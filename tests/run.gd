@@ -65,7 +65,15 @@ func run() -> void:
 		var peak = 0.0
 		for frame in range(ceili(Impact.DURATION * rate) + 1):
 			peak = maxf(peak, short_fx.step(1.0 / rate).length())
-		check(peak <= 1.5 and short_fx.trauma == 0.0, "pulse ends within 66.7ms at %dfps" % rate)
+		check(peak <= Impact.MAX_PIXELS and short_fx.trauma == 0.0, "pulse ends within 100ms at %dfps" % rate)
+	# Verify rendered offsets, since a nonzero envelope alone can still be imperceptible.
+	for rate in [30, 60, 120]:
+		var visible_fx = Impact.new()
+		visible_fx.hit()
+		var visible_peak = 0.0
+		for frame in range(ceili(Impact.DURATION * rate)):
+			visible_peak = maxf(visible_peak, visible_fx.step(1.0 / rate).length())
+		check(visible_peak >= 3.0 and visible_peak <= Impact.MAX_PIXELS, "normal hit has visible bounded displacement at %dfps" % rate)
 	var comfy = Impact.new()
 	comfy.reduced = true
 	comfy.hit(true)
