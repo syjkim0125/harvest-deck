@@ -213,7 +213,7 @@ func _physics_process(delta: float) -> void:
 		camera.position = camera.position.lerp(camera_follow_target(), 1.0 - exp(-10.0 * delta))
 	camera.offset = impact.step(delta) if not paused else Vector2.ZERO
 	hud.text = "HARVEST  $%d  BAG %d/%d  RAW %d  MIX %d  READY %d  TILL $%d  LINE %d" % [cash, cargo.size(), CAPACITY, production.raw.size(), int(production.active_kind >= 0), production.ready.size(), production.pending_cash, production.customers.size()]
-	status.text = "WASD / arrows / touch drag • auto-cut • mint: unload / blue: serve / gold: cash / purple: hire / coral: mixer\n1 Mild shake %s   2 Sound %s   3 Reaction %s   4 Local-stop %s   M No-shake %s   P Pause   R Reset %s" % [impact.enabled, sound_on, feedback, local_stop, impact.reduced, "[PAUSED]" if paused else ""]
+	status.text = "WASD / arrows / touch drag • auto-cut • mint: unload / blue: serve / gold: cash / purple: hire / coral: mixer\n1 Hit shake %s   2 Sound %s   3 Reaction %s   4 Local-stop %s   M No-shake %s   P Pause   R Reset %s" % [impact.enabled, sound_on, feedback, local_stop, impact.reduced, "[PAUSED]" if paused else ""]
 	status.text += "\n5 Motor %s  -/+ Volume %d%%  Saw %s" % [loop_sound, roundi(sound_volume * 100), saw_audio.mode()]
 	hire_button.text = "CASHIER WORKING" if production.cashier_hired else "E / HIRE CASHIER $%d" % Production.CASHIER_COST
 	hire_button.disabled = paused or production.cashier_hired or cash < Production.CASHIER_COST or player.distance_to(hire_pad) >= 80

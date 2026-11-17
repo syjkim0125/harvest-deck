@@ -1,18 +1,18 @@
 extends RefCounted
-## Short non-additive hit pulse. Values are comfort-tuning, not measured engine values.
-## Two frames of the 30 fps reference = 66.7 ms maximum, independent of render fps.
+## Visible, non-additive cutting impulse. Reference-informed tuning, not recovered engine values.
+## Fixed phase on confirmed hits; decay in seconds, no continuous idle vibration.
 var trauma: float = 0.0
 var clock: float = 0.0
 var enabled: bool = true
 var reduced: bool = false
-const DURATION: float = 2.0 / 30.0
+const DURATION: float = 0.1
 const DECAY: float = 1.0 / DURATION
-const MAX_PIXELS: float = 1.5
+const MAX_PIXELS: float = 8.0
 
 func hit(kill: bool = false) -> void:
 	if enabled and not reduced:
 		# A crowd cannot amplify or prolong the same attack pulse.
-		trauma = maxf(trauma, 1.0 if kill else 0.75)
+		trauma = maxf(trauma, 1.0 if kill else 0.85)
 		clock = 0.0
 
 func step(delta: float) -> Vector2:
@@ -20,8 +20,8 @@ func step(delta: float) -> Vector2:
 	trauma = maxf(0.0, trauma - DECAY * delta)
 	if not enabled or reduced or trauma <= 0.0:
 		return Vector2.ZERO
-	var direction = Vector2(sin(clock * 113.0), sin(clock * 147.0 + 1.7))
-	return direction.limit_length() * MAX_PIXELS * trauma * trauma
+	var direction = Vector2(cos(clock * TAU * 15.0), sin(clock * TAU * 21.0 + 0.4))
+	return direction.limit_length() * MAX_PIXELS * trauma
 
 func clear() -> void:
 	trauma = 0.0
