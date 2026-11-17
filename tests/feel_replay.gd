@@ -23,7 +23,8 @@ func run() -> void:
 		g.audio = null
 		var max_shake = 0.0
 		for i in range(1080):
-			# Fixed timestamped world-space path, independent of effects.
+			# Preserve the original world-space comparison path despite faster player tuning.
+			# Actual full-speed movement is exercised separately by tests/run.gd.
 			var direction = Vector2.ZERO
 			if i < 45:
 				direction = Vector2.LEFT
@@ -35,7 +36,7 @@ func run() -> void:
 				direction = Vector2.DOWN
 			elif i >= 971 and i < 987:
 				direction = Vector2.UP
-			g.simulate(1.0 / 60.0, direction)
+			g.simulate(1.0 / 60.0, direction * (270.0 / Game.SPEED))
 			max_shake = maxf(max_shake, g.impact.step(1.0 / 60.0).length())
 		print("%s,18,%d,%d,%d,%d,%d,%d,%d,%.3f" % [variant[0], g.hits, g.cargo.size(), g.ground_drops.size(), g.stock, g.production.sold_by_kind[0] + g.production.sold_by_kind[1], g.production.pending_cash, g.cash, max_shake])
 		g.audio = output

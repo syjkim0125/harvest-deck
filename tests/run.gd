@@ -51,7 +51,26 @@ func run() -> void:
 	check(g.attack() == 2, "one pulse can cut multiple targets")
 	for i in range(100):
 		g.impact.hit()
-	check(g.impact.trauma <= 1.0 and g.impact.step(0.0).abs().x <= 8, "crowd impact saturates")
+	check(g.impact.trauma <= 1.0 and g.impact.step(0.0).length() <= Impact.MAX_PIXELS, "crowd impact saturates")
+	# Dense simultaneous impacts must equal one pulse, with a hard short lifetime.
+	var single = Impact.new()
+	var crowd = Impact.new()
+	single.hit(true)
+	for i in range(100):
+		crowd.hit(true)
+	check(single.step(0.01).is_equal_approx(crowd.step(0.01)), "crowd does not amplify or extend pulse")
+	for rate in [30, 60, 120]:
+		var short_fx = Impact.new()
+		short_fx.hit(true)
+		var peak = 0.0
+		for frame in range(ceili(Impact.DURATION * rate) + 1):
+			peak = maxf(peak, short_fx.step(1.0 / rate).length())
+		check(peak <= 1.5 and short_fx.trauma == 0.0, "pulse ends within 66.7ms at %dfps" % rate)
+	var comfy = Impact.new()
+	comfy.reduced = true
+	comfy.hit(true)
+	check(comfy.trauma == 0.0 and comfy.step(0.001) == Vector2.ZERO, "no-shake mode does not retain a hidden pulse")
+	check(Game.SPEED == 360.0, "faster movement is the default")
 	for fps in [30, 60, 120]:
 		var fx = Impact.new()
 		fx.hit(true)
@@ -63,7 +82,7 @@ func run() -> void:
 		var start: Vector2 = g.player
 		for i in range(fps):
 			g.simulate(1.0 / fps, Vector2.RIGHT)
-		check(absf(g.player.x - start.x - 270) < 0.02, "movement speed at %dfps" % fps)
+		check(absf(g.player.x - start.x - Game.SPEED) < 0.02, "movement speed at %dfps" % fps)
 	fixture(g)
 	g.impact.reduced = true
 	g.attack()
@@ -396,6 +415,85 @@ func run() -> void:
 	g.player = g.upgrade_pad
 	check(g.try_upgrade_mixer() and g.cash == 0 and g.production.mixer_upgraded, "world interaction upgrades mixer at coral pad")
 	check(not g.try_upgrade_mixer() and g.cash == 0, "repeated world facility interaction cannot double charge")
+	check(g.orchard_button.position.y >= g.status.position.y + g.status.get_minimum_size().y and g.orchard_button.position.y + g.orchard_button.size.y <= g.HUD_HEIGHT, "purchase controls sit below all status lines inside HUD")
+	g.reset_run()
+	fixture(g)
+	g.fruits[0].kind = 1
+	check(g.attack() == 0 and g.hits == 0 and g.impact.trauma == 0 and g.cargo.is_empty(), "locked orchard cannot create hits, shake or rewards")
+	g.fruits[0].hp = 0
+	g.fruits[0].respawn = 0.1
+	g.simulate(0.2, Vector2.ZERO)
+	check(g.fruits[0].hp == 0 and is_equal_approx(g.fruits[0].respawn, 0.1), "locked orchard does not run a hidden respawn clock")
+	g.production.pending_cash = 50
+	g.player = g.orchard_pad
+	check(not g.try_unlock_orchard() and g.production.pending_cash == 50, "orchard cannot spend uncollected cash")
+	g.production.collect()
+	g.set_paused(true)
+	check(not g.try_unlock_orchard() and g.cash == 50, "pause blocks orchard purchase")
+	g.set_paused(false)
+	g.player = g.depot
+	check(not g.try_unlock_orchard() and g.cash == 50, "orchard purchase requires pad proximity")
+	g.player = g.orchard_pad
+	check(g.try_unlock_orchard() and g.cash == 0 and g.production.spent_cash == 50, "orchard unlock spends collected wallet once")
+	check(not g.try_unlock_orchard() and g.production.spent_cash == 50, "duplicate orchard unlock does not charge twice")
+	g.simulate(0.11, Vector2.ZERO)
+	check(g.fruits[0].hp == 3, "unlocked dead fruit resumes normal respawn")
+	g.player = Vector2(700, 700)
+	g.facing = Vector2.RIGHT
+	g.cooldown = 100
+	for i in range(3):
+		g.attack()
+	check(g.cargo == [1, 1, 1], "unlocked orchard produces its own fruit kind")
+	g.player = g.depot
+	for i in range(120):
+		g.simulate(1.0 / 60, Vector2.ZERO)
+	check(g.cargo.is_empty() and g.production.ready == [1, 1, 1], "unlocked fruit survives delivery and processing without conversion")
+	g.player = g.service_pad
+	for i in range(180):
+		g.simulate(1.0 / 60, Vector2.ZERO)
+	g.player = g.cash_pad
+	g.simulate(0.01, Vector2.ZERO)
+	check(g.production.sold_by_kind == [0, 3] and g.cash == 15 and g.stock == 0, "unlocked fruit sells and collected money conserves its value")
+	g.reset_run()
+	check(not g.production.orchard_unlocked and g.cash == 0 and g.production.spent_cash == 0, "reset relocks orchard and clears spending")
+	fixture(g)
+	check(g.attack() == 1, "starter fruit remains harvestable after reset")
+	var progression = Production.new()
+	for i in range(12):
+		progression.deposit(0)
+	progression.step(20.0, true)
+	progression.collect()
+	check(progression.collected_cash == 60 and progression.unlock_orchard() and progression.collected_cash == 10 and progression.spent_cash == 50, "starter fruit sales can fund orchard without mixer or cashier prerequisite")
+	# Cadence must not undercount on a long frame or repay old debt as a burst.
+	for rate in [5, 30, 60, 120]:
+		g.reset_run()
+		fixture(g, 1000)
+		g.sound_on = false
+		for frame in range(rate * 2):
+			g.simulate(1.0 / rate, Vector2.ZERO)
+		check(g.hits == 20 and g.cooldown > 0.0, "two-second harvest cadence has twenty hits and no debt at %dHz" % rate)
+	g.reset_run()
+	fixture(g, 1000)
+	g.simulate(0.5, Vector2.ZERO)
+	var hitch_hits: int = g.hits
+	g.simulate(1.0 / 120.0, Vector2.ZERO)
+	check(hitch_hits == 5 and g.hits == hitch_hits, "half-second hitch resolves scheduled cuts without a next-frame burst")
+	var path_outcomes = []
+	for rate in [5, 30, 60, 120]:
+		g.reset_run()
+		fixture(g, 1000)
+		g.player = Vector2(400, 700)
+		g.fruits[0].pos = Vector2(550, 700)
+		g.fruits[0].home = Vector2(550, 700)
+		for frame in range(rate):
+			g.simulate(1.0 / rate, Vector2.RIGHT)
+		path_outcomes.append([g.hits, roundi(g.player.x), g.production.inventory_count(), g.cargo.size()])
+	check(path_outcomes[0] == path_outcomes[1] and path_outcomes[1] == path_outcomes[2] and path_outcomes[2] == path_outcomes[3] and path_outcomes[0][0] > 0, "moving through a target agrees at 5 / 30 / 60 / 120Hz")
+	g.reset_run()
+	fixture(g, 1000)
+	g.facing = Vector2.LEFT
+	g.simulate(0.5, Vector2.ZERO)
+	check(g.hits == 0 and g.impact.trauma == 0.0, "long-frame whiffs do not create feedback")
 	g.set_paused(true)
 	g.audio.stop()
 	g.queue_free()
