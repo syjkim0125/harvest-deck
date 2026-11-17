@@ -3,10 +3,10 @@ extends Node2D
 const SawAudio = preload("res://scripts/saw_audio.gd")
 const Production = preload("res://scripts/production.gd")
 const Impact = preload("res://scripts/impact.gd")
-const SPEED: float = 270.0
+const SPEED: float = 360.0
 const ATTACK_INTERVAL: float = 0.105
 const CAPACITY: int = 40
-const HUD_HEIGHT: int = 114
+const HUD_HEIGHT: int = 150
 const BOUNDS = Rect2(40, 100, 1480, 1040)
 var impact = Impact.new()
 var player: Vector2 = Vector2(700, 720)
@@ -16,6 +16,8 @@ var fruits: Array[Dictionary] = []
 var particles: Array[Dictionary] = []
 var cargo: Array[int] = []
 var camera: Camera2D
+var orchard_button: Button
+var orchard_pad = Vector2(1020, 440)
 var upgrade_button: Button
 var hire_button: Button
 var notice: String = ""
@@ -75,17 +77,23 @@ func _ready() -> void:
 	status.add_theme_font_size_override("font_size", 14)
 	layer.add_child(status)
 	hire_button = Button.new()
-	hire_button.position = Vector2(720, 79)
+	hire_button.position = Vector2(720, 116)
 	hire_button.size = Vector2(220, 29)
 	hire_button.focus_mode = Control.FOCUS_NONE
 	hire_button.pressed.connect(try_hire_cashier)
 	layer.add_child(hire_button)
 	upgrade_button = Button.new()
-	upgrade_button.position = Vector2(480, 79)
+	upgrade_button.position = Vector2(480, 116)
 	upgrade_button.size = Vector2(220, 29)
 	upgrade_button.focus_mode = Control.FOCUS_NONE
 	upgrade_button.pressed.connect(try_upgrade_mixer)
 	layer.add_child(upgrade_button)
+	orchard_button = Button.new()
+	orchard_button.position = Vector2(240, 116)
+	orchard_button.size = Vector2(220, 29)
+	orchard_button.focus_mode = Control.FOCUS_NONE
+	orchard_button.pressed.connect(try_unlock_orchard)
+	layer.add_child(orchard_button)
 	audio = AudioStreamPlayer.new()
 	add_child(audio)
 	audio.max_polyphony = 2
@@ -162,6 +170,7 @@ func _input(event: InputEvent) -> void:
 			KEY_R: reset_run()
 			KEY_E: try_hire_cashier()
 			KEY_F: try_upgrade_mixer()
+			KEY_G: try_unlock_orchard()
 			KEY_1:
 				impact.enabled = not impact.enabled
 				impact.clear()
@@ -204,12 +213,14 @@ func _physics_process(delta: float) -> void:
 		camera.position = camera.position.lerp(camera_follow_target(), 1.0 - exp(-10.0 * delta))
 	camera.offset = impact.step(delta) if not paused else Vector2.ZERO
 	hud.text = "HARVEST  $%d  BAG %d/%d  RAW %d  MIX %d  READY %d  TILL $%d  LINE %d" % [cash, cargo.size(), CAPACITY, production.raw.size(), int(production.active_kind >= 0), production.ready.size(), production.pending_cash, production.customers.size()]
-	status.text = "WASD / arrows / touch drag • auto-cut • mint: unload / blue: serve / gold: cash / purple: hire / coral: mixer\n1 Shake %s   2 Sound %s   3 Reaction %s   4 Local-stop %s   M Reduced %s   P Pause   R Reset %s" % [impact.enabled, sound_on, feedback, local_stop, impact.reduced, "[PAUSED]" if paused else ""]
+	status.text = "WASD / arrows / touch drag • auto-cut • mint: unload / blue: serve / gold: cash / purple: hire / coral: mixer\n1 Mild shake %s   2 Sound %s   3 Reaction %s   4 Local-stop %s   M No-shake %s   P Pause   R Reset %s" % [impact.enabled, sound_on, feedback, local_stop, impact.reduced, "[PAUSED]" if paused else ""]
 	status.text += "\n5 Motor %s  -/+ Volume %d%%  Saw %s" % [loop_sound, roundi(sound_volume * 100), saw_audio.mode()]
 	hire_button.text = "CASHIER WORKING" if production.cashier_hired else "E / HIRE CASHIER $%d" % Production.CASHIER_COST
 	hire_button.disabled = paused or production.cashier_hired or cash < Production.CASHIER_COST or player.distance_to(hire_pad) >= 80
 	upgrade_button.text = "MIXER 0.25s ACTIVE" if production.mixer_upgraded else "F / UPGRADE MIXER $40"
 	upgrade_button.disabled = paused or production.mixer_upgraded or cash < Production.MIXER_UPGRADE_COST or player.distance_to(upgrade_pad) >= 80
+	orchard_button.text = "ORCHARD OPEN" if production.orchard_unlocked else "G / OPEN ORCHARD $50"
+	orchard_button.disabled = paused or production.orchard_unlocked or cash < Production.ORCHARD_COST or player.distance_to(orchard_pad) >= 80
 	if not notice.is_empty():
 		hire_button.tooltip_text = notice
 	queue_redraw()
@@ -230,6 +241,14 @@ func try_upgrade_mixer() -> bool:
 	notice = "Mixer upgraded: 0.25 seconds per item." if upgraded else "Collect $40 first, or mixer is already upgraded."
 	return upgraded
 
+func try_unlock_orchard() -> bool:
+	if paused or player.distance_to(orchard_pad) >= 80:
+		notice = "Stand on the amber orchard pad to unlock."
+		return false
+	var opened: bool = production.unlock_orchard()
+	notice = "Orchard open. Yellow fruit can now be harvested." if opened else "Collect $50 first, or orchard is already open."
+	return opened
+
 func set_sound_enabled(value: bool) -> void:
 	sound_on = value
 	if not value:
@@ -241,9 +260,19 @@ func set_sound_enabled(value: bool) -> void:
 func camera_follow_target() -> Vector2:
 	# Keep the queue below the fixed HUD while working the shop counter.
 	var shop_weight = clampf((600.0 - player.y) / 125.0, 0.0, 1.0)
-	return player + Vector2(0, -150.0 * shop_weight)
+	return player + Vector2(0, -180.0 * shop_weight)
 
 func simulate(delta: float, direction: Vector2) -> void:
+	# Advance movement, harvesting and production together. A slow frame must not
+	# skip cuts then leave negative cooldown debt to repay on subsequent frames.
+	# 120 Hz substeps also keep collisions along the path, not at the final point.
+	var remaining = maxf(delta, 0.0)
+	while remaining > 0.000000001:
+		var step_delta = minf(remaining, 1.0 / 120.0)
+		simulate_slice(step_delta, direction)
+		remaining -= step_delta
+
+func simulate_slice(delta: float, direction: Vector2) -> void:
 	time += delta
 	velocity = direction.limit_length() * SPEED
 	player += velocity * delta
@@ -255,6 +284,8 @@ func simulate(delta: float, direction: Vector2) -> void:
 		cooldown += ATTACK_INTERVAL
 		attack()
 	for f in fruits:
+		if not production.can_harvest(f.kind):
+			continue
 		f.flash = maxf(0.0, f.flash - delta)
 		f.freeze = maxf(0.0, f.freeze - delta)
 		if f.hp <= 0:
@@ -307,7 +338,7 @@ func attack() -> int:
 	var count = 0
 	var killed = false
 	for f in fruits:
-		if f.hp <= 0 or cargo.size() >= CAPACITY:
+		if not production.can_harvest(f.kind) or f.hp <= 0 or cargo.size() >= CAPACITY:
 			continue
 		var diff: Vector2 = f.pos - player
 		if diff.length() > 100 or (diff.length() > 28 and facing.dot(diff.normalized()) < 0.1):
@@ -316,7 +347,6 @@ func attack() -> int:
 		count += 1
 		hits += 1
 		var dead: bool = f.hp <= 0
-		impact.hit(dead)
 		if feedback:
 			f.flash = 0.055
 			f.recoil = diff.normalized() * 7
@@ -331,6 +361,8 @@ func attack() -> int:
 					cargo.append(f.kind)
 				else:
 					ground_drops.append({"pos": f.pos + Vector2(j * 9 - 9, 15), "kind": f.kind})
+	if count > 0:
+		impact.hit(killed)
 	if count > 0 and sound_on:
 		var pitch: float = 0.78 if killed else audio_rng.randf_range(1.0, 1.12)
 		if loop_sound and is_instance_valid(saw_audio):
@@ -402,10 +434,15 @@ func _draw() -> void:
 	draw_string(font, cash_pad + Vector2(-47, 4), "COLLECT $%d" % production.pending_cash, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color("263b38"))
 	draw_rect(Rect2(540, 253, 280, 12), Color("193a3e"))
 	draw_rect(Rect2(540, 253, 280 * production.mix_elapsed / production.mix_duration(), 12), Color("85e8b3"))
+	draw_circle(orchard_pad, 60, Color("ddb968"))
+	draw_string(font, orchard_pad + Vector2(-57, 3), "ORCHARD OPEN" if production.orchard_unlocked else "G / UNLOCK $50", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color("263b38"))
+	if not production.orchard_unlocked:
+		draw_arc(Vector2(1020, 660), 220, 0, TAU, 64, Color("ddb968"), 4)
+		draw_string(font, Vector2(930, 690), "LOCKED / OPEN AT PAD", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color("ffe5a0"))
 	for d in ground_drops:
 		draw_fruit(d.pos, d.kind, 10, false)
 	for f in fruits:
-		if f.hp > 0:
+		if f.hp > 0 and production.can_harvest(f.kind):
 			var display_pos: Vector2 = f.pos + (f.get("recoil", Vector2.ZERO) if feedback else Vector2.ZERO)
 			draw_fruit(display_pos, f.kind, 24, f.flash > 0 and feedback)
 			if f.hp < 3:

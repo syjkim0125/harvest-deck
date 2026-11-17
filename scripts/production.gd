@@ -10,6 +10,8 @@ const PRICE: int = 5
 const ARRIVAL_SECONDS: float = 1.6
 const MAX_QUEUE: int = 5
 const CASHIER_COST: int = 30
+const ORCHARD_COST: int = 50
+var orchard_unlocked: bool = false
 const MAX_SERVED_HISTORY: int = 64
 var cashier_hired: bool = false
 var spent_cash: int = 0
@@ -40,6 +42,7 @@ func reset() -> void:
 	served_ids.clear()
 	served_total = 0
 	cashier_hired = false
+	orchard_unlocked = false
 	mixer_upgraded = false
 	spent_cash = 0
 	arrival_elapsed = 0.0
@@ -131,3 +134,15 @@ func upgrade_mixer() -> bool:
 	# Preserve completed fraction, not elapsed seconds, during an active job.
 	mix_elapsed = progress * mix_duration() if active_kind >= 0 else 0.0
 	return true
+
+
+func unlock_orchard() -> bool:
+	if orchard_unlocked or collected_cash < ORCHARD_COST:
+		return false
+	collected_cash -= ORCHARD_COST
+	spent_cash += ORCHARD_COST
+	orchard_unlocked = true
+	return true
+
+func can_harvest(kind: int) -> bool:
+	return kind == 0 or (kind == 1 and orchard_unlocked)
