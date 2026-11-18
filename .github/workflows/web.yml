@@ -41,6 +41,7 @@ jobs:
           godot --headless --script tests/player_locator.gd
           godot --headless --script tests/spine_melon.gd
           godot --headless --script tests/day_harvest.gd
+          godot --headless --script tests/night_market.gd
           godot --headless --script tests/feel_replay.gd
           godot --headless --quit-after 120
       - name: Export Web

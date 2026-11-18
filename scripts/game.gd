@@ -13,6 +13,8 @@ const Impact = preload("res://scripts/impact.gd")
 const OrchardGround = preload("res://scripts/orchard_ground.gd")
 const SpineMelon = preload("res://scripts/spine_melon.gd")
 const DayHarvest = preload("res://scripts/day_harvest.gd")
+const NightMarket = preload("res://scripts/night_market.gd")
+const NightMarketView = preload("res://scripts/night_market_view.gd")
 const CUT_TRAIL_DURATION = 0.075
 const SPEED: float = 360.0
 const ATTACK_INTERVAL: float = 0.105
@@ -25,6 +27,8 @@ const HUD_HEIGHT: int = 150
 const BOUNDS = Rect2(40, 100, 1480, 1040)
 @export var day_mode := false
 var day := DayHarvest.new()
+var night := NightMarket.new()
+var night_view: NightMarketView
 var impact = Impact.new()
 var cargo_view = CargoView.new()
 var avatar = AvatarMotion.new()
@@ -145,8 +149,16 @@ func _ready() -> void:
 	return_button = Button.new()
 	return_button.text = "ENTER / END HARVEST"
 	return_button.focus_mode = Control.FOCUS_NONE
-	return_button.pressed.connect(finish_day_at_depot)
+	return_button.pressed.connect(advance_day)
 	layer.add_child(return_button)
+	var night_layer := CanvasLayer.new()
+	night_layer.layer = 2
+	add_child(night_layer)
+	night_view = NightMarketView.new()
+	night_layer.add_child(night_view)
+	night_view.recipe_pressed.connect(pick_night_recipe)
+	night_view.action_pressed.connect(advance_night)
+	night_view.pause_pressed.connect(func(): set_paused(not paused))
 	get_viewport().size_changed.connect(layout_hud)
 	layout_hud()
 	audio = AudioStreamPlayer.new()
@@ -238,6 +250,7 @@ func reset_run() -> void:
 	fruits.clear()
 	production.reset()
 	day.reset()
+	night.reset()
 	notice = ""
 	ground_drops.clear()
 	customer_visuals.clear()
@@ -247,6 +260,8 @@ func reset_run() -> void:
 	cooldown = 0.0
 	unload_clock = 0.0
 	paused = false
+	if is_instance_valid(night_view):
+		night_view.refresh(night, paused)
 	if is_instance_valid(pause_button):
 		pause_button.text = "PAUSE"
 	drag_id = -1
@@ -282,6 +297,8 @@ func set_paused(value: bool) -> void:
 	paused = value
 	if is_instance_valid(pause_button):
 		pause_button.text = "RESUME" if paused else "PAUSE"
+	if is_instance_valid(night_view):
+		night_view.refresh(night, paused)
 	avatar.clear_hit()
 	cut_trail_left = 0.0
 	if value and is_instance_valid(saw_audio):
@@ -302,7 +319,13 @@ func _input(event: InputEvent) -> void:
 			KEY_ESCAPE, KEY_P: set_paused(not paused)
 			KEY_R: reset_run()
 			KEY_7: switch_mode()
-			KEY_ENTER, KEY_KP_ENTER: finish_day_at_depot()
+			KEY_ENTER, KEY_KP_ENTER:
+				if night.phase == NightMarket.Phase.OFF:
+					advance_day()
+				else:
+					advance_night()
+			KEY_Q: pick_night_recipe(NightMarket.Recipe.WATERMELON)
+			KEY_W: pick_night_recipe(NightMarket.Recipe.MELON)
 			KEY_E: try_hire_cashier()
 			KEY_F: try_upgrade_mixer()
 			KEY_G: try_unlock_orchard()
@@ -342,6 +365,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		drag_vector = ((event.position - drag_origin) / 65.0).limit_length()
 
 func _physics_process(delta: float) -> void:
+	if night.phase != NightMarket.Phase.OFF:
+		if not paused:
+			night.step(delta)
+		night_view.refresh(night, paused)
+		return
 	if not paused and not day_finished():
 		var direction = Input.get_vector("left", "right", "up", "down")
 		if drag_vector.length() > 0.05:
@@ -383,8 +411,9 @@ func update_day_hud() -> void:
 		hint = "BATTERY EMPTY • Returned • Lost %d" % day.lost_cargo
 	elif day.outcome == DayHarvest.Outcome.RETURNED:
 		hint = "HARVEST ENDED • Safe stock secured"
-	status.text = hint + "\n" + ("R: new run" if day_finished() else "WASD / arrows / drag • auto-cut\nRing: battery drain • M: shake • 7: new lab")
-	return_button.disabled = paused or day_finished() or not cargo.is_empty() or player.distance_to(depot) >= DEPOT_RADIUS
+	status.text = hint + "\n" + ("Continue to the night market" if day_finished() else "WASD / arrows / drag • auto-cut\nRing: battery drain • M: shake • 7: new lab")
+	return_button.text = "ENTER / NIGHT MENU" if day_finished() else "ENTER / END HARVEST"
+	return_button.disabled = paused or (not day_finished() and (not cargo.is_empty() or player.distance_to(depot) >= DEPOT_RADIUS))
 
 func switch_mode() -> void:
 	day_mode = not day_mode
@@ -394,6 +423,40 @@ func switch_mode() -> void:
 
 func day_finished() -> bool:
 	return day_mode and day.outcome != DayHarvest.Outcome.ACTIVE
+
+func advance_day() -> bool:
+	return enter_night() if day_finished() else finish_day_at_depot()
+
+func enter_night() -> bool:
+	if paused or not day_finished() or not night.enter(production.raw):
+		return false
+	night_view.refresh(night, paused)
+	return true
+
+func pick_night_recipe(recipe: int) -> bool:
+	if paused or night.phase == NightMarket.Phase.OFF:
+		return false
+	var changed := night.toggle_recipe(recipe) if night.phase == NightMarket.Phase.MENU else night.serve(recipe)
+	if changed:
+		night_view.refresh(night, paused)
+	return changed
+
+func advance_night() -> bool:
+	if paused:
+		return false
+	match night.phase:
+		NightMarket.Phase.MENU:
+			if not (night.open() if night.has_available_menu() else night.close()):
+				return false
+		NightMarket.Phase.SERVICE:
+			if not night.close():
+				return false
+		NightMarket.Phase.CLOSED:
+			reset_run()
+		_:
+			return false
+	night_view.refresh(night, paused)
+	return true
 
 func finish_day_at_depot() -> bool:
 	if not day_mode or day_finished() or paused or not cargo.is_empty() or player.distance_to(depot) >= DEPOT_RADIUS:
