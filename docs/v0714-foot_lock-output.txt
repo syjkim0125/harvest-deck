@@ -1,0 +1,18 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS 90-degree turn cannot teleport a contact foot
+PASS stopping does not slide a planted foot
+PASS restarting does not pop a planted foot
+PASS 180-degree reversal does not drag a planted foot
+PASS turn/stop route preserves planted anchors at 30Hz
+PASS leg reach remains bounded on the route at 30Hz
+PASS turn/stop route preserves planted anchors at 60Hz
+PASS leg reach remains bounded on the route at 60Hz
+PASS turn/stop route preserves planted anchors at 120Hz
+PASS leg reach remains bounded on the route at 120Hz
+PASS same route ends at matching poses across frame rates
+PASS zero-time stop cannot snap an airborne foot
+PASS stopping settles airborne feet
+PASS settled idle anchors do not drift
+PASS reset removes stale world anchors
+FOOT LOCK: 15 checks, 0 failures

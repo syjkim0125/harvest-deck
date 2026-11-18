@@ -1,0 +1,62 @@
+[
+	{
+		"hud_origin": "(16.0, 10.0)",
+		"ms": 0.0,
+		"save_result": 0,
+		"viewport_offset": "(1.397757, 0.544312)"
+	},
+	{
+		"hud_origin": "(16.0, 10.0)",
+		"ms": 8.33333333333333,
+		"save_result": 0,
+		"viewport_offset": "(0.759055, 1.070743)"
+	},
+	{
+		"hud_origin": "(16.0, 10.0)",
+		"ms": 16.6666666666667,
+		"save_result": 0,
+		"viewport_offset": "(0.0, 0.580792)"
+	},
+	{
+		"hud_origin": "(16.0, 10.0)",
+		"ms": 25.0,
+		"save_result": 0,
+		"viewport_offset": "(-0.662913, -0.495665)"
+	},
+	{
+		"hud_origin": "(16.0, 10.0)",
+		"ms": 33.3333333333333,
+		"save_result": 0,
+		"viewport_offset": "(-0.531307, -0.529351)"
+	},
+	{
+		"hud_origin": "(16.0, 10.0)",
+		"ms": 41.6666666666667,
+		"save_result": 0,
+		"viewport_offset": "(-0.397748, -0.21146)"
+	},
+	{
+		"hud_origin": "(16.0, 10.0)",
+		"ms": 50.0,
+		"save_result": 0,
+		"viewport_offset": "(-0.0, 0.245618)"
+	},
+	{
+		"hud_origin": "(16.0, 10.0)",
+		"ms": 58.3333333333333,
+		"save_result": 0,
+		"viewport_offset": "(0.110403, 0.15155)"
+	},
+	{
+		"hud_origin": "(16.0, 10.0)",
+		"ms": 66.6666666666667,
+		"save_result": 0,
+		"viewport_offset": "(0.0, 0.0)"
+	},
+	{
+		"hud_origin": "(16.0, 10.0)",
+		"ms": 75.0,
+		"save_result": 0,
+		"viewport_offset": "(0.0, 0.0)"
+	}
+]

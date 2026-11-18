@@ -1,0 +1,48 @@
+{
+  "source": "libfile_85c043b3338c81919a14e5de0da5e83a",
+  "fps": 30,
+  "method": "Manual observation of 24 consecutive frames at 9.300..10.067s, crop (80,390,440,820); no game assets extracted.",
+  "observations": [
+    {
+      "time": 9.3666667,
+      "event": "Last observed frame before first bright target response in this window."
+    },
+    {
+      "time": 9.4,
+      "event": "Bright target response and health bar visible."
+    },
+    {
+      "time": 9.5333333,
+      "event": "Same near target still visible, with health bar and overlapping slash particles."
+    },
+    {
+      "time": 9.5666667,
+      "event": "Near target no longer intact; debris and another target response overlap."
+    },
+    {
+      "time": 10.0,
+      "event": "Carried slices visible beside character; particles still obscure the cutting area."
+    }
+  ],
+  "inference": {
+    "first_visible_response_to_disappearance_seconds": 0.1666667,
+    "confidence": "low; screen event window only, NOT attack period, HP count or authoritative kill timer",
+    "event_time_quantization_seconds": 0.0333333
+  },
+  "not_measured": [
+    "per-hit attack interval",
+    "original HP",
+    "pure camera shake",
+    "player world speed",
+    "audio timing"
+  ],
+  "prototype_design": {
+    "attack_interval_seconds": 0.105,
+    "hits_to_break": 3,
+    "nominal_first_to_third_hit_seconds": 0.21,
+    "movement_units_per_second": 360,
+    "shake_max_vector_pixels": 1.5,
+    "shake_max_duration_seconds": 0.06666666666666667
+  },
+  "decision": "Keep comfort settings; do not fit attack interval to ambiguous overlapping particles."
+}

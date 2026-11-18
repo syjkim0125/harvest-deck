@@ -1,0 +1,137 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS whiff has no damage or shake
+PASS each confirmed hit produces feedback
+PASS kill awards three items
+PASS dead target cannot duplicate drops
+PASS capacity overflow stays on ground; no reward loss
+PASS full bag prevents cutting
+PASS one pulse can cut multiple targets
+PASS crowd impact saturates
+PASS crowd does not amplify or extend pulse
+PASS pulse ends within 100ms at 30fps
+PASS pulse ends within 100ms at 60fps
+PASS pulse ends within 100ms at 120fps
+PASS normal hit has visible bounded displacement at 30fps
+PASS normal hit has visible bounded displacement at 60fps
+PASS normal hit has visible bounded displacement at 120fps
+PASS no-shake mode does not retain a hidden pulse
+PASS faster movement is the default
+PASS shake returns to zero at 30fps
+PASS movement speed at 30fps
+PASS shake returns to zero at 60fps
+PASS movement speed at 60fps
+PASS shake returns to zero at 120fps
+PASS movement speed at 120fps
+PASS reduced motion preserves damage
+PASS pause clears impact and touch
+PASS unattended depot produces but does not sell
+PASS attended counter serves customers and preserves items
+PASS cash collected only at gold pad
+PASS cash cannot be collected twice
+PASS reset snaps camera and clears stale shake
+PASS reset clears run state
+PASS local stop does not slow simulation clock
+PASS overflow can be recovered without duplicate kill
+PASS sound toggle preserves seeded gameplay RNG
+PASS pause freezes movement, harvest and production
+PASS focus-out pauses and releases touch
+PASS raw enters mixer without selling early
+PASS completed item retains fruit kind
+PASS only completed products can sell
+PASS production and sales agree at 30 / 60 / 120 fps
+PASS large step respects chronological processing and sales
+PASS production cash collection is idempotent
+PASS production reset clears every resource stage
+PASS hit recoil does not move gameplay collision target
+PASS reset also resets shake phase for repeatable comparisons
+PASS unattended queue waits without consuming product
+PASS leaving counter preserves partial service progress
+PASS first waiting customer receives exactly one product
+PASS stockout cannot create phantom sales; queue is bounded
+PASS FIFO queue advances and consumes matching inventory kind
+PASS reset clears customers, identifiers and service clocks
+PASS arrivals / service / stock agree at 30, 60 and 120 Hz
+PASS large-delta customer arrivals remain chronological
+PASS counter camera keeps customer heads below fixed HUD
+PASS customer heads stay below HUD at outer service radius
+PASS whiff never triggers cutting sound layer
+PASS confirmed hit opens bounded contact envelope
+PASS contact layer rises only after confirmed contact
+PASS sound OFF clears all layers and stale contact
+PASS unmute resumes idle, not a stale cut
+PASS pause silences motor and contact layer immediately
+PASS reset clears audio state
+PASS focus-out silences all saw layers
+PASS lost contact decays to silence without a stuck cutting loop
+PASS full cargo cannot sustain a cutting sound
+PASS contact envelope agrees at 30 / 60 / 120 Hz
+PASS dense hits cannot stack unbounded audio gain
+PASS zero volume shuts down loop state
+PASS synthesized false loop has bounded valid PCM
+PASS synthesized false loop seam stays within waveform slope
+PASS synthesized true loop has bounded valid PCM
+PASS synthesized true loop seam stays within waveform slope
+PASS hit voice overlap is capped at two
+PASS maximum loop gains plus two hit voices stay below PCM clipping bound
+PASS uncollected counter cash cannot pay a cashier
+PASS cashier hire atomically spends collected cash
+PASS duplicate hire cannot spend again
+PASS hired cashier serves without the player
+PASS cashier cannot sell nonexistent stock
+PASS reset removes worker, spending and service history
+PASS player plus cashier does not double the service rate
+PASS long automatic service bounds history without losing total sales
+PASS long automatic service preserves kinds and cash
+PASS pause blocks hiring
+PASS hiring requires proximity to purple pad
+PASS world hire interaction buys worker at purple pad
+PASS repeated world interaction is idempotent
+PASS game loop connects cashier to unattended sales
+PASS pause stops automatic staff and disables hire control
+PASS raw input does not start movement before UI consumes touch
+PASS unhandled gameplay touch still starts movement drag
+PASS touch release clears drag even when a HUD control consumes the event
+PASS uncollected money cannot fund mixer upgrade
+PASS mixer upgrade spends wallet exactly once
+PASS upgrade preserves active job fraction, kind and item count
+PASS duplicate mixer upgrade cannot spend money
+PASS upgrade does not instantly complete unfinished work
+PASS upgraded in-flight job completes at preserved remaining fraction
+PASS mixer processing conserves ten deposited items (false)
+PASS mixer processing conserves ten deposited items (true)
+PASS same two seconds produces four base or eight upgraded items
+PASS upgraded processing agrees at 30 / 60 / 120 Hz
+PASS reset restores base facility and clears upgrade spending
+PASS cashier plus upgrade preserve spending, stock and automatic revenue
+PASS pause prevents facility purchase
+PASS facility purchase requires coral-pad proximity
+PASS world interaction upgrades mixer at coral pad
+PASS repeated world facility interaction cannot double charge
+PASS purchase controls sit below all status lines inside HUD
+PASS locked orchard cannot create hits, shake or rewards
+PASS locked orchard does not run a hidden respawn clock
+PASS orchard cannot spend uncollected cash
+PASS pause blocks orchard purchase
+PASS orchard purchase requires pad proximity
+PASS orchard unlock spends collected wallet once
+PASS duplicate orchard unlock does not charge twice
+PASS unlocked dead fruit resumes normal respawn
+PASS unlocked orchard produces its own fruit kind
+PASS unlocked fruit survives delivery and processing without conversion
+PASS unlocked fruit sells and collected money conserves its value
+PASS reset relocks orchard and clears spending
+PASS starter fruit remains harvestable after reset
+PASS starter fruit sales can fund orchard without mixer or cashier prerequisite
+PASS two-second harvest cadence has twenty hits and no debt at 5Hz
+PASS two-second harvest cadence has twenty hits and no debt at 30Hz
+PASS two-second harvest cadence has twenty hits and no debt at 60Hz
+PASS two-second harvest cadence has twenty hits and no debt at 120Hz
+PASS half-second hitch resolves scheduled cuts without a next-frame burst
+PASS moving through a target agrees at 5 / 30 / 60 / 120Hz
+PASS long-frame whiffs do not create feedback
+PASS same-time confirmed-hit pulse agrees at 30 / 60 / 120Hz
+PASS hitch retains a recent hit instead of expiring it by the entire frame
+PASS rendered feedback stays within the previous replay peak
+PASS pulse age measures time since the last substep hit
+RESULT: 134 checks, 0 failures

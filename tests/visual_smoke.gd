@@ -14,9 +14,8 @@ func run() -> void:
 		var direction = (target - g.player).normalized() if target.distance_to(g.player) > 10 else Vector2.ZERO
 		g.simulate(1.0 / 60.0, direction)
 		g.camera.position = g.camera_follow_target()
-		g.camera.offset = g.impact.step(1.0 / 60.0)
-		g.hud.text = "HARVEST / FEEL LAB    $%d    CARGO %d / 40" % [g.cash, g.cargo.size()]
-		g.status.text = "Prototype 0.6 • movement / chainsaw / hit feedback / stack / delivery"
+		g.camera.offset = g.feedback_offset()
+		g._physics_process(0.0) # Refresh the real responsive HUD, no simulation advance.
 		g.queue_redraw()
 		await process_frame
 		if i in [120, 359]:

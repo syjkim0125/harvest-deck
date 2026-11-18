@@ -1,0 +1,15 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS large sprite imports mipmaps for small on-screen rendering
+PASS sprite has transparent corners and a solid body
+PASS authored visible frame stays within the unmodified generated source
+PASS sprite body width and bottom remain aligned with existing fruit center
+PASS whiff cannot create a squash pulse
+PASS confirmed-hit squash leaves collision position unchanged
+PASS squash amplitude is bounded rather than accumulated
+PASS reduced motion removes the new deformation
+PASS reaction OFF removes deformation immediately
+PASS four cosmetic kill pieces do not multiply the three-item reward
+PASS new sprite and legacy art preserve hits, rewards, particle state and RNG
+PASS 6 toggles the comparison art without resetting the run
+FRUIT ART: 12 checks, 0 failures

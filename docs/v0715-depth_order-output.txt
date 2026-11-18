@@ -1,0 +1,13 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS far fruit, player, near fruit draw in ground-depth order
+PASS presentation sorting never reorders targets or consumes gameplay RNG
+PASS walking behind both fruit changes actor depth
+PASS walking in front of both fruit changes actor depth
+PASS recoil, squash and full stack do not reorder ground anchors
+PASS reduced motion and legacy art share the same depth
+PASS locked fruit never enters presentation list
+PASS dead fruit never enters presentation list
+PASS equal-depth ties use stable player/target IDs
+PASS reset contains each visible target and player exactly once
+DEPTH ORDER: 10 checks, 0 failures

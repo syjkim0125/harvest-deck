@@ -1,0 +1,16 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS foreground fruit covering the body requests a locator
+PASS locator query cannot change targets or gameplay RNG
+PASS walking in front removes the locator immediately
+PASS a lateral fruit cannot produce a false full-width cue
+PASS fruit drawn behind the player cannot occlude them
+PASS equal-depth fruit follows player in draw order and can occlude
+PASS dead fruit cannot leave a stale locator
+PASS locked fruit cannot create a locator
+PASS unlocked golden fruit participates in the same cue
+PASS static cue remains available with M, reaction OFF and legacy art
+PASS full stack neither hides the cue nor changes resource ownership
+PASS paused scene keeps its static position cue
+PASS removing all occluders clears the cue without a timer
+PLAYER LOCATOR: 13 checks, 0 failures

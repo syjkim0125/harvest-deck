@@ -1,0 +1,8 @@
+Godot4.6.3 / native desktop terminal / OpenGL Mesa llvmpipe
+ALSA no device; fallback Dummy. Audio unverified.
+GOLDEN_RENDER locked result=0 unlocked=false hits=0 cargo=[]
+GOLDEN_RENDER legacy result=0 unlocked=true hits=0 cargo=[]
+GOLDEN_RENDER sprite result=0 unlocked=true hits=0 cargo=[]
+GOLDEN_RENDER hit result=0 unlocked=true hits=1 cargo=[]
+GOLDEN_RENDER cut result=0 unlocked=true hits=3 cargo=[1, 1, 1]
+Transcribed from visible terminal output; fixture is scripted, not human play.

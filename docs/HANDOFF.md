@@ -1,52 +1,796 @@
-# Handoff — v0.6 / 2026-11-17 KST
+# v0.7.17 · 가시멜론 첫 전투 / 2026-11-18 KST
 
-## 기준 / 보존
-Library libfile_e5fb49d15230819192d425860e2c9edd 최신version4를 새로 가져옴.
-입력ZIP SHA256 41a839dfdd7dab10d406844bac7cf617f481682d714877bdb8684aced07c5d50.
-expected_current_version=4로 동일ZIP 교체. checkpoints/g1-v0.1.zip 그대로 보존.
-Godot4.6.3/GDScript. 저장소/Sites 변경 없음.
+- 최신 ZIP version 23, SHA256 `57f631464e11b9804cedaac9ad0f22c9d1d6408fdda669508b5ff0dc5ac81dd0`에서 시작했다. main 기준 `612f5cdfe6d2bbd7bbb62cdba78ee7f2e0973f10`에 원격 전용 경로가 없음을 확인했다. 기존 main 체크포인트, Web export 설정, Pages 경로, Sites 비교판을 보존했다.
+- 일반 과일 32개를 유지하고 과수원 남서쪽 (210, 866)에 가시멜론 1마리를 배치했다. 접근 146, 씨앗 공격 반경 128 월드 단위. 예고 0.70초 → 씨앗 공격 1회 → 약점 1.30초 → 재정비 0.80초. 스프라이트, 고리, 씨앗 표시와 예고음은 직접 만든 코드 자산이다.
+- 첫 구현에서 닫힌 껍질은 자동 절삭을 막는다. 열린 동안 기존 절삭으로 세 번 명중하면 보라색 조각 3개를 얻는다. R을 눌러 런을 초기화하면 다시 나타난다. 조각은 기존 가방·납품·가공·판매에서 별도 재료(kind 2)로 유지한다. 씨앗에 맞으면 아직 피격 횟수만 기록한다.
+- Godot 4.6.3 import, 120프레임 runtime, Web export와 331개 검사 통과. 신규 19개는 회피, 닫힌 껍질, 피격 단발, 재노출, 정지, M, 보상, 납품, 판매를 확인한다. 기존 비교 리플레이 5종은 18초/명중 38/재고 26/판매 4/회수 $20 동일, 흔들림 OFF 0 / ON 최대 1.500px. 적중 흔들림 66.7ms 상한과 비누적, 이동 360, 절삭 105ms, 기존 판매 단가 $5를 유지했다.
+- Linux OpenGL 창에서 기본 시작점부터 실제 WASD 입력으로 접근, 고리 밖 회피(씨앗 피격 0회), 재진입, 절삭 3회, 멜론 3조각과 수박 6조각 납품을 확인했다. [예고](v0717-melon-warning.png) · [노출](v0717-melon-open.png) · [수확](v0717-melon-harvest.png) · [납품](v0717-melon-depot.png)
+- 실제 모바일 기기, 오디오 청음, 사람의 손맛, 원본 동등성은 아직 확인하지 않았다. 실제 창에서는 회피 쪽을 검증했고 고리 안에 머물러 피격되는 쪽은 자동 검증했다.
+- 다음은 배터리 차감과 원정 종료·귀환을 연결하고, 배터리가 0이 되어도 이미 납품한 재고를 보존하는 검사다. 밤 메뉴·영업·마감은 A 이후에 구현한다.
 
-## 실제 코드 변경
-- G2 production.upgrade_mixer(): 회수 지갑40 차감/spent_cash 기록/중복 구매 방지.
-  단일 믹서0.45→0.25초/개. 추가 병렬 믹서가 아님.
-- 진행 중 작업의 완료 비율을 유지해 mix_elapsed를 새 시간으로 환산.
-  재료종류/대기재고/완제품/고객/돈을 삭제하거나 중복 생성하지 않음.
-- 산호색 강화패드(460,310),반경80 내 F키 또는 고정HUD 버튼으로 구매.
-  pause/거리/자금/이미강화 조건으로 입력과 버튼을 각각 보호.
-- 믹서 도형/회전날/강화 후 색변경 및 실제 mix_duration 기반 진행바.
-  가게 제목과 믹서가 겹치지 않도록 제목 위치/폰트 정리.
-- 실제 버그 회귀: _unhandled_input에서만 touch release를 받으면 UI위 놓기를 놓쳐
-  drag가 유지될 수 있음. raw _input에서 활성index의 release를 먼저 해제.
-  press는 여전히 UI가 소비한 후 unhandled일 때만 이동 시작.
+---
 
-## 명령 / 실제 결과
-프로젝트루트:
-`godot --headless --path . --editor --import --quit` PASS
-`godot --headless --path . --script tests/run.gd` 99 checks /0 failures
-`godot --headless --path . --script tests/feel_replay.gd` 5조건 PASS
-`godot --headless --path . --quit-after 120` PASS
-로그 docs/*-output.txt. 기존82개 통과 후 터치해제 회귀를 추가하니83개 중1개실패;
-입력 수정+시설 검사 추가 후99개 통과.
-기본/강화 동일10재료·2초:4개/8개 완성, 전체재고10 유지.
-진행률 보존/중복구매/미회수대금 구매불가/pause·거리/30·60·120Hz/직원과통합 회귀 포함.
-5효과18초경로는 구매없이 명중39/재고26/판매4/현금회수20으로 유지.
-자동 테스트 수가 손맛/원본 동등성의 증거는 아님.
+# 2026-11-18 승인된 다음 작업
 
-## 실제 창
-최신run06을UI로import/F5. 판매대금45회수→40시설구매→잔액5,
-MIXER0.25sACTIVE/믹서색변경을 확인. 이후 RAW10→4,READY20→26으로 가공 진행.
-구체 키입력/상태는 PLAY_CHECK.md. UI시간은 정밀처리속도 계측 아님.
-F키 경로만 실제구매. HUD버튼/모바일터치는 자동이벤트검사만 수행.
-청음/인간손맛/원본 모션동등성/폰/Mac/GPU성능 미검증.
-이번원본새계측 없음; 이전200ms랜드마크측정만 유지.
+[현재 개발 로드맵](ROADMAP.md) A부터 이어간다. 가시멜론 한 마리의 범위 예고, 발동, 약점 노출을 구현하고 실제로 피했다가 접근할 수 있는지 확인한다. 배터리·안전 재고를 이어서 연결한다. 수박만 수확하는 기존 경로를 비교 기준으로 유지한다. 이번 저장은 설계와 개발 우선순위만 갱신했다.
+
+---
+
+# v0.7.16 — 과수원 아트, 명중 궤적, 낮·밤 설계
+
+2026-11-18 KST. v0.7.15 저장본 기준.
+- 정적인 바닥 그림을 분리하고 흙길, 테라스, 잔디, 화분, 감귤나무를 추가했다. 길과 화분은 장식이고 충돌을 바꾸지 않는다.
+- 캐릭터의 가시성을 위해 밝은 모자와 어깨끈, 작업복 포켓을 추가했다. 보행과 장비의 방향별 정렬은 기존 루틴을 사용한다.
+- 실제 명중 때만 75ms의 발광 궤적을 표시한다. 다수 명중은 한 궤적을 공유하며, 빠른 과즙 입자를 짧게 늘려 절삭 방향이 잘 읽히게 했다. M, 3, 정지/재시작은 활성 궤적을 정리한다. 기존 카메라 1.5px 상한과 절삭 판정, 재료 지급, 랜덤 시드는 유지한다.
+- 원본 30fps의 수확 장면에서 보인 명중, 과즙, 수확물 적층의 순서를 참고했다. 원본 리소스를 가져오지 않았다. 속도나 정확한 내부 프레임 수치를 확인한 것은 아니다.
+- Godot import/runtime, 기존 회귀 312개, 궤적 수명과 모션 감소 모드 검사, 동일 경로 18초 리플레이, Web PCK 생성 통과. 데스크톱 Godot 창에서 과수원·캐릭터 렌더, 수확·이동·납품·M 끄기·재개, 판매대금 $45를 확인했다. 최신판 브라우저 조작과 공개 배포는 미확인.
+- [낮·밤 설계](DAY_NIGHT_DESIGN.md)가 새 기능의 기준이다. 다음 구현은 배터리를 쓰는 낮 수확, 반납한 재료로 진행하는 밤 영업, 마감까지의 1일 흐름이다. 덱과 3일 캠페인은 그 흐름을 확인한 뒤 추가한다. 현재 빌드에는 낮·밤 규칙이 들어 있지 않다.
+
+- 낮에 넣을 첫 전투는 [수확 전투 설계](HARVEST_ENCOUNTERS.md)에 정의했다. 기존 수박과 선택형 가시멜론 한 마리로 1일 루프를 검증한다. 이 변경은 설계 문서만 갱신한다.
+
+---
+
+# v0.7.15 — 포커스 복귀 후 터치로 재개
+
+2026-11-18 KST. 최신 ZIP version19 새복원.
+입력SHA256:58b2bd30402f49ccebad9bfda63b6f2bf9a7f67fe25485f11943d1ad3065126f.
+main 새조회612f5cdfe6d2bbd7bbb62cdba78ee7f2e0973f10,tree15e1a88c30b3e8c5e1c0aaa99d728761c351c4af 유지.
+main 체크포인트의 production/saw_audio/export_presets/.gitignore blob SHA를 새 원격 tree와 대조하고 현재파일 동일확인.
+후속 ZIP 과일해금/아트/세로구도/깊이/가림표식/편안함 수정 보존. 같은 main에 대한 추가병합변경 없음.
+
+## 실제 버그와 변경
+- 애플리케이션 focus-out은 set_paused(true)였지만 재개는 P/Esc 키뿐이었다.
+  키보드가 없는 터치 사용자는 복귀 후 게임을 재개할 화면경로가 없었다.
+- CanvasLayer에 PAUSE/RESUME 버튼 추가. 동일 set_paused 경로를 사용하고 pause 중에도 활성.
+  비활성화된 구매버튼과 별개이며 FOCUS_NONE으로 키보드 이동 초점을 빼앗지 않는다.
+- 기존 하단 M버튼 자리만 두칸으로 분할. 세로 HUD210 높이/카메라zoom/위치추적 유지.
+  가로도 기존 왼쪽224px 구역을 사용. M/PAUSE 버튼 font12는 화면배치 설계값이다.
+- pause/reset/layout 시 버튼라벨과 상태 일치. pause/resume 시 drag/pulse 정리는 기존 set_paused 유지.
+  포커스 복귀만으로 자동재개하지 않으며 사용자가 화면버튼/키로 재개한다.
+- 실제명중/이동360/공격105ms/흔들림최대1.5논리px·66.667ms/생산/납품/판매/해금 불변.
+  전역 hit-stop 추가없음. 원본영상 측정값이나 완성 재현이 아니다.
+
+## 재현과 회귀 / Godot4.6.3
+프로젝트루트에서 모두exit0:
+- godot --headless --editor --import --quit
+- godot --headless --script tests/run.gd :134/0
+- hud_bounds5,viewport22,cargo_view17,avatar_motion18,foot_lock15,camera_follow13,
+  fruit_art12,golden_art10,comfort_budget16,depth_order10,player_locator13,pause_touch27 :0실패,합계312.
+  각 명령 godot --headless --script tests/파일명.gd.
+- godot --headless --script tests/feel_replay.gd :동일5조건18초38명중/재고26/판매4/회수20,흔들림0/1.500px.
+- godot --headless --quit-after 120
+로그 docs/v0715-*-output.txt. 신규27검사는3화면크기에서 포커스상실·정지보존·재개버튼·겹침·
+재고/시계보존·stale drag없음·M·reset을 검사. before9검사3실패→after27검사0실패.
+수정전로그 v0715-pause-before.txt,직전game.gd는 checkpoints/pause-before-v0.7.14-game.gd.txt.
+viewport 회귀에도 새버튼을 포함. CI에 pause_touch.gd 추가.
+실제 터치 OS 이벤트 전달/모바일 브라우저 수명주기는 위 callback 검사로 증명하지 않는다.
+
+## 실제 창 확인
+데스크톱 터미널에서:
+godot --path /workspace/scratch/20439e58e06d/run23/harvest-deck-godot
+OpenGL/Mesa llvmpipe,416×900 창12582915,ALSA장치없음→Dummy.
+- 시작 BAG18 자동절삭 표시 관찰.
+- 화면 PAUSE 클릭→RESUME/PAUSED 표시,BAG24/RAW0/MIX0/READY0/TILL0/LINE5 관찰.
+- 정지중 M 클릭→SHAKE OFF. RESUME 클릭→W900ms 입력→PAUSE 클릭.
+  캐릭터/카메라가 상점응대영역으로 이동,PAUSED/RESUME/SHAKE OFF 유지,BAG24 보존.
+키보드 W는 재개 이후 이동확인용이고 재개는 화면클릭으로 수행.
+도구지연 포함하므로 900ms와 화면관측위치를 이동속도 계측으로 사용하지 않음.
+이번은 마우스로 화면버튼을 누른 데스크톱 확인. 실제 모바일/손가락 제스처/OS백그라운드 복귀/청음/사람손맛은 미검증.
+새 스크린샷 파일은 생성하지 않았으며 화면 관찰기록만 남김.
+
+## 원격과 다음
+GitHub create_blob 새시도403 Resource not accessible by integration. main/Pages 변경없음.
+기존 브라우저 Confirm access 인증완료 여부를 이번실행에서 확인하지 못함. 추가권한/보안제한 우회없음.
+이번 Web빌드/배포성공 주장없음. 권한장애와 독립된 Godot 개발/검증을 완료.
+기본비교체크포인트/원본추적도구/아트원본 보존. 새에셋생성/원본영상·음향추출/새원본계측 없음.
+G1 IN_PROGRESS,G2기능보존,G3~5보류. 다음은 원본 다구간 추적/진동분리·이동/타격템포 비교 우선.
+인간편안함/피로감/원본동등성/Mac/실기기GPU성능 미검증. 자동검사수는손맛증명아님.
+동일ZIP expected_current_version=19로교체. 충돌이면최신판재병합.
+
+---
+
+# v0.7.14 — 가려진 플레이어의 정적 위치 안내
+
+2026-11-18 KST. 최신 ZIP version18 새복원.
+입력SHA256:8f2f635342a6f034f6b9b03bb70967b36b3b2444cd44f15e57ed3a419940ee17.
+main fetch 결과612f5cdfe6d2bbd7bbb62cdba78ee7f2e0973f10 유지. ZIP 후속 기능/아트/편안함 기준과 main 기능 보존.
+
+## 실제 변경
+- 지면정렬 후 전경 과일에 플레이어 몸통/발이 가려져 위치를 읽기 어려운 장면을 재현.
+- player_is_occluded():플레이어보다 뒤에 그려지는 살아있는/해금된 과일의 몸통만 근사 타원으로 검사.
+  머리/몸통의4개 지점 중2개 이상이 가려지면 정적 위치안내를 표시. 둘이 나눠 가린 경우도 covered배열로 합산.
+  텍스처 alpha를 매프레임 읽거나 정렬/충돌/타격대상을 수정하지 않음.
+- draw_player_locator():몸통 중심의 작은 다이아몬드와 발밑 타원 윤곽을 전경 위에 표시.
+  darkoutline5/mintstroke2/발밑23×9world units/표식반경5는 이번 설계실험값이며 원본계측 아님.
+- 표식에는 별도시계/펄스/깜빡임/추가흔들림/RNG가 없다. M/효과OFF/일시정지에서도 위치안내 유지.
+  앞에 나오거나 가리는 과일이 죽음/잠김/제거되면 즉시 사라져 잔상타이머가 없음.
+- 과일 이미지/불투명도/지면정렬/표적판정/캐릭터·보행은 그대로. 이동360/절삭105ms/
+  흔들림1.5논리px·66.667ms/M OFF·생산·적재/납품/판매/해금도 유지. 전역hit-stop 추가없음.
+
+## 실제 전후 렌더
+데스크톱 터미널에서 수정전/후 같은 fixture실행:
+`godot --path /workspace/scratch/20439e58e06d/run22/harvest-deck-godot --script tests/locator_render.gd -- before`
+`godot --path /workspace/scratch/20439e58e06d/run22/harvest-deck-godot --script tests/locator_render.gd -- after`
+OpenGL/Mesa llvmpipe. 전후 각각 hidden/reduced/front PNG3장,총6장 저장result0.
+- docs/locator-v0714-{before,after}-hidden.png :동일2과일/플레이어위치,표식전후.
+- reduced.png :M모드/재료24개에서도 고정표식 보임.
+- front.png :과일앞으로 나온 위치에서는 표식없음.
+수정전hidden 및 수정후3장을 실제 열어 확인. after JSON cue=true/true/false,모든장면hits0.
+PNG/JSON은 고정상태 렌더이며 자유플레이/연속보행/원본동등성/완성애니메이션 영상 아님.
+터미널출력전사는 v0714-render-output.txt. ALSA장치없음→Dummy로 청음미검증.
+
+## 검증 / Godot4.6.3
+프로젝트루트에서 모두 exit0:
+- godot --headless --editor --import --quit
+- godot --headless --script tests/run.gd :134/0
+- tests/hud_bounds.gd5,viewport.gd22,cargo_view.gd17,avatar_motion.gd18,foot_lock.gd15,
+  camera_follow.gd13,fruit_art.gd12,golden_art.gd10,comfort_budget.gd16,depth_order.gd10,player_locator.gd13 :모두0실패,합계285.
+  각실행:godot --headless --script tests/파일명.gd
+- godot --headless --script tests/feel_replay.gd :5효과조건18초/38명중/재고26/판매4/회수20 유지,흔들림0/1.500논리px.
+- godot --headless --quit-after 120
+로그:docs/v0714-*-output.txt. player_locator를CI에 추가.
+13검사는 가림/앞/옆/뒤/같은깊이/죽음·잠금·해금/M·효과OFF/만재/일시정지/과일제거/배열·RNG비변경을 확인.
+자동검사수는 사람의 타격감·편안함·가독성·조작성·피로감 증명이 아님.
+
+## 보존 / 한계 / 다음
+기존 기본형/비교ZIP 모두보존. 직전game.gd는 checkpoints/locator-before-v0.7.13-game.gd.txt.
+단일파일 비교본이므로 현재프로젝트 복사본의 scripts/game.gd에 덮어써 비교. 그복사본에는 신규locator검사 미적용.
+근사 타원/4지점 검사라 실제 alpha가림률이 아니며,아트·방향 변화/가장자리에서 오판정·표식전환 튐 가능.
+상점/시설/고객·입자/재료탑 자체의 가림은 검사하지 않는다. 밀집전경으로부터의 위치안내 첫 단계.
+확대/축소·기기별가독성/연속이동 피로감·사람의손맛·모바일/Mac·청음·GPU성능 미검증.
+reference_tracking.py/reference-30fps.json/FEEL_TUNING 읽고보존. 새원본계측/이미지·음향추출/생성에셋 없음.
+다음G1은 원본 다구간의 이동·카메라추적/명중진동 분리 비교를 우선. 현재표식의 연속접근 전환도 검토.
+G1진행중,G2기능보존,G3~5신규확장보류. 원본동등성/원본게임전체복제 주장없음.
+GitHub읽기정상,새push --dry-run은 HTTPS Username인증정보부재 exit128. 접근제한우회없음.
+main/Pages는v0.7.3. 이번Web빌드/업로드/배포성공 주장없음.
+동일ZIP expected_current_version=18로교체. 충돌시최신판재병합.
+
+---
+
+# v0.7.13 — 밀집 표적과 플레이어의 앞뒤 표시 오류 수정
+
+2026-11-18 KST. 최신 ZIP version17을 새로 복원.
+입력SHA256:00e8cb295bcc09bba981a74e148d5b41e82016daeb7398ae885d1eb086b265d9.
+main fetch 결과612f5cdfe6d2bbd7bbb62cdba78ee7f2e0973f10 유지. main+ZIP 후속 과일해금/생성아트/편안함수정 보존.
+
+## 발견 / 실제 구현
+- 기존 _draw는 과일을 생성배열 순서대로 그리고 플레이어/적층을 항상 그 위에 표시했음.
+  앞쪽 노란 과일이 뒤쪽 녹색 과일에 덮이고, 플레이어가 뒤에 있어도 앞에 뜨는 장면을 실제 렌더로 확인.
+- world_draw_order()는 살아있는/해금된 과일과 플레이어의 별도 표시 목록만 정렬.
+  과일 중심y+24/플레이어y+16의 지면 기준으로 뒤→앞 순서. 같은 깊이는 고정ID로 결정.
+  +24/+16은 현재 도형의 하단에 맞춘 표현 설계값이며 원본 측정치가 아님.
+- 실제 fruits배열/공격순서/판정좌표는 절대 정렬하지 않음. recoil/flash/squash/몸bob/적층높이는 깊이에 영향없음.
+  잠긴/죽은 표적 제외. 플레이어 그림자·재료탑·캐릭터는 한 묶음으로 정렬.
+- 피격체력바는 모든 몸체/재료탑 뒤에 별도 overlay pass로 표시해 가까운 대상의 상태를 읽게 함.
+  입자도 actor pass 뒤에 표시되어 플레이어에 가려지던 명중입자가 앞에 보임. 입자수/속도/수명/RNG는 동일.
+- 이동360/공격105ms/명중피드백1.5논리px·66.667ms/M OFF/추적·생산시계·경제·과일아트 유지.
+  전역hit-stop 추가없음. 상점/고객/시설 전체에 지면정렬을 적용한 것이 아님.
+
+## 실제 수정 전후 렌더
+데스크톱 터미널에서 먼저 원본코드에 실행, 수정 후 같은 명령에 after 인수로 재실행:
+`godot --path /workspace/scratch/20439e58e06d/run21/harvest-deck-godot --script tests/depth_render.gd -- before`
+`godot --path /workspace/scratch/20439e58e06d/run21/harvest-deck-godot --script tests/depth_render.gd -- after`
+고정카메라/동일표적3개/적층24개/플레이어y700·720·755/좌측무기/흔들림OFF.
+OpenGL/Mesa llvmpipe로 docs/depth-v0713-{before,after}-{700,720,755}.png 저장6장 result0.
+모든장면cargo24/hits0. before720과 after3장을 실제 열어 앞뒤 교환/앞과일 실루엣/체력바 overlay 확인.
+이것은 스크립트로 위치를 설정한 정적 비교이며 실제 연속 보행/자유플레이/원본동등성/완성애니메이션 영상이 아님.
+ALSA장치 없음→Dummy. 실제 청음 미검증. 터미널결과전사는 docs/v0713-render-output.txt.
+
+## 회귀 / Godot4.6.3
+프로젝트루트에서 다음실행, 모두exit0:
+- godot --headless --editor --import --quit
+- godot --headless --script tests/run.gd :134/0
+- tests/hud_bounds.gd5,viewport.gd22,cargo_view.gd17,avatar_motion.gd18,foot_lock.gd15,
+  camera_follow.gd13,fruit_art.gd12,golden_art.gd10,comfort_budget.gd16,depth_order.gd10 :모두0실패,합계272.
+  각 실행:godot --headless --script tests/파일명.gd
+- godot --headless --script tests/feel_replay.gd :5효과조건18초/38명중/재고26/판매4/회수20,흔들림0/1.500논리px 유지.
+- godot --headless --quit-after 120
+로그:docs/v0713-*-output.txt. CI에 depth_order 추가.
+새10검사는 앞뒤정렬/좌표이동/동일깊이/배열·RNG비변경/반동·만재·효과OFF독립/잠금·죽음·reset을 확인.
+검사개수는 인간손맛/가독성평점/원본동등성 증명이 아님.
+
+## 보존 / 한계 / 다음
+기존 최초/G2/여러버전 비교체크포인트 보존. 이번 직전 game.gd는
+checkpoints/depth-before-v0.7.12-game.gd.txt에 보존. 전체 프로젝트 복제가 아닌 단일파일 비교본이며,
+현재프로젝트 복사본에서 scripts/game.gd에 덮어쓰면 기존그림순서를 재현(그복사본의 depth_order검사는 미적용).
+전체직전판은 기존ZIP버전17에 남음. 원본에셋/음향추출·새생성이미지 없음.
+reference_tracking.py/reference-30fps.json/FEEL_TUNING을 읽고 보존. 새원본계측 없음.
+밀집시 플레이어가 가려지는 것은 깊이표현의 결과이며, 완전가림 실루엣/투명화 안내는 미구현.
+체력바끼리 겹칠 수 있고 상점/고객/시설의 상호가림은 아직별도. 적층24개 정적비교이며 만재/연속이동의 인간평가는 남음.
+다음G1은 완전가림의 위치안내·연속접근가독성과 원본다구간 추적/진동분리 비교. G2보존,G3~5신규확장보류.
+주관타격감/편안함/피로감·청음·모바일/Mac·실제GPU성능 미검증.
+GitHub 읽기정상. 새push --dry-run도 HTTPS Username인증정보부재 exit128. 보안/접근제한우회없음.
+main/Pages는v0.7.3. 이번 Web빌드/업로드/배포성공 주장없음.
+동일ZIP expected_current_version=17로 교체. 충돌하면최신판재병합.
+
+---
+
+# v0.7.12 — 최신 멀미 대응 기준 복구
+
+2026-11-18 KST. ZIP version16을 새로 복원, 입력 SHA256
+f7e132234fb396993cf546a24d370f3e580e162d60127e2306db0bd2e623f014.
+main fetch 결과612f5cdfe6d2bbd7bbb62cdba78ee7f2e0973f10 유지. main 및 ZIP의 과일 해금/새 아트/후속 수정 모두 보존.
+
+## 발견 / 수정
+현재 사용자의 명시적 최신 기준은 비누적1.5px/66.7ms. 기존 문서가 과거 대화의8px/100ms를 현재값으로
+취급하고 있었고 실제 Impact도8px/100ms, Game 화면출력상한5.333px였음. 최신 지시를 우선해 낮춤.
+- scripts/impact.gd: MAX_PIXELS1.5, DURATION2/30초(66.6667ms). 기존 위상·방향/비누적max결합/킬·일반타격 비율 유지.
+- scripts/game.gd: 논리 viewport-pixel 상한1.5. camera.zoom으로 나눠 확대와 비균일 줌에서도 상한 유지.
+- 실제 명중 시각부터 감쇠하는 기존120Hz substep 경로 유지. 새 전역hit-stop/생산 지연 없음.
+- tests/run.gd의 과거 최소3px 가시성 요구를 제거하고 비영점+1.5px 상한으로 교체. 구현상수와 독립된
+  tests/comfort_budget.gd를CI에 추가해 기준 자체가 또 커지면 실패하도록 함.
+- 이동360/절삭105ms·표적/보상/적층/납품/가공/고객/현금/계산원/시설/해금·과일 아트 유지.
+
+## 실제 재현 / 회귀 — Godot4.6.3
+새 comfort_budget를 수정 전 코드에서 실행:16중15실패(상한·수명·줌·연타중심복귀). 수정 후16/0.
+검사는 30/60/120/1000Hz 샘플, 100동시펄스, zoom0.7/1/1.4/(2,1.5),105ms연타의중심틈,M OFF를 포함.
+1000Hz는 오프라인 샘플 해상도이며 장치1000fps 성능이 아님.
+프로젝트 루트에서 실제 실행, 모두 exit0:
+- godot --headless --editor --import --quit
+- godot --headless --script tests/run.gd :134/0
+- tests/hud_bounds.gd5,viewport.gd22,cargo_view.gd17,avatar_motion.gd18,foot_lock.gd15,
+  camera_follow.gd13,fruit_art.gd12,golden_art.gd10,comfort_budget.gd16 :모두0실패, 합계262.
+  각 실행:godot --headless --script tests/파일명.gd
+- godot --headless --script tests/feel_replay.gd :5조건 모두18초/38명중/재고26/판매4/회수20 유지.
+  cameraOFF0,ON최대1.500 논리viewport-px. 이전5.333과 대비한 동일경로 시뮬레이션 결과.
+- godot --headless --quit-after 120 :PASS
+기록:docs/v0712-*-output.txt 및 comfort-before-output.txt. 검사수는 손맛/편안함/원본 동등성 증명이 아님.
+
+## 실제 렌더
+데스크톱 터미널:
+`godot --path /workspace/scratch/20439e58e06d/run20/harvest-deck-godot --script tests/comfort_render.gd`
+OpenGL/Mesa llvmpipe로 고정장면의 펄스0~75ms를120Hz 간격10장 렌더/저장 성공.
+comfort-v0712-render.json에 offset/HUD원점/저장결과 기록. 66.667ms와75ms offset(0,0),
+HUD원점(16,10) 전구간고정,save_result모두0. 첫/66.667ms PNG를 열어 검토.
+이는 스크립트가 직접 명중펄스를 호출한 피드백 렌더 fixture. 과일수확/자유플레이/인간입력지연/FPS측정 아님.
+터미널 COMFORT_RENDER10samples/last_offset(0,0) 확인. ALSA장치없음→Dummy,청음미검증.
+
+## 비교 / 미검증 / 다음
+과거 기록의8px/100ms 및5.333px는 당시 역사값이며 현재 승인값이 아님.
+직전 실행 비교본 checkpoints/g1-before-comfort-v0.7.11.zip,기존 최초/G2기본형 모두보존.
+reference_tracking.py/reference-30fps.json/FEEL_TUNING을 읽고 보존. 새 원본계측/에셋·음향추출 없음.
+수치1.5px/66.7ms는 사용자 피드백에 따른 설계실험값이며 원본계측/연구최적값 아님.
+사람의 편안함/타격감/가독성/조작성/피로감 점수,청음,모바일/Mac,실제GPU성능은 미검증.
+다음 G1은 밀집표적·적층 가독성과 원본 다구간의 추적/명중진동 분리 비교. G2보존,G3~5신규확장보류.
+GitHub main 읽기정상. 새 push --dry-run도 HTTPS Username인증정보부재 exit128. 접근제한우회없음.
+main/Pages는v0.7.3 유지. 이번 Web빌드/업로드/배포 성공 주장 없음.
+동일ZIP expected_current_version=16으로만 교체. 충돌 시 최신판재병합.
+
+---
+
+# v0.7.11 — 노란 과일 대체 아트 / 실행용 텍스처 축소
+
+2026-11-18 KST. 최신 ZIP version15, 입력 SHA256
+7b50e7b530727cd34ff2290549b82d2fed7219af405717ff7186cca9fde4926e 를 새로 가져옴.
+main fetch 결과612f5cdfe6d2bbd7bbb62cdba78ee7f2e0973f10 유지. main v0.7.3와 ZIP 후속 기능을 보존.
+
+## 실제 변경
+- kind1 노란 과일을 녹색 수박과 같은 실루엣/얼굴/선 스타일의 황금색 변형으로 생성해 통합.
+  참고 이미지는 이 프로젝트가 별도 생성한 수박뿐이며 원본 게임 이미지/음향 추출 없음.
+  assets/golden-fruit-v1.png에 생성 원본을 수정 없이 복사. 전체 프롬프트는 golden-generation-prompt.txt,
+  생성 경로·SHA256·프레임·한계는 golden-fruit-v1.json 및 assets/README.md에 기록.
+- 원본 두 PNG는1254×1254 보존. 실행용 import만 size_limit512+mipmap으로 변경.
+  기존 draw source region이 원본 픽셀 좌표에 고정된 문제를 고쳐 실제 import 크기로 비례 변환.
+  두 과일 모두 표시 몸통 폭48world units/하단anchor/충돌 위치와 기존 종횡비를 보존.
+- tools/texture_profile.gd로 실제 import 이미지 RGBA 데이터 측정:
+  녹색 기존8,384,072bytes → 새1,398,100bytes(약83.3% 감소), 황금색도1,398,100bytes.
+  두 장 합계2,796,200bytes. 이는 get_image().get_data().size()이며 실제 기기 GPU 메모리/FPS 측정 아님.
+  before 로그의 황금색은 최초 기본 import의 임시 상태이며 출시된 이전 버전과의 비교값이 아님.
+- 6키는 두 과일의 절차 도형/새 아트를 함께 전환. 잠금·해금50달러·HP·보상 종류·입자/RNG 유지.
+  이동360/절삭105ms/카메라 강도·감쇠·추적/생산·재고·판매·현금·고용·강화는 변경하지 않음.
+
+## 실제 검증 / Godot4.6.3
+프로젝트 루트에서 아래 실행, 모두 exit0:
+- godot --headless --editor --import --quit
+- godot --headless --script tests/run.gd :134/0
+- tests/hud_bounds.gd5, viewport.gd22, cargo_view.gd17, avatar_motion.gd18,
+  foot_lock.gd15, camera_follow.gd13, fruit_art.gd12, golden_art.gd10 :모두0실패, 합계246.
+  각 실행은 godot --headless --script tests/파일명.gd. golden_art를CI에도 추가.
+- godot --headless --script tests/feel_replay.gd :5조건 모두18초/38명중/재고26/판매4/회수20.
+- godot --headless --quit-after 120
+- godot --headless --script tools/texture_profile.gd :두 장512×512/mipmap=true/각1,398,100bytes.
+신규10개는 import 상한·mipmap·alpha·리사이즈 표시영역/앵커·잠금수확 차단·유료해금·kind1보상·아트ON/OFF 상태보존.
+로그는 docs/v0711-*-output.txt. 검사 개수는 손맛/원본 동등성/피로감 증명이 아님.
+
+## 실제 데스크톱 렌더 근거
+데스크톱 터미널에서:
+`godot --path /workspace/scratch/20439e58e06d/run19/harvest-deck-godot --script tests/golden_render.gd`
+OpenGL/Mesa llvmpipe로 저장 성공5장(result=0), 이후 이미지를 실제 열어 확인:
+- golden-v0711-locked.png :unlocked=false,hits0,cargo[]; 노란 과일 숨김.
+- golden-v0711-legacy.png :동일 배치의 해금 후 기존 도형.
+- golden-v0711-sprite.png :동일 배치의 새 녹색/황금 과일, hits0.
+- golden-v0711-hit.png :실제1명중의 flash/짧은눌림/HP 표시, 재고0.
+- golden-v0711-cut.png :총3명중 후 해당 표적 소멸·시각조각·cargo[1,1,1].
+고정 fixture/입력의 비교이며 카메라 흔들림은 script에서OFF. 자유 수동 플레이/완성 애니메이션 영상이 아님.
+ALSA장치없음→Dummy fallback 메시지 확인. 렌더/저장은 성공했지만 청음은 미검증.
+
+## 한계 / 다음
+정지 이미지2장+절차 반응이며 방향별 프레임·예비동작/후딜·완성 애니메이션 아님.
+이전 수박과 색상/실루엣은 맞췄으나 환경/캐릭터/원본3D시점·전체아트 동등성은 여전히 다름.
+기존 비교 체크포인트 보존. 직전 runtime 비교본은 checkpoints/g1-before-golden-v0.7.10.zip.
+다음 G1은 밀집 과일과 적층 겹침의 가독성·환경 실루엣/시점 비교. G2 보존, G3~5 신규 확장 보류.
+reference_tracking.py/reference-30fps.json/FEEL_TUNING을 읽고 보존. 이번 원본 추가 계측 없음.
+주관 타격감/편안함·모바일/Mac·실제GPU성능·청음은 미검증. 자동검사로 원본 동등성 주장 없음.
+main/Pages는v0.7.3. 이전 HTTPS인증정보부재·Web template누락을 우회하지 않았고 이번 배포 성공 주장 없음.
+동일 ZIP expected_current_version=15로 교체. 충돌하면 최신판 재병합 필요.
+
+---
+
+# v0.7.10 — 대체 수박 아트와 명중 표현
+
+2026-11-18 KST. 최신 ZIP version14 SHA256 e41ba1ec31a57be70cf4fb154965e4cc4e5ce4a14f05ce6bc2cdf8b8990dd4db를 새로 가져옴.
+main fetch/ls-remote 결과612f5cdfe6d2bbd7bbb62cdba78ee7f2e0973f10 유지. main v0.7.3와 ZIP 후속 기능 보존.
+
+## 이번 실제 구현
+- 기존 녹색 원 도형(kind0)을 새로 생성한 수박 스프라이트로 교체. 줄무늬/얼굴/잎과 투명 배경을 가진 정지 아트이며
+  원본 게임의 이미지/음향을 추출하거나 생성 참고 이미지로 사용하지 않았음. kind1 노란 과일은 기존 절차 도형 유지.
+- Built-in image generation으로 제작. assets/watermelon-v1.png에 원본을 수정 없이 복사. 전체 프롬프트는
+  assets/generation-prompt.txt, 생성 방식/한계는 assets/README.md, SHA256와 알파/프레임 정보는 watermelon-v1.json에 기록.
+- 원본1254×1254 RGBA, 모서리alpha0 확인. 미세 alpha 노이즈를 포함한 전체 여백 대신 authored frame(105,57,1016,1190)을
+  그릴 때만 사용. PNG 자체는 편집하지 않음. 기존 몸통 표시 폭48world units/하단/충돌 중심을 유지하고 종횡비 보존.
+- 큰 이미지를 작은 표적으로 줄일 때의 깜빡임을 줄이도록 mipmap 생성/linear mip filtering 설정. 실제 import 상태 검사 통과.
+- 6키로 이전 절차 도형/새 스프라이트 비교. R을 눌러도 다른 효과 토글처럼 설정 유지. 게임 상태를 초기화하는 토글이 아님.
+- 실제 명중 flash(55ms)와 함께 가로최대1.1/세로최소0.9의 짧은 squash를 표현. HP/판정 좌표는 움직이지 않음.
+  M 또는3 OFF에서는 새 변형 제거. 스프라이트 명중은 밝기 플래시이며 새 프레임 애니메이션을 제작한 것이 아님.
+- 파괴 시 기존13개 입자 중4개를 작은 수박 조각으로 표시. 나머지는 기존 점입자. 개수/속도/수명/난수 호출은 유지.
+  시각 조각은 재고가 아니며 기존 보상3개에 더하지 않는다. M/3 OFF에서는 기존 작은 점 표현으로 비교 가능.
+- 이동360/절삭105ms/카메라 추적·명중 흔들림 강도/재료·가공·고객·현금·고용·강화·과일 해금은 유지.
+
+## 실제 검증 / Godot4.6.3
+프로젝트 루트에서:
+- godot --headless --editor --import --quit :PASS
+- tests/run.gd134, hud_bounds.gd5, viewport.gd22, cargo_view.gd17, avatar_motion.gd18,
+  foot_lock.gd15, camera_follow.gd13, fruit_art.gd12 :모두0실패, 합계236.
+  각 실행: godot --headless --script tests/파일명.gd
+- godot --headless --script tests/feel_replay.gd :5조건 모두18초/38명중/재고26/판매4/회수20, 흔들림0/5.333viewport-px 유지.
+- godot --headless --quit-after 120 :PASS
+신규12개는 alpha/실제mipmap/프레임 범위·앵커, 헛스윙 무변형, 실제 명중의 표현/판정 분리, 변형 상한,
+M/3 OFF, 시각 조각과3보상 분리, 아트ON/OFF의명중·보상·입자상태·RNG 보존,6키 전환을 검사.
+이 수치들은 로직/표시 상태 검증이며 손맛·원본 동등성·인간 피로감의 증명이 아님.
+
+## 실제 렌더 근거
+데스크톱 터미널에서
+`godot --path /workspace/scratch/20439e58e06d/run18/harvest-deck-godot --script tests/fruit_render.gd`
+실행. 같은 표적3개/같은 카메라/같은 상태에서 비교하며 카메라 흔들림만 script에서OFF.
+OpenGL/Mesa llvmpipe 렌더로4 PNG 저장result=0 확인 후 실제 이미지를 열어 검토:
+- docs/fruit-v0710-legacy.png :이전 도형, hits0/cargo0
+- docs/fruit-v0710-sprite.png :새 아트, hits0/cargo0
+- docs/fruit-v0710-hit.png :실제1명중, 밝기·눌림·체력바, cargo0
+- docs/fruit-v0710-cut.png :총3명중, 시각 조각·적층, cargo3
+이것은 고정 입력/고정 상태의 렌더 비교이며 자유 플레이/완성 애니메이션/원본 동등성 영상이 아니다.
+ALSA 장치 없음→Dummy로 청음 미검증. 이번 자유 수동 플레이·모바일/Mac·GPU FPS·주관 손맛은 미검증.
+
+## 비교 / 한계 / 다음
+기존 체크포인트 보존. 직전 실행 코드 기본형은 g1-before-fruit-art-v0.7.9.zip. 6키는 아트만 비교하는 것이며
+v0.7.9 전체 동작을 되돌리는 기능이 아니다. 새 squash는 두 아트 모두에 적용해 비교 조건을 맞춘다.
+정지 스프라이트1장에 절차 반응을 붙인 단계다. 방향별 스프라이트/걷기 프레임/예비동작·후딜의 완성 애니메이션이 아님.
+노란 과일/캐릭터/환경은 여전히 다른 수준의 절차 도형이므로 전체 화면 아트 통일과 원본 시점 비교가 남음.
+다음 G1은 새 수박의 실사용 크기·겹침·명중 가독성 비교와 노란 과일/환경 대체 아트. G2 기능 유지, G3~5 확장 보류.
+reference_tracking.py/reference-30fps.json/FEEL_TUNING을 읽고 보존. 이번 원본 추가 계측/고유 에셋·음원 추출 없음.
+10% 변형과 조각8world-units는 이번 설계 실험값이며 연구 최적값/원본 계측값이 아님.
+main/Pages는 v0.7.3 유지. 이전 확인된 인증정보 부재를 우회하지 않았고 이번 Web 빌드/업로드/배포 성공 주장 없음.
+저장은 동일 ZIP expected_current_version=14로 교체하며 충돌 시 최신판 병합 필요.
+
+---
+
+# v0.7.9 — 카메라 추적의 프레임률 차이 수정
+
+2026-11-18 KST. 최신 ZIP version13, SHA256 9ac1b557e75dab62b7181af585330d0453c653f4fc658c9e32d529a178bf2add를 새로 가져옴.
+main fetch 결과612f5cdfe6d2bbd7bbb62cdba78ee7f2e0973f10 유지. main v0.7.3와 ZIP의 후속 변경을 모두 보존.
+
+## 재현 / 실제 변경
+이동·절삭은 이미120Hz 이하 구간으로 진행했지만, 카메라는 전체 프레임 끝의 최종 목표에 lerp를 한 번 적용했다.
+따라서 같은 입력/같은 시간에도 느린 프레임에서 카메라가 더 가까이 붙어 시각적 이동 템포가 달랐다.
+새 tests/camera_follow.gd의 우0.8초→상0.8초→정지0.4초 경로,0.8/1.6/2.0초 체크포인트를120Hz와 비교:
+- 수정 전5Hz 최대25.1781world units,30Hz4.6308,60Hz1.6015 차이. 13검사 중3실패.
+- 수정 후5/30/60/120Hz 모두 허용오차0.01world units 이내(출력0.0000),13/0.
+수정: 카메라 추적을 simulate_slice의 이동 직후에 같은 구간으로 진행. _physics_process 끝의 중복 추적은 제거.
+추적 응답률10/s·목표함수·상점 여백·카메라 명중 offset은 유지하며, 추적과 흔들림을 별도 경로로 유지했다.
+이동360/절삭105ms/명중 판정/카메라 흔들림 강도·감쇠/생산·재고·현금·해금은 변경하지 않음.
+
+## 검증 / Godot4.6.3
+프로젝트 루트:
+- godot --headless --editor --import --quit :PASS
+- godot --headless --script tests/run.gd :134/0
+- godot --headless --script tests/hud_bounds.gd :5/0
+- godot --headless --script tests/viewport.gd :22/0
+- godot --headless --script tests/cargo_view.gd :17/0
+- godot --headless --script tests/avatar_motion.gd :18/0
+- godot --headless --script tests/foot_lock.gd :15/0
+- godot --headless --script tests/camera_follow.gd :13/0
+- godot --headless --script tests/feel_replay.gd :5조건18초/38명중/재고26/판매4/회수20, 흔들림0/5.333viewport-px 유지
+- godot --headless --quit-after 120 :PASS
+합계224개는 로직/추적/상태 검사이며 원본 동등성·손맛·멀미 개선의 증명이 아니다.
+5Hz는 시뮬레이션 입력 간격이며 실제 GPU5fps의 쾌적함/지연을 측정한 것이 아님.
+신규13검사는 동일시간 카메라 위치·pause시추적동결/offset제거·reset정렬·이동/자원 보존. CI에 추가.
+
+## 실제 렌더
+데스크톱 터미널에서
+`godot --path /workspace/scratch/20439e58e06d/run17/harvest-deck-godot --script tests/camera_render.gd`
+실행. 카메라를 목표에 직접 스냅하지 않고 실제 _physics_process/추적코드를 사용한60프레임 저장 성공.
+CAMERA_RENDER:60 frames,2 simulated seconds; player=(988,432), camera=(987.9996,307.7064) 확인.
+OpenGL/Mesa llvmpipe 렌더이며 오디오는 ALSA장치없음→Dummy. 청음/자유수동플레이/인간평점은 이번에 수행하지 않음.
+ffmpeg로 docs/camera-v079.mp4 인코딩, ffprobe416×900/60frames/2.000초 확인.
+입력은 위 검사와 같은 우0.8/상0.8/정지0.4초. 영상은 스크립트 렌더이며 실제 사람의 입력 지연/원본 동등성 영상이 아님.
+원래 캡처 폭415px의 오른쪽1px만 패딩해H.264/yuv420p 인코딩했다. 게임 좌표/속도 변경 없음.
+명령: ffmpeg -framerate 30 -i ../camera-v079-frames/frame-%03d.png -vf 'pad=ceil(iw/2)*2:ceil(ih/2)*2' -c:v libx264 -pix_fmt yuv420p -crf 20 -movflags +faststart docs/camera-v079.mp4
+
+## 비교 / 원격 / 다음
+카메라 비교 JSON의 before/after는 게임 시뮬레이션 좌표이며 원본 영상 계측치가 아니다.
+reference_tracking.py, reference-30fps.json, FEEL_TUNING을 읽고 보존. 이번 원본 추가 계측·에셋/오디오 추출 없음.
+기존 체크포인트 유지, 직전 실행 코드 기본형은 g1-before-follow-v0.7.8.zip으로 비교 가능.
+GitHub main 읽기/fetch 정상. 변경 없는 push --dry-run도 HTTPS Username 인증정보 부재로 실패. 권한/보안 우회 없음.
+원격 main/Pages는 v0.7.3 유지. Web template 누락은 이전 확인 장애이며 이번 새 Web 빌드/배포 성공 주장 없음.
+G1 진행중. 다음은 원본 다구간의 카메라 추적·진동 분리 비교와 과일/환경 시점·실루엣 개선.
+모바일/Mac/실제GPU성능·주관적 피로감/타격감/조작성은 미검증. G2 기능 보존, G3~5 신규 확장 보류.
+저장은 동일 ZIP expected_current_version=13으로만 교체. 충돌 시 최신판 병합 필요.
+
+---
+
+# v0.7.8 — 회전·정지·재출발 발 접지
+
+2026-11-18 KST. 최신 ZIP version12를 새로 가져와 복원.
+입력 SHA256 b63f48e76a5f7bc71b5f7de14b9267884b41317785f7d4eb86e2c3d2c09fa793.
+main fetch 결과612f5cdfe6d2bbd7bbb62cdba78ee7f2e0973f10 유지. main v0.7.3와 ZIP v0.7.4~7의 기능을 보존.
+이전 작업의 임시 폴더가 없어 최신 ZIP에서 수정 코드를 다시 복구하고 아래 검증을 새로 실행했다. 이전 실행의 미저장 로그/영상은 이번 결과로 사용하지 않음.
+
+## 실제 오류와 수정
+- 이전 foot()은 현재 facing을 매번 곱해 좌표를 만들었으므로, 디딘 발도 회전 시 함께 돌아갔음.
+  정지 시 walk_weight 감쇠가 발 좌표까지 바꿔 발이 중립 위치로 미끄러졌음.
+- 접지(plant) 상태는 월드 기준 위치를 고정. 발을 떼는 swing에서만 다음 착지점을 계산하며,
+  공중에서 방향이 바뀌면 현재 위치/높이를 보존한 채 목표만 다시 설정한다.
+- 멈추면 공중인 발만 120ms 동안 바닥으로 정리. 이미 디딘 발은 움직이지 않음.
+  재출발도 현재 발 위치에서 시작하며 reset은 이전 월드 접지점을 제거한다.
+- 실제 표시에서 다리가 길게 늘어나는 첫 안을 보정해, 발 떼기 거리10 / 다른 발 대기 상한18 / swing 이동거리12 world units로 설정.
+  모두 이번 실험 설계값이며 원본 계측치·연구 최적값이 아님. 120Hz 이하 내부 구간으로 30/60/120Hz의 같은 경로 결과를 맞춤.
+- 게임은 clamp 이후 실제 이동량과 갱신한 facing을 AvatarMotion에 전달. 캐릭터 이동속도360, 공격105ms,
+  카메라 흔들림 상한/감쇠·명중 판정·생산 시계·재고·현금·해금은 변경하지 않음.
+- M, pause, reset, focus-out, 효과 OFF의 기존 경로를 보존. 발동작은 표현층이며 판정 위치를 움직이지 않음.
+
+## 새로 실행한 검증 / Godot4.6.3
+프로젝트 루트에서:
+- godot --headless --editor --import --quit :PASS
+- godot --headless --script tests/run.gd :134/0
+- godot --headless --script tests/hud_bounds.gd :5/0
+- godot --headless --script tests/viewport.gd :22/0
+- godot --headless --script tests/cargo_view.gd :17/0
+- godot --headless --script tests/avatar_motion.gd :18/0
+- godot --headless --script tests/foot_lock.gd :15/0
+- godot --headless --script tests/feel_replay.gd :5조건18초/38명중/재고26/판매4/회수20 유지, 카메라0/5.333viewport-px
+- godot --headless --quit-after 120 :PASS
+합계211개는 로직/포즈/상태 검사이며 손맛·원본 동등성 증명이 아님.
+최신 ZIP의 원래 코드에 tests/foot_lock.gd를 넣고 -- --contact-only 실행: 3중2실패(회전/정지), 수정 후 통과.
+추가15개는 90/180도 회전, 정지/재출발, 30/60/120Hz 동일 경로·접지점 보존·다리 도달거리 상한,
+0초 전환의 발 튐 방지·공중 발 정리·idle 안정성·reset 정리를 확인한다. CI에도 추가.
+
+## 실제 렌더 영상 / 재현
+데스크톱 터미널에서 새 복구본으로 실행:
+`godot --path /workspace/scratch/20439e58e06d/run16/harvest-deck-godot --script tests/foot_render.gd`
+우→상→좌→정지→하 각0.4초, 고정30Hz 입력. 실제 OpenGL/Mesa llvmpipe 렌더60프레임 저장 성공,
+출력 FOOT_RENDER:60 frames,2 simulated seconds,player=(700,720) 확인.
+이를 ffmpeg로 docs/foot-v078.mp4로 인코딩. ffprobe:416×900/60frames/2.000초.
+렌더 캡처 폭415px를 H.264/yuv420p에 맞추기 위해 오른쪽1px 패딩만 추가했으며 게임 좌표/속도 보정 없음.
+- 생성: ffmpeg -framerate 30 -i ../foot-v078-frames/frame-%03d.png -vf 'pad=ceil(iw/2)*2:ceil(ih/2)*2' -c:v libx264 -pix_fmt yuv420p -crf 20 -movflags +faststart docs/foot-v078.mp4
+- 수치 추적: docs/foot-lock-v078.json. 같은2초 입력의 모델 좌표이며 원본 영상 계측치가 아님.
+- 이 영상은 스크립트 입력의 렌더 기록이다. 인간 손맛/피로감 평가나 GPU FPS 측정, 원본 동등성 영상으로 쓰지 않는다.
+- 오디오는 ALSA 장치 없음→Dummy. 청음 검증 없음. 이번 복구 후 자유 수동 플레이는 별도 수행하지 않음.
+
+## 한계 / 다음
+급격한 연속 회전과 아날로그 저속 입력, M 전환 순간의 시각 품질·장시간 피로감, 모바일/Mac 검증은 남음.
+이 모델은 단순 평면 접지 표현이며 완성 3D IK/예비동작·후딜을 갖춘 공격 애니메이션이 아님.
+G1 진행중. 다음은 회전 접지의 원본 연속프레임 비교와 과일·환경 실루엣/시점의 대체 아트 진전.
+원본 reference_tracking.py/reference-30fps.json/FEEL_TUNING은 읽고 보존. 이번 원본 추가 계측/고유 에셋·음향 추출 없음.
+기존 비교 체크포인트 보존. g1-before-foot-v0.7.7.zip은 직전 실행 코드만 담은 비교 기본형이다.
+main/Pages는 v0.7.3 유지. 이전 확인된 HTTPS 인증정보 부재·Web template 누락은 이번에도 우회하지 않았고,
+이번 새 Web 빌드/업로드/배포 성공을 주장하지 않음. G2 기능 보존, G3~5 신규 확장 보류.
+저장은 같은 ZIP에 expected_current_version=12로 교체. 충돌하면 최신판을 다시 병합한다.
+
+---
+
+# v0.7.7 — 방향별 캐릭터 / 거리 기반 보행 / 명중 전용 무기 반동
+
+2026-11-18 KST. 최신 ZIP version11, SHA256 52c9462fa9b3e81b9b60d784cf7e59b2b6d1aa4798bc8a83249fd30970dc4aec를 새로 가져옴.
+main fetch 및 ls-remote 결과612f5cdfe6d2bbd7bbb62cdba78ee7f2e0973f10 유지. 최신 ZIP의 v0.7.4~6 및 main v0.7.3 기능을 유지.
+기존 체크포인트 보존. 직전 캐릭터는 checkpoints/g1-before-avatar-v0.7.6.zip으로 비교 가능(재귀 checkpoint ZIP 제외한 실행 소스).
+
+## 실제 문제와 수정
+- 이전 saw_end는 명중 여부와 무관하게 sin(time*90)*1.6으로 움직여 대기/헛스윙도 톱끝 진동을 보였음.
+  대기 끝점을 고정하고, 실제 공격 결과 count>0에서만 별도 AvatarMotion 반동 발생.
+  2.5world units/75ms 비누적 국소 무기반동은 신규 실험 설계값. 기존 카메라 진폭/감쇠는 변경하지 않음.
+- 이전 발/몸 bob은 시간 및 요청 velocity에만 의존하여 경계에 막혀도 계속 걸었음.
+  실제 player 변경량(경계 clamp 이후)을 AvatarMotion에 전달. 이동거리 기준 보행 위상, 정지 시 포즈만 부드럽게 중립 복귀.
+- STRIDE72world units, 양발 각 반주기 stance/swing, swing lift7world units, 몸 bob최대1.5world units는 설계값.
+  직선 등속 stance에서 몸의 이동량과 발 상대좌표가 상쇄되도록 구성. 4방향 월드 발 위치 검사 포함.
+  회전 중 foot lock/급정지·재출발의 접지 전환까지 해결한 IK/완성 애니메이션은 아님.
+- 같은38world-units 몸 폭을 유지하며 청록색 재킷/팔/손/장비, 앞면 두 눈·옆면 한 눈·뒷모습 모자 표현을 코드로 제작.
+  실제 첫 방향별 렌더에서 up 무기가 머리를 가리는 문제를 발견해 위쪽 장비를 몸 뒤에 그리도록 수정 후 재렌더.
+  avatar-v077-up-before.png와 avatar-v077-up.png에 수정 전후 근거 보존.
+- M은 장식 body bob/국소 무기반동을 제거. 3 OFF, pause/reset/focus-out도 이전 무기반동을 정리.
+  발의 이동 표시는 유지하며 판정·이동·수확·재료·가공·손님·판매·해금 코드 의미는 변경하지 않음.
+  공격 예비동작/판정/후딜 프레임을 갖춘 완성 애니메이션을 제작한 것이 아님. 105ms 절삭 판정은 기존 로직 그대로.
+
+## 검증 / Godot4.6.3
+프로젝트 루트에서:
+- godot --headless --editor --import --quit : PASS
+- godot --headless --script tests/run.gd :134/0
+- godot --headless --script tests/hud_bounds.gd :5/0
+- godot --headless --script tests/viewport.gd :22/0
+- godot --headless --script tests/cargo_view.gd :17/0
+- godot --headless --script tests/avatar_motion.gd :18/0
+- godot --headless --script tests/feel_replay.gd :5조건18초/38명중/재고26/판매4/회수20 유지, 흔들림0/5.333viewport-px
+- godot --headless --quit-after 120 :PASS
+합계196개는 로직·상태·포즈 검사이며 원본 동등성/손맛/피로감 검증이 아님.
+새18개: 4방향 직선 stance 접지, 30/60/120Hz 이동거리 포즈, 정지/경계, idle/whiff 무기정지,
+명중/군집 상한·중심복귀, pause/reset/focus-out/M, 게임 상태와 RNG 보존. CI에도 추가.
+
+## 실제 창 및 렌더 근거
+데스크톱 터미널에서 `godot --path /workspace/scratch/20439e58e06d/run14/harvest-deck-godot` 실행.
+416×900 새창12582915에서 D200ms→P: 옆얼굴/청록 장비·팔·발 확인, BAG24.
+P재개→S200ms→P→M: 앞얼굴/아래방향 장비, SHAKE OFF/BAG24 유지 관찰.
+관찰/도구 지연이 포함되므로 이동량·수확량의 정확한200ms 실측으로 사용하지 않음.
+OpenGL/Mesa llvmpipe 렌더, 오디오는 ALSA장치 없음→Dummy. 주관적 청음·손맛 평가 없음.
+
+별도 `godot --path . --script tests/avatar_render.gd` 실행으로 정지 포즈를 실제 렌더:
+up/down/left/right/right-next PNG5개 모두 result=0. 위쪽 가림 문제 수정 후 동일5개 재렌더 성공.
+PNG는 고정 위상 주입으로 방향별 외형/가림순서를 검토하는 근거이며 이동 동영상·완성 애니메이션 증명이 아님.
+
+## 한계 / 다음
+G1 진행중. 다음은 회전 시 발 미끄러짐/정지-재출발 포즈 및 캐릭터·과일·환경 시점/실루엣의 원본 연속프레임 비교.
+기존 reference_tracking.py/reference-30fps.json/FEEL_TUNING 읽고 보존. 이번 원본 추가 계측/음원 추출 없음.
+새 원본 에셋/외부 라이브러리/생성 이미지 사용 없음. 독립 절차 도형이며 최종 아트/3D시점 복제 완성이 아님.
+이동360/절삭105ms/카메라강도 상한은 변경하지 않음. 몸·국소무기 수치는 실험값이며 연구 최적값 아님.
+모바일/Mac/GPU성능/인간 손맛/가독성·피로감 평점은 미검증. G2 기능 유지, G3~5 신규 확장 보류.
+main/Pages는v0.7.3 유지. 이전 확인된 HTTPS 인증정보 부재로 이번에는 같은 실패 업로드를 반복하지 않음.
+Web template 누락은 이전 확인 장애이며 이번 Web 빌드·배포 성공 주장 없음. 권한 우회 없음.
+동일ZIP expected_current_version=11로만 교체. 충돌 시 최신판을 다시 병합한다.
+
+---
+
+# v0.7.6 — 조각 적층 / 납품 연출 / reset 카메라 수정
+
+2026-11-17 KST 시작. 최신 ZIP version10 SHA256 0e2a543b171cf88dee747d179616350b92af1cad0f8eca1e361d44d5d4a31c71 복원.
+main을 새 fetch/ls-remote로 대조:612f5cdfe6d2bbd7bbb62cdba78ee7f2e0973f10 유지, ZIP의v0.7.4~5변경 보존. 원격변경없어기존통합유지.
+
+## 실제 버그 수정 / 구현
+- reset이카메라를player위치로되돌렸지만 세로모드의정상추적목표는HUD여백때문에player보다위쪽임.
+  R이후서있어도카메라가다시미끄러지는오류를재현(기존134검사중목표위치회귀1실패), camera_follow_target()으로즉시스냅수정.
+- 원본20초프레임 재관찰:등에실리는재료는붉은단면/초록껍질의조각. 기존통과일도형적층을코드제작반원조각으로교체.
+  노란재료도별도색단면. 원본이미지/오디오를게임에추출하지않음. 완성아트/원본복제완료아님.
+- 실제렌더첫안에서윗조각의껍질이아래조각단면을가리는것을발견, 위→아래순서로그려단면노출.
+  적층간격5→3world units로조정(zoom1.4에서4.2논리px/개). 원본계측값이아닌실험값.
+- CargoView에0.24초/24world-units높이의납품곡선추가. 최대8개시각흔적. 40ms인계/즉시생산입고는기존그대로.
+  애니메이션은이미인계된재료의시각적흔적이며운송중재고가아님. 애니메이션종료시입고/보상코드없음.
+  시각효과개수를재고에더하면중복계산이되므로절대합산하지않는다. 재고와완전히분리된클래스.
+- M(reduced motion)은카메라흔들림/적층흔들림/납품곡선을제거. 3(대상반응)은납품곡선도함께비교. pause는연출시계동결,
+  reset은정리, focus-out은기존pause경로, 효과OFF는현재흔적즉시제거. 이동/절삭/생산시계정지없음.
+- 기존흔들림강도/진폭상한/공격105ms/이동360/경제변경없음. 가공/손님/계산원/강화/과일해금보존.
+
+## 검증 / Godot4.6.3
+프로젝트루트에서:
+- godot --headless --editor --import --quit: PASS (새스크립트/실제렌더PNG포함)
+- godot --headless --script tests/run.gd:134/0
+- godot --headless --script tests/hud_bounds.gd:5/0
+- godot --headless --script tests/viewport.gd:22/0
+- godot --headless --script tests/cargo_view.gd:17/0
+- godot --headless --script tests/feel_replay.gd:5조건모두18초/38명중/재고26/판매4/현금20, 흔들림0/5.333viewport-px
+- godot --headless --quit-after 120:PASS
+합계178개는로직/표시상태검사이며손맛/가독성/피로감의증명아님.
+신규17개는30/60/120Hz궤적/만료/상한/종류/기존40ms입고/중복입고없음/pause/OFF/reset/생산결과와RNG보존/초기카메라고정.
+
+## 실제 데스크톱 렌더 및 조작
+CLI의DISPLAY없음과별개로데스크톱터미널에서
+`godot --path /workspace/scratch/20439e58e06d/run13/harvest-deck-godot` 실행,416×900창12582915관찰.
+초기40개만재적층에서첫그리기순서문제를보며수정후Ctrl+C재실행.
+W1000ms→P: BAG3,RAW8,MIX1,READY0에서붉은조각및공중납품흔적확인.
+일시정지상태M:동일BAG3/RAW8/MIX1유지, 공중흔적제거·SHAKE OFF표시확인.
+이수치는관찰/도구지연포함하여정확한1초수확량이아님. 청음은ALSA장치없어Dummy, 인간손맛평가없음.
+
+같은화면의렌더근거를재현가능하게저장:
+`godot --path . --script tests/delivery_render.gd` (headless아님)
+2초고정시뮬레이션/직접렌더에서PNG3개저장result=0:
+- cargo-v076-000.png: BAG40/STOCK0/흔적0
+- cargo-v076-008.png: BAG37/STOCK3/흔적3 (흔적은재고중복아님)
+- cargo-v076-120.png: BAG0/STOCK40/흔적0
+이는고정상태주입을사용한스크립트렌더이며자유플레이영상/인간평가로사용하지않는다.
+
+## 기준/한계/다음
+이전기본형checkpoints유지. 직전세로기본형은g1-before-slices-v0.7.5.zip으로추가보존(과거checkpointZIP을재귀포함하지않은실행가능소스).
+원본추적도구와18샘플결과는읽고유지, 이번원본추가정량계측없음. 원본20초정지프레임관찰은동적템포측정이아님.
+다음G1:새조각실루엣/적층길이/납품곡선을원본연속프레임과비교하고캐릭터/환경대체아트진전.
+G1 IN_PROGRESS, G2기능유지, G3~5신규추가보류. 100%동등/완료주장없음.
+웹원격은v0.7.3유지. HTTPS인증정보부재는직전run에서확인; 이번에는같은실패업로드를반복하지않고독립Godot개발/실제렌더진행.
+Web template누락은이전확인장애, 이번Web빌드/배포성공주장없음. 모바일/Mac/실제GPU성능/주관손맛/원본청음미검증.
+저장:동일ZIP expected_current_version=10으로만교체. 충돌이면최신판병합필요。
+
+---
+
+# v0.7.5 — 세로 구도 / 반응형 HUD / 터치 흔들림 OFF
+
+2026-11-17 KST. 입력 ZIP version9 SHA256 aa5756830da7e9a38406eb66977b4d37bb71d6321fce1c48b41d2ff115c776ff.
+main 새 fetch 결과612f5cdfe6d2bbd7bbb62cdba78ee7f2e0973f10 유지. ZIP v0.7.4에는 main v0.7.3의 모든 코드변경이 이미 통합되어 있음.
+기본형 checkpoints/g1-v0.1.zip, g2-v0.6.zip 등 유지. 이번 변경 전 전체 소스는 g1-landscape-v0.7.4.zip으로 보존.
+
+## 실제 변경
+- 960×720 가로 기본화면 → 원본녹화와 같은512×1108 논리세로화면, 기본실창416×900.
+- 세로512폭에서 고정HUD의 header/status/강화/고용버튼이 화면밖으로 나가던 문제를 회귀로 재현(5중4실패).
+  세로HUD 요약/3구매버튼 재배치/고용·강화·해금 짧은 라벨로 수정,5중0실패.
+- 세로 카메라 zoom1.4: 표시몸폭38→53.2논리픽셀. 원본몸폭54~60px는 이전의 낮은확신 눈대중 추정;
+  zoom은 이 추정을 참고한 설계값이며 계측된 원작카메라/시점이 아님. 현재도 도형 탑다운이며 원본아트/3D시점과 다름.
+- HUD영역을 고려해 필드카메라 중심을 아래로 배치, 상점 추가오프셋은 세로50/가로180 world units.
+  실제창 첫조작에서 상단여백이 과도한 것을 관찰해 세로180→50으로 보정한 뒤 새실행에서 확인.
+- 흔들림offset을 camera.zoom으로 나누어 확대해도 기존5.333 viewport-px상한 유지. 내부펄스/이동360/공격105ms/생산시계 변경 없음.
+- 화면의 M/SHAKE 버튼으로 터치/마우스에서도 reduced motion 변경. M키와 같은 함수 사용, 즉시pulse/카메라offset제거,
+  pause중에도 접근성설정 변경 가능. 리사이즈시 잡힌drag해제. CanvasLayer와 스크린터치좌표는 카메라와 독립.
+- CI에 hud_bounds.gd/viewport.gd 검사 추가, visual_smoke는 긴 고정문구 대신 실제HUD를 갱신하도록 수정.
+
+## 실제 검증 / Godot4.6.3
+프로젝트루트에서:
+- godot --headless --editor --import --quit: PASS
+- godot --headless --script tests/run.gd: 134/0
+- godot --headless --script tests/hud_bounds.gd: 5/0 (수정전4실패 기록보존)
+- godot --headless --script tests/viewport.gd: 22/0
+- godot --headless --script tests/feel_replay.gd: 5조건18초/38명중/재고26/판매4/회수20, viewport-px 최고0/5.333
+- godot --headless --quit-after 120: PASS
+화면배치512×1108,960×720,1280×720에서 버튼겹침/화면이탈/고객머리 가림/zoom시화면진폭/CanvasLayer분리/resize drag해제/같은시드수확결과 검증.
+기존카메라검사1개는화면중심360을고정한가로용식이라실패하여실제viewport높이/zoom/HUD높이를쓰도록수정. 실패로그보존.
+
+## 실제 데스크톱 조작 근거
+CLI환경DISPLAY부재를최종장애로간주하지않고 데스크톱터미널에서
+`godot --path /workspace/scratch/20439e58e06d/run12/harvest-deck-godot` 실행.
+Godot4.6.3/OpenGL4.5/Mesa llvmpipe 창12582915의416×900 세로실화면 관찰.
+수정후새실행은짧은구매라벨로구별(이전실행을Ctrl+C로종료후재실행).
+- 버튼클릭→SHAKE OFF, W1000ms→P: BAG9, RAW8, MIX1, READY0.
+- P재개→S200ms→Shift1600ms→P: BAG0, RAW11, MIX1, READY3, TILL15, LINE3; 파란응대링/고객줄/세로적층 확인.
+키입력외관찰도구지연이포함되므로수량을정확한1초처리량으로해석하지않음.
+화면캡처를보며조작한검증이며 인간손맛/멀미/피로감 평점이아님. ALSA장치없음→Dummy이므로 청음미검증.
+
+## 원격/저장 및 다음
+원격main/Pages는아직v0.7.3. 이번통합커밋8c3263a를작성하고push재시도했으나could not read Username(HTTPS인증정보없음)으로실패. 이번소스는ZIP에보존하고인증제한우회없음.
+Web export template 누락은이전run의확인된장애; 이번에는로컬Web재빌드/배포성공주장없음.
+동일ZIP expected_current_version=9로교체. 버전충돌시 최신판병합필요.
+G1 IN_PROGRESS. 다음은원본다구간과새세로화면의캐릭터/과일/적층실루엣·시점비교및대체아트제작.
+모바일실기기/Mac/청음/인간손맛/GPU성능/원본동등성 미검증. G2~5신규확장보류.
+원본 고유에셋/오디오 추출없음, 신규외부라이선스없음, 고정75초실패/재고초기화규칙없음.
+
+---
+
+# v0.7.4 — 명중 이후 시간에 맞춘 피드백 / 2026-11-17 KST
+
+최신 main 612f5cd와 Library ZIP version8(c3a53ad3856107e0d7ced5fa96bd8c4faae5543a845a428177efba40af8e9774)을 새로 읽어 병합.
+main의 v0.7.3 가시적 타격 수정/130검사/과일 해금과 ZIP의 추적 도구·관찰기록·비교 체크포인트를 보존.
+기존 편안함 기준은 checkpoints/g1-comfort-v0.7.1.zip에 유지. 최근 실제 대화에서 흔들림이 안 보인다는 후속 요청으로 이미 배포된 main 설정을 수용했으며 이번에 강도를 다시 높이지 않는다.
+
+## 실제 버그 및 수정
+기존: simulate가 프레임 내부 여러 번 명중을 처리한 뒤 impact.step(delta)로 전체 프레임 시간을 감쇠.
+프레임 끝의 새 명중도 프레임 처음부터 발생한 것처럼 나이를 먹어, 30/60/120Hz의 같은 시점 진폭이 다르고 긴 프레임에서는 마지막 명중까지 사라짐.
+수정: 기존 120Hz 이하 simulate_slice 시작마다 이전 펄스 시간을 전진시킨 후 실제 명중을 처리.
+카메라 출력/리플레이는 feedback_offset()으로 읽기만 하므로 이중 시간 진행 없음.
+이 변경만 적용하면 기존보다 최대 출력이 커지는 것을 리플레이로 발견해 화면 출력 벡터를 이전60Hz 최고16/3≈5.333px로 제한.
+이는 연구 최적값/원본 계측치가 아니라 강도 증가를 막는 설계 안전상한이다. 내부8px/100ms·이동360/s·105ms절삭은 main 값 보존.
+M/1 OFF, pause/reset/focus-out, 헛스윙, 다수 명중 비누적, 판정과 반동 분리 유지. 전역 hit-stop 추가 없음.
+
+## 검증
+Godot4.6.3:
+- godot --headless --editor --import --quit: PASS
+- godot --headless --script tests/run.gd: 134 checks / 0 failures
+- 신규3회귀는 변경전133중3실패(pulse-clock-before.txt), 수정후모두통과. 출력상한회귀1개 추가.
+- godot --headless --script tests/feel_replay.gd: 5조건18초/38명중/재고26/판매4/회수20 유지. 흔들림OFF0, ON최대5.333px.
+- godot --headless --quit-after 120: PASS
+- godot --headless --export-release Web ../web/index.html: FAIL — 현재환경에 4.6.3 web_nothreads_debug/release.zip export templates 없음. 게임 스크립트 오류와 구분.
+- godot --display-driver x11 --quit-after 10: X11 display 없음 / Wayland 연결 실패. 실제 데스크톱 렌더·이번 조작·청음 미확인.
+
+원본 영상과 리포트를 최신 ID에서 다시 가져옴. reference_tracking.py 재실행으로 기존18샘플 추적과 일치 확인.
+새로운 원본 진폭·공격주기를 계측한 것은 아님. 원본 고유 에셋/오디오를 게임에 추출하지 않음.
+손맛·가독성·조작성·피로감 인간평점 및 모바일/Mac/GPU성능은 미검증. 자동검사는 원본 동등성 증거가 아니다.
+
+## 저장소/배포 상태
+main 읽기/fetch 정상. 로컬통합커밋5c1b38f 작성 후 push는 HTTPS 인증정보 없음(could not read Username, terminal prompts disabled)으로 실패. 접근제한 우회/대체계정 시도 없음. 원격 main/Pages는 변경되지 않았고 v0.7.3 유지.
 
 ## 다음
-1. G2 다음 과일 해금. 기존0/1종류가 처음부터열려 있어 진행규칙을정리하고
-   해금전 절삭/재생성/납품과해금후보상을 일관되게 구현. 리플레이 영향 명시.
-   기본형 비교물은 보존하고 G3진입전 G2포함 기본형도 별도체크포인트 권장.
-2. G1 원본30fps 다구간추적/절삭주기/추적·진동분리/청음·인간평가 필요.
-3. G1/G2 IN_PROGRESS,이후 G3사이버펑크→G4낮밤→G5진짜덱.
-고정75초실패/재고초기화 강제없음. 다음과일은 아직해금시스템없음.
+G1 세로 화면/카메라 구도/도형 아트의 차이를 실제 렌더와 원본 영상으로 비교. G2~5 신규확장 보류.
+원격과 ZIP을 각각 확인해 병합했고 보존 체크포인트에 main-v0.7.3-612f5cd.zip 추가.
+동일 ZIP은 expected_current_version=8로만 교체한다. 충돌 시 최신판 병합 필요.
 
-## GitHub / Web 이전
-이후 개발 기준은 syjkim0125/harvest-deck main. export_presets.cfg의 Web 프리셋으로 Pages에 배포. 단일 스레드로 COOP/COEP 헤더 의존성을 제거. 기존 게임 동작은 유지.
+---
+
+# Current: v0.7.2 — cadence / comfort / merged source
+
+2026-11-17 KST. 최신 ZIP version7(SHA256 8cf7c3ad38faeb79e650c2b3ce4669d1fa8e761954c2280481074b7207e92f08)을 새로 가져와 main 7a4524140af3faa3681c0d54d5381096ccb7ad9a와 대조.
+
+
+## 이번 실제 변경
+- simulate를 최대1/120초 구간으로 나눠 이동·충돌·절삭·가공을 함께 진행한다.
+  이전에는 delta가105ms보다 클 때 한 번만 절삭하고 음수cooldown을 남겼다.
+  0.5초 입력은 이전1회→수정5회, 다음1/120초에 몰아치는 공격 없음.
+- 5/30/60/120Hz의2초 정지절삭20회 및 이동 중 대상통과 결과 일치 확인.
+  물리/로직 검사이며 실제 GPU5fps 쾌적함 보장은 아님. 시뮬레이션을 전역정지하지 않는다.
+- main의 .github/workflows/web.yml/.gitignore/export 설정 보존, ZIP의 과일해금·HUD·이동360·짧은1.5px 펄스 보존.
+  비교체크포인트 g1-comfort-v0.7.1.zip / main-v0.6-7a452414.zip 추가. 기존 체크포인트 유지.
+- 원본9.300~10.067초24프레임 재관찰, 관찰과 추정/설계값을 reference-events-30fps.json에 분리.
+  9.400초 밝은반응→9.567초 가까운대상 소멸의 화면창은 약167ms.
+  겹친 입자·카메라 때문에 명중간격/체력/원작kill시간으로 사용하지 않음. 공격105ms는 유지.
+
+## 명령 / 실제 결과
+Godot4.6.3 프로젝트루트:
+- godot --headless --editor --import --quit : PASS
+- godot --headless --script tests/run.gd : 127 checks / 0 failures
+- godot --headless --script tests/feel_replay.gd : 5조건 모두18초/38명중/재고26/판매4/회수20; 흔들림0 또는최대0.844px
+- godot --headless --quit-after 120 : PASS
+- godot --headless --export-release Web ../web/index.html : PASS(로컬 빌드, 배포 아님)
+변경전추가회귀 126중2실패를 docs/cadence-before.txt에 보존. 수정후이동통과1개추가127통과.
+실제창 터미널명령: godot --path /workspace/scratch/20439e58e06d/run09/harvest-deck-godot
+새창20971523에서 M true, W1.1초 이동→RAW/MIX/READY 증가, S0.25초 후 파란응대링 진행 확인.
+포커스아웃 pause 발생 후 P 재개도 관찰. 실제청음 없음: ALSA장치없음→Dummy fallback.
+
+## 저장 / 원격 장애
+같은LibraryZIP에 expected_current_version=7로 교체. 충돌이면 최신판을 다시 읽고 병합하며 무가드덮어쓰기 금지.
+GitHub create_blob 재시도는403 Resource not accessible by integration. main/Pages 미반영.
+권한 우회/다른 계정 시도 없음. 이번에는 기존에 차단된 브라우저 업로드를 반복하지 않음.
+main 변경을 잃지 않도록 원격파일해시 대조 및 체크포인트 보존. Sites는 변경하지 않음.
+
+## 미검증 / 다음
+사용자 편안함·인간손맛·청음·원본동등성·모바일/Mac/GPU성능 미검증.
+새 과일해금의 실제구매 플레이는 여전히 미검증(로직은 회귀검사).
+다음: 원본 다구간 캐릭터폭/카메라 추적과 절삭명중을 분리해 비교하고, 아트/세로화면 시점 접근.
+공격주기·흔들림 강도를 추정만으로 올리지 않음. G1 우선, G3~5 신규기능은 보류.
+접근복구 시 main을 새로 읽고 병합→CI→Pages실제플레이 확인. 재현100%/완료 선언 금지.
+
+---
+
+# Current: v0.7.1 — movement / comfort
+
+과일 해금v0.7 보존. 이동360/s, 비누적 최대1.5px/66.7ms, M키OFF.
+docs/FEEL_TUNING.md 참고. 원본100% 일치 미완료.
+main은v0.6이며 Github 쓰기403/브라우저 앱설정 차단으로 업로드·배포 미완료.
+다음 실행은 main과 이ZIP을 병합한 뒤 검증·배포하며 G1을 우선한다.
+
+---
+
+# Handoff — v0.7 / 2026-11-17 KST
+
+## 기준과 동시 변경 보호
+Library libfile_e5fb49d15230819192d425860e2c9edd를 새로 가져옴.
+입력 current_version_number=5, SHA256 91c8eb16095ca6c1c761809b58e36906e7bd09c8737dffcaa80b61698a82ceb0.
+같은 ZIP에 expected_current_version=5로 교체하며 충돌 시 덮어쓰지 않는다.
+checkpoints/g1-v0.1.zip 유지, 두 구역 모두 열린 이전 버전은 checkpoints/g2-v0.6.zip 추가.
+이번 기준 ZIP에는 웹 export 설정이 없다. 별도 저장소/웹 배포 작업과 합치거나 배포 성공을 주장하지 않음.
+Sites 비교물/저장소 변경 없음. 다음에 저장소 작업 시 최신 remote를 읽고 별도로 변경 통합해야 함.
+
+## 실제 구현
+- 노란 과일(kind1) 구역을 회수 지갑 $50로 해금. 기본 녹색(kind0)은 항상 열림.
+- G키/CanvasLayer 버튼/호박색 패드(1020,440), 반경80 미만에서 구매.
+- 비용은 production.spent_cash에 기록, 미회수대금·부족금액·pause·먼거리·중복 구매 방지.
+- 잠긴 과일은 표시/절삭/보상/재생성 시계 대상에서 제외. 해금 시 원래 시드 위치 그대로 활성화.
+- 생산 모델 deposit은 이미 보유한 유효 kind0/1을 받는다. 해금은 수확 권한이며 기존 재고를 몰수하는 규칙이 아니다.
+- 수확→납품→가공→판매→회수에서 kind1 및 총량 보존, reset은 해금/비용 포함 새 게임으로 복구.
+- 녹색 과일 12개 판매→현금60 회수→해금50 구매→잔액10 검증. 직원/강화 구매 선행 필수 아님.
+- 버그 수정: 3줄 status Label 실제 최소높이66으로 y46..112인데 기존 버튼 y79부터 겹침.
+  버튼 y116/HUD150으로 분리. 새 검사 최초 114개 중1개실패(첫 y108안), 실제 높이 확인 후 수정하여 모두 통과.
+  늘어난 HUD에 맞춰 상점 카메라 수직여백150→180. 기존 고객 머리/응대 가장자리 검사 유지.
+
+## 명령과 결과
+프로젝트 루트에서 Godot4.6.3:
+- godot --headless --path . --editor --import --quit : PASS
+- godot --headless --path . --script tests/run.gd : 114 checks / 0 failures
+- godot --headless --path . --script tests/feel_replay.gd : 5조건 실행 완료
+- godot --headless --path . --quit-after 120 : PASS
+로그 docs/import-output.txt,test-output.txt,replay-output.txt,smoke-output.txt.
+기존99개를 변경 전/해금 구현 후 통과 확인. 신규15개는 잠금/비용/초기화/생산연결/HUD 배치.
+5조건 모두 18초/명중38/재고26/판매4/회수20. 흔들림 OFF0, ON최대벡터9.153px.
+이전 명중39에서38로 감소: 잠긴 kind1의 경계1타격 제외. 수확/판매/회수 결과 동일.
+동일 효과 조건끼리 비교하며 이전 버전과 공격 수를 억지로 동일하게 맞추지 않음.
+
+## 실제 표시와 미검증
+이번 UI는 기존 v0.6 창이 열린 상태. 파일 관리자에서 새 run07 프로젝트 경로 열기를 시도했으나
+표시 상태가 /workspace에 머물렀고 새 Godot 프로젝트 로드/실행을 확인하지 못함.
+따라서 v0.7 실제 창 해금/버튼 겹침 해소를 확인했다고 주장하지 않음.
+키/버튼은 코드로 연결되었으며 구매 함수와 상태/HUD 경계는 자동 검증.
+headless 머신 DISPLAY 미설정, xvfb-run 없음. 이전 GUI 장애를 이유로 개발 중단하지 않음.
+원본 이번 추가 측정 없음. 청음·주관 손맛·폰/Mac/GPU성능·원본 동등성 미검증.
+테스트 수는 손맛의 증명이 아님. 고정75초실패/재고초기화 규칙 추가 없음.
+
+## 다음
+1. 최신 ZIP 가드 확인. v0.7 새 프로젝트를 실제 창에서 열어 현금50 회수→G/버튼 구매→노란 과일 수확/납품 확인.
+2. G1 원본30fps 다구간 추적/절삭 주기/카메라 추적과 진동 분리. 청음·동일 경로 사람 평가 필요.
+3. G2 구현 목록은 해금까지 연결했으나 새 UI 플레이 확인 전 IN_PROGRESS 유지.
+4. G3 전환 전 기본형 checkpoints/g2-v0.6.zip 보존. G1 미검증을 DONE으로 바꾸지 않음.

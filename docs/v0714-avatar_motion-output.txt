@@ -1,0 +1,21 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS straight stance foot stays planted toward (0.0, -1.0)
+PASS straight stance foot stays planted toward (0.0, 1.0)
+PASS straight stance foot stays planted toward (-1.0, 0.0)
+PASS straight stance foot stays planted toward (1.0, 0.0)
+PASS gait matches actual distance at 30 / 60 / 120Hz
+PASS stopping settles the pose without advancing steps
+PASS reduced motion removes decorative body bob
+PASS crowd hits cannot add weapon recoil
+PASS weapon recoil returns to zero without an idle oscillation
+PASS idle and repeated whiffs leave saw endpoints still
+PASS pressing into a world boundary cannot run the feet in place
+PASS confirmed hit moves only the cosmetic weapon recoil
+PASS pause clears a stale weapon kick
+PASS focus-out clears weapon feedback through pause
+PASS M clears weapon recoil with other reduced-motion effects
+PASS reduced motion preserves hits without weapon kicks
+PASS reset clears gait and weapon phase
+PASS avatar feedback preserves gameplay positions, harvest and RNG
+AVATAR MOTION: 18 checks, 0 failures

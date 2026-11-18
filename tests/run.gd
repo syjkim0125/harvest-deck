@@ -65,7 +65,7 @@ func run() -> void:
 		var peak = 0.0
 		for frame in range(ceili(Impact.DURATION * rate) + 1):
 			peak = maxf(peak, short_fx.step(1.0 / rate).length())
-		check(peak <= Impact.MAX_PIXELS and short_fx.trauma == 0.0, "pulse ends within 100ms at %dfps" % rate)
+		check(peak <= Impact.MAX_PIXELS and short_fx.trauma == 0.0, "pulse ends within 66.667ms at %dfps" % rate)
 	# Verify rendered offsets, since a nonzero envelope alone can still be imperceptible.
 	for rate in [30, 60, 120]:
 		var visible_fx = Impact.new()
@@ -73,7 +73,7 @@ func run() -> void:
 		var visible_peak = 0.0
 		for frame in range(ceili(Impact.DURATION * rate)):
 			visible_peak = maxf(visible_peak, visible_fx.step(1.0 / rate).length())
-		check(visible_peak >= 3.0 and visible_peak <= Impact.MAX_PIXELS, "normal hit has visible bounded displacement at %dfps" % rate)
+		check(visible_peak > 0.0 and visible_peak <= 1.5, "normal hit has nonzero comfort-bounded displacement at %dfps" % rate)
 	var comfy = Impact.new()
 	comfy.reduced = true
 	comfy.hit(true)
@@ -116,7 +116,7 @@ func run() -> void:
 	check(g.cash == 15, "cash cannot be collected twice")
 	g.camera.offset = Vector2(4, 7)
 	g.reset_run()
-	check(g.camera.offset == Vector2.ZERO and g.camera.position == g.player, "reset snaps camera and clears stale shake")
+	check(g.camera.offset == Vector2.ZERO and g.camera.position == g.camera_follow_target(), "reset snaps camera and clears stale shake")
 	check(g.cargo.is_empty() and g.cash == 0 and g.stock == 0 and g.hits == 0 and g.impact.trauma == 0, "reset clears run state")
 	fixture(g)
 	g.local_stop = true
@@ -162,7 +162,7 @@ func run() -> void:
 	factory.step(0.25)
 	check(factory.active_kind == -1 and factory.ready == [1] and factory.pending_cash == 0, "completed item retains fruit kind")
 	factory.step(0.7)
-	check(factory.sold_by_kind == [0, 1] and factory.pending_cash == 5, "only completed products can sell")
+	check(factory.sold_by_kind == [0, 1, 0] and factory.pending_cash == 5, "only completed products can sell")
 	var summaries = []
 	for fps in [30, 60, 120]:
 		var line = Production.new()
@@ -171,7 +171,7 @@ func run() -> void:
 		for i in range(fps * 6):
 			line.step(1.0 / fps)
 		summaries.append([line.inventory_count(), line.sold_by_kind.duplicate(), line.pending_cash])
-	check(summaries[0] == summaries[1] and summaries[1] == summaries[2] and summaries[0] == [0, [3, 3], 30], "production and sales agree at 30 / 60 / 120 fps")
+	check(summaries[0] == summaries[1] and summaries[1] == summaries[2] and summaries[0] == [0, [3, 3, 0], 30], "production and sales agree at 30 / 60 / 120 fps")
 	factory.reset()
 	for k in [0, 1, 1, 0, 1, 0]:
 		factory.deposit(k)
@@ -180,7 +180,7 @@ func run() -> void:
 	factory.collect()
 	check(factory.collect() == 0 and factory.collected_cash == 30, "production cash collection is idempotent")
 	factory.reset()
-	check(factory.inventory_count() == 0 and factory.pending_cash == 0 and factory.collected_cash == 0 and factory.sold_by_kind == [0, 0], "production reset clears every resource stage")
+	check(factory.inventory_count() == 0 and factory.pending_cash == 0 and factory.collected_cash == 0 and factory.sold_by_kind == [0, 0, 0], "production reset clears every resource stage")
 	# Feedback must only affect presentation, never target collision coordinates.
 	g.reset_run()
 	fixture(g)
@@ -195,7 +195,7 @@ func run() -> void:
 	var shop = Production.new()
 	shop.deposit(0)
 	shop.step(1.0, false)
-	check(shop.sold_by_kind == [0, 0] and shop.ready == [0] and shop.customers.size() == 3, "unattended queue waits without consuming product")
+	check(shop.sold_by_kind == [0, 0, 0] and shop.ready == [0] and shop.customers.size() == 3, "unattended queue waits without consuming product")
 	shop.step(0.3, true)
 	var progress: float = shop.sale_elapsed
 	shop.step(0.2, false)
@@ -206,7 +206,7 @@ func run() -> void:
 	check(shop.served_ids == [1] and shop.pending_cash == 5 and shop.customers.size() == Production.MAX_QUEUE, "stockout cannot create phantom sales; queue is bounded")
 	shop.deposit(1)
 	shop.step(1.2, true)
-	check(shop.served_ids == [1, 2] and shop.sold_by_kind == [1, 1], "FIFO queue advances and consumes matching inventory kind")
+	check(shop.served_ids == [1, 2] and shop.sold_by_kind == [1, 1, 0], "FIFO queue advances and consumes matching inventory kind")
 	shop.reset()
 	check(shop.served_ids.is_empty() and shop.customers[0].id == 1 and shop.sale_elapsed == 0 and shop.arrival_elapsed == 0, "reset clears customers, identifiers and service clocks")
 	var queue_summaries = []
@@ -224,11 +224,11 @@ func run() -> void:
 	shop.step(12.0, true)
 	check([shop.inventory_count(), shop.pending_cash, shop.served_ids, shop.customers] == queue_summaries[0], "large-delta customer arrivals remain chronological")
 	g.player = g.service_pad
-	var screen_y: float = 135.0 - g.camera_follow_target().y + 360.0
-	check(screen_y > g.HUD_HEIGHT + 34, "counter camera keeps customer heads below fixed HUD")
+	var screen_y: float = (135.0 - g.camera_follow_target().y) * g.camera.zoom.y + g.get_viewport_rect().size.y / 2.0
+	check(screen_y > g.hud_height + 34, "counter camera keeps customer heads below fixed HUD")
 	g.player = g.service_pad + Vector2(0, 64)
-	screen_y = 135.0 - g.camera_follow_target().y + 360.0
-	check(screen_y > g.HUD_HEIGHT + 34, "customer heads stay below HUD at outer service radius")
+	screen_y = (135.0 - g.camera_follow_target().y) * g.camera.zoom.y + g.get_viewport_rect().size.y / 2.0
+	check(screen_y > g.hud_height + 34, "customer heads stay below HUD at outer service radius")
 	# Audio envelopes and source PCM are checked without pretending to hear a device.
 	g.reset_run()
 	fixture(g)
@@ -323,14 +323,14 @@ func run() -> void:
 			line.deposit(i % 2)
 		line.step(6.0, operator)
 		staffing_results.append([line.sold_by_kind, line.pending_cash, line.inventory_count()])
-	check(staffing_results[0] == staffing_results[1] and staffing_results[0] == [[3, 3], 30, 0], "player plus cashier does not double the service rate")
+	check(staffing_results[0] == staffing_results[1] and staffing_results[0] == [[3, 3, 0], 30, 0], "player plus cashier does not double the service rate")
 	staffing.collected_cash = 30
 	staffing.hire_cashier()
 	for i in range(300):
 		staffing.deposit(i % 2)
 	staffing.step(600.0, false)
 	check(staffing.served_total == 300 and staffing.served_ids.size() == Production.MAX_SERVED_HISTORY and staffing.served_ids[-1] == 300, "long automatic service bounds history without losing total sales")
-	check(staffing.inventory_count() == 0 and staffing.pending_cash == 1500 and staffing.sold_by_kind == [150, 150], "long automatic service preserves kinds and cash")
+	check(staffing.inventory_count() == 0 and staffing.pending_cash == 1500 and staffing.sold_by_kind == [150, 150, 0], "long automatic service preserves kinds and cash")
 	g.reset_run()
 	g.production.collected_cash = 30
 	g.player = g.hire_pad
@@ -389,7 +389,7 @@ func run() -> void:
 			line.deposit(i % 2)
 		line.step(2.0, false)
 		throughput.append(line.ready.size())
-		check(line.inventory_count() == 10 and line.sold_by_kind == [0, 0], "mixer processing conserves ten deposited items (%s)" % str(upgraded))
+		check(line.inventory_count() == 10 and line.sold_by_kind == [0, 0, 0], "mixer processing conserves ten deposited items (%s)" % str(upgraded))
 	check(throughput == [4, 8], "same two seconds produces four base or eight upgraded items")
 	var upgraded_summaries = []
 	for fps in [30, 60, 120]:
@@ -411,7 +411,7 @@ func run() -> void:
 		facility.deposit(i % 2)
 	facility.step(6.0, false)
 	facility.collect()
-	check(facility.collected_cash == 30 and facility.spent_cash == 70 and facility.inventory_count() == 0 and facility.sold_by_kind == [3, 3], "cashier plus upgrade preserve spending, stock and automatic revenue")
+	check(facility.collected_cash == 30 and facility.spent_cash == 70 and facility.inventory_count() == 0 and facility.sold_by_kind == [3, 3, 0], "cashier plus upgrade preserve spending, stock and automatic revenue")
 	g.reset_run()
 	g.production.collected_cash = 40
 	g.player = g.upgrade_pad
@@ -423,7 +423,7 @@ func run() -> void:
 	g.player = g.upgrade_pad
 	check(g.try_upgrade_mixer() and g.cash == 0 and g.production.mixer_upgraded, "world interaction upgrades mixer at coral pad")
 	check(not g.try_upgrade_mixer() and g.cash == 0, "repeated world facility interaction cannot double charge")
-	check(g.orchard_button.position.y >= g.status.position.y + g.status.get_minimum_size().y and g.orchard_button.position.y + g.orchard_button.size.y <= g.HUD_HEIGHT, "purchase controls sit below all status lines inside HUD")
+	check(g.orchard_button.position.y >= g.status.position.y + g.status.get_minimum_size().y and g.orchard_button.position.y + g.orchard_button.size.y <= g.hud_height, "purchase controls sit below all status lines inside HUD")
 	g.reset_run()
 	fixture(g)
 	g.fruits[0].kind = 1
@@ -461,7 +461,7 @@ func run() -> void:
 		g.simulate(1.0 / 60, Vector2.ZERO)
 	g.player = g.cash_pad
 	g.simulate(0.01, Vector2.ZERO)
-	check(g.production.sold_by_kind == [0, 3] and g.cash == 15 and g.stock == 0, "unlocked fruit sells and collected money conserves its value")
+	check(g.production.sold_by_kind == [0, 3, 0] and g.cash == 15 and g.stock == 0, "unlocked fruit sells and collected money conserves its value")
 	g.reset_run()
 	check(not g.production.orchard_unlocked and g.cash == 0 and g.production.spent_cash == 0, "reset relocks orchard and clears spending")
 	fixture(g)
@@ -502,6 +502,23 @@ func run() -> void:
 	g.facing = Vector2.LEFT
 	g.simulate(0.5, Vector2.ZERO)
 	check(g.hits == 0 and g.impact.trauma == 0.0, "long-frame whiffs do not create feedback")
+	# The final cut inside a long physics frame must retain its true pulse age.
+	var pulse_samples = []
+	for rate in [30, 60, 120]:
+		g.reset_run()
+		fixture(g, 1000)
+		g.sound_on = false
+		for frame in range(rate / 3):
+			g._physics_process(1.0 / rate)
+		pulse_samples.append(g.camera.offset)
+	check(pulse_samples[0].is_equal_approx(pulse_samples[1]) and pulse_samples[1].is_equal_approx(pulse_samples[2]), "same-time confirmed-hit pulse agrees at 30 / 60 / 120Hz")
+	g.reset_run()
+	fixture(g, 1000)
+	g.sound_on = false
+	g._physics_process(1.0 / 3.0)
+	check(g.camera.offset.is_equal_approx(pulse_samples[2]) and g.camera.offset.length() > 0.1, "hitch retains a recent hit instead of expiring it by the entire frame")
+	check((g.camera.offset * g.camera.zoom).length() <= 1.500001, "rendered feedback respects the 1.5 viewport-pixel comfort budget")
+	check(is_equal_approx(g.impact.clock, 1.0 / 60.0), "pulse age measures time since the last substep hit")
 	g.set_paused(true)
 	g.audio.stop()
 	g.queue_free()

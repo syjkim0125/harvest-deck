@@ -1,0 +1,12 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS focus loss clears input/pulse (512, 1108)
+PASS paused world and inventory frozen (512, 1108)
+FAIL touch resume control exists (512, 1108)
+PASS focus loss clears input/pulse (960, 720)
+PASS paused world and inventory frozen (960, 720)
+FAIL touch resume control exists (960, 720)
+PASS focus loss clears input/pulse (1280, 720)
+PASS paused world and inventory frozen (1280, 720)
+FAIL touch resume control exists (1280, 720)
+PAUSE TOUCH RESULT: 9 checks, 3 failures

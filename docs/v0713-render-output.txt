@@ -1,0 +1,8 @@
+Visible native terminal / OpenGL Mesa llvmpipe / ALSA unavailable -> Dummy
+DEPTH_RENDER before y=700 save=0 cargo=24 hits=0
+DEPTH_RENDER before y=720 save=0 cargo=24 hits=0
+DEPTH_RENDER before y=755 save=0 cargo=24 hits=0
+DEPTH_RENDER after y=700 save=0 cargo=24 hits=0
+DEPTH_RENDER after y=720 save=0 cargo=24 hits=0
+DEPTH_RENDER after y=755 save=0 cargo=24 hits=0
+Transcribed from terminal. Scripted fixture, not human play.

@@ -8,6 +8,15 @@ PASS capacity overflow stays on ground; no reward loss
 PASS full bag prevents cutting
 PASS one pulse can cut multiple targets
 PASS crowd impact saturates
+PASS crowd does not amplify or extend pulse
+PASS pulse ends within 100ms at 30fps
+PASS pulse ends within 100ms at 60fps
+PASS pulse ends within 100ms at 120fps
+PASS normal hit has visible bounded displacement at 30fps
+PASS normal hit has visible bounded displacement at 60fps
+PASS normal hit has visible bounded displacement at 120fps
+PASS no-shake mode does not retain a hidden pulse
+PASS faster movement is the default
 PASS shake returns to zero at 30fps
 PASS movement speed at 30fps
 PASS shake returns to zero at 60fps
@@ -99,4 +108,30 @@ PASS pause prevents facility purchase
 PASS facility purchase requires coral-pad proximity
 PASS world interaction upgrades mixer at coral pad
 PASS repeated world facility interaction cannot double charge
-RESULT: 99 checks, 0 failures
+PASS purchase controls sit below all status lines inside HUD
+PASS locked orchard cannot create hits, shake or rewards
+PASS locked orchard does not run a hidden respawn clock
+PASS orchard cannot spend uncollected cash
+PASS pause blocks orchard purchase
+PASS orchard purchase requires pad proximity
+PASS orchard unlock spends collected wallet once
+PASS duplicate orchard unlock does not charge twice
+PASS unlocked dead fruit resumes normal respawn
+PASS unlocked orchard produces its own fruit kind
+PASS unlocked fruit survives delivery and processing without conversion
+PASS unlocked fruit sells and collected money conserves its value
+PASS reset relocks orchard and clears spending
+PASS starter fruit remains harvestable after reset
+PASS starter fruit sales can fund orchard without mixer or cashier prerequisite
+PASS two-second harvest cadence has twenty hits and no debt at 5Hz
+PASS two-second harvest cadence has twenty hits and no debt at 30Hz
+PASS two-second harvest cadence has twenty hits and no debt at 60Hz
+PASS two-second harvest cadence has twenty hits and no debt at 120Hz
+PASS half-second hitch resolves scheduled cuts without a next-frame burst
+PASS moving through a target agrees at 5 / 30 / 60 / 120Hz
+PASS long-frame whiffs do not create feedback
+PASS same-time confirmed-hit pulse agrees at 30 / 60 / 120Hz
+PASS hitch retains a recent hit instead of expiring it by the entire frame
+PASS rendered feedback stays within the previous replay peak
+PASS pulse age measures time since the last substep hit
+RESULT: 134 checks, 0 failures

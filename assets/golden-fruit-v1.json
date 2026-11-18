@@ -1,0 +1,25 @@
+{
+  "asset": "golden-fruit-v1.png",
+  "generation": "built-in image generation edit of original generated watermelon-v1.png, no source-game artwork input",
+  "source_sha256": "6115d227ba7e817f0f019931d4e037a7226417493d89fd540f6408f39d3c1779",
+  "canvas_px": [
+    1254,
+    1254
+  ],
+  "alpha_128_bounds_xyxy": [
+    107,
+    58,
+    1118,
+    1244
+  ],
+  "authored_frame_xywh": [
+    103,
+    54,
+    1019,
+    1194
+  ],
+  "runtime_import_limit_px": 512,
+  "imported_image_bytes_with_mipmaps": 1398100,
+  "rendering": "unmodified source PNG; scale source frame by imported texture dimensions; preserve 48world-unit body width and bottom anchor; mipmaps+linear mip filtering",
+  "limitations": "one static golden round-fruit variant with procedural confirmed-hit response, not a complete animated character or original-game asset"
+}

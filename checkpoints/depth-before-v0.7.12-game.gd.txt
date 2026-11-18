@@ -1,0 +1,697 @@
+extends Node2D
+
+const WATERMELON = preload("res://assets/watermelon-v1.png")
+const WATERMELON_FRAME = Rect2(105, 57, 1016, 1190)
+const GOLDEN_FRUIT = preload("res://assets/golden-fruit-v1.png")
+const GOLDEN_FRAME = Rect2(103, 54, 1019, 1194)
+const FRUIT_SOURCE_SIZE = Vector2(1254, 1254)
+const AvatarMotion = preload("res://scripts/avatar_motion.gd")
+const CargoView = preload("res://scripts/cargo_view.gd")
+const SawAudio = preload("res://scripts/saw_audio.gd")
+const Production = preload("res://scripts/production.gd")
+const Impact = preload("res://scripts/impact.gd")
+const SPEED: float = 360.0
+const ATTACK_INTERVAL: float = 0.105
+const CAPACITY: int = 40
+const CARGO_SPACING: float = 3.0
+# Latest user comfort budget in logical viewport pixels, independent of zoom.
+const MAX_DISPLAY_SHAKE: float = 1.5
+const HUD_HEIGHT: int = 150
+const BOUNDS = Rect2(40, 100, 1480, 1040)
+var impact = Impact.new()
+var cargo_view = CargoView.new()
+var avatar = AvatarMotion.new()
+var player: Vector2 = Vector2(700, 720)
+var facing: Vector2 = Vector2.UP
+var velocity: Vector2 = Vector2.ZERO
+var fruits: Array[Dictionary] = []
+var particles: Array[Dictionary] = []
+var cargo: Array[int] = []
+var hud_panel: ColorRect
+var shake_button: Button
+var portrait_view: bool = false
+var hud_height: float = HUD_HEIGHT
+var camera: Camera2D
+var orchard_button: Button
+var orchard_pad = Vector2(1020, 440)
+var upgrade_button: Button
+var hire_button: Button
+var notice: String = ""
+var hud: Label
+var status: Label
+var audio: AudioStreamPlayer
+var saw_audio: Node
+var loop_sound: bool = true
+var sound_volume: float = 0.65
+var production = Production.new()
+var stock: int:
+	get: return production.inventory_count()
+var cash: int:
+	get: return production.collected_cash
+var ground_drops: Array[Dictionary] = []
+var cash_pad = Vector2(900, 310)
+var service_pad = Vector2(680, 410)
+var hire_pad = Vector2(1080, 310)
+var upgrade_pad = Vector2(460, 310)
+var customer_visuals: Dictionary = {}
+var hits: int = 0
+var cooldown: float = 0.0
+var unload_clock: float = 0.0
+var time: float = 0.0
+var paused: bool = false
+var sprite_art: bool = true
+var feedback: bool = true
+var sound_on: bool = true
+var local_stop: bool = false
+var drag_id: int = -1
+var drag_origin: Vector2
+var drag_vector: Vector2 = Vector2.ZERO
+var depot: Vector2 = Vector2(680, 310)
+var rng = RandomNumberGenerator.new()
+var audio_rng = RandomNumberGenerator.new()
+var avatar_style: StyleBoxFlat
+var terrain_style: StyleBoxFlat
+
+func _ready() -> void:
+	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+	rng.seed = 1742
+	terrain_style = field_style()
+	setup_inputs()
+	camera = Camera2D.new()
+	camera.position = player
+	add_child(camera)
+	var layer = CanvasLayer.new()
+	add_child(layer)
+	hud_panel = ColorRect.new()
+	hud_panel.color = Color(0.025, 0.055, 0.075, 0.92)
+	hud_panel.size = Vector2(960, HUD_HEIGHT)
+	hud_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layer.add_child(hud_panel)
+	hud = Label.new()
+	hud.position = Vector2(22, 12)
+	hud.add_theme_font_size_override("font_size", 18)
+	layer.add_child(hud)
+	status = Label.new()
+	status.position = Vector2(22, 46)
+	status.add_theme_font_size_override("font_size", 14)
+	layer.add_child(status)
+	hire_button = Button.new()
+	hire_button.position = Vector2(720, 116)
+	hire_button.size = Vector2(220, 29)
+	hire_button.focus_mode = Control.FOCUS_NONE
+	hire_button.pressed.connect(try_hire_cashier)
+	layer.add_child(hire_button)
+	upgrade_button = Button.new()
+	upgrade_button.position = Vector2(480, 116)
+	upgrade_button.size = Vector2(220, 29)
+	upgrade_button.focus_mode = Control.FOCUS_NONE
+	upgrade_button.pressed.connect(try_upgrade_mixer)
+	layer.add_child(upgrade_button)
+	orchard_button = Button.new()
+	orchard_button.position = Vector2(240, 116)
+	orchard_button.size = Vector2(220, 29)
+	orchard_button.focus_mode = Control.FOCUS_NONE
+	orchard_button.pressed.connect(try_unlock_orchard)
+	layer.add_child(orchard_button)
+	shake_button = Button.new()
+	shake_button.focus_mode = Control.FOCUS_NONE
+	shake_button.pressed.connect(toggle_reduced_motion)
+	layer.add_child(shake_button)
+	get_viewport().size_changed.connect(layout_hud)
+	layout_hud()
+	audio = AudioStreamPlayer.new()
+	add_child(audio)
+	audio.max_polyphony = 2
+	saw_audio = SawAudio.new()
+	add_child(saw_audio)
+	audio_rng.seed = 618
+	make_hit_sound()
+	reset_run()
+
+func toggle_reduced_motion() -> void:
+	impact.reduced = not impact.reduced
+	avatar.clear_hit()
+	cargo_view.clear()
+	impact.clear()
+	if is_instance_valid(camera):
+		camera.offset = Vector2.ZERO
+	shake_button.text = "M / SHAKE OFF" if impact.reduced else "M / SHAKE ON"
+
+func layout_hud() -> void:
+	var width = get_viewport_rect().size.x
+	portrait_view = width < 800.0
+	hud_height = 210.0 if portrait_view else float(HUD_HEIGHT)
+	hud_panel.size = Vector2(width, hud_height)
+	hud.position = Vector2(16, 10) if portrait_view else Vector2(22, 12)
+	status.position = Vector2(16, 60) if portrait_view else Vector2(22, 46)
+	hud.add_theme_font_size_override("font_size", 16 if portrait_view else 18)
+	status.add_theme_font_size_override("font_size", 12 if portrait_view else 14)
+	hud.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	hud.size = Vector2(width - 32, 44 if portrait_view else 26)
+	status.size = Vector2(width - 32, 52 if portrait_view else 66)
+	var buttons = [orchard_button, upgrade_button, hire_button]
+	var button_width = (width - 48.0) / 3.0 if portrait_view else 220.0
+	for i in range(buttons.size()):
+		buttons[i].position = Vector2(16 + i * (button_width + 8), 118) if portrait_view else Vector2(240 + i * 240, 116)
+		buttons[i].add_theme_font_size_override("font_size", 11 if portrait_view else 16)
+		buttons[i].size = Vector2(button_width, 38 if portrait_view else 29)
+	shake_button.position = Vector2(16, 166) if portrait_view else Vector2(16, 116)
+	shake_button.size = Vector2(width - 32, 36) if portrait_view else Vector2(200, 29)
+	shake_button.text = "M / SHAKE OFF" if impact.reduced else "M / SHAKE ON"
+	camera.zoom = Vector2.ONE * (1.4 if portrait_view else 1.0)
+	# Orientation changes must not leave a held drag or scale a previous pulse.
+	drag_id = -1
+	drag_vector = Vector2.ZERO
+	camera.offset = Vector2.ZERO
+
+func setup_inputs() -> void:
+	var bindings = {"left": [KEY_A, KEY_LEFT], "right": [KEY_D, KEY_RIGHT], "up": [KEY_W, KEY_UP], "down": [KEY_S, KEY_DOWN]}
+	for action in bindings:
+		if not InputMap.has_action(action):
+			InputMap.add_action(action)
+		for code in bindings[action]:
+			var event = InputEventKey.new()
+			event.physical_keycode = code
+			InputMap.action_add_event(action, event)
+
+func reset_run() -> void:
+	rng.seed = 1742
+	time = 0.0
+	player = Vector2(700, 720)
+	velocity = Vector2.ZERO
+	facing = Vector2.UP
+	cargo.clear()
+	particles.clear()
+	cargo_view.clear()
+	fruits.clear()
+	production.reset()
+	notice = ""
+	ground_drops.clear()
+	customer_visuals.clear()
+	audio_rng.seed = 618
+	hits = 0
+	cooldown = 0.0
+	unload_clock = 0.0
+	paused = false
+	drag_id = -1
+	drag_vector = Vector2.ZERO
+	impact.reset()
+	avatar.reset()
+	if is_instance_valid(saw_audio):
+		saw_audio.silence()
+	if is_instance_valid(camera):
+		camera.position = camera_follow_target()
+		camera.offset = Vector2.ZERO
+	if is_instance_valid(audio):
+		audio.stop()
+	for i in range(32):
+		var kind = i % 2
+		var center = Vector2(510, 690) if kind == 0 else Vector2(1020, 660)
+		var home = center + Vector2(rng.randf_range(-160, 160), rng.randf_range(-170, 170))
+		fruits.append({"pos": home, "home": home, "hp": 3, "kind": kind, "flash": 0.0, "respawn": 0.0, "freeze": 0.0, "recoil": Vector2.ZERO})
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
+		set_paused(true)
+
+func set_paused(value: bool) -> void:
+	paused = value
+	avatar.clear_hit()
+	if value and is_instance_valid(saw_audio):
+		saw_audio.silence()
+	if value and is_instance_valid(audio):
+		audio.stop()
+	drag_vector = Vector2.ZERO
+	drag_id = -1
+	impact.clear()
+	if is_instance_valid(camera):
+		camera.offset = Vector2.ZERO
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		match event.physical_keycode:
+			KEY_ESCAPE, KEY_P: set_paused(not paused)
+			KEY_R: reset_run()
+			KEY_E: try_hire_cashier()
+			KEY_F: try_upgrade_mixer()
+			KEY_G: try_unlock_orchard()
+			KEY_1:
+				impact.enabled = not impact.enabled
+				impact.clear()
+			KEY_2: set_sound_enabled(not sound_on)
+			KEY_6: sprite_art = not sprite_art
+			KEY_5:
+				loop_sound = not loop_sound
+				saw_audio.silence()
+			KEY_MINUS: sound_volume = maxf(0.0, sound_volume - 0.1)
+			KEY_EQUAL: sound_volume = minf(1.0, sound_volume + 0.1)
+			KEY_3:
+				feedback = not feedback
+				avatar.clear_hit()
+				cargo_view.clear()
+			KEY_4: local_stop = not local_stop
+			KEY_M: toggle_reduced_motion()
+
+	# A release must reach the active drag even if GUI consumes it later.
+	if event is InputEventScreenTouch and not event.pressed and event.index == drag_id:
+		drag_id = -1
+		drag_vector = Vector2.ZERO
+
+func _unhandled_input(event: InputEvent) -> void:
+	# Let CanvasLayer controls consume touch before starting the movement drag.
+	if event is InputEventScreenTouch:
+		if event.pressed and drag_id == -1 and not paused:
+			drag_id = event.index
+			drag_origin = event.position
+		elif not event.pressed and event.index == drag_id:
+			drag_id = -1
+			drag_vector = Vector2.ZERO
+	if event is InputEventScreenDrag and event.index == drag_id:
+		drag_vector = ((event.position - drag_origin) / 65.0).limit_length()
+
+func _physics_process(delta: float) -> void:
+	if not paused:
+		var direction = Input.get_vector("left", "right", "up", "down")
+		if drag_vector.length() > 0.05:
+			direction = drag_vector
+		simulate(delta, direction)
+	camera.offset = feedback_offset() if not paused else Vector2.ZERO
+	hud.text = "HARVEST  $%d  BAG %d/%d  RAW %d  MIX %d  READY %d  TILL $%d  LINE %d" % [cash, cargo.size(), CAPACITY, production.raw.size(), int(production.active_kind >= 0), production.ready.size(), production.pending_cash, production.customers.size()]
+	status.text = "WASD / arrows / touch drag • auto-cut • mint: unload / blue: serve / gold: cash / purple: hire / coral: mixer\n1 Hit shake %s   2 Sound %s   3 Reaction %s   4 Local-stop %s   M No-shake %s   P Pause   R Reset %s" % [impact.enabled, sound_on, feedback, local_stop, impact.reduced, "[PAUSED]" if paused else ""]
+	status.text += "\n5 Motor %s  -/+ Volume %d%%  Saw %s   6 Sprite art %s" % [loop_sound, roundi(sound_volume * 100), saw_audio.mode(), sprite_art]
+	if portrait_view:
+		hud.text = "HARVEST  $%d   BAG %d/%d\nRAW %d  MIX %d  READY %d  TILL $%d  LINE %d" % [cash, cargo.size(), CAPACITY, production.raw.size(), int(production.active_kind >= 0), production.ready.size(), production.pending_cash, production.customers.size()]
+		status.text = "Drag / WASD: move + auto-cut  |  P: pause  R: reset\n1: shake  2: sound  3: reaction  4: local-stop\n5: motor  -/+: volume %d%%  %s  6: art %s" % [roundi(sound_volume * 100), "PAUSED" if paused else saw_audio.mode(), sprite_art]
+	hire_button.text = "CASHIER WORKING" if production.cashier_hired else "E / HIRE CASHIER $%d" % Production.CASHIER_COST
+	hire_button.disabled = paused or production.cashier_hired or cash < Production.CASHIER_COST or player.distance_to(hire_pad) >= 80
+	upgrade_button.text = "MIXER 0.25s ACTIVE" if production.mixer_upgraded else "F / UPGRADE MIXER $40"
+	upgrade_button.disabled = paused or production.mixer_upgraded or cash < Production.MIXER_UPGRADE_COST or player.distance_to(upgrade_pad) >= 80
+	orchard_button.text = "ORCHARD OPEN" if production.orchard_unlocked else "G / OPEN ORCHARD $50"
+	orchard_button.disabled = paused or production.orchard_unlocked or cash < Production.ORCHARD_COST or player.distance_to(orchard_pad) >= 80
+	if portrait_view:
+		hire_button.text = "CASHIER WORKING" if production.cashier_hired else "E / CASHIER $30"
+		upgrade_button.text = "MIXER UPGRADED" if production.mixer_upgraded else "F / MIXER $40"
+		orchard_button.text = "ORCHARD OPEN" if production.orchard_unlocked else "G / ORCHARD $50"
+	if not notice.is_empty():
+		hire_button.tooltip_text = notice
+	queue_redraw()
+
+func try_hire_cashier() -> bool:
+	if paused or player.distance_to(hire_pad) >= 80:
+		notice = "Stand on the purple hire pad to hire."
+		return false
+	var hired: bool = production.hire_cashier()
+	notice = "Cashier hired. You can return to harvesting." if hired else "Collect $30 first, or cashier is already hired."
+	return hired
+
+func try_upgrade_mixer() -> bool:
+	if paused or player.distance_to(upgrade_pad) >= 80:
+		notice = "Stand on the coral pad to upgrade the mixer."
+		return false
+	var upgraded: bool = production.upgrade_mixer()
+	notice = "Mixer upgraded: 0.25 seconds per item." if upgraded else "Collect $40 first, or mixer is already upgraded."
+	return upgraded
+
+func try_unlock_orchard() -> bool:
+	if paused or player.distance_to(orchard_pad) >= 80:
+		notice = "Stand on the amber orchard pad to unlock."
+		return false
+	var opened: bool = production.unlock_orchard()
+	notice = "Orchard open. Yellow fruit can now be harvested." if opened else "Collect $50 first, or orchard is already open."
+	return opened
+
+func set_sound_enabled(value: bool) -> void:
+	sound_on = value
+	if not value:
+		if is_instance_valid(audio):
+			audio.stop()
+		if is_instance_valid(saw_audio):
+			saw_audio.silence()
+
+func feedback_offset() -> Vector2:
+	# Camera offsets are world units; keep the existing cap in viewport pixels.
+	return impact.step(0.0).limit_length(MAX_DISPLAY_SHAKE) / camera.zoom
+
+func camera_follow_target() -> Vector2:
+	# Keep the queue below the fixed HUD while working the shop counter.
+	var shop_weight = clampf((600.0 - player.y) / 125.0, 0.0, 1.0)
+	var hud_bias = hud_height / (2.0 * camera.zoom.y) if portrait_view else 0.0
+	var shop_bias = 50.0 if portrait_view else 180.0
+	return player + Vector2(0, -shop_bias * shop_weight - hud_bias)
+
+func simulate(delta: float, direction: Vector2) -> void:
+	# Advance movement, harvesting and production together. A slow frame must not
+	# skip cuts then leave negative cooldown debt to repay on subsequent frames.
+	# 120 Hz substeps also keep collisions along the path, not at the final point.
+	var remaining = maxf(delta, 0.0)
+	while remaining > 0.000000001:
+		var step_delta = minf(remaining, 1.0 / 120.0)
+		simulate_slice(step_delta, direction)
+		remaining -= step_delta
+
+func simulate_slice(delta: float, direction: Vector2) -> void:
+	# Age prior feedback before resolving this slice's hits. A late hit must not
+	# lose an entire render frame of lifetime, especially after a hitch.
+	impact.step(delta)
+	cargo_view.step(delta)
+	time += delta
+	velocity = direction.limit_length() * SPEED
+	var previous_player = player
+	player += velocity * delta
+	player = player.clamp(BOUNDS.position + Vector2.ONE * 20, BOUNDS.end - Vector2.ONE * 20)
+	if direction.length() > 0.05:
+		facing = direction.normalized()
+	avatar.step(delta, player - previous_player, facing)
+	# Follow the travelled path at the same cadence as movement, not only the
+	# final target of a long physics frame. Hit offset stays a separate channel.
+	if is_instance_valid(camera):
+		camera.position = camera.position.lerp(camera_follow_target(), 1.0 - exp(-10.0 * delta))
+	cooldown -= delta
+	if cooldown <= 0.0:
+		cooldown += ATTACK_INTERVAL
+		attack()
+	for f in fruits:
+		if not production.can_harvest(f.kind):
+			continue
+		f.flash = maxf(0.0, f.flash - delta)
+		f.freeze = maxf(0.0, f.freeze - delta)
+		if f.hp <= 0:
+			f.respawn -= delta
+			if f.respawn <= 0.0:
+				f.hp = 3
+				f.pos = f.home
+				f.recoil = Vector2.ZERO
+		else:
+			if f.freeze <= 0.0:
+				f.recoil = f.get("recoil", Vector2.ZERO).lerp(Vector2.ZERO, 1.0 - exp(-18.0 * delta))
+			f.pos = f.pos.lerp(f.home + Vector2(sin(time * 2.0 + f.home.x) * 7, cos(time * 2.5 + f.home.y) * 5), 1.0 - exp(-7.0 * delta))
+	for i in range(particles.size() - 1, -1, -1):
+		var p = particles[i]
+		p.life -= delta
+		p.pos += p.vel * delta
+		p.vel *= exp(-4.0 * delta)
+		if p.life <= 0.0:
+			particles.remove_at(i)
+	if player.distance_to(depot) < 85 and not cargo.is_empty():
+		unload_clock += delta
+		while unload_clock >= 0.04 and not cargo.is_empty():
+			unload_clock -= 0.04
+			var start = cargo_position(cargo.size() - 1)
+			var kind: int = cargo.pop_back()
+			production.deposit(kind)
+			if feedback and not impact.reduced:
+				cargo_view.send(kind, start, depot + Vector2(0, -30))
+	else:
+		unload_clock = 0.0
+	production.step(delta, player.distance_to(service_pad) < 65)
+	var live_ids: Array[int] = []
+	for i in range(production.customers.size()):
+		var id: int = production.customers[i].id
+		live_ids.append(id)
+		var destination = Vector2(570 + i * 52, 135)
+		customer_visuals[id] = customer_visuals.get(id, Vector2(960, 135)).lerp(destination, 1.0 - exp(-5.0 * delta))
+	for id in customer_visuals.keys():
+		if id not in live_ids:
+			customer_visuals.erase(id)
+	if player.distance_to(cash_pad) < 65:
+		production.collect()
+	for i in range(ground_drops.size() - 1, -1, -1):
+		if cargo.size() < CAPACITY and player.distance_to(ground_drops[i].pos) < 65:
+			cargo.append(ground_drops[i].kind)
+			ground_drops.remove_at(i)
+
+	saw_audio.master_gain = sound_volume
+	saw_audio.step(delta, sound_on and loop_sound and not paused, velocity.length() > 1, cargo.size() >= CAPACITY)
+
+func attack() -> int:
+	if cargo.size() >= CAPACITY:
+		return 0
+	var count = 0
+	var killed = false
+	for f in fruits:
+		if not production.can_harvest(f.kind) or f.hp <= 0 or cargo.size() >= CAPACITY:
+			continue
+		var diff: Vector2 = f.pos - player
+		if diff.length() > 100 or (diff.length() > 28 and facing.dot(diff.normalized()) < 0.1):
+			continue
+		f.hp -= 1
+		count += 1
+		hits += 1
+		var dead: bool = f.hp <= 0
+		if feedback:
+			f.flash = 0.055
+			f.recoil = diff.normalized() * 7
+		if local_stop:
+			f.freeze = 0.025
+		burst(f.pos + f.get("recoil", Vector2.ZERO), f.kind, dead)
+		if dead:
+			killed = true
+			f.respawn = 5.0
+			for j in range(3):
+				if cargo.size() < CAPACITY:
+					cargo.append(f.kind)
+				else:
+					ground_drops.append({"pos": f.pos + Vector2(j * 9 - 9, 15), "kind": f.kind})
+	if count > 0:
+		impact.hit(killed)
+		if feedback and not impact.reduced:
+			avatar.confirmed_hit()
+	if count > 0 and sound_on:
+		var pitch: float = 0.78 if killed else audio_rng.randf_range(1.0, 1.12)
+		if loop_sound and is_instance_valid(saw_audio):
+			saw_audio.confirmed_hit()
+		# Headless tests exercise state/PCM, not a hardware playback device.
+		if is_instance_valid(audio) and DisplayServer.get_name() != "headless":
+			audio.pitch_scale = pitch
+			audio.volume_linear = sound_volume * 0.75
+			audio.play()
+	return count
+
+func burst(at: Vector2, kind: int, dead: bool) -> void:
+	for i in range(13 if dead else 5):
+		var v = Vector2.RIGHT.rotated(rng.randf() * TAU) * rng.randf_range(40, 220)
+		particles.append({"pos": at, "vel": v, "life": rng.randf_range(0.15, 0.4), "kind": kind, "piece": dead and i < 4})
+
+func make_hit_sound() -> void:
+	var wave = AudioStreamWAV.new()
+	wave.format = AudioStreamWAV.FORMAT_16_BITS
+	wave.mix_rate = 22050
+	var bytes = PackedByteArray()
+	bytes.resize(2205 * 2)
+	for i in range(2205):
+		var t = float(i) / 22050.0
+		var sample = (sin(TAU * (160 * t - 420 * t * t)) * 0.65 + audio_rng.randf_range(-0.35, 0.35)) * exp(-t * 48) * 0.35
+		bytes.encode_s16(i * 2, int(sample * 32767))
+	wave.data = bytes
+	audio.stream = wave
+
+func _draw() -> void:
+	draw_rect(Rect2(-2000, -2000, 5500, 5500), Color("315953"))
+	draw_style_box(terrain_style, BOUNDS)
+	for x in range(80, 1500, 64):
+		for y in range(140, 1120, 64):
+			draw_line(Vector2(x, y), Vector2(x + 5, y - 7), Color(0.4, 0.65, 0.51, 0.27), 2)
+	draw_circle(Vector2(510, 690), 225, Color(0.18, 0.37, 0.28, 0.3))
+	draw_circle(Vector2(1020, 660), 225, Color(0.45, 0.39, 0.2, 0.25))
+	draw_rect(Rect2(520, 190, 320, 72), Color("193a3e"))
+	draw_rect(Rect2(530, 180, 300, 64), Color("ecbd68"))
+	draw_circle(depot, 82, Color(0.42, 0.9, 0.72, 0.25))
+	draw_arc(depot, 82, 0, TAU, 48, Color("85e8b3"), 3)
+	var font = ThemeDB.fallback_font
+	draw_string(font, Vector2(590, 220), "JUICE / DROP ZONE", HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color("183b38"))
+	for i in range(production.customers.size()):
+		var customer_id: int = production.customers[i].id
+		var p: Vector2 = customer_visuals.get(customer_id, Vector2(570 + i * 52, 135))
+		draw_circle(p, 13, Color("f1d8b4"))
+		draw_rect(Rect2(p + Vector2(-13, 8), Vector2(26, 22)), Color("7799b3"))
+		draw_string(font, p + Vector2(-9, -20), str(customer_id), HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color.WHITE)
+	draw_circle(service_pad, 60, Color("649fbe"))
+	draw_string(font, service_pad + Vector2(-48, 0), "AUTO SERVICE" if production.cashier_hired else "STAND TO SERVE", HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color("183b38"))
+	draw_arc(service_pad, 55, -PI / 2, -PI / 2 + TAU * production.sale_elapsed / Production.SALE_SECONDS, 32, Color.WHITE, 5)
+	draw_circle(upgrade_pad, 60, Color("d89580"))
+	draw_string(font, upgrade_pad + Vector2(-54, 0), "MIXER 0.25s" if production.mixer_upgraded else "F / MIXER $40", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color("263b38"))
+	var mixer_center = Vector2(563, 234)
+	draw_rect(Rect2(mixer_center + Vector2(-18, -29), Vector2(36, 33)), Color("a6e3dc") if production.mixer_upgraded else Color("cfdbcc"))
+	draw_rect(Rect2(mixer_center + Vector2(-21, 4), Vector2(42, 12)), Color("e08569") if production.mixer_upgraded else Color("6b837b"))
+	if production.active_kind >= 0:
+		var spin = time * (27 if production.mixer_upgraded else 15)
+		draw_line(mixer_center - Vector2.RIGHT.rotated(spin) * 12, mixer_center + Vector2.RIGHT.rotated(spin) * 12, Color("366f62"), 4)
+	draw_circle(hire_pad, 60, Color("ac8fbd"))
+	draw_string(font, hire_pad + Vector2(-52, 0), "CASHIER HIRED" if production.cashier_hired else "E / HIRE $30", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color("263b38"))
+	if production.cashier_hired:
+		var staff = Vector2(795, 220)
+		draw_circle(staff + Vector2(0, -20), 12, Color("f1d8b4"))
+		draw_rect(Rect2(staff + Vector2(-13, -9), Vector2(26, 29)), Color("4c7c72"))
+		draw_line(staff + Vector2(-8, 0), staff + Vector2(-18, 7 + sin(time * 10) * 3), Color("f1d8b4"), 5)
+	draw_circle(cash_pad, 60, Color("c9a84e"))
+	draw_string(font, cash_pad + Vector2(-47, 4), "COLLECT $%d" % production.pending_cash, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color("263b38"))
+	draw_rect(Rect2(540, 253, 280, 12), Color("193a3e"))
+	draw_rect(Rect2(540, 253, 280 * production.mix_elapsed / production.mix_duration(), 12), Color("85e8b3"))
+	draw_circle(orchard_pad, 60, Color("ddb968"))
+	draw_string(font, orchard_pad + Vector2(-57, 3), "ORCHARD OPEN" if production.orchard_unlocked else "G / UNLOCK $50", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color("263b38"))
+	if not production.orchard_unlocked:
+		draw_arc(Vector2(1020, 660), 220, 0, TAU, 64, Color("ddb968"), 4)
+		draw_string(font, Vector2(930, 690), "LOCKED / OPEN AT PAD", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color("ffe5a0"))
+	for d in ground_drops:
+		draw_slice(d.pos, d.kind, 12, 0.15)
+	for f in fruits:
+		if f.hp > 0 and production.can_harvest(f.kind):
+			var display_pos: Vector2 = f.pos + (f.get("recoil", Vector2.ZERO) if feedback else Vector2.ZERO)
+			draw_set_transform(display_pos, 0, fruit_display_scale(f))
+			draw_fruit(Vector2.ZERO, f.kind, 24, f.flash > 0 and feedback)
+			draw_set_transform(Vector2.ZERO)
+			if f.hp < 3:
+				draw_rect(Rect2(display_pos + Vector2(-20, -36), Vector2(40, 4)), Color("233635"))
+				draw_rect(Rect2(display_pos + Vector2(-20, -36), Vector2(f.hp * 13.3, 4)), Color("ffe3a0"))
+	for p in particles:
+		if p.get("piece", false) and feedback and not impact.reduced:
+			draw_slice(p.pos, p.kind, 8, p.vel.angle() + time * 8)
+		else:
+			draw_circle(p.pos, 3.5, Color("f9796d") if p.kind == 0 else Color("ffd36a"))
+	draw_set_transform(player + Vector2(0, 8), 0, Vector2(1, 0.45))
+	draw_circle(Vector2.ZERO, 24, Color(0.02, 0.08, 0.07, 0.4))
+	draw_set_transform(Vector2.ZERO)
+	for i in range(cargo.size() - 1, -1, -1):
+		draw_slice(cargo_position(i), cargo[i], 13, 0.13 if i % 2 == 0 else -0.13)
+	draw_avatar()
+	for item in cargo_view.transfers:
+		draw_slice(CargoView.position_at(item), item.kind, 13, 0.0)
+	if cargo.size() >= CAPACITY:
+		draw_string(font, player + Vector2(-35, 45), "FULL! UNLOAD", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color("ffe9a0"))
+
+func saw_endpoints() -> Array[Vector2]:
+	var kick = avatar.kick() if feedback and not impact.reduced else 0.0
+	var start = player + facing * (19.0 - kick) + Vector2(0, -6)
+	return [start, start + facing * 48]
+
+func draw_avatar() -> void:
+	var bob = avatar.bob(impact.reduced)
+	var side = facing.orthogonal()
+	if facing.y < -0.35:
+		draw_equipped_saw(bob)
+	for i in range(2):
+		var pose = avatar.foot(i, facing, impact.reduced)
+		var foot: Vector2 = player + pose.position
+		var hip = player + Vector2(0, 4) + side * (-5.5 if i == 0 else 5.5)
+		if pose.planted:
+			draw_circle(foot + Vector2(0, 2), 5, Color(0.03, 0.08, 0.09, 0.3))
+		draw_line(hip, foot, Color("26343d"), 8)
+		draw_circle(foot, 5, Color("162c33"))
+		draw_line(foot - side * 2, foot + side * 2, Color("79a9aa"), 2)
+	# Same 38-unit body silhouette in all directions; original procedural outfit.
+	draw_circle(player + Vector2(0, -9 + bob), 19, Color("173440"))
+	draw_style_box(avatar_jacket_style(), Rect2(player + Vector2(-11, -20 + bob), Vector2(22, 21)))
+	draw_line(player + Vector2(-8, -3 + bob), player + Vector2(8, -3 + bob), Color("a5e3dc"), 2)
+	var head = player + Vector2(0, -28 + bob)
+	draw_circle(head, 13, Color("f1d4ad"))
+	draw_arc(head + Vector2(0, -2), 12, PI, TAU, 16, Color("28454b"), 8)
+	if facing.y < -0.35:
+		draw_circle(head + Vector2(0, -2), 10, Color("28454b"))
+		draw_line(head + Vector2(-8, 1), head + Vector2(8, 1), Color("427078"), 2)
+	elif absf(facing.x) > 0.6:
+		draw_circle(head + Vector2(signf(facing.x) * 5, 1), 1.8, Color("17313b"))
+		draw_circle(head + Vector2(signf(facing.x) * 11, 4), 2.5, Color("dfb98f"))
+	else:
+		for x in [-4, 4]:
+			draw_circle(head + Vector2(x, 1), 1.8, Color("17313b"))
+		draw_line(head + Vector2(-2, 7), head + Vector2(2, 7), Color("986c5b"), 1.5)
+	if facing.y >= -0.35:
+		draw_equipped_saw(bob)
+
+func draw_equipped_saw(bob: float) -> void:
+	var side = facing.orthogonal()
+	var ends = saw_endpoints()
+	for i in [-1, 1]:
+		var shoulder = player + Vector2(i * 9, -13 + bob)
+		var hand: Vector2 = ends[0] + side * (i * 7)
+		draw_line(shoulder, hand, Color("173440"), 8)
+		draw_line(shoulder, hand, Color("e0be98"), 5)
+	draw_line(ends[0], ends[1], Color("17313b"), 20)
+	draw_line(ends[0], ends[1], Color("c1d8d0"), 12)
+	draw_line(ends[0] + facing * 8, ends[1] - facing * 6, Color("718f91"), 3)
+	for tooth in range(8):
+		var center: Vector2 = ends[0] + facing * (9 + tooth * 5)
+		for sign_side in [-1, 1]:
+			draw_line(center + side * (sign_side * 5), center + side * (sign_side * 8) - facing * 2, Color("17313b"), 2)
+	draw_circle(ends[0], 13, Color("17313b"))
+	draw_circle(ends[0], 10, Color("4eafb6"))
+	draw_line(ends[0] - side * 6, ends[0] + side * 6, Color("a3e6df"), 3)
+
+func avatar_jacket_style() -> StyleBoxFlat:
+	# Cached once; drawing must not allocate one style box per frame.
+	if avatar_style == null:
+		avatar_style = StyleBoxFlat.new()
+		avatar_style.bg_color = Color("3b8f9c")
+		avatar_style.set_corner_radius_all(5)
+	return avatar_style
+
+func cargo_position(index: int) -> Vector2:
+	var sway = sin(time * 7 - index * 0.18) * minf(index * 0.3, 8.0) if velocity.length() > 1 and not impact.reduced else 0.0
+	return player + Vector2(-13 + sway, -25 - index * CARGO_SPACING)
+
+func draw_slice(at: Vector2, kind: int, radius: float, tilt: float) -> void:
+	# Original procedural wedge: dark silhouette, rind, cut face, three seeds.
+	var outline = PackedVector2Array()
+	var rind = PackedVector2Array()
+	var flesh = PackedVector2Array()
+	for i in range(17):
+		var direction = Vector2.from_angle(PI * i / 16.0)
+		outline.append(at + (direction * (radius + 1.5)).rotated(tilt))
+		rind.append(at + (direction * radius).rotated(tilt))
+		flesh.append(at + (direction * (radius - 3)).rotated(tilt))
+	draw_colored_polygon(outline, Color("17382f"))
+	draw_colored_polygon(rind, Color("80bb66") if kind == 0 else Color("e6b74f"))
+	draw_colored_polygon(flesh, Color("ef746b") if kind == 0 else Color("ffe397"))
+	for x in [-0.45, 0.0, 0.45]:
+		draw_circle(at + Vector2(x * radius, radius * 0.36).rotated(tilt), 1.2, Color("3b3337"))
+
+func fruit_display_scale(fruit: Dictionary) -> Vector2:
+	if not feedback or impact.reduced:
+		return Vector2.ONE
+	var strength = clampf(fruit.get("flash", 0.0) / 0.055, 0.0, 1.0)
+	return Vector2(1.0 + 0.10 * strength, 1.0 - 0.10 * strength)
+
+func fruit_texture(kind: int) -> Texture2D:
+	return WATERMELON if kind == 0 else GOLDEN_FRUIT
+
+func fruit_sprite_region(kind: int) -> Rect2:
+	var source_frame = WATERMELON_FRAME if kind == 0 else GOLDEN_FRAME
+	var import_scale = fruit_texture(kind).get_size() / FRUIT_SOURCE_SIZE
+	return Rect2(source_frame.position * import_scale, source_frame.size * import_scale)
+
+func fruit_sprite_rect(at: Vector2, kind: int, radius: float) -> Rect2:
+	var frame = fruit_sprite_region(kind)
+	var height = radius * 2.0 * frame.size.y / frame.size.x
+	return Rect2(at + Vector2(-radius, radius - height), Vector2(radius * 2.0, height))
+
+func watermelon_rect(at: Vector2, radius: float) -> Rect2:
+	return fruit_sprite_rect(at, 0, radius)
+
+func draw_fruit(at: Vector2, kind: int, radius: float, flash: bool) -> void:
+	if kind in [0, 1] and sprite_art:
+		var shadow = PackedVector2Array()
+		for i in range(24):
+			var angle = TAU * i / 24.0
+			shadow.append(at + Vector2(cos(angle) * radius * 0.95, radius * 0.68 + sin(angle) * radius * 0.28))
+		draw_colored_polygon(shadow, Color(0.03, 0.10, 0.07, 0.35))
+		var tint = Color(1.75, 1.75, 1.75, 1) if flash else Color.WHITE
+		draw_texture_rect_region(fruit_texture(kind), fruit_sprite_rect(at, kind, radius), fruit_sprite_region(kind), tint)
+		return
+	draw_circle(at + Vector2(0, radius * 0.22), radius, Color("203e35"))
+	draw_circle(at, radius - 2, Color.WHITE if flash else (Color("74bc68") if kind == 0 else Color("edb950")))
+	if kind == 0:
+		draw_arc(at, radius * 0.65, -1.0, 1.0, 10, Color("3a8754"), 4)
+	else:
+		draw_line(at + Vector2(-7, -radius + 2), at + Vector2(0, -radius - 10), Color("86ba64"), 5)
+	if radius > 15:
+		draw_circle(at + Vector2(-7, 0), 3, Color("17382f"))
+		draw_circle(at + Vector2(7, 0), 3, Color("17382f"))
+
+func field_style() -> StyleBoxFlat:
+	var style = StyleBoxFlat.new()
+	style.bg_color = Color("4d826b")
+	style.border_color = Color("23493f")
+	style.set_border_width_all(12)
+	style.set_corner_radius_all(45)
+	return style

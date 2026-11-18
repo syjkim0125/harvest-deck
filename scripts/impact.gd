@@ -1,13 +1,13 @@
 extends RefCounted
-## Visible, non-additive cutting impulse. Reference-informed tuning, not recovered engine values.
+## Non-additive comfort-budget impulse; design values, not reference measurements.
 ## Fixed phase on confirmed hits; decay in seconds, no continuous idle vibration.
 var trauma: float = 0.0
 var clock: float = 0.0
 var enabled: bool = true
 var reduced: bool = false
-const DURATION: float = 0.1
+const DURATION: float = 2.0 / 30.0
 const DECAY: float = 1.0 / DURATION
-const MAX_PIXELS: float = 8.0
+const MAX_PIXELS: float = 1.5
 
 func hit(kill: bool = false) -> void:
 	if enabled and not reduced:

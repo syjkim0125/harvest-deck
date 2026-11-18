@@ -1,0 +1,20 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS handoff starts at its slice position with the same kind
+PASS midpoint follows the designed arc
+PASS arc ends at the depot without overshoot
+PASS handoff expires at 30Hz without leaving a ghost
+PASS handoff expires at 60Hz without leaving a ghost
+PASS handoff expires at 120Hz without leaving a ghost
+PASS same elapsed time has the same arc at 30 / 60 / 120Hz
+PASS dense cosmetic sends are bounded
+PASS handoff credits production once at existing 40ms timing, not animation end
+PASS pause freezes handoff without consuming or duplicating items
+PASS reduced motion removes cosmetic movement without touching ownership
+PASS reduced motion preserves normal delivery and processing
+PASS walking away during handoff cannot cancel or duplicate the deposit
+PASS explicit reset clears traces with the rest of the run
+PASS cosmetic delivery ON/OFF preserves kinds, timing and gameplay RNG
+PASS effect OFF clears already running handoff traces
+PASS reset starts at the settled camera target instead of introducing a follow pan
+CARGO VIEW: 17 checks, 0 failures
