@@ -12,15 +12,19 @@ const Production = preload("res://scripts/production.gd")
 const Impact = preload("res://scripts/impact.gd")
 const OrchardGround = preload("res://scripts/orchard_ground.gd")
 const SpineMelon = preload("res://scripts/spine_melon.gd")
+const DayHarvest = preload("res://scripts/day_harvest.gd")
 const CUT_TRAIL_DURATION = 0.075
 const SPEED: float = 360.0
 const ATTACK_INTERVAL: float = 0.105
 const CAPACITY: int = 40
+const DEPOT_RADIUS := 85.0
 const CARGO_SPACING: float = 3.0
 # Latest user comfort budget in logical viewport pixels, independent of zoom.
 const MAX_DISPLAY_SHAKE: float = 1.5
 const HUD_HEIGHT: int = 150
 const BOUNDS = Rect2(40, 100, 1480, 1040)
+@export var day_mode := false
+var day := DayHarvest.new()
 var impact = Impact.new()
 var cargo_view = CargoView.new()
 var avatar = AvatarMotion.new()
@@ -33,6 +37,8 @@ var cargo: Array[int] = []
 var hud_panel: ColorRect
 var pause_button: Button
 var shake_button: Button
+var mode_button: Button
+var return_button: Button
 var portrait_view: bool = false
 var hud_height: float = HUD_HEIGHT
 var camera: Camera2D
@@ -132,6 +138,15 @@ func _ready() -> void:
 	pause_button.focus_mode = Control.FOCUS_NONE
 	pause_button.pressed.connect(func(): set_paused(not paused))
 	layer.add_child(pause_button)
+	mode_button = Button.new()
+	mode_button.focus_mode = Control.FOCUS_NONE
+	mode_button.pressed.connect(switch_mode)
+	layer.add_child(mode_button)
+	return_button = Button.new()
+	return_button.text = "ENTER / END HARVEST"
+	return_button.focus_mode = Control.FOCUS_NONE
+	return_button.pressed.connect(finish_day_at_depot)
+	layer.add_child(return_button)
 	get_viewport().size_changed.connect(layout_hud)
 	layout_hud()
 	audio = AudioStreamPlayer.new()
@@ -154,7 +169,7 @@ func toggle_reduced_motion() -> void:
 	impact.clear()
 	if is_instance_valid(camera):
 		camera.offset = Vector2.ZERO
-	shake_button.text = "M / SHAKE OFF" if impact.reduced else "M / SHAKE ON"
+	shake_button.text = "M / OFF" if impact.reduced else "M / ON"
 
 func layout_hud() -> void:
 	var width = get_viewport_rect().size.x
@@ -175,14 +190,26 @@ func layout_hud() -> void:
 		buttons[i].position = Vector2(16 + i * (button_width + 8), 118) if portrait_view else Vector2(240 + i * 240, 116)
 		buttons[i].add_theme_font_size_override("font_size", 11 if portrait_view else 16)
 		buttons[i].size = Vector2(button_width, 38 if portrait_view else 29)
-	shake_button.position = Vector2(16, 166) if portrait_view else Vector2(16, 116)
-	shake_button.size = Vector2((width - 40) / 2, 36) if portrait_view else Vector2(100, 29)
-	shake_button.add_theme_font_size_override("font_size", 12)
-	shake_button.text = "M / SHAKE OFF" if impact.reduced else "M / SHAKE ON"
-	pause_button.position = Vector2(24 + (width - 40) / 2, 166) if portrait_view else Vector2(124, 116)
-	pause_button.size = Vector2((width - 40) / 2, 36) if portrait_view else Vector2(100, 29)
-	pause_button.add_theme_font_size_override("font_size", 12)
+	var utility_width: float = (width - 48.0) / 3.0 if portrait_view else 68.0
+	var utility_gap := 8.0 if portrait_view else 6.0
+	var utility_y := 166.0 if portrait_view else 116.0
+	var utility_buttons := [shake_button, pause_button, mode_button]
+	for i in range(utility_buttons.size()):
+		var button: Button = utility_buttons[i]
+		button.position = Vector2(16.0 + i * (utility_width + utility_gap), utility_y)
+		button.size = Vector2(utility_width, 36 if portrait_view else 29)
+		button.add_theme_font_size_override("font_size", 11)
+	shake_button.text = "M / OFF" if impact.reduced else "M / ON"
 	pause_button.text = "RESUME" if paused else "PAUSE"
+	mode_button.text = "NEW LAB" if day_mode else "NEW DAY"
+	shake_button.tooltip_text = "Toggle screen shake."
+	mode_button.tooltip_text = "Switch modes and start a new run."
+	return_button.position = Vector2(16, 118) if portrait_view else Vector2(240, 116)
+	return_button.size = Vector2(width - 32, 38) if portrait_view else Vector2(220, 29)
+	return_button.add_theme_font_size_override("font_size", 13)
+	return_button.visible = day_mode
+	for button in buttons:
+		button.visible = not day_mode
 	camera.zoom = Vector2.ONE * (1.4 if portrait_view else 1.0)
 	# Orientation changes must not leave a held drag or scale a previous pulse.
 	drag_id = -1
@@ -210,6 +237,7 @@ func reset_run() -> void:
 	cargo_view.clear()
 	fruits.clear()
 	production.reset()
+	day.reset()
 	notice = ""
 	ground_drops.clear()
 	customer_visuals.clear()
@@ -273,6 +301,8 @@ func _input(event: InputEvent) -> void:
 		match event.physical_keycode:
 			KEY_ESCAPE, KEY_P: set_paused(not paused)
 			KEY_R: reset_run()
+			KEY_7: switch_mode()
+			KEY_ENTER, KEY_KP_ENTER: finish_day_at_depot()
 			KEY_E: try_hire_cashier()
 			KEY_F: try_upgrade_mixer()
 			KEY_G: try_unlock_orchard()
@@ -302,7 +332,7 @@ func _input(event: InputEvent) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	# Let CanvasLayer controls consume touch before starting the movement drag.
 	if event is InputEventScreenTouch:
-		if event.pressed and drag_id == -1 and not paused:
+		if event.pressed and drag_id == -1 and not paused and not day_finished():
 			drag_id = event.index
 			drag_origin = event.position
 		elif not event.pressed and event.index == drag_id:
@@ -312,12 +342,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		drag_vector = ((event.position - drag_origin) / 65.0).limit_length()
 
 func _physics_process(delta: float) -> void:
-	if not paused:
+	if not paused and not day_finished():
 		var direction = Input.get_vector("left", "right", "up", "down")
 		if drag_vector.length() > 0.05:
 			direction = drag_vector
 		simulate(delta, direction)
 	camera.offset = feedback_offset() if not paused else Vector2.ZERO
+	if day_mode:
+		update_day_hud()
+		queue_redraw()
+		return
 	hud.text = "HARVEST  $%d  BAG %d/%d  RAW %d  MIX %d  READY %d  TILL $%d  LINE %d" % [cash, cargo.size(), CAPACITY, production.raw.size(), int(production.active_kind >= 0), production.ready.size(), production.pending_cash, production.customers.size()]
 	status.text = "WASD / arrows / touch drag • auto-cut • mint: unload / blue: serve / gold: cash / purple: hire / coral: mixer\n1 Hit shake %s   2 Sound %s   3 Reaction %s   4 Local-stop %s   M No-shake %s   P Pause   R Reset %s" % [impact.enabled, sound_on, feedback, local_stop, impact.reduced, "[PAUSED]" if paused else ""]
 	status.text += "\n5 Motor %s  -/+ Volume %d%%  Saw %s   6 Sprite art %s" % [loop_sound, roundi(sound_volume * 100), saw_audio.mode(), sprite_art]
@@ -338,8 +372,63 @@ func _physics_process(delta: float) -> void:
 		hire_button.tooltip_text = notice
 	queue_redraw()
 
+func update_day_hud() -> void:
+	var charge_percent := ceili(day.charge)
+	hud.text = "DAY   BAT %d%%   BAG %d/%d" % [charge_percent, cargo.size(), CAPACITY]
+	var stock_text := "SAFE %d   MELON %d" % [stock, production.raw.count(SpineMelon.KIND)]
+	hud.text += ("\n" if portrait_view else "     ") + stock_text
+	hud.modulate = Color("ffbc82") if charge_percent <= DayHarvest.SEED_COST else Color.WHITE
+	var hint := "Mint pad: unload, then End Harvest"
+	if day.outcome == DayHarvest.Outcome.EXHAUSTED:
+		hint = "BATTERY EMPTY • Returned • Lost %d" % day.lost_cargo
+	elif day.outcome == DayHarvest.Outcome.RETURNED:
+		hint = "HARVEST ENDED • Safe stock secured"
+	status.text = hint + "\n" + ("R: new run" if day_finished() else "WASD / arrows / drag • auto-cut\nRing: battery drain • M: shake • 7: new lab")
+	return_button.disabled = paused or day_finished() or not cargo.is_empty() or player.distance_to(depot) >= DEPOT_RADIUS
+
+func switch_mode() -> void:
+	day_mode = not day_mode
+	hud.modulate = Color.WHITE
+	layout_hud()
+	reset_run()
+
+func day_finished() -> bool:
+	return day_mode and day.outcome != DayHarvest.Outcome.ACTIVE
+
+func finish_day_at_depot() -> bool:
+	if not day_mode or day_finished() or paused or not cargo.is_empty() or player.distance_to(depot) >= DEPOT_RADIUS:
+		return false
+	conclude_day(false)
+	return true
+
+func conclude_day(exhausted: bool) -> void:
+	day.outcome = DayHarvest.Outcome.EXHAUSTED if exhausted else DayHarvest.Outcome.RETURNED
+	if exhausted:
+		# Keep the oldest half of the carried stack. Already deposited stock is untouched.
+		day.lost_cargo = ceili(cargo.size() / 2.0)
+		cargo.resize(cargo.size() - day.lost_cargo)
+		while not cargo.is_empty():
+			deposit_cargo(false)
+		ground_drops.clear()
+		player = depot
+		camera.position = camera_follow_target()
+		camera.reset_smoothing()
+	velocity = Vector2.ZERO
+	drag_id = -1
+	drag_vector = Vector2.ZERO
+	impact.clear()
+	avatar.reset()
+	cut_trail_left = 0.0
+	cargo_view.clear()
+	particles.clear()
+	camera.offset = Vector2.ZERO
+	if exhausted:
+		camera.force_update_scroll()
+	saw_audio.silence()
+	audio.stop()
+
 func try_hire_cashier() -> bool:
-	if paused or player.distance_to(hire_pad) >= 80:
+	if day_mode or paused or player.distance_to(hire_pad) >= 80:
 		notice = "Stand on the purple hire pad to hire."
 		return false
 	var hired: bool = production.hire_cashier()
@@ -347,7 +436,7 @@ func try_hire_cashier() -> bool:
 	return hired
 
 func try_upgrade_mixer() -> bool:
-	if paused or player.distance_to(upgrade_pad) >= 80:
+	if day_mode or paused or player.distance_to(upgrade_pad) >= 80:
 		notice = "Stand on the coral pad to upgrade the mixer."
 		return false
 	var upgraded: bool = production.upgrade_mixer()
@@ -355,7 +444,7 @@ func try_upgrade_mixer() -> bool:
 	return upgraded
 
 func try_unlock_orchard() -> bool:
-	if paused or player.distance_to(orchard_pad) >= 80:
+	if day_mode or paused or player.distance_to(orchard_pad) >= 80:
 		notice = "Stand on the amber orchard pad to unlock."
 		return false
 	var opened: bool = production.unlock_orchard()
@@ -388,7 +477,7 @@ func simulate(delta: float, direction: Vector2) -> void:
 	# skip cuts then leave negative cooldown debt to repay on subsequent frames.
 	# 120 Hz substeps also keep collisions along the path, not at the final point.
 	var remaining = maxf(delta, 0.0)
-	while remaining > 0.000000001:
+	while remaining > 0.000000001 and not day_finished():
 		var step_delta = minf(remaining, 1.0 / 120.0)
 		simulate_slice(step_delta, direction)
 		remaining -= step_delta
@@ -415,6 +504,8 @@ func simulate_slice(delta: float, direction: Vector2) -> void:
 	if cooldown <= 0.0:
 		cooldown += ATTACK_INTERVAL
 		attack()
+		if day_finished():
+			return
 	for f in fruits:
 		if not production.can_harvest(f.kind):
 			continue
@@ -425,6 +516,8 @@ func simulate_slice(delta: float, direction: Vector2) -> void:
 				if f.freeze <= 0.0:
 					f.recoil = f.recoil.lerp(Vector2.ZERO, 1.0 - exp(-18.0 * delta))
 				step_spine_melon(f, delta)
+				if day_finished():
+					return
 			continue
 		if f.hp <= 0:
 			f.respawn -= delta
@@ -443,29 +536,15 @@ func simulate_slice(delta: float, direction: Vector2) -> void:
 		p.vel *= exp(-4.0 * delta)
 		if p.life <= 0.0:
 			particles.remove_at(i)
-	if player.distance_to(depot) < 85 and not cargo.is_empty():
+	if player.distance_to(depot) < DEPOT_RADIUS and not cargo.is_empty():
 		unload_clock += delta
 		while unload_clock >= 0.04 and not cargo.is_empty():
 			unload_clock -= 0.04
-			var start = cargo_position(cargo.size() - 1)
-			var kind: int = cargo.pop_back()
-			production.deposit(kind)
-			if feedback and not impact.reduced:
-				cargo_view.send(kind, start, depot + Vector2(0, -30))
+			deposit_cargo(feedback and not impact.reduced)
 	else:
 		unload_clock = 0.0
-	production.step(delta, player.distance_to(service_pad) < 65)
-	var live_ids: Array[int] = []
-	for i in range(production.customers.size()):
-		var id: int = production.customers[i].id
-		live_ids.append(id)
-		var destination = Vector2(570 + i * 52, 135)
-		customer_visuals[id] = customer_visuals.get(id, Vector2(960, 135)).lerp(destination, 1.0 - exp(-5.0 * delta))
-	for id in customer_visuals.keys():
-		if id not in live_ids:
-			customer_visuals.erase(id)
-	if player.distance_to(cash_pad) < 65:
-		production.collect()
+	if not day_mode:
+		step_shop(delta)
 	for i in range(ground_drops.size() - 1, -1, -1):
 		if cargo.size() < CAPACITY and player.distance_to(ground_drops[i].pos) < 65:
 			cargo.append(ground_drops[i].kind)
@@ -474,17 +553,43 @@ func simulate_slice(delta: float, direction: Vector2) -> void:
 	saw_audio.master_gain = sound_volume
 	saw_audio.step(delta, sound_on and loop_sound and not paused, velocity.length() > 1, cargo.size() >= CAPACITY)
 
+func deposit_cargo(animate: bool) -> void:
+	var start := cargo_position(cargo.size() - 1)
+	var kind: int = cargo.pop_back()
+	production.deposit(kind)
+	if animate:
+		cargo_view.send(kind, start, depot + Vector2(0, -30))
+
+func step_shop(delta: float) -> void:
+	production.step(delta, player.distance_to(service_pad) < 65)
+	var live_ids: Array[int] = []
+	for i in range(production.customers.size()):
+		var id: int = production.customers[i].id
+		live_ids.append(id)
+		var destination := Vector2(570 + i * 52, 135)
+		customer_visuals[id] = customer_visuals.get(id, Vector2(960, 135)).lerp(destination, 1.0 - exp(-5.0 * delta))
+	for id in customer_visuals.keys():
+		if id not in live_ids:
+			customer_visuals.erase(id)
+	if player.distance_to(cash_pad) < 65:
+		production.collect()
+
 func step_spine_melon(fruit: Dictionary, delta: float) -> void:
 	var encounter: SpineMelon = fruit.encounter
 	var previous_phase := encounter.phase
-	encounter.step(delta, player.distance_to(fruit.pos))
-	if encounter.phase == previous_phase:
-		return
-	if encounter.phase == SpineMelon.Phase.WARNING:
-		play_encounter_cue(1.0)
-	elif encounter.phase == SpineMelon.Phase.VULNERABLE:
-		seed_hits += int(encounter.last_strike_hit)
-		play_encounter_cue(0.57)
+	var distance := player.distance_to(fruit.pos)
+	encounter.step(delta, distance)
+	var battery_cost := DayHarvest.HAZARD_COST_PER_SECOND * delta if distance <= SpineMelon.STRIKE_RADIUS else 0.0
+	if encounter.phase != previous_phase:
+		if encounter.phase == SpineMelon.Phase.WARNING:
+			play_encounter_cue(1.0)
+		elif encounter.phase == SpineMelon.Phase.VULNERABLE:
+			if encounter.last_strike_hit:
+				seed_hits += 1
+				battery_cost += DayHarvest.SEED_COST
+			play_encounter_cue(0.57)
+	if day_mode and battery_cost > 0.0 and day.spend(battery_cost):
+		conclude_day(true)
 
 func play_encounter_cue(pitch: float) -> void:
 	if sound_on and is_instance_valid(encounter_audio) and DisplayServer.get_name() != "headless":
@@ -493,10 +598,11 @@ func play_encounter_cue(pitch: float) -> void:
 		encounter_audio.play()
 
 func attack() -> int:
-	if cargo.size() >= CAPACITY:
+	if cargo.size() >= CAPACITY or day_finished():
 		return 0
 	var count = 0
 	var killed = false
+	var exhausted := false
 	for f in fruits:
 		if not production.can_harvest(f.kind) or f.hp <= 0 or cargo.size() >= CAPACITY:
 			continue
@@ -524,6 +630,12 @@ func attack() -> int:
 					cargo.append(f.kind)
 				else:
 					ground_drops.append({"pos": f.pos + Vector2(j * 9 - 9, 15), "kind": f.kind})
+		if day_mode and day.spend(DayHarvest.CUT_COST):
+			exhausted = true
+			break
+	if exhausted:
+		conclude_day(true)
+		return count
 	if count > 0:
 		impact.hit(killed)
 		if feedback and not impact.reduced:
@@ -566,7 +678,48 @@ func _draw() -> void:
 	draw_circle(depot, 82, Color(0.42, 0.9, 0.72, 0.25))
 	draw_arc(depot, 82, 0, TAU, 48, Color("85e8b3"), 3)
 	var font = ThemeDB.fallback_font
-	draw_string(font, Vector2(590, 220), "JUICE / DROP ZONE", HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color("183b38"))
+	draw_string(font, Vector2(590, 220), "SAFE STOCK / DROP" if day_mode else "JUICE / DROP ZONE", HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color("183b38"))
+	if not day_mode:
+		draw_shop(font)
+	for f in fruits:
+		if f.kind == SpineMelon.KIND and f.hp > 0 and not day_finished():
+			draw_melon_hazard(f.pos, f.encounter)
+	for d in ground_drops:
+		draw_slice(d.pos, d.kind, 12, 0.15)
+	# Sort a separate presentation list; never reorder the harvesting array.
+	for actor in world_draw_order():
+		if actor == -1:
+			draw_player_actor()
+		else:
+			draw_fruit_actor(fruits[actor])
+	draw_cut_trail()
+	for p in particles:
+		if p.get("piece", false) and feedback and not impact.reduced:
+			draw_slice(p.pos, p.kind, 8, p.vel.angle() + time * 8)
+		else:
+			var juice := Color("ee775d") if p.kind == 0 else Color("ffcb70")
+			if p.kind == SpineMelon.KIND:
+				juice = fruit_flesh_color(p.kind)
+			if feedback and not impact.reduced and p.vel.length_squared() > 11000.0:
+				draw_line(p.pos, p.pos - p.vel.limit_length(140.0) * 0.055, juice, 3.0, true)
+			else:
+				draw_circle(p.pos, 3.0, juice, true)
+	# Damaged-target bars remain readable above bodies and the carried stack.
+	if player_is_occluded():
+		draw_player_locator()
+	for f in fruits:
+		if f.kind == SpineMelon.KIND and f.hp > 0 and not day_finished():
+			draw_melon_status(font, f.pos, f.encounter)
+		if f.hp > 0 and f.hp < 3 and production.can_harvest(f.kind):
+			var display_pos: Vector2 = f.pos + (f.get("recoil", Vector2.ZERO) if feedback else Vector2.ZERO)
+			draw_rect(Rect2(display_pos + Vector2(-20, -36), Vector2(40, 4)), Color("233635"))
+			draw_rect(Rect2(display_pos + Vector2(-20, -36), Vector2(f.hp * 13.3, 4)), Color("ffe3a0"))
+	for item in cargo_view.transfers:
+		draw_slice(CargoView.position_at(item), item.kind, 13, 0.0)
+	if cargo.size() >= CAPACITY:
+		draw_string(font, player + Vector2(-35, 45), "FULL! UNLOAD", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color("ffe9a0"))
+
+func draw_shop(font: Font) -> void:
 	for i in range(production.customers.size()):
 		var customer_id: int = production.customers[i].id
 		var p: Vector2 = customer_visuals.get(customer_id, Vector2(570 + i * 52, 135))
@@ -600,49 +753,16 @@ func _draw() -> void:
 	if not production.orchard_unlocked:
 		draw_arc(Vector2(1020, 660), 220, 0, TAU, 64, Color("ddb968"), 4)
 		draw_string(font, Vector2(930, 690), "LOCKED / OPEN AT PAD", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color("ffe5a0"))
-	for f in fruits:
-		if f.kind == SpineMelon.KIND and f.hp > 0:
-			draw_melon_hazard(f.pos, f.encounter)
-	for d in ground_drops:
-		draw_slice(d.pos, d.kind, 12, 0.15)
-	# Sort a separate presentation list; never reorder the harvesting array.
-	for actor in world_draw_order():
-		if actor == -1:
-			draw_player_actor()
-		else:
-			draw_fruit_actor(fruits[actor])
-	draw_cut_trail()
-	for p in particles:
-		if p.get("piece", false) and feedback and not impact.reduced:
-			draw_slice(p.pos, p.kind, 8, p.vel.angle() + time * 8)
-		else:
-			var juice := Color("ee775d") if p.kind == 0 else Color("ffcb70")
-			if p.kind == SpineMelon.KIND:
-				juice = fruit_flesh_color(p.kind)
-			if feedback and not impact.reduced and p.vel.length_squared() > 11000.0:
-				draw_line(p.pos, p.pos - p.vel.limit_length(140.0) * 0.055, juice, 3.0, true)
-			else:
-				draw_circle(p.pos, 3.0, juice, true)
-	# Damaged-target bars remain readable above bodies and the carried stack.
-	if player_is_occluded():
-		draw_player_locator()
-	for f in fruits:
-		if f.kind == SpineMelon.KIND and f.hp > 0:
-			draw_melon_status(font, f.pos, f.encounter)
-		if f.hp > 0 and f.hp < 3 and production.can_harvest(f.kind):
-			var display_pos: Vector2 = f.pos + (f.get("recoil", Vector2.ZERO) if feedback else Vector2.ZERO)
-			draw_rect(Rect2(display_pos + Vector2(-20, -36), Vector2(40, 4)), Color("233635"))
-			draw_rect(Rect2(display_pos + Vector2(-20, -36), Vector2(f.hp * 13.3, 4)), Color("ffe3a0"))
-	for item in cargo_view.transfers:
-		draw_slice(CargoView.position_at(item), item.kind, 13, 0.0)
-	if cargo.size() >= CAPACITY:
-		draw_string(font, player + Vector2(-35, 45), "FULL! UNLOAD", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color("ffe9a0"))
 
 func draw_melon_hazard(at: Vector2, encounter: SpineMelon) -> void:
 	var warning := encounter.phase == SpineMelon.Phase.WARNING
-	if not warning and encounter.burst_left <= 0.0:
-		return
 	var radius := SpineMelon.STRIKE_RADIUS
+	if not warning and encounter.burst_left <= 0.0:
+		if day_mode:
+			for i in range(24):
+				var angle := TAU * i / 24.0
+				draw_arc(at, radius, angle, angle + 0.12, 5, Color("d1b184"), 2.0, true)
+		return
 	var color := Color("ffd078") if warning else Color("ff977a")
 	draw_circle(at, radius, Color(color, 0.17 if warning else 0.29), true, -1.0, true)
 	draw_arc(at, radius, 0, TAU, 96, Color("452a29"), 8.0, true)
@@ -665,7 +785,7 @@ func draw_melon_status(font: Font, at: Vector2, encounter: SpineMelon) -> void:
 			label = "OPEN • CUT NOW"
 			color = Color("b7ffe0")
 			if encounter.last_strike_hit and encounter.time_left > SpineMelon.OPEN_SECONDS - 0.55:
-				label = "SEED HIT • CUT NOW"
+				label = "SEED HIT -%d • CUT NOW" % DayHarvest.SEED_COST if day_mode else "SEED HIT • CUT NOW"
 				color = Color("ffb29a")
 		SpineMelon.Phase.RECOVERING:
 			label = "SHELL CLOSED"
