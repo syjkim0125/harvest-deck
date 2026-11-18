@@ -12,6 +12,7 @@ const RECOVERY_SECONDS := 0.80
 const BURST_SECONDS := 0.18
 
 var phase := Phase.IDLE
+var first_open_bonus := 0.0
 var time_left := 0.0
 var burst_left := 0.0
 var last_strike_hit := false
@@ -29,7 +30,8 @@ func step(delta: float, distance: float) -> void:
 	match phase:
 		Phase.WARNING:
 			phase = Phase.VULNERABLE
-			time_left = OPEN_SECONDS
+			time_left = OPEN_SECONDS + first_open_bonus
+			first_open_bonus = 0.0
 			burst_left = BURST_SECONDS
 			last_strike_hit = distance <= STRIKE_RADIUS
 		Phase.VULNERABLE:

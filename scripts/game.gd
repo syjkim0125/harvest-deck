@@ -28,6 +28,7 @@ const CARGO_SPACING: float = 3.0
 const HUD_HEIGHT: int = 150
 const BOUNDS = Rect2(40, 100, 1480, 1040)
 @export var day_mode := false
+var preparing_day := false
 var day := DayHarvest.new()
 var night := NightMarket.new()
 var night_view: NightMarketView
@@ -165,6 +166,8 @@ func _ready() -> void:
 	night_layer.add_child(night_view)
 	night_view.recipe_pressed.connect(pick_night_recipe)
 	night_view.action_pressed.connect(advance_night)
+	night_view.loadout_pressed.connect(pick_day_card)
+	night_view.start_pressed.connect(begin_harvest)
 	night_view.pause_pressed.connect(func(): set_paused(not paused))
 	get_viewport().size_changed.connect(layout_hud)
 	layout_hud()
@@ -264,6 +267,7 @@ func reset_run() -> void:
 	fruits.clear()
 	production.reset()
 	day.reset()
+	preparing_day = day_mode
 	night.reset()
 	notice = ""
 	ground_drops.clear()
@@ -275,7 +279,7 @@ func reset_run() -> void:
 	unload_clock = 0.0
 	paused = false
 	if is_instance_valid(night_view):
-		night_view.refresh(night, paused)
+		refresh_market_view()
 	if is_instance_valid(pause_button):
 		pause_button.text = "PAUSE"
 	drag_id = -1
@@ -312,7 +316,7 @@ func set_paused(value: bool) -> void:
 	if is_instance_valid(pause_button):
 		pause_button.text = "RESUME" if paused else "PAUSE"
 	if is_instance_valid(night_view):
-		night_view.refresh(night, paused)
+		refresh_market_view()
 	avatar.clear_hit()
 	cut_trail_left = 0.0
 	if value and is_instance_valid(saw_audio):
@@ -338,8 +342,16 @@ func _input(event: InputEvent) -> void:
 					advance_day()
 				else:
 					advance_night()
-			KEY_Q: pick_night_recipe(NightMarket.Recipe.WATERMELON)
-			KEY_W: pick_night_recipe(NightMarket.Recipe.MELON)
+			KEY_Q:
+				if preparing_day:
+					pick_day_card(DayHarvest.Card.STANDARD)
+				else:
+					pick_night_recipe(NightMarket.Recipe.WATERMELON)
+			KEY_W:
+				if preparing_day:
+					pick_day_card(DayHarvest.Card.WEDGE)
+				else:
+					pick_night_recipe(NightMarket.Recipe.MELON)
 			KEY_E: try_hire_cashier()
 			KEY_F: try_upgrade_mixer()
 			KEY_G: try_unlock_orchard()
@@ -374,7 +386,7 @@ func _input(event: InputEvent) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	# Let CanvasLayer controls consume touch before starting the movement drag.
 	if event is InputEventScreenTouch:
-		if event.pressed and drag_id == -1 and not paused and not day_finished():
+		if event.pressed and drag_id == -1 and not paused and not preparing_day and not day_finished():
 			drag_id = event.index
 			drag_origin = event.position
 		elif not event.pressed and event.index == drag_id:
@@ -384,6 +396,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		drag_vector = ((event.position - drag_origin) / 65.0).limit_length()
 
 func _physics_process(delta: float) -> void:
+	if preparing_day:
+		return
 	if night.phase != NightMarket.Phase.OFF:
 		if not paused:
 			night.step(delta)
@@ -424,6 +438,8 @@ func update_day_hud() -> void:
 	hud.text = "DAY   BAT %d%%   BAG %d/%d" % [charge_percent, cargo.size(), CAPACITY]
 	var stock_text := "SAFE %d   MELON %d" % [stock, production.raw.count(SpineMelon.KIND)]
 	hud.text += ("\n" if portrait_view else "     ") + stock_text
+	if day.card == DayHarvest.Card.WEDGE:
+		hud.text += "   WEDGE"
 	hud.modulate = Color("ffbc82") if charge_percent <= DayHarvest.SEED_COST else Color.WHITE
 	var hint := "Mint pad: unload, then End Harvest"
 	if day.outcome == DayHarvest.Outcome.EXHAUSTED:
@@ -443,7 +459,31 @@ func switch_mode() -> void:
 func day_finished() -> bool:
 	return day_mode and day.outcome != DayHarvest.Outcome.ACTIVE
 
+func refresh_market_view() -> void:
+	if preparing_day:
+		night_view.refresh_prep(day.card, paused)
+	else:
+		night_view.refresh(night, paused)
+
+func pick_day_card(card: DayHarvest.Card) -> void:
+	if preparing_day and not paused:
+		day.card = card
+		refresh_market_view()
+
+func begin_harvest() -> bool:
+	if not preparing_day or paused:
+		return false
+	preparing_day = false
+	if day.card == DayHarvest.Card.WEDGE:
+		for fruit in fruits:
+			if fruit.kind == SpineMelon.KIND:
+				fruit.encounter.first_open_bonus = DayHarvest.WEDGE_OPEN_BONUS
+	refresh_market_view()
+	return true
+
 func advance_day() -> bool:
+	if preparing_day:
+		return begin_harvest()
 	return enter_night() if day_finished() else finish_day_at_depot()
 
 func enter_night() -> bool:
@@ -472,13 +512,14 @@ func advance_night() -> bool:
 				return false
 		NightMarket.Phase.CLOSED:
 			reset_run()
+			return true
 		_:
 			return false
 	night_view.refresh(night, paused)
 	return true
 
 func finish_day_at_depot() -> bool:
-	if not day_mode or day_finished() or paused or not cargo.is_empty() or player.distance_to(depot) >= DEPOT_RADIUS:
+	if not day_mode or preparing_day or day_finished() or paused or not cargo.is_empty() or player.distance_to(depot) >= DEPOT_RADIUS:
 		return false
 	conclude_day(false)
 	return true
@@ -555,6 +596,8 @@ func camera_follow_target() -> Vector2:
 	return player + Vector2(0, -shop_bias * shop_weight - hud_bias)
 
 func simulate(delta: float, direction: Vector2) -> void:
+	if preparing_day:
+		return
 	# Advance movement, harvesting and production together. A slow frame must not
 	# skip cuts then leave negative cooldown debt to repay on subsequent frames.
 	# 120 Hz substeps also keep collisions along the path, not at the final point.
@@ -679,7 +722,7 @@ func play_encounter_cue(pitch: float) -> void:
 		encounter_audio.play()
 
 func attack() -> int:
-	if cargo.size() >= CAPACITY or day_finished():
+	if preparing_day or cargo.size() >= CAPACITY or day_finished():
 		return 0
 	var count := 0
 	var killed := false
@@ -721,7 +764,7 @@ func attack() -> int:
 					cargo.append(f.kind)
 				else:
 					ground_drops.append({"pos": f.pos + Vector2(j * 9 - 9, 15), "kind": f.kind})
-		if day_mode and day.spend(DayHarvest.CUT_COST):
+		if day_mode and day.spend(day.cut_cost()):
 			exhausted = true
 			break
 	if exhausted:

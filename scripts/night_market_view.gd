@@ -1,6 +1,7 @@
 extends Panel
 
 const Market = preload("res://scripts/night_market.gd")
+const Day = preload("res://scripts/day_harvest.gd")
 const SpineMelon = preload("res://scripts/spine_melon.gd")
 const INK := Color("101e29")
 const PAPER := Color("f2f5ee")
@@ -11,7 +12,14 @@ const GOLD := Color("f7ce88")
 signal recipe_pressed(recipe: int)
 signal action_pressed
 signal pause_pressed
+signal loadout_pressed(card: Day.Card)
+signal start_pressed
 
+var market_content: VBoxContainer
+var prep_content: VBoxContainer
+var loadout_buttons: Array[Button] = []
+var start_button: Button
+var prep_pause_button: Button
 var title: Label
 var detail: Label
 var inventory: Label
@@ -37,7 +45,11 @@ func _ready() -> void:
 	var content := VBoxContainer.new()
 	content.custom_minimum_size.x = 280
 	content.add_theme_constant_override("separation", 10)
-	frame.add_child(content)
+	var pages := VBoxContainer.new()
+	frame.add_child(pages)
+	pages.add_child(content)
+	market_content = content
+	build_prep(pages)
 	title = label(content, "Night Market", 32, PAPER)
 	detail = label(content, "", 16, GOLD)
 	inventory = label(content, "", 14, MUTED)
@@ -72,7 +84,47 @@ func _ready() -> void:
 	pause_button = action(content)
 	pause_button.pressed.connect(func(): pause_pressed.emit())
 
+func build_prep(parent: Control) -> void:
+	prep_content = VBoxContainer.new()
+	prep_content.custom_minimum_size.x = 280
+	prep_content.add_theme_constant_override("separation", 8)
+	parent.add_child(prep_content)
+	label(prep_content, "Day 1 Preparation", 27, PAPER)
+	label(prep_content, "Tonight’s orders  ·  Fee $%d" % Market.FEE, 16, GOLD)
+	for i in range(Market.NAMES.size()):
+		label(prep_content, "%s  ·  %d × $%d" % [Market.NAMES[i], Market.DEMAND[i], Market.PRICES[i]], 14, MINT)
+	label(prep_content, "Special: 1 watermelon + 1 spine melon", 13, MUTED)
+	label(prep_content, "Choose today’s loadout", 16, GOLD)
+	var standard := action(prep_content)
+	standard.pressed.connect(func(): loadout_pressed.emit(Day.Card.STANDARD))
+	loadout_buttons.append(standard)
+	label(prep_content, "1 charge per cut  ·  Normal openings", 13, MUTED)
+	var wedge := action(prep_content)
+	wedge.pressed.connect(func(): loadout_pressed.emit(Day.Card.WEDGE))
+	loadout_buttons.append(wedge)
+	label(prep_content, "First melon opening +%.1fs  ·  %.2f charge/cut" % [Day.WEDGE_OPEN_BONUS, Day.WEDGE_CUT_COST], 13, MUTED)
+	start_button = action(prep_content)
+	start_button.text = "ENTER / START HARVEST"
+	start_button.add_theme_stylebox_override("normal", surface(Color("235246"), 6))
+	start_button.add_theme_stylebox_override("hover", surface(Color("316a5b"), 6))
+	start_button.pressed.connect(func(): start_pressed.emit())
+	prep_pause_button = action(prep_content)
+	prep_pause_button.pressed.connect(func(): pause_pressed.emit())
+
+func refresh_prep(card: Day.Card, paused: bool) -> void:
+	show()
+	market_content.hide()
+	prep_content.show()
+	loadout_buttons[Day.Card.STANDARD].text = "Q / STANDARD KIT" + ("   ✓" if card == Day.Card.STANDARD else "")
+	loadout_buttons[Day.Card.WEDGE].text = "W / CUTTING WEDGE" + ("   ✓" if card == Day.Card.WEDGE else "")
+	for button in loadout_buttons:
+		button.disabled = paused
+	start_button.disabled = paused
+	prep_pause_button.text = "RESUME" if paused else "PAUSE"
+
 func refresh(market: Market, paused: bool) -> void:
+	prep_content.hide()
+	market_content.show()
 	visible = market.phase != Market.Phase.OFF
 	if not visible:
 		return

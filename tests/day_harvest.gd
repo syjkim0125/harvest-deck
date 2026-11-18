@@ -25,6 +25,7 @@ func run() -> void:
 		quit(failures)
 		return
 
+	game.begin_harvest()
 	var day = game.day
 	var initial_charge: float = day.charge
 	game.player = Vector2(950, 930)
@@ -35,11 +36,13 @@ func run() -> void:
 	check(game.hits > 0 and day.charge == initial_charge - game.hits * day.CUT_COST, "watermelon cuts spend exactly one charge per target")
 
 	game.reset_run()
+	game.begin_harvest()
 	var center := SpineMelon.HOME
 	game.player = center + Vector2(0, SpineMelon.STRIKE_RADIUS + 8)
 	game.simulate(0.74, Vector2.ZERO)
 	check(game.seed_hits == 0 and day.charge == initial_charge, "standing outside a warning avoids both seed and hazard cost")
 	game.reset_run()
+	game.begin_harvest()
 	game.player = center + Vector2(0, 75)
 	game.facing = Vector2.DOWN
 	game.simulate(0.69, Vector2.ZERO)
@@ -50,6 +53,7 @@ func run() -> void:
 	check(game.impact.trauma == 0.0, "incoming seed damage never adds shake")
 
 	game.reset_run()
+	game.begin_harvest()
 	game.cargo.assign([0, 2])
 	game.player = game.depot
 	game.simulate(1.0, Vector2.ZERO)
@@ -70,6 +74,7 @@ func run() -> void:
 	check(game.player == game.depot and game.stock == stock_after_return and game.attack() == 0, "a long frame or further movement cannot reopen or duplicate the day")
 
 	game.reset_run()
+	game.begin_harvest()
 	game.fruits.clear()
 	game.fruits.assign([
 		{"pos": game.player, "kind": 0, "hp": 1},
@@ -81,6 +86,7 @@ func run() -> void:
 	check(game.stock == 1 and day.lost_cargo == 2, "a last cut's payout goes through the same cargo loss rule")
 
 	game.reset_run()
+	game.begin_harvest()
 	game.player = center + Vector2(0, 75)
 	game.facing = Vector2.DOWN
 	day.charge = 0.10
@@ -89,6 +95,7 @@ func run() -> void:
 		"hazard exposure alone can exhaust the saw before any seed hits")
 
 	game.reset_run()
+	game.begin_harvest()
 	game.cargo.assign([0, 0])
 	check(not game.finish_day_at_depot(), "safe return is unavailable away from the drop zone")
 	game.player = game.depot
@@ -120,6 +127,7 @@ func run() -> void:
 		layout_game.day_mode = true
 		view.add_child(layout_game)
 		layout_game.set_physics_process(false)
+		layout_game.begin_harvest()
 		layout_game._physics_process(0.0)
 		await process_frame
 		var buttons := [layout_game.return_button, layout_game.shake_button, layout_game.pause_button, layout_game.mode_button]
