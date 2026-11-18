@@ -8,13 +8,15 @@ func run() -> void:
 		["shake", true, false, false, false],
 		["shake_sound", true, true, false, false],
 		["shake_sound_reaction", true, true, true, false],
-		["shake_sound_reaction_local", true, true, true, true]]
+		["shake_sound_reaction_local", true, true, true, true],
+		["soft_camera", true, true, true, true]]
 	print("variant,seconds,hits,cargo,ground,inventory,sold,pending_cash,collected_cash,max_shake_px")
 	for variant in variants:
 		var g = Game.new()
 		root.add_child(g)
 		g.set_physics_process(false)
 		g.impact.enabled = variant[1]
+		g.impact.soft = variant[0] == "soft_camera"
 		g.sound_on = variant[2]
 		g.feedback = variant[3]
 		g.local_stop = variant[4]

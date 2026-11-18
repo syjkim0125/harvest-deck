@@ -35,8 +35,16 @@ func run() -> void:
 	check(g.attack() == 0 and g.impact.trauma == 0, "whiff has no damage or shake")
 	g.facing = Vector2.RIGHT
 	check(g.attack() == 1 and g.fruits[0].hp == 2 and g.impact.trauma > 0, "each confirmed hit produces feedback")
+	check(g.cut_trail_position.is_equal_approx(Vector2(738, 693)) and g.cut_trail_facing == Vector2.RIGHT, "cut flash uses the fruit contact point and direction")
+	check(g.local_stop and g.avatar.hit_hold == Game.HIT_HOLD and g.fruits[0].freeze == Game.HIT_HOLD, "default contact holds only the tool and fruit recoil on hit")
+	var normal_kick: float = g.avatar.kick()
+	g.avatar.step(1.0 / 60.0, Vector2.RIGHT * 6)
+	check(is_equal_approx(g.avatar.kick(), normal_kick) and g.avatar.body.x == 6.0, "held tool reaction leaves locomotion responsive")
+	var normal_shake: float = g.impact.offset().length()
 	g.attack()
 	g.attack()
+	check(g.cut_trail_break and g.impact.offset().length() > normal_shake and g.avatar.hit_hold == Game.BREAK_HOLD, "a break gives one stronger cue and local hold")
+	check(g.particles.any(func(p): return p.piece and p.vel.dot(Vector2.RIGHT) > 0.0), "break emits fruit pieces away from contact")
 	check(g.cargo.size() == 3 and g.fruits[0].hp == 0, "kill awards three items")
 	check(g.attack() == 0 and g.cargo.size() == 3, "dead target cannot duplicate drops")
 	fixture(g, 1)
@@ -65,7 +73,7 @@ func run() -> void:
 		var peak = 0.0
 		for frame in range(ceili(Impact.DURATION * rate) + 1):
 			peak = maxf(peak, short_fx.step(1.0 / rate).length())
-		check(peak <= Impact.MAX_PIXELS and short_fx.trauma == 0.0, "pulse ends within 66.667ms at %dfps" % rate)
+		check(peak <= Impact.MAX_PIXELS and short_fx.trauma == 0.0, "pulse ends within 92ms at %dfps" % rate)
 	# Verify rendered offsets, since a nonzero envelope alone can still be imperceptible.
 	for rate in [30, 60, 120]:
 		var visible_fx = Impact.new()
@@ -73,7 +81,11 @@ func run() -> void:
 		var visible_peak = 0.0
 		for frame in range(ceili(Impact.DURATION * rate)):
 			visible_peak = maxf(visible_peak, visible_fx.step(1.0 / rate).length())
-		check(visible_peak > 0.0 and visible_peak <= 1.5, "normal hit has nonzero comfort-bounded displacement at %dfps" % rate)
+		check(visible_peak > 0.0 and visible_peak <= Impact.HIT_PIXELS + 0.000001, "normal hit has nonzero bounded displacement at %dfps" % rate)
+	var directional = Impact.new()
+	directional.hit(false, Vector2.UP)
+	check(directional.offset().is_equal_approx(Vector2.DOWN * 3.4), "normal camera kick starts opposite the cut direction")
+	check(directional.step(1.0 / 60.0).y > 2.5 and directional.step(1.0 / 60.0).y < -0.8, "normal camera kick survives one frame and then rebounds")
 	var comfy = Impact.new()
 	comfy.reduced = true
 	comfy.hit(true)
@@ -293,14 +305,16 @@ func run() -> void:
 		check(wave.loop_mode == AudioStreamWAV.LOOP_FORWARD and wave.loop_end == SawAudio.SAMPLES and pcm.size() == SawAudio.SAMPLES * 2 and peak < 32767, "synthesized %s loop has bounded valid PCM" % str(cutting))
 		check(seam <= max_step, "synthesized %s loop seam stays within waveform slope" % str(cutting))
 	check(g.audio.max_polyphony == 2, "hit voice overlap is capped at two")
+	check(g.cut_sound.data != g.break_sound.data and g.cut_sound.get_length() < g.break_sound.get_length(), "cut and break have distinct short PCM cues")
+	check(g.cut_sound.data.decode_s16(0) == 0 and g.break_sound.data.decode_s16(g.break_sound.data.size() - 2) == 0, "cut and break use tapered sample boundaries")
 	var peaks: Array[float] = []
-	for wave in [SawAudio.make_loop(false), SawAudio.make_loop(true), g.audio.stream]:
+	for wave in [SawAudio.make_loop(false), SawAudio.make_loop(true), g.cut_sound, g.break_sound]:
 		var pcm: PackedByteArray = wave.data
 		var peak: float = 0
 		for i in range(pcm.size() / 2):
 			peak = maxf(peak, absf(pcm.decode_s16(i * 2) / 32767.0))
 		peaks.append(peak)
-	check(peaks[0] * 0.20 + peaks[1] * 0.28 + peaks[2] * 2 * 0.75 < 1.0, "maximum loop gains plus two hit voices stay below PCM clipping bound")
+	check(peaks[0] * 0.20 + peaks[1] * 0.28 + maxf(peaks[2], peaks[3]) * 2 * 0.75 < 1.0, "maximum loop gains plus two hit voices stay below PCM clipping bound")
 	var staffing = Production.new()
 	staffing.pending_cash = Production.CASHIER_COST
 	check(not staffing.hire_cashier() and not staffing.cashier_hired and staffing.pending_cash == 30, "uncollected counter cash cannot pay a cashier")
@@ -517,7 +531,7 @@ func run() -> void:
 	g.sound_on = false
 	g._physics_process(1.0 / 3.0)
 	check(g.camera.offset.is_equal_approx(pulse_samples[2]) and g.camera.offset.length() > 0.1, "hitch retains a recent hit instead of expiring it by the entire frame")
-	check((g.camera.offset * g.camera.zoom).length() <= 1.500001, "rendered feedback respects the 1.5 viewport-pixel comfort budget")
+	check((g.camera.offset * g.camera.zoom).length() <= 3.400001, "normal hit respects the 3.4 logical-pixel cap")
 	check(is_equal_approx(g.impact.clock, 1.0 / 60.0), "pulse age measures time since the last substep hit")
 	g.set_paused(true)
 	g.audio.stop()

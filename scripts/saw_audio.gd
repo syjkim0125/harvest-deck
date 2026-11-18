@@ -74,10 +74,10 @@ func step(delta: float, enabled: bool, moving: bool, full: bool) -> void:
 	var dt = maxf(0.0, delta)
 	var active_dt = minf(dt, contact_left) if not full else 0.0
 	contact_left = maxf(0.0, contact_left - dt) if not full else 0.0
-	var motor_target: float = 0.20 if moving and not full else 0.10
+	var motor_target: float = 0.07 if active_dt > 0.0 else (0.17 if moving and not full else 0.10)
 	motor_gain = lerpf(motor_gain, motor_target * master_gain, 1.0 - exp(-dt / ATTACK_TAU))
 	if active_dt > 0:
-		cut_gain = lerpf(cut_gain, 0.28 * master_gain, 1.0 - exp(-active_dt / ATTACK_TAU))
+		cut_gain = lerpf(cut_gain, 0.22 * master_gain, 1.0 - exp(-active_dt / ATTACK_TAU))
 	if dt > active_dt:
 		cut_gain *= exp(-(dt - active_dt) / RELEASE_TAU)
 	var pitch_target: float = 0.82 if active_dt > 0 else (1.12 if moving else 0.9)

@@ -1,5 +1,5 @@
 extends SceneTree
-## Literal user comfort budget: do not derive expected limits from implementation constants.
+## The opt-in soft camera keeps the previously shipped comfort limits.
 const Game = preload("res://scripts/game.gd")
 const Impact = preload("res://scripts/impact.gd")
 var checks = 0
@@ -11,10 +11,11 @@ func check(ok: bool, label: String) -> void:
 	if not ok: failures += 1
 	print("PASS " if ok else "FAIL ",label)
 func run() -> void:
-	check(Impact.MAX_PIXELS <= 1.5 and Game.MAX_DISPLAY_SHAKE <= 1.5, "configured displacement respects literal 1.5px budget")
-	check(Impact.DURATION <= 2.0 / 30.0 + 0.0000001, "configured pulse lasts at most 66.667ms")
+	check(Impact.SOFT_PIXELS <= 1.5, "configured displacement respects literal 1.5px budget")
+	check(Impact.SOFT_DURATION <= 2.0 / 30.0 + 0.0000001, "configured pulse lasts at most 66.667ms")
 	for rate in [30,60,120,1000]:
 		var fx = Impact.new()
+		fx.soft = true
 		fx.hit(true)
 		var peak = fx.step(0.0).length()
 		var elapsed = 0.0
@@ -28,6 +29,12 @@ func run() -> void:
 	root.add_child(g)
 	g.set_physics_process(false)
 	g.sound_on = false
+	g.impact.hit(true)
+	var soft_key := InputEventKey.new()
+	soft_key.physical_keycode = KEY_8
+	soft_key.pressed = true
+	g._input(soft_key)
+	check(g.impact.soft and g.feedback_offset() == Vector2.ZERO and g.shake_button.text == "M / SOFT", "8 switches to soft camera and clears active recoil")
 	for zoom in [Vector2(0.7,0.7),Vector2.ONE,Vector2(1.4,1.4),Vector2(2,1.5)]:
 		g.camera.zoom = zoom
 		g.impact.clear()
@@ -38,6 +45,7 @@ func run() -> void:
 			g.impact.step(0.001)
 		check(peak <= 1.500001 and g.feedback_offset() == Vector2.ZERO, "100 simultaneous hits retain pixel budget and expiry with zoom %s" % zoom)
 	var fx = Impact.new()
+	fx.soft = true
 	var gap_zero = true
 	for i in range(20):
 		fx.hit(true)

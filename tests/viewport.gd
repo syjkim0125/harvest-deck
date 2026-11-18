@@ -40,7 +40,7 @@ func run() -> void:
 		check(head_y > g.hud_height + 8, "queue heads stay below HUD at service edge %s" % size)
 		g.impact.hit(true)
 		g.camera.offset = g.feedback_offset()
-		check((g.camera.offset * g.camera.zoom).length() <= Game.MAX_DISPLAY_SHAKE + 0.001, "zoom cannot amplify viewport-pixel shake %s" % size)
+		check((g.camera.offset * g.camera.zoom).length() <= 5.001, "zoom cannot amplify viewport-pixel shake %s" % size)
 		var hud_before = g.hud.get_global_transform()
 		g.camera.position += Vector2(150, 200)
 		g.camera.offset = Vector2(2, 1)

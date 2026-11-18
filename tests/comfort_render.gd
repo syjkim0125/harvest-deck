@@ -12,6 +12,7 @@ func run() -> void:
 	g.sound_on = false
 	g.cooldown = 100.0
 	g.fruits.clear()
+	g.impact.soft = true
 	g.impact.hit(true)
 	var samples = []
 	for i in range(10):

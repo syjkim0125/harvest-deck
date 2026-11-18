@@ -2,7 +2,7 @@ extends RefCounted
 ## Presentation only. Contact anchors remain fixed across turns and stops.
 const STRIDE: float = 72.0
 const KICK_SECONDS: float = 0.075
-const KICK_UNITS: float = 2.5
+const KICK_UNITS: float = 4.0
 const STEP_REACH: float = 10.0
 const MAX_STANCE_REACH: float = 18.0
 const SWING_TRAVEL: float = 12.0
@@ -10,6 +10,8 @@ const SETTLE_SECONDS: float = 0.12
 var distance: float = 0.0
 var walk_weight: float = 0.0
 var hit_age: float = KICK_SECONDS
+var hit_hold: float = 0.0
+var hit_strength: float = 1.0
 var body: Vector2 = Vector2.ZERO
 var heading: Vector2 = Vector2.UP
 var feet: Array[Dictionary] = []
@@ -48,7 +50,9 @@ func step_slice(delta: float, displacement: Vector2, direction: Vector2) -> void
 	body += displacement
 	distance = fposmod(distance + travel, STRIDE)
 	walk_weight = 1.0 if moving else walk_weight * exp(-18.0 * delta)
-	hit_age = minf(KICK_SECONDS, hit_age + delta)
+	var held := minf(hit_hold, delta)
+	hit_hold -= held
+	hit_age = minf(KICK_SECONDS, hit_age + delta - held)
 	for i in range(2):
 		var foot = feet[i]
 		var rest = nominal(i, body, heading)
@@ -74,11 +78,14 @@ func step_slice(delta: float, displacement: Vector2, direction: Vector2) -> void
 			foot.lift = 0.0
 			foot.mode = "plant"
 
-func confirmed_hit() -> void:
+func confirmed_hit(hold: float = 0.0, strength: float = 1.0) -> void:
 	hit_age = 0.0
+	hit_hold = hold
+	hit_strength = strength
 
 func clear_hit() -> void:
 	hit_age = KICK_SECONDS
+	hit_hold = 0.0
 
 func reset() -> void:
 	distance = 0.0
@@ -89,7 +96,7 @@ func reset() -> void:
 	clear_hit()
 
 func kick() -> float:
-	return KICK_UNITS * (1.0 - hit_age / KICK_SECONDS)
+	return KICK_UNITS * hit_strength * (1.0 - hit_age / KICK_SECONDS) ** 2
 
 func bob(reduced: bool) -> float:
 	return 0.0 if reduced else -absf(sin(distance / STRIDE * TAU)) * 1.5 * walk_weight

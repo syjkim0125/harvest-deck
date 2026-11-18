@@ -33,7 +33,7 @@ func run() -> void:
 	var center: Vector2 = g.fruits[0].pos
 	check(g.attack() == 1 and g.fruit_display_scale(g.fruits[0]).x > 1.0 and g.fruits[0].pos == center, "confirmed-hit squash leaves collision position unchanged")
 	g.fruits[0].flash = 10.0
-	check(g.fruit_display_scale(g.fruits[0]).is_equal_approx(Vector2(1.1,0.9)), "squash amplitude is bounded rather than accumulated")
+	check(g.fruit_display_scale(g.fruits[0]).is_equal_approx(Vector2(1.16,0.85)), "squash amplitude is bounded rather than accumulated")
 	g.impact.reduced = true
 	check(g.fruit_display_scale(g.fruits[0]) == Vector2.ONE, "reduced motion removes the new deformation")
 	g.impact.reduced = false
