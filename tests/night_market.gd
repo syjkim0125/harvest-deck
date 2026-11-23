@@ -749,8 +749,9 @@ func check_menu_shortage(game) -> void:
 	game.reset_run()
 
 func check_service_buttons(game) -> void:
-	deliver(game, [0, 0, MELON])
+	deliver(game, [0, 0, 0, MELON])
 	var ui = game.night_view
+	var night = game.night
 	var juice: Button = ui.recipe_buttons[Market.Recipe.WATERMELON]
 	var special: Button = ui.recipe_buttons[Market.Recipe.MELON]
 	key(game, KEY_Q)
@@ -758,28 +759,69 @@ func check_service_buttons(game) -> void:
 	key(game, KEY_ENTER)
 	check(juice.text == "Q / SERVE ORDER" and special.text == "W / SERVE ORDER"
 		and not juice.disabled and not special.disabled, "both selected recipes advertise their live order shortcuts")
-	check(game.night.order_state(-1) == Market.OrderState.UNAVAILABLE
-		and game.night.order_state(Market.Recipe.ORANGE) == Market.OrderState.UNAVAILABLE,
+	check(night.order_state(-1) == Market.OrderState.UNAVAILABLE
+		and night.order_state(Market.Recipe.ORANGE) == Market.OrderState.UNAVAILABLE,
 		"out-of-range recipes and menus without demand cannot accept an order")
 	special.pressed.emit()
-	check(special.text == "PREPARING…" and special.disabled and juice.text == "MIXER BUSY" and juice.disabled,
-		"the active special is preparing and a second recipe with ingredients waits for the mixer")
-	game.set_paused(true)
-	game._physics_process(2.0)
-	check(ui.detail.text == "Paused" and special.text == "PREPARING…" and game.night.sold[1] == 0,
-		"pausing preserves the preparation status and sale in progress")
-	game.set_paused(false)
-	game._physics_process(2.0)
-	check(juice.text == "Q / SERVE ORDER" and not juice.disabled
-		and special.text == "NEEDS INGREDIENTS" and special.disabled,
-		"when the mixer clears, juice resumes and the special reports the missing melon")
+	check(special.text == "PREPARING…" and special.disabled and juice.text == "Q / QUEUE NEXT" and not juice.disabled,
+		"the active special uses its only melon while juice advertises the available queue slot")
 	key(game, KEY_Q)
-	check(juice.text == "PREPARING…" and game.night.stock.is_empty(),
-		"reserving the last watermelon keeps its active order in preparation")
-	game._physics_process(2.0)
-	check(juice.text == "NEEDS INGREDIENTS" and juice.disabled and game.night.gross == 17,
-		"remaining juice demand reports missing ingredients when the prep finishes")
+	check(juice.text == "QUEUED" and juice.disabled and night.active_recipe == Market.Recipe.MELON
+		and night.queued_recipe == Market.Recipe.WATERMELON and game.stock == 1 and night.gross == 0,
+		"queuing juice reserves its watermelon without displacing or selling the active special")
+	check(not game.pick_night_recipe(Market.Recipe.WATERMELON) and game.stock == 1 and ui.action_button.disabled
+		and not game.advance_night(), "a full slot rejects another order and blocks market close")
+	var special_time: float = night.remaining
+	game.set_paused(true)
+	game._physics_process(8.0)
+	key(game, KEY_Q)
+	check(ui.detail.text == "Paused" and night.remaining == special_time and night.gross == 0
+		and special.text == "PREPARING…" and juice.text == "QUEUED", "pause freezes both orders and their display")
+	game.set_paused(false)
+	game._physics_process(special_time + 0.25)
+	check(night.gross == 12 and night.sold == [0, 1, 0] and night.active_recipe == Market.Recipe.WATERMELON
+		and night.queued_recipe == -1 and is_equal_approx(night.remaining, night.duration(Market.Recipe.WATERMELON) - 0.25),
+		"the special sells first and leftover frame time advances the promoted juice")
+	check(juice.text == "Q / QUEUE NEXT" and not juice.disabled and special.text == "NEEDS INGREDIENTS"
+		and not game.advance_night(), "the mixer accepts the same recipe next and still blocks closing")
+	juice.pressed.emit()
+	check(juice.text == "PREPARING · NEXT QUEUED" and juice.disabled and night.stock.is_empty()
+		and not game.pick_night_recipe(Market.Recipe.WATERMELON), "both accepted juice orders fit the same button")
+	game._physics_process(8.0)
+	check(juice.text == "NEEDS INGREDIENTS" and juice.disabled and night.gross == 22 and night.sold == [2, 1, 0]
+		and night.active_recipe == -1 and night.queued_recipe == -1 and not ui.action_button.disabled,
+		"one long frame clears both juice orders once and re-enables close")
+	key(game, KEY_ENTER)
+	check(game.run_results.back().sold == [2, 1, 0] and game.run_results.back().leftover == [0, 0, 0],
+		"settlement counts both completed reservations and excludes their ingredients")
 	game.reset_run()
+
+func check_queue_demand() -> void:
+	var market := Market.new()
+	market.reset(2)
+	market.enter([0, 0, 0, 0, 0, 0, 0, 0, 0, MELON, MELON, Orange.KIND])
+	market.toggle_recipe(Market.Recipe.WATERMELON)
+	market.toggle_recipe(Market.Recipe.MELON)
+	market.open()
+	market.serve(Market.Recipe.MELON)
+	check(market.order_state(Market.Recipe.MELON) == Market.OrderState.PREPARING
+		and not market.serve(Market.Recipe.MELON) and market.stock.count(MELON) == 1,
+		"the active drink already uses Day 2's sole special order even with extra melon")
+	check(not market.serve(Market.Recipe.ORANGE) and market.stock.count(Orange.KIND) == 1,
+		"an unselected recipe cannot claim the waiting slot")
+	market.serve(Market.Recipe.WATERMELON)
+	market.step(9.0)
+	check(market.sold == [1, 1, 0] and market.order_state(Market.Recipe.MELON) == Market.OrderState.FILLED,
+		"the demand cap remains filled when the queue drains")
+	for i in range(5):
+		market.serve(Market.Recipe.WATERMELON)
+		market.step(2.0)
+	market.serve(Market.Recipe.WATERMELON)
+	check(market.sold[0] == 6 and market.stock.count(0) > 0 and not market.serve(Market.Recipe.WATERMELON),
+		"six sold plus the current juice reserve the seventh and final order")
+	market.reset()
+	check(market.active_recipe == -1 and market.queued_recipe == -1 and market.remaining == 0.0,
+		"reset clears work in progress and the waiting slot")
 
 func check_ingredient_forecast() -> void:
 	var market := Market.new()
@@ -808,6 +850,7 @@ func run() -> void:
 	check_ingredient_forecast()
 	check_menu_shortage(game)
 	check_service_buttons(game)
+	check_queue_demand()
 	check_preparation(game)
 	check_harvest_target(game)
 	check_seed_guard(game)
@@ -831,7 +874,7 @@ func run() -> void:
 	var home: Vector2 = game.player
 	key(game, KEY_Q)
 	check(night.active_recipe == 0 and game.stock == 3 and night.gross == 0, "one service reserves one watermelon before earning sales")
-	check(not game.pick_night_recipe(0) and not game.advance_night(), "in-flight work prevents duplicate reservations or close")
+	check(not game.advance_night(), "in-flight work prevents close before the sale")
 	game.set_paused(true)
 	game._physics_process(20.0)
 	check(night.active_recipe == 0 and night.gross == 0 and ui.pause_button.text == "RESUME", "night work waits through a pause")
@@ -975,7 +1018,7 @@ func run() -> void:
 			var panel: Rect2 = layout_game.waypoint_bounds(ThemeDB.fallback_font, marker)
 			signs_fit = signs_fit and safe_playfield.encloses(transform * panel)
 		check(signs_fit, "all route markers are visible below the HUD at expedition spawn at %s" % size)
-		deliver(layout_game, [0, MELON, Orange.KIND])
+		deliver(layout_game, [0, 0, MELON, Orange.KIND])
 		await process_frame
 		await process_frame
 		check(bounds.encloses(pane.recipe_cards[2].get_global_rect()) and bounds.encloses(pane.pause_button.get_global_rect()),
@@ -985,21 +1028,22 @@ func run() -> void:
 		key(layout_game, KEY_T)
 		await process_frame
 		await process_frame
-		check(pane.detail.text == "Menu short: 10 watermelon · 2 orange"
+		check(pane.detail.text == "Menu short: 9 watermelon · 2 orange"
 			and bounds.encloses(pane.market_content.get_global_rect()) and not pane.action_button.disabled,
 			"the combined shortage and all three selected menus fit before opening at %s" % size)
 		key(layout_game, KEY_ENTER)
 		key(layout_game, KEY_T)
+		key(layout_game, KEY_Q)
 		await process_frame
 		await process_frame
 		var service_fits: bool = bounds.encloses(pane.pause_button.get_global_rect())
 		for button in pane.recipe_buttons:
 			service_fits = (service_fits and button.is_visible_in_tree() and button.disabled
 				and bounds.encloses(button.get_global_rect()))
-		check(service_fits and pane.recipe_buttons[1].text == "NEEDS INGREDIENTS"
+		check(service_fits and pane.recipe_buttons[0].text == "QUEUED" and pane.recipe_buttons[1].text == "NEEDS INGREDIENTS"
 			and pane.recipe_buttons[2].text == "PREPARING…",
-			"three live service states fit with the preparation meter at %s" % size)
-		layout_game._physics_process(2.0)
+			"queued, missing and preparing drinks fit with the preparation meter at %s" % size)
+		layout_game._physics_process(3.0)
 		await process_frame
 		await process_frame
 		check(bounds.encloses(pane.market_content.get_global_rect()) and pane.detail.text == "No orders available"

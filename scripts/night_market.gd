@@ -7,7 +7,7 @@ const RollingOrange = preload("res://scripts/rolling_orange.gd")
 
 enum Phase { OFF, MENU, SERVICE, CLOSED }
 enum Recipe { WATERMELON, MELON, ORANGE }
-enum OrderState { UNAVAILABLE, READY, PREPARING, MIXER_BUSY, FILLED, MISSING_INGREDIENTS }
+enum OrderState { UNAVAILABLE, READY, QUEUE_NEXT, PREPARING, QUEUED, QUEUE_FULL, FILLED, MISSING_INGREDIENTS }
 
 const FEES := [10, 12, 20]
 const DAYS := 3
@@ -31,6 +31,7 @@ var selected: Array[bool] = [false, false, false]
 var sold: Array[int] = [0, 0, 0]
 var gross := 0
 var active_recipe := -1
+var queued_recipe := -1
 var remaining := 0.0
 
 func reset(day_number := 1) -> void:
@@ -43,6 +44,7 @@ func reset(day_number := 1) -> void:
 	sold.fill(0)
 	gross = 0
 	active_recipe = -1
+	queued_recipe = -1
 	remaining = 0.0
 
 func enter(safe_stock: Array[int]) -> bool:
@@ -98,16 +100,23 @@ func open() -> bool:
 func order_state(recipe: int) -> OrderState:
 	if phase != Phase.SERVICE or not offers(recipe) or not selected[recipe]:
 		return OrderState.UNAVAILABLE
-	if active_recipe == recipe:
+	if queued_recipe == recipe:
+		return OrderState.QUEUED
+	var preparing := active_recipe == recipe
+	var at_limit: bool = sold[recipe] + int(preparing) >= demand[recipe]
+	var has_stock := portions(recipe) > 0
+	if preparing and (at_limit or not has_stock or queued_recipe != -1):
 		return OrderState.PREPARING
-	if sold[recipe] >= demand[recipe]:
+	if at_limit:
 		return OrderState.FILLED
-	if portions(recipe) == 0:
+	if not has_stock:
 		return OrderState.MISSING_INGREDIENTS
-	return OrderState.MIXER_BUSY if active_recipe != -1 else OrderState.READY
+	if queued_recipe != -1:
+		return OrderState.QUEUE_FULL
+	return OrderState.QUEUE_NEXT if active_recipe != -1 else OrderState.READY
 
 func can_serve(recipe: int) -> bool:
-	return order_state(recipe) == OrderState.READY
+	return order_state(recipe) in [OrderState.READY, OrderState.QUEUE_NEXT]
 
 func serve(recipe: int) -> bool:
 	if not can_serve(recipe):
@@ -116,8 +125,11 @@ func serve(recipe: int) -> bool:
 	var extra: int = EXTRA_FRUIT[recipe]
 	if extra != -1:
 		stock.erase(extra)
-	active_recipe = recipe
-	remaining = duration(recipe)
+	if active_recipe == -1:
+		active_recipe = recipe
+		remaining = duration(recipe)
+	else:
+		queued_recipe = recipe
 	return true
 
 func price(recipe: int) -> int:
@@ -128,14 +140,16 @@ func duration(recipe: int) -> float:
 	return MIX_TIMES[recipe] + Production.SALE_SECONDS + extra
 
 func step(delta: float) -> void:
-	if active_recipe == -1 or delta <= 0.0:
-		return
-	remaining = maxf(0.0, remaining - delta)
-	if remaining <= 0.000001:
+	while active_recipe != -1 and delta > 0.0:
+		if delta < remaining - 0.000001:
+			remaining -= delta
+			return
+		delta -= remaining
 		sold[active_recipe] += 1
 		gross += price(active_recipe)
-		active_recipe = -1
-		remaining = 0.0
+		active_recipe = queued_recipe
+		queued_recipe = -1
+		remaining = duration(active_recipe) if active_recipe != -1 else 0.0
 
 func close() -> bool:
 	if active_recipe != -1:

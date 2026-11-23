@@ -299,11 +299,13 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 		elif serving:
 			description = "Served %d/%d  ·  Stock for %d" % [market.sold[i], market.demand[i], market.portions(i)]
 			var order := market.order_state(i)
-			button.disabled = paused or order != Market.OrderState.READY
+			button.disabled = paused or order not in [Market.OrderState.READY, Market.OrderState.QUEUE_NEXT]
 			match order:
 				Market.OrderState.READY: button.text = "%s / SERVE ORDER" % key_for(i)
+				Market.OrderState.QUEUE_NEXT: button.text = "%s / QUEUE NEXT" % key_for(i)
 				Market.OrderState.PREPARING: button.text = "PREPARING…"
-				Market.OrderState.MIXER_BUSY: button.text = "MIXER BUSY"
+				Market.OrderState.QUEUED: button.text = "PREPARING · NEXT QUEUED" if market.active_recipe == i else "QUEUED"
+				Market.OrderState.QUEUE_FULL: button.text = "QUEUE FULL"
 				Market.OrderState.FILLED: button.text = "ORDERS FILLED"
 				Market.OrderState.MISSING_INGREDIENTS: button.text = "NEEDS INGREDIENTS"
 		button.present(drink_art[i], name_and_price, description + "\n" + button.text, market.selected[i], button.disabled)
