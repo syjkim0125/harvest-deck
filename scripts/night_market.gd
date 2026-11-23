@@ -61,11 +61,11 @@ func portions(recipe: int) -> int:
 	var extra: int = EXTRA_FRUIT[recipe]
 	return watermelon if extra == -1 else mini(watermelon, stock.count(extra))
 
-func missing_ingredients(safe_stock: Array[int]) -> Dictionary:
+func missing_ingredients(safe_stock: Array[int], selected_only := false) -> Dictionary:
 	# Every order uses one watermelon, including both specials.
 	var required: Dictionary = {0: 0}
 	for recipe in range(demand.size()):
-		if not offers(recipe):
+		if not offers(recipe) or (selected_only and not selected[recipe]):
 			continue
 		required[0] += demand[recipe]
 		var extra: int = EXTRA_FRUIT[recipe]

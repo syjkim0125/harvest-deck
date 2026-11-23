@@ -12,6 +12,7 @@ const GOLD := Color("f7ce88")
 const LOSS := Color("ffb4a1")
 const SHORT_RECIPE_NAMES := ["Juice", "Melon", "Fizz"]
 const STOCK_NAMES := ["watermelon", "melon", "orange"]
+const INGREDIENT_NAMES := {0: STOCK_NAMES[0], SpineMelon.KIND: STOCK_NAMES[1], RollingOrange.KIND: STOCK_NAMES[2]}
 
 signal recipe_pressed(recipe: int)
 signal action_pressed
@@ -283,10 +284,18 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 	progress.value = 100.0 * (1.0 - market.remaining / market.duration(market.active_recipe)) if preparing else 0.0
 	action_button.disabled = paused
 	pause_button.text = "RESUME" if paused else "PAUSE"
+	var detail_size := 14 if picking else 16
+	if detail.get_theme_font_size("font_size") != detail_size:
+		detail.add_theme_font_size_override("font_size", detail_size)
 	if picking:
-		detail.text = "Set tonight’s menu" if market.has_available_menu() else "No recipes available"
-		action_button.text = "ENTER / OPEN MARKET" if market.has_available_menu() else "ENTER / CLOSE WITHOUT SALES"
-		action_button.disabled = paused or (market.has_available_menu() and not market.selected.has(true))
+		var has_menu := market.has_available_menu()
+		var has_selection := market.selected.has(true)
+		detail.text = "Set tonight’s menu" if has_menu else "No recipes available"
+		if has_selection:
+			var shortage := ingredient_list(market.missing_ingredients(market.stock, true))
+			detail.text = "Selected orders covered" if shortage.is_empty() else "Menu short: " + shortage
+		action_button.text = "ENTER / OPEN MARKET" if has_menu else "ENTER / CLOSE WITHOUT SALES"
+		action_button.disabled = paused or (has_menu and not has_selection)
 	elif serving:
 		detail.text = "Take an order" if market.can_serve(0) or market.can_serve(1) or market.can_serve(2) else "No orders available"
 		if preparing:
@@ -341,6 +350,14 @@ func unfilled_text(demand: Array, sold: Array) -> String:
 		if missed > 0:
 			orders.append("%d %s" % [missed, SHORT_RECIPE_NAMES[recipe].to_lower()])
 	return "All orders served" if orders.is_empty() else "Unfilled: " + " · ".join(orders)
+
+static func ingredient_list(counts: Dictionary) -> String:
+	var items := PackedStringArray()
+	for kind in INGREDIENT_NAMES:
+		var amount: int = counts.get(kind, 0)
+		if amount > 0:
+			items.append("%d %s" % [amount, INGREDIENT_NAMES[kind]])
+	return " · ".join(items)
 
 func leftover_text(counts: Array) -> String:
 	var fruit := PackedStringArray()

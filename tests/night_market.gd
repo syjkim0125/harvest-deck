@@ -541,6 +541,34 @@ func check_orchard_waypoints(game) -> void:
 	check(game.orchard_waypoints().is_empty(), "the comparison lab has no expedition markers")
 	game.switch_mode()
 
+func check_menu_shortage(game) -> void:
+	deliver(game, [0, 0, 0, 0, 0, MELON])
+	var ui = game.night_view
+	check(ui.detail.text == "Set tonight’s menu" and ui.action_button.disabled,
+		"menu planning starts with selection guidance")
+	ui.recipe_buttons[Market.Recipe.WATERMELON].pressed.emit()
+	check(ui.detail.text == "Selected orders covered",
+		"five watermelons can cover all five selected juice orders")
+	key(game, KEY_W)
+	check(ui.detail.text == "Menu short: 3 watermelon · 2 melon" and not ui.action_button.disabled,
+		"adding the special counts the same five watermelons against eight drinks and allows partial service")
+	key(game, KEY_Q)
+	check(ui.detail.text == "Menu short: 2 melon" and game.stock == 6,
+		"removing the juice frees its planned watermelon demand without changing stock")
+	key(game, KEY_W)
+	check(ui.detail.text == "Set tonight’s menu" and ui.action_button.disabled,
+		"removing the final menu restores the selection guidance")
+	key(game, KEY_Q)
+	key(game, KEY_W)
+	key(game, KEY_ENTER)
+	key(game, KEY_W)
+	game._physics_process(2.0)
+	key(game, KEY_Q)
+	game._physics_process(2.0)
+	check(game.night.sold == [1, 1, 0] and game.night.gross == 17 and game.stock == 3,
+		"a projected shortage leaves both selected recipes sellable while ingredients last")
+	game.reset_run()
+
 func check_service_buttons(game) -> void:
 	deliver(game, [0, 0, MELON])
 	var ui = game.night_view
@@ -599,6 +627,7 @@ func run() -> void:
 		quit(failures)
 		return
 	check_ingredient_forecast()
+	check_menu_shortage(game)
 	check_service_buttons(game)
 	check_preparation(game)
 	check_seed_guard(game)
@@ -766,6 +795,11 @@ func run() -> void:
 		key(layout_game, KEY_Q)
 		key(layout_game, KEY_W)
 		key(layout_game, KEY_T)
+		await process_frame
+		await process_frame
+		check(pane.detail.text == "Menu short: 10 watermelon · 2 orange"
+			and bounds.encloses(pane.market_content.get_global_rect()) and not pane.action_button.disabled,
+			"the combined shortage and all three selected menus fit before opening at %s" % size)
 		key(layout_game, KEY_ENTER)
 		key(layout_game, KEY_T)
 		await process_frame
