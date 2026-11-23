@@ -37,6 +37,7 @@ const CAPACITY: int = 40
 const DEPOT_RADIUS := 85.0
 const EAST_DROP_POINT := Vector2(1280, 542)
 const EAST_DROP_RADIUS := 60.0
+const RETURN_GUIDE_SIZE := Vector2(90, 30)
 const CARGO_SPACING: float = 3.0
 const HUD_HEIGHT: int = 150
 const BOUNDS = Rect2(40, 100, 1480, 1040)
@@ -76,6 +77,7 @@ var pause_button: Button
 var shake_button: Button
 var mode_button: Button
 var return_button: Button
+var return_guide: Control
 var orchard_counter: TextureButton
 var dash_button: Button
 var dash_left := 0.0
@@ -209,6 +211,11 @@ func _ready() -> void:
 	dash_button.tooltip_text = "Dash once for %d battery." % DayHarvest.DASH_COST
 	dash_button.pressed.connect(try_dash)
 	layer.add_child(dash_button)
+	return_guide = Control.new()
+	return_guide.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layer.add_child(return_guide)
+	return_guide.draw.connect(draw_return_guide)
+	return_guide.hide()
 	var night_layer := CanvasLayer.new()
 	night_layer.layer = 2
 	add_child(night_layer)
@@ -568,6 +575,7 @@ func update_day_hud() -> void:
 		DayHarvest.Card.LIMITED_COCKTAIL: hud.text += "   COCKTAIL"
 		DayHarvest.Card.WHEEL_CHOCK: hud.text += "   CHOCK"
 	hud.modulate = Color("ffbc82") if charge_percent <= DayHarvest.SEED_COST else Color.WHITE
+	var goal_covered := false
 	if day_finished():
 		var hint := "HARVEST ENDED • Safe stock secured"
 		if day.outcome == DayHarvest.Outcome.EXHAUSTED:
@@ -575,14 +583,16 @@ func update_day_hud() -> void:
 		status.text = hint + "\nContinue to the night market"
 	else:
 		var drop_hint := "East pad: unload · Main depot: return" if has_east_drop() else "Mint pad: unload • Ring drains battery"
-		status.text = harvest_forecast() + "\n" + drop_hint + "\nWASD / arrows / drag • auto-cut"
+		var shortage := NightMarketView.ingredient_list(night.missing_ingredients(production.raw, harvest_target))
+		goal_covered = shortage.is_empty()
+		status.text = harvest_forecast(shortage) + "\n" + drop_hint + "\nWASD / arrows / drag • auto-cut"
+	update_return_guide(goal_covered)
 	return_button.text = "ENTER / NIGHT MENU" if day_finished() else "ENTER / END HARVEST"
 	if dash_button.visible:
 		update_dash_button()
 	return_button.disabled = paused or (not day_finished() and (not cargo.is_empty() or player.distance_to(depot) >= DEPOT_RADIUS))
 
-func harvest_forecast() -> String:
-	var shortage := NightMarketView.ingredient_list(night.missing_ingredients(production.raw, harvest_target))
+func harvest_forecast(shortage: String) -> String:
 	if harvest_target == NightMarket.ALL_RECIPES:
 		return "Tonight: all orders covered" if shortage.is_empty() else "Need: " + shortage
 	var target: String = NightMarketView.SHORT_RECIPE_NAMES[harvest_target]
@@ -598,6 +608,41 @@ func harvest_forecast() -> String:
 			return target + " · unload to cover orders"
 	return "%s need: %s" % [target, shortage]
 
+func update_return_guide(goal_covered: bool) -> void:
+	var bounds := Rect2()
+	if goal_covered and not paused:
+		bounds = return_guide_bounds(get_global_transform_with_canvas() * depot)
+	return_guide.visible = bounds.has_area()
+	if return_guide.visible:
+		return_guide.position = bounds.position
+		return_guide.size = bounds.size
+		return_guide.queue_redraw()
+
+func return_guide_bounds(depot_screen: Vector2) -> Rect2:
+	var viewport_size := get_viewport_rect().size
+	var playfield := Rect2(0, hud_height, viewport_size.x, viewport_size.y - hud_height)
+	var half_travel := (playfield.size - RETURN_GUIDE_SIZE) * 0.5 - Vector2(10, 10)
+	if playfield.has_point(depot_screen) or half_travel.x <= 0 or half_travel.y <= 0:
+		return Rect2()
+	var origin := playfield.get_center()
+	var offset := depot_screen - origin
+	var edge := maxf(absf(offset.x) / half_travel.x, absf(offset.y) / half_travel.y)
+	return Rect2(origin + offset / edge - RETURN_GUIDE_SIZE * 0.5, RETURN_GUIDE_SIZE)
+
+func draw_return_guide() -> void:
+	var box := Rect2(Vector2.ZERO, return_guide.size)
+	var ink := Color("b4efd2")
+	var depot_screen := get_global_transform_with_canvas() * depot
+	var axis := (depot_screen - return_guide.get_rect().get_center()).normalized()
+	var arrow := Vector2(17, box.size.y * 0.5)
+	var tip := arrow + axis * 8.0
+	return_guide.draw_rect(box, Color("213832"))
+	return_guide.draw_rect(box, ink, false, 1.0)
+	return_guide.draw_line(arrow - axis * 7.0, tip, ink, 2.0, true)
+	return_guide.draw_line(tip, tip - axis.rotated(0.62) * 7.0, ink, 2.0, true)
+	return_guide.draw_line(tip, tip - axis.rotated(-0.62) * 7.0, ink, 2.0, true)
+	return_guide.draw_string(ThemeDB.fallback_font, Vector2(31, 20), "DEPOT", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, ink)
+
 func switch_mode() -> void:
 	day_mode = not day_mode
 	hud.modulate = Color.WHITE
@@ -609,6 +654,8 @@ func day_finished() -> bool:
 
 func refresh_market_view() -> void:
 	update_orchard_counter()
+	if not day_mode or preparing_day or day_finished() or paused or night.phase != NightMarket.Phase.OFF:
+		return_guide.hide()
 	var chilled_watermelon := carryover_watermelons()
 	if preparing_day:
 		night_view.refresh_prep(night, day.card, paused, run_day, deck, run_sales - run_fees, chilled_watermelon, harvest_target)
@@ -750,6 +797,7 @@ func finish_day_at_depot() -> bool:
 	return true
 
 func conclude_day(exhausted: bool) -> void:
+	return_guide.hide()
 	dash_left = 0.0
 	day.outcome = DayHarvest.Outcome.EXHAUSTED if exhausted else DayHarvest.Outcome.RETURNED
 	if exhausted:

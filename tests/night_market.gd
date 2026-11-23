@@ -263,6 +263,7 @@ func check_reward_continuation(game) -> void:
 	key(game, KEY_V)
 	check(game.day.card == Day.Card.LIMITED_COCKTAIL and night.price(1) == 15 and "6 × $15" in ui.forecast_buttons[1].text,
 		"the second reward updates the live forecast and actual sale price")
+	game.toggle_harvest_target(Market.Recipe.MELON)
 	key(game, KEY_ENTER)
 	walk_to(game, Vector2(510, 690))
 	game.simulate(0.70, Vector2.ZERO)
@@ -289,6 +290,10 @@ func check_reward_continuation(game) -> void:
 	game.simulate(1.40, Vector2.ZERO)
 	check(game.cargo.is_empty() and game.production.raw.count(MELON) == 6 and not game.finish_day_at_depot(),
 		"the east drop protects all six pieces before the player returns to the main depot")
+	game.camera.force_update_scroll()
+	game.update_day_hud()
+	check(game.return_guide.visible and game.status.text.begins_with("Melon covered · return to depot"),
+		"the east delivery points back to the main depot once all six specials are covered")
 	walk_to(game, game.depot)
 	game.simulate(2.0, Vector2.ZERO)
 	key(game, KEY_ENTER)

@@ -62,6 +62,41 @@ func check_east_drop(game) -> void:
 	check(game.cargo == [0] and game.stock == 0, "the comparison Lab has no east unloading station")
 	game.switch_mode()
 
+func check_return_guide(game: Game, size: Vector2i) -> void:
+	var field := Rect2(0, game.hud_height, size.x, size.y - game.hud_height)
+	for axis in [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN, Vector2(1, 1).normalized()]:
+		var projected: Vector2 = field.get_center() + axis * 3000.0
+		var marker := game.return_guide_bounds(projected)
+		check(marker.has_area() and field.encloses(marker)
+			and (marker.get_center() - field.get_center()).normalized().is_equal_approx(axis),
+			"the guide stays below the HUD and points along %s at %s" % [axis, size])
+	check(not game.return_guide_bounds(field.get_center()).has_area(),
+		"a depot already visible in the playfield needs no marker at %s" % size)
+	game.toggle_harvest_target(game.NightMarket.Recipe.WATERMELON)
+	game.begin_harvest()
+	game.camera.position = Vector2(1350, 960)
+	game.camera.force_update_scroll()
+	game.cargo.assign([0, 0, 0, 0, 0])
+	game.update_day_hud()
+	check(not game.return_guide.visible, "ingredients in the bag cannot trigger the return guide")
+	for piece in range(5):
+		game.production.deposit(0)
+	game.cargo.clear()
+	game.update_day_hud()
+	check(game.return_guide.visible and game.return_guide.mouse_filter == Control.MOUSE_FILTER_IGNORE
+		and field.encloses(game.return_guide.get_rect()), "safe stock shows the guide without intercepting movement input")
+	game.set_paused(true)
+	check(not game.return_guide.visible, "pause hides the guide")
+	game.set_paused(false)
+	game.player = game.depot
+	game.camera.position = game.camera_follow_target()
+	game.camera.force_update_scroll()
+	game.update_day_hud()
+	check(not game.return_guide.visible and not game.return_button.disabled,
+		"the guide disappears when the depot is visible and return is available")
+	game.finish_day_at_depot()
+	check(not game.return_guide.visible, "finishing harvest leaves no return guide")
+
 func run() -> void:
 	var game = load("res://main.tscn").instantiate()
 	root.add_child(game)
@@ -188,6 +223,8 @@ func run() -> void:
 			for j in range(i):
 				valid = valid and not rect.intersects(buttons[j].get_rect())
 		check(valid, "day HUD controls fit without overlap at %s" % size)
+		layout_game.reset_run()
+		check_return_guide(layout_game, size)
 		view.queue_free()
 		await process_frame
 
