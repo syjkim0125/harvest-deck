@@ -4,6 +4,8 @@ const Market = preload("res://scripts/night_market.gd")
 const Day = preload("res://scripts/day_harvest.gd")
 const SpineMelon = preload("res://scripts/spine_melon.gd")
 const RollingOrange = preload("res://scripts/rolling_orange.gd")
+const IllustratedAction = preload("res://scripts/illustrated_action.gd")
+const Art = preload("res://scripts/market_art.gd")
 const INK := Color("101e29")
 const PAPER := Color("f2f5ee")
 const MUTED := Color("afc6cb")
@@ -23,19 +25,18 @@ signal start_pressed
 
 var market_content: VBoxContainer
 var prep_content: VBoxContainer
-var loadout_buttons: Array[Button] = []
-var dash_kit_button: Button
+var loadout_buttons: Array[IllustratedAction] = []
+var dash_kit_button: IllustratedAction
 var prep_title: Label
 var forecast_title: Label
 var forecast_labels: Array[Label] = []
 var route_hint: Label
-var deck_buttons: Array[Button] = []
+var deck_buttons: Array[IllustratedAction] = []
 var available_cards: Array[Day.Card] = []
 var reward_title: Label
 var reward_options: Array = []
-var reward_descriptions: Array[Label] = []
 var reward_content: VBoxContainer
-var reward_buttons: Array[Button] = []
+var reward_buttons: Array[IllustratedAction] = []
 var start_button: Button
 var prep_pause_button: Button
 var title: Label
@@ -47,14 +48,17 @@ var night_headings: Array[Label] = []
 var night_breakdowns: Array[Label] = []
 var progress: ProgressBar
 var recipes: VBoxContainer
+var stall_art: TextureRect
 var recipe_cards: Array[PanelContainer] = []
-var recipe_labels: Array[Label] = []
-var recipe_titles: Array[Label] = []
-var recipe_buttons: Array[Button] = []
+var recipe_buttons: Array[IllustratedAction] = []
+var drink_art: Array[AtlasTexture] = []
+var card_art: Array[AtlasTexture] = []
 var action_button: Button
 var pause_button: Button
 
 func _ready() -> void:
+	for i in range(Day.Card.DASH_KIT + 1):
+		card_art.append(Art.card(i))
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_theme_stylebox_override("panel", surface(INK))
 	var center := CenterContainer.new()
@@ -73,6 +77,13 @@ func _ready() -> void:
 	market_content = content
 	build_prep(pages)
 	title = label(content, "Night Market", 32, PAPER)
+	stall_art = TextureRect.new()
+	stall_art.texture = Art.stall()
+	stall_art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	stall_art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	stall_art.custom_minimum_size.y = 72
+	stall_art.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	content.add_child(stall_art)
 	detail = label(content, "", 16, GOLD)
 	inventory = label(content, "", 14, MUTED)
 	recipes = VBoxContainer.new()
@@ -80,20 +91,14 @@ func _ready() -> void:
 	content.add_child(recipes)
 	for i in range(Market.NAMES.size()):
 		var card := PanelContainer.new()
-		var card_surface := surface(Color("1b303d"), 4)
-		card_surface.set_content_margin(SIDE_TOP, 2)
-		card_surface.set_content_margin(SIDE_BOTTOM, 2)
-		card.add_theme_stylebox_override("panel", card_surface)
+		card.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		card.add_theme_stylebox_override("panel", StyleBoxEmpty.new())
 		recipes.add_child(card)
 		recipe_cards.append(card)
-		var recipe := VBoxContainer.new()
-		recipe.add_theme_constant_override("separation", 1)
-		card.add_child(recipe)
-		recipe_titles.append(label(recipe, "", 17, MINT if i == 0 else GOLD))
-		recipe_labels.append(label(recipe, "", 13, MUTED))
-		var button := action(recipe)
+		var button := illustrated_action(card, 62.0)
 		button.pressed.connect(func(): recipe_pressed.emit(i))
 		recipe_buttons.append(button)
+		drink_art.append(Art.drink(i))
 	ledger = label(content, "", 15, PAPER)
 	build_run_breakdown(content)
 	progress = ProgressBar.new()
@@ -106,13 +111,12 @@ func _ready() -> void:
 	content.add_child(reward_content)
 	reward_title = label(reward_content, "", 16, GOLD)
 	for i in range(Day.REWARD_OFFERS[0].size()):
-		var button := action(reward_content)
+		var button := illustrated_action(reward_content)
 		button.pressed.connect(func():
 			if i < reward_options.size():
 				reward_pressed.emit(reward_options[i])
 		)
 		reward_buttons.append(button)
-		reward_descriptions.append(label(reward_content, "", 13, MUTED))
 	action_button = action(content)
 	action_button.add_theme_stylebox_override("normal", surface(Color("235246"), 6))
 	action_button.add_theme_stylebox_override("hover", surface(Color("316a5b"), 6))
@@ -148,20 +152,16 @@ func build_prep(parent: Control) -> void:
 	label(prep_content, "Special: 1 watermelon + 1 spine melon", 13, MUTED)
 	route_hint = label(prep_content, "", 13, MUTED)
 	label(prep_content, "Choose today’s loadout", 16, GOLD)
-	var standard := action(prep_content)
-	standard.custom_minimum_size.y = 48
+	var standard := illustrated_action(prep_content)
 	standard.pressed.connect(func(): loadout_pressed.emit(Day.Card.STANDARD))
 	loadout_buttons.append(standard)
-	var wedge := action(prep_content)
-	wedge.custom_minimum_size.y = 48
+	var wedge := illustrated_action(prep_content)
 	wedge.pressed.connect(func(): loadout_pressed.emit(Day.Card.WEDGE))
 	loadout_buttons.append(wedge)
-	dash_kit_button = action(prep_content)
-	dash_kit_button.custom_minimum_size.y = 48
+	dash_kit_button = illustrated_action(prep_content)
 	dash_kit_button.pressed.connect(func(): loadout_pressed.emit(Day.Card.DASH_KIT))
 	for i in range(2):
-		var button := action(prep_content)
-		button.custom_minimum_size.y = 48
+		var button := illustrated_action(prep_content)
 		button.pressed.connect(func(): loadout_pressed.emit(available_cards[i]))
 		deck_buttons.append(button)
 	start_button = action(prep_content)
@@ -209,18 +209,16 @@ func refresh_prep(market: Market, card: Day.Card, paused: bool, run_day: int, de
 		button.visible = i < deck.size()
 		if button.visible:
 			var reward := deck[i]
-			button.text = "%s / %s%s\n%s" % ["C" if i == 0 else "V", reward_name(reward),
-				"   ✓" if card == reward else "", reward_description(reward)]
-			button.disabled = paused or not Day.card_available(reward, run_day)
-	loadout_buttons[Day.Card.STANDARD].text = "Q / STANDARD KIT%s\n1 charge per cut" % ("   ✓" if card == Day.Card.STANDARD else "")
-	loadout_buttons[Day.Card.WEDGE].text = "W / CUTTING WEDGE%s\nMelon opening +%.1fs once  ·  %.2f/cut" % [
-		"   ✓" if card == Day.Card.WEDGE else "", Day.WEDGE_OPEN_BONUS, Day.WEDGE_CUT_COST]
-	for button in loadout_buttons:
-		button.disabled = paused
+			present_card(button, reward, "%s / %s" % ["C" if i == 0 else "V", reward_name(reward)],
+				reward_description(reward), card == reward, paused or not Day.card_available(reward, run_day))
+	present_card(loadout_buttons[Day.Card.STANDARD], Day.Card.STANDARD, "Q / STANDARD KIT",
+		"1 charge per cut", card == Day.Card.STANDARD, paused)
+	present_card(loadout_buttons[Day.Card.WEDGE], Day.Card.WEDGE, "W / CUTTING WEDGE",
+		"Melon opening +%.1fs once  ·  %.2f/cut" % [Day.WEDGE_OPEN_BONUS, Day.WEDGE_CUT_COST],
+		card == Day.Card.WEDGE, paused)
 	dash_kit_button.visible = Day.card_available(Day.Card.DASH_KIT, run_day)
-	dash_kit_button.disabled = paused
-	dash_kit_button.text = "B / DASH KIT%s\nSpace: one %.2fs dash for %d charge" % [
-		"   ✓" if card == Day.Card.DASH_KIT else "", Day.DASH_SECONDS, Day.DASH_COST]
+	present_card(dash_kit_button, Day.Card.DASH_KIT, "B / DASH KIT",
+		"Space: one %.2fs dash for %d charge" % [Day.DASH_SECONDS, Day.DASH_COST], card == Day.Card.DASH_KIT, paused)
 	start_button.disabled = paused
 	prep_pause_button.text = "RESUME" if paused else "PAUSE"
 
@@ -235,6 +233,7 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 	var serving := market.phase == Market.Phase.SERVICE
 	var closed := market.phase == Market.Phase.CLOSED
 	var final_night := run_day == Market.DAYS
+	stall_art.visible = picking or serving
 	run_breakdown.visible = closed and final_night
 	inventory.visible = not run_breakdown.visible
 	title.text = "Day %d Closed" % run_day if closed else "Night %d Market" % run_day
@@ -245,12 +244,10 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 		for i in range(reward_buttons.size()):
 			var button := reward_buttons[i]
 			button.visible = i < reward_options.size()
-			reward_descriptions[i].visible = button.visible
 			if button.visible:
 				var card: Day.Card = reward_options[i]
-				reward_descriptions[i].text = reward_description(card)
-				button.text = "%s / %s%s" % [key_for(i), reward_name(card), "   ✓" if card == reward else ""]
-				button.disabled = paused
+				present_card(button, card, "%s / %s" % [key_for(i), reward_name(card)],
+					reward_description(card), card == reward, paused)
 	inventory.text = "Watermelon %d   Spine melon %d" % [market.stock.count(0), market.stock.count(SpineMelon.KIND)]
 	var citrus_night := market.offers(Market.Recipe.ORANGE)
 	if citrus_night:
@@ -258,18 +255,19 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 	recipes.visible = picking or serving
 	for i in range(recipe_buttons.size()):
 		var button := recipe_buttons[i]
-		recipe_titles[i].text = "%s  ·  $%d" % [Market.NAMES[i], market.price(i)]
+		var name_and_price := "%s  ·  $%d" % [Market.NAMES[i], market.price(i)]
+		var description: String
 		recipe_cards[i].visible = market.offers(i) and (picking or (serving and market.selected[i]))
 		if not recipe_cards[i].visible:
 			continue
 		if picking:
-			recipe_labels[i].text = "%s  ·  Up to %d" % [Market.INGREDIENTS[i], market.demand[i]]
+			description = "%s  ·  Up to %d" % [Market.INGREDIENTS[i], market.demand[i]]
 			button.text = "%s / %s" % [key_for(i), "REMOVE FROM MENU" if market.selected[i] else "ADD TO MENU"]
 			if market.portions(i) == 0:
 				button.text = "NEEDS INGREDIENTS"
 			button.disabled = paused or market.portions(i) == 0
 		elif serving:
-			recipe_labels[i].text = "Served %d / %d   ·   Stock for %d" % [market.sold[i], market.demand[i], market.portions(i)]
+			description = "Served %d/%d  ·  Stock for %d" % [market.sold[i], market.demand[i], market.portions(i)]
 			var order := market.order_state(i)
 			button.disabled = paused or order != Market.OrderState.READY
 			match order:
@@ -278,6 +276,7 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 				Market.OrderState.MIXER_BUSY: button.text = "MIXER BUSY"
 				Market.OrderState.FILLED: button.text = "ORDERS FILLED"
 				Market.OrderState.MISSING_INGREDIENTS: button.text = "NEEDS INGREDIENTS"
+		button.present(drink_art[i], name_and_price, description + "\n" + button.text, market.selected[i], button.disabled)
 	ledger.text = "Sales  $%d     Operating fee  $%d" % [market.gross, market.fee]
 	var preparing := serving and market.active_recipe != -1
 	progress.visible = serving
@@ -379,6 +378,17 @@ func label(parent: Control, value: String, font_size: int, color: Color) -> Labe
 	text.add_theme_color_override("font_color", color)
 	parent.add_child(text)
 	return text
+
+func illustrated_action(parent: Control, height := 51.0) -> IllustratedAction:
+	var button := IllustratedAction.new()
+	parent.add_child(button)
+	button.custom_minimum_size.y = height
+	return button
+
+func present_card(button: IllustratedAction, card: Day.Card, title: String, description: String,
+	selected: bool, unavailable: bool) -> void:
+	button.text = title + ("   ✓" if selected else "")
+	button.present(card_art[card], button.text, description, selected, unavailable)
 
 func action(parent: Control) -> Button:
 	var button := Button.new()

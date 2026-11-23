@@ -1,16 +1,17 @@
 extends Node2D
 
-const WATERMELON = preload("res://assets/watermelon-v1.png")
-const WATERMELON_FRAME = Rect2(105, 57, 1016, 1190)
+const WATERMELON = preload("res://assets/watermelon-v2.png")
+const WATERMELON_FRAME = Rect2(4, 4, 184, 184)
 const GOLDEN_FRUIT = preload("res://assets/golden-fruit-v1.png")
 const GOLDEN_FRAME = Rect2(103, 54, 1019, 1194)
 const FRUIT_SOURCE_SIZE = Vector2(1254, 1254)
-const HARVESTER_ATLAS = preload("res://assets/harvester-v1.png")
-const HARVESTER_FRONT := Rect2(4, 4, 112, 152)
-const HARVESTER_SIDE := Rect2(120, 4, 112, 152)
-const HARVESTER_BACK := Rect2(236, 4, 112, 152)
-const SAW_FRAME := Rect2(354, 4, 156, 76)
+const HARVESTER_ATLAS = preload("res://assets/harvester-v2.png")
+const HARVESTER_FRONT := Rect2(4, 4, 116, 120)
+const HARVESTER_SIDE := Rect2(132, 4, 116, 120)
+const HARVESTER_BACK := Rect2(260, 4, 116, 120)
+const SAW_FRAME := Rect2(388, 4, 116, 66)
 const SLICE_ATLAS = preload("res://assets/fruit-slices-v1.png")
+const MarketArt = preload("res://scripts/market_art.gd")
 const AvatarMotion = preload("res://scripts/avatar_motion.gd")
 const CargoView = preload("res://scripts/cargo_view.gd")
 const SawAudio = preload("res://scripts/saw_audio.gd")
@@ -72,6 +73,7 @@ var pause_button: Button
 var shake_button: Button
 var mode_button: Button
 var return_button: Button
+var orchard_counter: TextureButton
 var dash_button: Button
 var dash_left := 0.0
 var dash_direction := Vector2.ZERO
@@ -134,6 +136,16 @@ func _ready() -> void:
 	ground.floor_bounds = BOUNDS
 	ground.z_index = -1
 	add_child(ground)
+	orchard_counter = TextureButton.new()
+	orchard_counter.position = Vector2(608, 145)
+	orchard_counter.size = Vector2(144, 119)
+	orchard_counter.ignore_texture_size = true
+	orchard_counter.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+	orchard_counter.texture_normal = MarketArt.stall()
+	orchard_counter.focus_mode = Control.FOCUS_NONE
+	orchard_counter.show_behind_parent = true
+	orchard_counter.pressed.connect(open_orchard_counter)
+	add_child(orchard_counter)
 	setup_inputs()
 	camera = Camera2D.new()
 	camera.position = player
@@ -465,7 +477,9 @@ func _input(event: InputEvent) -> void:
 				impact.clear()
 				camera.offset = Vector2.ZERO
 				update_shake_button()
-			KEY_6: sprite_art = not sprite_art
+			KEY_6:
+				sprite_art = not sprite_art
+				update_orchard_counter()
 			KEY_5:
 				loop_sound = not loop_sound
 				saw_audio.silence()
@@ -532,6 +546,7 @@ func _physics_process(delta: float) -> void:
 	queue_redraw()
 
 func update_day_hud() -> void:
+	update_orchard_counter()
 	var charge_percent := ceili(day.charge)
 	hud.text = "DAY %d   BAT %d%%   BAG %d/%d" % [run_day, charge_percent, cargo.size(), CAPACITY]
 	var stock_text := "SAFE %d   MELON %d" % [stock, production.raw.count(SpineMelon.KIND)]
@@ -568,6 +583,7 @@ func day_finished() -> bool:
 	return day_mode and day.outcome != DayHarvest.Outcome.ACTIVE
 
 func refresh_market_view() -> void:
+	update_orchard_counter()
 	if preparing_day:
 		night_view.refresh_prep(night, day.card, paused, run_day, deck, run_sales - run_fees)
 	else:
@@ -605,6 +621,23 @@ func advance_day() -> bool:
 	if preparing_day:
 		return begin_harvest()
 	return enter_night() if day_finished() else finish_day_at_depot()
+
+func counter_ready() -> bool:
+	return day_mode and not paused and not preparing_day and night.phase == NightMarket.Phase.OFF and (
+		day_finished() or (cargo.is_empty() and player.distance_to(depot) < DEPOT_RADIUS))
+
+func update_orchard_counter() -> void:
+	if not is_instance_valid(orchard_counter):
+		return
+	var ready_to_open := counter_ready()
+	orchard_counter.visible = sprite_art
+	orchard_counter.disabled = not ready_to_open
+	orchard_counter.mouse_filter = Control.MOUSE_FILTER_STOP if ready_to_open else Control.MOUSE_FILTER_IGNORE
+	orchard_counter.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND if ready_to_open else Control.CURSOR_ARROW
+
+func open_orchard_counter() -> void:
+	if counter_ready() and (day_finished() or finish_day_at_depot()):
+		enter_night()
 
 func enter_night() -> bool:
 	if paused or not day_finished() or not night.enter(production.raw):
@@ -1012,12 +1045,17 @@ func make_hit_sound(broken: bool) -> AudioStreamWAV:
 	return wave
 
 func _draw() -> void:
-	draw_rect(Rect2(520, 190, 320, 72), Color("193a3e"))
-	draw_rect(Rect2(530, 180, 300, 64), Color("ecbd68"))
+	if not sprite_art:
+		draw_rect(Rect2(520, 190, 320, 72), Color("193a3e"))
+		draw_rect(Rect2(530, 180, 300, 64), Color("ecbd68"))
 	draw_circle(depot, 82, Color(0.42, 0.9, 0.72, 0.25))
 	draw_arc(depot, 82, 0, TAU, 48, Color("85e8b3"), 3)
 	var font = ThemeDB.fallback_font
-	draw_string(font, Vector2(590, 220), "SAFE STOCK / DROP" if day_mode else "JUICE / DROP ZONE", HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color("183b38"))
+	var label := "TAP STALL FOR NIGHT MARKET" if counter_ready() and sprite_art else ("SAFE STOCK / DROP" if day_mode else "JUICE / DROP ZONE")
+	var label_width := font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, 13).x
+	var sign_at := Vector2(depot.x - label_width * 0.5, 277)
+	draw_rect(Rect2(sign_at + Vector2(-7, -13), Vector2(label_width + 14, 19)), Color("253c35"))
+	draw_string(font, sign_at, label, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color("e4f3da"))
 	if not day_mode:
 		draw_shop(font)
 	for marker in orchard_waypoints():
@@ -1359,7 +1397,7 @@ func draw_avatar() -> void:
 		var frame := harvester_frame()
 		var mirror := -1.0 if frame == HARVESTER_SIDE and facing.x < 0.0 else 1.0
 		draw_set_transform(player + Vector2(0, bob), 0.0, Vector2(mirror, 1.0))
-		draw_texture_rect_region(HARVESTER_ATLAS, Rect2(-19, -45, 38, 51), frame)
+		draw_texture_rect_region(HARVESTER_ATLAS, Rect2(-19, -36, 38, 41), frame)
 		draw_set_transform(Vector2.ZERO)
 	else:
 		draw_legacy_avatar_body(bob)
@@ -1494,9 +1532,10 @@ func fruit_texture(kind: int) -> Texture2D:
 	return WATERMELON if kind == 0 else GOLDEN_FRUIT
 
 func fruit_sprite_region(kind: int) -> Rect2:
-	var source_frame = WATERMELON_FRAME if kind == 0 else GOLDEN_FRAME
-	var import_scale = fruit_texture(kind).get_size() / FRUIT_SOURCE_SIZE
-	return Rect2(source_frame.position * import_scale, source_frame.size * import_scale)
+	if kind == 0:
+		return WATERMELON_FRAME
+	var import_scale = GOLDEN_FRUIT.get_size() / FRUIT_SOURCE_SIZE
+	return Rect2(GOLDEN_FRAME.position * import_scale, GOLDEN_FRAME.size * import_scale)
 
 func fruit_sprite_rect(at: Vector2, kind: int, radius: float) -> Rect2:
 	var frame = fruit_sprite_region(kind)

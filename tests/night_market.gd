@@ -23,6 +23,19 @@ func key(game, code: int) -> void:
 	event.pressed = true
 	game._input(event)
 
+func click_at(view: Viewport, at: Vector2) -> void:
+	var motion := InputEventMouseMotion.new()
+	motion.position = at
+	motion.global_position = at
+	view.push_input(motion, true)
+	for pressed in [true, false]:
+		var event := InputEventMouseButton.new()
+		event.position = at
+		event.global_position = at
+		event.button_index = MOUSE_BUTTON_LEFT
+		event.pressed = pressed
+		view.push_input(event, true)
+
 func deliver(game, pieces: Array[int]) -> void:
 	key(game, KEY_ENTER)
 	game.player = game.depot
@@ -834,6 +847,45 @@ func run() -> void:
 			"all three final ledger rows and both actions fit at %s" % size)
 		view.queue_free()
 		await process_frame
+
+	var art_view := SubViewport.new()
+	art_view.size = Vector2i(512, 1108)
+	root.add_child(art_view)
+	var art_game = load("res://main.tscn").instantiate()
+	art_view.add_child(art_game)
+	art_game.set_physics_process(false)
+	art_game.sound_on = false
+	await process_frame
+	await process_frame
+	var art_ui = art_game.night_view
+	var wedge: Control = art_ui.loadout_buttons[Day.Card.WEDGE].artwork
+	click_at(art_view, wedge.get_global_rect().get_center())
+	check(art_game.day.card == Day.Card.WEDGE, "clicking the cutting wedge illustration equips its card")
+	key(art_game, KEY_ENTER)
+	check(art_game.orchard_counter.mouse_filter == Control.MOUSE_FILTER_IGNORE, "a distant stall leaves the orchard gesture available")
+	art_game.player = art_game.depot
+	art_game.cargo.assign([0])
+	art_game.simulate(0.08, Vector2.ZERO)
+	art_game.camera.position = art_game.camera_follow_target()
+	art_game.camera.force_update_scroll()
+	art_game.update_day_hud()
+	var stall: TextureButton = art_game.orchard_counter
+	click_at(art_view, stall.get_global_transform_with_canvas() * (stall.size * 0.5))
+	check(art_game.night.phase == Market.Phase.MENU and art_game.night.stock.count(0) == 1,
+		"clicking the world stall after unloading opens the market with the deposited fruit")
+	await process_frame
+	await process_frame
+	var juice_icon: Control = art_ui.recipe_buttons[0].artwork
+	click_at(art_view, juice_icon.get_global_rect().get_center())
+	check(art_game.night.selected[0], "clicking the juice illustration adds it to the market menu")
+	key(art_game, KEY_ENTER)
+	await process_frame
+	await process_frame
+	click_at(art_view, juice_icon.get_global_rect().get_center())
+	check(art_game.night.active_recipe == Market.Recipe.WATERMELON and art_game.night.stock.is_empty(),
+		"clicking the juice illustration during service reserves its ingredients")
+	art_view.queue_free()
+	await process_frame
 
 	print("NIGHT MARKET: %d checks, %d failures" % [checks, failures])
 	quit(failures)
