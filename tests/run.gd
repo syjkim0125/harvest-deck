@@ -494,13 +494,13 @@ func run() -> void:
 		g.sound_on = false
 		for frame in range(rate * 2):
 			g.simulate(1.0 / rate, Vector2.ZERO)
-		check(g.hits == 24 and g.cooldown > 0.0, "two-second harvest cadence has 24 hits and no debt at %dHz" % rate)
+		check(g.hits == 20 and g.cooldown > 0.0, "two-second harvest cadence has 20 hits and no debt at %dHz" % rate)
 	g.reset_run()
 	fixture(g, 1000)
-	g.simulate(0.49, Vector2.ZERO)
+	g.simulate(0.5, Vector2.ZERO)
 	var hitch_hits: int = g.hits
 	g.simulate(1.0 / 120.0, Vector2.ZERO)
-	check(hitch_hits == 6 and g.hits == hitch_hits, "490ms hitch resolves scheduled cuts without a next-frame burst")
+	check(hitch_hits == 5 and g.hits == hitch_hits, "500ms hitch resolves scheduled cuts without a next-frame burst")
 	var path_outcomes = []
 	for rate in [5, 30, 60, 120]:
 		g.reset_run()
@@ -523,17 +523,17 @@ func run() -> void:
 		g.reset_run()
 		fixture(g, 1000)
 		g.sound_on = false
-		for frame in range(rate * 11 / 30):
+		for frame in range(rate / 3):
 			g._physics_process(1.0 / rate)
 		pulse_samples.append(g.camera.offset)
 	check(pulse_samples[0].is_equal_approx(pulse_samples[1]) and pulse_samples[1].is_equal_approx(pulse_samples[2]), "same-time confirmed-hit pulse agrees at 30 / 60 / 120Hz")
 	g.reset_run()
 	fixture(g, 1000)
 	g.sound_on = false
-	g._physics_process(11.0 / 30.0)
+	g._physics_process(1.0 / 3.0)
 	check(g.camera.offset.is_equal_approx(pulse_samples[2]) and g.camera.offset.length() > 0.1, "hitch retains a recent hit instead of expiring it by the entire frame")
 	check((g.camera.offset * g.camera.zoom).length() <= 3.400001, "normal hit respects the 3.4 logical-pixel cap")
-	check(is_equal_approx(g.impact.clock, 0.025), "pulse age measures time since the last substep hit")
+	check(is_equal_approx(g.impact.clock, 1.0 / 60.0), "pulse age measures time since the last substep hit")
 	g.reset_run()
 	fixture(g, 1)
 	g.attack()

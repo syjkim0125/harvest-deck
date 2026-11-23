@@ -32,7 +32,7 @@ const PICKUP_DURATION := 0.18
 const MAX_CUT_PARTICLES := 160
 const SPEED: float = 360.0
 const DASH_SPEED := 900.0
-const ATTACK_INTERVAL: float = 0.084
+const ATTACK_INTERVAL: float = 0.105
 const CAPACITY: int = 40
 const DEPOT_RADIUS := 85.0
 const CARGO_SPACING: float = 3.0
@@ -459,8 +459,8 @@ func _input(event: InputEvent) -> void:
 				if deck.size() > 1:
 					pick_day_card(deck[1])
 			KEY_T:
-				if run_day == 1 and choosing_reward():
-					pick_reward_card(DayHarvest.Card.WHEEL_CHOCK)
+				if choosing_reward():
+					pick_reward_card(DayHarvest.REWARD_OFFERS[run_day - 1][2])
 				else:
 					pick_night_recipe(NightMarket.Recipe.ORANGE)
 			KEY_B: pick_day_card(DayHarvest.Card.DASH_KIT)
@@ -584,16 +584,25 @@ func day_finished() -> bool:
 
 func refresh_market_view() -> void:
 	update_orchard_counter()
+	var chilled_watermelon := carryover_watermelons()
 	if preparing_day:
-		night_view.refresh_prep(night, day.card, paused, run_day, deck, run_sales - run_fees)
+		night_view.refresh_prep(night, day.card, paused, run_day, deck, run_sales - run_fees, chilled_watermelon)
 	else:
-		night_view.refresh(night, paused, run_day, earned_card, run_sales, run_fees, run_results)
+		night_view.refresh(night, paused, run_day, earned_card, run_sales, run_fees, run_results, chilled_watermelon)
+
+func carryover_watermelons() -> int:
+	var night_index := DayHarvest.COOLER_DAY - 2
+	if run_results.size() <= night_index:
+		return 0
+	return mini(DayHarvest.COOLER_CAPACITY, run_results[night_index].leftover[0])
 
 func choosing_reward() -> bool:
 	return run_day < NightMarket.DAYS and night.phase == NightMarket.Phase.CLOSED
 
 func pick_reward_card(card: DayHarvest.Card) -> void:
 	if choosing_reward() and not paused and card in DayHarvest.REWARD_OFFERS[run_day - 1]:
+		if card == DayHarvest.Card.COOLER_CRATE and carryover_watermelons() == 0:
+			return
 		earned_card = card
 		refresh_market_view()
 
@@ -608,6 +617,9 @@ func begin_harvest() -> bool:
 	if not preparing_day or paused:
 		return false
 	preparing_day = false
+	if day.card == DayHarvest.Card.COOLER_CRATE:
+		for i in range(carryover_watermelons()):
+			production.deposit(0)
 	for fruit in fruits:
 		if fruit.kind == SpineMelon.KIND and day.card == DayHarvest.Card.WEDGE:
 			fruit.encounter.first_open_bonus = DayHarvest.WEDGE_OPEN_BONUS

@@ -405,8 +405,8 @@ func check_wheel_chock(game) -> void:
 		key(game, KEY_T)
 		game._physics_process(2.0)
 		key(game, KEY_ENTER)
-		check(game.night.gross == 9 and game.night.sold[2] == 1 and not ui.reward_buttons[2].visible,
-			"the rescued harvest can sell as orange fizz and Night 2 still offers its own cards")
+		check(game.night.gross == 9 and game.night.sold[2] == 1 and "COOLER CRATE" in ui.reward_buttons[2].text,
+			"the rescued harvest can sell as orange fizz and Night 2 offers the cooler")
 		key(game, KEY_Q)
 		key(game, KEY_ENTER)
 		key(game, KEY_C)
@@ -554,6 +554,76 @@ func check_orchard_waypoints(game) -> void:
 	check(game.orchard_waypoints().is_empty(), "the comparison lab has no expedition markers")
 	game.switch_mode()
 
+func check_cooler_crate(game) -> void:
+	var ui = game.night_view
+	for use_cooler in [false, true]:
+		game.reset_run()
+		deliver(game, [])
+		key(game, KEY_ENTER)
+		key(game, KEY_T)
+		check(game.earned_card == Day.Card.WHEEL_CHOCK, "T still selects the first night's orange card")
+		key(game, KEY_ENTER)
+		game.begin_harvest()
+		walk_to(game, Vector2(510, 690))
+		game.simulate(0.7, Vector2.ZERO)
+		walk_to(game, game.depot)
+		game.simulate(2.0, Vector2.ZERO)
+		game.finish_day_at_depot()
+		game.enter_night()
+		key(game, KEY_Q)
+		key(game, KEY_ENTER)
+		key(game, KEY_Q)
+		game._physics_process(2.0)
+		key(game, KEY_ENTER)
+		var leftovers: int = game.run_results[1].leftover[0]
+		check(leftovers > Day.COOLER_CAPACITY and game.run_results[1].sold[0] == 1
+			and "4/4 watermelon saved" in ui.reward_buttons[2].tooltip_text,
+			"the second night offers the cooler with a capped preview based on what went unsold")
+		game.set_paused(true)
+		key(game, KEY_T)
+		check(game.earned_card == Day.Card.NONE and ui.reward_buttons[2].disabled, "paused close blocks the cooler choice")
+		game.set_paused(false)
+		key(game, KEY_T)
+		key(game, KEY_ENTER)
+		check(game.run_day == 3 and game.day.card == Day.Card.COOLER_CRATE and game.stock == 0
+			and ui.deck_buttons[1].visible and "4/4 watermelon saved" in ui.deck_buttons[1].tooltip_text,
+			"the cooler's preview carries to Day 3 preparation before it grants stock")
+		key(game, KEY_Q)
+		if use_cooler:
+			key(game, KEY_V)
+		key(game, KEY_ENTER)
+		var carried := Day.COOLER_CAPACITY if use_cooler else 0
+		check(not game.begin_harvest() and game.stock == carried and game.cargo.is_empty()
+			and game.run_results[1].leftover[0] == leftovers,
+			"starting harvest banks only the equipped cooler's stock once and preserves last night's ledger")
+		walk_to(game, Vector2(700, 1004))
+		walk_to(game, Vector2(SpineMelon.HOME.x, 1004))
+		harvest_melon_from_south(game, SpineMelon.HOME)
+		check(game.cargo.count(MELON) == 3 and not game.cargo.has(0),
+			"the direct melon route yields three pieces without a watermelon detour")
+		walk_to(game, Vector2(SpineMelon.HOME.x, 1004))
+		walk_to(game, Vector2(820, 1004))
+		walk_to(game, Vector2(820, game.depot.y))
+		walk_to(game, game.depot)
+		game.simulate(2.0, Vector2.ZERO)
+		game.finish_day_at_depot()
+		game.enter_night()
+		check(game.night.stock.count(0) == carried and game.night.stock.count(MELON) == 3
+			and game.pick_night_recipe(Market.Recipe.MELON) == use_cooler,
+			"only the stocked cooler makes the same Day 3 harvest eligible for the special")
+		key(game, KEY_ENTER)
+		if use_cooler:
+			for i in range(3):
+				key(game, KEY_W)
+				game._physics_process(2.0)
+			key(game, KEY_ENTER)
+		check(game.night.phase == Market.Phase.CLOSED and game.night.gross == (36 if use_cooler else 0)
+			and game.run_results.size() == 3 and game.run_results[1].leftover[0] == leftovers,
+			"the final ledger records actual sales from the cooler route without rewriting Night 2")
+		key(game, KEY_ENTER)
+		check(game.stock == 0 and game.deck.is_empty() and game.carryover_watermelons() == 0,
+			"starting a new run clears the cooler and its stock")
+
 func check_menu_shortage(game) -> void:
 	deliver(game, [0, 0, 0, 0, 0, MELON])
 	var ui = game.night_view
@@ -649,6 +719,7 @@ func run() -> void:
 	check_wheel_chock(game)
 	check_dash_kit(game)
 	check_orchard_waypoints(game)
+	check_cooler_crate(game)
 	var night = game.night
 	var ui = game.night_view
 	check(not game.enter_night(), "an active expedition cannot open the market")
@@ -831,6 +902,14 @@ func run() -> void:
 			and pane.recipe_buttons[2].text == "NEEDS INGREDIENTS" and not pane.action_button.disabled,
 			"all three menu states and the close action fit when ingredients run out at %s" % size)
 		key(layout_game, KEY_ENTER)
+		await process_frame
+		await process_frame
+		key(layout_game, KEY_T)
+		check(pane.reward_buttons[2].visible and pane.reward_buttons[2].disabled
+			and layout_game.earned_card == Day.Card.NONE
+			and "No watermelon left" in pane.reward_buttons[2].tooltip_text
+			and bounds.encloses(pane.reward_content.get_global_rect()) and bounds.encloses(pane.action_button.get_global_rect()),
+			"the empty cooler explains why it is unavailable and the closing controls fit at %s" % size)
 		key(layout_game, KEY_W)
 		key(layout_game, KEY_ENTER)
 		await process_frame

@@ -57,7 +57,7 @@ var action_button: Button
 var pause_button: Button
 
 func _ready() -> void:
-	for i in range(Day.Card.DASH_KIT + 1):
+	for i in range(Day.Card.COOLER_CRATE + 1):
 		card_art.append(Art.card(i))
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_theme_stylebox_override("panel", surface(INK))
@@ -179,18 +179,23 @@ func reward_name(card: Day.Card) -> String:
 		Day.Card.TUNED_BLADE: return "TUNED BLADE"
 		Day.Card.LIMITED_COCKTAIL: return "LIMITED COCKTAIL"
 		Day.Card.WHEEL_CHOCK: return "WHEEL CHOCK"
+		Day.Card.COOLER_CRATE: return "COOLER CRATE"
 	return ""
 
-func reward_description(card: Day.Card) -> String:
+func reward_description(card: Day.Card, chilled_watermelon: int) -> String:
 	match card:
 		Day.Card.RESERVE_CELL: return "First unload: restore up to %d charge" % Day.RESERVE_CHARGE
 		Day.Card.SEED_GUARD: return "First seed hit: costs %d instead of %d" % [Day.GUARDED_SEED_COST, Day.SEED_COST]
 		Day.Card.TUNED_BLADE: return "Each cut uses %.2f charge" % Day.TUNED_CUT_COST
 		Day.Card.LIMITED_COCKTAIL: return "Special: +$%d each, +%.2fs prep" % [Market.COCKTAIL_BONUS, Market.COCKTAIL_EXTRA_TIME]
 		Day.Card.WHEEL_CHOCK: return "Day %d: orange stops +%.2fs" % [RollingOrange.DAY, Day.CHOCK_BRAKE_BONUS]
+		Day.Card.COOLER_CRATE:
+			if chilled_watermelon == 0:
+				return "No watermelon left to carry"
+			return "Day 3 depot: %d/%d watermelon saved" % [chilled_watermelon, Day.COOLER_CAPACITY]
 	return ""
 
-func refresh_prep(market: Market, card: Day.Card, paused: bool, run_day: int, deck: Array[Day.Card], balance: int) -> void:
+func refresh_prep(market: Market, card: Day.Card, paused: bool, run_day: int, deck: Array[Day.Card], balance: int, chilled_watermelon: int) -> void:
 	show()
 	market_content.hide()
 	prep_content.show()
@@ -210,7 +215,7 @@ func refresh_prep(market: Market, card: Day.Card, paused: bool, run_day: int, de
 		if button.visible:
 			var reward := deck[i]
 			present_card(button, reward, "%s / %s" % ["C" if i == 0 else "V", reward_name(reward)],
-				reward_description(reward), card == reward, paused or not Day.card_available(reward, run_day))
+				reward_description(reward, chilled_watermelon), card == reward, paused or not Day.card_available(reward, run_day))
 	present_card(loadout_buttons[Day.Card.STANDARD], Day.Card.STANDARD, "Q / STANDARD KIT",
 		"1 charge per cut", card == Day.Card.STANDARD, paused)
 	present_card(loadout_buttons[Day.Card.WEDGE], Day.Card.WEDGE, "W / CUTTING WEDGE",
@@ -223,7 +228,7 @@ func refresh_prep(market: Market, card: Day.Card, paused: bool, run_day: int, de
 	prep_pause_button.text = "RESUME" if paused else "PAUSE"
 
 func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_sales: int, run_fees: int,
-	results: Array[Dictionary]) -> void:
+	results: Array[Dictionary], chilled_watermelon: int) -> void:
 	prep_content.hide()
 	market_content.show()
 	visible = market.phase != Market.Phase.OFF
@@ -247,7 +252,8 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 			if button.visible:
 				var card: Day.Card = reward_options[i]
 				present_card(button, card, "%s / %s" % [key_for(i), reward_name(card)],
-					reward_description(card), card == reward, paused)
+					reward_description(card, chilled_watermelon), card == reward,
+					paused or (card == Day.Card.COOLER_CRATE and chilled_watermelon == 0))
 	inventory.text = "Watermelon %d   Spine melon %d" % [market.stock.count(0), market.stock.count(SpineMelon.KIND)]
 	var citrus_night := market.offers(Market.Recipe.ORANGE)
 	if citrus_night:

@@ -3,7 +3,7 @@ extends RefCounted
 
 const RollingOrange = preload("res://scripts/rolling_orange.gd")
 
-enum Card { NONE = -1, STANDARD, WEDGE, RESERVE_CELL, SEED_GUARD, TUNED_BLADE, LIMITED_COCKTAIL, WHEEL_CHOCK, DASH_KIT }
+enum Card { NONE = -1, STANDARD, WEDGE, RESERVE_CELL, SEED_GUARD, TUNED_BLADE, LIMITED_COCKTAIL, WHEEL_CHOCK, DASH_KIT, COOLER_CRATE }
 enum Outcome { ACTIVE, RETURNED, EXHAUSTED }
 
 const MAX_CHARGE := 100.0
@@ -18,9 +18,11 @@ const TUNED_CUT_COST := 0.75
 const CHOCK_BRAKE_BONUS := 0.60
 const DASH_COST := 8.0
 const DASH_SECONDS := 0.20
+const COOLER_DAY := 3
+const COOLER_CAPACITY := 4
 const REWARD_OFFERS := [
 	[Card.RESERVE_CELL, Card.SEED_GUARD, Card.WHEEL_CHOCK],
-	[Card.TUNED_BLADE, Card.LIMITED_COCKTAIL],
+	[Card.TUNED_BLADE, Card.LIMITED_COCKTAIL, Card.COOLER_CRATE],
 ]
 
 var card := Card.STANDARD
@@ -32,6 +34,8 @@ var dash_used := false
 var last_seed_cost := SEED_COST
 
 static func card_available(card_id: Card, day_number: int) -> bool:
+	if card_id == Card.COOLER_CRATE:
+		return day_number == COOLER_DAY
 	return card_id not in [Card.WHEEL_CHOCK, Card.DASH_KIT] or day_number == RollingOrange.DAY
 
 func reset() -> void:
