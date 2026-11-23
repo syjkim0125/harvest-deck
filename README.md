@@ -1,6 +1,6 @@
 # Harvest Deck · 모바일 MVP 0.8.0
 
-[휴대폰에서 열기](https://syjkim0125.github.io/harvest-deck/?v=0.8.0) · [이전 수확·판매 비교판](https://syjkim0125.github.io/harvest-deck/?lab=1) · [모바일 설계와 장르 비교](docs/MOBILE_MVP.md)
+[휴대폰에서 열기](https://syjkim0125.github.io/harvest-deck/?v=0.8.0) · [이전 수확·판매 비교판](https://syjkim0125.github.io/harvest-deck/?lab=1) · [모바일 설계와 장르 비교](docs/MOBILE_MVP.md) · [플레이테스트 기준](docs/PLAYTEST.md)
 
 - **낮** 화면 어디든 엄지로 밀어 움직인다. 몰려드는 과일을 톱이 자동으로 베고, 수확물이 밤의 재고가 된다. 레벨업 때 시간이 멈추면 그림 카드 한 장을 골라 전투 덱의 효과를 쌓는다.
 - **밤** 카드 그림을 눌러 빛나는 설비를 다시 누르거나, 카드를 그곳에 끌어다 놓는다. 믹서가 두 재료를 주스로 가공하고, 손님이 줄을 서서 산다. 도우미나 팁 병을 붙이면 계산 방식이 달라진다.

@@ -118,7 +118,7 @@ func stop_hunt() -> void:
 		audio.stop()
 
 func harvest_limit() -> int:
-	return 150
+	return 999
 
 func displayed_cargo_limit() -> int:
 	return 18

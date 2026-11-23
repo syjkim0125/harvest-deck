@@ -127,6 +127,12 @@ func run() -> void:
 		plain.tick(1.0 / 60.0)
 	check(plain.sold == 2 and plain.cash == 6 and plain.premiums == 0 and plain.done,
 		"the watermelon-only route produces two actual sales and settles once")
+	game.combat.fruits.clear()
+	game.combat.cargo.resize(150)
+	game.combat.cargo.fill(0)
+	game.combat.spawn_enemy(game.combat.player + Vector2(0, -45), 0)
+	game.combat.facing = Vector2.UP
+	check(game.combat.attack() == 1, "a full legacy bag cannot shut down the survival saw")
 	game.combat.equip(Combat.SPIN)
 	game.combat.equip(Combat.SPIN)
 	check(game.combat.cut_dot_limit() == -1.0 and game.combat.cut_reach() == 114.0,

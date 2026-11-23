@@ -980,12 +980,12 @@ func simulate_slice(delta: float, direction: Vector2) -> void:
 	if not day_mode:
 		step_shop(delta)
 	for i in range(ground_drops.size() - 1, -1, -1):
-		if cargo.size() < CAPACITY and player.distance_to(ground_drops[i].pos) < 65:
+		if cargo.size() < harvest_limit() and player.distance_to(ground_drops[i].pos) < 65:
 			cargo.append(ground_drops[i].kind)
 			ground_drops.remove_at(i)
 
 	saw_audio.master_gain = sound_volume
-	saw_audio.step(delta, sound_on and loop_sound and not paused, velocity.length() > 1, cargo.size() >= CAPACITY)
+	saw_audio.step(delta, sound_on and loop_sound and not paused, velocity.length() > 1, cargo.size() >= harvest_limit())
 
 func has_east_drop() -> bool:
 	return day_mode and run_day == NightMarket.DAYS
