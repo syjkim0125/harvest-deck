@@ -12,6 +12,7 @@ const Production = preload("res://scripts/production.gd")
 const Impact = preload("res://scripts/impact.gd")
 const OrchardGround = preload("res://scripts/orchard_ground.gd")
 const SpineMelon = preload("res://scripts/spine_melon.gd")
+const RollingOrange = preload("res://scripts/rolling_orange.gd")
 const DayHarvest = preload("res://scripts/day_harvest.gd")
 const NightMarket = preload("res://scripts/night_market.gd")
 const NightMarketView = preload("res://scripts/night_market_view.gd")
@@ -328,6 +329,13 @@ func reset_day() -> void:
 			"encounter": SpineMelon.new(),
 		})
 
+	if day_mode and run_day == RollingOrange.DAY:
+		fruits.append({
+			"pos": RollingOrange.HOME, "kind": RollingOrange.KIND, "hp": 3,
+			"flash": 0.0, "freeze": 0.0, "recoil": Vector2.ZERO,
+			"encounter": RollingOrange.new(),
+		})
+
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
 		set_paused(true)
@@ -383,6 +391,7 @@ func _input(event: InputEvent) -> void:
 			KEY_V:
 				if deck.size() > 1:
 					pick_day_card(deck[1])
+			KEY_T: pick_night_recipe(NightMarket.Recipe.ORANGE)
 			KEY_E: try_hire_cashier()
 			KEY_F: try_upgrade_mixer()
 			KEY_G: try_unlock_orchard()
@@ -701,6 +710,11 @@ func simulate_slice(delta: float, direction: Vector2) -> void:
 				if day_finished():
 					return
 			continue
+		if f.kind == RollingOrange.KIND:
+			if f.hp > 0:
+				f.encounter.step(delta, player)
+				f.pos = f.encounter.position
+			continue
 		if f.hp <= 0:
 			f.respawn -= delta
 			if f.respawn <= 0.0:
@@ -795,6 +809,8 @@ func attack() -> int:
 			continue
 		if f.kind == SpineMelon.KIND and f.encounter.phase != SpineMelon.Phase.VULNERABLE:
 			continue
+		if f.kind == RollingOrange.KIND and f.encounter.phase != RollingOrange.Phase.BRAKING:
+			continue
 		f.hp -= 1
 		count += 1
 		hits += 1
@@ -815,7 +831,7 @@ func attack() -> int:
 			cut_trail_kind = f.kind
 		if dead:
 			killed = true
-			if f.kind != SpineMelon.KIND:
+			if f.kind in [0, 1]:
 				f.respawn = 5.0
 			for j in range(3):
 				if cargo.size() < CAPACITY:
@@ -897,6 +913,8 @@ func _draw() -> void:
 	for f in fruits:
 		if f.kind == SpineMelon.KIND and f.hp > 0 and not day_finished():
 			draw_melon_hazard(f.pos, f.encounter)
+		if f.kind == RollingOrange.KIND and f.hp > 0 and not day_finished():
+			draw_orange_route()
 	for d in ground_drops:
 		draw_slice(d.pos, d.kind, 12, 0.15)
 	# Sort a separate presentation list; never reorder the harvesting array.
@@ -924,6 +942,8 @@ func _draw() -> void:
 	for f in fruits:
 		if f.kind == SpineMelon.KIND and f.hp > 0 and not day_finished():
 			draw_melon_status(font, f.pos, f.encounter)
+		if f.kind == RollingOrange.KIND and f.hp > 0 and not day_finished():
+			draw_orange_status(font, f.pos, f.encounter)
 		if f.hp > 0 and f.hp < 3 and production.can_harvest(f.kind):
 			var display_pos: Vector2 = f.pos + (f.get("recoil", Vector2.ZERO) if feedback and not impact.reduced else Vector2.ZERO)
 			draw_rect(Rect2(display_pos + Vector2(-20, -36), Vector2(40, 4)), Color("233635"))
@@ -1090,9 +1110,40 @@ func draw_fruit_actor(f: Dictionary) -> void:
 	draw_set_transform(display_pos, 0, fruit_display_scale(f))
 	if f.kind == SpineMelon.KIND:
 		draw_spine_melon(f.encounter.phase == SpineMelon.Phase.VULNERABLE, f.flash > 0.0 and feedback)
+	elif f.kind == RollingOrange.KIND:
+		draw_rolling_orange(f.encounter, f.flash > 0 and feedback)
 	else:
 		draw_fruit(Vector2.ZERO, f.kind, 24, f.flash > 0 and feedback)
 	draw_set_transform(Vector2.ZERO)
+
+func draw_orange_route() -> void:
+	var trail := Color("ffcc80")
+	draw_dashed_line(RollingOrange.HOME, RollingOrange.TURN, trail, 3, 14, true, true)
+	draw_dashed_line(RollingOrange.TURN, RollingOrange.BRAKE_POINT, trail, 3, 14, true, true)
+	draw_arc(RollingOrange.BRAKE_POINT, 32, 0, TAU, 32, trail, 2, true)
+
+func draw_orange_status(font: Font, at: Vector2, orange: RollingOrange) -> void:
+	var prompt := "ROLLING ORANGE"
+	if orange.phase == RollingOrange.Phase.ROLLING:
+		prompt = "CUT AHEAD"
+	elif orange.phase == RollingOrange.Phase.BRAKING:
+		prompt = "CUT NOW"
+	var width := font.get_string_size(prompt, HORIZONTAL_ALIGNMENT_LEFT, -1, 14).x
+	draw_rect(Rect2(at + Vector2(-width * 0.5 - 5, -65), Vector2(width + 10, 21)), Color("243b32"))
+	draw_string(font, at + Vector2(-width * 0.5, -49), prompt, HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color("fff1bd"))
+
+func draw_rolling_orange(orange: RollingOrange, flash: bool) -> void:
+	draw_circle(Vector2(0, 9), 24, Color("52362b"), true, -1.0, true)
+	draw_circle(Vector2.ZERO, 24, Color("af5028"), true, -1.0, true)
+	draw_circle(Vector2.ZERO, 21, Color("f49243") if not flash else Color("fff0b7"), true, -1.0, true)
+	var roll := 0.0 if impact.reduced else orange.angle
+	var leaf_root := Vector2(0, -20).rotated(roll)
+	draw_colored_polygon(PackedVector2Array([leaf_root, Vector2(5, -29).rotated(roll),
+		Vector2(15, -27).rotated(roll), Vector2(10, -20).rotated(roll)]), Color("81c66a"))
+	for dot in [Vector2(-9, -9), Vector2(4, -12), Vector2(11, 5), Vector2(-10, 8)]:
+		draw_circle(dot.rotated(roll), 1.5, Color("b84f2d"), true)
+	if orange.phase == RollingOrange.Phase.BRAKING:
+		draw_arc(Vector2.ZERO, 28, 0, TAU, 32, Color("fff1bd"), 2.5, true)
 
 func draw_spine_melon(open: bool, flash: bool) -> void:
 	draw_circle(Vector2(0, 12), 24, Color("272035"), true, -1.0, true)
@@ -1212,6 +1263,8 @@ func draw_slice(at: Vector2, kind: int, radius: float, tilt: float) -> void:
 	var rind_color := Color("80bb66") if kind == 0 else Color("e6b74f")
 	if kind == SpineMelon.KIND:
 		rind_color = Color("9b5aad")
+	elif kind == RollingOrange.KIND:
+		rind_color = Color("cf612e")
 	draw_colored_polygon(rind, rind_color)
 	draw_colored_polygon(flesh, fruit_flesh_color(kind))
 	for x in [-0.45, 0.0, 0.45]:
@@ -1221,6 +1274,7 @@ func fruit_flesh_color(kind: int) -> Color:
 	match kind:
 		0: return Color("ef746b")
 		SpineMelon.KIND: return Color("fbcaff")
+		RollingOrange.KIND: return Color("ffb35e")
 		_: return Color("ffe397")
 
 func fruit_display_scale(fruit: Dictionary) -> Vector2:

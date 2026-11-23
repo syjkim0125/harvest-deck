@@ -3,25 +3,29 @@ extends RefCounted
 const Production = preload("res://scripts/production.gd")
 const SpineMelon = preload("res://scripts/spine_melon.gd")
 
+const RollingOrange = preload("res://scripts/rolling_orange.gd")
+
 enum Phase { OFF, MENU, SERVICE, CLOSED }
-enum Recipe { WATERMELON, MELON }
+enum Recipe { WATERMELON, MELON, ORANGE }
 
 const FEES := [10, 12, 20]
 const DAYS := 3
 const COCKTAIL_BONUS := 3
 const COCKTAIL_EXTRA_TIME := 0.25
-const NAMES := ["Watermelon juice", "Spine melon special"]
-const PRICES := [Production.PRICE, 12]
-const ORDERS := [[5, 3], [7, 1], [4, 6]]
-const MIX_TIMES := [Production.MIX_SECONDS, Production.MIX_SECONDS + 0.35]
+const NAMES := ["Watermelon juice", "Spine melon special", "Orange fizz"]
+const INGREDIENTS := ["1 watermelon", "1 watermelon + 1 spine melon", "1 watermelon + 1 orange"]
+const EXTRA_FRUIT := [-1, SpineMelon.KIND, RollingOrange.KIND]
+const PRICES := [Production.PRICE, 12, 9]
+const ORDERS := [[5, 3, 0], [7, 1, 3], [4, 6, 0]]
+const MIX_TIMES := [Production.MIX_SECONDS, Production.MIX_SECONDS + 0.35, Production.MIX_SECONDS + 0.20]
 
 var phase := Phase.OFF
 var fee := FEES[0]
 var demand: Array = ORDERS[0]
 var cocktail := false
 var stock: Array[int] = []
-var selected: Array[bool] = [false, false]
-var sold: Array[int] = [0, 0]
+var selected: Array[bool] = [false, false, false]
+var sold: Array[int] = [0, 0, 0]
 var gross := 0
 var active_recipe := -1
 var remaining := 0.0
@@ -46,17 +50,18 @@ func enter(safe_stock: Array[int]) -> bool:
 	phase = Phase.MENU
 	return true
 
+func offers(recipe: int) -> bool:
+	return recipe >= 0 and recipe < demand.size() and demand[recipe] > 0
+
 func portions(recipe: int) -> int:
+	if not offers(recipe):
+		return 0
 	var watermelon := stock.count(0)
-	match recipe:
-		Recipe.WATERMELON:
-			return watermelon
-		Recipe.MELON:
-			return mini(watermelon, stock.count(SpineMelon.KIND))
-	return 0
+	var extra: int = EXTRA_FRUIT[recipe]
+	return watermelon if extra == -1 else mini(watermelon, stock.count(extra))
 
 func has_available_menu() -> bool:
-	# Both recipes require at least one watermelon.
+	# All recipes require one watermelon.
 	return portions(Recipe.WATERMELON) > 0
 
 func toggle_recipe(recipe: int) -> bool:
@@ -78,8 +83,9 @@ func serve(recipe: int) -> bool:
 	if not can_serve(recipe):
 		return false
 	stock.erase(0)
-	if recipe == Recipe.MELON:
-		stock.erase(SpineMelon.KIND)
+	var extra: int = EXTRA_FRUIT[recipe]
+	if extra != -1:
+		stock.erase(extra)
 	active_recipe = recipe
 	remaining = duration(recipe)
 	return true

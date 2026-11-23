@@ -2,6 +2,7 @@ extends RefCounted
 ## One mixer, FIFO inputs. Raw -> in-process -> ready -> sold -> collected.
 ## Customers arrive into a bounded FIFO queue; service requires an operator.
 const SpineMelon = preload("res://scripts/spine_melon.gd")
+const RollingOrange = preload("res://scripts/rolling_orange.gd")
 const MIX_SECONDS: float = 0.45
 const UPGRADED_MIX_SECONDS: float = 0.25
 const MIXER_UPGRADE_COST: int = 40
@@ -26,7 +27,7 @@ var ready: Array[int] = []
 var active_kind: int = -1
 var mix_elapsed: float = 0.0
 var sale_elapsed: float = 0.0
-var sold_by_kind: Array[int] = [0, 0, 0]
+var sold_by_kind: Array[int] = [0, 0, 0, 0]
 var pending_cash: int = 0
 var collected_cash: int = 0
 
@@ -55,12 +56,12 @@ func reset() -> void:
 	active_kind = -1
 	mix_elapsed = 0.0
 	sale_elapsed = 0.0
-	sold_by_kind.assign([0, 0, 0])
+	sold_by_kind.fill(0)
 	pending_cash = 0
 	collected_cash = 0
 
 func deposit(kind: int) -> void:
-	assert(kind in [0, 1, SpineMelon.KIND])
+	assert(kind in [0, 1, SpineMelon.KIND, RollingOrange.KIND])
 	raw.append(kind)
 
 func inventory_count() -> int:
@@ -146,4 +147,4 @@ func unlock_orchard() -> bool:
 	return true
 
 func can_harvest(kind: int) -> bool:
-	return kind == 0 or kind == SpineMelon.KIND or (kind == 1 and orchard_unlocked)
+	return kind in [0, SpineMelon.KIND, RollingOrange.KIND] or (kind == 1 and orchard_unlocked)

@@ -3,6 +3,7 @@ extends Panel
 const Market = preload("res://scripts/night_market.gd")
 const Day = preload("res://scripts/day_harvest.gd")
 const SpineMelon = preload("res://scripts/spine_melon.gd")
+const RollingOrange = preload("res://scripts/rolling_orange.gd")
 const INK := Color("101e29")
 const PAPER := Color("f2f5ee")
 const MUTED := Color("afc6cb")
@@ -57,7 +58,7 @@ func _ready() -> void:
 		frame.add_theme_constant_override("margin_" + side, 14)
 	var content := VBoxContainer.new()
 	content.custom_minimum_size.x = 280
-	content.add_theme_constant_override("separation", 10)
+	content.add_theme_constant_override("separation", 7)
 	var pages := VBoxContainer.new()
 	frame.add_child(pages)
 	pages.add_child(content)
@@ -67,18 +68,17 @@ func _ready() -> void:
 	detail = label(content, "", 16, GOLD)
 	inventory = label(content, "", 14, MUTED)
 	recipes = VBoxContainer.new()
-	recipes.add_theme_constant_override("separation", 9)
+	recipes.add_theme_constant_override("separation", 6)
 	content.add_child(recipes)
 	for i in range(Market.NAMES.size()):
 		var card := PanelContainer.new()
-		card.add_theme_stylebox_override("panel", surface(Color("1b303d"), 8))
+		card.add_theme_stylebox_override("panel", surface(Color("1b303d"), 4))
 		recipes.add_child(card)
 		recipe_cards.append(card)
 		var recipe := VBoxContainer.new()
-		recipe.add_theme_constant_override("separation", 5)
+		recipe.add_theme_constant_override("separation", 3)
 		card.add_child(recipe)
 		recipe_titles.append(label(recipe, "", 17, MINT if i == 0 else GOLD))
-		label(recipe, "1 watermelon" if i == 0 else "1 watermelon + 1 spine melon", 13, MUTED)
 		recipe_labels.append(label(recipe, "", 13, MUTED))
 		var button := action(recipe)
 		button.pressed.connect(func(): recipe_pressed.emit(i))
@@ -161,8 +161,12 @@ func refresh_prep(market: Market, card: Day.Card, paused: bool, run_day: int, de
 	prep_title.text = "Day %d Preparation" % run_day
 	forecast_title.text = "Tonight’s fee $%d  ·  Run net $%d" % [market.fee, balance]
 	for i in range(forecast_labels.size()):
+		forecast_labels[i].visible = market.offers(i)
 		forecast_labels[i].text = "%s  ·  %d × $%d" % [Market.NAMES[i], market.demand[i], market.price(i)]
-	route_hint.text = "Spine melons: southwest and east" if run_day == Market.DAYS else "Spine melon: southwest"
+	match run_day:
+		RollingOrange.DAY: route_hint.text = "Orange: southeast • needs watermelon"
+		Market.DAYS: route_hint.text = "Spine melons: southwest and east"
+		_: route_hint.text = "Spine melon: southwest"
 	available_cards = deck
 	for i in range(deck_buttons.size()):
 		var button := deck_buttons[i]
@@ -200,14 +204,17 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 			var button := reward_buttons[i]
 			button.text = "%s / %s%s" % [key_for(i), reward_name(card), "   ✓" if card == reward else ""]
 			button.disabled = paused
-	inventory.text = "Watermelon  %d     Spine melon  %d" % [market.stock.count(0), market.stock.count(SpineMelon.KIND)]
+	inventory.text = "Watermelon %d   Spine melon %d" % [market.stock.count(0), market.stock.count(SpineMelon.KIND)]
+	var citrus_night := market.offers(Market.Recipe.ORANGE)
+	if citrus_night:
+		inventory.text += "   Orange %d" % market.stock.count(RollingOrange.KIND)
 	recipes.visible = picking or serving
 	for i in range(recipe_buttons.size()):
 		var button := recipe_buttons[i]
 		recipe_titles[i].text = "%s  ·  $%d" % [Market.NAMES[i], market.price(i)]
-		recipe_cards[i].visible = picking or (serving and market.selected[i])
+		recipe_cards[i].visible = market.offers(i) and (picking or (serving and market.selected[i]))
 		if picking:
-			recipe_labels[i].text = "Up to %d orders" % market.demand[i]
+			recipe_labels[i].text = "%s  ·  Up to %d" % [Market.INGREDIENTS[i], market.demand[i]]
 			button.text = "%s / %s" % [key_for(i), "REMOVE FROM MENU" if market.selected[i] else "ADD TO MENU"]
 			if market.portions(i) == 0:
 				button.text = "NEEDS INGREDIENTS"
@@ -227,7 +234,7 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 		action_button.text = "ENTER / OPEN MARKET" if market.has_available_menu() else "ENTER / CLOSE WITHOUT SALES"
 		action_button.disabled = paused or (market.has_available_menu() and not market.selected.has(true))
 	elif serving:
-		detail.text = "Take an order" if market.can_serve(0) or market.can_serve(1) else "No orders available · close the market"
+		detail.text = "Take an order" if market.can_serve(0) or market.can_serve(1) or market.can_serve(2) else "No orders available · close the market"
 		if preparing:
 			detail.text = "Preparing " + Market.NAMES[market.active_recipe]
 		action_button.text = "ENTER / CLOSE MARKET"
@@ -238,6 +245,8 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 		else:
 			detail.text = "Operating shortfall  ·  $%d" % -market.net()
 		ledger.text += "\nServed  %d juice  ·  %d special" % [market.sold[0], market.sold[1]]
+		if citrus_night:
+			ledger.text += "  ·  %d fizz" % market.sold[2]
 		ledger.text += "\nRun sales $%d  ·  Run fees $%d" % [run_sales, run_fees]
 		if final_night:
 			title.text = "Run Complete"
@@ -250,7 +259,7 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 		detail.text = "Paused"
 
 func key_for(recipe: int) -> String:
-	return "Q" if recipe == 0 else "W"
+	return ["Q", "W", "T"][recipe]
 
 func label(parent: Control, value: String, font_size: int, color: Color) -> Label:
 	var text := Label.new()

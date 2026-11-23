@@ -71,7 +71,7 @@ func run() -> void:
 
 	game.simulate(game.depot.distance_to(game.service_pad) / game.SPEED, Vector2.DOWN)
 	game.simulate(3.0, Vector2.ZERO)
-	check(game.production.sold_by_kind == [0, 0, 3] and game.production.pending_cash == 15,
+	check(game.production.sold_by_kind == [0, 0, 3, 0] and game.production.pending_cash == 15,
 		"comparison sales count the third ingredient without changing prices")
 
 	game.reset_run()

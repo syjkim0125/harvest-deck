@@ -2,6 +2,8 @@ extends SceneTree
 
 const Day = preload("res://scripts/day_harvest.gd")
 const SpineMelon = preload("res://scripts/spine_melon.gd")
+const Orange = preload("res://scripts/rolling_orange.gd")
+const Market = preload("res://scripts/night_market.gd")
 const MELON := SpineMelon.KIND
 var checks := 0
 var failures := 0
@@ -145,7 +147,7 @@ func check_reward_continuation(game) -> void:
 	key(game, KEY_W)
 	key(game, KEY_ENTER)
 	check(game.run_day == 3 and game.deck == [Day.Card.RESERVE_CELL, Day.Card.LIMITED_COCKTAIL]
-		and ui.deck_buttons[0].visible and ui.deck_buttons[1].visible and night.demand == [4, 6] and night.fee == 20,
+		and ui.deck_buttons[0].visible and ui.deck_buttons[1].visible and night.demand == [4, 6, 0] and night.fee == 20,
 		"Day 3 keeps both rewards and opens with a new forecast")
 	key(game, KEY_C)
 	check(game.day.card == Day.Card.RESERVE_CELL and night.price(1) == 12, "the first reward is still selectable without the second reward bonus")
@@ -170,7 +172,7 @@ func check_reward_continuation(game) -> void:
 	for i in range(6):
 		key(game, KEY_W)
 		game._physics_process(3.0)
-	check(night.sold == [0, 6] and night.gross == 90 and not game.pick_night_recipe(1),
+	check(night.sold == [0, 6, 0] and night.gross == 90 and not game.pick_night_recipe(1),
 		"the final night sells six premium specials against the displayed order limit")
 	key(game, KEY_ENTER)
 	check(night.phase == night.Phase.CLOSED and not ui.reward_content.visible and ui.title.text == "Run Complete"
@@ -207,7 +209,7 @@ func check_watermelon_run(game) -> void:
 		for i in range(expected_orders):
 			key(game, KEY_Q)
 			game._physics_process(2.0)
-		check(night.sold == [expected_orders, 0] and not game.pick_night_recipe(0),
+		check(night.sold == [expected_orders, 0, 0] and not game.pick_night_recipe(0),
 			"Day %d enforces its watermelon order limit" % date)
 		key(game, KEY_ENTER)
 		if date < 3:
@@ -227,7 +229,7 @@ func check_seed_guard(game) -> void:
 	key(game, KEY_Q)
 	game.night_view.deck_buttons[0].pressed.emit()
 	key(game, KEY_ENTER)
-	var melon: Dictionary = game.fruits[-1]
+	var melon: Dictionary = game.fruits.filter(func(f): return f.kind == MELON)[0]
 	var encounter: SpineMelon = melon.encounter
 	game.player = SpineMelon.HOME + Vector2(0, 110)
 	game.simulate(0.75, Vector2.ZERO)
@@ -239,6 +241,79 @@ func check_seed_guard(game) -> void:
 		and is_equal_approx(game.day.charge, Day.MAX_CHARGE - Day.GUARDED_SEED_COST - Day.SEED_COST - 3.60 * Day.HAZARD_COST_PER_SECOND),
 		"the next seed strike charges the original cost")
 	check(encounter.first_open_bonus == 0.0, "the chosen reward does not stack with the wedge")
+	game.reset_run()
+
+func open_orange_day(game) -> void:
+	game.reset_run()
+	deliver(game, [])
+	key(game, KEY_ENTER)
+	key(game, KEY_Q)
+	key(game, KEY_ENTER)
+
+func check_rolling_orange(game) -> void:
+	check(not game.night.offers(Market.Recipe.ORANGE) and game.fruits.all(func(f): return f.kind != Orange.KIND),
+		"Day 1 forecast and orchard omit the optional orange encounter")
+	var harvest_times: Array[float] = []
+	for intercept in [false, true]:
+		open_orange_day(game)
+		check(game.night_view.forecast_labels[2].visible and "3 × $9" in game.night_view.forecast_labels[2].text,
+			"Day 2 forecasts the orange fizz before departure")
+		key(game, KEY_ENTER)
+		var fruit: Dictionary = game.fruits.filter(func(f): return f.kind == Orange.KIND)[0]
+		var orange: Orange = fruit.encounter
+		walk_to(game, Orange.HOME + Vector2(0, -154))
+		check(orange.phase == Orange.Phase.IDLE and orange.position == Orange.HOME, "outside the trigger the orange waits")
+		walk_to(game, Orange.HOME + Vector2(0, -70))
+		check(orange.phase == Orange.Phase.ROLLING and fruit.hp == 3 and game.hits == 0 and game.day.charge == 100.0,
+			"approach starts the roll, and chase contact spends no charge before braking")
+		var start: float = game.time
+		if intercept:
+			walk_to(game, Orange.BRAKE_POINT + Vector2(-55, -55))
+		else:
+			walk_to(game, Orange.TURN)
+			walk_to(game, Orange.BRAKE_POINT + Vector2(-55, 0))
+		game.simulate(0.34, Vector2.ZERO)
+		harvest_times.append(game.time - start)
+		check(fruit.hp == 0 and game.cargo.count(Orange.KIND) == 3 and game.hits == 3 and game.day.charge == 97.0,
+			"%s at the bend yields exactly three slices through the regular saw" % ("Intercepting" if intercept else "Following the trail"))
+		if not intercept:
+			continue
+		walk_to(game, Vector2(510, 690))
+		game.simulate(0.70, Vector2.ZERO)
+		walk_to(game, game.depot)
+		game.simulate(6.0, Vector2.ZERO)
+		check(fruit.hp == 0 and game.production.raw.count(Orange.KIND) == 3, "the orange does not respawn and all slices land at the depot")
+		key(game, KEY_ENTER)
+		key(game, KEY_ENTER)
+		check(game.night_view.recipe_cards[2].visible and not game.night_view.recipe_buttons[2].disabled,
+			"the Day 2 menu accepts the harvested orange and watermelon stock")
+		key(game, KEY_T)
+		key(game, KEY_ENTER)
+		for i in range(3):
+			key(game, KEY_T)
+			game._physics_process(2.0)
+		check(game.night.gross == 27 and game.night.sold[2] == 3 and game.night.stock.count(Orange.KIND) == 0
+			and not game.pick_night_recipe(Market.Recipe.ORANGE), "three orange drinks consume exactly three slices and earn $27")
+		key(game, KEY_ENTER)
+		check(game.night.net() == 15 and "3 fizz" in game.night_view.ledger.text, "Day 2 closing counts orange drinks and their sales")
+		key(game, KEY_W)
+		key(game, KEY_ENTER)
+		check(game.run_day == 3 and not game.night.offers(Market.Recipe.ORANGE) and game.fruits.all(func(f): return f.kind != Orange.KIND),
+			"Day 3 restores the two-melon route with no carry-over orange order")
+	check(harvest_times[0] > harvest_times[1] + 0.30, "intercepting cuts more than 0.3 seconds from the same chase")
+
+	open_orange_day(game)
+	key(game, KEY_ENTER)
+	var retry: Orange = game.fruits[-1].encounter
+	walk_to(game, Orange.HOME + Vector2(0, -70))
+	var rolling_at := retry.position
+	game.set_paused(true)
+	game._physics_process(3.5)
+	check(retry.position == rolling_at and retry.phase == Orange.Phase.ROLLING, "pause freezes the active route")
+	game.set_paused(false)
+	walk_to(game, Vector2(720, 780))
+	game.simulate(3.2, Vector2.ZERO)
+	check(retry.phase == Orange.Phase.IDLE and retry.position == Orange.HOME, "a missed brake loops back for another attempt")
 	game.reset_run()
 
 func run() -> void:
@@ -254,6 +329,7 @@ func run() -> void:
 	check_preparation(game)
 	check_seed_guard(game)
 	check_watermelon_run(game)
+	check_rolling_orange(game)
 	var night = game.night
 	var ui = game.night_view
 	check(not game.enter_night(), "an active expedition cannot open the market")
@@ -262,7 +338,7 @@ func run() -> void:
 	check(ui.recipe_buttons[1].disabled and not game.pick_night_recipe(1), "watermelon stock alone cannot enable the special")
 	check(not game.advance_night(), "the market needs a chosen menu")
 	ui.recipe_buttons[0].pressed.emit()
-	check(night.selected == [true, false] and game.stock == 4, "menu choice leaves stock intact")
+	check(night.selected == [true, false, false] and game.stock == 4, "menu choice leaves stock intact")
 	key(game, KEY_ENTER)
 	check(night.phase == night.Phase.SERVICE, "Enter opens the selected menu")
 	var home: Vector2 = game.player
@@ -274,7 +350,7 @@ func run() -> void:
 	check(night.active_recipe == 0 and night.gross == 0 and ui.pause_button.text == "RESUME", "night work waits through a pause")
 	ui.pause_button.pressed.emit()
 	game._physics_process(2.0)
-	check(night.gross == 5 and night.sold == [1, 0] and game.player == home, "a finished drink earns one sale while the player stays put")
+	check(night.gross == 5 and night.sold == [1, 0, 0] and game.player == home, "a finished drink earns one sale while the player stays put")
 	check(game.hits == 0 and game.impact.trauma == 0.0 and Engine.time_scale == 1.0, "night work does not cut targets or stop the engine")
 	key(game, KEY_Q)
 	game._physics_process(2.0)
@@ -292,11 +368,11 @@ func run() -> void:
 	key(game, KEY_W)
 	check(night.active_recipe == 1 and night.stock.count(0) == 1 and night.stock.count(MELON) == 0, "the special spends one watermelon and one melon")
 	game._physics_process(2.0)
-	check(night.gross == 12 and night.sold == [0, 1] and not night.can_serve(1), "the melon premium pays once and needs fresh ingredients for another order")
+	check(night.gross == 12 and night.sold == [0, 1, 0] and not night.can_serve(1), "the melon premium pays once and needs fresh ingredients for another order")
 	ui.recipe_buttons[0].pressed.emit()
 	game._physics_process(2.0)
 	game.advance_night()
-	check(night.phase == night.Phase.CLOSED and night.net() == 7 and night.sold == [1, 1] and game.stock == 0,
+	check(night.phase == night.Phase.CLOSED and night.net() == 7 and night.sold == [1, 1, 0] and game.stock == 0,
 		"the mixed menu completes the melon route and charges the fee once")
 
 	game.reset_run()
@@ -361,7 +437,13 @@ func run() -> void:
 		await process_frame
 		check(bounds.encloses(pane.prep_content.get_global_rect()) and bounds.encloses(pane.deck_buttons[0].get_global_rect()),
 			"Day 2 preparation and the earned card fit at %s" % size)
-		deliver(layout_game, [])
+		deliver(layout_game, [0, MELON, Orange.KIND])
+		await process_frame
+		await process_frame
+		check(bounds.encloses(pane.recipe_cards[2].get_global_rect()) and bounds.encloses(pane.pause_button.get_global_rect()),
+			"Day 2 market fits three recipes and pause at %s" % size)
+		key(layout_game, KEY_T)
+		key(layout_game, KEY_ENTER)
 		key(layout_game, KEY_ENTER)
 		key(layout_game, KEY_W)
 		key(layout_game, KEY_ENTER)
