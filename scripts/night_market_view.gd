@@ -156,7 +156,6 @@ func build_run_breakdown(parent: Control) -> void:
 func build_prep(parent: Control) -> void:
 	prep_content = VBoxContainer.new()
 	prep_content.custom_minimum_size.x = 280
-	prep_content.add_theme_constant_override("separation", 5)
 	parent.add_child(prep_content)
 	prep_title = label(prep_content, "", 27, PAPER)
 	forecast_title = label(prep_content, "", 16, GOLD)
@@ -214,6 +213,7 @@ func reward_description(card: Day.Card, chilled_watermelon: int) -> String:
 	return ""
 
 func refresh_prep(market: Market, card: Day.Card, paused: bool, run_day: int, deck: Array[Day.Card], balance: int, chilled_watermelon: int, target: int) -> void:
+	prep_content.add_theme_constant_override("separation", 3 if run_day == Market.DAYS else 5)
 	show()
 	market_content.hide()
 	prep_content.show()

@@ -16,6 +16,7 @@ const RESERVE_CHARGE := 25.0
 const GUARDED_SEED_COST := 10.0
 const TUNED_CUT_COST := 0.75
 const CHOCK_BRAKE_BONUS := 0.60
+const DASH_DAYS := [2, 3]
 const DASH_COST := 8.0
 const DASH_SECONDS := 0.20
 const COOLER_DAY := 3
@@ -36,7 +37,9 @@ var last_seed_cost := SEED_COST
 static func card_available(card_id: Card, day_number: int) -> bool:
 	if card_id == Card.COOLER_CRATE:
 		return day_number == COOLER_DAY
-	return card_id not in [Card.WHEEL_CHOCK, Card.DASH_KIT] or day_number == RollingOrange.DAY
+	if card_id == Card.DASH_KIT:
+		return day_number in DASH_DAYS
+	return card_id != Card.WHEEL_CHOCK or day_number == RollingOrange.DAY
 
 func reset() -> void:
 	card = Card.STANDARD

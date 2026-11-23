@@ -532,7 +532,7 @@ func check_wheel_chock(game) -> void:
 func check_dash_kit(game) -> void:
 	key(game, KEY_B)
 	check(game.day.card == Day.Card.STANDARD and not game.night_view.dash_kit_button.visible,
-		"the dash kit is offered only on the orange day")
+		"the dash kit is unavailable on the first day")
 	for equip_dash in [false, true]:
 		open_orange_day(game)
 		if equip_dash:
@@ -607,6 +607,65 @@ func check_dash_kit(game) -> void:
 		"the touch button uses the drag direction and pausing cancels the remaining dash")
 	game.reset_run()
 	check(not game.day.dash_used and game.dash_left == 0.0 and not game.dash_button.visible, "new run clears the dash state")
+
+func check_east_dash(game) -> void:
+	for equip_dash in [false, true]:
+		game.reset_run()
+		for i in range(2):
+			deliver(game, [])
+			key(game, KEY_ENTER)
+			key(game, KEY_Q)
+			key(game, KEY_ENTER)
+		check(game.run_day == 3 and game.night_view.dash_kit_button.visible,
+			"the final day's preparation offers the dash kit alongside the earned cards")
+		key(game, KEY_B if equip_dash else KEY_Q)
+		key(game, KEY_ENTER)
+		check(game.day.card == (Day.Card.DASH_KIT if equip_dash else Day.Card.STANDARD)
+			and game.dash_button.visible == equip_dash and not game.day.dash_used,
+			"the final day starts with the chosen kit and a fresh dash")
+		var east: SpineMelon = game.fruits[-1].encounter
+		walk_to(game, Vector2(510, 690))
+		game.simulate(0.7, Vector2.ZERO)
+		walk_to(game, Vector2(700, 1004))
+		walk_to(game, Vector2(SpineMelon.EAST_HOME.x, 1004))
+		walk_to(game, SpineMelon.EAST_HOME + Vector2(0, 65))
+		check(east.phase == SpineMelon.Phase.WARNING and east.strike_direction.dot(Vector2.DOWN) > 0.99
+			and east.time_left > 0.12 and game.cargo.has(0), "both routes bring fresh watermelon to the same south-facing warning")
+		game.simulate(east.time_left - 0.12, Vector2.ZERO)
+		var charge_before: float = game.day.charge
+		if equip_dash:
+			Input.action_press("left")
+			key(game, KEY_SPACE)
+			Input.action_release("left")
+			check(is_equal_approx(game.day.charge, charge_before - Day.DASH_COST)
+				and not game.try_dash(), "the late dash spends eight charge once")
+		game.simulate(0.13, Vector2.LEFT)
+		check(east.phase == SpineMelon.Phase.VULNERABLE and game.seed_hits == (0 if equip_dash else 1),
+			"with 0.12 seconds left, %s" % ("dashing clears the fan" if equip_dash else "walking stays inside the fan"))
+		var action_cost := Day.DASH_COST if equip_dash else Day.SEED_COST
+		check(game.day.charge <= charge_before - action_cost
+			and game.day.charge >= charge_before - action_cost - 0.13 * Day.HAZARD_COST_PER_SECOND - 0.001,
+			"the battery reflects the dash or the seed hit plus passive drain")
+		if equip_dash:
+			game.simulate(Day.DASH_SECONDS - 0.13, Vector2.ZERO)
+			walk_to(game, SpineMelon.EAST_HOME + Vector2(-50, 40))
+			game.simulate(0.35, Vector2.ZERO)
+			check(game.cargo.count(MELON) == 3 and game.seed_hits == 0,
+				"the late dodge leaves time to return and harvest the east melon")
+			walk_to(game, game.EAST_DROP_POINT)
+			game.simulate(1.5, Vector2.ZERO)
+			walk_to(game, game.depot)
+			game.simulate(1.8, Vector2.ZERO)
+			key(game, KEY_ENTER)
+			key(game, KEY_ENTER)
+			key(game, KEY_W)
+			key(game, KEY_ENTER)
+			key(game, KEY_W)
+			key(game, KEY_ENTER)
+			game._physics_process(2.0)
+			check(game.night.sold[Market.Recipe.MELON] == 1 and game.night.gross == 12
+				and game.run_results.size() == 3, "the safely delivered melon sells for $12 in the final ledger")
+	game.reset_run()
 
 func check_orchard_waypoints(game) -> void:
 	check(game.orchard_waypoints().is_empty(), "route markers wait until preparation ends")
@@ -957,6 +1016,7 @@ func run() -> void:
 	check_rolling_orange(game)
 	check_wheel_chock(game)
 	check_dash_kit(game)
+	check_east_dash(game)
 	check_orchard_waypoints(game)
 	check_cooler_crate(game)
 	var night = game.night
@@ -1181,7 +1241,9 @@ func run() -> void:
 		await process_frame
 		await process_frame
 		check(bounds.encloses(pane.prep_content.get_global_rect()) and bounds.encloses(pane.deck_buttons[1].get_global_rect())
-			and bounds.encloses(pane.start_button.get_global_rect()), "Day 3 preparation and both earned cards fit at %s" % size)
+			and pane.dash_kit_button.visible and bounds.encloses(pane.dash_kit_button.get_global_rect())
+			and bounds.encloses(pane.prep_pause_button.get_global_rect()) and bounds.encloses(pane.start_button.get_global_rect()),
+			"Day 3 preparation fits the dash kit, both earned cards and controls at %s" % size)
 		key(layout_game, KEY_ENTER)
 		layout_game.update_day_hud()
 		layout_game.camera.force_update_scroll()
