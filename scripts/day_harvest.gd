@@ -1,7 +1,7 @@
 extends RefCounted
 ## The day owns energy and its conclusion; the depot owns deposited ingredients.
 
-enum Card { NONE = -1, STANDARD, WEDGE, RESERVE_CELL, SEED_GUARD }
+enum Card { NONE = -1, STANDARD, WEDGE, RESERVE_CELL, SEED_GUARD, TUNED_BLADE, LIMITED_COCKTAIL }
 enum Outcome { ACTIVE, RETURNED, EXHAUSTED }
 
 const MAX_CHARGE := 100.0
@@ -12,7 +12,8 @@ const SEED_COST := 25.0
 const HAZARD_COST_PER_SECOND := 2.0
 const RESERVE_CHARGE := 25.0
 const GUARDED_SEED_COST := 10.0
-const REWARDS := [Card.RESERVE_CELL, Card.SEED_GUARD]
+const TUNED_CUT_COST := 0.75
+const REWARD_OFFERS := [[Card.RESERVE_CELL, Card.SEED_GUARD], [Card.TUNED_BLADE, Card.LIMITED_COCKTAIL]]
 
 var card := Card.STANDARD
 var charge := MAX_CHARGE
@@ -30,7 +31,10 @@ func reset() -> void:
 	last_seed_cost = SEED_COST
 
 func cut_cost() -> float:
-	return WEDGE_CUT_COST if card == Card.WEDGE else CUT_COST
+	match card:
+		Card.WEDGE: return WEDGE_CUT_COST
+		Card.TUNED_BLADE: return TUNED_CUT_COST
+	return CUT_COST
 
 func on_deposit() -> void:
 	if card == Card.RESERVE_CELL and not reward_used:

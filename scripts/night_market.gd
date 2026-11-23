@@ -6,13 +6,19 @@ const SpineMelon = preload("res://scripts/spine_melon.gd")
 enum Phase { OFF, MENU, SERVICE, CLOSED }
 enum Recipe { WATERMELON, MELON }
 
-const FEE := 10
+const FEES := [10, 12, 20]
+const DAYS := 3
+const COCKTAIL_BONUS := 3
+const COCKTAIL_EXTRA_TIME := 0.25
 const NAMES := ["Watermelon juice", "Spine melon special"]
 const PRICES := [Production.PRICE, 12]
-const DEMAND := [5, 3]
+const ORDERS := [[5, 3], [7, 1], [4, 6]]
 const MIX_TIMES := [Production.MIX_SECONDS, Production.MIX_SECONDS + 0.35]
 
 var phase := Phase.OFF
+var fee := FEES[0]
+var demand: Array = ORDERS[0]
+var cocktail := false
 var stock: Array[int] = []
 var selected: Array[bool] = [false, false]
 var sold: Array[int] = [0, 0]
@@ -20,8 +26,11 @@ var gross := 0
 var active_recipe := -1
 var remaining := 0.0
 
-func reset() -> void:
+func reset(day_number := 1) -> void:
 	phase = Phase.OFF
+	fee = FEES[day_number - 1]
+	demand = ORDERS[day_number - 1]
+	cocktail = false
 	stock = []
 	selected.fill(false)
 	sold.fill(0)
@@ -63,7 +72,7 @@ func open() -> bool:
 	return true
 
 func can_serve(recipe: int) -> bool:
-	return phase == Phase.SERVICE and active_recipe == -1 and portions(recipe) > 0 and selected[recipe] and sold[recipe] < DEMAND[recipe]
+	return phase == Phase.SERVICE and active_recipe == -1 and portions(recipe) > 0 and selected[recipe] and sold[recipe] < demand[recipe]
 
 func serve(recipe: int) -> bool:
 	if not can_serve(recipe):
@@ -75,8 +84,12 @@ func serve(recipe: int) -> bool:
 	remaining = duration(recipe)
 	return true
 
+func price(recipe: int) -> int:
+	return PRICES[recipe] + (COCKTAIL_BONUS if cocktail and recipe == Recipe.MELON else 0)
+
 func duration(recipe: int) -> float:
-	return MIX_TIMES[recipe] + Production.SALE_SECONDS
+	var extra := COCKTAIL_EXTRA_TIME if cocktail and recipe == Recipe.MELON else 0.0
+	return MIX_TIMES[recipe] + Production.SALE_SECONDS + extra
 
 func step(delta: float) -> void:
 	if active_recipe == -1 or delta <= 0.0:
@@ -84,7 +97,7 @@ func step(delta: float) -> void:
 	remaining = maxf(0.0, remaining - delta)
 	if remaining <= 0.000001:
 		sold[active_recipe] += 1
-		gross += PRICES[active_recipe]
+		gross += price(active_recipe)
 		active_recipe = -1
 		remaining = 0.0
 
@@ -97,4 +110,4 @@ func close() -> bool:
 	return true
 
 func net() -> int:
-	return gross - FEE
+	return gross - fee

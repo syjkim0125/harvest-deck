@@ -4,6 +4,7 @@ enum Phase { IDLE, WARNING, VULNERABLE, RECOVERING }
 
 const KIND := 2
 const HOME := Vector2(210, 866)
+const EAST_HOME := Vector2(1200, 740)
 const TRIGGER_RADIUS := 146.0
 const STRIKE_RADIUS := 128.0
 const WARNING_SECONDS := 0.70

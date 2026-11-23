@@ -31,6 +31,9 @@ const BOUNDS = Rect2(40, 100, 1480, 1040)
 var preparing_day := false
 var run_day := 1
 var earned_card := DayHarvest.Card.NONE
+var deck: Array[DayHarvest.Card] = []
+var run_sales := 0
+var run_fees := 0
 var day := DayHarvest.new()
 var night := NightMarket.new()
 var night_view: NightMarketView
@@ -259,6 +262,9 @@ func setup_inputs() -> void:
 
 func reset_run() -> void:
 	run_day = 1
+	deck.clear()
+	run_sales = 0
+	run_fees = 0
 	earned_card = DayHarvest.Card.NONE
 	reset_day()
 
@@ -275,10 +281,11 @@ func reset_day() -> void:
 	fruits.clear()
 	production.reset()
 	day.reset()
-	if run_day > 1:
-		day.card = earned_card
 	preparing_day = day_mode
-	night.reset()
+	night.reset(run_day)
+	if not deck.is_empty():
+		day.card = deck.back()
+		night.cocktail = day.card == DayHarvest.Card.LIMITED_COCKTAIL
 	notice = ""
 	ground_drops.clear()
 	customer_visuals.clear()
@@ -311,11 +318,15 @@ func reset_day() -> void:
 		fruits.append({"pos": home, "home": home, "hp": 3, "kind": kind, "flash": 0.0, "respawn": 0.0, "freeze": 0.0, "recoil": Vector2.ZERO})
 	if is_instance_valid(encounter_audio):
 		encounter_audio.stop()
-	fruits.append({
-		"pos": SpineMelon.HOME, "kind": SpineMelon.KIND, "hp": 3,
-		"flash": 0.0, "freeze": 0.0, "recoil": Vector2.ZERO,
-		"encounter": SpineMelon.new(),
-	})
+	var melon_sites := [SpineMelon.HOME]
+	if day_mode and run_day == NightMarket.DAYS:
+		melon_sites.append(SpineMelon.EAST_HOME)
+	for site in melon_sites:
+		fruits.append({
+			"pos": site, "kind": SpineMelon.KIND, "hp": 3,
+			"flash": 0.0, "freeze": 0.0, "recoil": Vector2.ZERO,
+			"encounter": SpineMelon.new(),
+		})
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
@@ -356,17 +367,22 @@ func _input(event: InputEvent) -> void:
 				if preparing_day:
 					pick_day_card(DayHarvest.Card.STANDARD)
 				elif choosing_reward():
-					pick_reward_card(DayHarvest.Card.RESERVE_CELL)
+					pick_reward_card(DayHarvest.REWARD_OFFERS[run_day - 1][0])
 				else:
 					pick_night_recipe(NightMarket.Recipe.WATERMELON)
 			KEY_W:
 				if preparing_day:
 					pick_day_card(DayHarvest.Card.WEDGE)
 				elif choosing_reward():
-					pick_reward_card(DayHarvest.Card.SEED_GUARD)
+					pick_reward_card(DayHarvest.REWARD_OFFERS[run_day - 1][1])
 				else:
 					pick_night_recipe(NightMarket.Recipe.MELON)
-			KEY_C: pick_day_card(earned_card)
+			KEY_C:
+				if not deck.is_empty():
+					pick_day_card(deck[0])
+			KEY_V:
+				if deck.size() > 1:
+					pick_day_card(deck[1])
 			KEY_E: try_hire_cashier()
 			KEY_F: try_upgrade_mixer()
 			KEY_G: try_unlock_orchard()
@@ -416,7 +432,7 @@ func _physics_process(delta: float) -> void:
 	if night.phase != NightMarket.Phase.OFF:
 		if not paused:
 			night.step(delta)
-		night_view.refresh(night, paused, run_day, earned_card)
+		refresh_market_view()
 		return
 	if not paused and not day_finished():
 		var direction = Input.get_vector("left", "right", "up", "down")
@@ -457,6 +473,8 @@ func update_day_hud() -> void:
 		DayHarvest.Card.WEDGE: hud.text += "   WEDGE"
 		DayHarvest.Card.RESERVE_CELL: hud.text += "   CELL USED" if day.reward_used else "   CELL READY"
 		DayHarvest.Card.SEED_GUARD: hud.text += "   GUARD USED" if day.reward_used else "   GUARD READY"
+		DayHarvest.Card.TUNED_BLADE: hud.text += "   TUNED"
+		DayHarvest.Card.LIMITED_COCKTAIL: hud.text += "   COCKTAIL"
 	hud.modulate = Color("ffbc82") if charge_percent <= DayHarvest.SEED_COST else Color.WHITE
 	var hint := "Mint pad: unload, then End Harvest"
 	if day.outcome == DayHarvest.Outcome.EXHAUSTED:
@@ -478,22 +496,23 @@ func day_finished() -> bool:
 
 func refresh_market_view() -> void:
 	if preparing_day:
-		night_view.refresh_prep(day.card, paused, run_day, earned_card)
+		night_view.refresh_prep(night, day.card, paused, run_day, deck, run_sales - run_fees)
 	else:
-		night_view.refresh(night, paused, run_day, earned_card)
+		night_view.refresh(night, paused, run_day, earned_card, run_sales, run_fees)
 
 func choosing_reward() -> bool:
-	return run_day == 1 and night.phase == NightMarket.Phase.CLOSED
+	return run_day < NightMarket.DAYS and night.phase == NightMarket.Phase.CLOSED
 
 func pick_reward_card(card: DayHarvest.Card) -> void:
-	if choosing_reward() and not paused and card in DayHarvest.REWARDS:
+	if choosing_reward() and not paused and card in DayHarvest.REWARD_OFFERS[run_day - 1]:
 		earned_card = card
 		refresh_market_view()
 
 func pick_day_card(card: DayHarvest.Card) -> void:
 	if preparing_day and not paused and (card == DayHarvest.Card.STANDARD or card == DayHarvest.Card.WEDGE
-		or (run_day > 1 and card == earned_card)):
+		or card in deck):
 		day.card = card
+		night.cocktail = card == DayHarvest.Card.LIMITED_COCKTAIL
 		refresh_market_view()
 
 func begin_harvest() -> bool:
@@ -515,7 +534,7 @@ func advance_day() -> bool:
 func enter_night() -> bool:
 	if paused or not day_finished() or not night.enter(production.raw):
 		return false
-	night_view.refresh(night, paused, run_day, earned_card)
+	refresh_market_view()
 	return true
 
 func pick_night_recipe(recipe: int) -> bool:
@@ -523,7 +542,7 @@ func pick_night_recipe(recipe: int) -> bool:
 		return false
 	var changed := night.toggle_recipe(recipe) if night.phase == NightMarket.Phase.MENU else night.serve(recipe)
 	if changed:
-		night_view.refresh(night, paused, run_day, earned_card)
+		refresh_market_view()
 	return changed
 
 func advance_night() -> bool:
@@ -540,6 +559,8 @@ func advance_night() -> bool:
 			if choosing_reward():
 				if earned_card == DayHarvest.Card.NONE:
 					return false
+				deck.append(earned_card)
+				earned_card = DayHarvest.Card.NONE
 				run_day += 1
 				reset_day()
 			else:
@@ -547,7 +568,10 @@ func advance_night() -> bool:
 			return true
 		_:
 			return false
-	night_view.refresh(night, paused, run_day, earned_card)
+	if night.phase == NightMarket.Phase.CLOSED:
+		run_sales += night.gross
+		run_fees += night.fee
+	refresh_market_view()
 	return true
 
 func finish_day_at_depot() -> bool:

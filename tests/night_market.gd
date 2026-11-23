@@ -107,7 +107,7 @@ func check_reward_continuation(game) -> void:
 		"changing the closing choice replaces the card and keeps the settled ledger")
 	ui.action_button.pressed.emit()
 	check(game.run_day == 2 and night.phase == night.Phase.OFF and game.stock == 0 and game.day.charge == Day.MAX_CHARGE
-		and ui.prep_title.text == "Day 2 Preparation" and ui.earned_button.visible and game.day.card == Day.Card.RESERVE_CELL,
+		and ui.prep_title.text == "Day 2 Preparation" and ui.deck_buttons[0].visible and game.day.card == Day.Card.RESERVE_CELL,
 		"the same run opens Day 2 with the chosen reward and fresh daily state")
 	key(game, KEY_Q)
 	check(game.day.card == Day.Card.STANDARD, "Day 2 can still choose the standard kit")
@@ -136,11 +136,86 @@ func check_reward_continuation(game) -> void:
 	key(game, KEY_Q)
 	game._physics_process(2.0)
 	key(game, KEY_ENTER)
-	check(night.phase == night.Phase.CLOSED and night.gross == 5 and not ui.reward_content.visible,
-		"Day 2 can serve another night and then ends the two-day run")
+	check(night.phase == night.Phase.CLOSED and night.gross == 5 and ui.reward_content.visible,
+		"Day 2 settles and opens the second reward offer")
+	check(game.run_sales == 20 and game.run_fees == 22 and not game.advance_night() and game.run_fees == 22,
+		"both nightly ledgers accrue once, even when the run goes into deficit")
+	key(game, KEY_Q)
+	check(game.earned_card == Day.Card.TUNED_BLADE, "Day 2 offers Tuned Blade")
+	key(game, KEY_W)
 	key(game, KEY_ENTER)
-	check(game.run_day == 1 and game.earned_card == Day.Card.NONE and not ui.earned_button.visible and not game.day.reward_used,
-		"replaying starts a fresh run with no reward or spent-card state")
+	check(game.run_day == 3 and game.deck == [Day.Card.RESERVE_CELL, Day.Card.LIMITED_COCKTAIL]
+		and ui.deck_buttons[0].visible and ui.deck_buttons[1].visible and night.demand == [4, 6] and night.fee == 20,
+		"Day 3 keeps both rewards and opens with a new forecast")
+	key(game, KEY_C)
+	check(game.day.card == Day.Card.RESERVE_CELL and night.price(1) == 12, "the first reward is still selectable without the second reward bonus")
+	key(game, KEY_V)
+	check(game.day.card == Day.Card.LIMITED_COCKTAIL and night.price(1) == 15 and "6 × $15" in ui.forecast_labels[1].text,
+		"the second reward updates the live forecast and actual sale price")
+	key(game, KEY_ENTER)
+	walk_to(game, Vector2(510, 690))
+	game.simulate(0.70, Vector2.ZERO)
+	walk_to(game, Vector2(390, 1004))
+	harvest_melon_from_south(game, SpineMelon.HOME)
+	walk_to(game, Vector2(SpineMelon.HOME.x, 1004))
+	walk_to(game, Vector2(SpineMelon.EAST_HOME.x, 1004))
+	harvest_melon_from_south(game, SpineMelon.EAST_HOME)
+	check(game.cargo.count(MELON) == 6 and game.seed_hits == 0, "the two Day 3 orchard routes yield all six specials without taking a seed hit")
+	walk_to(game, game.depot)
+	game.simulate(2.0, Vector2.ZERO)
+	key(game, KEY_ENTER)
+	key(game, KEY_ENTER)
+	key(game, KEY_W)
+	key(game, KEY_ENTER)
+	for i in range(6):
+		key(game, KEY_W)
+		game._physics_process(3.0)
+	check(night.sold == [0, 6] and night.gross == 90 and not game.pick_night_recipe(1),
+		"the final night sells six premium specials against the displayed order limit")
+	key(game, KEY_ENTER)
+	check(night.phase == night.Phase.CLOSED and not ui.reward_content.visible and ui.title.text == "Run Complete"
+		and game.run_sales == 110 and game.run_fees == 42 and ui.detail.text == "Three-day net  $68",
+		"the final screen settles three nights with the exact cumulative net")
+	key(game, KEY_ENTER)
+	check(game.run_day == 1 and game.earned_card == Day.Card.NONE and game.deck.is_empty()
+		and game.run_sales == 0 and game.run_fees == 0 and not ui.deck_buttons[0].visible and not game.day.reward_used,
+		"replaying clears the entire run ledger and deck")
+
+func harvest_melon_from_south(game, center: Vector2) -> void:
+	walk_to(game, center + Vector2(0, 138))
+	game.simulate(0.74, Vector2.ZERO)
+	walk_to(game, center + Vector2(0, 65))
+	game.simulate(0.35, Vector2.ZERO)
+
+func check_watermelon_run(game) -> void:
+	for date in range(1, 4):
+		var night = game.night
+		var expected_orders: int = [5, 7, 4][date - 1]
+		check(night.demand[0] == expected_orders, "Day %d has its own watermelon order count" % date)
+		var pieces: Array[int] = []
+		pieces.resize(8)
+		pieces.fill(0)
+		if date == 3:
+			key(game, KEY_ENTER)
+			walk_to(game, Vector2(510, 690))
+			check(game.day.card == Day.Card.TUNED_BLADE and game.hits > 0
+				and game.day.charge == Day.MAX_CHARGE - game.hits * Day.TUNED_CUT_COST,
+				"Tuned Blade saves charge on each real Day 3 cut")
+		deliver(game, pieces)
+		key(game, KEY_Q)
+		key(game, KEY_ENTER)
+		for i in range(expected_orders):
+			key(game, KEY_Q)
+			game._physics_process(2.0)
+		check(night.sold == [expected_orders, 0] and not game.pick_night_recipe(0),
+			"Day %d enforces its watermelon order limit" % date)
+		key(game, KEY_ENTER)
+		if date < 3:
+			key(game, KEY_Q)
+			key(game, KEY_ENTER)
+	check(game.run_sales == 80 and game.run_fees == 42 and game.night_view.detail.text == "Three-day net  $38",
+		"watermelon alone reaches the final screen with positive cumulative profit")
+	game.reset_run()
 
 func check_seed_guard(game) -> void:
 	deliver(game, [])
@@ -150,7 +225,7 @@ func check_seed_guard(game) -> void:
 	key(game, KEY_W)
 	key(game, KEY_ENTER)
 	key(game, KEY_Q)
-	game.night_view.earned_button.pressed.emit()
+	game.night_view.deck_buttons[0].pressed.emit()
 	key(game, KEY_ENTER)
 	var melon: Dictionary = game.fruits[-1]
 	var encounter: SpineMelon = melon.encounter
@@ -178,6 +253,7 @@ func run() -> void:
 		return
 	check_preparation(game)
 	check_seed_guard(game)
+	check_watermelon_run(game)
 	var night = game.night
 	var ui = game.night_view
 	check(not game.enter_night(), "an active expedition cannot open the market")
@@ -283,8 +359,22 @@ func run() -> void:
 		key(layout_game, KEY_ENTER)
 		await process_frame
 		await process_frame
-		check(bounds.encloses(pane.prep_content.get_global_rect()) and bounds.encloses(pane.earned_button.get_global_rect()),
+		check(bounds.encloses(pane.prep_content.get_global_rect()) and bounds.encloses(pane.deck_buttons[0].get_global_rect()),
 			"Day 2 preparation and the earned card fit at %s" % size)
+		deliver(layout_game, [])
+		key(layout_game, KEY_ENTER)
+		key(layout_game, KEY_W)
+		key(layout_game, KEY_ENTER)
+		await process_frame
+		await process_frame
+		check(bounds.encloses(pane.prep_content.get_global_rect()) and bounds.encloses(pane.deck_buttons[1].get_global_rect())
+			and bounds.encloses(pane.start_button.get_global_rect()), "Day 3 preparation and both earned cards fit at %s" % size)
+		deliver(layout_game, [])
+		key(layout_game, KEY_ENTER)
+		await process_frame
+		await process_frame
+		check(bounds.encloses(pane.ledger.get_global_rect()) and bounds.encloses(pane.action_button.get_global_rect()),
+			"final ledger and new-run button fit at %s" % size)
 		view.queue_free()
 		await process_frame
 

@@ -20,9 +20,14 @@ var market_content: VBoxContainer
 var prep_content: VBoxContainer
 var loadout_buttons: Array[Button] = []
 var prep_title: Label
-var available_reward := Day.Card.NONE
-var earned_button: Button
-var earned_description: Label
+var forecast_title: Label
+var forecast_labels: Array[Label] = []
+var route_hint: Label
+var deck_buttons: Array[Button] = []
+var available_cards: Array[Day.Card] = []
+var reward_title: Label
+var reward_options: Array = []
+var reward_descriptions: Array[Label] = []
 var reward_content: VBoxContainer
 var reward_buttons: Array[Button] = []
 var start_button: Button
@@ -35,6 +40,7 @@ var progress: ProgressBar
 var recipes: VBoxContainer
 var recipe_cards: Array[PanelContainer] = []
 var recipe_labels: Array[Label] = []
+var recipe_titles: Array[Label] = []
 var recipe_buttons: Array[Button] = []
 var action_button: Button
 var pause_button: Button
@@ -71,7 +77,7 @@ func _ready() -> void:
 		var recipe := VBoxContainer.new()
 		recipe.add_theme_constant_override("separation", 5)
 		card.add_child(recipe)
-		label(recipe, "%s  ·  $%d" % [Market.NAMES[i], Market.PRICES[i]], 17, MINT if i == 0 else GOLD)
+		recipe_titles.append(label(recipe, "", 17, MINT if i == 0 else GOLD))
 		label(recipe, "1 watermelon" if i == 0 else "1 watermelon + 1 spine melon", 13, MUTED)
 		recipe_labels.append(label(recipe, "", 13, MUTED))
 		var button := action(recipe)
@@ -86,12 +92,12 @@ func _ready() -> void:
 	content.add_child(progress)
 	reward_content = VBoxContainer.new()
 	content.add_child(reward_content)
-	label(reward_content, "Choose one card for Day 2", 16, GOLD)
-	for card in Day.REWARDS:
+	reward_title = label(reward_content, "", 16, GOLD)
+	for i in range(2):
 		var button := action(reward_content)
-		button.pressed.connect(func(): reward_pressed.emit(card))
+		button.pressed.connect(func(): reward_pressed.emit(reward_options[i]))
 		reward_buttons.append(button)
-		label(reward_content, reward_description(card), 13, MUTED)
+		reward_descriptions.append(label(reward_content, "", 13, MUTED))
 	action_button = action(content)
 	action_button.add_theme_stylebox_override("normal", surface(Color("235246"), 6))
 	action_button.add_theme_stylebox_override("hover", surface(Color("316a5b"), 6))
@@ -102,13 +108,14 @@ func _ready() -> void:
 func build_prep(parent: Control) -> void:
 	prep_content = VBoxContainer.new()
 	prep_content.custom_minimum_size.x = 280
-	prep_content.add_theme_constant_override("separation", 8)
+	prep_content.add_theme_constant_override("separation", 5)
 	parent.add_child(prep_content)
 	prep_title = label(prep_content, "", 27, PAPER)
-	label(prep_content, "Tonight’s orders  ·  Fee $%d" % Market.FEE, 16, GOLD)
+	forecast_title = label(prep_content, "", 16, GOLD)
 	for i in range(Market.NAMES.size()):
-		label(prep_content, "%s  ·  %d × $%d" % [Market.NAMES[i], Market.DEMAND[i], Market.PRICES[i]], 14, MINT)
+		forecast_labels.append(label(prep_content, "", 14, MINT))
 	label(prep_content, "Special: 1 watermelon + 1 spine melon", 13, MUTED)
+	route_hint = label(prep_content, "", 13, MUTED)
 	label(prep_content, "Choose today’s loadout", 16, GOLD)
 	var standard := action(prep_content)
 	standard.pressed.connect(func(): loadout_pressed.emit(Day.Card.STANDARD))
@@ -117,10 +124,12 @@ func build_prep(parent: Control) -> void:
 	var wedge := action(prep_content)
 	wedge.pressed.connect(func(): loadout_pressed.emit(Day.Card.WEDGE))
 	loadout_buttons.append(wedge)
-	label(prep_content, "First melon opening +%.1fs  ·  %.2f charge/cut" % [Day.WEDGE_OPEN_BONUS, Day.WEDGE_CUT_COST], 13, MUTED)
-	earned_button = action(prep_content)
-	earned_button.pressed.connect(func(): loadout_pressed.emit(available_reward))
-	earned_description = label(prep_content, "", 13, MUTED)
+	label(prep_content, "Melon opening +%.1fs once  ·  %.2f/cut" % [Day.WEDGE_OPEN_BONUS, Day.WEDGE_CUT_COST], 13, MUTED)
+	for i in range(2):
+		var button := action(prep_content)
+		button.custom_minimum_size.y = 48
+		button.pressed.connect(func(): loadout_pressed.emit(available_cards[i]))
+		deck_buttons.append(button)
 	start_button = action(prep_content)
 	start_button.text = "ENTER / START HARVEST"
 	start_button.add_theme_stylebox_override("normal", surface(Color("235246"), 6))
@@ -130,25 +139,39 @@ func build_prep(parent: Control) -> void:
 	prep_pause_button.pressed.connect(func(): pause_pressed.emit())
 
 func reward_name(card: Day.Card) -> String:
-	return "RESERVE CELL" if card == Day.Card.RESERVE_CELL else "SEED GUARD"
+	match card:
+		Day.Card.RESERVE_CELL: return "RESERVE CELL"
+		Day.Card.SEED_GUARD: return "SEED GUARD"
+		Day.Card.TUNED_BLADE: return "TUNED BLADE"
+		Day.Card.LIMITED_COCKTAIL: return "LIMITED COCKTAIL"
+	return ""
 
 func reward_description(card: Day.Card) -> String:
-	if card == Day.Card.RESERVE_CELL:
-		return "First unload: restore up to %d charge" % Day.RESERVE_CHARGE
-	return "First seed hit: costs %d instead of %d" % [Day.GUARDED_SEED_COST, Day.SEED_COST]
+	match card:
+		Day.Card.RESERVE_CELL: return "First unload: restore up to %d charge" % Day.RESERVE_CHARGE
+		Day.Card.SEED_GUARD: return "First seed hit: costs %d instead of %d" % [Day.GUARDED_SEED_COST, Day.SEED_COST]
+		Day.Card.TUNED_BLADE: return "Each cut uses %.2f charge" % Day.TUNED_CUT_COST
+		Day.Card.LIMITED_COCKTAIL: return "Special: +$%d each, +%.2fs prep" % [Market.COCKTAIL_BONUS, Market.COCKTAIL_EXTRA_TIME]
+	return ""
 
-func refresh_prep(card: Day.Card, paused: bool, run_day: int, reward: Day.Card) -> void:
+func refresh_prep(market: Market, card: Day.Card, paused: bool, run_day: int, deck: Array[Day.Card], balance: int) -> void:
 	show()
 	market_content.hide()
 	prep_content.show()
 	prep_title.text = "Day %d Preparation" % run_day
-	available_reward = reward if run_day > 1 else Day.Card.NONE
-	earned_button.visible = available_reward != Day.Card.NONE
-	earned_description.visible = earned_button.visible
-	if earned_button.visible:
-		earned_button.text = "C / " + reward_name(available_reward) + ("   ✓" if card == available_reward else "")
-		earned_description.text = reward_description(available_reward)
-		earned_button.disabled = paused
+	forecast_title.text = "Tonight’s fee $%d  ·  Run net $%d" % [market.fee, balance]
+	for i in range(forecast_labels.size()):
+		forecast_labels[i].text = "%s  ·  %d × $%d" % [Market.NAMES[i], market.demand[i], market.price(i)]
+	route_hint.text = "Spine melons: southwest and east" if run_day == Market.DAYS else "Spine melon: southwest"
+	available_cards = deck
+	for i in range(deck_buttons.size()):
+		var button := deck_buttons[i]
+		button.visible = i < deck.size()
+		if button.visible:
+			var reward := deck[i]
+			button.text = "%s / %s%s\n%s" % ["C" if i == 0 else "V", reward_name(reward),
+				"   ✓" if card == reward else "", reward_description(reward)]
+			button.disabled = paused
 	loadout_buttons[Day.Card.STANDARD].text = "Q / STANDARD KIT" + ("   ✓" if card == Day.Card.STANDARD else "")
 	loadout_buttons[Day.Card.WEDGE].text = "W / CUTTING WEDGE" + ("   ✓" if card == Day.Card.WEDGE else "")
 	for button in loadout_buttons:
@@ -156,7 +179,7 @@ func refresh_prep(card: Day.Card, paused: bool, run_day: int, reward: Day.Card) 
 	start_button.disabled = paused
 	prep_pause_button.text = "RESUME" if paused else "PAUSE"
 
-func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card) -> void:
+func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_sales: int, run_fees: int) -> void:
 	prep_content.hide()
 	market_content.show()
 	visible = market.phase != Market.Phase.OFF
@@ -165,11 +188,15 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card) -> vo
 	var picking := market.phase == Market.Phase.MENU
 	var serving := market.phase == Market.Phase.SERVICE
 	var closed := market.phase == Market.Phase.CLOSED
-	title.text = "Day %d Closed" % run_day if closed else "Night Market"
-	reward_content.visible = closed and run_day == 1
+	var final_night := run_day == Market.DAYS
+	title.text = "Day %d Closed" % run_day if closed else "Night %d Market" % run_day
+	reward_content.visible = closed and not final_night
 	if reward_content.visible:
+		reward_title.text = "Choose one card for Day %d" % (run_day + 1)
+		reward_options = Day.REWARD_OFFERS[run_day - 1]
 		for i in range(reward_buttons.size()):
-			var card: Day.Card = Day.REWARDS[i]
+			var card: Day.Card = reward_options[i]
+			reward_descriptions[i].text = reward_description(card)
 			var button := reward_buttons[i]
 			button.text = "%s / %s%s" % [key_for(i), reward_name(card), "   ✓" if card == reward else ""]
 			button.disabled = paused
@@ -177,18 +204,19 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card) -> vo
 	recipes.visible = picking or serving
 	for i in range(recipe_buttons.size()):
 		var button := recipe_buttons[i]
+		recipe_titles[i].text = "%s  ·  $%d" % [Market.NAMES[i], market.price(i)]
 		recipe_cards[i].visible = picking or (serving and market.selected[i])
 		if picking:
-			recipe_labels[i].text = "Up to %d orders" % Market.DEMAND[i]
+			recipe_labels[i].text = "Up to %d orders" % market.demand[i]
 			button.text = "%s / %s" % [key_for(i), "REMOVE FROM MENU" if market.selected[i] else "ADD TO MENU"]
 			if market.portions(i) == 0:
 				button.text = "NEEDS INGREDIENTS"
 			button.disabled = paused or market.portions(i) == 0
 		elif serving:
-			recipe_labels[i].text = "Served %d / %d   ·   Stock for %d" % [market.sold[i], Market.DEMAND[i], market.portions(i)]
+			recipe_labels[i].text = "Served %d / %d   ·   Stock for %d" % [market.sold[i], market.demand[i], market.portions(i)]
 			button.text = "%s / SERVE ORDER" % key_for(i)
 			button.disabled = paused or not market.can_serve(i)
-	ledger.text = "Sales  $%d     Operating fee  $%d" % [market.gross, Market.FEE]
+	ledger.text = "Sales  $%d     Operating fee  $%d" % [market.gross, market.fee]
 	var preparing := serving and market.active_recipe != -1
 	progress.visible = serving
 	progress.value = 100.0 * (1.0 - market.remaining / market.duration(market.active_recipe)) if preparing else 0.0
@@ -210,9 +238,13 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card) -> vo
 		else:
 			detail.text = "Operating shortfall  ·  $%d" % -market.net()
 		ledger.text += "\nServed  %d juice  ·  %d special" % [market.sold[0], market.sold[1]]
-		action_button.text = "ENTER / REPLAY DAY 1"
-		if reward_content.visible:
-			action_button.text = "ENTER / PREPARE DAY 2"
+		ledger.text += "\nRun sales $%d  ·  Run fees $%d" % [run_sales, run_fees]
+		if final_night:
+			title.text = "Run Complete"
+			detail.text = "Three-day net  $%d" % (run_sales - run_fees)
+			action_button.text = "ENTER / NEW RUN"
+		else:
+			action_button.text = "ENTER / PREPARE DAY %d" % (run_day + 1)
 			action_button.disabled = paused or reward == Day.Card.NONE
 	if paused:
 		detail.text = "Paused"
