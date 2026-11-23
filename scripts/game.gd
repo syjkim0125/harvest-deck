@@ -5,6 +5,12 @@ const WATERMELON_FRAME = Rect2(105, 57, 1016, 1190)
 const GOLDEN_FRUIT = preload("res://assets/golden-fruit-v1.png")
 const GOLDEN_FRAME = Rect2(103, 54, 1019, 1194)
 const FRUIT_SOURCE_SIZE = Vector2(1254, 1254)
+const HARVESTER_ATLAS = preload("res://assets/harvester-v1.png")
+const HARVESTER_FRONT := Rect2(4, 4, 112, 152)
+const HARVESTER_SIDE := Rect2(120, 4, 112, 152)
+const HARVESTER_BACK := Rect2(236, 4, 112, 152)
+const SAW_FRAME := Rect2(354, 4, 156, 76)
+const SLICE_ATLAS = preload("res://assets/fruit-slices-v1.png")
 const AvatarMotion = preload("res://scripts/avatar_motion.gd")
 const CargoView = preload("res://scripts/cargo_view.gd")
 const SawAudio = preload("res://scripts/saw_audio.gd")
@@ -17,13 +23,15 @@ const DayHarvest = preload("res://scripts/day_harvest.gd")
 const NightMarket = preload("res://scripts/night_market.gd")
 const NightMarketView = preload("res://scripts/night_market_view.gd")
 const CUT_TRAIL_DURATION := 0.075
-const BREAK_TRAIL_DURATION := 0.105
-const HIT_HOLD := 0.024
-const BREAK_HOLD := 0.034
+const BREAK_TRAIL_DURATION := 0.108
+const HIT_FLASH_DURATION := 0.055
+const HIT_HOLD := 0.032
+const BREAK_HOLD := 0.040
+const PICKUP_DURATION := 0.18
 const MAX_CUT_PARTICLES := 160
 const SPEED: float = 360.0
 const DASH_SPEED := 900.0
-const ATTACK_INTERVAL: float = 0.105
+const ATTACK_INTERVAL: float = 0.084
 const CAPACITY: int = 40
 const DEPOT_RADIUS := 85.0
 const CARGO_SPACING: float = 3.0
@@ -116,8 +124,8 @@ var avatar_style: StyleBoxFlat
 var cut_trail_left: float = 0.0
 var cut_trail_position := Vector2.ZERO
 var cut_trail_facing := Vector2.UP
-var cut_trail_kind := 0
 var cut_trail_break := false
+var cut_contacts: Array[Dictionary] = []
 
 func _ready() -> void:
 	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
@@ -215,13 +223,22 @@ func _ready() -> void:
 
 func toggle_reduced_motion() -> void:
 	impact.reduced = not impact.reduced
-	avatar.clear_hit()
-	cut_trail_left = 0.0
+	clear_cut_feedback()
+	particles.clear()
 	cargo_view.clear()
 	impact.clear()
 	if is_instance_valid(camera):
 		camera.offset = Vector2.ZERO
 	update_shake_button()
+
+func clear_cut_feedback() -> void:
+	avatar.clear_hit()
+	cut_trail_left = 0.0
+	cut_contacts.clear()
+	for fruit in fruits:
+		fruit.freeze = 0.0
+		fruit.flash = 0.0
+		fruit.recoil = Vector2.ZERO
 
 func update_shake_button() -> void:
 	shake_button.text = "M / OFF" if impact.reduced else ("M / SOFT" if impact.soft else "M / ON")
@@ -339,7 +356,7 @@ func reset_day() -> void:
 	drag_vector = Vector2.ZERO
 	impact.reset()
 	avatar.reset()
-	cut_trail_left = 0.0
+	clear_cut_feedback()
 	if is_instance_valid(saw_audio):
 		saw_audio.silence()
 	if is_instance_valid(camera):
@@ -385,8 +402,7 @@ func set_paused(value: bool) -> void:
 		pause_button.text = "RESUME" if paused else "PAUSE"
 	if is_instance_valid(night_view):
 		refresh_market_view()
-	avatar.clear_hit()
-	cut_trail_left = 0.0
+	clear_cut_feedback()
 	if value and is_instance_valid(saw_audio):
 		saw_audio.silence()
 	if value and is_instance_valid(audio):
@@ -457,8 +473,8 @@ func _input(event: InputEvent) -> void:
 			KEY_EQUAL: sound_volume = minf(1.0, sound_volume + 0.1)
 			KEY_3:
 				feedback = not feedback
-				avatar.clear_hit()
-				cut_trail_left = 0.0
+				clear_cut_feedback()
+				particles.clear()
 				cargo_view.clear()
 			KEY_4: local_stop = not local_stop
 			KEY_M: toggle_reduced_motion()
@@ -656,7 +672,7 @@ func conclude_day(exhausted: bool) -> void:
 	drag_vector = Vector2.ZERO
 	impact.clear()
 	avatar.reset()
-	cut_trail_left = 0.0
+	clear_cut_feedback()
 	cargo_view.clear()
 	particles.clear()
 	camera.offset = Vector2.ZERO
@@ -751,9 +767,17 @@ func simulate_slice(delta: float, direction: Vector2) -> void:
 	cut_trail_left = maxf(0.0, cut_trail_left - delta)
 	for fruit in fruits:
 		fruit.flash = maxf(0.0, fruit.flash - delta)
-		fruit.freeze = maxf(0.0, fruit.freeze - delta)
+		var held := minf(fruit.freeze, delta)
+		fruit.freeze -= held
 		if fruit.hp > 0 and fruit.freeze <= 0.0:
-			fruit.recoil = fruit.get("recoil", Vector2.ZERO).lerp(Vector2.ZERO, 1.0 - exp(-18.0 * delta))
+			fruit.recoil = fruit.get("recoil", Vector2.ZERO).lerp(Vector2.ZERO, 1.0 - exp(-25.0 * (delta - held)))
+	for i in range(particles.size() - 1, -1, -1):
+		var p = particles[i]
+		p.life -= delta
+		p.pos += p.vel * delta
+		p.vel *= exp(-4.0 * delta)
+		if p.life <= 0.0:
+			particles.remove_at(i)
 	time += delta
 	velocity = direction.limit_length() * SPEED
 	var previous_player = player
@@ -800,13 +824,6 @@ func simulate_slice(delta: float, direction: Vector2) -> void:
 				f.recoil = Vector2.ZERO
 		else:
 			f.pos = f.pos.lerp(f.home + Vector2(sin(time * 2.0 + f.home.x) * 7, cos(time * 2.5 + f.home.y) * 5), 1.0 - exp(-7.0 * delta))
-	for i in range(particles.size() - 1, -1, -1):
-		var p = particles[i]
-		p.life -= delta
-		p.pos += p.vel * delta
-		p.vel *= exp(-4.0 * delta)
-		if p.life <= 0.0:
-			particles.remove_at(i)
 	if player.distance_to(depot) < DEPOT_RADIUS and not cargo.is_empty():
 		unload_clock += delta
 		while unload_clock >= 0.04 and not cargo.is_empty():
@@ -827,7 +844,13 @@ func simulate_slice(delta: float, direction: Vector2) -> void:
 	saw_audio.step(delta, sound_on and loop_sound and not paused, velocity.length() > 1, cargo.size() >= CAPACITY)
 
 func deposit_cargo(animate: bool) -> void:
-	var start := cargo_position(cargo.size() - 1)
+	var index := cargo.size() - 1
+	var start := cargo_position(index)
+	for i in range(particles.size() - 1, -1, -1):
+		if particles[i].get("cargo_index", -1) == index:
+			start = pickup_position(particles[i])
+			particles.remove_at(i)
+			break
 	var kind: int = cargo.pop_back()
 	production.deposit(kind)
 	if animate:
@@ -877,6 +900,7 @@ func attack() -> int:
 	var killed := false
 	var exhausted := false
 	var nearest_contact := INF
+	var animated := feedback and not impact.reduced
 	for f in fruits:
 		if not production.can_harvest(f.kind) or f.hp <= 0 or cargo.size() >= CAPACITY:
 			continue
@@ -895,17 +919,19 @@ func attack() -> int:
 		var cut_axis := diff / distance if distance > 0.001 else facing
 		var contact: Vector2 = f.pos - cut_axis * minf(17.0, distance * 0.5) + Vector2(0, -7)
 		if feedback:
-			f.flash = 0.055
-			f.recoil = cut_axis * 9.0 if not impact.reduced else Vector2.ZERO
-		if local_stop and feedback and not impact.reduced:
-			f.freeze = HIT_HOLD
-		burst(contact, cut_axis, f.kind, dead)
+			f.flash = HIT_FLASH_DURATION
+		if animated:
+			if count == 1:
+				cut_contacts.clear()
+			cut_contacts.append({"at": contact, "axis": cut_axis, "kind": f.kind, "break": dead})
+			f.recoil = cut_axis * 9.0
+			f.freeze = HIT_HOLD if local_stop else 0.0
 		# Favor the nearest break, or the nearest normal cut if nothing broke.
 		if (dead and not killed) or (dead == killed and distance < nearest_contact):
 			nearest_contact = distance
 			cut_trail_position = contact
 			cut_trail_facing = cut_axis
-			cut_trail_kind = f.kind
+		var cargo_start := cargo.size()
 		if dead:
 			killed = true
 			if f.kind in [0, 1]:
@@ -915,6 +941,7 @@ func attack() -> int:
 					cargo.append(f.kind)
 				else:
 					ground_drops.append({"pos": f.pos + Vector2(j * 9 - 9, 15), "kind": f.kind})
+		burst(contact, cut_axis, f.kind, dead, cargo_start, cargo.size() - cargo_start)
 		if day_mode and day.spend(day.cut_cost()):
 			exhausted = true
 			break
@@ -924,7 +951,7 @@ func attack() -> int:
 	if count == 0:
 		return 0
 	impact.hit(killed, cut_trail_facing)
-	if feedback and not impact.reduced:
+	if animated:
 		var hold := (BREAK_HOLD if killed else HIT_HOLD) if local_stop else 0.0
 		avatar.confirmed_hit(hold, 1.4 if killed else 1.0)
 		cut_trail_break = killed
@@ -942,16 +969,22 @@ func attack() -> int:
 			audio.play()
 	return count
 
-func burst(at: Vector2, axis: Vector2, kind: int, dead: bool) -> void:
-	var amount := 15 if dead else 6
+func burst(at: Vector2, axis: Vector2, kind: int, dead: bool, cargo_start: int, collected: int) -> void:
+	var amount := 17 if dead else 7
 	var animated := feedback and not impact.reduced
 	for i in range(amount if animated else (6 if dead else 3)):
 		var piece := animated and dead and i < 4
-		var spread := 1.45 if piece else 0.95
-		var speed := particle_rng.randf_range(100.0, 260.0) if piece else particle_rng.randf_range(120.0, 340.0)
+		var pickup := piece and i < collected
+		var spread := 1.45 if piece else 1.15
+		var speed := particle_rng.randf_range(100.0, 230.0) if piece else particle_rng.randf_range(145.0, 390.0)
 		var velocity := axis.rotated(particle_rng.randf_range(-spread, spread)) * speed
-		var lifetime := particle_rng.randf_range(0.21, 0.36) if piece else particle_rng.randf_range(0.12, 0.27)
-		particles.append({"pos": at, "vel": velocity, "life": lifetime, "duration": lifetime, "kind": kind, "piece": piece})
+		var lifetime := particle_rng.randf_range(0.16, 0.28)
+		if pickup:
+			lifetime = PICKUP_DURATION
+		particles.append({
+			"pos": at, "vel": velocity, "life": lifetime, "duration": lifetime, "kind": kind, "piece": piece,
+			"cargo_index": cargo_start + i if pickup else -1,
+		})
 	if particles.size() > MAX_CUT_PARTICLES:
 		particles = particles.slice(particles.size() - MAX_CUT_PARTICLES)
 
@@ -968,12 +1001,12 @@ func make_hit_sound(broken: bool) -> AudioStreamWAV:
 	for i in range(sample_count):
 		var t := float(i) / wave.mix_rate
 		var noise := noise_rng.randf_range(-1.0, 1.0)
-		var grit := (noise - previous_noise * 0.72) * exp(-t * (65.0 if broken else 104.0))
+		var grit := (noise - previous_noise * 0.58) * exp(-t * (55.0 if broken else 112.0))
 		previous_noise = noise
 		var body := sin(TAU * (168.0 * t - 660.0 * t * t)) * exp(-t * 30.0) if broken else sin(TAU * (345.0 * t - 2100.0 * t * t)) * exp(-t * 72.0)
 		var edge := sin(TAU * 1900.0 * t) * exp(-t * 220.0)
 		var ramp := minf(t / 0.0013, 1.0) * minf(float(sample_count - 1 - i) / 100.0, 1.0)
-		var sample := (body * (0.39 if broken else 0.27) + grit * 0.21 + edge * 0.14) * ramp
+		var sample := (body * (0.52 if broken else 0.29) + grit * 0.28 + edge * 0.17) * ramp
 		bytes.encode_s16(i * 2, roundi(clampf(sample, -0.48, 0.48) * 32767.0))
 	wave.data = bytes
 	return wave
@@ -1004,15 +1037,20 @@ func _draw() -> void:
 			draw_fruit_actor(fruits[actor])
 	draw_cut_trail()
 	for p in particles:
-		var opacity := clampf(p.life / p.duration * 2.0, 0.0, 1.0)
+		var progress := 1.0 - clampf(p.life / p.duration, 0.0, 1.0)
+		var opacity := 1.0 - smoothstep(0.34, 1.0, progress)
 		if p.piece and feedback and not impact.reduced:
-			draw_slice(p.pos, p.kind, 6.0 + 3.0 * opacity, p.vel.angle() + time * 8.0)
+			var at := pickup_position(p) if p.cargo_index >= 0 else Vector2(p.pos)
+			var settled := smoothstep(0.45, 1.0, progress) if p.cargo_index >= 0 else 0.0
+			var size := lerpf(7.0, 13.0, settled) if p.cargo_index >= 0 else 7.0 * opacity
+			draw_slice(at, p.kind, size, lerp_angle(p.vel.angle() + time * 8.0, 0.13, settled))
 		else:
-			var juice := fruit_flesh_color(p.kind).darkened(0.12)
+			var juice := cut_juice_color(p.kind)
 			juice.a = opacity
 			if feedback and not impact.reduced and p.vel.length_squared() > 9000.0:
-				var tail: Vector2 = p.pos - p.vel * (0.025 + 0.055 * opacity)
-				draw_line(tail, p.pos, juice, 2.0 + 2.0 * opacity, true)
+				var tail: Vector2 = p.pos - p.vel * (0.02 + 0.065 * opacity) * smoothstep(0.0, 0.18, progress)
+				draw_line(tail, p.pos, juice, 1.0 + 2.2 * opacity, true)
+				draw_circle(p.pos, 1.1 + 1.5 * opacity, juice, true, -1.0, true)
 			else:
 				draw_circle(p.pos, 3.0, juice, true)
 	# Damaged-target bars remain readable above bodies and the carried stack.
@@ -1149,31 +1187,29 @@ func draw_cut_trail() -> void:
 	if cut_trail_left <= 0.0 or not feedback or impact.reduced:
 		return
 	var duration := BREAK_TRAIL_DURATION if cut_trail_break else CUT_TRAIL_DURATION
-	var strength := cut_trail_left / duration
-	var shape := 1.2 if cut_trail_break else 1.0
-	var side := cut_trail_facing.orthogonal()
-	var center := cut_trail_position
-	var tint := fruit_flesh_color(cut_trail_kind)
-	tint.a = strength * 0.72
-	# Draw a tapered strike at the contact, followed by outward juice trails.
-	var spark := PackedVector2Array([
-		center - cut_trail_facing * 22.0 * shape,
-		center - side * 7.0 * shape,
-		center + cut_trail_facing * 26.0 * shape,
-		center + side * 7.0 * shape,
-	])
-	draw_colored_polygon(spark, tint)
-	var core := PackedVector2Array([
-		center - cut_trail_facing * 13.0 * shape,
-		center - side * 3.0 * shape,
-		center + cut_trail_facing * 16.0 * shape,
-		center + side * 3.0 * shape,
-	])
-	draw_colored_polygon(core, Color(1.0, 0.97, 0.79, strength))
-	for i in range(4 if cut_trail_break else 2):
-		var angle := (i - (1.5 if cut_trail_break else 0.5)) * 0.47
-		var ray := cut_trail_facing.rotated(angle)
-		draw_line(center + ray * 6.0, center + ray * (20.0 + 11.0 * strength) * shape, tint, 2.0, true)
+	var age := duration - cut_trail_left
+	for contact in cut_contacts:
+		var life := BREAK_TRAIL_DURATION if contact.break else CUT_TRAIL_DURATION
+		var strength := 1.0 - clampf(age / life, 0.0, 1.0)
+		if strength <= 0.0:
+			continue
+		var center: Vector2 = contact.at
+		var axis: Vector2 = contact.axis
+		var tint := cut_juice_color(contact.kind)
+		tint.a = strength
+		var length := 45.0 if contact.break else 33.0
+		for i in range(-1, 2):
+			var ray := axis.rotated(i * 0.49)
+			var tip := center + ray * length * (1.0 if i == 0 else 0.78)
+			var width := ray.orthogonal() * (1.1 + 1.9 * strength)
+			draw_colored_polygon(PackedVector2Array([center, center + ray * 10.0 + width, tip,
+				center + ray * 10.0 - width]), tint)
+		var core := Color(1.0, 0.97, 0.79, 1.0 - smoothstep(0.012, 0.055, age))
+		if core.a > 0.0:
+			var side := axis.orthogonal() * 4.0
+			draw_colored_polygon(PackedVector2Array([center - axis * 13.0, center + side,
+				center + axis * 19.0, center - side]), core)
+			draw_circle(center, 4.5 if contact.break else 3.0, core, true, -1.0, true)
 
 func player_is_occluded() -> bool:
 	# Conservative body samples, not per-pixel alpha reads. Ignore transparent
@@ -1284,14 +1320,26 @@ func draw_player_actor() -> void:
 	draw_set_transform(player + Vector2(0, 8), 0, Vector2(1, 0.45))
 	draw_circle(Vector2.ZERO, 24, Color(0.02, 0.08, 0.07, 0.4))
 	draw_set_transform(Vector2.ZERO)
+	var flying := {}
+	if feedback and not impact.reduced:
+		for p in particles:
+			if p.cargo_index >= 0:
+				flying[p.cargo_index] = true
 	for i in range(cargo.size() - 1, -1, -1):
-		draw_slice(cargo_position(i), cargo[i], 13, 0.13 if i % 2 == 0 else -0.13)
+		if i not in flying:
+			draw_slice(cargo_position(i), cargo[i], 13, 0.13 if i % 2 == 0 else -0.13)
 	draw_avatar()
 
 func saw_endpoints() -> Array[Vector2]:
 	var kick = avatar.kick() if feedback and not impact.reduced else 0.0
 	var start = player + facing * (19.0 - kick) + Vector2(0, -6)
-	return [start, start + facing * 48]
+	if cut_trail_left <= 0.0 or not feedback or impact.reduced:
+		return [start, start + facing * 48]
+	# Turn the visual bar toward the confirmed contact without changing the hitbox.
+	var weight := clampf(cut_trail_left / CUT_TRAIL_DURATION, 0.0, 1.0)
+	var aim := start.direction_to(cut_trail_position)
+	var axis := facing.lerp(aim, weight * 0.40).normalized()
+	return [start, start + axis * (48.0 + weight * 8.0)]
 
 func draw_avatar() -> void:
 	var bob = avatar.bob(impact.reduced)
@@ -1307,7 +1355,23 @@ func draw_avatar() -> void:
 		draw_line(hip, foot, Color("26343d"), 8)
 		draw_circle(foot, 5, Color("162c33"))
 		draw_line(foot - side * 2, foot + side * 2, Color("79a9aa"), 2)
-	# Same 38-unit body silhouette in all directions; original procedural outfit.
+	if sprite_art:
+		var frame := harvester_frame()
+		var mirror := -1.0 if frame == HARVESTER_SIDE and facing.x < 0.0 else 1.0
+		draw_set_transform(player + Vector2(0, bob), 0.0, Vector2(mirror, 1.0))
+		draw_texture_rect_region(HARVESTER_ATLAS, Rect2(-19, -45, 38, 51), frame)
+		draw_set_transform(Vector2.ZERO)
+	else:
+		draw_legacy_avatar_body(bob)
+	if facing.y >= -0.35:
+		draw_equipped_saw(bob)
+
+func harvester_frame() -> Rect2:
+	if absf(facing.x) > absf(facing.y):
+		return HARVESTER_SIDE
+	return HARVESTER_BACK if facing.y < 0.0 else HARVESTER_FRONT
+
+func draw_legacy_avatar_body(bob: float) -> void:
 	draw_circle(player + Vector2(0, -9 + bob), 19, Color("173440"))
 	draw_style_box(avatar_jacket_style(), Rect2(player + Vector2(-11, -20 + bob), Vector2(22, 21)))
 	var torso = player + Vector2(0, -9 + bob)
@@ -1332,24 +1396,33 @@ func draw_avatar() -> void:
 		for x in [-4, 4]:
 			draw_circle(head + Vector2(x, 1), 1.8, Color("17313b"))
 		draw_line(head + Vector2(-2, 7), head + Vector2(2, 7), Color("986c5b"), 1.5)
-	if facing.y >= -0.35:
-		draw_equipped_saw(bob)
 
 func draw_equipped_saw(bob: float) -> void:
-	var side = facing.orthogonal()
 	var ends = saw_endpoints()
+	var axis := ends[0].direction_to(ends[1])
+	var side := axis.orthogonal()
 	for i in [-1, 1]:
 		var shoulder = player + Vector2(i * 9, -13 + bob)
 		var hand: Vector2 = ends[0] + side * (i * 7)
 		draw_line(shoulder, hand, Color("173440"), 8)
 		draw_line(shoulder, hand, Color("e0be98"), 5)
+	if sprite_art:
+		var length := ends[0].distance_to(ends[1]) + 9.0
+		var height := length * SAW_FRAME.size.y / SAW_FRAME.size.x
+		var flip := -1.0 if axis.x < 0.0 else 1.0
+		draw_set_transform(ends[0], axis.angle(), Vector2(1.0, flip))
+		var glow := clampf(cut_trail_left / 0.055, 0.0, 1.0) if feedback and not impact.reduced else 0.0
+		draw_texture_rect_region(HARVESTER_ATLAS, Rect2(-9.0, -height * 0.58, length, height), SAW_FRAME,
+			Color(1.0 + glow * 0.45, 1.0 + glow * 0.20, 1.0))
+		draw_set_transform(Vector2.ZERO)
+		return
 	draw_line(ends[0], ends[1], Color("17313b"), 20)
 	draw_line(ends[0], ends[1], Color("c1d8d0"), 12)
-	draw_line(ends[0] + facing * 8, ends[1] - facing * 6, Color("718f91"), 3)
+	draw_line(ends[0] + axis * 8, ends[1] - axis * 6, Color("718f91"), 3)
 	for tooth in range(8):
-		var center: Vector2 = ends[0] + facing * (9 + tooth * 5)
+		var center: Vector2 = ends[0] + axis * (9 + tooth * 5)
 		for sign_side in [-1, 1]:
-			draw_line(center + side * (sign_side * 5), center + side * (sign_side * 8) - facing * 2, Color("17313b"), 2)
+			draw_line(center + side * (sign_side * 5), center + side * (sign_side * 8) - axis * 2, Color("17313b"), 2)
 	draw_circle(ends[0], 13, Color("17313b"))
 	draw_circle(ends[0], 10, Color("4eafb6"))
 	draw_line(ends[0] - side * 6, ends[0] + side * 6, Color("a3e6df"), 3)
@@ -1366,7 +1439,21 @@ func cargo_position(index: int) -> Vector2:
 	var sway = sin(time * 7 - index * 0.18) * minf(index * 0.3, 8.0) if velocity.length() > 1 and not impact.reduced else 0.0
 	return player + Vector2(-13 + sway, -25 - index * CARGO_SPACING)
 
+func pickup_position(piece: Dictionary) -> Vector2:
+	var progress := 1.0 - clampf(piece.life / PICKUP_DURATION, 0.0, 1.0)
+	var destination := cargo_position(piece.cargo_index)
+	var at: Vector2 = piece.pos.lerp(destination, smoothstep(0.20, 1.0, progress))
+	return at + Vector2(0, -sin(progress * PI) * 12.0)
+
 func draw_slice(at: Vector2, kind: int, radius: float, tilt: float) -> void:
+	if sprite_art:
+		var frame := Rect2(4 + kind * 128, 4, 120, 96)
+		var width := radius * 2.0
+		var height := width * frame.size.y / frame.size.x
+		draw_set_transform(at, tilt)
+		draw_texture_rect_region(SLICE_ATLAS, Rect2(-radius, -height * 0.34, width, height), frame)
+		draw_set_transform(Vector2.ZERO)
+		return
 	# Original procedural wedge: dark silhouette, rind, cut face, three seeds.
 	var outline = PackedVector2Array()
 	var rind = PackedVector2Array()
@@ -1394,10 +1481,13 @@ func fruit_flesh_color(kind: int) -> Color:
 		RollingOrange.KIND: return Color("ffb35e")
 		_: return Color("ffe397")
 
+func cut_juice_color(kind: int) -> Color:
+	return Color("f13b4e") if kind == 0 else fruit_flesh_color(kind)
+
 func fruit_display_scale(fruit: Dictionary) -> Vector2:
 	if not feedback or impact.reduced:
 		return Vector2.ONE
-	var strength = clampf(fruit.get("flash", 0.0) / 0.055, 0.0, 1.0)
+	var strength = clampf(fruit.get("flash", 0.0) / HIT_FLASH_DURATION, 0.0, 1.0)
 	return Vector2(1.0 + 0.16 * strength, 1.0 - 0.15 * strength)
 
 func fruit_texture(kind: int) -> Texture2D:
@@ -1423,7 +1513,9 @@ func draw_fruit(at: Vector2, kind: int, radius: float, flash: bool) -> void:
 			var angle = TAU * i / 24.0
 			shadow.append(at + Vector2(cos(angle) * radius * 0.95, radius * 0.68 + sin(angle) * radius * 0.28))
 		draw_colored_polygon(shadow, Color(0.03, 0.10, 0.07, 0.35))
-		var tint = Color(1.75, 1.75, 1.75, 1) if flash else Color.WHITE
+		var tint := Color.WHITE
+		if flash:
+			tint = Color(1.3, 1.25, 1.0) if impact.reduced else Color(2.35, 1.9, 0.95)
 		draw_texture_rect_region(fruit_texture(kind), fruit_sprite_rect(at, kind, radius), fruit_sprite_region(kind), tint)
 		return
 	draw_circle(at + Vector2(0, radius * 0.22), radius, Color("203e35"))

@@ -14,3 +14,9 @@ No images, artwork or audio from the reference game were supplied to generation 
 ## Golden fruit and runtime import
 
 Golden-fruit-v1.png was produced by editing only the palette of our generated watermelon source with the built-in image tool. The full edit prompt is in golden-generation-prompt.txt; source SHA256 and source-frame bounds are in golden-fruit-v1.json. Both original PNGs remain unmodified. Godot imports both at a maximum512px with mipmaps, and draw regions scale from the1254px source coordinates to the actual imported texture size. Both static sprites use the same48-unit body width and bottom anchor.
+
+## Harvester and fruit slices
+
+- `harvester-v1.png` contains three views of the orchard mechanic and an independent saw sprite. The left-facing pose mirrors the side view.
+- `fruit-slices-v1.png` contains watermelon, golden fruit, spine melon and orange wedges in gameplay kind order.
+- Prompts described an original orchard mechanic in a navy cap and teal jacket with amber goggles, a teal-and-brass battery pruner, and four painted fruit wedges on transparent sheets. The generated artwork was trimmed and packed into atlases for Godot.
