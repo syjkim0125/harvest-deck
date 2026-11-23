@@ -3,7 +3,7 @@ extends RefCounted
 
 const RollingOrange = preload("res://scripts/rolling_orange.gd")
 
-enum Card { NONE = -1, STANDARD, WEDGE, RESERVE_CELL, SEED_GUARD, TUNED_BLADE, LIMITED_COCKTAIL, WHEEL_CHOCK }
+enum Card { NONE = -1, STANDARD, WEDGE, RESERVE_CELL, SEED_GUARD, TUNED_BLADE, LIMITED_COCKTAIL, WHEEL_CHOCK, DASH_KIT }
 enum Outcome { ACTIVE, RETURNED, EXHAUSTED }
 
 const MAX_CHARGE := 100.0
@@ -16,6 +16,8 @@ const RESERVE_CHARGE := 25.0
 const GUARDED_SEED_COST := 10.0
 const TUNED_CUT_COST := 0.75
 const CHOCK_BRAKE_BONUS := 0.60
+const DASH_COST := 8.0
+const DASH_SECONDS := 0.20
 const REWARD_OFFERS := [
 	[Card.RESERVE_CELL, Card.SEED_GUARD, Card.WHEEL_CHOCK],
 	[Card.TUNED_BLADE, Card.LIMITED_COCKTAIL],
@@ -26,10 +28,11 @@ var charge := MAX_CHARGE
 var outcome := Outcome.ACTIVE
 var lost_cargo := 0
 var reward_used := false
+var dash_used := false
 var last_seed_cost := SEED_COST
 
 static func card_available(card_id: Card, day_number: int) -> bool:
-	return card_id != Card.WHEEL_CHOCK or day_number == RollingOrange.DAY
+	return card_id not in [Card.WHEEL_CHOCK, Card.DASH_KIT] or day_number == RollingOrange.DAY
 
 func reset() -> void:
 	card = Card.STANDARD
@@ -37,6 +40,7 @@ func reset() -> void:
 	outcome = Outcome.ACTIVE
 	lost_cargo = 0
 	reward_used = false
+	dash_used = false
 	last_seed_cost = SEED_COST
 
 func cut_cost() -> float:

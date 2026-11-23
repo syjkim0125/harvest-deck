@@ -22,6 +22,7 @@ const HIT_HOLD := 0.024
 const BREAK_HOLD := 0.034
 const MAX_CUT_PARTICLES := 160
 const SPEED: float = 360.0
+const DASH_SPEED := 900.0
 const ATTACK_INTERVAL: float = 0.105
 const CAPACITY: int = 40
 const DEPOT_RADIUS := 85.0
@@ -63,6 +64,9 @@ var pause_button: Button
 var shake_button: Button
 var mode_button: Button
 var return_button: Button
+var dash_button: Button
+var dash_left := 0.0
+var dash_direction := Vector2.ZERO
 var portrait_view: bool = false
 var hud_height: float = HUD_HEIGHT
 var camera: Camera2D
@@ -176,6 +180,12 @@ func _ready() -> void:
 	return_button.focus_mode = Control.FOCUS_NONE
 	return_button.pressed.connect(advance_day)
 	layer.add_child(return_button)
+	dash_button = Button.new()
+	dash_button.focus_mode = Control.FOCUS_NONE
+	dash_button.add_theme_font_size_override("font_size", 11)
+	dash_button.tooltip_text = "Dash once for %d battery." % DayHarvest.DASH_COST
+	dash_button.pressed.connect(try_dash)
+	layer.add_child(dash_button)
 	var night_layer := CanvasLayer.new()
 	night_layer.layer = 2
 	add_child(night_layer)
@@ -250,10 +260,7 @@ func layout_hud() -> void:
 	mode_button.text = "NEW LAB" if day_mode else "NEW DAY"
 	shake_button.tooltip_text = "Toggle screen shake."
 	mode_button.tooltip_text = "Switch modes and start a new run."
-	return_button.position = Vector2(16, 118) if portrait_view else Vector2(240, 116)
-	return_button.size = Vector2(width - 32, 38) if portrait_view else Vector2(220, 29)
-	return_button.add_theme_font_size_override("font_size", 13)
-	return_button.visible = day_mode
+	layout_day_actions()
 	for button in buttons:
 		button.visible = not day_mode
 	camera.zoom = Vector2.ONE * (1.4 if portrait_view else 1.0)
@@ -261,6 +268,22 @@ func layout_hud() -> void:
 	drag_id = -1
 	drag_vector = Vector2.ZERO
 	camera.offset = Vector2.ZERO
+
+func layout_day_actions() -> void:
+	var width := get_viewport_rect().size.x
+	var active_kit := day_mode and not preparing_day and not day_finished() and day.card == DayHarvest.Card.DASH_KIT
+	return_button.visible = day_mode
+	return_button.position = Vector2(16, 118) if portrait_view else Vector2(240, 116)
+	return_button.size = Vector2(width - (140 if active_kit else 32), 38) if portrait_view else Vector2(220, 29)
+	return_button.add_theme_font_size_override("font_size", 11 if active_kit and portrait_view else 13)
+	dash_button.visible = active_kit
+	dash_button.position = Vector2(width - 116, 118) if portrait_view else Vector2(480, 116)
+	dash_button.size = Vector2(100, 38) if portrait_view else Vector2(220, 29)
+	update_dash_button()
+
+func update_dash_button() -> void:
+	dash_button.disabled = not can_dash()
+	dash_button.text = "DASH USED" if day.dash_used else "SPACE / DASH"
 
 func setup_inputs() -> void:
 	var bindings = {"left": [KEY_A, KEY_LEFT], "right": [KEY_D, KEY_RIGHT], "up": [KEY_W, KEY_UP], "down": [KEY_S, KEY_DOWN]}
@@ -291,6 +314,7 @@ func reset_day() -> void:
 	cargo_view.clear()
 	fruits.clear()
 	production.reset()
+	dash_left = 0.0
 	day.reset()
 	preparing_day = day_mode
 	night.reset(run_day)
@@ -310,6 +334,7 @@ func reset_day() -> void:
 		refresh_market_view()
 	if is_instance_valid(pause_button):
 		pause_button.text = "PAUSE"
+		layout_day_actions()
 	drag_id = -1
 	drag_vector = Vector2.ZERO
 	impact.reset()
@@ -352,6 +377,10 @@ func _notification(what: int) -> void:
 
 func set_paused(value: bool) -> void:
 	paused = value
+	if paused:
+		dash_left = 0.0
+	if is_instance_valid(dash_button):
+		update_dash_button()
 	if is_instance_valid(pause_button):
 		pause_button.text = "RESUME" if paused else "PAUSE"
 	if is_instance_valid(night_view):
@@ -406,6 +435,8 @@ func _input(event: InputEvent) -> void:
 					pick_reward_card(DayHarvest.Card.WHEEL_CHOCK)
 				else:
 					pick_night_recipe(NightMarket.Recipe.ORANGE)
+			KEY_B: pick_day_card(DayHarvest.Card.DASH_KIT)
+			KEY_SPACE: try_dash()
 			KEY_E: try_hire_cashier()
 			KEY_F: try_upgrade_mixer()
 			KEY_G: try_unlock_orchard()
@@ -458,10 +489,7 @@ func _physics_process(delta: float) -> void:
 		refresh_market_view()
 		return
 	if not paused and not day_finished():
-		var direction = Input.get_vector("left", "right", "up", "down")
-		if drag_vector.length() > 0.05:
-			direction = drag_vector
-		simulate(delta, direction)
+		simulate(delta, movement_direction())
 	camera.offset = feedback_offset() if not paused else Vector2.ZERO
 	if day_mode:
 		update_day_hud()
@@ -507,6 +535,8 @@ func update_day_hud() -> void:
 		hint = "HARVEST ENDED • Safe stock secured"
 	status.text = hint + "\n" + ("Continue to the night market" if day_finished() else "WASD / arrows / drag • auto-cut\nRing: battery drain • M: shake • 7: new lab")
 	return_button.text = "ENTER / NIGHT MENU" if day_finished() else "ENTER / END HARVEST"
+	if dash_button.visible:
+		update_dash_button()
 	return_button.disabled = paused or (not day_finished() and (not cargo.is_empty() or player.distance_to(depot) >= DEPOT_RADIUS))
 
 func switch_mode() -> void:
@@ -534,7 +564,7 @@ func pick_reward_card(card: DayHarvest.Card) -> void:
 
 func pick_day_card(card: DayHarvest.Card) -> void:
 	if preparing_day and not paused and DayHarvest.card_available(card, run_day) and (
-		card == DayHarvest.Card.STANDARD or card == DayHarvest.Card.WEDGE or card in deck):
+		card in [DayHarvest.Card.STANDARD, DayHarvest.Card.WEDGE, DayHarvest.Card.DASH_KIT] or card in deck):
 		day.card = card
 		night.cocktail = card == DayHarvest.Card.LIMITED_COCKTAIL
 		refresh_market_view()
@@ -548,6 +578,7 @@ func begin_harvest() -> bool:
 			fruit.encounter.first_open_bonus = DayHarvest.WEDGE_OPEN_BONUS
 		elif fruit.kind == RollingOrange.KIND and day.card == DayHarvest.Card.WHEEL_CHOCK:
 			fruit.encounter.brake_bonus = DayHarvest.CHOCK_BRAKE_BONUS
+	layout_day_actions()
 	refresh_market_view()
 	return true
 
@@ -605,6 +636,7 @@ func finish_day_at_depot() -> bool:
 	return true
 
 func conclude_day(exhausted: bool) -> void:
+	dash_left = 0.0
 	day.outcome = DayHarvest.Outcome.EXHAUSTED if exhausted else DayHarvest.Outcome.RETURNED
 	if exhausted:
 		# Keep the oldest half of the carried stack. Already deposited stock is untouched.
@@ -629,6 +661,7 @@ func conclude_day(exhausted: bool) -> void:
 		camera.force_update_scroll()
 	saw_audio.silence()
 	audio.stop()
+	layout_day_actions()
 
 func try_hire_cashier() -> bool:
 	if day_mode or paused or player.distance_to(hire_pad) >= 80:
@@ -675,6 +708,26 @@ func camera_follow_target() -> Vector2:
 	var shop_bias = 50.0 if portrait_view else 180.0
 	return player + Vector2(0, -shop_bias * shop_weight - hud_bias)
 
+func movement_direction() -> Vector2:
+	if drag_vector.length() > 0.05:
+		return drag_vector
+	return Input.get_vector("left", "right", "up", "down")
+
+func can_dash() -> bool:
+	return day_mode and not preparing_day and not day_finished() and not paused and (
+		day.card == DayHarvest.Card.DASH_KIT and not day.dash_used and day.charge > DayHarvest.DASH_COST)
+
+func try_dash() -> bool:
+	if not can_dash():
+		return false
+	var direction := movement_direction()
+	dash_direction = direction.normalized() if direction.length() > 0.05 else facing
+	dash_left = DayHarvest.DASH_SECONDS
+	day.dash_used = true
+	day.spend(DayHarvest.DASH_COST)
+	update_dash_button()
+	return true
+
 func simulate(delta: float, direction: Vector2) -> void:
 	if preparing_day:
 		return
@@ -701,10 +754,16 @@ func simulate_slice(delta: float, direction: Vector2) -> void:
 	time += delta
 	velocity = direction.limit_length() * SPEED
 	var previous_player = player
+	if dash_left > 0.0:
+		var dash_time := minf(dash_left, delta)
+		dash_left = maxf(0.0, dash_left - delta)
+		var displacement := dash_direction * DASH_SPEED * dash_time + velocity * (delta - dash_time)
+		velocity = displacement / delta
+		facing = dash_direction
+	elif direction.length() > 0.05:
+		facing = direction.normalized()
 	player += velocity * delta
 	player = player.clamp(BOUNDS.position + Vector2.ONE * 20, BOUNDS.end - Vector2.ONE * 20)
-	if direction.length() > 0.05:
-		facing = direction.normalized()
 	avatar.step(delta, player - previous_player, facing)
 	# Follow the travelled path at the same cadence as movement, not only the
 	# final target of a long physics frame. Hit offset stays a separate channel.

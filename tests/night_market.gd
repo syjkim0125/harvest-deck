@@ -387,6 +387,85 @@ func check_wheel_chock(game) -> void:
 			"the final screen retains the real citrus sale from the prior night")
 	game.reset_run()
 
+func check_dash_kit(game) -> void:
+	key(game, KEY_B)
+	check(game.day.card == Day.Card.STANDARD and not game.night_view.dash_kit_button.visible,
+		"the dash kit is offered only on the orange day")
+	for equip_dash in [false, true]:
+		open_orange_day(game)
+		if equip_dash:
+			game.night_view.dash_kit_button.pressed.emit()
+			check(game.day.card == Day.Card.DASH_KIT and not game.try_dash(), "selecting the kit does not use the ability during prep")
+			key(game, KEY_Q)
+			key(game, KEY_B)
+		else:
+			key(game, KEY_Q)
+		key(game, KEY_ENTER)
+		var orange: Orange = game.fruits[-1].encounter
+		walk_to(game, Orange.HOME + Vector2(0, -70))
+		walk_to(game, Orange.BRAKE_POINT + Vector2(-155, -155))
+		game.simulate(0.40, Vector2.ZERO)
+		check(orange.phase == Orange.Phase.BRAKING and orange.brake_bonus == 0.0 and orange.brake_left > 0.50,
+			"both approaches reach the same unextended brake window")
+		game.simulate(orange.brake_left - 0.50, Vector2.ZERO)
+		var direction := Vector2.ONE.normalized()
+		var start: Vector2 = game.player
+		if equip_dash:
+			game.set_paused(true)
+			check(game.dash_button.disabled and not game.try_dash(), "pause blocks the dash")
+			game.set_paused(false)
+			game.day.charge = Day.DASH_COST
+			check(not game.try_dash() and not game.day.dash_used, "dash requires enough charge to leave the saw on")
+			game.day.charge = Day.MAX_CHARGE
+			Input.action_press("right")
+			Input.action_press("down")
+			key(game, KEY_SPACE)
+			Input.action_release("right")
+			Input.action_release("down")
+			check(game.day.charge == 92.0 and game.dash_button.disabled and not game.try_dash(), "Space spends eight charge once")
+			game.simulate(Day.DASH_SECONDS, Vector2.ZERO)
+			check(game.player.distance_to(start + direction * game.DASH_SPEED * Day.DASH_SECONDS) < 0.01,
+				"the dash travels 180 units along the selected diagonal")
+			game.simulate(0.31, Vector2.ZERO)
+		else:
+			check(not game.dash_button.visible and not game.try_dash(), "standard kit keeps its original movement inputs")
+			game.simulate(0.50, direction)
+			game.simulate(0.01, Vector2.ZERO)
+		check(game.cargo.count(Orange.KIND) == (3 if equip_dash else 0),
+			"the same late corner %s" % ("can be intercepted with a dash" if equip_dash else "is missed when approached on foot"))
+		if equip_dash:
+			var after_dash: Vector2 = game.player
+			game.simulate(0.1, Vector2.RIGHT)
+			check(game.player.distance_to(after_dash + Vector2.RIGHT * 36.0) < 0.01, "normal speed resumes as soon as the dash ends")
+			walk_to(game, Vector2(510, 690))
+			game.simulate(0.70, Vector2.ZERO)
+			walk_to(game, game.depot)
+			game.simulate(2.0, Vector2.ZERO)
+			key(game, KEY_ENTER)
+			key(game, KEY_ENTER)
+			key(game, KEY_T)
+			key(game, KEY_ENTER)
+			key(game, KEY_T)
+			game._physics_process(2.0)
+			check(game.night.gross == 9 and game.night.sold[2] == 1, "the dash-caught orange reaches the second night's menu")
+
+	open_orange_day(game)
+	key(game, KEY_B)
+	key(game, KEY_ENTER)
+	game.drag_vector = Vector2.DOWN
+	var touch_start: Vector2 = game.player
+	game.dash_button.pressed.emit()
+	game.simulate(0.05, Vector2.ZERO)
+	var pause_at: Vector2 = game.player
+	game.set_paused(true)
+	game.set_paused(false)
+	game.simulate(0.3, Vector2.ZERO)
+	check(game.day.dash_used and pause_at.distance_to(touch_start + Vector2(0, 45)) < 0.01
+		and game.player == pause_at and game.dash_left == 0.0,
+		"the touch button uses the drag direction and pausing cancels the remaining dash")
+	game.reset_run()
+	check(not game.day.dash_used and game.dash_left == 0.0 and not game.dash_button.visible, "new run clears the dash state")
+
 func run() -> void:
 	var game = load("res://main.tscn").instantiate()
 	root.add_child(game)
@@ -402,6 +481,7 @@ func run() -> void:
 	check_watermelon_run(game)
 	check_rolling_orange(game)
 	check_wheel_chock(game)
+	check_dash_kit(game)
 	var night = game.night
 	var ui = game.night_view
 	check(not game.enter_night(), "an active expedition cannot open the market")
@@ -507,8 +587,16 @@ func run() -> void:
 		key(layout_game, KEY_ENTER)
 		await process_frame
 		await process_frame
-		check(bounds.encloses(pane.prep_content.get_global_rect()) and bounds.encloses(pane.deck_buttons[0].get_global_rect()),
-			"Day 2 preparation and the earned card fit at %s" % size)
+		check(bounds.encloses(pane.prep_content.get_global_rect()) and bounds.encloses(pane.deck_buttons[0].get_global_rect())
+			and bounds.encloses(pane.dash_kit_button.get_global_rect()), "Day 2 prep fits both the dash kit and the earned card at %s" % size)
+		key(layout_game, KEY_B)
+		key(layout_game, KEY_ENTER)
+		layout_game._physics_process(0.0)
+		await process_frame
+		await process_frame
+		check(bounds.encloses(layout_game.dash_button.get_global_rect())
+			and not layout_game.dash_button.get_global_rect().intersects(layout_game.return_button.get_global_rect()),
+			"the touch dash and end-harvest buttons fit at %s" % size)
 		deliver(layout_game, [0, MELON, Orange.KIND])
 		await process_frame
 		await process_frame

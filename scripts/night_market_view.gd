@@ -22,6 +22,7 @@ signal start_pressed
 var market_content: VBoxContainer
 var prep_content: VBoxContainer
 var loadout_buttons: Array[Button] = []
+var dash_kit_button: Button
 var prep_title: Label
 var forecast_title: Label
 var forecast_labels: Array[Label] = []
@@ -141,13 +142,16 @@ func build_prep(parent: Control) -> void:
 	route_hint = label(prep_content, "", 13, MUTED)
 	label(prep_content, "Choose today’s loadout", 16, GOLD)
 	var standard := action(prep_content)
+	standard.custom_minimum_size.y = 48
 	standard.pressed.connect(func(): loadout_pressed.emit(Day.Card.STANDARD))
 	loadout_buttons.append(standard)
-	label(prep_content, "1 charge per cut  ·  Normal openings", 13, MUTED)
 	var wedge := action(prep_content)
+	wedge.custom_minimum_size.y = 48
 	wedge.pressed.connect(func(): loadout_pressed.emit(Day.Card.WEDGE))
 	loadout_buttons.append(wedge)
-	label(prep_content, "Melon opening +%.1fs once  ·  %.2f/cut" % [Day.WEDGE_OPEN_BONUS, Day.WEDGE_CUT_COST], 13, MUTED)
+	dash_kit_button = action(prep_content)
+	dash_kit_button.custom_minimum_size.y = 48
+	dash_kit_button.pressed.connect(func(): loadout_pressed.emit(Day.Card.DASH_KIT))
 	for i in range(2):
 		var button := action(prep_content)
 		button.custom_minimum_size.y = 48
@@ -201,10 +205,15 @@ func refresh_prep(market: Market, card: Day.Card, paused: bool, run_day: int, de
 			button.text = "%s / %s%s\n%s" % ["C" if i == 0 else "V", reward_name(reward),
 				"   ✓" if card == reward else "", reward_description(reward)]
 			button.disabled = paused or not Day.card_available(reward, run_day)
-	loadout_buttons[Day.Card.STANDARD].text = "Q / STANDARD KIT" + ("   ✓" if card == Day.Card.STANDARD else "")
-	loadout_buttons[Day.Card.WEDGE].text = "W / CUTTING WEDGE" + ("   ✓" if card == Day.Card.WEDGE else "")
+	loadout_buttons[Day.Card.STANDARD].text = "Q / STANDARD KIT%s\n1 charge per cut" % ("   ✓" if card == Day.Card.STANDARD else "")
+	loadout_buttons[Day.Card.WEDGE].text = "W / CUTTING WEDGE%s\nMelon opening +%.1fs once  ·  %.2f/cut" % [
+		"   ✓" if card == Day.Card.WEDGE else "", Day.WEDGE_OPEN_BONUS, Day.WEDGE_CUT_COST]
 	for button in loadout_buttons:
 		button.disabled = paused
+	dash_kit_button.visible = Day.card_available(Day.Card.DASH_KIT, run_day)
+	dash_kit_button.disabled = paused
+	dash_kit_button.text = "B / DASH KIT%s\nSpace: one %.2fs dash for %d charge" % [
+		"   ✓" if card == Day.Card.DASH_KIT else "", Day.DASH_SECONDS, Day.DASH_COST]
 	start_button.disabled = paused
 	prep_pause_button.text = "RESUME" if paused else "PAUSE"
 
