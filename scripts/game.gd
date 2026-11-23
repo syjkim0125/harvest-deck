@@ -1047,8 +1047,17 @@ func play_encounter_cue(pitch: float) -> void:
 		encounter_audio.volume_linear = sound_volume * 0.65
 		encounter_audio.play()
 
+func harvest_limit() -> int:
+	return CAPACITY
+
+func cut_reach() -> float:
+	return 100.0
+
+func cut_dot_limit() -> float:
+	return 0.1
+
 func attack() -> int:
-	if preparing_day or cargo.size() >= CAPACITY or day_finished():
+	if preparing_day or cargo.size() >= harvest_limit() or day_finished():
 		return 0
 	var count := 0
 	var killed := false
@@ -1056,11 +1065,11 @@ func attack() -> int:
 	var nearest_contact := INF
 	var animated := feedback and not impact.reduced
 	for f in fruits:
-		if not production.can_harvest(f.kind) or f.hp <= 0 or cargo.size() >= CAPACITY:
+		if not production.can_harvest(f.kind) or f.hp <= 0 or cargo.size() >= harvest_limit():
 			continue
 		var diff: Vector2 = f.pos - player
 		var distance := diff.length()
-		if distance > 100.0 or (distance > 28.0 and facing.dot(diff / distance) < 0.1):
+		if distance > cut_reach() or (distance > 28.0 and facing.dot(diff / distance) < cut_dot_limit()):
 			continue
 		if f.kind == SpineMelon.KIND and f.encounter.phase != SpineMelon.Phase.VULNERABLE:
 			continue
@@ -1091,7 +1100,7 @@ func attack() -> int:
 			if f.kind in [0, 1]:
 				f.respawn = 5.0
 			for j in range(3):
-				if cargo.size() < CAPACITY:
+				if cargo.size() < harvest_limit():
 					cargo.append(f.kind)
 				else:
 					ground_drops.append({"pos": f.pos + Vector2(j * 9 - 9, 15), "kind": f.kind})
@@ -1188,6 +1197,9 @@ func _draw() -> void:
 			draw_melon_hazard(f.pos, f.encounter)
 		if f.kind == RollingOrange.KIND and f.hp > 0 and not day_finished():
 			draw_orange_route()
+	draw_harvest_actors(font)
+
+func draw_harvest_actors(font: Font) -> void:
 	for d in ground_drops:
 		draw_slice(d.pos, d.kind, 12, 0.15)
 	# Sort a separate presentation list; never reorder the harvesting array.
@@ -1228,7 +1240,7 @@ func _draw() -> void:
 			draw_rect(Rect2(display_pos + Vector2(-20, -36), Vector2(f.hp * 13.3, 4)), Color("ffe3a0"))
 	for item in cargo_view.transfers:
 		draw_slice(CargoView.position_at(item), item.kind, 13, 0.0)
-	if cargo.size() >= CAPACITY:
+	if cargo.size() >= harvest_limit():
 		draw_string(font, player + Vector2(-35, 45), "FULL! UNLOAD", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color("ffe9a0"))
 
 func draw_east_drop(font: Font) -> void:
@@ -1527,10 +1539,13 @@ func draw_player_actor() -> void:
 		for p in particles:
 			if p.cargo_index >= 0:
 				flying[p.cargo_index] = true
-	for i in range(cargo.size() - 1, -1, -1):
+	for i in range(mini(cargo.size(), displayed_cargo_limit()) - 1, -1, -1):
 		if i not in flying:
 			draw_slice(cargo_position(i), cargo[i], 13, 0.13 if i % 2 == 0 else -0.13)
 	draw_avatar()
+
+func displayed_cargo_limit() -> int:
+	return cargo.size()
 
 func saw_endpoints() -> Array[Vector2]:
 	var kick = avatar.kick() if feedback and not impact.reduced else 0.0
