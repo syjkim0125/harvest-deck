@@ -193,7 +193,7 @@ func refresh_prep(market: Market, card: Day.Card, paused: bool, run_day: int, de
 		forecast_labels[i].visible = market.offers(i)
 		forecast_labels[i].text = "%s  ·  %d × $%d" % [Market.NAMES[i], market.demand[i], market.price(i)]
 	match run_day:
-		RollingOrange.DAY: route_hint.text = "Orange: southeast • needs watermelon"
+		RollingOrange.DAY: route_hint.text = "Melon SW  ·  Orange SE (with watermelon)"
 		Market.DAYS: route_hint.text = "Spine melons: southwest and east"
 		_: route_hint.text = "Spine melon: southwest"
 	available_cards = deck

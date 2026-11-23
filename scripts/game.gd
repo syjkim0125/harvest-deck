@@ -984,6 +984,8 @@ func _draw() -> void:
 	draw_string(font, Vector2(590, 220), "SAFE STOCK / DROP" if day_mode else "JUICE / DROP ZONE", HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color("183b38"))
 	if not day_mode:
 		draw_shop(font)
+	for marker in orchard_waypoints():
+		draw_orchard_waypoint(font, marker)
 	for f in fruits:
 		if f.kind == SpineMelon.KIND and f.hp > 0 and not day_finished():
 			draw_melon_hazard(f.pos, f.encounter)
@@ -1026,6 +1028,44 @@ func _draw() -> void:
 		draw_slice(CargoView.position_at(item), item.kind, 13, 0.0)
 	if cargo.size() >= CAPACITY:
 		draw_string(font, player + Vector2(-35, 45), "FULL! UNLOAD", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color("ffe9a0"))
+
+func orchard_waypoints() -> Array[Dictionary]:
+	var markers: Array[Dictionary] = []
+	if not day_mode or preparing_day or day_finished():
+		return markers
+	markers.append({"at": Vector2(702, 620), "target": depot, "label": "DROP-OFF", "ink": Color("b4efd2")})
+	for fruit in fruits:
+		if fruit.hp <= 0:
+			continue
+		if fruit.kind == SpineMelon.KIND:
+			var east: bool = fruit.pos == SpineMelon.EAST_HOME
+			markers.append({
+				"at": Vector2(728, 819) if east else Vector2(670, 772),
+				"target": fruit.pos, "label": "SPINE MELON E" if east else "SPINE MELON W", "ink": Color("f1ceff"),
+			})
+		elif fruit.kind == RollingOrange.KIND:
+			# Guide to where a chase starts, even while the fruit is on its loop.
+			markers.append({
+				"at": Vector2(728, 819), "target": RollingOrange.HOME, "label": "ROLLING ORANGE", "ink": Color("ffd393"),
+			})
+	return markers
+
+func waypoint_bounds(font: Font, marker: Dictionary) -> Rect2:
+	var width := font.get_string_size(marker.label, HORIZONTAL_ALIGNMENT_LEFT, -1, 14).x + 44.0
+	return Rect2(marker.at - Vector2(width / 2.0, 14), Vector2(width, 28))
+
+func draw_orchard_waypoint(font: Font, marker: Dictionary) -> void:
+	var panel := waypoint_bounds(font, marker)
+	var arrow := panel.position + Vector2(17, 14)
+	var direction: Vector2 = (marker.target - marker.at).normalized()
+	draw_rect(Rect2(panel.position + Vector2(0, 3), panel.size), Color(0.1, 0.19, 0.16, 0.45))
+	draw_rect(panel, Color("213832"))
+	draw_rect(panel, marker.ink, false, 1.0)
+	var tip := arrow + direction * 8.0
+	draw_line(arrow - direction * 7.0, tip, marker.ink, 2.0, true)
+	draw_line(tip, tip - direction.rotated(0.62) * 7.0, marker.ink, 2.0, true)
+	draw_line(tip, tip - direction.rotated(-0.62) * 7.0, marker.ink, 2.0, true)
+	draw_string(font, panel.position + Vector2(32, 19), marker.label, HORIZONTAL_ALIGNMENT_LEFT, -1, 14, marker.ink)
 
 func draw_shop(font: Font) -> void:
 	for i in range(production.customers.size()):

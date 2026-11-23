@@ -288,6 +288,8 @@ func check_rolling_orange(game) -> void:
 			"%s at the bend yields exactly three slices through the regular saw" % ("Intercepting" if intercept else "Following the trail"))
 		if not intercept:
 			continue
+		check(game.orchard_waypoints().all(func(marker): return marker.target != Orange.HOME),
+			"the fruit arrow leaves when the orange is harvested")
 		walk_to(game, Vector2(510, 690))
 		game.simulate(0.70, Vector2.ZERO)
 		walk_to(game, game.depot)
@@ -466,6 +468,58 @@ func check_dash_kit(game) -> void:
 	game.reset_run()
 	check(not game.day.dash_used and game.dash_left == 0.0 and not game.dash_button.visible, "new run clears the dash state")
 
+func check_orchard_waypoints(game) -> void:
+	check(game.orchard_waypoints().is_empty(), "route markers wait until preparation ends")
+	key(game, KEY_ENTER)
+	var markers: Array[Dictionary] = game.orchard_waypoints()
+	check(markers.map(func(marker): return marker.target) == [game.depot, SpineMelon.HOME],
+		"Day 1 marks the drop-off and west melon")
+	var west: Dictionary = markers[1]
+	walk_to(game, west.at)
+	var direction: Vector2 = (west.target - west.at).normalized()
+	walk_to(game, west.target - direction * 139.0)
+	check(game.fruits[-1].encounter.phase == SpineMelon.Phase.WARNING,
+		"the west arrow leads to the melon warning without entering the strike radius")
+	walk_to(game, game.depot)
+	game.simulate(2.0, Vector2.ZERO)
+	key(game, KEY_ENTER)
+	check(game.orchard_waypoints().is_empty(), "the signs retire when the expedition is over")
+
+	open_orange_day(game)
+	key(game, KEY_ENTER)
+	markers = game.orchard_waypoints()
+	check(markers.map(func(marker): return marker.target) == [game.depot, SpineMelon.HOME, Orange.HOME],
+		"Day 2 adds the orange start to the west melon and drop-off")
+	var orange: Dictionary = markers[2]
+	walk_to(game, orange.at)
+	direction = (orange.target - orange.at).normalized()
+	walk_to(game, orange.target - direction * 124.0)
+	check(game.fruits[-1].encounter.phase == Orange.Phase.ROLLING and game.orchard_waypoints()[2].target == Orange.HOME,
+		"the orange arrow reaches the chase and stays pointed at the launch point")
+	walk_to(game, game.depot)
+	game.simulate(2.0, Vector2.ZERO)
+	key(game, KEY_ENTER)
+	key(game, KEY_ENTER)
+	if game.night.has_available_menu():
+		key(game, KEY_Q)
+		key(game, KEY_ENTER)
+	key(game, KEY_ENTER)
+	key(game, KEY_Q)
+	key(game, KEY_ENTER)
+	key(game, KEY_ENTER)
+	markers = game.orchard_waypoints()
+	check(markers.map(func(marker): return marker.target) == [game.depot, SpineMelon.HOME, SpineMelon.EAST_HOME],
+		"Day 3 points east towards the second melon instead of the orange lane")
+	var east: Dictionary = markers[2]
+	walk_to(game, east.at)
+	direction = (east.target - east.at).normalized()
+	walk_to(game, east.target - direction * 139.0)
+	check(game.fruits[-1].encounter.phase == SpineMelon.Phase.WARNING,
+		"following the east arrow reaches the second melon")
+	game.switch_mode()
+	check(game.orchard_waypoints().is_empty(), "the comparison lab has no expedition markers")
+	game.switch_mode()
+
 func run() -> void:
 	var game = load("res://main.tscn").instantiate()
 	root.add_child(game)
@@ -482,6 +536,7 @@ func run() -> void:
 	check_rolling_orange(game)
 	check_wheel_chock(game)
 	check_dash_kit(game)
+	check_orchard_waypoints(game)
 	var night = game.night
 	var ui = game.night_view
 	check(not game.enter_night(), "an active expedition cannot open the market")
@@ -597,6 +652,14 @@ func run() -> void:
 		check(bounds.encloses(layout_game.dash_button.get_global_rect())
 			and not layout_game.dash_button.get_global_rect().intersects(layout_game.return_button.get_global_rect()),
 			"the touch dash and end-harvest buttons fit at %s" % size)
+		layout_game.camera.force_update_scroll()
+		var safe_playfield := Rect2(0.0, layout_game.hud_height, size.x, size.y - layout_game.hud_height)
+		var transform: Transform2D = layout_game.get_global_transform_with_canvas()
+		var signs_fit := true
+		for marker in layout_game.orchard_waypoints():
+			var panel: Rect2 = layout_game.waypoint_bounds(ThemeDB.fallback_font, marker)
+			signs_fit = signs_fit and safe_playfield.encloses(transform * panel)
+		check(signs_fit, "all route markers are visible below the HUD at expedition spawn at %s" % size)
 		deliver(layout_game, [0, MELON, Orange.KIND])
 		await process_frame
 		await process_frame
