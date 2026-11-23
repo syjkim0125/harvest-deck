@@ -75,15 +75,18 @@ func _ready() -> void:
 	detail = label(content, "", 16, GOLD)
 	inventory = label(content, "", 14, MUTED)
 	recipes = VBoxContainer.new()
-	recipes.add_theme_constant_override("separation", 6)
+	recipes.add_theme_constant_override("separation", 4)
 	content.add_child(recipes)
 	for i in range(Market.NAMES.size()):
 		var card := PanelContainer.new()
-		card.add_theme_stylebox_override("panel", surface(Color("1b303d"), 4))
+		var card_surface := surface(Color("1b303d"), 4)
+		card_surface.set_content_margin(SIDE_TOP, 2)
+		card_surface.set_content_margin(SIDE_BOTTOM, 2)
+		card.add_theme_stylebox_override("panel", card_surface)
 		recipes.add_child(card)
 		recipe_cards.append(card)
 		var recipe := VBoxContainer.new()
-		recipe.add_theme_constant_override("separation", 3)
+		recipe.add_theme_constant_override("separation", 1)
 		card.add_child(recipe)
 		recipe_titles.append(label(recipe, "", 17, MINT if i == 0 else GOLD))
 		recipe_labels.append(label(recipe, "", 13, MUTED))
@@ -256,6 +259,8 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 		var button := recipe_buttons[i]
 		recipe_titles[i].text = "%s  ·  $%d" % [Market.NAMES[i], market.price(i)]
 		recipe_cards[i].visible = market.offers(i) and (picking or (serving and market.selected[i]))
+		if not recipe_cards[i].visible:
+			continue
 		if picking:
 			recipe_labels[i].text = "%s  ·  Up to %d" % [Market.INGREDIENTS[i], market.demand[i]]
 			button.text = "%s / %s" % [key_for(i), "REMOVE FROM MENU" if market.selected[i] else "ADD TO MENU"]
@@ -264,8 +269,14 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 			button.disabled = paused or market.portions(i) == 0
 		elif serving:
 			recipe_labels[i].text = "Served %d / %d   ·   Stock for %d" % [market.sold[i], market.demand[i], market.portions(i)]
-			button.text = "%s / SERVE ORDER" % key_for(i)
-			button.disabled = paused or not market.can_serve(i)
+			var order := market.order_state(i)
+			button.disabled = paused or order != Market.OrderState.READY
+			match order:
+				Market.OrderState.READY: button.text = "%s / SERVE ORDER" % key_for(i)
+				Market.OrderState.PREPARING: button.text = "PREPARING…"
+				Market.OrderState.MIXER_BUSY: button.text = "MIXER BUSY"
+				Market.OrderState.FILLED: button.text = "ORDERS FILLED"
+				Market.OrderState.MISSING_INGREDIENTS: button.text = "NEEDS INGREDIENTS"
 	ledger.text = "Sales  $%d     Operating fee  $%d" % [market.gross, market.fee]
 	var preparing := serving and market.active_recipe != -1
 	progress.visible = serving
@@ -277,7 +288,7 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 		action_button.text = "ENTER / OPEN MARKET" if market.has_available_menu() else "ENTER / CLOSE WITHOUT SALES"
 		action_button.disabled = paused or (market.has_available_menu() and not market.selected.has(true))
 	elif serving:
-		detail.text = "Take an order" if market.can_serve(0) or market.can_serve(1) or market.can_serve(2) else "No orders available · close the market"
+		detail.text = "Take an order" if market.can_serve(0) or market.can_serve(1) or market.can_serve(2) else "No orders available"
 		if preparing:
 			detail.text = "Preparing " + Market.NAMES[market.active_recipe]
 		action_button.text = "ENTER / CLOSE MARKET"

@@ -7,6 +7,7 @@ const RollingOrange = preload("res://scripts/rolling_orange.gd")
 
 enum Phase { OFF, MENU, SERVICE, CLOSED }
 enum Recipe { WATERMELON, MELON, ORANGE }
+enum OrderState { UNAVAILABLE, READY, PREPARING, MIXER_BUSY, FILLED, MISSING_INGREDIENTS }
 
 const FEES := [10, 12, 20]
 const DAYS := 3
@@ -90,8 +91,19 @@ func open() -> bool:
 	phase = Phase.SERVICE
 	return true
 
+func order_state(recipe: int) -> OrderState:
+	if phase != Phase.SERVICE or not offers(recipe) or not selected[recipe]:
+		return OrderState.UNAVAILABLE
+	if active_recipe == recipe:
+		return OrderState.PREPARING
+	if sold[recipe] >= demand[recipe]:
+		return OrderState.FILLED
+	if portions(recipe) == 0:
+		return OrderState.MISSING_INGREDIENTS
+	return OrderState.MIXER_BUSY if active_recipe != -1 else OrderState.READY
+
 func can_serve(recipe: int) -> bool:
-	return phase == Phase.SERVICE and active_recipe == -1 and portions(recipe) > 0 and selected[recipe] and sold[recipe] < demand[recipe]
+	return order_state(recipe) == OrderState.READY
 
 func serve(recipe: int) -> bool:
 	if not can_serve(recipe):
