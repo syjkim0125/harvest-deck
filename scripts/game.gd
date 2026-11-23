@@ -520,9 +520,10 @@ func _physics_process(delta: float) -> void:
 	if preparing_day:
 		return
 	if night.phase != NightMarket.Phase.OFF:
+		var previous_phase := night.phase
 		if not paused:
 			night.step(delta)
-		refresh_market_view()
+		update_night_after_action(previous_phase)
 		return
 	if not paused and not day_finished():
 		simulate(delta, movement_direction())
@@ -708,12 +709,13 @@ func cancel_queued_order() -> bool:
 func advance_night() -> bool:
 	if paused:
 		return false
-	match night.phase:
+	var previous_phase := night.phase
+	match previous_phase:
 		NightMarket.Phase.MENU:
 			if not (night.open() if night.has_available_menu() else night.close()):
 				return false
 		NightMarket.Phase.SERVICE:
-			if not night.close():
+			if not night.toggle_close_request():
 				return false
 		NightMarket.Phase.CLOSED:
 			if choosing_reward():
@@ -728,10 +730,13 @@ func advance_night() -> bool:
 			return true
 		_:
 			return false
-	if night.phase == NightMarket.Phase.CLOSED:
+	update_night_after_action(previous_phase)
+	return true
+
+func update_night_after_action(previous_phase: NightMarket.Phase) -> void:
+	if previous_phase != NightMarket.Phase.CLOSED and night.phase == NightMarket.Phase.CLOSED:
 		run_results.append(night.settlement())
 	refresh_market_view()
-	return true
 
 func finish_day_at_depot() -> bool:
 	if not day_mode or preparing_day or day_finished() or paused or not cargo.is_empty() or player.distance_to(depot) >= DEPOT_RADIUS:

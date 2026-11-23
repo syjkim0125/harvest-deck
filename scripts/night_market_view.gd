@@ -321,6 +321,7 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 				Market.OrderState.QUEUE_FULL: button.text = "QUEUE FULL"
 				Market.OrderState.FILLED: button.text = "ORDERS FILLED"
 				Market.OrderState.MISSING_INGREDIENTS: button.text = "NEEDS INGREDIENTS"
+				Market.OrderState.CLOSING: button.text = "CLOSING"
 		button.present(drink_art[i], name_and_price, description + "\n" + button.text, market.selected[i], button.disabled)
 	ledger.text = "Sales  $%d     Operating fee  $%d" % [market.gross, market.fee]
 	var preparing := serving and market.active_recipe != -1
@@ -342,10 +343,14 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 		action_button.disabled = paused or (has_menu and not has_selection)
 	elif serving:
 		detail.text = "Take an order" if market.can_serve(0) or market.can_serve(1) or market.can_serve(2) else "No orders available"
-		if preparing:
+		if market.closing_requested:
+			detail.text = "Closing after accepted orders"
+			action_button.text = "ENTER / KEEP OPEN"
+		elif preparing:
 			detail.text = "Preparing " + Market.NAMES[market.active_recipe]
-		action_button.text = "ENTER / CLOSE" if cancel_button.visible else "ENTER / CLOSE MARKET"
-		action_button.disabled = paused or market.active_recipe != -1
+			action_button.text = "ENTER / CLOSE AFTER"
+		else:
+			action_button.text = "ENTER / CLOSE MARKET"
 	else:
 		var result: Dictionary = results[run_day - 1]
 		inventory.text = leftover_text(result.leftover)

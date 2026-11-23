@@ -7,7 +7,7 @@ const RollingOrange = preload("res://scripts/rolling_orange.gd")
 
 enum Phase { OFF, MENU, SERVICE, CLOSED }
 enum Recipe { WATERMELON, MELON, ORANGE }
-enum OrderState { UNAVAILABLE, READY, QUEUE_NEXT, PREPARING, QUEUED, QUEUE_FULL, FILLED, MISSING_INGREDIENTS }
+enum OrderState { UNAVAILABLE, READY, QUEUE_NEXT, PREPARING, QUEUED, QUEUE_FULL, FILLED, MISSING_INGREDIENTS, CLOSING }
 
 const FEES := [10, 12, 20]
 const DAYS := 3
@@ -32,6 +32,7 @@ var sold: Array[int] = [0, 0, 0]
 var gross := 0
 var active_recipe := -1
 var queued_recipe := -1
+var closing_requested := false
 var remaining := 0.0
 
 func reset(day_number := 1) -> void:
@@ -45,6 +46,7 @@ func reset(day_number := 1) -> void:
 	gross = 0
 	active_recipe = -1
 	queued_recipe = -1
+	closing_requested = false
 	remaining = 0.0
 
 func enter(safe_stock: Array[int]) -> bool:
@@ -103,6 +105,8 @@ func order_state(recipe: int) -> OrderState:
 	if queued_recipe == recipe:
 		return OrderState.QUEUED
 	var preparing := active_recipe == recipe
+	if closing_requested:
+		return OrderState.PREPARING if preparing else OrderState.CLOSING
 	var at_limit: bool = sold[recipe] + int(preparing) >= demand[recipe]
 	var has_stock := portions(recipe) > 0
 	if preparing and (at_limit or not has_stock or queued_recipe != -1):
@@ -160,6 +164,16 @@ func step(delta: float) -> void:
 		active_recipe = queued_recipe
 		queued_recipe = -1
 		remaining = duration(active_recipe) if active_recipe != -1 else 0.0
+	if closing_requested and active_recipe == -1:
+		close()
+
+func toggle_close_request() -> bool:
+	if phase != Phase.SERVICE:
+		return false
+	if active_recipe == -1:
+		return close()
+	closing_requested = not closing_requested
+	return true
 
 func close() -> bool:
 	if active_recipe != -1:
@@ -167,6 +181,7 @@ func close() -> bool:
 	if phase != Phase.SERVICE and (phase != Phase.MENU or has_available_menu()):
 		return false
 	phase = Phase.CLOSED
+	closing_requested = false
 	return true
 
 func settlement() -> Dictionary:
