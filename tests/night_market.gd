@@ -140,8 +140,9 @@ func check_reward_continuation(game) -> void:
 	key(game, KEY_ENTER)
 	check(night.phase == night.Phase.CLOSED and night.gross == 5 and ui.reward_content.visible,
 		"Day 2 settles and opens the second reward offer")
-	check(game.run_sales == 20 and game.run_fees == 22 and not game.advance_night() and game.run_fees == 22,
-		"both nightly ledgers accrue once, even when the run goes into deficit")
+	check(game.run_sales == 20 and game.run_fees == 22 and not game.advance_night() and game.run_fees == 22
+		and game.run_results.size() == 2 and game.run_results[0].sold == [3, 0, 0] and game.run_results[1].sold == [1, 0, 0],
+		"both nightly ledgers accrue once and preserve past menu sales when the run goes into deficit")
 	key(game, KEY_Q)
 	check(game.earned_card == Day.Card.TUNED_BLADE, "Day 2 offers Tuned Blade")
 	key(game, KEY_W)
@@ -178,9 +179,18 @@ func check_reward_continuation(game) -> void:
 	check(night.phase == night.Phase.CLOSED and not ui.reward_content.visible and ui.title.text == "Run Complete"
 		and game.run_sales == 110 and game.run_fees == 42 and ui.detail.text == "Three-day net  $68",
 		"the final screen settles three nights with the exact cumulative net")
+	check(ui.run_breakdown.is_visible_in_tree() and not ui.inventory.visible and ui.ledger.text == "Run sales $110  ·  Run fees $42",
+		"the final summary shows whole-run totals and each closed night")
+	check(ui.night_headings[0].text == "Night 1  ·  Net $5" and "Juice 3/5  ·  Melon 0/3" in ui.night_breakdowns[0].text,
+		"Night 1 still shows its own juice sales and uncovered melon demand")
+	check(ui.night_headings[1].text == "Night 2  ·  Net -$7" and "Juice 1/7  ·  Melon 0/1  ·  Fizz 0/3" in ui.night_breakdowns[1].text,
+		"Night 2 shows its deficit and includes the orange fizz orders")
+	check(ui.night_headings[2].text == "Night 3  ·  Net $70" and ui.night_breakdowns[2].text == "Sales $90  ·  Fee $20\nJuice 0/4  ·  Melon 6/6",
+		"Night 3 uses actual cocktail receipts and omits unavailable fizz")
 	key(game, KEY_ENTER)
 	check(game.run_day == 1 and game.earned_card == Day.Card.NONE and game.deck.is_empty()
-		and game.run_sales == 0 and game.run_fees == 0 and not ui.deck_buttons[0].visible and not game.day.reward_used,
+		and game.run_sales == 0 and game.run_fees == 0 and game.run_results.is_empty()
+		and not ui.run_breakdown.is_visible_in_tree() and not ui.deck_buttons[0].visible and not game.day.reward_used,
 		"replaying clears the entire run ledger and deck")
 
 func harvest_melon_from_south(game, center: Vector2) -> void:
@@ -369,6 +379,12 @@ func check_wheel_chock(game) -> void:
 		key(game, KEY_C)
 		check(game.run_day == 3 and game.deck.has(Day.Card.WHEEL_CHOCK) and ui.deck_buttons[0].disabled
 			and game.day.card == Day.Card.TUNED_BLADE, "the orange-only card stays in the deck but cannot equip on Day 3")
+		deliver(game, [])
+		key(game, KEY_ENTER)
+		check(ui.detail.text == "Three-day net  -$33" and ui.night_headings[0].text == "Night 1  ·  Net -$10"
+			and ui.night_headings[2].text == "Night 3  ·  Net -$20", "no-stock closes still produce rows and a signed run loss")
+		check(ui.night_headings[1].text == "Night 2  ·  Net -$3" and "Fizz 1/3" in ui.night_breakdowns[1].text,
+			"the final screen retains the real citrus sale from the prior night")
 	game.reset_run()
 
 func run() -> void:
@@ -511,8 +527,10 @@ func run() -> void:
 		key(layout_game, KEY_ENTER)
 		await process_frame
 		await process_frame
-		check(bounds.encloses(pane.ledger.get_global_rect()) and bounds.encloses(pane.action_button.get_global_rect()),
-			"final ledger and new-run button fit at %s" % size)
+		check(bounds.encloses(pane.ledger.get_global_rect()) and bounds.encloses(pane.run_breakdown.get_global_rect())
+			and bounds.encloses(pane.action_button.get_global_rect()) and bounds.encloses(pane.pause_button.get_global_rect())
+			and not pane.run_breakdown.get_global_rect().intersects(pane.action_button.get_global_rect()),
+			"all three final ledger rows and both actions fit at %s" % size)
 		view.queue_free()
 		await process_frame
 

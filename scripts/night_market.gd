@@ -115,5 +115,8 @@ func close() -> bool:
 	phase = Phase.CLOSED
 	return true
 
+func settlement() -> Dictionary:
+	return {"sales": gross, "fee": fee, "sold": sold.duplicate(), "demand": demand.duplicate()}
+
 func net() -> int:
 	return gross - fee

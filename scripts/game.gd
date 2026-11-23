@@ -33,8 +33,19 @@ var preparing_day := false
 var run_day := 1
 var earned_card := DayHarvest.Card.NONE
 var deck: Array[DayHarvest.Card] = []
-var run_sales := 0
-var run_fees := 0
+var run_results: Array[Dictionary] = []
+var run_sales: int:
+	get:
+		var total := 0
+		for result in run_results:
+			total += result.sales
+		return total
+var run_fees: int:
+	get:
+		var total := 0
+		for result in run_results:
+			total += result.fee
+		return total
 var day := DayHarvest.new()
 var night := NightMarket.new()
 var night_view: NightMarketView
@@ -264,8 +275,7 @@ func setup_inputs() -> void:
 func reset_run() -> void:
 	run_day = 1
 	deck.clear()
-	run_sales = 0
-	run_fees = 0
+	run_results.clear()
 	earned_card = DayHarvest.Card.NONE
 	reset_day()
 
@@ -512,7 +522,7 @@ func refresh_market_view() -> void:
 	if preparing_day:
 		night_view.refresh_prep(night, day.card, paused, run_day, deck, run_sales - run_fees)
 	else:
-		night_view.refresh(night, paused, run_day, earned_card, run_sales, run_fees)
+		night_view.refresh(night, paused, run_day, earned_card, run_sales, run_fees, run_results)
 
 func choosing_reward() -> bool:
 	return run_day < NightMarket.DAYS and night.phase == NightMarket.Phase.CLOSED
@@ -584,8 +594,7 @@ func advance_night() -> bool:
 		_:
 			return false
 	if night.phase == NightMarket.Phase.CLOSED:
-		run_sales += night.gross
-		run_fees += night.fee
+		run_results.append(night.settlement())
 	refresh_market_view()
 	return true
 

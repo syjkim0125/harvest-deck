@@ -9,6 +9,8 @@ const PAPER := Color("f2f5ee")
 const MUTED := Color("afc6cb")
 const MINT := Color("b4efd2")
 const GOLD := Color("f7ce88")
+const LOSS := Color("ffb4a1")
+const SHORT_RECIPE_NAMES := ["Juice", "Melon", "Fizz"]
 
 signal recipe_pressed(recipe: int)
 signal action_pressed
@@ -37,6 +39,9 @@ var title: Label
 var detail: Label
 var inventory: Label
 var ledger: Label
+var run_breakdown: VBoxContainer
+var night_headings: Array[Label] = []
+var night_breakdowns: Array[Label] = []
 var progress: ProgressBar
 var recipes: VBoxContainer
 var recipe_cards: Array[PanelContainer] = []
@@ -84,6 +89,7 @@ func _ready() -> void:
 		button.pressed.connect(func(): recipe_pressed.emit(i))
 		recipe_buttons.append(button)
 	ledger = label(content, "", 15, PAPER)
+	build_run_breakdown(content)
 	progress = ProgressBar.new()
 	progress.show_percentage = false
 	progress.custom_minimum_size.y = 7
@@ -107,6 +113,20 @@ func _ready() -> void:
 	action_button.pressed.connect(func(): action_pressed.emit())
 	pause_button = action(content)
 	pause_button.pressed.connect(func(): pause_pressed.emit())
+
+func build_run_breakdown(parent: Control) -> void:
+	run_breakdown = VBoxContainer.new()
+	run_breakdown.add_theme_constant_override("separation", 6)
+	parent.add_child(run_breakdown)
+	for i in range(Market.DAYS):
+		var card := PanelContainer.new()
+		card.add_theme_stylebox_override("panel", surface(Color("1b303d"), 6))
+		run_breakdown.add_child(card)
+		var lines := VBoxContainer.new()
+		lines.add_theme_constant_override("separation", 1)
+		card.add_child(lines)
+		night_headings.append(label(lines, "", 16, MINT))
+		night_breakdowns.append(label(lines, "", 13, PAPER))
 
 func build_prep(parent: Control) -> void:
 	prep_content = VBoxContainer.new()
@@ -188,7 +208,8 @@ func refresh_prep(market: Market, card: Day.Card, paused: bool, run_day: int, de
 	start_button.disabled = paused
 	prep_pause_button.text = "RESUME" if paused else "PAUSE"
 
-func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_sales: int, run_fees: int) -> void:
+func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_sales: int, run_fees: int,
+	results: Array[Dictionary]) -> void:
 	prep_content.hide()
 	market_content.show()
 	visible = market.phase != Market.Phase.OFF
@@ -198,6 +219,8 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 	var serving := market.phase == Market.Phase.SERVICE
 	var closed := market.phase == Market.Phase.CLOSED
 	var final_night := run_day == Market.DAYS
+	run_breakdown.visible = closed and final_night
+	inventory.visible = not run_breakdown.visible
 	title.text = "Day %d Closed" % run_day if closed else "Night %d Market" % run_day
 	reward_content.visible = closed and not final_night
 	if reward_content.visible:
@@ -258,13 +281,32 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 		ledger.text += "\nRun sales $%d  ·  Run fees $%d" % [run_sales, run_fees]
 		if final_night:
 			title.text = "Run Complete"
-			detail.text = "Three-day net  $%d" % (run_sales - run_fees)
+			detail.text = "Three-day net  %s" % net_text(run_sales - run_fees)
+			ledger.text = "Run sales $%d  ·  Run fees $%d" % [run_sales, run_fees]
+			update_run_breakdown(results)
 			action_button.text = "ENTER / NEW RUN"
 		else:
 			action_button.text = "ENTER / PREPARE DAY %d" % (run_day + 1)
 			action_button.disabled = paused or reward == Day.Card.NONE
 	if paused:
 		detail.text = "Paused"
+
+func update_run_breakdown(results: Array[Dictionary]) -> void:
+	for i in range(night_headings.size()):
+		var heading := night_headings[i]
+		var breakdown := night_breakdowns[i]
+		var result: Dictionary = results[i]
+		var net: int = result.sales - result.fee
+		heading.text = "Night %d  ·  Net %s" % [i + 1, net_text(net)]
+		heading.add_theme_color_override("font_color", LOSS if net < 0 else MINT)
+		var orders := PackedStringArray()
+		for recipe in range(Market.NAMES.size()):
+			if result.demand[recipe] > 0:
+				orders.append("%s %d/%d" % [SHORT_RECIPE_NAMES[recipe], result.sold[recipe], result.demand[recipe]])
+		breakdown.text = "Sales $%d  ·  Fee $%d\n%s" % [result.sales, result.fee, "  ·  ".join(orders)]
+
+func net_text(amount: int) -> String:
+	return "-$%d" % -amount if amount < 0 else "$%d" % amount
 
 func key_for(recipe: int) -> String:
 	return ["Q", "W", "T"][recipe]
