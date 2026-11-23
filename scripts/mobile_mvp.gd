@@ -362,7 +362,7 @@ func paint_hunt_hud() -> void:
 	Art.box(canvas, Rect2(12, 16, 266, 92), Color("24453d"), 20)
 	for i in range(combat.heart_limit):
 		heart(Vector2(33 + 23 * i, 39), i < combat.hearts)
-	label("낮 %d" % day_number, 196, 46, 18)
+	label("낮 %d" % day_number, 214, 46, 18)
 	Art.fruit(canvas, Vector2(36, 75), 0, 0.78)
 	Art.fruit(canvas, Vector2(108, 75), 1, 0.78)
 	label(str(stash_counts[0]), 49, 81, 19)
@@ -439,6 +439,7 @@ func icon(card: int, at: Vector2, radius: float) -> void:
 			Art.fruit(canvas, at + Vector2(10, -4), 1, radius / 23.0)
 		Shop.JUICE:
 			Art.cup(canvas, at, 0, radius / 15.0)
+			spark(at + Vector2(15, -8), 7, Color("bc6a37"))
 		Shop.MIX, Shop.EXTRA:
 			Art.fruit(canvas, at + Vector2(-13, 7), 0, radius / 25.0)
 			Art.fruit(canvas, at + Vector2(13, 7), 1, radius / 25.0)
@@ -455,7 +456,7 @@ func card_name(card: int) -> String:
 		Combat.HEART: return "튼튼 앞치마"
 		Combat.BOUNTY: return "과일 한 줌"
 		Combat.GUARD: return "폭신 방패"
-		Shop.JUICE: return "두 잔 한 번에"
+		Shop.JUICE: return "빠른 착즙"
 		Shop.MIX: return "섞어 주스"
 		Shop.HELP: return "도우미"
 		Shop.GIFT: return "팁 병"
@@ -464,7 +465,7 @@ func card_name(card: int) -> String:
 func card_effect(card: int) -> String:
 	match card:
 		Combat.WIDE: return "멀리 베기"
-		Combat.SPIN: return "뒤도 베기"
+		Combat.SPIN: return "회전 범위 +" if combat.spins > 0 else "뒤도 베기"
 		Combat.HEART: return "하트 +1"
 		Combat.BOUNTY: return "과일 +1"
 		_: return "한 번 막기"

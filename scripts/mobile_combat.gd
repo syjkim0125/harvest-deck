@@ -17,9 +17,9 @@ var heart_limit := 5
 var immunity := 0.0
 var next_spawn := 0.0
 var wide := 0
-var spins := false
-var bounty := false
-var armor := false
+var spins := 0
+var bounty := 0
+var armor := 0
 var direction := Vector2.ZERO
 var wave_random := RandomNumberGenerator.new()
 
@@ -41,9 +41,9 @@ func start_hunt(number: int) -> void:
 	defeated = 0
 	immunity = 0.0
 	wide = 0
-	spins = false
-	bounty = false
-	armor = false
+	spins = 0
+	bounty = 0
+	armor = 0
 	next_spawn = 2.6 if number == 1 else 1.9
 	wave_random.seed = 834 + number
 	direction = Vector2.ZERO
@@ -78,13 +78,13 @@ func tick_hunt(delta: float, number: int) -> void:
 		var enemy := fruits[i]
 		if enemy.hp <= 0:
 			defeated += 1
-			if bounty and cargo.size() < harvest_limit():
+			for bonus in range(mini(bounty, harvest_limit() - cargo.size())):
 				cargo.append(enemy.kind)
 			fruits.remove_at(i)
 		elif immunity <= 0.0 and player.distance_to(enemy.pos) < 32:
 			immunity = 1.35
-			if armor:
-				armor = false
+			if armor > 0:
+				armor -= 1
 			else:
 				hearts -= 1
 			enemy.pos += player.direction_to(enemy.pos) * 70
@@ -102,12 +102,12 @@ func tick_hunt(delta: float, number: int) -> void:
 func equip(card: int) -> void:
 	match card:
 		WIDE: wide += 1
-		SPIN: spins = true
+		SPIN: spins += 1
 		HEART:
 			heart_limit += 1
 			hearts += 1
-		BOUNTY: bounty = true
-		GUARD: armor = true
+		BOUNTY: bounty += 1
+		GUARD: armor += 1
 
 func stop_hunt() -> void:
 	active = false
@@ -124,10 +124,10 @@ func displayed_cargo_limit() -> int:
 	return 18
 
 func cut_reach() -> float:
-	return 100.0 + 33.0 * wide
+	return 100.0 + 33.0 * wide + 14.0 * maxi(0, spins - 1)
 
 func cut_dot_limit() -> float:
-	return -1.0 if spins else 0.1
+	return -1.0 if spins > 0 else 0.1
 
 func update_orchard_counter() -> void:
 	if is_instance_valid(orchard_counter):
@@ -140,7 +140,7 @@ func step_shop(_delta: float) -> void:
 	pass
 
 func _draw() -> void:
-	if spins and cut_trail_left > 0.0 and not impact.reduced:
+	if spins > 0 and cut_trail_left > 0.0 and not impact.reduced:
 		var opacity := cut_trail_left / BREAK_TRAIL_DURATION
 		draw_arc(player, cut_reach() * (0.94 - opacity * 0.20), 0, TAU, 44, Color(1, 0.89, 0.59, opacity * 0.58), 2.5, true)
 	draw_harvest_actors(ThemeDB.fallback_font)

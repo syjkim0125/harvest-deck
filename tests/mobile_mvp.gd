@@ -122,10 +122,14 @@ func run() -> void:
 	plain.hands.assign([Shop.MIX, Shop.JUICE])
 	check(not plain.play_at(Shop.MIX, 0) and not plain.opened and plain.raw == [2, 0],
 		"watermelon-only stock cannot play a mix card")
-	check(plain.play_at(Shop.JUICE, 0) and plain.jobs == [0, 0], "watermelon-only stock starts the regular recipe")
+	check(plain.play_at(Shop.JUICE, 0) and plain.jobs == [0, 0] and plain.mix_duration() == 0.45, "watermelon-only quick blend actually speeds both queued cups")
 	for i in 1500:
 		plain.tick(1.0 / 60.0)
 	check(plain.sold == 2 and plain.cash == 6 and plain.premiums == 0 and plain.done,
 		"the watermelon-only route produces two actual sales and settles once")
+	game.combat.equip(Combat.SPIN)
+	game.combat.equip(Combat.SPIN)
+	check(game.combat.cut_dot_limit() == -1.0 and game.combat.cut_reach() == 114.0,
+		"redrawing the spin card extends its range instead of wasting the choice")
 	print("MOBILE MVP: %d checks, %d failures" % [checks, failures])
 	quit(failures)

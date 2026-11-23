@@ -21,6 +21,7 @@ var produced := 0
 var next_customer := 0
 var arrival := 0.0
 var blend := 0.0
+var quick_blends := 0
 var service := 0.0
 var time := 0.0
 var closing_time := 0.0
@@ -75,6 +76,7 @@ func play_at(card: int, target: int) -> bool:
 				if raw[fruit] > 0:
 					raw[fruit] -= 1
 					jobs.append(fruit)
+					quick_blends += 1
 		MIX, EXTRA:
 			raw[0] -= 1
 			raw[1] -= 1
@@ -101,6 +103,8 @@ func tick(delta: float) -> void:
 		if blend >= mix_duration():
 			blend = 0.0
 			produced = jobs.pop_front()
+			if produced < 2:
+				quick_blends = maxi(0, quick_blends - 1)
 			shelf.append(produced)
 			mixed += 1
 	if not shelf.is_empty() and not customers.is_empty():
@@ -118,7 +122,9 @@ func tick(delta: float) -> void:
 		done = (jobs.is_empty() and shelf.is_empty()) or closing_time >= 9.0
 
 func mix_duration() -> float:
-	return 0.70 if not jobs.is_empty() and jobs[0] >= 2 else 1.25
+	if not jobs.is_empty() and jobs[0] >= 2:
+		return 0.70
+	return 0.45 if quick_blends > 0 else 1.25
 
 func service_duration() -> float:
 	return 0.46 if helper else 1.5
