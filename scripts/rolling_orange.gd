@@ -17,6 +17,7 @@ var position := HOME
 var angle := 0.0
 var waypoint := 0
 var brake_left := 0.0
+var brake_bonus := 0.0
 
 func step(delta: float, player: Vector2) -> void:
 	match phase:
@@ -33,7 +34,7 @@ func step(delta: float, player: Vector2) -> void:
 			waypoint += 1
 			if position == BRAKE_POINT:
 				phase = Phase.BRAKING
-				brake_left = BRAKE_SECONDS
+				brake_left = BRAKE_SECONDS + brake_bonus
 			elif waypoint == ROUTE.size():
 				phase = Phase.IDLE
 				waypoint = 0

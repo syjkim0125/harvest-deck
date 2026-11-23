@@ -93,9 +93,12 @@ func _ready() -> void:
 	reward_content = VBoxContainer.new()
 	content.add_child(reward_content)
 	reward_title = label(reward_content, "", 16, GOLD)
-	for i in range(2):
+	for i in range(Day.REWARD_OFFERS[0].size()):
 		var button := action(reward_content)
-		button.pressed.connect(func(): reward_pressed.emit(reward_options[i]))
+		button.pressed.connect(func():
+			if i < reward_options.size():
+				reward_pressed.emit(reward_options[i])
+		)
 		reward_buttons.append(button)
 		reward_descriptions.append(label(reward_content, "", 13, MUTED))
 	action_button = action(content)
@@ -144,6 +147,7 @@ func reward_name(card: Day.Card) -> String:
 		Day.Card.SEED_GUARD: return "SEED GUARD"
 		Day.Card.TUNED_BLADE: return "TUNED BLADE"
 		Day.Card.LIMITED_COCKTAIL: return "LIMITED COCKTAIL"
+		Day.Card.WHEEL_CHOCK: return "WHEEL CHOCK"
 	return ""
 
 func reward_description(card: Day.Card) -> String:
@@ -152,6 +156,7 @@ func reward_description(card: Day.Card) -> String:
 		Day.Card.SEED_GUARD: return "First seed hit: costs %d instead of %d" % [Day.GUARDED_SEED_COST, Day.SEED_COST]
 		Day.Card.TUNED_BLADE: return "Each cut uses %.2f charge" % Day.TUNED_CUT_COST
 		Day.Card.LIMITED_COCKTAIL: return "Special: +$%d each, +%.2fs prep" % [Market.COCKTAIL_BONUS, Market.COCKTAIL_EXTRA_TIME]
+		Day.Card.WHEEL_CHOCK: return "Day %d: orange stops +%.2fs" % [RollingOrange.DAY, Day.CHOCK_BRAKE_BONUS]
 	return ""
 
 func refresh_prep(market: Market, card: Day.Card, paused: bool, run_day: int, deck: Array[Day.Card], balance: int) -> void:
@@ -175,7 +180,7 @@ func refresh_prep(market: Market, card: Day.Card, paused: bool, run_day: int, de
 			var reward := deck[i]
 			button.text = "%s / %s%s\n%s" % ["C" if i == 0 else "V", reward_name(reward),
 				"   ✓" if card == reward else "", reward_description(reward)]
-			button.disabled = paused
+			button.disabled = paused or not Day.card_available(reward, run_day)
 	loadout_buttons[Day.Card.STANDARD].text = "Q / STANDARD KIT" + ("   ✓" if card == Day.Card.STANDARD else "")
 	loadout_buttons[Day.Card.WEDGE].text = "W / CUTTING WEDGE" + ("   ✓" if card == Day.Card.WEDGE else "")
 	for button in loadout_buttons:
@@ -199,11 +204,14 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 		reward_title.text = "Choose one card for Day %d" % (run_day + 1)
 		reward_options = Day.REWARD_OFFERS[run_day - 1]
 		for i in range(reward_buttons.size()):
-			var card: Day.Card = reward_options[i]
-			reward_descriptions[i].text = reward_description(card)
 			var button := reward_buttons[i]
-			button.text = "%s / %s%s" % [key_for(i), reward_name(card), "   ✓" if card == reward else ""]
-			button.disabled = paused
+			button.visible = i < reward_options.size()
+			reward_descriptions[i].visible = button.visible
+			if button.visible:
+				var card: Day.Card = reward_options[i]
+				reward_descriptions[i].text = reward_description(card)
+				button.text = "%s / %s%s" % [key_for(i), reward_name(card), "   ✓" if card == reward else ""]
+				button.disabled = paused
 	inventory.text = "Watermelon %d   Spine melon %d" % [market.stock.count(0), market.stock.count(SpineMelon.KIND)]
 	var citrus_night := market.offers(Market.Recipe.ORANGE)
 	if citrus_night:

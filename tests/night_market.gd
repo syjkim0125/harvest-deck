@@ -316,6 +316,61 @@ func check_rolling_orange(game) -> void:
 	check(retry.phase == Orange.Phase.IDLE and retry.position == Orange.HOME, "a missed brake loops back for another attempt")
 	game.reset_run()
 
+func check_wheel_chock(game) -> void:
+	for use_chock in [false, true]:
+		game.reset_run()
+		deliver(game, [])
+		key(game, KEY_ENTER)
+		var ui = game.night_view
+		check(ui.reward_buttons[2].visible and "WHEEL CHOCK" in ui.reward_buttons[2].text, "the first close offers the orange route card")
+		if use_chock:
+			ui.reward_buttons[2].pressed.emit()
+			check(game.earned_card == Day.Card.WHEEL_CHOCK, "the touch button picks Wheel Chock")
+			key(game, KEY_Q)
+			key(game, KEY_T)
+			check(game.earned_card == Day.Card.WHEEL_CHOCK, "T changes the first-night reward back to Wheel Chock")
+		else:
+			key(game, KEY_Q)
+		key(game, KEY_ENTER)
+		if use_chock:
+			check(game.deck == [Day.Card.WHEEL_CHOCK] and game.day.card == Day.Card.WHEEL_CHOCK and not ui.deck_buttons[0].disabled,
+				"Wheel Chock enters the deck and prepares the Day 2 run")
+			key(game, KEY_Q)
+			key(game, KEY_C)
+		key(game, KEY_ENTER)
+		var orange: Orange = game.fruits[-1].encounter
+		walk_to(game, Orange.HOME + Vector2(0, -70))
+		walk_to(game, Orange.BRAKE_POINT + Vector2(-90, -90))
+		game.simulate(0.60, Vector2.ZERO)
+		check(orange.phase == Orange.Phase.BRAKING and orange.brake_bonus == (Day.CHOCK_BRAKE_BONUS if use_chock else 0.0),
+			"the orange takes the same route and only the selected card changes its stop")
+		game.simulate(0.51, Vector2.ZERO)
+		walk_to(game, Orange.BRAKE_POINT + Vector2(-42, -42))
+		game.simulate(0.34, Vector2.ZERO)
+		check(game.cargo.count(Orange.KIND) == (3 if use_chock else 0),
+			"the same late approach %s" % ("harvests the orange with Wheel Chock" if use_chock else "misses with Reserve Cell"))
+		if not use_chock:
+			continue
+		walk_to(game, Vector2(510, 690))
+		game.simulate(0.70, Vector2.ZERO)
+		walk_to(game, game.depot)
+		game.simulate(2.0, Vector2.ZERO)
+		key(game, KEY_ENTER)
+		key(game, KEY_ENTER)
+		key(game, KEY_T)
+		key(game, KEY_ENTER)
+		key(game, KEY_T)
+		game._physics_process(2.0)
+		key(game, KEY_ENTER)
+		check(game.night.gross == 9 and game.night.sold[2] == 1 and not ui.reward_buttons[2].visible,
+			"the rescued harvest can sell as orange fizz and Night 2 still offers its own cards")
+		key(game, KEY_Q)
+		key(game, KEY_ENTER)
+		key(game, KEY_C)
+		check(game.run_day == 3 and game.deck.has(Day.Card.WHEEL_CHOCK) and ui.deck_buttons[0].disabled
+			and game.day.card == Day.Card.TUNED_BLADE, "the orange-only card stays in the deck but cannot equip on Day 3")
+	game.reset_run()
+
 func run() -> void:
 	var game = load("res://main.tscn").instantiate()
 	root.add_child(game)
@@ -330,6 +385,7 @@ func run() -> void:
 	check_seed_guard(game)
 	check_watermelon_run(game)
 	check_rolling_orange(game)
+	check_wheel_chock(game)
 	var night = game.night
 	var ui = game.night_view
 	check(not game.enter_night(), "an active expedition cannot open the market")
@@ -429,8 +485,8 @@ func run() -> void:
 		key(layout_game, KEY_ENTER)
 		await process_frame
 		await process_frame
-		var rewards_fit: bool = bounds.encloses(pane.reward_content.get_global_rect()) and bounds.encloses(pane.action_button.get_global_rect())
-		check(rewards_fit, "closing rewards and continue action fit at %s" % size)
+		var rewards_fit: bool = bounds.encloses(pane.reward_content.get_global_rect()) and bounds.encloses(pane.action_button.get_global_rect()) and bounds.encloses(pane.reward_buttons[2].get_global_rect())
+		check(rewards_fit, "three closing rewards and continue action fit at %s" % size)
 		key(layout_game, KEY_Q)
 		key(layout_game, KEY_ENTER)
 		await process_frame

@@ -1,7 +1,9 @@
 extends RefCounted
 ## The day owns energy and its conclusion; the depot owns deposited ingredients.
 
-enum Card { NONE = -1, STANDARD, WEDGE, RESERVE_CELL, SEED_GUARD, TUNED_BLADE, LIMITED_COCKTAIL }
+const RollingOrange = preload("res://scripts/rolling_orange.gd")
+
+enum Card { NONE = -1, STANDARD, WEDGE, RESERVE_CELL, SEED_GUARD, TUNED_BLADE, LIMITED_COCKTAIL, WHEEL_CHOCK }
 enum Outcome { ACTIVE, RETURNED, EXHAUSTED }
 
 const MAX_CHARGE := 100.0
@@ -13,7 +15,11 @@ const HAZARD_COST_PER_SECOND := 2.0
 const RESERVE_CHARGE := 25.0
 const GUARDED_SEED_COST := 10.0
 const TUNED_CUT_COST := 0.75
-const REWARD_OFFERS := [[Card.RESERVE_CELL, Card.SEED_GUARD], [Card.TUNED_BLADE, Card.LIMITED_COCKTAIL]]
+const CHOCK_BRAKE_BONUS := 0.60
+const REWARD_OFFERS := [
+	[Card.RESERVE_CELL, Card.SEED_GUARD, Card.WHEEL_CHOCK],
+	[Card.TUNED_BLADE, Card.LIMITED_COCKTAIL],
+]
 
 var card := Card.STANDARD
 var charge := MAX_CHARGE
@@ -21,6 +27,9 @@ var outcome := Outcome.ACTIVE
 var lost_cargo := 0
 var reward_used := false
 var last_seed_cost := SEED_COST
+
+static func card_available(card_id: Card, day_number: int) -> bool:
+	return card_id != Card.WHEEL_CHOCK or day_number == RollingOrange.DAY
 
 func reset() -> void:
 	card = Card.STANDARD
