@@ -21,6 +21,7 @@ signal action_pressed
 signal pause_pressed
 signal reward_pressed(card: Day.Card)
 signal loadout_pressed(card: Day.Card)
+signal target_pressed(recipe: int)
 signal start_pressed
 
 var market_content: VBoxContainer
@@ -29,7 +30,8 @@ var loadout_buttons: Array[IllustratedAction] = []
 var dash_kit_button: IllustratedAction
 var prep_title: Label
 var forecast_title: Label
-var forecast_labels: Array[Label] = []
+var forecast_buttons: Array[Button] = []
+var target_hint: Label
 var route_hint: Label
 var deck_buttons: Array[IllustratedAction] = []
 var available_cards: Array[Day.Card] = []
@@ -148,10 +150,15 @@ func build_prep(parent: Control) -> void:
 	prep_title = label(prep_content, "", 27, PAPER)
 	forecast_title = label(prep_content, "", 16, GOLD)
 	for i in range(Market.NAMES.size()):
-		forecast_labels.append(label(prep_content, "", 14, MINT))
-	label(prep_content, "Special: 1 watermelon + 1 spine melon", 13, MUTED)
+		var button := action(prep_content, 29.0, 3)
+		button.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		button.toggle_mode = true
+		button.tooltip_text = Market.INGREDIENTS[i]
+		button.add_theme_stylebox_override("pressed", surface(Color("235246"), 3))
+		button.pressed.connect(func(): target_pressed.emit(i))
+		forecast_buttons.append(button)
+	target_hint = label(prep_content, "", 13, MUTED)
 	route_hint = label(prep_content, "", 13, MUTED)
-	label(prep_content, "Choose today’s loadout", 16, GOLD)
 	var standard := illustrated_action(prep_content)
 	standard.pressed.connect(func(): loadout_pressed.emit(Day.Card.STANDARD))
 	loadout_buttons.append(standard)
@@ -195,19 +202,35 @@ func reward_description(card: Day.Card, chilled_watermelon: int) -> String:
 			return "Day 3 depot: %d/%d watermelon saved" % [chilled_watermelon, Day.COOLER_CAPACITY]
 	return ""
 
-func refresh_prep(market: Market, card: Day.Card, paused: bool, run_day: int, deck: Array[Day.Card], balance: int, chilled_watermelon: int) -> void:
+func refresh_prep(market: Market, card: Day.Card, paused: bool, run_day: int, deck: Array[Day.Card], balance: int, chilled_watermelon: int, target: int) -> void:
 	show()
 	market_content.hide()
 	prep_content.show()
 	prep_title.text = "Day %d Preparation" % run_day
 	forecast_title.text = "Tonight’s fee $%d  ·  Run net $%d" % [market.fee, balance]
-	for i in range(forecast_labels.size()):
-		forecast_labels[i].visible = market.offers(i)
-		forecast_labels[i].text = "%s  ·  %d × $%d" % [Market.NAMES[i], market.demand[i], market.price(i)]
-	match run_day:
-		RollingOrange.DAY: route_hint.text = "Melon SW  ·  Orange SE (with watermelon)"
-		Market.DAYS: route_hint.text = "Spine melons: southwest and east"
-		_: route_hint.text = "Spine melon: southwest"
+	for i in range(forecast_buttons.size()):
+		var button := forecast_buttons[i]
+		button.visible = market.offers(i)
+		button.disabled = paused
+		button.set_pressed_no_signal(i == target)
+		button.text = "%s  ·  %d × $%d" % [Market.NAMES[i], market.demand[i], market.price(i)]
+		if i == target:
+			button.text += "  ✓"
+	var target_name: String = "all orders" if target == Market.ALL_RECIPES else SHORT_RECIPE_NAMES[target]
+	target_hint.text = "Target: %s  ·  Tap an order or press N" % target_name
+	match target:
+		Market.Recipe.WATERMELON:
+			route_hint.text = "Watermelon patch: west"
+		Market.Recipe.MELON:
+			var sites := "SW + E" if run_day == Market.DAYS else "SW"
+			route_hint.text = "1 watermelon + 1 spine melon (%s)" % sites
+		Market.Recipe.ORANGE:
+			route_hint.text = "1 watermelon + 1 orange (SE)"
+		_:
+			match run_day:
+				RollingOrange.DAY: route_hint.text = "Melon SW  ·  Orange SE (with watermelon)"
+				Market.DAYS: route_hint.text = "Spine melons: southwest and east"
+				_: route_hint.text = "Spine melon: southwest"
 	available_cards = deck
 	for i in range(deck_buttons.size()):
 		var button := deck_buttons[i]
@@ -297,7 +320,7 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 		var has_selection := market.selected.has(true)
 		detail.text = "Set tonight’s menu" if has_menu else "No recipes available"
 		if has_selection:
-			var shortage := ingredient_list(market.missing_ingredients(market.stock, true))
+			var shortage := ingredient_list(market.missing_ingredients(market.stock, Market.SELECTED_RECIPES))
 			detail.text = "Selected orders covered" if shortage.is_empty() else "Menu short: " + shortage
 		action_button.text = "ENTER / OPEN MARKET" if has_menu else "ENTER / CLOSE WITHOUT SALES"
 		action_button.disabled = paused or (has_menu and not has_selection)
@@ -396,15 +419,15 @@ func present_card(button: IllustratedAction, card: Day.Card, title: String, desc
 	button.text = title + ("   ✓" if selected else "")
 	button.present(card_art[card], button.text, description, selected, unavailable)
 
-func action(parent: Control) -> Button:
+func action(parent: Control, height := 42.0, padding := 6) -> Button:
 	var button := Button.new()
 	button.focus_mode = Control.FOCUS_NONE
-	button.custom_minimum_size.y = 42
+	button.custom_minimum_size.y = height
 	button.add_theme_font_size_override("font_size", 13)
-	button.add_theme_stylebox_override("normal", surface(Color("2c4656"), 6))
-	button.add_theme_stylebox_override("hover", surface(Color("3e5968"), 6))
-	button.add_theme_stylebox_override("pressed", surface(Color("35594f"), 6))
-	button.add_theme_stylebox_override("disabled", surface(Color("233641"), 6))
+	button.add_theme_stylebox_override("normal", surface(Color("2c4656"), padding))
+	button.add_theme_stylebox_override("hover", surface(Color("3e5968"), padding))
+	button.add_theme_stylebox_override("pressed", surface(Color("35594f"), padding))
+	button.add_theme_stylebox_override("disabled", surface(Color("233641"), padding))
 	parent.add_child(button)
 	return button
 

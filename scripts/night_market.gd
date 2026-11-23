@@ -11,6 +11,8 @@ enum OrderState { UNAVAILABLE, READY, PREPARING, MIXER_BUSY, FILLED, MISSING_ING
 
 const FEES := [10, 12, 20]
 const DAYS := 3
+const ALL_RECIPES := -1
+const SELECTED_RECIPES := -2
 const COCKTAIL_BONUS := 3
 const COCKTAIL_EXTRA_TIME := 0.25
 const NAMES := ["Watermelon juice", "Spine melon special", "Orange fizz"]
@@ -61,11 +63,13 @@ func portions(recipe: int) -> int:
 	var extra: int = EXTRA_FRUIT[recipe]
 	return watermelon if extra == -1 else mini(watermelon, stock.count(extra))
 
-func missing_ingredients(safe_stock: Array[int], selected_only := false) -> Dictionary:
+func missing_ingredients(safe_stock: Array[int], recipe_scope := ALL_RECIPES) -> Dictionary:
 	# Every order uses one watermelon, including both specials.
 	var required: Dictionary = {0: 0}
 	for recipe in range(demand.size()):
-		if not offers(recipe) or (selected_only and not selected[recipe]):
+		if not offers(recipe) or (recipe_scope == SELECTED_RECIPES and not selected[recipe]):
+			continue
+		if recipe_scope >= 0 and recipe_scope != recipe:
 			continue
 		required[0] += demand[recipe]
 		var extra: int = EXTRA_FRUIT[recipe]

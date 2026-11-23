@@ -40,6 +40,7 @@ const HUD_HEIGHT: int = 150
 const BOUNDS = Rect2(40, 100, 1480, 1040)
 @export var day_mode := false
 var preparing_day := false
+var harvest_target := NightMarket.ALL_RECIPES
 var run_day := 1
 var earned_card := DayHarvest.Card.NONE
 var deck: Array[DayHarvest.Card] = []
@@ -214,6 +215,7 @@ func _ready() -> void:
 	night_view.recipe_pressed.connect(pick_night_recipe)
 	night_view.action_pressed.connect(advance_night)
 	night_view.loadout_pressed.connect(pick_day_card)
+	night_view.target_pressed.connect(toggle_harvest_target)
 	night_view.reward_pressed.connect(pick_reward_card)
 	night_view.start_pressed.connect(begin_harvest)
 	night_view.pause_pressed.connect(func(): set_paused(not paused))
@@ -346,6 +348,7 @@ func reset_day() -> void:
 	dash_left = 0.0
 	day.reset()
 	preparing_day = day_mode
+	harvest_target = NightMarket.ALL_RECIPES
 	night.reset(run_day)
 	if not deck.is_empty():
 		day.card = deck.back()
@@ -463,6 +466,7 @@ func _input(event: InputEvent) -> void:
 					pick_reward_card(DayHarvest.REWARD_OFFERS[run_day - 1][2])
 				else:
 					pick_night_recipe(NightMarket.Recipe.ORANGE)
+			KEY_N: cycle_harvest_target()
 			KEY_B: pick_day_card(DayHarvest.Card.DASH_KIT)
 			KEY_SPACE: try_dash()
 			KEY_E: try_hire_cashier()
@@ -565,13 +569,26 @@ func update_day_hud() -> void:
 			hint = "BATTERY EMPTY • Returned • Lost %d" % day.lost_cargo
 		status.text = hint + "\nContinue to the night market"
 	else:
-		var shortage := NightMarketView.ingredient_list(night.missing_ingredients(production.raw))
-		var forecast := "Tonight: all orders covered" if shortage.is_empty() else "Need: " + shortage
-		status.text = forecast + "\nMint pad: unload • Ring drains battery\nWASD / arrows / drag • auto-cut"
+		status.text = harvest_forecast() + "\nMint pad: unload • Ring drains battery\nWASD / arrows / drag • auto-cut"
 	return_button.text = "ENTER / NIGHT MENU" if day_finished() else "ENTER / END HARVEST"
 	if dash_button.visible:
 		update_dash_button()
 	return_button.disabled = paused or (not day_finished() and (not cargo.is_empty() or player.distance_to(depot) >= DEPOT_RADIUS))
+
+func harvest_forecast() -> String:
+	var shortage := NightMarketView.ingredient_list(night.missing_ingredients(production.raw, harvest_target))
+	if harvest_target == NightMarket.ALL_RECIPES:
+		return "Tonight: all orders covered" if shortage.is_empty() else "Need: " + shortage
+	var target: String = NightMarketView.SHORT_RECIPE_NAMES[harvest_target]
+	if shortage.is_empty():
+		if player.distance_to(depot) >= DEPOT_RADIUS:
+			return target + " covered · return to depot"
+		return target + (" covered · end harvest" if cargo.is_empty() else " covered · finish unloading")
+	if not cargo.is_empty():
+		var full_load := NightMarketView.ingredient_list(night.missing_ingredients(production.raw + cargo, harvest_target))
+		if full_load.is_empty():
+			return target + " · unload to cover orders"
+	return "%s need: %s" % [target, shortage]
 
 func switch_mode() -> void:
 	day_mode = not day_mode
@@ -586,7 +603,7 @@ func refresh_market_view() -> void:
 	update_orchard_counter()
 	var chilled_watermelon := carryover_watermelons()
 	if preparing_day:
-		night_view.refresh_prep(night, day.card, paused, run_day, deck, run_sales - run_fees, chilled_watermelon)
+		night_view.refresh_prep(night, day.card, paused, run_day, deck, run_sales - run_fees, chilled_watermelon, harvest_target)
 	else:
 		night_view.refresh(night, paused, run_day, earned_card, run_sales, run_fees, run_results, chilled_watermelon)
 
@@ -605,6 +622,21 @@ func pick_reward_card(card: DayHarvest.Card) -> void:
 			return
 		earned_card = card
 		refresh_market_view()
+
+func toggle_harvest_target(recipe: int) -> void:
+	if not preparing_day or paused or not night.offers(recipe):
+		return
+	harvest_target = NightMarket.ALL_RECIPES if harvest_target == recipe else recipe
+	refresh_market_view()
+
+func cycle_harvest_target() -> void:
+	if not preparing_day or paused:
+		return
+	var next := harvest_target + 1
+	while next < night.demand.size() and not night.offers(next):
+		next += 1
+	harvest_target = next if next < night.demand.size() else NightMarket.ALL_RECIPES
+	refresh_market_view()
 
 func pick_day_card(card: DayHarvest.Card) -> void:
 	if preparing_day and not paused and DayHarvest.card_available(card, run_day) and (

@@ -118,6 +118,89 @@ func check_preparation(game) -> void:
 		"the wedge route sells tonight's special with harvested ingredients")
 	game.reset_run()
 
+func check_harvest_target(game) -> void:
+	var ui = game.night_view
+	for target in [Market.Recipe.WATERMELON, Market.Recipe.MELON]:
+		game.reset_run()
+		check(game.harvest_target == Market.ALL_RECIPES and not ui.forecast_buttons[Market.Recipe.ORANGE].visible,
+			"a fresh Day 1 tracks all orders and hides the unavailable orange order")
+		game.set_paused(true)
+		key(game, KEY_N)
+		ui.forecast_buttons[target].pressed.emit()
+		check(game.harvest_target == Market.ALL_RECIPES and ui.forecast_buttons[target].disabled,
+			"pause blocks both ways to change the target")
+		game.set_paused(false)
+		if target == Market.Recipe.WATERMELON:
+			key(game, KEY_N)
+		else:
+			ui.forecast_buttons[target].pressed.emit()
+			ui.forecast_buttons[target].pressed.emit()
+			check(game.harvest_target == Market.ALL_RECIPES, "tapping the chosen order again tracks all orders")
+			ui.forecast_buttons[target].pressed.emit()
+		check(game.harvest_target == target and ui.forecast_buttons[target].button_pressed,
+			"preparation highlights the chosen demand")
+		key(game, KEY_ENTER)
+		key(game, KEY_N)
+		game.update_day_hud()
+		var target_name: String = "Juice" if target == Market.Recipe.WATERMELON else "Melon"
+		var start_need := "5 watermelon" if target == Market.Recipe.WATERMELON else "3 watermelon · 3 melon"
+		check(game.harvest_target == target and game.status.text.begins_with("%s need: %s" % [target_name, start_need]),
+			"the target is locked for today's harvest and counts only that recipe's demand")
+		walk_to(game, Vector2(510, 690))
+		game.simulate(0.70, Vector2.ZERO)
+		game.update_day_hud()
+		check(game.cargo.count(0) >= 5 and game.stock == 0
+			and game.status.text.begins_with("Juice · unload to cover orders" if target == Market.Recipe.WATERMELON
+				else "Melon need: 3 watermelon · 3 melon"),
+			"the same watermelon harvest prompts unloading only for the juice goal")
+		walk_to(game, game.depot)
+		game.simulate(2.0, Vector2.ZERO)
+		game.update_day_hud()
+		check(game.status.text.begins_with("Juice covered · end harvest" if target == Market.Recipe.WATERMELON
+			else "Melon need: 3 melon") and not game.return_button.disabled,
+			"safe watermelon finishes the juice goal, while the melon goal still shows a shortage and permits return")
+		if target == Market.Recipe.MELON:
+			walk_to(game, Vector2(820, game.depot.y))
+			walk_to(game, Vector2(820, 1004))
+			walk_to(game, Vector2(SpineMelon.HOME.x, 1004))
+			harvest_melon_from_south(game, SpineMelon.HOME)
+			game.update_day_hud()
+			check(game.cargo.count(MELON) == 3 and game.status.text.begins_with("Melon · unload to cover orders"),
+				"harvesting the extra three melons changes the prompt to unload")
+			walk_to(game, Vector2(SpineMelon.HOME.x, 1004))
+			walk_to(game, Vector2(820, 1004))
+			walk_to(game, Vector2(820, game.depot.y))
+			walk_to(game, game.depot)
+			game.simulate(2.0, Vector2.ZERO)
+		game.cargo.append(0)
+		game.update_day_hud()
+		check(game.status.text.begins_with(target_name + " covered · finish unloading") and game.return_button.disabled,
+			"surplus cargo still needs unloading when the goal is already covered at the depot")
+		game.simulate(0.1, Vector2.ZERO)
+		walk_to(game, game.depot + Vector2(0, 110))
+		game.update_day_hud()
+		check(game.status.text.begins_with(target_name + " covered · return to depot") and game.return_button.disabled,
+			"departing with a covered target points back to the depot")
+		walk_to(game, game.depot)
+		key(game, KEY_ENTER)
+		key(game, KEY_ENTER)
+		check(game.night.phase == Market.Phase.MENU and not game.night.selected.has(true),
+			"the daytime goal leaves the actual market menu open for selection")
+		key(game, KEY_Q if target == Market.Recipe.WATERMELON else KEY_W)
+		key(game, KEY_ENTER)
+		var orders: int = game.night.demand[target]
+		for i in range(orders):
+			key(game, KEY_Q if target == Market.Recipe.WATERMELON else KEY_W)
+			game._physics_process(2.0)
+		key(game, KEY_ENTER)
+		check(game.night.phase == Market.Phase.CLOSED and game.night.sold[target] == orders
+			and game.night.gross == orders * game.night.price(target), "the planned route sells every target order")
+		key(game, KEY_Q)
+		key(game, KEY_ENTER)
+		check(game.run_day == 2 and game.harvest_target == Market.ALL_RECIPES,
+			"Day 2 starts with a fresh target before offering orange fizz")
+	game.reset_run()
+
 func check_reward_continuation(game) -> void:
 	var ui = game.night_view
 	var night = game.night
@@ -178,7 +261,7 @@ func check_reward_continuation(game) -> void:
 	key(game, KEY_C)
 	check(game.day.card == Day.Card.RESERVE_CELL and night.price(1) == 12, "the first reward is still selectable without the second reward bonus")
 	key(game, KEY_V)
-	check(game.day.card == Day.Card.LIMITED_COCKTAIL and night.price(1) == 15 and "6 × $15" in ui.forecast_labels[1].text,
+	check(game.day.card == Day.Card.LIMITED_COCKTAIL and night.price(1) == 15 and "6 × $15" in ui.forecast_buttons[1].text,
 		"the second reward updates the live forecast and actual sale price")
 	key(game, KEY_ENTER)
 	walk_to(game, Vector2(510, 690))
@@ -295,7 +378,7 @@ func check_rolling_orange(game) -> void:
 	var harvest_times: Array[float] = []
 	for intercept in [false, true]:
 		open_orange_day(game)
-		check(game.night_view.forecast_labels[2].visible and "3 × $9" in game.night_view.forecast_labels[2].text,
+		check(game.night_view.forecast_buttons[2].visible and "3 × $9" in game.night_view.forecast_buttons[2].text,
 			"Day 2 forecasts the orange fizz before departure")
 		key(game, KEY_ENTER)
 		var fruit: Dictionary = game.fruits.filter(func(f): return f.kind == Orange.KIND)[0]
@@ -713,6 +796,7 @@ func run() -> void:
 	check_menu_shortage(game)
 	check_service_buttons(game)
 	check_preparation(game)
+	check_harvest_target(game)
 	check_seed_guard(game)
 	check_watermelon_run(game)
 	check_rolling_orange(game)
@@ -826,7 +910,7 @@ func run() -> void:
 		var pane = layout_game.night_view
 		var bounds := Rect2(Vector2.ZERO, Vector2(size))
 		var prep_fits: bool = bounds.encloses(pane.prep_content.get_global_rect())
-		for button in pane.loadout_buttons + [pane.start_button, pane.prep_pause_button]:
+		for button in pane.forecast_buttons.slice(0, 2) + pane.loadout_buttons + [pane.start_button, pane.prep_pause_button]:
 			prep_fits = prep_fits and bounds.encloses(button.get_global_rect())
 		check(prep_fits, "forecast and loadout actions fit at %s" % size)
 		deliver(layout_game, [0, MELON])
@@ -849,7 +933,14 @@ func run() -> void:
 		await process_frame
 		await process_frame
 		check(bounds.encloses(pane.prep_content.get_global_rect()) and bounds.encloses(pane.deck_buttons[0].get_global_rect())
-			and bounds.encloses(pane.dash_kit_button.get_global_rect()), "Day 2 prep fits both the dash kit and the earned card at %s" % size)
+			and bounds.encloses(pane.dash_kit_button.get_global_rect()) and bounds.encloses(pane.prep_pause_button.get_global_rect()),
+			"Day 2 prep fits the target, dash kit, earned card and pause at %s" % size)
+		for i in range(3):
+			key(layout_game, KEY_N)
+		check(layout_game.harvest_target == Market.Recipe.ORANGE and pane.forecast_buttons[2].button_pressed
+			and bounds.encloses(pane.forecast_buttons[2].get_global_rect()), "N can target the Day 2 orange order at %s" % size)
+		key(layout_game, KEY_N)
+		check(layout_game.harvest_target == Market.ALL_RECIPES, "N wraps to all orders at %s" % size)
 		key(layout_game, KEY_B)
 		key(layout_game, KEY_ENTER)
 		layout_game._physics_process(0.0)
@@ -937,6 +1028,9 @@ func run() -> void:
 	await process_frame
 	await process_frame
 	var art_ui = art_game.night_view
+	var order: Control = art_ui.forecast_buttons[Market.Recipe.WATERMELON]
+	click_at(art_view, order.get_global_rect().get_center())
+	check(art_game.harvest_target == Market.Recipe.WATERMELON, "clicking the forecast order chooses the harvest target")
 	var wedge: Control = art_ui.loadout_buttons[Day.Card.WEDGE].artwork
 	click_at(art_view, wedge.get_global_rect().get_center())
 	check(art_game.day.card == Day.Card.WEDGE, "clicking the cutting wedge illustration equips its card")
