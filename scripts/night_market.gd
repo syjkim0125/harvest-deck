@@ -132,6 +132,16 @@ func serve(recipe: int) -> bool:
 		queued_recipe = recipe
 	return true
 
+func cancel_queued_order() -> bool:
+	if phase != Phase.SERVICE or queued_recipe == -1:
+		return false
+	var extra: int = EXTRA_FRUIT[queued_recipe]
+	queued_recipe = -1
+	stock.append(0)
+	if extra != -1:
+		stock.append(extra)
+	return true
+
 func price(recipe: int) -> int:
 	return PRICES[recipe] + (COCKTAIL_BONUS if cocktail and recipe == Recipe.MELON else 0)
 

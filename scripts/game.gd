@@ -214,6 +214,7 @@ func _ready() -> void:
 	night_layer.add_child(night_view)
 	night_view.recipe_pressed.connect(pick_night_recipe)
 	night_view.action_pressed.connect(advance_night)
+	night_view.cancel_pressed.connect(cancel_queued_order)
 	night_view.loadout_pressed.connect(pick_day_card)
 	night_view.target_pressed.connect(toggle_harvest_target)
 	night_view.reward_pressed.connect(pick_reward_card)
@@ -467,6 +468,7 @@ func _input(event: InputEvent) -> void:
 				else:
 					pick_night_recipe(NightMarket.Recipe.ORANGE)
 			KEY_N: cycle_harvest_target()
+			KEY_X: cancel_queued_order()
 			KEY_B: pick_day_card(DayHarvest.Card.DASH_KIT)
 			KEY_SPACE: try_dash()
 			KEY_E: try_hire_cashier()
@@ -696,6 +698,12 @@ func pick_night_recipe(recipe: int) -> bool:
 	if changed:
 		refresh_market_view()
 	return changed
+
+func cancel_queued_order() -> bool:
+	if paused or not night.cancel_queued_order():
+		return false
+	refresh_market_view()
+	return true
 
 func advance_night() -> bool:
 	if paused:

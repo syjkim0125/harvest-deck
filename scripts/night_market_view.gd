@@ -18,6 +18,7 @@ const INGREDIENT_NAMES := {0: STOCK_NAMES[0], SpineMelon.KIND: STOCK_NAMES[1], R
 
 signal recipe_pressed(recipe: int)
 signal action_pressed
+signal cancel_pressed
 signal pause_pressed
 signal reward_pressed(card: Day.Card)
 signal loadout_pressed(card: Day.Card)
@@ -56,6 +57,7 @@ var recipe_buttons: Array[IllustratedAction] = []
 var drink_art: Array[AtlasTexture] = []
 var card_art: Array[AtlasTexture] = []
 var action_button: Button
+var cancel_button: Button
 var pause_button: Button
 
 func _ready() -> void:
@@ -119,10 +121,19 @@ func _ready() -> void:
 				reward_pressed.emit(reward_options[i])
 		)
 		reward_buttons.append(button)
-	action_button = action(content)
+	var actions := HBoxContainer.new()
+	actions.add_theme_constant_override("separation", 6)
+	content.add_child(actions)
+	action_button = action(actions)
+	action_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	action_button.add_theme_stylebox_override("normal", surface(Color("235246"), 6))
 	action_button.add_theme_stylebox_override("hover", surface(Color("316a5b"), 6))
 	action_button.pressed.connect(func(): action_pressed.emit())
+	cancel_button = action(actions)
+	cancel_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	cancel_button.text = "X / CANCEL QUEUE"
+	cancel_button.hide()
+	cancel_button.pressed.connect(func(): cancel_pressed.emit())
 	pause_button = action(content)
 	pause_button.pressed.connect(func(): pause_pressed.emit())
 
@@ -283,6 +294,8 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 	if citrus_night:
 		inventory.text += "   Orange %d" % market.stock.count(RollingOrange.KIND)
 	recipes.visible = picking or serving
+	cancel_button.visible = serving and market.queued_recipe != -1
+	cancel_button.disabled = paused
 	for i in range(recipe_buttons.size()):
 		var button := recipe_buttons[i]
 		var name_and_price := "%s  ·  $%d" % [Market.NAMES[i], market.price(i)]
@@ -331,7 +344,7 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 		detail.text = "Take an order" if market.can_serve(0) or market.can_serve(1) or market.can_serve(2) else "No orders available"
 		if preparing:
 			detail.text = "Preparing " + Market.NAMES[market.active_recipe]
-		action_button.text = "ENTER / CLOSE MARKET"
+		action_button.text = "ENTER / CLOSE" if cancel_button.visible else "ENTER / CLOSE MARKET"
 		action_button.disabled = paused or market.active_recipe != -1
 	else:
 		var result: Dictionary = results[run_day - 1]

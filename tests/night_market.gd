@@ -787,6 +787,10 @@ func check_service_buttons(game) -> void:
 	juice.pressed.emit()
 	check(juice.text == "PREPARING · NEXT QUEUED" and juice.disabled and night.stock.is_empty()
 		and not game.pick_night_recipe(Market.Recipe.WATERMELON), "both accepted juice orders fit the same button")
+	check(game.cancel_queued_order() and night.active_recipe == Market.Recipe.WATERMELON
+		and night.queued_recipe == -1 and game.stock == 1 and night.gross == 12,
+		"cancelling a duplicate juice returns only the waiting order's watermelon")
+	juice.pressed.emit()
 	game._physics_process(8.0)
 	check(juice.text == "NEEDS INGREDIENTS" and juice.disabled and night.gross == 22 and night.sold == [2, 1, 0]
 		and night.active_recipe == -1 and night.queued_recipe == -1 and not ui.action_button.disabled,
@@ -794,6 +798,44 @@ func check_service_buttons(game) -> void:
 	key(game, KEY_ENTER)
 	check(game.run_results.back().sold == [2, 1, 0] and game.run_results.back().leftover == [0, 0, 0],
 		"settlement counts both completed reservations and excludes their ingredients")
+	game.reset_run()
+
+func check_queue_cancellation(game) -> void:
+	deliver(game, [0, 0, MELON])
+	var ui = game.night_view
+	var night = game.night
+	check(not game.cancel_queued_order() and not ui.cancel_button.visible and game.stock == 3,
+		"menu selection cannot cancel an order or change stock")
+	for code in [KEY_Q, KEY_W, KEY_ENTER, KEY_Q, KEY_W]:
+		key(game, code)
+	check(night.active_recipe == Market.Recipe.WATERMELON and night.queued_recipe == Market.Recipe.MELON
+		and night.stock.is_empty() and ui.cancel_button.is_visible_in_tree(), "a waiting special exposes a dedicated cancel action")
+	var juice_time: float = night.remaining
+	game.set_paused(true)
+	key(game, KEY_X)
+	ui.cancel_button.pressed.emit()
+	check(ui.cancel_button.disabled and game.stock == 0 and night.queued_recipe == Market.Recipe.MELON,
+		"pause blocks both cancellation inputs without refunding anything")
+	game.set_paused(false)
+	key(game, KEY_X)
+	check(night.queued_recipe == -1 and night.active_recipe == Market.Recipe.WATERMELON
+		and night.remaining == juice_time and night.gross == 0 and night.sold == [0, 0, 0]
+		and game.production.raw.count(0) == 1 and game.production.raw.count(MELON) == 1,
+		"cancelling refunds both ingredients to the shared inventory and leaves the active timer and ledger alone")
+	key(game, KEY_X)
+	check(game.stock == 2 and not ui.cancel_button.visible and ui.action_button.disabled and not game.advance_night(),
+		"repeated cancellation cannot refund again and the active order still blocks closing")
+	key(game, KEY_W)
+	check(night.queued_recipe == Market.Recipe.MELON and game.stock == 0,
+		"the refunded ingredients and waiting slot can book the special again")
+	game._physics_process(juice_time)
+	key(game, KEY_X)
+	check(night.active_recipe == Market.Recipe.MELON and not ui.cancel_button.visible
+		and game.stock == 0 and night.gross == 5, "the cancellation shortcut cannot touch a promoted order")
+	game._physics_process(2.0)
+	key(game, KEY_ENTER)
+	check(game.run_results.back().sold == [1, 1, 0] and game.run_results.back().sales == 17
+		and game.run_results.back().leftover == [0, 0, 0], "settlement charges only the two drinks actually completed")
 	game.reset_run()
 
 func check_queue_demand() -> void:
@@ -850,6 +892,7 @@ func run() -> void:
 	check_ingredient_forecast()
 	check_menu_shortage(game)
 	check_service_buttons(game)
+	check_queue_cancellation(game)
 	check_queue_demand()
 	check_preparation(game)
 	check_harvest_target(game)
@@ -1043,6 +1086,15 @@ func run() -> void:
 		check(service_fits and pane.recipe_buttons[0].text == "QUEUED" and pane.recipe_buttons[1].text == "NEEDS INGREDIENTS"
 			and pane.recipe_buttons[2].text == "PREPARING…",
 			"queued, missing and preparing drinks fit with the preparation meter at %s" % size)
+		check(pane.cancel_button.is_visible_in_tree() and not pane.cancel_button.disabled
+			and bounds.encloses(pane.cancel_button.get_global_rect()) and bounds.encloses(pane.action_button.get_global_rect())
+			and not pane.cancel_button.get_global_rect().intersects(pane.action_button.get_global_rect()),
+			"the cancel and close buttons fit beside one another at %s" % size)
+		click_at(view, pane.cancel_button.get_global_rect().get_center())
+		check(layout_game.night.queued_recipe == -1 and layout_game.night.active_recipe == Market.Recipe.ORANGE
+			and layout_game.night.stock.count(0) == 1 and not pane.cancel_button.visible,
+			"clicking cancel restores the queued ingredient and leaves the mixer working at %s" % size)
+		key(layout_game, KEY_Q)
 		layout_game._physics_process(3.0)
 		await process_frame
 		await process_frame
