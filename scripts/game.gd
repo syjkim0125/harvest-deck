@@ -29,6 +29,8 @@ const HUD_HEIGHT: int = 150
 const BOUNDS = Rect2(40, 100, 1480, 1040)
 @export var day_mode := false
 var preparing_day := false
+var run_day := 1
+var earned_card := DayHarvest.Card.NONE
 var day := DayHarvest.new()
 var night := NightMarket.new()
 var night_view: NightMarketView
@@ -167,6 +169,7 @@ func _ready() -> void:
 	night_view.recipe_pressed.connect(pick_night_recipe)
 	night_view.action_pressed.connect(advance_night)
 	night_view.loadout_pressed.connect(pick_day_card)
+	night_view.reward_pressed.connect(pick_reward_card)
 	night_view.start_pressed.connect(begin_harvest)
 	night_view.pause_pressed.connect(func(): set_paused(not paused))
 	get_viewport().size_changed.connect(layout_hud)
@@ -255,6 +258,11 @@ func setup_inputs() -> void:
 			InputMap.action_add_event(action, event)
 
 func reset_run() -> void:
+	run_day = 1
+	earned_card = DayHarvest.Card.NONE
+	reset_day()
+
+func reset_day() -> void:
 	rng.seed = 1742
 	particle_rng.seed = 2841
 	time = 0.0
@@ -267,6 +275,8 @@ func reset_run() -> void:
 	fruits.clear()
 	production.reset()
 	day.reset()
+	if run_day > 1:
+		day.card = earned_card
 	preparing_day = day_mode
 	night.reset()
 	notice = ""
@@ -345,13 +355,18 @@ func _input(event: InputEvent) -> void:
 			KEY_Q:
 				if preparing_day:
 					pick_day_card(DayHarvest.Card.STANDARD)
+				elif choosing_reward():
+					pick_reward_card(DayHarvest.Card.RESERVE_CELL)
 				else:
 					pick_night_recipe(NightMarket.Recipe.WATERMELON)
 			KEY_W:
 				if preparing_day:
 					pick_day_card(DayHarvest.Card.WEDGE)
+				elif choosing_reward():
+					pick_reward_card(DayHarvest.Card.SEED_GUARD)
 				else:
 					pick_night_recipe(NightMarket.Recipe.MELON)
+			KEY_C: pick_day_card(earned_card)
 			KEY_E: try_hire_cashier()
 			KEY_F: try_upgrade_mixer()
 			KEY_G: try_unlock_orchard()
@@ -401,7 +416,7 @@ func _physics_process(delta: float) -> void:
 	if night.phase != NightMarket.Phase.OFF:
 		if not paused:
 			night.step(delta)
-		night_view.refresh(night, paused)
+		night_view.refresh(night, paused, run_day, earned_card)
 		return
 	if not paused and not day_finished():
 		var direction = Input.get_vector("left", "right", "up", "down")
@@ -435,11 +450,13 @@ func _physics_process(delta: float) -> void:
 
 func update_day_hud() -> void:
 	var charge_percent := ceili(day.charge)
-	hud.text = "DAY   BAT %d%%   BAG %d/%d" % [charge_percent, cargo.size(), CAPACITY]
+	hud.text = "DAY %d   BAT %d%%   BAG %d/%d" % [run_day, charge_percent, cargo.size(), CAPACITY]
 	var stock_text := "SAFE %d   MELON %d" % [stock, production.raw.count(SpineMelon.KIND)]
 	hud.text += ("\n" if portrait_view else "     ") + stock_text
-	if day.card == DayHarvest.Card.WEDGE:
-		hud.text += "   WEDGE"
+	match day.card:
+		DayHarvest.Card.WEDGE: hud.text += "   WEDGE"
+		DayHarvest.Card.RESERVE_CELL: hud.text += "   CELL USED" if day.reward_used else "   CELL READY"
+		DayHarvest.Card.SEED_GUARD: hud.text += "   GUARD USED" if day.reward_used else "   GUARD READY"
 	hud.modulate = Color("ffbc82") if charge_percent <= DayHarvest.SEED_COST else Color.WHITE
 	var hint := "Mint pad: unload, then End Harvest"
 	if day.outcome == DayHarvest.Outcome.EXHAUSTED:
@@ -461,12 +478,21 @@ func day_finished() -> bool:
 
 func refresh_market_view() -> void:
 	if preparing_day:
-		night_view.refresh_prep(day.card, paused)
+		night_view.refresh_prep(day.card, paused, run_day, earned_card)
 	else:
-		night_view.refresh(night, paused)
+		night_view.refresh(night, paused, run_day, earned_card)
+
+func choosing_reward() -> bool:
+	return run_day == 1 and night.phase == NightMarket.Phase.CLOSED
+
+func pick_reward_card(card: DayHarvest.Card) -> void:
+	if choosing_reward() and not paused and card in DayHarvest.REWARDS:
+		earned_card = card
+		refresh_market_view()
 
 func pick_day_card(card: DayHarvest.Card) -> void:
-	if preparing_day and not paused:
+	if preparing_day and not paused and (card == DayHarvest.Card.STANDARD or card == DayHarvest.Card.WEDGE
+		or (run_day > 1 and card == earned_card)):
 		day.card = card
 		refresh_market_view()
 
@@ -489,7 +515,7 @@ func advance_day() -> bool:
 func enter_night() -> bool:
 	if paused or not day_finished() or not night.enter(production.raw):
 		return false
-	night_view.refresh(night, paused)
+	night_view.refresh(night, paused, run_day, earned_card)
 	return true
 
 func pick_night_recipe(recipe: int) -> bool:
@@ -497,7 +523,7 @@ func pick_night_recipe(recipe: int) -> bool:
 		return false
 	var changed := night.toggle_recipe(recipe) if night.phase == NightMarket.Phase.MENU else night.serve(recipe)
 	if changed:
-		night_view.refresh(night, paused)
+		night_view.refresh(night, paused, run_day, earned_card)
 	return changed
 
 func advance_night() -> bool:
@@ -511,11 +537,17 @@ func advance_night() -> bool:
 			if not night.close():
 				return false
 		NightMarket.Phase.CLOSED:
-			reset_run()
+			if choosing_reward():
+				if earned_card == DayHarvest.Card.NONE:
+					return false
+				run_day += 1
+				reset_day()
+			else:
+				reset_run()
 			return true
 		_:
 			return false
-	night_view.refresh(night, paused)
+	night_view.refresh(night, paused, run_day, earned_card)
 	return true
 
 func finish_day_at_depot() -> bool:
@@ -665,6 +697,8 @@ func simulate_slice(delta: float, direction: Vector2) -> void:
 		while unload_clock >= 0.04 and not cargo.is_empty():
 			unload_clock -= 0.04
 			deposit_cargo(feedback and not impact.reduced)
+			if day_mode:
+				day.on_deposit()
 	else:
 		unload_clock = 0.0
 	if not day_mode:
@@ -710,7 +744,7 @@ func step_spine_melon(fruit: Dictionary, delta: float) -> void:
 		elif encounter.phase == SpineMelon.Phase.VULNERABLE:
 			if encounter.last_strike_hit:
 				seed_hits += 1
-				battery_cost += DayHarvest.SEED_COST
+				battery_cost += day.take_seed_hit() if day_mode else DayHarvest.SEED_COST
 			play_encounter_cue(0.57)
 	if day_mode and battery_cost > 0.0 and day.spend(battery_cost):
 		conclude_day(true)
@@ -941,7 +975,7 @@ func draw_melon_status(font: Font, at: Vector2, encounter: SpineMelon) -> void:
 			label = "OPEN • CUT NOW"
 			color = Color("b7ffe0")
 			if encounter.last_strike_hit and encounter.time_left > SpineMelon.OPEN_SECONDS - 0.55:
-				label = "SEED HIT -%d • CUT NOW" % DayHarvest.SEED_COST if day_mode else "SEED HIT • CUT NOW"
+				label = "SEED HIT -%d • CUT NOW" % day.last_seed_cost if day_mode else "SEED HIT • CUT NOW"
 				color = Color("ffb29a")
 		SpineMelon.Phase.RECOVERING:
 			label = "SHELL CLOSED"

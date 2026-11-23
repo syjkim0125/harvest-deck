@@ -12,12 +12,19 @@ const GOLD := Color("f7ce88")
 signal recipe_pressed(recipe: int)
 signal action_pressed
 signal pause_pressed
+signal reward_pressed(card: Day.Card)
 signal loadout_pressed(card: Day.Card)
 signal start_pressed
 
 var market_content: VBoxContainer
 var prep_content: VBoxContainer
 var loadout_buttons: Array[Button] = []
+var prep_title: Label
+var available_reward := Day.Card.NONE
+var earned_button: Button
+var earned_description: Label
+var reward_content: VBoxContainer
+var reward_buttons: Array[Button] = []
 var start_button: Button
 var prep_pause_button: Button
 var title: Label
@@ -77,6 +84,14 @@ func _ready() -> void:
 	progress.add_theme_stylebox_override("background", surface(Color("253b46")))
 	progress.add_theme_stylebox_override("fill", surface(MINT))
 	content.add_child(progress)
+	reward_content = VBoxContainer.new()
+	content.add_child(reward_content)
+	label(reward_content, "Choose one card for Day 2", 16, GOLD)
+	for card in Day.REWARDS:
+		var button := action(reward_content)
+		button.pressed.connect(func(): reward_pressed.emit(card))
+		reward_buttons.append(button)
+		label(reward_content, reward_description(card), 13, MUTED)
 	action_button = action(content)
 	action_button.add_theme_stylebox_override("normal", surface(Color("235246"), 6))
 	action_button.add_theme_stylebox_override("hover", surface(Color("316a5b"), 6))
@@ -89,7 +104,7 @@ func build_prep(parent: Control) -> void:
 	prep_content.custom_minimum_size.x = 280
 	prep_content.add_theme_constant_override("separation", 8)
 	parent.add_child(prep_content)
-	label(prep_content, "Day 1 Preparation", 27, PAPER)
+	prep_title = label(prep_content, "", 27, PAPER)
 	label(prep_content, "Tonight’s orders  ·  Fee $%d" % Market.FEE, 16, GOLD)
 	for i in range(Market.NAMES.size()):
 		label(prep_content, "%s  ·  %d × $%d" % [Market.NAMES[i], Market.DEMAND[i], Market.PRICES[i]], 14, MINT)
@@ -103,6 +118,9 @@ func build_prep(parent: Control) -> void:
 	wedge.pressed.connect(func(): loadout_pressed.emit(Day.Card.WEDGE))
 	loadout_buttons.append(wedge)
 	label(prep_content, "First melon opening +%.1fs  ·  %.2f charge/cut" % [Day.WEDGE_OPEN_BONUS, Day.WEDGE_CUT_COST], 13, MUTED)
+	earned_button = action(prep_content)
+	earned_button.pressed.connect(func(): loadout_pressed.emit(available_reward))
+	earned_description = label(prep_content, "", 13, MUTED)
 	start_button = action(prep_content)
 	start_button.text = "ENTER / START HARVEST"
 	start_button.add_theme_stylebox_override("normal", surface(Color("235246"), 6))
@@ -111,10 +129,26 @@ func build_prep(parent: Control) -> void:
 	prep_pause_button = action(prep_content)
 	prep_pause_button.pressed.connect(func(): pause_pressed.emit())
 
-func refresh_prep(card: Day.Card, paused: bool) -> void:
+func reward_name(card: Day.Card) -> String:
+	return "RESERVE CELL" if card == Day.Card.RESERVE_CELL else "SEED GUARD"
+
+func reward_description(card: Day.Card) -> String:
+	if card == Day.Card.RESERVE_CELL:
+		return "First unload: restore up to %d charge" % Day.RESERVE_CHARGE
+	return "First seed hit: costs %d instead of %d" % [Day.GUARDED_SEED_COST, Day.SEED_COST]
+
+func refresh_prep(card: Day.Card, paused: bool, run_day: int, reward: Day.Card) -> void:
 	show()
 	market_content.hide()
 	prep_content.show()
+	prep_title.text = "Day %d Preparation" % run_day
+	available_reward = reward if run_day > 1 else Day.Card.NONE
+	earned_button.visible = available_reward != Day.Card.NONE
+	earned_description.visible = earned_button.visible
+	if earned_button.visible:
+		earned_button.text = "C / " + reward_name(available_reward) + ("   ✓" if card == available_reward else "")
+		earned_description.text = reward_description(available_reward)
+		earned_button.disabled = paused
 	loadout_buttons[Day.Card.STANDARD].text = "Q / STANDARD KIT" + ("   ✓" if card == Day.Card.STANDARD else "")
 	loadout_buttons[Day.Card.WEDGE].text = "W / CUTTING WEDGE" + ("   ✓" if card == Day.Card.WEDGE else "")
 	for button in loadout_buttons:
@@ -122,7 +156,7 @@ func refresh_prep(card: Day.Card, paused: bool) -> void:
 	start_button.disabled = paused
 	prep_pause_button.text = "RESUME" if paused else "PAUSE"
 
-func refresh(market: Market, paused: bool) -> void:
+func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card) -> void:
 	prep_content.hide()
 	market_content.show()
 	visible = market.phase != Market.Phase.OFF
@@ -130,7 +164,15 @@ func refresh(market: Market, paused: bool) -> void:
 		return
 	var picking := market.phase == Market.Phase.MENU
 	var serving := market.phase == Market.Phase.SERVICE
-	title.text = "Day 1 Closed" if market.phase == Market.Phase.CLOSED else "Night Market"
+	var closed := market.phase == Market.Phase.CLOSED
+	title.text = "Day %d Closed" % run_day if closed else "Night Market"
+	reward_content.visible = closed and run_day == 1
+	if reward_content.visible:
+		for i in range(reward_buttons.size()):
+			var card: Day.Card = Day.REWARDS[i]
+			var button := reward_buttons[i]
+			button.text = "%s / %s%s" % [key_for(i), reward_name(card), "   ✓" if card == reward else ""]
+			button.disabled = paused
 	inventory.text = "Watermelon  %d     Spine melon  %d" % [market.stock.count(0), market.stock.count(SpineMelon.KIND)]
 	recipes.visible = picking or serving
 	for i in range(recipe_buttons.size()):
@@ -169,6 +211,9 @@ func refresh(market: Market, paused: bool) -> void:
 			detail.text = "Operating shortfall  ·  $%d" % -market.net()
 		ledger.text += "\nServed  %d juice  ·  %d special" % [market.sold[0], market.sold[1]]
 		action_button.text = "ENTER / REPLAY DAY 1"
+		if reward_content.visible:
+			action_button.text = "ENTER / PREPARE DAY 2"
+			action_button.disabled = paused or reward == Day.Card.NONE
 	if paused:
 		detail.text = "Paused"
 

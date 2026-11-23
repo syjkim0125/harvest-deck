@@ -91,6 +91,81 @@ func check_preparation(game) -> void:
 		"the wedge route sells tonight's special with harvested ingredients")
 	game.reset_run()
 
+func check_reward_continuation(game) -> void:
+	var ui = game.night_view
+	var night = game.night
+	check(ui.reward_content.is_visible_in_tree() and ui.action_button.disabled and not game.advance_night(),
+		"Day 1 close requires one reward selection before advancing")
+	game.set_paused(true)
+	ui.reward_buttons[0].pressed.emit()
+	check(game.earned_card == Day.Card.NONE and ui.reward_buttons[0].disabled, "pause blocks the closing choice")
+	game.set_paused(false)
+	key(game, KEY_W)
+	check(game.earned_card == Day.Card.SEED_GUARD, "W selects Seed Guard at close")
+	ui.reward_buttons[0].pressed.emit()
+	check(game.earned_card == Day.Card.RESERVE_CELL and night.net() == 5,
+		"changing the closing choice replaces the card and keeps the settled ledger")
+	ui.action_button.pressed.emit()
+	check(game.run_day == 2 and night.phase == night.Phase.OFF and game.stock == 0 and game.day.charge == Day.MAX_CHARGE
+		and ui.prep_title.text == "Day 2 Preparation" and ui.earned_button.visible and game.day.card == Day.Card.RESERVE_CELL,
+		"the same run opens Day 2 with the chosen reward and fresh daily state")
+	key(game, KEY_Q)
+	check(game.day.card == Day.Card.STANDARD, "Day 2 can still choose the standard kit")
+	key(game, KEY_C)
+	check(game.day.card == Day.Card.RESERVE_CELL, "C equips the carried reward")
+	key(game, KEY_ENTER)
+	walk_to(game, game.depot)
+	check(not game.day.reward_used, "visiting the depot with an empty bag does not spend Reserve Cell")
+	walk_to(game, Vector2(510, 690))
+	game.simulate(0.45, Vector2.ZERO)
+	walk_to(game, game.depot + Vector2(0, 90))
+	var charge_before: float = game.day.charge
+	check(game.cargo.has(0) and charge_before < Day.MAX_CHARGE, "Day 2 harvest fills the bag and spends charge")
+	walk_to(game, game.depot)
+	game.simulate(2.0, Vector2.ZERO)
+	check(game.stock > 0 and game.day.reward_used and is_equal_approx(game.day.charge, minf(charge_before + Day.RESERVE_CHARGE, Day.MAX_CHARGE)),
+		"the first real unload uses Reserve Cell once without exceeding 100 charge")
+	game.day.charge = 60.0
+	game.cargo.append(0)
+	game.simulate(0.1, Vector2.ZERO)
+	check(game.day.charge == 60.0, "later deposits do not recharge again")
+	key(game, KEY_ENTER)
+	key(game, KEY_ENTER)
+	key(game, KEY_Q)
+	key(game, KEY_ENTER)
+	key(game, KEY_Q)
+	game._physics_process(2.0)
+	key(game, KEY_ENTER)
+	check(night.phase == night.Phase.CLOSED and night.gross == 5 and not ui.reward_content.visible,
+		"Day 2 can serve another night and then ends the two-day run")
+	key(game, KEY_ENTER)
+	check(game.run_day == 1 and game.earned_card == Day.Card.NONE and not ui.earned_button.visible and not game.day.reward_used,
+		"replaying starts a fresh run with no reward or spent-card state")
+
+func check_seed_guard(game) -> void:
+	deliver(game, [])
+	key(game, KEY_ENTER)
+	game.pick_reward_card(Day.Card.WEDGE)
+	check(game.earned_card == Day.Card.NONE, "the closing offer rejects starter equipment")
+	key(game, KEY_W)
+	key(game, KEY_ENTER)
+	key(game, KEY_Q)
+	game.night_view.earned_button.pressed.emit()
+	key(game, KEY_ENTER)
+	var melon: Dictionary = game.fruits[-1]
+	var encounter: SpineMelon = melon.encounter
+	game.player = SpineMelon.HOME + Vector2(0, 110)
+	game.simulate(0.75, Vector2.ZERO)
+	check(game.seed_hits == 1 and game.day.reward_used and game.day.last_seed_cost == Day.GUARDED_SEED_COST
+		and is_equal_approx(game.day.charge, Day.MAX_CHARGE - Day.GUARDED_SEED_COST - 0.75 * Day.HAZARD_COST_PER_SECOND),
+		"Seed Guard reduces only the first real seed strike and keeps hazard drain")
+	game.simulate(2.85, Vector2.ZERO)
+	check(game.seed_hits == 2 and game.day.last_seed_cost == Day.SEED_COST
+		and is_equal_approx(game.day.charge, Day.MAX_CHARGE - Day.GUARDED_SEED_COST - Day.SEED_COST - 3.60 * Day.HAZARD_COST_PER_SECOND),
+		"the next seed strike charges the original cost")
+	check(encounter.first_open_bonus == 0.0, "the chosen reward does not stack with the wedge")
+	game.reset_run()
+
 func run() -> void:
 	var game = load("res://main.tscn").instantiate()
 	root.add_child(game)
@@ -102,6 +177,7 @@ func run() -> void:
 		quit(failures)
 		return
 	check_preparation(game)
+	check_seed_guard(game)
 	var night = game.night
 	var ui = game.night_view
 	check(not game.enter_night(), "an active expedition cannot open the market")
@@ -132,10 +208,7 @@ func run() -> void:
 	check(night.phase == night.Phase.CLOSED and night.gross == 15 and night.net() == 5 and game.stock == 1,
 		"watermelon-only service covers the closing fee, leaves surplus, and reaches the results screen")
 	check(not night.close() and not game.pick_night_recipe(0) and night.net() == 5, "a closed night cannot charge or sell again")
-	ui.action_button.pressed.emit()
-	check(night.phase == night.Phase.OFF and ui.prep_content.is_visible_in_tree() and game.stock == 0 and game.day.charge == 100.0,
-		"the completed prototype can start a new independent day")
-
+	check_reward_continuation(game)
 	deliver(game, [0, 0, MELON])
 	key(game, KEY_Q)
 	key(game, KEY_W)
@@ -199,6 +272,19 @@ func run() -> void:
 		check(bounds.encloses(pane.action_button.get_global_rect()) and bounds.encloses(pane.pause_button.get_global_rect())
 			and not pane.action_button.get_global_rect().intersects(pane.pause_button.get_global_rect()),
 			"night actions remain in-bounds at %s" % size)
+		key(layout_game, KEY_Q)
+		key(layout_game, KEY_ENTER)
+		key(layout_game, KEY_ENTER)
+		await process_frame
+		await process_frame
+		var rewards_fit: bool = bounds.encloses(pane.reward_content.get_global_rect()) and bounds.encloses(pane.action_button.get_global_rect())
+		check(rewards_fit, "closing rewards and continue action fit at %s" % size)
+		key(layout_game, KEY_Q)
+		key(layout_game, KEY_ENTER)
+		await process_frame
+		await process_frame
+		check(bounds.encloses(pane.prep_content.get_global_rect()) and bounds.encloses(pane.earned_button.get_global_rect()),
+			"Day 2 preparation and the earned card fit at %s" % size)
 		view.queue_free()
 		await process_frame
 
