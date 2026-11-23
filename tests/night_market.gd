@@ -269,9 +269,22 @@ func check_reward_continuation(game) -> void:
 	walk_to(game, Vector2(390, 1004))
 	harvest_melon_from_south(game, SpineMelon.HOME)
 	walk_to(game, Vector2(SpineMelon.HOME.x, 1004))
-	walk_to(game, Vector2(SpineMelon.EAST_HOME.x, 1004))
-	harvest_melon_from_south(game, SpineMelon.EAST_HOME)
-	check(game.cargo.count(MELON) == 6 and game.seed_hits == 0, "the two Day 3 orchard routes yield all six specials without taking a seed hit")
+	var east_home := SpineMelon.EAST_HOME
+	walk_to(game, Vector2(east_home.x, 1004))
+	walk_to(game, east_home + Vector2(0, 65))
+	var east: SpineMelon = game.fruits.back().encounter
+	check(east.phase == SpineMelon.Phase.WARNING and east.strike_direction.is_equal_approx(Vector2.DOWN),
+		"approaching the eastern melon from the south fixes the warning fan in that direction")
+	walk_to(game, east_home + Vector2(-92, 65))
+	check(east.phase == SpineMelon.Phase.WARNING and east.strike_direction.is_equal_approx(Vector2.DOWN)
+		and game.player.distance_to(east_home) < SpineMelon.STRIKE_RADIUS and not east.strike_contains(game.player - east_home),
+		"sidestepping the warning keeps the player inside the passive ring but outside the locked fan")
+	game.simulate(0.35, Vector2.ZERO)
+	check(east.phase == SpineMelon.Phase.VULNERABLE and game.seed_hits == 0 and not east.last_strike_hit,
+		"the visibly safe flank avoids the seed hit and opens the eastern shell")
+	walk_to(game, east_home + Vector2(-48, 36))
+	game.simulate(0.35, Vector2.ZERO)
+	check(game.cargo.count(MELON) == 6 and game.seed_hits == 0, "retreating from the west ring and flanking the east fan yield six melon pieces")
 	walk_to(game, game.depot)
 	game.simulate(2.0, Vector2.ZERO)
 	key(game, KEY_ENTER)

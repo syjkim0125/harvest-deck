@@ -222,14 +222,15 @@ func refresh_prep(market: Market, card: Day.Card, paused: bool, run_day: int, de
 		Market.Recipe.WATERMELON:
 			route_hint.text = "Watermelon patch: west"
 		Market.Recipe.MELON:
-			var sites := "SW + E" if run_day == Market.DAYS else "SW"
-			route_hint.text = "1 watermelon + 1 spine melon (%s)" % sites
+			route_hint.text = "1 watermelon + 1 spine melon (SW)"
+			if run_day == Market.DAYS:
+				route_hint.text = "Melon SW: ring  ·  E: dodge sideways"
 		Market.Recipe.ORANGE:
 			route_hint.text = "1 watermelon + 1 orange (SE)"
 		_:
 			match run_day:
 				RollingOrange.DAY: route_hint.text = "Melon SW  ·  Orange SE (with watermelon)"
-				Market.DAYS: route_hint.text = "Spine melons: southwest and east"
+				Market.DAYS: route_hint.text = "Melon SW: ring  ·  E: dodge sideways"
 				_: route_hint.text = "Spine melon: southwest"
 	available_cards = deck
 	for i in range(deck_buttons.size()):

@@ -1,7 +1,8 @@
 extends SceneTree
 
 const Game = preload("res://scripts/game.gd")
-const MELON_KIND := 2
+const Melon = preload("res://scripts/spine_melon.gd")
+const MELON_KIND := Melon.KIND
 var checks := 0
 var failures := 0
 
@@ -19,6 +20,34 @@ func melon_in(game) -> Dictionary:
 		if fruit.kind == MELON_KIND:
 			return fruit
 	return {}
+
+func check_east_fan(game) -> void:
+	game.day_mode = true
+	game.run_day = 3
+	game.reset_day()
+	game.begin_harvest()
+	var east: Melon = game.fruits.back().encounter
+	var west: Melon = melon_in(game).encounter
+	var center := Melon.EAST_HOME
+	check(east.uses_fan and not west.uses_fan, "only the east encounter uses the Day 3 seed fan")
+	game.player = center + Vector2(0, 110)
+	game.facing = Vector2.DOWN
+	game.simulate(0.01, Vector2.ZERO)
+	check(east.phase == Melon.Phase.WARNING and east.strike_direction == Vector2.DOWN and west.phase == Melon.Phase.IDLE,
+		"the warning locks south without starting the distant western encounter")
+	check(east.strike_contains(Vector2(60, 100)) and not east.strike_contains(Vector2(100, 60))
+		and not east.strike_contains(Vector2(0, Melon.STRIKE_RADIUS + 1)) and west.strike_contains(Vector2(100, 60)),
+		"the fan combines its visible angle and radius, while the west ring covers either angle")
+	game.simulate(0.74, Vector2.ZERO)
+	check(east.phase == Melon.Phase.VULNERABLE and east.last_strike_hit and game.seed_hits == 1
+		and game.day.charge < 100.0 - game.day.SEED_COST and game.impact.trauma == 0,
+		"standing in the marked fan costs one seed hit plus the ring drain and leaves camera feedback alone")
+	game.player = center + Vector2(170, 0)
+	game.simulate(2.2, Vector2.ZERO)
+	game.player = center + Vector2(110, 0)
+	game.simulate(0.01, Vector2.ZERO)
+	check(east.phase == Melon.Phase.WARNING and east.strike_direction == Vector2.RIGHT and game.seed_hits == 1,
+		"after the shell resets, a new warning aims at the new entry angle")
 
 func run() -> void:
 	var game = Game.new()
@@ -91,5 +120,6 @@ func run() -> void:
 	game.facing = Vector2.UP
 	check(game.attack() == 0, "closed shell blocks cuts again after the opening ends")
 
+	check_east_fan(game)
 	print("%d checks / %d failures" % [checks, failures])
 	quit(failures)

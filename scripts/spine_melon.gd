@@ -7,6 +7,7 @@ const HOME := Vector2(210, 866)
 const EAST_HOME := Vector2(1200, 740)
 const TRIGGER_RADIUS := 146.0
 const STRIKE_RADIUS := 128.0
+const FAN_HALF_ANGLE := PI / 4.0
 const WARNING_SECONDS := 0.70
 const OPEN_SECONDS := 1.30
 const RECOVERY_SECONDS := 0.80
@@ -17,13 +18,25 @@ var first_open_bonus := 0.0
 var time_left := 0.0
 var burst_left := 0.0
 var last_strike_hit := false
+var uses_fan: bool
+var strike_direction := Vector2.DOWN
 
-func step(delta: float, distance: float) -> void:
+func _init(fan := false) -> void:
+	uses_fan = fan
+
+func strike_contains(offset: Vector2) -> bool:
+	if offset.length_squared() > STRIKE_RADIUS * STRIKE_RADIUS:
+		return false
+	return not uses_fan or offset.is_zero_approx() or absf(strike_direction.angle_to(offset)) <= FAN_HALF_ANGLE
+
+func step(delta: float, offset: Vector2) -> void:
 	burst_left = maxf(0.0, burst_left - delta)
 	if phase == Phase.IDLE:
-		if distance <= TRIGGER_RADIUS:
+		if offset.length_squared() <= TRIGGER_RADIUS * TRIGGER_RADIUS:
 			phase = Phase.WARNING
 			time_left = WARNING_SECONDS
+			if uses_fan:
+				strike_direction = Vector2.DOWN if offset.is_zero_approx() else offset.normalized()
 		return
 	time_left = maxf(0.0, time_left - delta)
 	if time_left > 0.000001:
@@ -34,7 +47,7 @@ func step(delta: float, distance: float) -> void:
 			time_left = OPEN_SECONDS + first_open_bonus
 			first_open_bonus = 0.0
 			burst_left = BURST_SECONDS
-			last_strike_hit = distance <= STRIKE_RADIUS
+			last_strike_hit = strike_contains(offset)
 		Phase.VULNERABLE:
 			phase = Phase.RECOVERING
 			time_left = RECOVERY_SECONDS

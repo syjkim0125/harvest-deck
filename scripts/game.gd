@@ -393,7 +393,7 @@ func reset_day() -> void:
 		fruits.append({
 			"pos": site, "kind": SpineMelon.KIND, "hp": 3,
 			"flash": 0.0, "freeze": 0.0, "recoil": Vector2.ZERO,
-			"encounter": SpineMelon.new(),
+			"encounter": SpineMelon.new(site == SpineMelon.EAST_HOME),
 		})
 
 	if day_mode and run_day == RollingOrange.DAY:
@@ -950,9 +950,9 @@ func step_shop(delta: float) -> void:
 func step_spine_melon(fruit: Dictionary, delta: float) -> void:
 	var encounter: SpineMelon = fruit.encounter
 	var previous_phase := encounter.phase
-	var distance := player.distance_to(fruit.pos)
-	encounter.step(delta, distance)
-	var battery_cost := DayHarvest.HAZARD_COST_PER_SECOND * delta if distance <= SpineMelon.STRIKE_RADIUS else 0.0
+	var offset: Vector2 = player - fruit.pos
+	encounter.step(delta, offset)
+	var battery_cost := DayHarvest.HAZARD_COST_PER_SECOND * delta if offset.length_squared() <= SpineMelon.STRIKE_RADIUS * SpineMelon.STRIKE_RADIUS else 0.0
 	if encounter.phase != previous_phase:
 		if encounter.phase == SpineMelon.Phase.WARNING:
 			play_encounter_cue(1.0)
@@ -1164,7 +1164,7 @@ func orchard_waypoints() -> Array[Dictionary]:
 			var east: bool = fruit.pos == SpineMelon.EAST_HOME
 			markers.append({
 				"at": Vector2(728, 819) if east else Vector2(670, 772),
-				"target": fruit.pos, "label": "SPINE MELON E" if east else "SPINE MELON W", "ink": Color("f1ceff"),
+				"target": fruit.pos, "label": "FAN MELON E" if east else "SPINE MELON W", "ink": Color("f1ceff"),
 			})
 		elif fruit.kind == RollingOrange.KIND:
 			# Guide to where a chase starts, even while the fruit is on its loop.
@@ -1228,13 +1228,17 @@ func draw_shop(font: Font) -> void:
 func draw_melon_hazard(at: Vector2, encounter: SpineMelon) -> void:
 	var warning := encounter.phase == SpineMelon.Phase.WARNING
 	var radius := SpineMelon.STRIKE_RADIUS
-	if not warning and encounter.burst_left <= 0.0:
-		if day_mode:
-			for i in range(24):
-				var angle := TAU * i / 24.0
-				draw_arc(at, radius, angle, angle + 0.12, 5, Color("d1b184"), 2.0, true)
+	var striking := encounter.burst_left > 0.0
+	if day_mode and (encounter.uses_fan or (not warning and not striking)):
+		for i in range(24):
+			var angle := TAU * i / 24.0
+			draw_arc(at, radius, angle, angle + 0.12, 5, Color("d1b184"), 2.0, true)
+	if not warning and not striking:
 		return
 	var color := Color("ffd078") if warning else Color("ff977a")
+	if encounter.uses_fan:
+		draw_melon_fan(at, encounter.strike_direction.angle(), color, warning)
+		return
 	draw_circle(at, radius, Color(color, 0.17 if warning else 0.29), true, -1.0, true)
 	draw_arc(at, radius, 0, TAU, 96, Color("452a29"), 8.0, true)
 	draw_arc(at, radius, 0, TAU, 96, color, 4.0, true)
@@ -1245,12 +1249,32 @@ func draw_melon_hazard(at: Vector2, encounter: SpineMelon) -> void:
 		else:
 			draw_circle(at + ray * (radius * 0.8), 4.0, color, true)
 
+func draw_melon_fan(at: Vector2, aim: float, color: Color, warning: bool) -> void:
+	var radius := SpineMelon.STRIKE_RADIUS
+	var start := aim - SpineMelon.FAN_HALF_ANGLE
+	var end := aim + SpineMelon.FAN_HALF_ANGLE
+	var fan := PackedVector2Array([at])
+	for i in range(25):
+		fan.append(at + Vector2.from_angle(lerpf(start, end, i / 24.0)) * radius)
+	draw_colored_polygon(fan, Color(color, 0.24 if warning else 0.43))
+	for ink in [Color("452a29"), color]:
+		var width := 7.0 if ink != color else 3.0
+		draw_arc(at, radius, start, end, 24, ink, width, true)
+		draw_line(at, fan[1], ink, width, true)
+		draw_line(at, fan[-1], ink, width, true)
+	for i in range(1, 6):
+		var ray := Vector2.from_angle(lerpf(start, end, i / 6.0))
+		if warning:
+			draw_line(at + ray * (radius - 12), at + ray * (radius - 3), color, 2.5, true)
+		else:
+			draw_circle(at + ray * (radius * 0.8), 4.0, color, true)
+
 func draw_melon_status(font: Font, at: Vector2, encounter: SpineMelon) -> void:
-	var label := "SPINE MELON"
+	var label := "FAN MELON" if encounter.uses_fan else "SPINE MELON"
 	var color := Color("ecd8ff")
 	match encounter.phase:
 		SpineMelon.Phase.WARNING:
-			label = "STEP OUT"
+			label = "SIDESTEP" if encounter.uses_fan else "STEP OUT"
 			color = Color("ffd078")
 		SpineMelon.Phase.VULNERABLE:
 			label = "OPEN • CUT NOW"
