@@ -28,6 +28,7 @@ const CAPACITY: int = 40
 const DEPOT_RADIUS := 85.0
 const CARGO_SPACING: float = 3.0
 const HUD_HEIGHT: int = 150
+const NIGHT_FRUIT_NAMES := {0: "watermelon", SpineMelon.KIND: "melon", RollingOrange.KIND: "orange"}
 const BOUNDS = Rect2(40, 100, 1480, 1040)
 @export var day_mode := false
 var preparing_day := false
@@ -528,12 +529,21 @@ func update_day_hud() -> void:
 		DayHarvest.Card.LIMITED_COCKTAIL: hud.text += "   COCKTAIL"
 		DayHarvest.Card.WHEEL_CHOCK: hud.text += "   CHOCK"
 	hud.modulate = Color("ffbc82") if charge_percent <= DayHarvest.SEED_COST else Color.WHITE
-	var hint := "Mint pad: unload, then End Harvest"
-	if day.outcome == DayHarvest.Outcome.EXHAUSTED:
-		hint = "BATTERY EMPTY • Returned • Lost %d" % day.lost_cargo
-	elif day.outcome == DayHarvest.Outcome.RETURNED:
-		hint = "HARVEST ENDED • Safe stock secured"
-	status.text = hint + "\n" + ("Continue to the night market" if day_finished() else "WASD / arrows / drag • auto-cut\nRing: battery drain • M: shake • 7: new lab")
+	if day_finished():
+		var hint := "HARVEST ENDED • Safe stock secured"
+		if day.outcome == DayHarvest.Outcome.EXHAUSTED:
+			hint = "BATTERY EMPTY • Returned • Lost %d" % day.lost_cargo
+		status.text = hint + "\nContinue to the night market"
+	else:
+		var missing := night.missing_ingredients(production.raw)
+		var shortages := PackedStringArray()
+		for kind in missing:
+			if missing[kind] > 0:
+				shortages.append("%d %s" % [missing[kind], NIGHT_FRUIT_NAMES[kind]])
+		var forecast := "Need: " + " · ".join(shortages)
+		if shortages.is_empty():
+			forecast = "Tonight: all orders covered"
+		status.text = forecast + "\nMint pad: unload • Ring drains battery\nWASD / arrows / drag • auto-cut"
 	return_button.text = "ENTER / NIGHT MENU" if day_finished() else "ENTER / END HARVEST"
 	if dash_button.visible:
 		update_dash_button()

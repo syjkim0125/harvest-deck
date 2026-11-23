@@ -77,12 +77,24 @@ func check_preparation(game) -> void:
 	game.reset_run()
 	key(game, KEY_W)
 	key(game, KEY_ENTER)
+	game.update_day_hud()
+	check(game.status.text.begins_with("Need: 8 watermelon · 3 melon"),
+		"Day 1 counts one shared watermelon per regular and special order")
 	late_melon_approach(game)
+	game.update_day_hud()
 	var encounter: SpineMelon = game.fruits[-1].encounter
 	check(encounter.first_open_bonus == 0.0 and game.seed_hits == 0 and game.cargo.count(MELON) == 3,
 		"the same late route harvests all three melon slices with the wedge")
+	check(game.status.text.begins_with("Need: 8 watermelon · 3 melon"),
+		"watermelon and melon in the bag do not reduce the safe-stock forecast")
 	walk_to(game, game.depot)
 	game.simulate(2.0, Vector2.ZERO)
+	game.update_day_hud()
+	var remaining_watermelon: int = maxi(0, 8 - game.production.raw.count(0))
+	var forecast: String = game.status.text.get_slice("\n", 0)
+	check(forecast == ("Tonight: all orders covered" if remaining_watermelon == 0 else "Need: %d watermelon" % remaining_watermelon),
+		"safely delivering the melon harvest removes it from the forecast")
+	check(not game.return_button.disabled, "the player can return after delivering stock even if there are shortages")
 	key(game, KEY_ENTER)
 	key(game, KEY_ENTER)
 	key(game, KEY_W)
@@ -520,6 +532,20 @@ func check_orchard_waypoints(game) -> void:
 	check(game.orchard_waypoints().is_empty(), "the comparison lab has no expedition markers")
 	game.switch_mode()
 
+func check_ingredient_forecast() -> void:
+	var market := Market.new()
+	var stock: Array[int] = [0, 0, MELON, Orange.KIND, Orange.KIND, 1]
+	market.reset(2)
+	check(market.missing_ingredients(stock) == {0: 9, MELON: 0, Orange.KIND: 1},
+		"Day 2 counts all three recipes without counting other inventory as watermelon")
+	market.reset(3)
+	check(market.missing_ingredients(stock) == {0: 8, MELON: 5},
+		"Day 3 wants six melon specials and omits Day 2's orange demand")
+	stock.assign([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, MELON, MELON, MELON, MELON, MELON, MELON, MELON])
+	var before := stock.duplicate()
+	check(market.missing_ingredients(stock) == {0: 0, MELON: 0} and stock == before,
+		"surplus is clamped to zero without consuming stock")
+
 func run() -> void:
 	var game = load("res://main.tscn").instantiate()
 	root.add_child(game)
@@ -530,6 +556,7 @@ func run() -> void:
 		print("NIGHT MARKET: %d checks, %d failures" % [checks, failures])
 		quit(failures)
 		return
+	check_ingredient_forecast()
 	check_preparation(game)
 	check_seed_guard(game)
 	check_watermelon_run(game)
@@ -652,6 +679,11 @@ func run() -> void:
 		check(bounds.encloses(layout_game.dash_button.get_global_rect())
 			and not layout_game.dash_button.get_global_rect().intersects(layout_game.return_button.get_global_rect()),
 			"the touch dash and end-harvest buttons fit at %s" % size)
+		var daytime_status: Label = layout_game.status
+		check(daytime_status.text.begins_with("Need: 11 watermelon · 1 melon · 3 orange")
+			and daytime_status.get_global_rect().end.y <= layout_game.return_button.position.y
+			and daytime_status.get_minimum_size().y <= layout_game.return_button.position.y - daytime_status.position.y,
+			"the three-ingredient forecast and its instructions fit above the harvest controls at %s" % size)
 		layout_game.camera.force_update_scroll()
 		var safe_playfield := Rect2(0.0, layout_game.hud_height, size.x, size.y - layout_game.hud_height)
 		var transform: Transform2D = layout_game.get_global_transform_with_canvas()
