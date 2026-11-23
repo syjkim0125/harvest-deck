@@ -197,7 +197,7 @@ func check_reward_continuation(game) -> void:
 		"Night 1 still shows its own juice sales and uncovered melon demand")
 	check(ui.night_headings[1].text == "Night 2  ·  Net -$7" and "Juice 1/7  ·  Melon 0/1  ·  Fizz 0/3" in ui.night_breakdowns[1].text,
 		"Night 2 shows its deficit and includes the orange fizz orders")
-	check(ui.night_headings[2].text == "Night 3  ·  Net $70" and ui.night_breakdowns[2].text == "Sales $90  ·  Fee $20\nJuice 0/4  ·  Melon 6/6",
+	check(ui.night_headings[2].text == "Night 3  ·  Net $70" and ui.night_breakdowns[2].text.begins_with("Sales $90  ·  Fee $20\nJuice 0/4  ·  Melon 6/6\nUnfilled: 4 juice\n"),
 		"Night 3 uses actual cocktail receipts and omits unavailable fizz")
 	key(game, KEY_ENTER)
 	check(game.run_day == 1 and game.earned_card == Day.Card.NONE and game.deck.is_empty()
@@ -239,6 +239,10 @@ func check_watermelon_run(game) -> void:
 			key(game, KEY_ENTER)
 	check(game.run_sales == 80 and game.run_fees == 42 and game.night_view.detail.text == "Three-day net  $38",
 		"watermelon alone reaches the final screen with positive cumulative profit")
+	check(game.run_results[0].leftover == [3, 0, 0] and game.run_results[1].leftover == [1, 0, 0]
+		and "Unfilled: 3 melon\nLeft: 3 watermelon" in game.night_view.night_breakdowns[0].text
+		and "Unfilled: 1 melon · 3 fizz\nLeft: 1 watermelon" in game.night_view.night_breakdowns[1].text,
+		"the final ledger keeps each night's own leftovers and excludes fully served juice from its shortfall")
 	game.reset_run()
 
 func check_seed_guard(game) -> void:
@@ -399,6 +403,9 @@ func check_wheel_chock(game) -> void:
 			and ui.night_headings[2].text == "Night 3  ·  Net -$20", "no-stock closes still produce rows and a signed run loss")
 		check(ui.night_headings[1].text == "Night 2  ·  Net -$3" and "Fizz 1/3" in ui.night_breakdowns[1].text,
 			"the final screen retains the real citrus sale from the prior night")
+		check(game.run_results[1].leftover[2] == 2 and "2 fizz" in ui.night_breakdowns[1].text
+			and "2 orange" in ui.night_breakdowns[1].text,
+			"the final ledger retains two leftover oranges and two unfilled fizz orders after the day resets")
 	game.reset_run()
 
 func check_dash_kit(game) -> void:
@@ -593,6 +600,8 @@ func run() -> void:
 	ui.action_button.pressed.emit()
 	check(night.phase == night.Phase.CLOSED and night.gross == 15 and night.net() == 5 and game.stock == 1,
 		"watermelon-only service covers the closing fee, leaves surplus, and reaches the results screen")
+	check(ui.inventory.text == "Left: 1 watermelon" and "Unfilled: 2 juice · 3 melon" in ui.ledger.text,
+		"Night 1 closing shows leftover watermelon beside both unfilled demand counts")
 	check(not night.close() and not game.pick_night_recipe(0) and night.net() == 5, "a closed night cannot charge or sell again")
 	check_reward_continuation(game)
 	deliver(game, [0, 0, MELON])
@@ -608,6 +617,8 @@ func run() -> void:
 	game.advance_night()
 	check(night.phase == night.Phase.CLOSED and night.net() == 7 and night.sold == [1, 1, 0] and game.stock == 0,
 		"the mixed menu completes the melon route and charges the fee once")
+	check(ui.inventory.text == "Left: none" and "Unfilled: 4 juice · 2 melon" in ui.ledger.text,
+		"selling one of each Day 1 recipe shows two updated shortfalls and no leftovers")
 
 	game.reset_run()
 	game.begin_harvest()
@@ -624,6 +635,8 @@ func run() -> void:
 	deliver(game, [])
 	check(not night.has_available_menu() and game.advance_night() and night.net() == -10,
 		"an empty harvest can close immediately and records the shortfall")
+	check(ui.inventory.text == "Left: none" and "Unfilled: 5 juice · 3 melon" in ui.ledger.text,
+		"closing without sales still records all unfilled demand")
 
 	game.reset_run()
 	deliver(game, [0, 0, 0, 0, 0, 0])
@@ -636,6 +649,19 @@ func run() -> void:
 		key(game, KEY_Q)
 		game._physics_process(2.0)
 	check(night.gross == 25 and game.stock == 1 and not game.pick_night_recipe(0), "demand limits sales even when another portion is in stock")
+
+	game.reset_run()
+	deliver(game, [0, 0, 0, 0, 0, 0, 0, 0, MELON, MELON, MELON, MELON])
+	key(game, KEY_Q)
+	key(game, KEY_W)
+	key(game, KEY_ENTER)
+	for recipe in [KEY_Q, KEY_W]:
+		for i in range(5 if recipe == KEY_Q else 3):
+			key(game, recipe)
+			game._physics_process(2.0)
+	key(game, KEY_ENTER)
+	check(night.sold == [5, 3, 0] and "All orders served" in ui.ledger.text and ui.inventory.text == "Left: 1 melon",
+		"meeting all demand can leave surplus stock on the closing screen")
 
 	for size in [Vector2i(320, 560), Vector2i(512, 1108), Vector2i(960, 720)]:
 		var view := SubViewport.new()
@@ -664,7 +690,9 @@ func run() -> void:
 		await process_frame
 		await process_frame
 		var rewards_fit: bool = bounds.encloses(pane.reward_content.get_global_rect()) and bounds.encloses(pane.action_button.get_global_rect()) and bounds.encloses(pane.reward_buttons[2].get_global_rect())
-		check(rewards_fit, "three closing rewards and continue action fit at %s" % size)
+		check(rewards_fit and bounds.encloses(pane.inventory.get_global_rect()) and bounds.encloses(pane.ledger.get_global_rect())
+			and not pane.ledger.get_global_rect().intersects(pane.reward_content.get_global_rect()),
+			"leftovers, unfilled orders and three closing rewards fit at %s" % size)
 		key(layout_game, KEY_Q)
 		key(layout_game, KEY_ENTER)
 		await process_frame

@@ -11,6 +11,7 @@ const MINT := Color("b4efd2")
 const GOLD := Color("f7ce88")
 const LOSS := Color("ffb4a1")
 const SHORT_RECIPE_NAMES := ["Juice", "Melon", "Fizz"]
+const STOCK_NAMES := ["watermelon", "melon", "orange"]
 
 signal recipe_pressed(recipe: int)
 signal action_pressed
@@ -117,17 +118,19 @@ func _ready() -> void:
 
 func build_run_breakdown(parent: Control) -> void:
 	run_breakdown = VBoxContainer.new()
-	run_breakdown.add_theme_constant_override("separation", 6)
+	run_breakdown.add_theme_constant_override("separation", 4)
 	parent.add_child(run_breakdown)
 	for i in range(Market.DAYS):
 		var card := PanelContainer.new()
-		card.add_theme_stylebox_override("panel", surface(Color("1b303d"), 6))
+		card.add_theme_stylebox_override("panel", surface(Color("1b303d"), 3))
 		run_breakdown.add_child(card)
 		var lines := VBoxContainer.new()
 		lines.add_theme_constant_override("separation", 1)
 		card.add_child(lines)
-		night_headings.append(label(lines, "", 16, MINT))
-		night_breakdowns.append(label(lines, "", 13, PAPER))
+		night_headings.append(label(lines, "", 14, MINT))
+		var breakdown := label(lines, "", 12, PAPER)
+		breakdown.add_theme_constant_override("line_spacing", 0)
+		night_breakdowns.append(breakdown)
 
 func build_prep(parent: Control) -> void:
 	prep_content = VBoxContainer.new()
@@ -280,6 +283,8 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 		action_button.text = "ENTER / CLOSE MARKET"
 		action_button.disabled = paused or market.active_recipe != -1
 	else:
+		var result: Dictionary = results[run_day - 1]
+		inventory.text = leftover_text(result.leftover)
 		if market.net() >= 0:
 			detail.text = "Operating fee covered  ·  Net $%d" % market.net()
 		else:
@@ -287,6 +292,7 @@ func refresh(market: Market, paused: bool, run_day: int, reward: Day.Card, run_s
 		ledger.text += "\nServed  %d juice  ·  %d special" % [market.sold[0], market.sold[1]]
 		if citrus_night:
 			ledger.text += "  ·  %d fizz" % market.sold[2]
+		ledger.text += "\n" + unfilled_text(result.demand, result.sold)
 		ledger.text += "\nRun sales $%d  ·  Run fees $%d" % [run_sales, run_fees]
 		if final_night:
 			title.text = "Run Complete"
@@ -312,7 +318,25 @@ func update_run_breakdown(results: Array[Dictionary]) -> void:
 		for recipe in range(Market.NAMES.size()):
 			if result.demand[recipe] > 0:
 				orders.append("%s %d/%d" % [SHORT_RECIPE_NAMES[recipe], result.sold[recipe], result.demand[recipe]])
-		breakdown.text = "Sales $%d  ·  Fee $%d\n%s" % [result.sales, result.fee, "  ·  ".join(orders)]
+		breakdown.text = "Sales $%d  ·  Fee $%d\n%s\n%s\n%s" % [
+			result.sales, result.fee, "  ·  ".join(orders),
+			unfilled_text(result.demand, result.sold), leftover_text(result.leftover),
+		]
+
+func unfilled_text(demand: Array, sold: Array) -> String:
+	var orders := PackedStringArray()
+	for recipe in range(demand.size()):
+		var missed: int = demand[recipe] - sold[recipe]
+		if missed > 0:
+			orders.append("%d %s" % [missed, SHORT_RECIPE_NAMES[recipe].to_lower()])
+	return "All orders served" if orders.is_empty() else "Unfilled: " + " · ".join(orders)
+
+func leftover_text(counts: Array) -> String:
+	var fruit := PackedStringArray()
+	for i in range(STOCK_NAMES.size()):
+		if counts[i] > 0:
+			fruit.append("%d %s" % [counts[i], STOCK_NAMES[i]])
+	return "Left: none" if fruit.is_empty() else "Left: " + " · ".join(fruit)
 
 func net_text(amount: int) -> String:
 	return "-$%d" % -amount if amount < 0 else "$%d" % amount

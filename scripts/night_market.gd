@@ -130,7 +130,10 @@ func close() -> bool:
 	return true
 
 func settlement() -> Dictionary:
-	return {"sales": gross, "fee": fee, "sold": sold.duplicate(), "demand": demand.duplicate()}
+	return {
+		"sales": gross, "fee": fee, "sold": sold.duplicate(), "demand": demand.duplicate(),
+		"leftover": [stock.count(0), stock.count(SpineMelon.KIND), stock.count(RollingOrange.KIND)],
+	}
 
 func net() -> int:
 	return gross - fee
