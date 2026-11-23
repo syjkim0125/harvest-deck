@@ -285,6 +285,10 @@ func check_reward_continuation(game) -> void:
 	walk_to(game, east_home + Vector2(-48, 36))
 	game.simulate(0.35, Vector2.ZERO)
 	check(game.cargo.count(MELON) == 6 and game.seed_hits == 0, "retreating from the west ring and flanking the east fan yield six melon pieces")
+	walk_to(game, game.EAST_DROP_POINT)
+	game.simulate(1.40, Vector2.ZERO)
+	check(game.cargo.is_empty() and game.production.raw.count(MELON) == 6 and not game.finish_day_at_depot(),
+		"the east drop protects all six pieces before the player returns to the main depot")
 	walk_to(game, game.depot)
 	game.simulate(2.0, Vector2.ZERO)
 	key(game, KEY_ENTER)
@@ -639,8 +643,8 @@ func check_orchard_waypoints(game) -> void:
 	key(game, KEY_ENTER)
 	key(game, KEY_ENTER)
 	markers = game.orchard_waypoints()
-	check(markers.map(func(marker): return marker.target) == [game.depot, SpineMelon.HOME, SpineMelon.EAST_HOME],
-		"Day 3 points east towards the second melon instead of the orange lane")
+	check(markers.map(func(marker): return marker.target) == [game.depot, SpineMelon.HOME, SpineMelon.EAST_HOME, game.EAST_DROP_POINT],
+		"Day 3 points to the fan melon and the new east unloading station")
 	var east: Dictionary = markers[2]
 	walk_to(game, east.at)
 	direction = (east.target - east.at).normalized()
@@ -1173,6 +1177,15 @@ func run() -> void:
 		await process_frame
 		check(bounds.encloses(pane.prep_content.get_global_rect()) and bounds.encloses(pane.deck_buttons[1].get_global_rect())
 			and bounds.encloses(pane.start_button.get_global_rect()), "Day 3 preparation and both earned cards fit at %s" % size)
+		key(layout_game, KEY_ENTER)
+		layout_game.update_day_hud()
+		layout_game.camera.force_update_scroll()
+		transform = layout_game.get_global_transform_with_canvas()
+		var east_marker: Dictionary = layout_game.orchard_waypoints().back()
+		check(east_marker.target == layout_game.EAST_DROP_POINT
+			and safe_playfield.encloses(transform * layout_game.waypoint_bounds(ThemeDB.fallback_font, east_marker))
+			and daytime_status.get_combined_minimum_size().x <= size.x - 32,
+			"the east sign and depot HUD instructions fit at %s" % size)
 		deliver(layout_game, [])
 		key(layout_game, KEY_ENTER)
 		await process_frame

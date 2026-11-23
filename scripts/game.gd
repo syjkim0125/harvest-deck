@@ -35,6 +35,8 @@ const DASH_SPEED := 900.0
 const ATTACK_INTERVAL: float = 0.105
 const CAPACITY: int = 40
 const DEPOT_RADIUS := 85.0
+const EAST_DROP_POINT := Vector2(1280, 542)
+const EAST_DROP_RADIUS := 60.0
 const CARGO_SPACING: float = 3.0
 const HUD_HEIGHT: int = 150
 const BOUNDS = Rect2(40, 100, 1480, 1040)
@@ -572,7 +574,8 @@ func update_day_hud() -> void:
 			hint = "BATTERY EMPTY • Returned • Lost %d" % day.lost_cargo
 		status.text = hint + "\nContinue to the night market"
 	else:
-		status.text = harvest_forecast() + "\nMint pad: unload • Ring drains battery\nWASD / arrows / drag • auto-cut"
+		var drop_hint := "East pad: unload · Main depot: return" if has_east_drop() else "Mint pad: unload • Ring drains battery"
+		status.text = harvest_forecast() + "\n" + drop_hint + "\nWASD / arrows / drag • auto-cut"
 	return_button.text = "ENTER / NIGHT MENU" if day_finished() else "ENTER / END HARVEST"
 	if dash_button.visible:
 		update_dash_button()
@@ -584,9 +587,11 @@ func harvest_forecast() -> String:
 		return "Tonight: all orders covered" if shortage.is_empty() else "Need: " + shortage
 	var target: String = NightMarketView.SHORT_RECIPE_NAMES[harvest_target]
 	if shortage.is_empty():
-		if player.distance_to(depot) >= DEPOT_RADIUS:
-			return target + " covered · return to depot"
-		return target + (" covered · end harvest" if cargo.is_empty() else " covered · finish unloading")
+		if not cargo.is_empty() and unload_destination().is_finite():
+			return target + " covered · finish unloading"
+		if player.distance_to(depot) < DEPOT_RADIUS:
+			return target + " covered · end harvest"
+		return target + " covered · return to depot"
 	if not cargo.is_empty():
 		var full_load := NightMarketView.ingredient_list(night.missing_ingredients(production.raw + cargo, harvest_target))
 		if full_load.is_empty():
@@ -752,7 +757,7 @@ func conclude_day(exhausted: bool) -> void:
 		day.lost_cargo = ceili(cargo.size() / 2.0)
 		cargo.resize(cargo.size() - day.lost_cargo)
 		while not cargo.is_empty():
-			deposit_cargo(false)
+			deposit_cargo(false, depot)
 		ground_drops.clear()
 		player = depot
 		camera.position = camera_follow_target()
@@ -914,11 +919,12 @@ func simulate_slice(delta: float, direction: Vector2) -> void:
 				f.recoil = Vector2.ZERO
 		else:
 			f.pos = f.pos.lerp(f.home + Vector2(sin(time * 2.0 + f.home.x) * 7, cos(time * 2.5 + f.home.y) * 5), 1.0 - exp(-7.0 * delta))
-	if player.distance_to(depot) < DEPOT_RADIUS and not cargo.is_empty():
+	var destination := unload_destination()
+	if destination.is_finite() and not cargo.is_empty():
 		unload_clock += delta
 		while unload_clock >= 0.04 and not cargo.is_empty():
 			unload_clock -= 0.04
-			deposit_cargo(feedback and not impact.reduced)
+			deposit_cargo(feedback and not impact.reduced, destination)
 			if day_mode:
 				day.on_deposit()
 	else:
@@ -933,7 +939,17 @@ func simulate_slice(delta: float, direction: Vector2) -> void:
 	saw_audio.master_gain = sound_volume
 	saw_audio.step(delta, sound_on and loop_sound and not paused, velocity.length() > 1, cargo.size() >= CAPACITY)
 
-func deposit_cargo(animate: bool) -> void:
+func has_east_drop() -> bool:
+	return day_mode and run_day == NightMarket.DAYS
+
+func unload_destination() -> Vector2:
+	if player.distance_to(depot) < DEPOT_RADIUS:
+		return depot
+	if has_east_drop() and player.distance_to(EAST_DROP_POINT) < EAST_DROP_RADIUS:
+		return EAST_DROP_POINT
+	return Vector2.INF
+
+func deposit_cargo(animate: bool, destination: Vector2) -> void:
 	var index := cargo.size() - 1
 	var start := cargo_position(index)
 	for i in range(particles.size() - 1, -1, -1):
@@ -944,7 +960,7 @@ func deposit_cargo(animate: bool) -> void:
 	var kind: int = cargo.pop_back()
 	production.deposit(kind)
 	if animate:
-		cargo_view.send(kind, start, depot + Vector2(0, -30))
+		cargo_view.send(kind, start, destination + Vector2(0, -30))
 
 func step_shop(delta: float) -> void:
 	production.step(delta, player.distance_to(service_pad) < 65)
@@ -1115,6 +1131,8 @@ func _draw() -> void:
 	draw_string(font, sign_at, label, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color("e4f3da"))
 	if not day_mode:
 		draw_shop(font)
+	elif has_east_drop() and not day_finished():
+		draw_east_drop(font)
 	for marker in orchard_waypoints():
 		draw_orchard_waypoint(font, marker)
 	for f in fruits:
@@ -1165,6 +1183,21 @@ func _draw() -> void:
 	if cargo.size() >= CAPACITY:
 		draw_string(font, player + Vector2(-35, 45), "FULL! UNLOAD", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color("ffe9a0"))
 
+func draw_east_drop(font: Font) -> void:
+	var center := EAST_DROP_POINT
+	draw_circle(center, EAST_DROP_RADIUS, Color(0.42, 0.9, 0.72, 0.25))
+	draw_arc(center, EAST_DROP_RADIUS, 0, TAU, 48, Color("85e8b3"), 3, true)
+	var crate := Rect2(center + Vector2(-24, -34), Vector2(48, 36))
+	draw_rect(crate, Color("514334"))
+	draw_rect(crate.grow(-3), Color("b29063"))
+	draw_line(crate.position + Vector2(5, 12), crate.position + Vector2(43, 12), Color("73583e"), 2)
+	draw_line(crate.position + Vector2(5, 24), crate.position + Vector2(43, 24), Color("73583e"), 2)
+	var label := "UNLOAD ONLY"
+	var width := font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, 13).x
+	var sign_at := center + Vector2(-width * 0.5, -44)
+	draw_rect(Rect2(sign_at + Vector2(-7, -13), Vector2(width + 14, 19)), Color("253c35"))
+	draw_string(font, sign_at, label, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color("e4f3da"))
+
 func orchard_waypoints() -> Array[Dictionary]:
 	var markers: Array[Dictionary] = []
 	if not day_mode or preparing_day or day_finished():
@@ -1184,6 +1217,8 @@ func orchard_waypoints() -> Array[Dictionary]:
 			markers.append({
 				"at": Vector2(728, 819), "target": RollingOrange.HOME, "label": "ROLLING ORANGE", "ink": Color("ffd393"),
 			})
+	if has_east_drop():
+		markers.append({"at": Vector2(720, 674), "target": EAST_DROP_POINT, "label": "EAST UNLOAD", "ink": Color("b4efd2")})
 	return markers
 
 func waypoint_bounds(font: Font, marker: Dictionary) -> Rect2:

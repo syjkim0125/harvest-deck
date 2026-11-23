@@ -540,7 +540,7 @@ func run() -> void:
 	check(g.particles.filter(func(p): return p.cargo_index >= 0).size() == 3, "three animated chunks join the cargo stack")
 	var last_piece: Dictionary = g.particles.filter(func(p): return p.cargo_index == 2)[0]
 	var airborne: Vector2 = g.pickup_position(last_piece)
-	g.deposit_cargo(true)
+	g.deposit_cargo(true, g.depot)
 	check(g.cargo.size() == 2 and g.cargo_view.transfers[0].start == airborne, "deposit hands off an airborne slice from its current position")
 	check(g.particles.all(func(p): return p.cargo_index != 2), "a deposited airborne slice is no longer drawn as a pickup")
 	g.set_paused(true)

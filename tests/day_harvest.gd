@@ -14,6 +14,54 @@ func check(ok: bool, message: String) -> void:
 		failures += 1
 	print("PASS " if ok else "FAIL ", message)
 
+func check_east_drop(game) -> void:
+	var day = game.day
+	for date in [1, 2]:
+		game.run_day = date
+		game.reset_day()
+		game.begin_harvest()
+		game.cargo.assign([0])
+		game.player = Game.EAST_DROP_POINT
+		game.simulate(0.2, Vector2.ZERO)
+		check(game.cargo == [0] and game.stock == 0, "the east pad is inactive on Day %d" % date)
+	game.run_day = 3
+	game.deck.assign([day.Card.RESERVE_CELL])
+	game.reset_day()
+	game.begin_harvest()
+	day.charge = 60.0
+	game.cargo.assign([0, SpineMelon.KIND])
+	game.player = Game.EAST_DROP_POINT + Vector2(0, Game.EAST_DROP_RADIUS + 1.0)
+	game.simulate(0.2, Vector2.ZERO)
+	check(game.stock == 0 and not day.reward_used, "standing outside the green ring cannot transfer cargo or spend the card")
+	game.player = Game.EAST_DROP_POINT
+	game.simulate(0.05, Vector2.ZERO)
+	check(game.cargo_view.transfers.size() == 1
+		and game.cargo_view.transfers[0].destination == Game.EAST_DROP_POINT + Vector2(0, -30),
+		"the first handoff animates toward the east crate")
+	game.simulate(0.15, Vector2.ZERO)
+	game.update_day_hud()
+	check(game.cargo.is_empty() and game.production.raw == [SpineMelon.KIND, 0]
+		and day.reward_used and day.charge == 85.0,
+		"the east pad unloads both fruit types and triggers the first-delivery battery card once")
+	check(game.return_button.disabled and not game.finish_day_at_depot() and not game.counter_ready(),
+		"an empty bag at the east pad cannot end the expedition or enter the night")
+	game.cargo.assign([0, SpineMelon.KIND, 0])
+	game.player = SpineMelon.EAST_HOME + Vector2(0, 70)
+	game.facing = Vector2.DOWN
+	day.charge = 0.01
+	game.simulate(0.2, Vector2.ZERO)
+	check(day.outcome == day.Outcome.EXHAUSTED and day.lost_cargo == 2 and game.player == game.depot
+		and game.production.raw == [SpineMelon.KIND, 0, 0],
+		"exhaustion leaves the east deposit intact and applies losses only to the bag")
+	check(game.enter_night() and not game.enter_night() and game.night.stock == [SpineMelon.KIND, 0, 0],
+		"the forced return hands one shared inventory to the market without duplicate deposits")
+	game.switch_mode()
+	game.player = Game.EAST_DROP_POINT
+	game.cargo.assign([0])
+	game.simulate(0.2, Vector2.ZERO)
+	check(game.cargo == [0] and game.stock == 0, "the comparison Lab has no east unloading station")
+	game.switch_mode()
+
 func run() -> void:
 	var game = load("res://main.tscn").instantiate()
 	root.add_child(game)
@@ -119,6 +167,7 @@ func run() -> void:
 	check(game.production.pending_cash == 10 and day.charge == initial_charge, "comparison input still unloads, mixes and sells without battery costs")
 	game.mode_button.pressed.emit()
 	check(game.day_mode and day.charge == initial_charge and day.outcome == day.Outcome.ACTIVE, "the mode button starts a fresh day again")
+	check_east_drop(game)
 	for size in [Vector2i(320, 720), Vector2i(512, 1108), Vector2i(960, 720)]:
 		var view := SubViewport.new()
 		view.size = size
