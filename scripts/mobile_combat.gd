@@ -10,6 +10,7 @@ const GUARD := 4
 const DAY_STARTER: Array[int] = [WIDE, SPIN, HEART, BOUNTY]
 const LEVELS: Array[int] = [1, 4, 8]
 const CARD_PREVIEW_SECONDS := 1.4
+const FULL_CIRCLE_CUT_DOT := -1.0
 
 var active := false
 var preview_card := -1
@@ -138,7 +139,10 @@ func cut_reach() -> float:
 	return 100.0 + 33.0 * wide + 14.0 * maxi(0, spins - 1)
 
 func cut_dot_limit() -> float:
-	return -1.0 if spins > 0 else 0.1
+	return FULL_CIRCLE_CUT_DOT if spins > 0 else 0.1
+
+func cut_dot_after(card: int) -> float:
+	return FULL_CIRCLE_CUT_DOT if card == SPIN else cut_dot_limit()
 
 func update_orchard_counter() -> void:
 	if is_instance_valid(orchard_counter):
@@ -159,17 +163,19 @@ func _draw() -> void:
 	draw_harvest_actors(ThemeDB.fallback_font)
 
 func draw_cut_preview() -> void:
-	# An outline at the actual range is an equipment cue, not a hit effect.
 	var tint := Color(0.63, 1.0, 0.86, 0.76)
 	if not impact.reduced:
 		tint.a *= minf(1.0, preview_left / 0.28)
-	var radius := cut_reach()
-	if cut_dot_limit() <= -1.0:
-		draw_arc(player, radius, 0.0, TAU, 64, tint, 2.0, true)
+	draw_cut_outline(self, player, cut_reach(), facing.angle(), cut_dot_limit(), tint)
+
+static func draw_cut_outline(surface: CanvasItem, at: Vector2, radius: float, heading: float,
+		dot_limit: float, tint: Color) -> void:
+	if dot_limit <= FULL_CIRCLE_CUT_DOT:
+		surface.draw_arc(at, radius, 0.0, TAU, 64, tint, 2.0, true)
 		return
-	var heading := facing.angle()
-	var spread := acos(cut_dot_limit())
-	draw_arc(player, radius, heading - spread, heading + spread, 32, tint, 2.0, true)
+	var spread := acos(dot_limit)
+	surface.draw_arc(at, radius, heading - spread, heading + spread, 32, tint, 2.0, true)
 	for side in [-1.0, 1.0]:
 		var edge := Vector2.from_angle(heading + side * spread)
-		draw_line(player + edge * (radius - 16.0), player + edge * radius, tint, 2.0, true)
+		surface.draw_line(at + edge * (radius - minf(16.0, radius * 0.22)),
+			at + edge * radius, tint, 2.0, true)

@@ -476,7 +476,17 @@ func paint_card(card: int, rect: Rect2, available: bool, lifted := false) -> voi
 	var x := rect.get_center().x
 	Art.box(canvas, Rect2(rect.position + Vector2(0, 4), rect.size), Color("252239"), 13)
 	Art.box(canvas, rect, Color("fff1d0") if available else Color("b4a7a7"), 13, accent if lifted else OAK)
-	icon(card, Vector2(x, rect.position.y + 44), 25)
+	var picture := Vector2(x, rect.position.y + 44)
+	if phase == Phase.UPGRADE and day_card_level == 0 and card in [Combat.WIDE, Combat.SPIN]:
+		# Match the field's outline while leaving the saw readable at card size.
+		picture.y -= 8.0
+		var radius := 29.0 if card == Combat.WIDE else 23.0
+		if card == Combat.WIDE:
+			picture.x -= 8.0
+		Combat.draw_cut_outline(canvas, picture, radius, 0.0, combat.cut_dot_after(card), Color("21634e"))
+		icon(card, picture, 15)
+	else:
+		icon(card, picture, 25)
 	center(card_name(card), rect.position.y + 82, 14, OAK, x)
 	if card >= 10:
 		for i in Shop.cost(card):

@@ -198,7 +198,11 @@ func run() -> void:
 		check(game.combat.attack() == 0, "baseline front reach and rear coverage miss both identical targets")
 		game.options.assign([card])
 		game.phase = MVP.Phase.UPGRADE
+		var offered_dot := game.combat.cut_dot_after(card)
 		tap(view, game, game.card_rect(0, 1, 288).get_center())
+		check(is_equal_approx(offered_dot, game.combat.cut_dot_limit())
+			and (offered_dot <= Combat.FULL_CIRCLE_CUT_DOT) == (card == Combat.SPIN),
+			"the first card illustration predicts the field's actual coverage")
 		check(game.combat.preview_card == card and game.combat.attack() == 1
 			and game.combat.fruits[0].hp == (2 if card == Combat.WIDE else 3)
 			and game.combat.fruits[1].hp == (2 if card == Combat.SPIN else 3),
