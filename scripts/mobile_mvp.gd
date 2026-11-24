@@ -162,12 +162,25 @@ func refill_night_hand() -> void:
 	shop.energy = 2
 	selected = -1
 
+func opening_card() -> int:
+	if shop.opened:
+		return -1
+	for card in shop.hands:
+		if shop.can_play(card):
+			return card
+	return -1
+
+func select_shop_card(card: int) -> void:
+	selected = card if shop.can_play(card) else -1
+	rejected = 0.55 if selected < 0 else 0.0
+
 func play_card(card: int, station: int) -> void:
 	if shop.play_at(card, station):
 		night_discard.append(card)
 		selected = -1
+		rejected = 0.0
 	else:
-		rejected = 0.55
+		select_shop_card(card)
 
 func _physics_process(delta: float) -> void:
 	if not is_instance_valid(combat):
@@ -271,15 +284,20 @@ func contact(id: int, at: Vector2, pressed: bool) -> void:
 			pick_day_card(card_at(at, options, 288))
 		Phase.SHOP:
 			var target := station_at(at)
-			if down_card >= 0 and target >= 0:
-				play_card(down_card, target)
-			elif down_card >= 0 and from.distance_to(at) < 22.0:
-				selected = down_card if shop.can_play(down_card) else -1
-				rejected = 0.55 if selected < 0 else 0.0
-			elif selected >= 0 and target >= 0:
-				play_card(selected, target)
-			elif target >= 0 and not shop.opened:
-				shop.opened = true
+			if down_card >= 0:
+				if target >= 0:
+					play_card(down_card, target)
+				else:
+					select_shop_card(down_card)
+			elif target >= 0:
+				if selected >= 0:
+					play_card(selected, target)
+				elif not shop.opened:
+					var suggested := opening_card()
+					if suggested < 0:
+						shop.opened = true
+					elif Shop.station(suggested) == target:
+						select_shop_card(suggested)
 		Phase.REWARD:
 			var card := card_at(at, options, 288)
 			if card < 0:
@@ -476,7 +494,10 @@ func spark(at: Vector2, r: float, color: Color) -> void:
 
 func paint_shop(include_hand := true) -> void:
 	var moving := hand_at_press >= 0 and pointer != -2 and point.distance_to(press_at) > 12.0
+	var guide := opening_card() if include_hand and selected < 0 and not moving else -1
 	var preview := hand_at_press if moving else selected
+	if preview < 0:
+		preview = guide
 	var target := Shop.station(preview) if preview >= 0 and shop.can_play(preview) else -1
 	art.paint(canvas, shop, animation, target)
 	label("밤 %d" % day_number, 23, 51, 29, GOLD)
@@ -493,7 +514,10 @@ func paint_shop(include_hand := true) -> void:
 		var to := Art.STATIONS[target].get_center()
 		var baton := Vector2(to.x, to.y - 88 + sin(animation * 6.0) * 6)
 		Art.shape(canvas, PackedVector2Array([baton + Vector2(-11, -3), baton + Vector2(11, -3), baton + Vector2(0, 11)]), GOLD)
-		center("빛나는 곳에 놓아요", 455, 18, PAPER)
+		if guide < 0:
+			center("빛나는 곳에 놓아요", 455, 18, PAPER)
+		else:
+			center("카드를 눌러 가게를 열어요", 455, 19, PAPER)
 	elif rejected > 0.0:
 		center("과일과 별을 확인해요", 455, 18, Color("f7a3a2"))
 	elif not shop.opened:
@@ -508,12 +532,15 @@ func paint_shop(include_hand := true) -> void:
 		var card := shop.hands[i]
 		if moving and card == hand_at_press:
 			continue
-		paint_card(card, card_rect(i, shop.hands.size(), 491), shop.can_play(card), card == selected)
-	if not shop.opened and selected < 0 and not moving:
-		for i in shop.hands.size():
-			if shop.can_play(shop.hands[i]):
-				finger(card_rect(i, shop.hands.size(), 491).get_center() + Vector2(34, 32 + sin(animation * 4.0) * 5))
-				break
+		paint_card(card, card_rect(i, shop.hands.size(), 491), shop.can_play(card), card in [selected, guide])
+	if guide >= 0:
+		var card := card_rect(shop.hands.find(guide), shop.hands.size(), 491)
+		var station := Art.STATIONS[target]
+		var cycle := fmod(animation, 2.4)
+		var slide := smoothstep(0.55, 1.60, cycle) if motion < 2 else 0.0
+		finger((card.get_center() + Vector2(27, 21)).lerp(station.get_center() + Vector2(27, 12), slide))
+	elif selected >= 0 and target >= 0 and not shop.opened and not moving:
+		finger(Art.STATIONS[target].get_center() + Vector2(27, 12))
 	if moving:
 		paint_card(hand_at_press, Rect2(point - Vector2(OPTION_W / 2, OPTION_H - 17), Vector2(OPTION_W, OPTION_H)), shop.can_play(hand_at_press), true)
 

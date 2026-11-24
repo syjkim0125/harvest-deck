@@ -79,13 +79,27 @@ func run() -> void:
 	check(game.phase == MVP.Phase.SHOP and game.shop.raw[0] > 0 and game.shop.raw[1] > 0
 		and game.shop.customers.size() == 3, "two real day ingredients enter the graphical night shop")
 	var saved := game.shop.raw.duplicate()
-	tap(view, game, game.card_rect(1, game.shop.hands.size(), 491).get_center())
-	tap(view, game, Art.STATIONS[2].get_center())
-	check(game.shop.raw == saved and game.shop.energy == 2 and not game.shop.opened,
-		"tapping the wrong station cannot lose ingredients or spend energy")
-	tap(view, game, Art.STATIONS[0].get_center())
+	var mixer := Art.STATIONS[0].get_center()
+	var cashier := Art.STATIONS[2].get_center()
+	var mix_card := game.card_rect(1, game.shop.hands.size(), 491).get_center()
+	check(game.opening_card() == Shop.JUICE, "the opening gesture starts at a playable mixer card")
+	tap(view, game, mixer)
+	check(game.selected == Shop.JUICE and not game.shop.opened and game.shop.energy == 2,
+		"tapping the guided mixer first selects its card without starting the clock")
+	touch(view, game, mix_card, true)
+	drag(view, game, cashier)
+	touch(view, game, cashier, false)
+	check(game.selected == Shop.MIX and game.shop.raw == saved and game.shop.energy == 2 and not game.shop.opened,
+		"dropping on the wrong station keeps the card selected and spends nothing")
+	touch(view, game, mix_card, true)
+	drag(view, game, Vector2(135, 450))
+	touch(view, game, Vector2(135, 450), false)
+	check(game.selected == Shop.MIX and game.shop.time == 0.0,
+		"a short drop can be finished by tapping the mixer alone")
+	tap(view, game, mixer)
 	check(game.shop.opened and game.shop.energy == 1 and Shop.MIX not in game.shop.hands
-		and game.shop.raw == [saved[0] - 1, saved[1] - 1], "tap card and mixer consumes both fruits once")
+		and game.shop.raw == [saved[0] - 1, saved[1] - 1] and game.opening_card() < 0,
+		"the mixer completes one card and the opening guide ends")
 	tick(game, 3.0)
 	check(game.shop.premiums == 1 and game.shop.cash >= 8
 		and game.shop.next_customer > 3, "mixer, shelf and physical customers complete a premium sale")
@@ -111,12 +125,31 @@ func run() -> void:
 		tap(view, game, game.card_rect(0, game.shop.hands.size(), 491).get_center())
 		tap(view, game, Art.STATIONS[0].get_center())
 	else:
-		tap(view, game, Art.STATIONS[0].get_center())
+		var suggested := game.opening_card()
+		var station := Art.STATIONS[Shop.station(suggested)].get_center()
+		tap(view, game, station)
+		if suggested >= 0:
+			tap(view, game, station)
 	wait_for_phase(game, MVP.Phase.SCORE)
 	check(game.phase == MVP.Phase.SCORE and game.total_sold > 0, "the second night closes to a combined ledger")
 	tap(view, game, Vector2(179, 461))
 	check(game.phase == MVP.Phase.INTRO and game.total_cash == 0 and Shop.EXTRA not in game.night_deck,
 		"the restart icon resets both decks")
+	view.size = Vector2i(393, 852)
+	game.combat.cargo.assign([0, 1])
+	game.open_market()
+	var second_card := game.card_rect(1, game.shop.hands.size(), 491).get_center()
+	tap(view, game, second_card)
+	check(game.selected == Shop.MIX and not game.shop.opened, "a tall portrait viewport accepts the first tap on a card")
+	tap(view, game, mixer)
+	check(game.shop.opened and game.shop.energy == 1 and game.shop.jobs == [2],
+		"the second tap applies the card at 393 by 852 without any drag")
+	game.combat.cargo.clear()
+	game.open_market()
+	game.shop.hands.assign([Shop.JUICE, Shop.MIX])
+	tap(view, game, mixer)
+	check(game.shop.opened and game.selected < 0 and game.shop.energy == 2,
+		"without a usable card, a station opens an empty shop without spending")
 	var plain := Shop.new()
 	plain.setup([0, 0])
 	plain.hands.assign([Shop.MIX, Shop.JUICE])
