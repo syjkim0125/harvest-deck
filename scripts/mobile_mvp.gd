@@ -14,6 +14,10 @@ const SHEET_TOP := 210.0
 const OPTION_W := 102.0
 const OPTION_H := 120.0
 const MOTION_RECT := Rect2(295, 16, 56, 56)
+const INTRO_STICK := Vector2(180, 566)
+const INTRO_STICK_RADIUS := 38.0
+const INTRO_DRAG_THRESHOLD := 10.0
+const INTRO_STEP_SECONDS := 0.22
 
 enum Phase { INTRO, HUNT, UPGRADE, SHOP, REWARD, SCORE }
 var phase := Phase.INTRO
@@ -41,6 +45,7 @@ var pointer := -2
 var press_at := Vector2.ZERO
 var point := Vector2.ZERO
 var hand_at_press := -1
+var intro_step_left := 0.0
 var selected := -1
 var rejected := 0.0
 var settings := false
@@ -190,6 +195,10 @@ func _physics_process(delta: float) -> void:
 	if not settings:
 		if phase == Phase.HUNT:
 			combat.tick_hunt(delta, day_number)
+			if intro_step_left > 0.0:
+				intro_step_left = maxf(0.0, intro_step_left - delta)
+				if intro_step_left == 0.0:
+					combat.direction = Vector2.ZERO
 			stash_counts[0] = combat.cargo.count(0)
 			stash_counts[1] = combat.cargo.count(1)
 			if combat.hearts <= 0 or combat.time >= Combat.DAY_SECONDS:
@@ -255,6 +264,9 @@ func contact(id: int, at: Vector2, pressed: bool) -> void:
 	if pressed:
 		if pointer != -2:
 			return
+		if intro_step_left > 0.0:
+			intro_step_left = 0.0
+			combat.direction = Vector2.ZERO
 		pointer = id
 		press_at = at
 		point = at
@@ -278,8 +290,9 @@ func contact(id: int, at: Vector2, pressed: bool) -> void:
 		return
 	match phase:
 		Phase.INTRO:
-			phase = Phase.HUNT
-			combat.active = true
+			if from.distance_to(INTRO_STICK) <= INTRO_STICK_RADIUS and at.distance_to(INTRO_STICK) <= INTRO_STICK_RADIUS:
+				begin_hunt(Vector2.UP)
+				intro_step_left = INTRO_STEP_SECONDS
 		Phase.UPGRADE:
 			pick_day_card(card_at(at, options, 288))
 		Phase.SHOP:
@@ -313,19 +326,28 @@ func contact(id: int, at: Vector2, pressed: bool) -> void:
 			if Rect2(110, 414, 140, 104).has_point(at):
 				reset_run()
 
+func begin_hunt(direction: Vector2) -> void:
+	phase = Phase.HUNT
+	combat.active = true
+	combat.direction = direction
+
 func drag(id: int, at: Vector2) -> void:
 	if settings or pointer != id:
 		return
 	point = at
-	if phase == Phase.INTRO and press_at.distance_to(at) > 10.0 and not MOTION_RECT.has_point(press_at):
-		phase = Phase.HUNT
-		combat.active = true
-	if phase == Phase.HUNT and not MOTION_RECT.has_point(press_at):
-		combat.direction = ((at - press_at) / 45.0).limit_length()
+	if MOTION_RECT.has_point(press_at):
+		return
+	var displacement := at - press_at
+	var direction := (displacement / 45.0).limit_length()
+	if phase == Phase.INTRO and displacement.length() > INTRO_DRAG_THRESHOLD:
+		begin_hunt(direction)
+	elif phase == Phase.HUNT:
+		combat.direction = direction
 
 func clear_pointer() -> void:
 	pointer = -2
 	hand_at_press = -1
+	intro_step_left = 0.0
 	if is_instance_valid(combat):
 		combat.direction = Vector2.ZERO
 
@@ -398,21 +420,29 @@ func heart(at: Vector2, full: bool) -> void:
 	Art.shape(canvas, PackedVector2Array([at + Vector2(-8, -1), at + Vector2(8, -1), at + Vector2(0, 9)]), tint)
 
 func paint_intro() -> void:
-	Art.box(canvas, Rect2(36, 466, 288, 130), Color("203f3a"), 23, MINT)
-	center("수확 상점", 506, 33, PAPER)
-	center("손가락으로 밀어요", 540, 19, MINT)
-	var slide := Vector2(sin(animation * 3.6) * 28, 0)
-	finger(Vector2(180, 566) + slide)
-	canvas.draw_line(Vector2(139, 565), Vector2(222, 565), Color(1.0, 1.0, 0.9, 0.32), 2, true)
+	Art.box(canvas, Rect2(59, 454, 242, 68), Color("203f3a"), 18, MINT)
+	center("수확 상점", 485, 27, PAPER)
+	center("손가락으로 밀어요", 508, 15, MINT)
+	if pointer != -2 and not MOTION_RECT.has_point(press_at):
+		paint_stick(press_at, point - press_at)
+		return
+	var rise := 0.7 if motion == 2 else smoothstep(0.35, 1.2, fmod(animation, 2.0))
+	var thumb := Vector2(0, -27 * rise)
+	paint_stick(INTRO_STICK, thumb, true)
+	finger(INTRO_STICK + thumb + Vector2(12, 8))
 
 func paint_joystick() -> void:
-	if pointer == -2 or MOTION_RECT.has_point(press_at):
-		if combat.time < 4.5 and combat.defeated == 0:
-			finger(Vector2(179 + sin(animation * 3) * 28, 555))
-		return
-	canvas.draw_circle(press_at, 33, Color(0.13, 0.25, 0.22, 0.39), true, -1.0, true)
-	canvas.draw_arc(press_at, 33, 0, TAU, 36, Color(1, 1, 0.9, 0.64), 2, true)
-	canvas.draw_circle(press_at + (point - press_at).limit_length(33), 11, PAPER, true, -1.0, true)
+	if pointer != -2 and not MOTION_RECT.has_point(press_at):
+		paint_stick(press_at, point - press_at)
+
+func paint_stick(at: Vector2, displacement: Vector2, guide := false) -> void:
+	var radius := INTRO_STICK_RADIUS if guide else 33.0
+	canvas.draw_circle(at, radius, Color(0.13, 0.25, 0.22, 0.65), true, -1.0, true)
+	canvas.draw_arc(at, radius, 0, TAU, 36, MINT if guide else Color(1, 1, 0.9, 0.64), 2, true)
+	if guide:
+		canvas.draw_polyline(PackedVector2Array([at + Vector2(-9, -17), at + Vector2(0, -27),
+			at + Vector2(9, -17)]), MINT, 3, true)
+	canvas.draw_circle(at + displacement.limit_length(radius - 6), 11, PAPER, true, -1.0, true)
 
 func finger(at: Vector2) -> void:
 	canvas.draw_circle(at, 13, Color(1, 0.94, 0.76, 0.34), true, -1.0, true)

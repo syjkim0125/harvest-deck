@@ -56,6 +56,16 @@ func run() -> void:
 	game.day_draw = game.shuffled(game.day_deck)
 	check(game.phase == MVP.Phase.INTRO and game.scale_factor < 1.0, "the mobile scene opens at 320 by 560")
 	var player := game.combat.player
+	tap(view, game, Vector2(82, 432))
+	tick(game, 0.5)
+	check(game.phase == MVP.Phase.INTRO and game.combat.time == 0.0 and game.combat.player == player,
+		"a stray tap leaves the opening and battle clock idle")
+	touch(view, game, Vector2(179, 520), true)
+	drag(view, game, Vector2(180, 515))
+	tick(game, 0.12)
+	touch(view, game, Vector2(180, 515), false)
+	check(game.phase == MVP.Phase.INTRO and game.combat.time == 0.0,
+		"brief finger jitter outside the illustrated stick does not start the hunt")
 	touch(view, game, Vector2(179, 520), true)
 	drag(view, game, Vector2(179, 470))
 	tick(game, 0.25)
@@ -150,6 +160,23 @@ func run() -> void:
 	tap(view, game, mixer)
 	check(game.shop.opened and game.selected < 0 and game.shop.energy == 2,
 		"without a usable card, a station opens an empty shop without spending")
+	game.reset_run()
+	var tap_spawn := game.combat.player
+	tap(view, game, MVP.INTRO_STICK)
+	check(game.phase == MVP.Phase.HUNT and game.combat.direction == Vector2.UP,
+		"tapping the illustrated stick starts a short step toward fruit at 393 by 852")
+	tick(game, 0.4)
+	check(game.combat.player.y < tap_spawn.y and game.combat.direction.is_zero_approx(),
+		"the assisted first step stops without another touch")
+	game.reset_run()
+	tap(view, game, MVP.INTRO_STICK)
+	touch(view, game, Vector2(120, 520), true)
+	drag(view, game, Vector2(65, 520))
+	tick(game, 0.30)
+	check(game.combat.direction == Vector2.LEFT,
+		"a new drag takes over the first step without being cut off by its timer")
+	touch(view, game, Vector2(65, 520), false)
+	game.reset_run()
 	var plain := Shop.new()
 	plain.setup([0, 0])
 	plain.hands.assign([Shop.MIX, Shop.JUICE])
