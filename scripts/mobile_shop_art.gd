@@ -1,5 +1,6 @@
 extends RefCounted
 
+const Shop = preload("res://scripts/mobile_shop.gd")
 const INK := Color("30294b")
 const GOLD := Color("ffd279")
 const CREAM := Color("fff0cf")
@@ -33,6 +34,9 @@ func refresh(delta: float, shop) -> void:
 static func customer_spot(index: int) -> Vector2:
 	const SPOTS := [Vector2(287, 329), Vector2(264, 372), Vector2(205, 393), Vector2(144, 391), Vector2(87, 385)]
 	return SPOTS[index]
+
+static func shelf_cup_position(index: int) -> Vector2:
+	return Vector2(152 + 20 * index, 258)
 
 func first_customer_position(shop) -> Vector2:
 	return walking.get(shop.customers[0], customer_spot(0))
@@ -142,12 +146,15 @@ func paint(canvas: CanvasItem, shop, animation: float, highlighted: int) -> void
 	box(canvas, Rect2(base + Vector2(-25, -28), Vector2(50, 7)), INK, 3)
 	box(canvas, Rect2(135, 228, 94, 66), Color("8c535f"), 8, INK)
 	box(canvas, Rect2(134, 223, 96, 13), Color("e0a16c"), 5, INK)
+	for i in range(Shop.SHELF_CAPACITY):
+		var slot := shelf_cup_position(i) + Vector2(0, 5)
+		box(canvas, Rect2(slot - Vector2(8, 2), Vector2(16, 6)), Color("654051"), 3)
 	for i in range(shop.shelf.size()):
 		if cup_time <= 0.0 or i < shop.shelf.size() - 1:
-			cup(canvas, Vector2(147 + 17 * i, 258), shop.shelf[i], 0.73)
+			cup(canvas, shelf_cup_position(i), shop.shelf[i], 0.73)
 	if cup_time > 0.0:
 		var t := 1.0 - cup_time / 0.27
-		var destination := Vector2(147 + 17 * maxi(0, shop.shelf.size() - 1), 258)
+		var destination := shelf_cup_position(maxi(0, shop.shelf.size() - 1))
 		cup(canvas, Vector2(74, 232).lerp(destination, t) + Vector2(0, -18 * sin(PI * t)), shop.produced, 0.73)
 	box(canvas, Rect2(244, 232, 91, 67), Color("894f5d"), 8, INK)
 	if shop.helper:

@@ -8,6 +8,7 @@ const EXTRA := 14
 const STARTER: Array[int] = [JUICE, MIX, HELP, GIFT]
 const SHIFT := 12.0
 const TOTAL := 24.0
+const SHELF_CAPACITY := 4
 
 var raw: Array[int] = [0, 0]
 var star_fruit := false
@@ -102,7 +103,7 @@ func tick(delta: float) -> void:
 	if arrival >= (1.05 if helper else 1.8):
 		arrival = 0.0
 		arrive()
-	if jobs.is_empty() and time < TOTAL - 1.35 and shelf.size() < 5:
+	if jobs.is_empty() and time < TOTAL - 1.35 and shelf.size() < SHELF_CAPACITY:
 		var fruit := 0 if raw[0] >= raw[1] else 1
 		if raw[fruit] > 0:
 			raw[fruit] -= 1
@@ -136,7 +137,7 @@ func mix_duration() -> float:
 	return 0.45 if quick_blends > 0 else 1.25
 
 func can_blend() -> bool:
-	return not done and not jobs.is_empty() and shelf.size() < 5
+	return not done and not jobs.is_empty() and shelf.size() < SHELF_CAPACITY
 
 func service_duration() -> float:
 	return 0.46 if helper else 1.5

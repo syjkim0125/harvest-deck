@@ -68,6 +68,7 @@ func observe_open_shop(view: Viewport, game: MVP, harvest: Array[int], use_cards
 	var mixer: Dictionary = {}
 	var full_shelf: Dictionary = {}
 	var cards_used: Array[int] = []
+	var helper_at := -1.0
 	for i in range(34 * 60):
 		if game.phase != MVP.Phase.SHOP:
 			break
@@ -78,25 +79,60 @@ func observe_open_shop(view: Viewport, game: MVP, harvest: Array[int], use_cards
 			if use_cards:
 				play_shop_touch(view, game, Shop.JUICE)
 				cards_used.append(Shop.JUICE)
-		if full_shelf.is_empty() and game.shop.shelf.size() == 5 and not game.shop.customers.is_empty():
-			full_shelf = {"second": snappedf(game.shop.time, 0.01), "hand": game.shop.hands.duplicate(),
-				"juice": game.shop.can_play(Shop.JUICE), "helper": game.shop.can_play(Shop.HELP)}
-			if use_cards and full_shelf.helper:
+		if game.shop.shelf.size() == Shop.SHELF_CAPACITY and not game.shop.customers.is_empty():
+			if full_shelf.is_empty():
+				full_shelf = {"second": snappedf(game.shop.time, 0.01), "hand": game.shop.hands.duplicate(),
+					"juice": game.shop.can_play(Shop.JUICE), "helper": game.shop.can_play(Shop.HELP)}
+			if use_cards and game.shop.can_play(Shop.HELP):
 				play_shop_touch(view, game, Shop.HELP)
 				cards_used.append(Shop.HELP)
+				helper_at = snappedf(game.shop.time, 0.01)
 	var outcome := {"cards": cards_used, "empty_shelf": mixer, "full_shelf": full_shelf,
-		"closed": game.phase == MVP.Phase.REWARD, "sold": game.shop.sold, "cash": game.total_cash}
+		"helper_at": helper_at, "closed": game.phase == MVP.Phase.REWARD, "sold": game.shop.sold, "cash": game.total_cash}
 	print("NATURAL SHOP ", JSON.stringify(outcome))
 	return outcome
+
+func replay_delayed_sale(view: Viewport, game: MVP, harvest: Array[int], seed: int, delay: float, card: int) -> Dictionary:
+	game.reset_run()
+	game.random.seed = seed
+	game.combat.cargo.assign(harvest)
+	game.open_market()
+	tap(view, game, game.art.first_customer_hit_area(game.shop).get_center())
+	var full_at := -1.0
+	var played_at := -1.0
+	var spent := 0
+	var hand: Array[int] = []
+	var response_shelf := -1
+	for i in range(34 * 60):
+		if game.phase != MVP.Phase.SHOP:
+			break
+		tick(game, 1.0 / 60.0)
+		if full_at < 0.0 and game.shop.shelf.size() == Shop.SHELF_CAPACITY and not game.shop.customers.is_empty():
+			full_at = game.shop.time
+		if played_at < 0.0 and full_at >= 0.0 and game.shop.time >= full_at + delay and game.shop.time < Shop.TOTAL:
+			played_at = game.shop.time
+			hand.assign(game.shop.hands)
+			response_shelf = game.shop.shelf.size()
+			var can_compare := game.shop.can_play(Shop.HELP) and game.shop.can_play(Shop.JUICE) and game.shop.can_play(Shop.GIFT)
+			if can_compare:
+				var budget := game.shop.energy
+				play_shop_touch(view, game, card)
+				if card == Shop.JUICE:
+					play_shop_touch(view, game, Shop.GIFT)
+				spent = budget - game.shop.energy
+	return {"full_at": snappedf(full_at, 0.01), "response_at": snappedf(played_at, 0.01),
+		"hand": hand, "response_shelf": response_shelf, "spent": spent, "sold": game.shop.sold,
+		"cash": game.total_cash, "closed": game.phase == MVP.Phase.REWARD}
 
 func compare_shop_bottleneck(full_shelf: bool, hire_helper: bool) -> Dictionary:
 	var shop := Shop.new()
 	var ingredients: Array[int] = []
-	ingredients.resize(19 if full_shelf else 24)
+	ingredients.resize(24 - Shop.SHELF_CAPACITY if full_shelf else 24)
 	ingredients.fill(0)
 	shop.setup(ingredients)
 	if full_shelf:
-		shop.shelf.assign([0, 0, 0, 0, 0])
+		shop.shelf.resize(Shop.SHELF_CAPACITY)
+		shop.shelf.fill(0)
 	shop.hands.assign([Shop.JUICE, Shop.GIFT, Shop.HELP])
 	if hire_helper:
 		shop.play_at(Shop.HELP, 2)
@@ -442,7 +478,8 @@ func run() -> void:
 	var blocked := Shop.new()
 	blocked.setup([0, 0])
 	blocked.hands.assign([Shop.JUICE])
-	blocked.shelf.assign([0, 0, 0, 0, 0])
+	blocked.shelf.resize(Shop.SHELF_CAPACITY)
+	blocked.shelf.fill(0)
 	blocked.play_at(Shop.JUICE, 0)
 	blocked.tick(0.4)
 	check(blocked.jobs == [0, 0] and not blocked.can_blend() and blocked.blend == 0.0,
@@ -466,9 +503,25 @@ func run() -> void:
 	var intervene := observe_open_shop(view, game, first_harvest, true)
 	check(observe.closed and observe.sold > 0 and observe.empty_shelf.get("juice", false)
 		and observe.empty_shelf.get("helper", false), "watching a normal opening reveals the mixer queue with both cards still usable")
-	check(intervene.closed and intervene.cards == [Shop.JUICE, Shop.HELP] and intervene.cash > observe.cash
-		and intervene.full_shelf.get("helper", false),
-		"natural mixer and sales bottlenecks expose usable cards in both shifts")
+	check(intervene.closed and intervene.cards == [Shop.JUICE, Shop.HELP]
+		and intervene.helper_at >= Shop.SHIFT and intervene.helper_at < Shop.TOTAL,
+		"an early full shelf can be answered once the next hand restores energy")
+	var responses := 0
+	var delays_with_two_choices := {}
+	for seed in [9344, 27, 51, 87, 143, 42]:
+		for delay in [1.0, 2.0, 3.0]:
+			var helper_case := replay_delayed_sale(view, game, first_harvest, seed, delay, Shop.HELP)
+			var mixer_case := replay_delayed_sale(view, game, first_harvest, seed, delay, Shop.JUICE)
+			print("DELAYED SHOP ", JSON.stringify({"seed": seed, "delay": delay, "helper": helper_case, "mixer": mixer_case}))
+			if (helper_case.closed and mixer_case.closed and helper_case.full_at >= 0.0
+					and helper_case.response_at >= helper_case.full_at + delay
+					and helper_case.response_at < Shop.TOTAL and helper_case.response_at == mixer_case.response_at
+					and helper_case.hand == mixer_case.hand):
+				responses += 1
+			if helper_case.spent == 2 and mixer_case.spent == 2:
+				delays_with_two_choices[delay] = true
+	check(responses == 18, "a normal shop gives all six seeds time for a one to three second response")
+	check(delays_with_two_choices.size() == 3, "matched hands allow an equal-cost comparison at every tested delay")
 	game.reset_run()
 	game.combat.fruits.clear()
 	game.combat.cargo.resize(150)
