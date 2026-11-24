@@ -44,6 +44,29 @@ func wait_for_phase(game: MVP, expected: MVP.Phase) -> void:
 			game.pick_day_card(game.options[0])
 		tick(game, 1.0)
 
+func compare_shop_bottleneck(full_shelf: bool, hire_helper: bool) -> Dictionary:
+	var shop := Shop.new()
+	var ingredients: Array[int] = []
+	ingredients.resize(19 if full_shelf else 24)
+	ingredients.fill(0)
+	shop.setup(ingredients)
+	if full_shelf:
+		shop.shelf.assign([0, 0, 0, 0, 0])
+	shop.hands.assign([Shop.JUICE, Shop.GIFT, Shop.HELP])
+	if hire_helper:
+		shop.play_at(Shop.HELP, 2)
+	else:
+		shop.play_at(Shop.JUICE, 0)
+		shop.play_at(Shop.GIFT, 1)
+	check(shop.opened and shop.energy == 0, "each shop comparison spends the same two stars")
+	for i in range(180):
+		shop.tick(1.0 / 60.0)
+	var result := {"full_shelf": full_shelf, "helper": hire_helper, "mixed": shop.mixed,
+		"shelf": shop.shelf.size(), "line": shop.customers.size(), "mix_queue": shop.jobs.size(),
+		"sold": shop.sold, "cash": shop.cash}
+	print("SHOP BOTTLENECK ", JSON.stringify(result))
+	return result
+
 func compare_reward_route(view: Viewport, game: MVP, reward_card: int, direction: Vector2) -> Vector2i:
 	game.reset_run()
 	game.random.seed = 9344
@@ -365,6 +388,24 @@ func run() -> void:
 		plain.tick(1.0 / 60.0)
 	check(plain.sold == 2 and plain.cash == 6 and plain.premiums == 0 and plain.done,
 		"the watermelon-only route produces two actual sales and settles once")
+	var blocked := Shop.new()
+	blocked.setup([0, 0])
+	blocked.hands.assign([Shop.JUICE])
+	blocked.shelf.assign([0, 0, 0, 0, 0])
+	blocked.play_at(Shop.JUICE, 0)
+	blocked.tick(0.4)
+	check(blocked.jobs == [0, 0] and not blocked.can_blend() and blocked.blend == 0.0,
+		"the mixer holds both batches while the display shelf is full")
+	blocked.tick(1.1)
+	check(blocked.sold == 1 and blocked.can_blend(), "a real sale frees shelf space and releases the mixer")
+	var mixer_quick := compare_shop_bottleneck(false, false)
+	var mixer_helper := compare_shop_bottleneck(false, true)
+	var sales_quick := compare_shop_bottleneck(true, false)
+	var sales_helper := compare_shop_bottleneck(true, true)
+	check(mixer_quick.mixed > mixer_helper.mixed and mixer_quick.shelf > mixer_helper.shelf,
+		"an empty shelf fills faster with quick blending")
+	check(sales_helper.sold > sales_quick.sold and sales_helper.line < sales_quick.line,
+		"with a full shelf, the helper serves more of the queue")
 	game.combat.fruits.clear()
 	game.combat.cargo.resize(150)
 	game.combat.cargo.fill(0)

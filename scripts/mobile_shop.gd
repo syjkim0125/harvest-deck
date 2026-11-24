@@ -107,7 +107,7 @@ func tick(delta: float) -> void:
 		if raw[fruit] > 0:
 			raw[fruit] -= 1
 			jobs.append(fruit)
-	if not jobs.is_empty() and shelf.size() < 5:
+	if can_blend():
 		blend += delta
 		if blend >= mix_duration():
 			blend = 0.0
@@ -134,6 +134,9 @@ func mix_duration() -> float:
 	if not jobs.is_empty() and jobs[0] >= 2:
 		return 0.70
 	return 0.45 if quick_blends > 0 else 1.25
+
+func can_blend() -> bool:
+	return not done and not jobs.is_empty() and shelf.size() < 5
 
 func service_duration() -> float:
 	return 0.46 if helper else 1.5

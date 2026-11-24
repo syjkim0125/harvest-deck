@@ -111,16 +111,27 @@ func paint(canvas: CanvasItem, shop, animation: float, highlighted: int) -> void
 		box(canvas, Rect2(at - Vector2(17, 8), Vector2(34, 24)), Color("a86552"), 4, INK)
 		for piece in range(mini(shop.raw[kind], 3)):
 			fruit(canvas, at + Vector2(-8 + piece * 8, -5 - 4 * (piece % 2)), kind, 0.65)
-	var running: bool = not shop.jobs.is_empty()
+	# The active batch stays in the jar. The tray shows the actual line behind it.
+	if shop.jobs.size() > 1:
+		box(canvas, Rect2(30, 322, 88, 25), Color("a86552"), 6, INK)
+		for i in range(1, mini(5, shop.jobs.size())):
+			var at := Vector2(23 + 20 * i, 333)
+			var job: int = shop.jobs[i]
+			if job < 2:
+				fruit(canvas, at, job, 0.62)
+			else:
+				cup(canvas, at, job, 0.62)
+	var running: bool = shop.can_blend()
 	var base := Vector2(74, 237) + Vector2(sin(animation * 65) * 1.7 * float(running), 0)
 	box(canvas, Rect2(base + Vector2(-22, 22), Vector2(44, 19)), Color("b56971"), 5, INK)
 	shape(canvas, PackedVector2Array([base + Vector2(-22, -24), base + Vector2(22, -24),
 		base + Vector2(15, 22), base + Vector2(-15, 22)]), Color("b7dad4"))
-	if running:
+	if not shop.jobs.is_empty():
 		var drink: int = shop.jobs[0]
 		var fill: Color = [MINT, PINK, Color("d4a7f6"), GOLD][drink]
 		box(canvas, Rect2(base + Vector2(-14, 1), Vector2(28, 20)), fill, 4)
-		canvas.draw_circle(base + Vector2(sin(animation * 11) * 8, 2 - sin(animation * 17) * 8), 3, CREAM)
+		if running:
+			canvas.draw_circle(base + Vector2(sin(animation * 11) * 8, 2 - sin(animation * 17) * 8), 3, CREAM)
 		progress(canvas, Rect2(base + Vector2(-21, 42), Vector2(42, 4)), shop.blend / shop.mix_duration())
 	box(canvas, Rect2(base + Vector2(-25, -28), Vector2(50, 7)), INK, 3)
 	box(canvas, Rect2(135, 228, 94, 66), Color("8c535f"), 8, INK)
