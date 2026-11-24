@@ -64,6 +64,11 @@ func compare_shop_bottleneck(full_shelf: bool, hire_helper: bool) -> Dictionary:
 	var result := {"full_shelf": full_shelf, "helper": hire_helper, "mixed": shop.mixed,
 		"shelf": shop.shelf.size(), "line": shop.customers.size(), "mix_queue": shop.jobs.size(),
 		"sold": shop.sold, "cash": shop.cash}
+	for i in range(31 * 60):
+		if shop.done:
+			break
+		shop.tick(1.0 / 60.0)
+	result.merge({"closed": shop.done, "final_sold": shop.sold, "final_cash": shop.cash})
 	print("SHOP BOTTLENECK ", JSON.stringify(result))
 	return result
 
@@ -406,6 +411,9 @@ func run() -> void:
 		"an empty shelf fills faster with quick blending")
 	check(sales_helper.sold > sales_quick.sold and sales_helper.line < sales_quick.line,
 		"with a full shelf, the helper serves more of the queue")
+	check(mixer_quick.closed and mixer_helper.closed and sales_quick.closed and sales_helper.closed
+		and mixer_quick.final_cash > mixer_helper.final_cash and sales_helper.final_cash > sales_quick.final_cash,
+		"with equal opening spend, the higher closing revenue depends on the starting shelf")
 	game.combat.fruits.clear()
 	game.combat.cargo.resize(150)
 	game.combat.cargo.fill(0)
