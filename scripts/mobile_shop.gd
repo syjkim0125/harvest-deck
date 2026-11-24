@@ -31,11 +31,13 @@ var shift := 0
 var energy := 2
 var hands: Array[int] = []
 var helper := false
+var first_night := false
 var tips := 0
 var opened := false
 var done := false
 
-func setup(ingredients: Array[int], reserve_star_fruit := false) -> void:
+func setup(ingredients: Array[int], reserve_star_fruit := false, opening_night := false) -> void:
+	first_night = opening_night
 	for fruit in ingredients:
 		if fruit in [0, 1]:
 			raw[fruit] += 1
@@ -140,4 +142,6 @@ func can_blend() -> bool:
 	return not done and not jobs.is_empty() and shelf.size() < SHELF_CAPACITY
 
 func service_duration() -> float:
-	return 0.46 if helper else 1.5
+	if helper:
+		return 0.46
+	return 1.8 if first_night else 1.5

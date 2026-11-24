@@ -92,7 +92,28 @@ func observe_open_shop(view: Viewport, game: MVP, harvest: Array[int], use_cards
 	print("NATURAL SHOP ", JSON.stringify(outcome))
 	return outcome
 
-func replay_delayed_sale(view: Viewport, game: MVP, harvest: Array[int], seed: int, delay: float, card: int) -> Dictionary:
+func harvest_while_circling(view: Viewport, game: MVP) -> Array[int]:
+	game.reset_run()
+	game.random.seed = 9344
+	game.day_draw = game.shuffled(game.day_deck)
+	tap(view, game, MVP.INTRO_STICK)
+	var thumb := Vector2(180, 520)
+	var corners := [Vector2(1350, 975), Vector2(205, 975), Vector2(205, 265), Vector2(1350, 265)]
+	var corner := 0
+	while game.phase in [MVP.Phase.HUNT, MVP.Phase.UPGRADE]:
+		if game.phase == MVP.Phase.UPGRADE:
+			var index := maxi(0, game.options.find(Combat.HEART))
+			tap(view, game, game.card_rect(index, game.options.size(), 288).get_center())
+		elif game.combat.time >= 1.5:
+			if game.combat.player.distance_to(corners[corner]) < 25.0:
+				corner = (corner + 1) % corners.size()
+			if game.pointer < 0:
+				touch(view, game, thumb, true)
+			drag(view, game, thumb + game.combat.player.direction_to(corners[corner]) * 60.0)
+		tick(game, 1.0 / 60.0)
+	return game.combat.cargo.duplicate()
+
+func replay_shop_response(view: Viewport, game: MVP, harvest: Array[int], seed: int, delay: float, card: int) -> Dictionary:
 	game.reset_run()
 	game.random.seed = seed
 	game.combat.cargo.assign(harvest)
@@ -103,16 +124,21 @@ func replay_delayed_sale(view: Viewport, game: MVP, harvest: Array[int], seed: i
 	var spent := 0
 	var hand: Array[int] = []
 	var response_shelf := -1
+	var response_raw := -1
+	var queue_seconds := 0.0
 	for i in range(34 * 60):
 		if game.phase != MVP.Phase.SHOP:
 			break
 		tick(game, 1.0 / 60.0)
 		if full_at < 0.0 and game.shop.shelf.size() == Shop.SHELF_CAPACITY and not game.shop.customers.is_empty():
 			full_at = game.shop.time
-		if played_at < 0.0 and full_at >= 0.0 and game.shop.time >= full_at + delay and game.shop.time < Shop.TOTAL:
+		if played_at >= 0.0:
+			queue_seconds += game.shop.customers.size() / 60.0
+		if played_at < 0.0 and game.shop.time >= Shop.SHIFT + delay and game.shop.time < Shop.TOTAL:
 			played_at = game.shop.time
 			hand.assign(game.shop.hands)
 			response_shelf = game.shop.shelf.size()
+			response_raw = game.shop.raw[0] + game.shop.raw[1]
 			var can_compare := game.shop.can_play(Shop.HELP) and game.shop.can_play(Shop.JUICE) and game.shop.can_play(Shop.GIFT)
 			if can_compare:
 				var budget := game.shop.energy
@@ -121,7 +147,8 @@ func replay_delayed_sale(view: Viewport, game: MVP, harvest: Array[int], seed: i
 					play_shop_touch(view, game, Shop.GIFT)
 				spent = budget - game.shop.energy
 	return {"full_at": snappedf(full_at, 0.01), "response_at": snappedf(played_at, 0.01),
-		"hand": hand, "response_shelf": response_shelf, "spent": spent, "sold": game.shop.sold,
+		"hand": hand, "response_shelf": response_shelf, "response_raw": response_raw,
+		"queue_seconds": snappedf(queue_seconds, 0.01), "spent": spent, "sold": game.shop.sold,
 		"cash": game.total_cash, "closed": game.phase == MVP.Phase.REWARD}
 
 func compare_shop_bottleneck(full_shelf: bool, hire_helper: bool) -> Dictionary:
@@ -508,21 +535,38 @@ func run() -> void:
 		and intervene.helper_at >= Shop.SHIFT and intervene.helper_at < Shop.TOTAL,
 		"an early full shelf can be answered once the next hand restores energy")
 	var responses := 0
-	var responses_with_both_choices := 0
+	var helper_wins := 0
+	var early_cash_wins := 0
 	for seed in [9344, 27, 51, 87, 143, 42]:
 		for delay in [1.0, 2.0, 3.0]:
-			var helper_case := replay_delayed_sale(view, game, first_harvest, seed, delay, Shop.HELP)
-			var mixer_case := replay_delayed_sale(view, game, first_harvest, seed, delay, Shop.JUICE)
+			var helper_case := replay_shop_response(view, game, first_harvest, seed, delay, Shop.HELP)
+			var mixer_case := replay_shop_response(view, game, first_harvest, seed, delay, Shop.JUICE)
 			print("DELAYED SHOP ", JSON.stringify({"seed": seed, "delay": delay, "helper": helper_case, "mixer": mixer_case}))
 			if (helper_case.closed and mixer_case.closed and helper_case.full_at >= 0.0
-					and helper_case.response_at >= helper_case.full_at + delay
-					and helper_case.response_at < Shop.TOTAL and helper_case.response_at == mixer_case.response_at
-					and helper_case.hand == mixer_case.hand):
+					and helper_case.full_at <= helper_case.response_at
+					and helper_case.response_at == mixer_case.response_at and helper_case.hand == mixer_case.hand
+					and helper_case.spent == 2 and mixer_case.spent == 2):
 				responses += 1
-			if helper_case.spent == 2 and mixer_case.spent == 2:
-				responses_with_both_choices += 1
-	check(responses == 18, "a normal shop gives all six seeds time for a one to three second response")
-	check(responses_with_both_choices == 18, "all six seeds offer both equal-cost responses at every tested delay")
+			if (helper_case.sold > mixer_case.sold and helper_case.cash >= mixer_case.cash
+					and helper_case.queue_seconds < mixer_case.queue_seconds):
+				helper_wins += 1
+			if delay == 1.0 and helper_case.cash > mixer_case.cash:
+				early_cash_wins += 1
+	check(responses == 18, "all six seeds offer both equal-cost responses one to three seconds after the shift")
+	check(helper_wins == 18 and early_cash_wins == 6,
+		"the helper eases every full-stock queue and wins on revenue when played after one second")
+	var small_harvest := harvest_while_circling(view, game)
+	var sparse_helper := replay_shop_response(view, game, small_harvest, 9344, 1.0, Shop.HELP)
+	var sparse_mixer := replay_shop_response(view, game, small_harvest, 9344, 1.0, Shop.JUICE)
+	print("SMALL HARVEST SHOP ", JSON.stringify({"stock": small_harvest.size(), "large_stock": first_harvest.size(),
+		"helper": sparse_helper, "mixer": sparse_mixer}))
+	check(sparse_helper.closed and sparse_mixer.closed and sparse_helper.response_raw > 0
+		and sparse_helper.spent == 2 and sparse_mixer.spent == 2 and sparse_helper.hand == sparse_mixer.hand
+		and sparse_helper.response_at == sparse_mixer.response_at,
+		"a full day spent circling supplies a smaller genuine harvest and both responses are playable")
+	check(sparse_helper.sold == small_harvest.size() and sparse_mixer.sold == small_harvest.size()
+		and sparse_mixer.cash > sparse_helper.cash,
+		"with less to sell, both finish the harvest and the tip combination earns more")
 	game.reset_run()
 	game.combat.cargo.assign(first_harvest)
 	game.open_market()

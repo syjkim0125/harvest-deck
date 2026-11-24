@@ -145,7 +145,7 @@ func open_market() -> void:
 	clear_pointer()
 	art = Art.new()
 	shop = Shop.new()
-	shop.setup(combat.cargo, combat.star_fruit)
+	shop.setup(combat.cargo, combat.star_fruit, day_number == 1)
 	night_draw = shuffled(night_deck)
 	night_discard.clear()
 	# Both starter routes are available on opening night.
