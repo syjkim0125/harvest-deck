@@ -95,7 +95,7 @@ func start_hunt() -> void:
 	clear_pointer()
 	combat.show()
 	combat.camera.enabled = true
-	combat.start_hunt(day_number)
+	combat.start_hunt(day_number, day_number == 2 and reward == Shop.EXTRA)
 	apply_motion()
 	day_card_level = 0
 	equipped.clear()
@@ -488,7 +488,9 @@ func paint_card(card: int, rect: Rect2, available: bool, lifted := false) -> voi
 	else:
 		icon(card, picture, 25)
 	center(card_name(card), rect.position.y + 82, 14, OAK, x)
-	if card >= 10:
+	if phase == Phase.REWARD and card == Shop.EXTRA:
+		center("황금 과일 찾기", rect.position.y + 103, 12, Color("435856"), x)
+	elif card >= 10:
 		for i in Shop.cost(card):
 			spark(Vector2(x + (i - (Shop.cost(card) - 1) * 0.5) * 15, rect.position.y + 100), 6, Color("bc6a37"))
 	else:
@@ -514,6 +516,8 @@ func icon(card: int, at: Vector2, radius: float) -> void:
 			Art.fruit(canvas, at + Vector2(-13, 7), 0, radius / 25.0)
 			Art.fruit(canvas, at + Vector2(13, 7), 1, radius / 25.0)
 			Art.cup(canvas, at - Vector2(0, 6), 2 if card == Shop.MIX else 3, radius / 21.0)
+			if card == Shop.EXTRA:
+				Combat.draw_recipe_mark(canvas, at + Vector2(23, -14), 7.0)
 		Shop.HELP:
 			Art.person(canvas, at + Vector2(0, 4), 3)
 		Shop.GIFT:

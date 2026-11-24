@@ -44,6 +44,60 @@ func wait_for_phase(game: MVP, expected: MVP.Phase) -> void:
 			game.pick_day_card(game.options[0])
 		tick(game, 1.0)
 
+func compare_reward_route(view: Viewport, game: MVP, reward_card: int, direction: Vector2) -> Vector2i:
+	game.reset_run()
+	game.random.seed = 9344
+	game.options.assign([Combat.GUARD, Shop.EXTRA])
+	game.phase = MVP.Phase.REWARD
+	tap(view, game, game.card_rect(game.options.find(reward_card), game.options.size(), 288).get_center())
+	var recipe := reward_card == Shop.EXTRA
+	var start := game.combat.player
+	var golden: Dictionary = game.combat.fruits[2]
+	var golden_start: Vector2 = golden.pos
+	check(game.day_number == 2 and golden.get("recipe_target", false) == recipe
+		and (not recipe or golden_start == start + Combat.RECIPE_FRUIT_OFFSET),
+		"only the recipe reward marks the golden fruit at the side of the day-two field")
+	tick(game, 0.2)
+	check((golden.home == golden_start) == recipe, "the marked fruit waits for a detour")
+	# Both branches start with one ordinary ingredient and use the real saw for the next harvest.
+	game.combat.cargo.append(0)
+	var thumb := Vector2(180, 520)
+	touch(view, game, thumb, true)
+	drag(view, game, thumb + direction)
+	tick(game, 0.75)
+	touch(view, game, thumb + direction, false)
+	var counts := Vector2i(game.combat.cargo.count(0), game.combat.cargo.count(1))
+	check(game.combat.defeated > 0 and ((game.combat.player.x > start.x) == recipe)
+		and (counts.y >= 3 if recipe else counts.x >= 4 and counts.y == 0),
+		"the two touch routes harvest different fruits from the same starting stock")
+	if not recipe:
+		tap(view, game, game.card_rect(game.options.find(Combat.GUARD), game.options.size(), 288).get_center())
+		check(game.combat.armor == 1, "the alternative reward keeps its use in the combat deck")
+	game.open_market()
+	if not recipe:
+		check(Shop.EXTRA not in game.shop.hands and game.shop.raw[1] == 0,
+			"the guard route sends only ordinary stock to the night fixture")
+		var first_card := game.opening_card()
+		var target := Art.STATIONS[Shop.station(first_card)].get_center()
+		tap(view, game, game.card_rect(game.shop.hands.find(first_card), game.shop.hands.size(), 491).get_center())
+		tap(view, game, target)
+		tick(game, 4.0)
+		check(game.shop.sold > 0 and game.shop.premiums == 0, "the alternative route can sell ordinary juice")
+	else:
+		var card := game.card_rect(0, game.shop.hands.size(), 491).get_center()
+		var mixer := Art.STATIONS[0].get_center()
+		check(game.shop.hands[0] == Shop.EXTRA and game.shop.raw == [counts.x, counts.y]
+			and game.shop.can_play(Shop.EXTRA), "the harvested pair makes the earned recipe playable")
+		touch(view, game, card, true)
+		drag(view, game, mixer)
+		touch(view, game, mixer, false)
+		check(game.shop.jobs == [3] and game.shop.raw == [counts.x - 1, counts.y - 1]
+			and game.shop.energy == 0 and Shop.EXTRA in game.night_discard,
+			"dragging the recipe to the mixer spends exactly the pair and two stars")
+		tick(game, 3.0)
+		check(game.shop.premiums == 1 and game.shop.cash >= 12, "a customer buys the actual star juice")
+	return counts
+
 func run() -> void:
 	var view := SubViewport.new()
 	view.size = Vector2i(320, 560)
@@ -213,6 +267,10 @@ func run() -> void:
 		check(game.combat.preview_left == 0.0 and game.phase == MVP.Phase.HUNT,
 			"the cue expires on its own during play")
 	game.motion = 0
+	var ordinary_route := compare_reward_route(view, game, Combat.GUARD, Vector2(-30, -55))
+	var star_route := compare_reward_route(view, game, Shop.EXTRA, Vector2(42, -46))
+	check(ordinary_route.x > star_route.x and ordinary_route.y < star_route.y,
+		"the seeded day-two routes change the mix of fruits")
 	game.reset_run()
 	var plain := Shop.new()
 	plain.setup([0, 0])

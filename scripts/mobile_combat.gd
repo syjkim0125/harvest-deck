@@ -11,6 +11,7 @@ const DAY_STARTER: Array[int] = [WIDE, SPIN, HEART, BOUNTY]
 const LEVELS: Array[int] = [1, 4, 8]
 const CARD_PREVIEW_SECONDS := 1.4
 const FULL_CIRCLE_CUT_DOT := -1.0
+const RECIPE_FRUIT_OFFSET := Vector2(142, -154)
 
 var active := false
 var preview_card := -1
@@ -36,7 +37,7 @@ func _ready() -> void:
 	set_process_input(false)
 	set_process_unhandled_input(false)
 
-func start_hunt(number: int) -> void:
+func start_hunt(number: int, has_recipe := false) -> void:
 	reset_day()
 	preview_card = -1
 	preview_left = 0.0
@@ -57,7 +58,11 @@ func start_hunt(number: int) -> void:
 	camera.position = camera_follow_target()
 	# One approachable group starts within sight of the player.
 	for i in range(3):
-		spawn_enemy(player + Vector2((i - 1) * 68, -175.0 - i * 28), int(i == 2))
+		var recipe_fruit := has_recipe and i == 2
+		var offset := RECIPE_FRUIT_OFFSET if recipe_fruit else Vector2((i - 1) * 68, -175.0 - i * 28)
+		spawn_enemy(player + offset, int(i == 2))
+		if recipe_fruit:
+			fruits.back()["recipe_target"] = true
 
 func spawn_enemy(at: Vector2, kind: int) -> void:
 	var home := at.clamp(BOUNDS.position + Vector2.ONE * 35, BOUNDS.end - Vector2.ONE * 35)
@@ -77,6 +82,8 @@ func tick_hunt(delta: float, number: int) -> void:
 				nearest = offset.length()
 				facing = offset.normalized()
 	for enemy in fruits:
+		if enemy.get("recipe_target", false):
+			continue
 		if enemy.freeze <= 0.0:
 			enemy.pos = enemy.pos.move_toward(player, (56.0 + 4.0 * time + 9.0 * (number - 1) + 12.0 * enemy.kind) * delta)
 		enemy.home = enemy.pos
@@ -161,6 +168,16 @@ func _draw() -> void:
 		var opacity := cut_trail_left / BREAK_TRAIL_DURATION
 		draw_arc(player, cut_reach() * (0.94 - opacity * 0.20), 0, TAU, 44, Color(1, 0.89, 0.59, opacity * 0.58), 2.5, true)
 	draw_harvest_actors(ThemeDB.fallback_font)
+	for fruit in fruits:
+		if fruit.get("recipe_target", false) and fruit.hp > 0:
+			draw_recipe_mark(self, fruit.pos + Vector2(0, -53), 11.0)
+
+static func draw_recipe_mark(surface: CanvasItem, at: Vector2, radius: float) -> void:
+	var points := PackedVector2Array([at - Vector2(0, radius), at + Vector2(radius * 0.7, 0),
+		at + Vector2(0, radius), at - Vector2(radius * 0.7, 0)])
+	surface.draw_colored_polygon(points, Color("ffd279"))
+	points.append(points[0])
+	surface.draw_polyline(points, Color("68452e"), 2.0, true)
 
 func draw_cut_preview() -> void:
 	var tint := Color(0.63, 1.0, 0.86, 0.76)
