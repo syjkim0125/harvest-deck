@@ -161,7 +161,16 @@ func open_market() -> void:
 func refill_night_hand() -> void:
 	night_discard.append_array(shop.hands)
 	shop.hands.clear()
-	for i in range(3):
+	# Offer both ways to respond to the first night's bottleneck after the shift.
+	if day_number == 1 and shop.shift == 1 and not shop.helper and shop.raw[0] + shop.raw[1] > 0:
+		for card in [Shop.JUICE, Shop.HELP, Shop.GIFT]:
+			if night_draw.has(card):
+				night_draw.erase(card)
+				shop.hands.append(card)
+			elif night_discard.has(card):
+				night_discard.erase(card)
+				shop.hands.append(card)
+	for i in range(3 - shop.hands.size()):
 		if night_draw.is_empty():
 			night_draw = shuffled(night_discard)
 			night_discard.clear()

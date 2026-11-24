@@ -353,9 +353,10 @@ func run() -> void:
 	tick(game, 10.0)
 	check(game.shop.shift == 1 and game.shop.energy == 2 and game.shop.hands.size() == 3,
 		"next hand restores energy and cycles the draw and discard piles")
-	# If the helper was not redrawn, swap the hands just for the drag fixture.
-	if Shop.HELP not in game.shop.hands:
-		game.shop.hands[0] = Shop.HELP
+	var all_cards := game.shop.hands + game.night_draw + game.night_discard
+	all_cards.sort()
+	check(game.shop.hands == [Shop.JUICE, Shop.HELP, Shop.GIFT] and all_cards == Shop.STARTER,
+		"the first-night refill offers both responses and preserves all four physical cards")
 	var helper := game.card_rect(game.shop.hands.find(Shop.HELP), game.shop.hands.size(), 491).get_center()
 	touch(view, game, helper, true)
 	drag(view, game, Art.STATIONS[2].get_center())
@@ -507,7 +508,7 @@ func run() -> void:
 		and intervene.helper_at >= Shop.SHIFT and intervene.helper_at < Shop.TOTAL,
 		"an early full shelf can be answered once the next hand restores energy")
 	var responses := 0
-	var delays_with_two_choices := {}
+	var responses_with_both_choices := 0
 	for seed in [9344, 27, 51, 87, 143, 42]:
 		for delay in [1.0, 2.0, 3.0]:
 			var helper_case := replay_delayed_sale(view, game, first_harvest, seed, delay, Shop.HELP)
@@ -519,9 +520,22 @@ func run() -> void:
 					and helper_case.hand == mixer_case.hand):
 				responses += 1
 			if helper_case.spent == 2 and mixer_case.spent == 2:
-				delays_with_two_choices[delay] = true
+				responses_with_both_choices += 1
 	check(responses == 18, "a normal shop gives all six seeds time for a one to three second response")
-	check(delays_with_two_choices.size() == 3, "matched hands allow an equal-cost comparison at every tested delay")
+	check(responses_with_both_choices == 18, "all six seeds offer both equal-cost responses at every tested delay")
+	game.reset_run()
+	game.combat.cargo.assign(first_harvest)
+	game.open_market()
+	play_shop_touch(view, game, Shop.HELP)
+	tick(game, Shop.SHIFT + 0.1)
+	check(game.shop.helper and game.shop.hands[0] == Shop.GIFT,
+		"the normal draw order is used when a helper is already hired")
+	game.reset_run()
+	game.open_market()
+	tap(view, game, game.art.first_customer_hit_area(game.shop).get_center())
+	tick(game, Shop.SHIFT + 0.1)
+	check(game.shop.raw == [0, 0] and not game.shop.helper and game.shop.hands[0] == Shop.GIFT,
+		"an empty shop uses the normal draw instead of prioritizing quick blend")
 	game.reset_run()
 	game.combat.fruits.clear()
 	game.combat.cargo.resize(150)
