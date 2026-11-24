@@ -131,6 +131,8 @@ func pick_day_card(card: int) -> void:
 	if phase != Phase.UPGRADE or card not in options:
 		return
 	combat.equip(card)
+	if day_card_level == 0:
+		combat.preview_upgrade(card)
 	equipped.append(card)
 	day_discard.append_array(options)
 	day_card_level += 1
@@ -400,16 +402,26 @@ func paint() -> void:
 
 func paint_hunt_hud() -> void:
 	Art.box(canvas, Rect2(12, 16, 266, 92), Color("24453d"), 20)
+	var preview := combat.preview_card if phase == Phase.HUNT and combat.preview_left > 0.0 else -1
 	for i in range(combat.heart_limit):
-		heart(Vector2(33 + 23 * i, 39), i < combat.hearts)
+		var at := Vector2(33 + 23 * i, 39)
+		if preview == Combat.HEART and i == combat.heart_limit - 1:
+			canvas.draw_arc(at, 11, 0, TAU, 24, MINT, 2.0, true)
+		heart(at, i < combat.hearts)
 	label("낮 %d" % day_number, 214, 46, 18)
+	if preview == Combat.BOUNTY:
+		Art.box(canvas, Rect2(21, 60, 137, 30), Color("315c4d"), 5, MINT)
 	Art.fruit(canvas, Vector2(36, 75), 0, 0.78)
 	Art.fruit(canvas, Vector2(108, 75), 1, 0.78)
 	label(str(stash_counts[0]), 49, 81, 19)
 	label(str(stash_counts[1]), 122, 81, 19)
 	Art.progress(canvas, Rect2(168, 71, 88, 8), 1.0 - combat.time / Combat.DAY_SECONDS)
 	for i in equipped.size():
-		icon(equipped[i], Vector2(29 + i * 39, 131), 13)
+		var at := Vector2(29 + i * 39, 131)
+		if i == 0 and preview >= 0:
+			canvas.draw_circle(at, 18, Color("24453d"), true, -1.0, true)
+			canvas.draw_arc(at, 18, 0, TAU, 24, MINT, 2.0, true)
+		icon(equipped[i], at, 13)
 	if combat.immunity > 1.15 and motion < 2:
 		canvas.draw_rect(Rect2(2, 2, 356, 636), Color(0.99, 0.35, 0.35, 0.46), false, 5)
 

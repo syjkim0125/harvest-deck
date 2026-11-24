@@ -85,6 +85,15 @@ func run() -> void:
 	tap(view, game, game.card_rect(index, game.options.size(), 288).get_center())
 	check(game.phase == MVP.Phase.HUNT and first in game.equipped
 		and (first != Combat.WIDE or game.combat.cut_reach() == 133.0), "touch equips a combat card that changes the same saw")
+	check(game.combat.preview_card == first and game.combat.preview_left == Combat.CARD_PREVIEW_SECONDS
+		and is_equal_approx(clock, game.combat.time), "the first card shows its cue on the live field without advancing on tap")
+	var resume_from := game.combat.player
+	touch(view, game, Vector2(179, 520), true)
+	drag(view, game, Vector2(225, 520))
+	tick(game, 0.10)
+	touch(view, game, Vector2(225, 520), false)
+	check(game.combat.player.x > resume_from.x and game.combat.time > clock and game.combat.preview_left > 0.0,
+		"movement and the hunt clock resume while the first-card cue is visible")
 	wait_for_phase(game, MVP.Phase.SHOP)
 	check(game.phase == MVP.Phase.SHOP and game.shop.raw[0] > 0 and game.shop.raw[1] > 0
 		and game.shop.customers.size() == 3, "two real day ingredients enter the graphical night shop")
@@ -176,6 +185,30 @@ func run() -> void:
 	check(game.combat.direction == Vector2.LEFT,
 		"a new drag takes over the first step without being cut off by its timer")
 	touch(view, game, Vector2(65, 520), false)
+	game.reset_run()
+	# Compare actual cutting at the same position with each available first card.
+	for card in [Combat.WIDE, Combat.SPIN]:
+		game.start_hunt()
+		game.combat.fruits.clear()
+		game.combat.spawn_enemy(game.combat.player + Vector2(0, -120), 0)
+		game.combat.spawn_enemy(game.combat.player + Vector2(0, 75), 0)
+		game.combat.facing = Vector2.UP
+		game.motion = 2
+		game.apply_motion()
+		check(game.combat.attack() == 0, "baseline front reach and rear coverage miss both identical targets")
+		game.options.assign([card])
+		game.phase = MVP.Phase.UPGRADE
+		tap(view, game, game.card_rect(0, 1, 288).get_center())
+		check(game.combat.preview_card == card and game.combat.attack() == 1
+			and game.combat.fruits[0].hp == (2 if card == Combat.WIDE else 3)
+			and game.combat.fruits[1].hp == (2 if card == Combat.SPIN else 3),
+			"at 393 by 852 with reduced motion, the preview accompanies the card's distinct real hit")
+		game.combat.fruits.clear()
+		game.combat.next_spawn = 5.0
+		tick(game, 1.5)
+		check(game.combat.preview_left == 0.0 and game.phase == MVP.Phase.HUNT,
+			"the cue expires on its own during play")
+	game.motion = 0
 	game.reset_run()
 	var plain := Shop.new()
 	plain.setup([0, 0])

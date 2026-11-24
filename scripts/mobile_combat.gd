@@ -9,8 +9,11 @@ const BOUNTY := 3
 const GUARD := 4
 const DAY_STARTER: Array[int] = [WIDE, SPIN, HEART, BOUNTY]
 const LEVELS: Array[int] = [1, 4, 8]
+const CARD_PREVIEW_SECONDS := 1.4
 
 var active := false
+var preview_card := -1
+var preview_left := 0.0
 var hearts := 5
 var defeated := 0
 var heart_limit := 5
@@ -34,6 +37,8 @@ func _ready() -> void:
 
 func start_hunt(number: int) -> void:
 	reset_day()
+	preview_card = -1
+	preview_left = 0.0
 	fruits.clear()
 	production.orchard_unlocked = true
 	hearts = 5
@@ -62,6 +67,7 @@ func tick_hunt(delta: float, number: int) -> void:
 	if not active:
 		return
 	immunity = maxf(0.0, immunity - delta)
+	preview_left = maxf(0.0, preview_left - delta)
 	if direction.length_squared() < 0.01:
 		var nearest := 145.0
 		for enemy in fruits:
@@ -109,6 +115,11 @@ func equip(card: int) -> void:
 		BOUNTY: bounty += 1
 		GUARD: armor += 1
 
+func preview_upgrade(card: int) -> void:
+	preview_card = card
+	preview_left = CARD_PREVIEW_SECONDS
+	queue_redraw()
+
 func stop_hunt() -> void:
 	active = false
 	direction = Vector2.ZERO
@@ -140,7 +151,25 @@ func step_shop(_delta: float) -> void:
 	pass
 
 func _draw() -> void:
+	if preview_left > 0.0 and preview_card in [WIDE, SPIN]:
+		draw_cut_preview()
 	if spins > 0 and cut_trail_left > 0.0 and not impact.reduced:
 		var opacity := cut_trail_left / BREAK_TRAIL_DURATION
 		draw_arc(player, cut_reach() * (0.94 - opacity * 0.20), 0, TAU, 44, Color(1, 0.89, 0.59, opacity * 0.58), 2.5, true)
 	draw_harvest_actors(ThemeDB.fallback_font)
+
+func draw_cut_preview() -> void:
+	# An outline at the actual range is an equipment cue, not a hit effect.
+	var tint := Color(0.63, 1.0, 0.86, 0.76)
+	if not impact.reduced:
+		tint.a *= minf(1.0, preview_left / 0.28)
+	var radius := cut_reach()
+	if cut_dot_limit() <= -1.0:
+		draw_arc(player, radius, 0.0, TAU, 64, tint, 2.0, true)
+		return
+	var heading := facing.angle()
+	var spread := acos(cut_dot_limit())
+	draw_arc(player, radius, heading - spread, heading + spread, 32, tint, 2.0, true)
+	for side in [-1.0, 1.0]:
+		var edge := Vector2.from_angle(heading + side * spread)
+		draw_line(player + edge * (radius - 16.0), player + edge * radius, tint, 2.0, true)
