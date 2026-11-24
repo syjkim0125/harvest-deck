@@ -34,6 +34,12 @@ static func customer_spot(index: int) -> Vector2:
 	const SPOTS := [Vector2(287, 329), Vector2(264, 372), Vector2(205, 393), Vector2(144, 391), Vector2(87, 385)]
 	return SPOTS[index]
 
+func first_customer_position(shop) -> Vector2:
+	return walking.get(shop.customers[0], customer_spot(0))
+
+func first_customer_hit_area(shop) -> Rect2:
+	return Rect2(first_customer_position(shop) + Vector2(-25, -58), Vector2(50, 77))
+
 static func shape(canvas: CanvasItem, points: PackedVector2Array, color: Color) -> void:
 	canvas.draw_colored_polygon(points, color)
 
@@ -154,8 +160,9 @@ func paint(canvas: CanvasItem, shop, animation: float, highlighted: int) -> void
 		var id: int = shop.customers[i]
 		person(canvas, walking.get(id, customer_spot(i)), id, sin(animation * 5 + id) * 1.1)
 	if not shop.customers.is_empty():
-		var first: Vector2 = walking.get(shop.customers[0], customer_spot(0))
-		box(canvas, Rect2(first + Vector2(-13, -56), Vector2(26, 27)), CREAM, 9)
+		var first := first_customer_position(shop)
+		box(canvas, Rect2(first + Vector2(-15, -56), Vector2(30, 27)), CREAM, 9,
+			GOLD if not shop.opened else Color.TRANSPARENT)
 		cup(canvas, first + Vector2(0, -42), shop.shelf[0] if not shop.shelf.is_empty() else 0, 0.64)
 		if shop.service > 0.0:
 			progress(canvas, Rect2(first + Vector2(-23, 18), Vector2(46, 4)), shop.service / shop.service_duration())

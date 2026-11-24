@@ -304,6 +304,11 @@ func contact(id: int, at: Vector2, pressed: bool) -> void:
 					play_card(down_card, target)
 				else:
 					select_shop_card(down_card)
+			elif (not shop.opened and selected < 0 and not shop.customers.is_empty()
+					and from.distance_to(at) < 14.0 and art.first_customer_hit_area(shop).has_point(from)
+					and art.first_customer_hit_area(shop).has_point(at)):
+				shop.opened = true
+				rejected = 0.0
 			elif target >= 0:
 				if selected >= 0:
 					play_card(selected, target)
@@ -582,11 +587,11 @@ func paint_shop(include_hand := true) -> void:
 		if guide < 0:
 			center("빛나는 곳에 놓아요", 455, 18, PAPER)
 		else:
-			center("카드를 눌러 가게를 열어요", 455, 19, PAPER)
+			center("손님을 눌러도 열려요", 455, 19, PAPER)
 	elif rejected > 0.0:
 		center("과일과 별을 확인해요", 455, 18, Color("f7a3a2"))
 	elif not shop.opened:
-		center("카드를 눌러 가게를 열어요", 455, 19, PAPER)
+		center("손님을 눌러 가게를 열어요", 455, 19, PAPER)
 	elif shop.time >= Shop.TOTAL:
 		center("마지막 주스를 팔아요", 455, 18, PAPER)
 	else:

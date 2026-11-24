@@ -44,6 +44,51 @@ func wait_for_phase(game: MVP, expected: MVP.Phase) -> void:
 			game.pick_day_card(game.options[0])
 		tick(game, 1.0)
 
+func play_shop_touch(view: Viewport, game: MVP, card: int) -> void:
+	tap(view, game, game.card_rect(game.shop.hands.find(card), game.shop.hands.size(), 491).get_center())
+	tap(view, game, Art.STATIONS[Shop.station(card)].get_center())
+
+func observe_open_shop(view: Viewport, game: MVP, harvest: Array[int], use_cards: bool) -> Dictionary:
+	game.reset_run()
+	game.random.seed = 9344
+	game.combat.cargo.assign(harvest)
+	game.open_market()
+	var first_customer := game.art.first_customer_hit_area(game.shop).get_center()
+	tap(view, game, Vector2(165, 390))
+	touch(view, game, Vector2(165, 390), true)
+	drag(view, game, first_customer)
+	touch(view, game, first_customer, false)
+	check(not game.shop.opened and game.shop.time == 0.0, "a tap on the floor or drag ending on a customer does not open the shop")
+	var hands := game.shop.hands.duplicate()
+	var stock := game.shop.raw.duplicate()
+	tap(view, game, first_customer)
+	check(game.shop.opened and game.shop.energy == 2 and game.shop.hands == hands
+		and game.shop.raw == stock and game.night_discard.is_empty(),
+		"tapping the first customer opens the shop without paying for a card")
+	var mixer: Dictionary = {}
+	var full_shelf: Dictionary = {}
+	var cards_used: Array[int] = []
+	for i in range(34 * 60):
+		if game.phase != MVP.Phase.SHOP:
+			break
+		tick(game, 1.0 / 60.0)
+		if mixer.is_empty() and game.shop.shelf.is_empty() and game.shop.can_blend() and not game.shop.customers.is_empty():
+			mixer = {"second": snappedf(game.shop.time, 0.01), "hand": game.shop.hands.duplicate(),
+				"juice": game.shop.can_play(Shop.JUICE), "helper": game.shop.can_play(Shop.HELP)}
+			if use_cards:
+				play_shop_touch(view, game, Shop.JUICE)
+				cards_used.append(Shop.JUICE)
+		if full_shelf.is_empty() and game.shop.shelf.size() == 5 and not game.shop.customers.is_empty():
+			full_shelf = {"second": snappedf(game.shop.time, 0.01), "hand": game.shop.hands.duplicate(),
+				"juice": game.shop.can_play(Shop.JUICE), "helper": game.shop.can_play(Shop.HELP)}
+			if use_cards and full_shelf.helper:
+				play_shop_touch(view, game, Shop.HELP)
+				cards_used.append(Shop.HELP)
+	var outcome := {"cards": cards_used, "empty_shelf": mixer, "full_shelf": full_shelf,
+		"closed": game.phase == MVP.Phase.REWARD, "sold": game.shop.sold, "cash": game.total_cash}
+	print("NATURAL SHOP ", JSON.stringify(outcome))
+	return outcome
+
 func compare_shop_bottleneck(full_shelf: bool, hire_helper: bool) -> Dictionary:
 	var shop := Shop.new()
 	var ingredients: Array[int] = []
@@ -243,6 +288,7 @@ func run() -> void:
 	wait_for_phase(game, MVP.Phase.SHOP)
 	check(game.phase == MVP.Phase.SHOP and game.shop.raw[0] > 0 and game.shop.raw[1] > 0
 		and game.shop.customers.size() == 3, "two real day ingredients enter the graphical night shop")
+	var first_harvest := game.combat.cargo.duplicate()
 	var saved := game.shop.raw.duplicate()
 	var mixer := Art.STATIONS[0].get_center()
 	var cashier := Art.STATIONS[2].get_center()
@@ -414,6 +460,16 @@ func run() -> void:
 	check(mixer_quick.closed and mixer_helper.closed and sales_quick.closed and sales_helper.closed
 		and mixer_quick.final_cash > mixer_helper.final_cash and sales_helper.final_cash > sales_quick.final_cash,
 		"with equal opening spend, the higher closing revenue depends on the starting shelf")
+	view.size = Vector2i(320, 560)
+	var observe := observe_open_shop(view, game, first_harvest, false)
+	view.size = Vector2i(393, 852)
+	var intervene := observe_open_shop(view, game, first_harvest, true)
+	check(observe.closed and observe.sold > 0 and observe.empty_shelf.get("juice", false)
+		and observe.empty_shelf.get("helper", false), "watching a normal opening reveals the mixer queue with both cards still usable")
+	check(intervene.closed and intervene.cards == [Shop.JUICE, Shop.HELP] and intervene.cash > observe.cash
+		and intervene.full_shelf.get("helper", false),
+		"natural mixer and sales bottlenecks expose usable cards in both shifts")
+	game.reset_run()
 	game.combat.fruits.clear()
 	game.combat.cargo.resize(150)
 	game.combat.cargo.fill(0)
