@@ -25,6 +25,7 @@ var wide := 0
 var spins := 0
 var bounty := 0
 var armor := 0
+var star_fruit := false
 var direction := Vector2.ZERO
 var wave_random := RandomNumberGenerator.new()
 
@@ -51,6 +52,7 @@ func start_hunt(number: int, has_recipe := false) -> void:
 	spins = 0
 	bounty = 0
 	armor = 0
+	star_fruit = false
 	next_spawn = 2.6 if number == 1 else 1.9
 	wave_random.seed = 834 + number
 	direction = Vector2.ZERO
@@ -92,6 +94,8 @@ func tick_hunt(delta: float, number: int) -> void:
 		var enemy := fruits[i]
 		if enemy.hp <= 0:
 			defeated += 1
+			if enemy.get("recipe_target", false):
+				star_fruit = true
 			for bonus in range(mini(bounty, harvest_limit() - cargo.size())):
 				cargo.append(enemy.kind)
 			fruits.remove_at(i)

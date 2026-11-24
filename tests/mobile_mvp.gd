@@ -72,7 +72,15 @@ func compare_reward_route(view: Viewport, game: MVP, reward_card: int, direction
 		"the two touch routes harvest different fruits from the same starting stock")
 	if not recipe:
 		tap(view, game, game.card_rect(game.options.find(Combat.GUARD), game.options.size(), 288).get_center())
-		check(game.combat.armor == 1, "the alternative reward keeps its use in the combat deck")
+		var protected_hearts := game.combat.hearts
+		var before_armor := game.combat.armor
+		game.combat.fruits.clear()
+		game.combat.immunity = 0.0
+		game.combat.spawn_enemy(game.combat.player, 0)
+		tick(game, 1.0 / 60.0)
+		check(before_armor == 1 and game.combat.armor == 0 and game.combat.hearts == protected_hearts
+			and game.combat.immunity > 0.0,
+			"the alternative reward blocks an incoming contact")
 	game.open_market()
 	if not recipe:
 		check(Shop.EXTRA not in game.shop.hands and game.shop.raw[1] == 0,
@@ -86,17 +94,73 @@ func compare_reward_route(view: Viewport, game: MVP, reward_card: int, direction
 	else:
 		var card := game.card_rect(0, game.shop.hands.size(), 491).get_center()
 		var mixer := Art.STATIONS[0].get_center()
-		check(game.shop.hands[0] == Shop.EXTRA and game.shop.raw == [counts.x, counts.y]
-			and game.shop.can_play(Shop.EXTRA), "the harvested pair makes the earned recipe playable")
+		check(game.shop.hands[0] == Shop.EXTRA and game.shop.raw == [counts.x, counts.y - 1]
+			and game.shop.star_fruit and game.shop.can_play(Shop.EXTRA), "one marked piece is reserved from the golden harvest")
 		touch(view, game, card, true)
 		drag(view, game, mixer)
 		touch(view, game, mixer, false)
-		check(game.shop.jobs == [3] and game.shop.raw == [counts.x - 1, counts.y - 1]
+		check(game.shop.jobs == [3] and game.shop.raw == [counts.x - 1, counts.y - 1] and not game.shop.star_fruit
 			and game.shop.energy == 0 and Shop.EXTRA in game.night_discard,
 			"dragging the recipe to the mixer spends exactly the pair and two stars")
 		tick(game, 3.0)
 		check(game.shop.premiums == 1 and game.shop.cash >= 12, "a customer buys the actual star juice")
 	return counts
+
+func full_reward_route(view: Viewport, game: MVP, reward_card: int, detour: bool) -> Dictionary:
+	game.reset_run()
+	game.random.seed = 9344
+	game.options.assign([Combat.GUARD, Shop.EXTRA])
+	game.phase = MVP.Phase.REWARD
+	tap(view, game, game.card_rect(game.options.find(reward_card), game.options.size(), 288).get_center())
+	var thumb := Vector2(180, 520)
+	var to := thumb + Vector2(42, -46)
+	var moving_for := 0.0
+	var contacts := 0
+	var marked: Dictionary = game.combat.fruits[2] if reward_card == Shop.EXTRA else {}
+	if detour:
+		touch(view, game, thumb, true)
+		drag(view, game, to)
+	while game.phase in [MVP.Phase.HUNT, MVP.Phase.UPGRADE]:
+		if game.phase == MVP.Phase.UPGRADE:
+			var card := game.options[0]
+			for preferred in [Combat.GUARD, Combat.SPIN, Combat.WIDE]:
+				if preferred in game.options:
+					card = preferred
+					break
+			tap(view, game, game.card_rect(game.options.find(card), game.options.size(), 288).get_center())
+			continue
+		if detour and moving_for < 0.60:
+			moving_for += 1.0 / 60.0
+			if moving_for >= 0.60:
+				touch(view, game, to, false)
+		var prior_immunity := game.combat.immunity
+		tick(game, 1.0 / 60.0)
+		contacts += int(game.combat.immunity > prior_immunity)
+	var result := {"reward": game.card_name(reward_card), "detour": detour, "route_s": snappedf(moving_for, 0.01),
+		"day_s": snappedf(game.combat.time, 0.01), "contacts": contacts, "hearts": game.combat.hearts,
+		"watermelon": game.combat.cargo.count(0), "golden": game.combat.cargo.count(1),
+		"marked_pick": not marked.is_empty() and marked.hp <= 0, "star_playable": game.shop.can_play(Shop.EXTRA)}
+	var star_orders := 0
+	for shift in range(2):
+		var card := game.opening_card() if shift == 0 else -1
+		if shift == 1:
+			for candidate in game.shop.hands:
+				if game.shop.can_play(candidate):
+					card = candidate
+					break
+		if card >= 0:
+			tap(view, game, game.card_rect(game.shop.hands.find(card), game.shop.hands.size(), 491).get_center())
+			tap(view, game, Art.STATIONS[Shop.station(card)].get_center())
+			star_orders += int(card == Shop.EXTRA and card not in game.shop.hands)
+		elif not game.shop.opened:
+			tap(view, game, Art.STATIONS[0].get_center())
+		if shift == 0:
+			tick(game, Shop.SHIFT + 0.1)
+	wait_for_phase(game, MVP.Phase.SCORE)
+	result.merge({"star_orders": star_orders, "cups_sold": game.shop.sold, "cash": game.total_cash,
+		"closed": game.phase == MVP.Phase.SCORE})
+	print("REWARD ROUTE ", JSON.stringify(result))
+	return result
 
 func run() -> void:
 	var view := SubViewport.new()
@@ -271,7 +335,26 @@ func run() -> void:
 	var star_route := compare_reward_route(view, game, Shop.EXTRA, Vector2(42, -46))
 	check(ordinary_route.x > star_route.x and ordinary_route.y < star_route.y,
 		"the seeded day-two routes change the mix of fruits")
+	for reward in [Combat.GUARD, Shop.EXTRA]:
+		for detour in [false, true]:
+			var outcome := full_reward_route(view, game, reward, detour)
+			check(outcome.closed and outcome.cups_sold > 0, "the seeded route plays through the whole shop to settlement")
+			var earns_star: bool = reward == Shop.EXTRA and detour
+			check(outcome.marked_pick == earns_star and outcome.star_playable == earns_star
+				and outcome.star_orders == int(earns_star) and outcome.golden > 0,
+				"ordinary golden stock never substitutes for the marked harvest")
 	game.reset_run()
+	var reserved := Shop.new()
+	reserved.setup([0, 0, 0, 0, 0, 0, 1], true)
+	reserved.hands.assign([Shop.JUICE, Shop.MIX, Shop.EXTRA])
+	check(not reserved.can_play(Shop.MIX) and reserved.play_at(Shop.JUICE, 0),
+		"normal recipes cannot use the reserved star piece as ordinary gold")
+	for i in range(240):
+		reserved.tick(1.0 / 60.0)
+	check(reserved.raw[0] > 0 and reserved.star_fruit, "automatic mixing leaves the reserved piece alone")
+	reserved.energy = 2
+	check(reserved.play_at(Shop.EXTRA, 0) and not reserved.star_fruit,
+		"the marked piece remains usable by the star recipe after normal sales")
 	var plain := Shop.new()
 	plain.setup([0, 0])
 	plain.hands.assign([Shop.MIX, Shop.JUICE])

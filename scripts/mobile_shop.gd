@@ -10,6 +10,7 @@ const SHIFT := 12.0
 const TOTAL := 24.0
 
 var raw: Array[int] = [0, 0]
+var star_fruit := false
 var jobs: Array[int] = []
 var shelf: Array[int] = []
 var customers: Array[int] = []
@@ -33,10 +34,13 @@ var tips := 0
 var opened := false
 var done := false
 
-func setup(ingredients: Array[int]) -> void:
+func setup(ingredients: Array[int], reserve_star_fruit := false) -> void:
 	for fruit in ingredients:
 		if fruit in [0, 1]:
 			raw[fruit] += 1
+	if reserve_star_fruit and raw[1] > 0:
+		raw[1] -= 1
+		star_fruit = true
 	for i in range(3):
 		arrive()
 
@@ -58,7 +62,8 @@ func can_play(card: int) -> bool:
 		return false
 	match card:
 		JUICE: return raw[0] + raw[1] > 0
-		MIX, EXTRA: return raw[0] > 0 and raw[1] > 0
+		MIX: return raw[0] > 0 and raw[1] > 0
+		EXTRA: return raw[0] > 0 and star_fruit
 		HELP: return not helper
 		GIFT: return true
 	return false
@@ -77,10 +82,14 @@ func play_at(card: int, target: int) -> bool:
 					raw[fruit] -= 1
 					jobs.append(fruit)
 					quick_blends += 1
-		MIX, EXTRA:
+		MIX:
 			raw[0] -= 1
 			raw[1] -= 1
-			jobs.append(3 if card == EXTRA else 2)
+			jobs.append(2)
+		EXTRA:
+			raw[0] -= 1
+			star_fruit = false
+			jobs.append(3)
 		HELP: helper = true
 		GIFT: tips += 3
 	return true

@@ -145,7 +145,7 @@ func open_market() -> void:
 	clear_pointer()
 	art = Art.new()
 	shop = Shop.new()
-	shop.setup(combat.cargo)
+	shop.setup(combat.cargo, combat.star_fruit)
 	night_draw = shuffled(night_deck)
 	night_discard.clear()
 	# Both starter routes are available on opening night.
@@ -414,8 +414,10 @@ func paint_hunt_hud() -> void:
 	Art.fruit(canvas, Vector2(36, 75), 0, 0.78)
 	Art.fruit(canvas, Vector2(108, 75), 1, 0.78)
 	label(str(stash_counts[0]), 49, 81, 19)
-	label(str(stash_counts[1]), 122, 81, 19)
+	label(str(stash_counts[1] - int(combat.star_fruit)), 122, 81, 19)
 	Art.progress(canvas, Rect2(168, 71, 88, 8), 1.0 - combat.time / Combat.DAY_SECONDS)
+	if combat.star_fruit:
+		paint_star_fruit(Vector2(244, 93), 0.58)
 	for i in equipped.size():
 		var at := Vector2(29 + i * 39, 131)
 		if i == 0 and preview >= 0:
@@ -489,7 +491,7 @@ func paint_card(card: int, rect: Rect2, available: bool, lifted := false) -> voi
 		icon(card, picture, 25)
 	center(card_name(card), rect.position.y + 82, 14, OAK, x)
 	if phase == Phase.REWARD and card == Shop.EXTRA:
-		center("황금 과일 찾기", rect.position.y + 103, 12, Color("435856"), x)
+		center("별 과일 찾기", rect.position.y + 103, 12, Color("435856"), x)
 	elif card >= 10:
 		for i in Shop.cost(card):
 			spark(Vector2(x + (i - (Shop.cost(card) - 1) * 0.5) * 15, rect.position.y + 100), 6, Color("bc6a37"))
@@ -514,10 +516,11 @@ func icon(card: int, at: Vector2, radius: float) -> void:
 			spark(at + Vector2(15, -8), 7, Color("bc6a37"))
 		Shop.MIX, Shop.EXTRA:
 			Art.fruit(canvas, at + Vector2(-13, 7), 0, radius / 25.0)
-			Art.fruit(canvas, at + Vector2(13, 7), 1, radius / 25.0)
-			Art.cup(canvas, at - Vector2(0, 6), 2 if card == Shop.MIX else 3, radius / 21.0)
 			if card == Shop.EXTRA:
-				Combat.draw_recipe_mark(canvas, at + Vector2(23, -14), 7.0)
+				paint_star_fruit(at + Vector2(13, 7), radius / 25.0)
+			else:
+				Art.fruit(canvas, at + Vector2(13, 7), 1, radius / 25.0)
+			Art.cup(canvas, at - Vector2(0, 6), 2 if card == Shop.MIX else 3, radius / 21.0)
 		Shop.HELP:
 			Art.person(canvas, at + Vector2(0, 4), 3)
 		Shop.GIFT:
@@ -548,6 +551,10 @@ func spark(at: Vector2, r: float, color: Color) -> void:
 	Art.shape(canvas, PackedVector2Array([at + Vector2(0, -r), at + Vector2(r * 0.7, 0),
 		at + Vector2(0, r), at + Vector2(-r * 0.7, 0)]), color)
 
+func paint_star_fruit(at: Vector2, size: float) -> void:
+	Art.fruit(canvas, at, 1, size)
+	Combat.draw_recipe_mark(canvas, at + Vector2(10, -21) * size, 7.0 * size)
+
 func paint_shop(include_hand := true) -> void:
 	var moving := hand_at_press >= 0 and pointer != -2 and point.distance_to(press_at) > 12.0
 	var guide := opening_card() if include_hand and selected < 0 and not moving else -1
@@ -564,6 +571,8 @@ func paint_shop(include_hand := true) -> void:
 	label(str(shop.raw[0]), 54, 111, 16)
 	Art.fruit(canvas, Vector2(105, 105), 1, 0.73)
 	label(str(shop.raw[1]), 117, 111, 16)
+	if shop.star_fruit:
+		paint_star_fruit(Vector2(171, 105), 0.82)
 	if not include_hand:
 		return
 	if target >= 0:
