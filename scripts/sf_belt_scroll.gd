@@ -294,6 +294,9 @@ func end_touch(id: int, point: Vector2) -> void:
 	touch_id = -1
 	move_axis = Vector2.ZERO
 
+func draw_text(label: String, at: Vector2, font_size: int, tint: Color) -> void:
+	draw_string(FONT, at, label, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, tint)
+
 func _draw() -> void:
 	var jitter := Vector2.ZERO
 	if shake > 0.0:
