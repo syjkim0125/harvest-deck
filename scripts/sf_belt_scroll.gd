@@ -15,7 +15,7 @@ const WHITE := Color("#f0f2ff")
 const STRIKE_POS := Vector2(291, 559)
 const DODGE_POS := Vector2(68, 559)
 
-enum Mode { INTRO, COMBAT, CLEAR, DEFEAT, CAPTAIN, STARSHIP, GALAXY }
+enum Mode { INTRO, COMBAT, CLEAR, DEFEAT, CAPTAIN, STARSHIP, GALAXY, EXPLORE }
 var mode := Mode.INTRO
 var hero := Vector2(90, 396)
 var facing := 1
@@ -51,6 +51,8 @@ var captain_choice := 0
 var ship_choice := 0
 var active_sector := 0
 var mission_notice := ""
+var expedition_route := ""
+var last_expedition_route := ""
 
 func _ready() -> void:
 	random.seed = 20261125
@@ -90,9 +92,13 @@ func jump_to_system(index: int) -> bool:
 	active_sector = index
 	mission_notice = String(result["event"])
 	start_run()
+	mode = Mode.EXPLORE
+	hero = Vector2(180, 440)
+	enemies.clear()
 	return true
 
 func finish_expedition(won: bool) -> void:
+	last_expedition_route = expedition_route
 	galaxy.finish_expedition(scraps, won)
 	mode = Mode.GALAXY
 	enemies.clear()
@@ -102,6 +108,7 @@ func finish_expedition(won: bool) -> void:
 
 func start_run() -> void:
 	mode = Mode.COMBAT
+	expedition_route = ""
 	hero = Vector2(90, 396)
 	facing = 1
 	health = 5 + (1 if campaign_started and captain_choice == 0 else 0) + (1 if campaign_started and ship_choice == 1 else 0)
@@ -172,7 +179,7 @@ func _process(delta: float) -> void:
 		p["pos"] = pos + velocity * dt
 		if float(p["life"]) <= 0.0:
 			particles.remove_at(i)
-	if mode == Mode.COMBAT:
+	if mode == Mode.COMBAT or mode == Mode.EXPLORE:
 		var motion := move_axis
 		if touch_id == -1:
 			motion = Vector2(
@@ -181,6 +188,9 @@ func _process(delta: float) -> void:
 			)
 		if motion.length_squared() > 0.001:
 			move_hero(motion.normalized() * 146.0 * dt)
+		if mode == Mode.EXPLORE:
+			queue_redraw()
+			return
 		advance_enemies(dt)
 		if next_wave >= 0.0:
 			next_wave -= dt
@@ -198,6 +208,16 @@ func move_hero(offset: Vector2) -> void:
 	hero.y = clampf(hero.y, FIELD.position.y + 30.0, FIELD.end.y - 22.0)
 	if absf(offset.x) > 0.05:
 		facing = 1 if offset.x > 0.0 else -1
+
+	if mode == Mode.EXPLORE:
+		if hero.distance_to(Vector2(55, 340)) < 25.0:
+			expedition_route = "Nooli refuge"
+			scraps = 2
+			mode = Mode.CLEAR
+		elif hero.distance_to(Vector2(305, 340)) < 25.0:
+			expedition_route = "Amber quarry"
+			mode = Mode.COMBAT
+			spawn_wave()
 
 func advance_enemies(dt: float) -> void:
 	for e in enemies:
@@ -375,6 +395,8 @@ func begin_touch(id: int, point: Vector2) -> void:
 			else:
 				start_run()
 			return
+	if mode == Mode.EXPLORE and not FIELD.has_point(point):
+		return
 	if point.distance_to(STRIKE_POS) < 45.0:
 		strike()
 		return
@@ -417,6 +439,8 @@ func _draw() -> void:
 	draw_set_transform(layout_origin + jitter * layout_scale, 0.0, Vector2.ONE * layout_scale)
 	paint_world()
 	match mode:
+		Mode.EXPLORE:
+			paint_exploration()
 		Mode.INTRO:
 			paint_title()
 		Mode.CAPTAIN, Mode.STARSHIP:
@@ -541,7 +565,19 @@ func paint_galaxy() -> void:
 	draw_rect(Rect2(11, 562, 338, 55), Color("#273351"))
 	draw_text("TAP CONNECTED STAR TO JUMP", Vector2(30, 585), 15, WHITE)
 	draw_text("AT FREEPORT: TAP HERE TO REFUEL 4C", Vector2(30, 604), 11, ICE)
-	draw_text("GALAXY CHANGES AFTER EACH JUMP", Vector2(44, 630), 10, LILAC)
+	draw_text("LAST: " + last_expedition_route if not last_expedition_route.is_empty() else "GALAXY CHANGES AFTER EACH JUMP", Vector2(44, 630), 10, LILAC)
+
+func paint_exploration() -> void:
+	draw_rect(Rect2(0, 282, 360, 208), Color("#253d42"))
+	draw_line(Vector2(180, 440), Vector2(55, 340), Color("#639b83"), 32.0, true)
+	draw_line(Vector2(180, 440), Vector2(305, 340), Color("#9c7951"), 32.0, true)
+	draw_circle(Vector2(55, 340), 20, ICE)
+	draw_circle(Vector2(305, 340), 20, GOLD)
+	draw_text("NOOLI REFUGE", Vector2(18, 300), 12, ICE)
+	draw_text("AMBER QUARRY", Vector2(234, 300), 12, GOLD)
+	draw_text("FOLLOW THE TRAILS", Vector2(68, 110), 20, WHITE)
+	draw_text("DRAG TO EXPLORE", Vector2(93, 550), 16, WHITE)
+	paint_hero()
 
 func paint_game() -> void:
 	draw_rect(Rect2(8, 9, 344, 72), Color("#10162f", 0.9))
@@ -550,7 +586,7 @@ func paint_game() -> void:
 	for i in range(5):
 		draw_circle(Vector2(27 + i * 22, 54), 7, CORAL if i < health else Color("#35334b"))
 	draw_text("SCRAP  %02d" % scraps, Vector2(228, 59), 18, GOLD)
-	draw_text("WAVE  %d / 2" % wave, Vector2(20, 111), 15, WHITE)
+	draw_text(expedition_route if not expedition_route.is_empty() else "WAVE  %d / 2" % wave, Vector2(20, 111), 15, WHITE)
 	if combo > 1 and mode == Mode.COMBAT:
 		draw_text("%d HIT COMBO" % combo, Vector2(219, 111), 16, ICE)
 	for e in enemies:
