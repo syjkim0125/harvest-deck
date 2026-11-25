@@ -19,6 +19,7 @@ func verify() -> void:
 	game.attack_cd = 0.0
 	game.strike()
 	test(int(game.enemies[0]["hp"]) == 2, "close-range facing attack damages the crawler")
+	test(game.attack_landed and float(game.enemies[0]["telegraph"]) == 0.0 and float(game.enemies[0]["recovery"]) > 0.0, "confirmed hit interrupts enemy windup and enters recovery")
 	test(game.combo == 1 and game.attack_cd > 0.0, "confirmed strike has combo and cooldown")
 	test(game.impact_pause > 0.0 and game.impact_fx > 0.0, "confirmed contact starts a visible impact stop")
 	var stop_before: float = game.impact_pause
@@ -28,6 +29,7 @@ func verify() -> void:
 	game.attack_cd = 0.0
 	game.enemies[0]["hp"] = 1
 	game.strike()
+	test(game.impact_pause > 0.055, "defeat contact uses a stronger impact pause")
 	test(game.enemies.size() == 1 and game.scraps == 1, "defeated alien awards salvage once")
 	game.enemies[0]["target"] = game.hero
 	game.enemies[0]["telegraph"] = 0.02
@@ -49,6 +51,7 @@ func verify() -> void:
 	game.facing = 1
 	game.strike()
 	test(game.impact_pause == 0.0 and game.impact_fx == 0.0, "a whiff never freezes combat or plays contact effects")
+	test(not game.attack_landed, "miss uses a distinct swing state, never confirmed contact")
 	test(game.combo == 0 and int(game.enemies[0]["hp"]) == 3, "a missed swing never rewards combo or damage")
 	game.queue_free()
 	await process_frame
