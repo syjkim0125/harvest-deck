@@ -1,5 +1,7 @@
 # VOID CARAVAN · Living Galaxy Alpha 0.2 (2026-11-25)
 
+> 🧭 **[매시간 개발용 기능별 레퍼런스 라우터](docs/REFERENCE_ROUTER.md)** · **[디자인 작업/통합 규칙](docs/DESIGN_HANDOFF.md)** — 작업 중인 기능에 맞는 게임 1~2개만 확인하고, 디자인은 독립 브랜치에서 검증 후 통합
+>
 > 🎨 **[이미지 18종 포함 — VOID CARAVAN 비주얼 & 시스템 레퍼런스 보드](docs/VISUAL_REFERENCE_BOARD.md)** · Bannerlord / EVE / Black Flag / Absolum / Dave / RimWorld 등 공식 출처 링크·이미지 및 적용 판단
 
 
