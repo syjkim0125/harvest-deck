@@ -190,7 +190,7 @@ func _process(delta: float) -> void:
 			)
 		if motion.length_squared() > 0.001:
 			move_hero(motion.normalized() * 146.0 * dt)
-		if mode == Mode.EXPLORE:
+		if mode != Mode.COMBAT:
 			queue_redraw()
 			return
 		advance_enemies(dt)
@@ -624,8 +624,8 @@ func paint_enemy(e: Dictionary) -> void:
 	var c := CORAL if kind != 1 else GOLD
 	if float(e["telegraph"]) > 0.0:
 		var target: Vector2 = e["target"]
-		draw_circle(target, 46.0 if kind == 2 else 37.0, Color("#ff5970", 0.17))
-		draw_arc(target, 46.0 if kind == 2 else 37.0, 0.0, TAU, 38, CORAL, 3.0, true)
+		draw_circle(target, 52.0 if kind == 2 else 42.0, Color("#ff5970", 0.17))
+		draw_arc(target, 52.0 if kind == 2 else 42.0, 0.0, TAU, 38, CORAL, 3.0, true)
 		draw_line(p, target, Color("#f87b89", 0.75), 2.0)
 	if kind == 0:
 		var pose := 1 if float(e["telegraph"]) > 0.0 else (2 if float(e["flash"]) > 0.0 else 0)
