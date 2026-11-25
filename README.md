@@ -1,5 +1,8 @@
 # VOID CARAVAN · Living Galaxy Alpha 0.2 (2026-11-25)
 
+> 🎨 **[이미지 18종 포함 — VOID CARAVAN 비주얼 & 시스템 레퍼런스 보드](docs/VISUAL_REFERENCE_BOARD.md)** · Bannerlord / EVE / Black Flag / Absolum / Dave / RimWorld 등 공식 출처 링크·이미지 및 적용 판단
+
+
 **우주 RPG의 첫 연결 플레이 빌드** · [게임 플레이](https://syjkim0125.github.io/harvest-deck/?v=galaxy0.2) · [새 설계](docs/LIVING_GALAXY_VISION.md) · [연구·검증 기록](docs/RESEARCH_LOG.md) · [과일 게임 보존 브랜치](https://github.com/syjkim0125/harvest-deck/tree/legacy/harvest-deck-v0.8.11)
 
 - **중립 선장으로 시작:** 첫 화면을 탭하고 선장 성향(Guardian: 체력+1 / Scavenger: 적 처치 시 추가 SCRAP), 출발 함선(Scout: 연료 6 / Escort: 연료 5·전투 체력+1)을 각각 선택한다.
