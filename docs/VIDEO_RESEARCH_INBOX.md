@@ -1,65 +1,96 @@
-# VOID CARAVAN — User Videos & Game Design Research Inbox
+# VOID CARAVAN — YouTube Game Design Research (Six user videos verified)
 
-> **2026-11-25 / 6 user-provided YouTube videos / incremental verification queue**  
-> These links are direct inputs from the game's creator and must not disappear when another automation runs.  
-> [Game Design Theory and vetted practitioner guidance](GAME_DESIGN_THEORY.md) · [Current vision gap review](SF_VISION_GAP_REVIEW.md) · [Mechanics router](REFERENCE_ROUTER.md) · [Visual style router](DESIGN_REFERENCE_ROUTER.md)
+> **Last audit: 2026-11-25 KST.** The original six user-supplied YouTube videos are now resolved via **vidIQ**. **All six original Korean/English caption tracks actually retrieved** (timed transcripts); **four visually analyzed** (U-003, U-004, U-005, U-006), with the remaining two visual analyses requested and pending at the time of this update. The old statement "YouTube could not be accessed" is now superseded.
+>
+> **Work split:** [Playable-vision review](SF_VISION_GAP_REVIEW.md) → [Theory & acceptance tests](GAME_DESIGN_THEORY.md) → [mechanic routing](REFERENCE_ROUTER.md) or [design routing](DESIGN_REFERENCE_ROUTER.md) → development/design PR. No copying of original game footage or artwork. Public YouTube presenter claims are **not independently proven scientific/market facts**.
 
-## 1. User-provided videos: content **not yet verified**
+## 1. Video registry / evidence status
 
-The six URLs were accessed through web and exact video-ID searches on 2026-11-25. **The web retrieval service blocked YouTube watch/shorts pages, and search did not return reliable video-specific titles, creators, captions or frames.** Their actual content was **not viewed**. Therefore any title, technique, timestamp or recommendation attributed to a particular one would be fabricated. Retain the exact URLs as evidence to be recovered in a future run with a compatible video/transcript/browser tool.
-
-| ID | User-supplied original URL | Source type | Evidence status | Follow-up |
+| ID | Verified actual title · channel | Length | Direct video | What we verified and decision |
 | --- | --- | --- | --- | --- |
-| U-001 | https://youtu.be/gLtH71EnKBU?si=ZIdQ1uJfbE9H-543 | standard video | `UNVERIFIED_CONTENT` | Retrieve title/creator/chapters/transcript, verify tip in original video |
-| U-002 | https://youtube.com/shorts/kHjA7wGAa_g?si=kX-K6G2kC-fsgLTA | Short | `UNVERIFIED_CONTENT` | Frame-by-frame inspection or captions; identify action and feedback mechanic |
-| U-003 | https://youtube.com/shorts/loCtLnNPDtE?si=PQckC5z9H35Judbd | Short | `UNVERIFIED_CONTENT` | Validate specific visual/gameplay recommendation, if any |
-| U-004 | https://youtu.be/U-M_cP3Nw1Q?si=Xl3m0yaUVu39Vt_H | standard video | `UNVERIFIED_CONTENT` | Retrieve metadata/transcript and grounded design technique |
-| U-005 | https://youtube.com/shorts/QeXYjJFFF_E?si=t-iRB0cMm0WzHGqS | Short | `UNVERIFIED_CONTENT` | Validate tip, its context, and if transferable to our 2D SF RPG |
-| U-006 | https://youtube.com/shorts/_U5wuMhZXI0?si=PBcufKWirtUEzCl6 | Short | `UNVERIFIED_CONTENT` | Validate tip, discard if no gameplay/visual relevance |
+| **U-001** | **잘 팔리는 인디 게임의 6가지 유형 (히트작 26개로 보기)** · MGD - Midnight Game Devs | 9:12 | [YouTube](https://youtu.be/gLtH71EnKBU?si=ZIdQ1uJfbE9H-543) | `TRANSCRIPT_VERIFIED`: six marketing archetypes. **EXPERIMENT**: one sentence/gameplay GIF hook; not "six guaranteed success formulas". |
+| **U-002** | **결과가 뻔한 게임이 재미없는 이유 · 눈덩이 vs 아무 장치 없음 vs 역전** · 밥따뚜 | 2:08 | [YouTube Short](https://youtube.com/shorts/kHjA7wGAa_g?si=kX-K6G2kC-fsgLTA) | `TRANSCRIPT_VERIFIED`: simulated auto-battle comeback comparison; **HOLD** for future ship/boss fights, no forced rubberbanding in current exploration. |
+| **U-003** | **비가 오면 캐릭터가 젖는 도트 인디게임** · Lunacy | 0:22 | [YouTube Short](https://youtube.com/shorts/loCtLnNPDtE?si=PQckC5z9H35Judbd) | `TRANSCRIPT_AND_VISUAL_VERIFIED`: staged rainfall, wet palette, atmosphere. **HOLD until meaningful exploration exists**. |
+| **U-004** | **AI티 안나게 게임 캐릭터 만드는 방법 ┃미친 노하우 전수** · 개발자 김뽑희 | 12:02 | [YouTube](https://youtu.be/U-M_cP3Nw1Q?si=Xl3m0yaUVu39Vt_H) | `TRANSCRIPT_AND_VISUAL_VERIFIED`: visual style guide, silhouette tests, rejection log, side-by-side in-game previews. **ADOPT now for design pipeline.** |
+| **U-005** | **때리는 순간 게임이 멈춘다? 손맛의 비밀은 0.15초, 9프레임** · 몬티 | 1:21 | [YouTube Short](https://youtube.com/shorts/QeXYjJFFF_E?si=t-iRB0cMm0WzHGqS) | `TRANSCRIPT_AND_VISUAL_VERIFIED`: 0 vs 3 vs 9 hit-stop *claimed* frame differences in examples. **EXPERIMENT** in P0 combat; 9 frames is not a universal optimum. |
+| **U-006** | **AI 게임 리소스 제작에 사용할 수 있는 오픈소스 8가지 · 1편** · 오늘코딩 Todaycoding | 1:59 | [YouTube Short](https://youtube.com/shorts/_U5wuMhZXI0?si=PBcufKWirtUEzCl6) | `TRANSCRIPT_AND_VISUAL_VERIFIED`: four actual tools in **part 1**. **PILOT** only on proper asset pipeline; PixelOE may conflict with painterly 2D art. |
 
-**Mandatory rule for every automated research execution:** try **at most one or two pending sources** when access exists, but don't repeatedly fetch blocked YouTube URLs each hour. If unavailable, state `BLOCKED_BY_SOURCE_ACCESS` once and continue with an authoritative accessible source relevant to the current implementation. Do not assign fictional titles or treat search hits for other YouTube videos as matching these IDs. Do not assume a Short contains a game design tip simply because the user grouped it with tips.
+**Evidence lexicon:** `METADATA_VERIFIED` = known title/creator/description; `TRANSCRIPT_VERIFIED` = timestamped original caption data obtained via vidIQ; `TRANSCRIPT_AND_VISUAL_VERIFIED` = vidIQ also returned a timestamped visual/scene analysis; `IN_GAME_VALIDATED` = verified in our own Godot build + user play observation (none yet). vidIQ scene interpretations are **automated analyses**, not ground truth on exact physics/frame measurement. Preserve source quotes as short paraphrases and links rather than pasting complete YouTube captions.
 
-## 2. Video verification workflow
+## 2. U-001 · Six kinds of indie games: marketability is not the same as game feel
 
-1. Exact ID or original URL → creator/official channel, title, date/duration; record method and verification date.
-2. Inspect video, accessible captions/transcript or creator-authored description, **not** a generic search snippet for an unrelated video. For visual claims (shake, animations, rendering), timestamps/screenshots/frame notes are preferred, if obtainable.
-3. Distill **no more than 3 concrete observations** from the source. Distinguish creator opinion, demonstrated mechanic, and a claim supported by a controlled study.
-4. Link observation to a **specific system** (galaxy navigation, factions, action combat, discovery, companion, ship/interior, store, mobile controls, painterly character art).
-5. Compare with our latest **actual playable code or captured frame**; derive one implementable hypothesis, acceptance test, implementation owner (development/design) and status (ADOPT / EXPERIMENT / HOLD / REJECT).
-6. Promote only **verified, applicable** techniques to [GAME_DESIGN_THEORY.md](GAME_DESIGN_THEORY.md) or relevant feature/design router. Keep original source URL and, when available, timestamps.
-7. If video's technique contradicts user vision or harms clarity, mark `REJECT` with reason. More particles, screenshake, captions or clickable menus are not a substitute for movement, mastery and discovery.
+**Source video:** [gLtH71EnKBU](https://youtu.be/gLtH71EnKBU). Presenter's framing is attributed to [Chris Zukowski, How To Market A Game](https://howtomarketagame.com/2022/11/21/six-types-of-best-selling-games/), *not* an academically proven taxonomy or a guarantee of sales. Sales figures in the video are **presenter-reported**, not independently audited here.
 
-## 3. Verified presentations & original practitioner research (ready-to-use now)
+- **00:35–01:49: Visually beautiful:** Tiny Glade and ANIMAL WELL; a compelling screenshot/GIF can communicate the fantasy. **Our test**: actual *gameplay* capture must visibly show an inviting alien biome/companion; poster mockup alone fails.
+- **01:49–03:16: High concept:** a one-sentence visual hook recognizable immediately. **Our candidate:** "작은 외계 친구들과 함께 살아 움직이는 은하를 항해하고, 위험한 행성을 탐험해 우주선을 키운다". Too many themes at launch dilute comprehension; A/B test an 8-second first-play GIF rather than listing 26 features.
+- **03:16–04:50: Strong replay loop:** Dome Keeper, Balatro, etc.; the *consequence* of one risk/reward decision should tempt a new run. **Our test**: do players voluntarily choose one more planet after first return?
+- **04:50–05:41: Systemic depth:** Factorio/RimWorld, emergent systems. **Danger**: huge simulation before a satisfying first 90 seconds. Add deeper factions only after a playable choice→result loop.
+- **05:41–07:30: Underserved fans & funny sandboxes** plus **07:30–09:00: co-op/friendslop**: potentially relevant market positioning only; **do not change** the approved solo mobile SF RPG into a multiplayer meme sandbox just because it sold in other contexts.
+- **Decision:** `EXPERIMENT`, **owner: independent review** for positioning and **development** for a first 90-sec visible player loop. No new marketing claims or revenue targets from cited examples.
 
-These have **independently available original speaker or publisher sources**. Their presence here is a research seed, not a claim that full-length video footage was watched during this audit.
+## 3. U-002 · Outcomes decided too early, mild comeback instead of forced rubberbanding
 
-| Source | Link | What is grounded/verified | Primary use |
+**Source:** [kHjA7wGAa_g](https://youtube.com/shorts/kHjA7wGAa_g), by 밥따뚜.
+
+- **00:15–00:31:** author models estimated win probability by continuing a copied 3v3 auto-battle state **160 Monte Carlo simulations** per instant, then plots its movement; the "dramatic match score" is **their invented visualization metric**, not an industry-wide established quality measure.
+- **00:31–01:03:** runaway advantage (snowballing) and unmodified battles often became predictable before they actually ended.
+- **01:03–01:34:** losing side gets a charge mechanic and final-survivor attack opportunity; the presenter reports **60 simulation runs per condition** and more reversals. These numbers are not independently reproduced here.
+- **01:34–02:08:** overly strong comeback mechanisms shortened battles/undermined prior decisions; a losing player needs a *chance* to respond, not guaranteed rescue.
+- **Transfer to VOID CARAVAN:** `HOLD` until ship duel/boss encounter with meaningful active player control is built. Then test whether the player still has a meaningful last defensive decision at 70–90% boss phase, without artificial HP-rubberbanding. **Avoid** adding arbitrary rubberbanding to faction wars, a simulation where outcomes should be consequential.
+
+## 4. U-003 · Weather should interact with sprites and decisions, not be a passive background toggle
+
+**Source:** [loCtLnNPDtE](https://youtube.com/shorts/loCtLnNPDtE). The visual analysis checked the original 22-second Short; around **0:00–0:05** sky lighting shifts/rain streaks arrive, and **0:06–0:12** wetness darkens visible clothing/pieces progressively. The narration claims a fuller weather/day-night system; the analysis **did not verify** all underlying climate algorithms.
+
+- **Extracted principle:** environment → character **visible consequence**. A storm has time, physical presence, and local effect.
+- **Our candidate:** on one alien planet, rain enters gradually, changes visor/cloth/foliage shading and weakens one environmental signal (while another emerges). A player responds by choosing a sheltered route or returning.
+- **Actual priority:** `HOLD/P1`. A beautiful "wet" sprite with no playable path/discovery is inferior to an interactable two-route planet stage. Don't reuse Lunacy original pixels, characters, images or animation.
+
+## 5. U-004 · Repeatable AI art quality comes from a visual system + rejection record
+
+**Source:** [U-M_cP3Nw1Q](https://youtu.be/U-M_cP3Nw1Q). **Both Korean captions and vidIQ visual walkthrough were inspected**, including the creator's own Damaged Spirit project examples. These are **creator experiences** (not a controlled generalizable study).
+
+- **00:47–01:18:** attractive isolated designs still became visually interchangeable; vague "make it better" produced random differences.
+- **01:29–02:47:** a single punch needed **34 iterations** over roughly **19 hours** (creator-reported). Arm-only interpolation and composites broke body/face consistency; pose continuity mattered more than sheer frame count.
+- **02:47–03:49:** accumulated **style/negative-choice document**; assign reference-image roles explicitly: one is **style authority**, another **pose/shape only**. For our project, style authority = **original approved VOID CARAVAN art sheet**, not a copyrighted Vanillaware screenshot.
+- **04:39–05:06:** **solid-black silhouette test** exposed why superficially cute characters looked similar. Different species should have different volume architecture: shell/wing/antenna/plant/fungal/material.
+- **05:07–06:35:** one boss design used creature identity, contrasting eye/motif, and differentiated idle/attack/hit/reaction pose timing.
+- **07:07–08:43:** very concrete **in-game comparison against existing cards/assets**; isolated art approval is not enough. Side-by-side at target display size exposes over-large wings, outline mismatch and cramped framing.
+- **09:20–10:07:** add consistent outlines, effect origins and projectile sizing; **do not patch unmatched frames by cutting/stretching limbs** if it corrupts pose anatomy.
+- **10:08–11:41:** base creature variety on **materials/construction** (ink, paper, string instrument etc.), not simply new animal faces/colors.
+- **Our immediate rule `ADOPT`:** every design PR needs a **style lock** (approved original), a 3–5 silhouette **black-fill contact sheet**, a **rejection log**, at least **two states that preserve head/limb identity** and **side-by-side 360×640 screenshot with one existing game character**. Do not merge a lovely isolated poster as finished sprite integration. Preserve cute Kindchenschema cues but avoid making all aliens identical baby dolls.
+
+## 6. U-005 · Hitstop: impact differentiation, not magic 9-frame hardcode
+
+**Source:** [QeXYjJFFF_E](https://youtube.com/shorts/QeXYjJFFF_E). Visual review:
+- **00:00–00:30:** presenter demonstrates a strike with a freeze indicator and without freeze; both parties freeze on **actual hit**, not on miss.
+- **00:31–00:51:** frames shown for light (3) vs heavy (9) attacks; 9 frames at 60fps would be 150ms. These are the presenter's design **illustrations**, *not a measured optimal value for our game*.
+- **00:52–01:13:** tiny impact motion/spark on release and avoiding overly long pauses that interrupt rapid combos.
+- **Our game:** the current SF combat source contains a ~55ms confirmed-contact pause. Test variants around `current 55ms` vs `shorter on quick hit` and `moderately longer only on a heavy finisher`, while preserving input buffering and distinguishing **HIT / MISS / EVADE**. **No automatic 150ms everywhere**. Test at 60fps and unstable mobile fps, with reduced-motion setting. Compare the same encounter by recorded input and ask an actual player to identify increased punch without loss of responsiveness.
+- **Decision:** `EXPERIMENT NOW / P0`; owner gameplay developer + designer for contact keyframes/stronger silhouettes. **Avoid** claiming visual hitstop inherently guarantees a fun battle.
+
+## 7. U-006 · Real animation pipelines, but don't force pixel art onto the painterly project
+
+**Source:** [_U5wuMhZXI0](https://youtube.com/shorts/_U5wuMhZXI0), 1:59. The video says "**8 open-source tools**" but **this Part 1 introduces exactly 4**. Their public project sites were independently located and checked for existence:
+- [2dimg2motion](https://github.com/WU-HAOTIAN34/2dimg2motion) — example 14-frame key-pose → inbetween sequence with alpha sprite sheets; candidate for original 2D creature **motion consistency pilot**, check code license and third-party model requirements before integration.
+- [sprite-gen](https://github.com/aldegad/sprite-gen) — clean up alpha/background, extract generated video frames, assemble atlases; possible **post-processing** for Godot import. It does not by itself guarantee consistent anatomy across frames.
+- [pixelfx](https://github.com/patch-gg/pixelfx) — library of **244 code-rendered pixel effects**; candidate only if its granularity, gamma and style match approved painterly 2D combat. Verify license before reuse.
+- [PixelOE](https://github.com/KohakuBlueleaf/PixelOE) — contrast-aware pixelization/outline retention. **HOLD by default** because VOID CARAVAN's latest approval favors painterly, layered higher-resolution 2D **over forcing every image to a low-res pixel grid**.
+- **Practical pipeline:** original approved style sheet → one creature with 3 distinct silhouette/pose states → a single animation tool pilot → clean transparent atlas → Godot import + linear/nearest compatibility and alignment check → mobile 360×640 preview → side-by-side with existing actual game art → PR. **No wholesale switch of rendering style, no copy of demo sprites and no assumed zero cost for external AI APIs.**
+
+## 8. Independent review selection rules (stop token waste)
+
+| Game development work | Relevant user video | Max source use | Experimental outcome |
 | --- | --- | --- | --- |
-| Raph Koster, *Game design is simple, actually* (2025) | https://www.raphkoster.com/2025/11/03/game-design-is-simple-actually/ | Original author's written article explains verbs, action feedback, uncertainty, situation variation, pacing and mastery | Decide whether a new mechanic truly generates learnable player action |
-| Raph Koster, *An Atomic Theory of Fun Game Design* (2012) | https://www.raphkoster.com/2012/01/24/an-atomic-theory-of-fun-game-design/ | Author's article argues interesting loops involve pattern perception and decision | Cross-check individual subsystems and how their inputs/outputs connect |
-| Raph Koster, *Revisiting Fun* (GDC 2024) | https://www.raphkoster.com/games/presentations/revisiting-fun-20-years-of-a-theory-of-fun/ | Author's GDC talk overview/slides and modern perspective | Calibrate limits of any single theory |
-| Jonasson & Purho, *Juice It or Lose It* | https://www.youtube.com/watch?v=Fy0aCDmgnxg | Original talk identified and described by speakers/GDC: https://www.gdcvault.com/play/1016487/ | Action feedback and tiny sensory touches, with combat input reliability tested |
-| Jan Willem Nijman (Vlambeer), *The Art of Screenshake* | https://www.youtube.com/watch?v=AJdEqssNZ-U | Original talk identifier/author; summary https://www.gamedeveloper.com/design/vlambeer-co-founder-shares-advice-on-building-better-action-games | Directional recoil/impact without camera abuse |
-| Unknown Worlds / Charlie Cleveland, *The Design of Subnautica* (GDC 2019) | https://gdcvault.com/play/1025745/The-Design-of-Subnautica | Original GDC abstract explains unknown, mystery, radio clues and non-overdirected discovery | Two-path alien planet exploration with meaningful hidden signal |
-| Folmer Kelly, *Don't Juice It or Lose It* | https://www.gamedeveloper.com/design/video-indies-resist-the-urge-to-juice-it-or-lose-it- | Developer talk summary is a useful counterpoint to pure polish | Prevent cosmetic spectacle hiding lack of playable choices |
-| Pichlmair & Johansen, *Designing Game Feel: A Survey* | https://doi.org/10.1109/TG.2021.3072241 | Research abstract, not an instruction manual | Physicality, sensory feedback, and responsiveness measured together |
+| P0 combat and physical contact | **U-005** | Intro + 00:31–01:13; [GDC game feel theory](GAME_DESIGN_THEORY.md) K-02/G-02 | A/B hit vs miss, hit reaction, input timing |
+| P0 visual character and in-game art inconsistency | **U-004** | 02:47–05:06 and 07:07–10:07 | Original style lock + silhouette contrast + target-screen preview |
+| P0 too little actual discovery | **U-001** or GDC Subnautica | 01:49–04:50 and [theory](GAME_DESIGN_THEORY.md) G-01 | Two routes, one surprising reward, one visible outcome |
+| World-feels-alive environmental polish | **U-003** | 00:00–00:12 only | Rain/mist changes character sprite AND an interaction; defer until exploration |
+| Later ship/boss fights lack tension | **U-002** | 00:15–01:34 only | Test meaningful comeback choice, no forced luck |
+| Art production pipeline bottleneck | **U-006** | 00:13–01:47 plus official repo README | Pilot one 3-pose sheet, not all four tools |
+| Marketing/value proposition or itch to replay | **U-001** | 00:35–04:50 only | Film 8-second real gameplay hook, not poster or claimed sales |
 
-## 4. Future research entries schema
+**Status update contract:** only promote new source findings to [GAME_DESIGN_THEORY.md](GAME_DESIGN_THEORY.md) after actual evidence. A creator-presented number remains a **creator-presented number**. Never mark a game feature `USER_VERIFIED` on the basis of video analysis. Reviewers should keep a small cache of already processed URLs and search for new videos only when a specific unresolved gap needs a different mechanic.
 
-Append/update only one row per **verified original source**, keyed by canonical URL or stable video ID.
-
-| field | meaning |
-| --- | --- |
-| id, source_url, title, creator, date, verified_at | Deduplicate by video ID/DOI; never fill unknown metadata with guesses |
-| trust_level | `PRIMARY_DEVELOPER` / `PRIMARY_RESEARCH` / `SECONDARY_SUMMARY` / `UNVERIFIED_CONTENT` |
-| review_method | `ACTUALLY_VIEWED` / `TRANSCRIPT_READ` / `AUTHOR_ARTICLE_READ` / `ABSTRACT_ONLY` / `FAILED_FETCH` |
-| observation | Verified action or design principle, with relevant timestamp when possible |
-| applicable_system | Route to one current game/visual task, not 18-game breadth |
-| proposed_experiment | Small actual code or visual change, A/B or behavioral success condition |
-| decision, state, owner | `ADOPT/EXPERIMENT/HOLD/REJECT`, planned/PR/tested/verified, gameplay/designer |
-
-## 5. Review vs development responsibilities
-
-- **Independent review:** compare *actual shipped game* against user-approved vision, **not** reference screenshots alone; collect a source-backed technique, evaluate evidence, file top P0 deviation and a practical acceptance test. Never declare user feel solved via code inspection.
-- **Gameplay developer:** one relevant corrected mechanic per execution in actual Godot code → tests/CI → main/Pages check. Read only promoted applicable theory; not this entire inbox every time.
-- **Design artist:** one related ORIGINAL sprite/scene asset; the author of a YouTube short does not grant reuse rights. Follow user-approved painterly 2D + Kindchenschema art bible, and submit separate design PR.
+---
+**Historical note:** all six videos were previously logged `UNVERIFIED_CONTENT` because direct YouTube website retrieval failed. On connection to vidIQ, all six captions and video metadata were obtained, and four videos were visually analyzed. This replaces—not contradicts—the earlier inability to directly browse YouTube.
