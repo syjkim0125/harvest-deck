@@ -1,6 +1,8 @@
 extends Node2D
 ## SF pivot: playable, portrait-first belt-scroll combat experiment A.
 ## The old fruit game remains in legacy/harvest-deck-v0.8.11.
+const NOOLI = preload("res://assets/gameplay/nooli.svg")
+const MANTIS = preload("res://assets/gameplay/amber_mantis.svg")
 const FONT = preload("res://assets/market-sans.otf")
 const GALAXY_SIM = preload("res://scripts/sf_galaxy_sim.gd")
 const SIZE := Vector2(360, 640)
@@ -15,7 +17,7 @@ const WHITE := Color("#f0f2ff")
 const STRIKE_POS := Vector2(291, 559)
 const DODGE_POS := Vector2(68, 559)
 
-enum Mode { INTRO, COMBAT, CLEAR, DEFEAT, CAPTAIN, STARSHIP, GALAXY }
+enum Mode { INTRO, COMBAT, CLEAR, DEFEAT, CAPTAIN, STARSHIP, GALAXY, EXPLORE }
 var mode := Mode.INTRO
 var hero := Vector2(90, 396)
 var facing := 1
@@ -51,6 +53,8 @@ var captain_choice := 0
 var ship_choice := 0
 var active_sector := 0
 var mission_notice := ""
+var expedition_route := ""
+var last_expedition_route := ""
 
 func _ready() -> void:
 	random.seed = 20261125
@@ -90,9 +94,13 @@ func jump_to_system(index: int) -> bool:
 	active_sector = index
 	mission_notice = String(result["event"])
 	start_run()
+	mode = Mode.EXPLORE
+	hero = Vector2(180, 440)
+	enemies.clear()
 	return true
 
 func finish_expedition(won: bool) -> void:
+	last_expedition_route = expedition_route
 	galaxy.finish_expedition(scraps, won)
 	mode = Mode.GALAXY
 	enemies.clear()
@@ -102,6 +110,7 @@ func finish_expedition(won: bool) -> void:
 
 func start_run() -> void:
 	mode = Mode.COMBAT
+	expedition_route = ""
 	hero = Vector2(90, 396)
 	facing = 1
 	health = 5 + (1 if campaign_started and captain_choice == 0 else 0) + (1 if campaign_started and ship_choice == 1 else 0)
@@ -172,7 +181,7 @@ func _process(delta: float) -> void:
 		p["pos"] = pos + velocity * dt
 		if float(p["life"]) <= 0.0:
 			particles.remove_at(i)
-	if mode == Mode.COMBAT:
+	if mode == Mode.COMBAT or mode == Mode.EXPLORE:
 		var motion := move_axis
 		if touch_id == -1:
 			motion = Vector2(
@@ -181,6 +190,9 @@ func _process(delta: float) -> void:
 			)
 		if motion.length_squared() > 0.001:
 			move_hero(motion.normalized() * 146.0 * dt)
+		if mode != Mode.COMBAT:
+			queue_redraw()
+			return
 		advance_enemies(dt)
 		if next_wave >= 0.0:
 			next_wave -= dt
@@ -198,6 +210,16 @@ func move_hero(offset: Vector2) -> void:
 	hero.y = clampf(hero.y, FIELD.position.y + 30.0, FIELD.end.y - 22.0)
 	if absf(offset.x) > 0.05:
 		facing = 1 if offset.x > 0.0 else -1
+
+	if mode == Mode.EXPLORE:
+		if hero.distance_to(Vector2(55, 340)) < 25.0:
+			expedition_route = "Nooli refuge"
+			scraps = 2
+			mode = Mode.CLEAR
+		elif hero.distance_to(Vector2(305, 340)) < 25.0:
+			expedition_route = "Amber quarry"
+			mode = Mode.COMBAT
+			spawn_wave()
 
 func advance_enemies(dt: float) -> void:
 	for e in enemies:
@@ -375,6 +397,8 @@ func begin_touch(id: int, point: Vector2) -> void:
 			else:
 				start_run()
 			return
+	if mode == Mode.EXPLORE and not FIELD.has_point(point):
+		return
 	if point.distance_to(STRIKE_POS) < 45.0:
 		strike()
 		return
@@ -417,6 +441,8 @@ func _draw() -> void:
 	draw_set_transform(layout_origin + jitter * layout_scale, 0.0, Vector2.ONE * layout_scale)
 	paint_world()
 	match mode:
+		Mode.EXPLORE:
+			paint_exploration()
 		Mode.INTRO:
 			paint_title()
 		Mode.CAPTAIN, Mode.STARSHIP:
@@ -541,7 +567,19 @@ func paint_galaxy() -> void:
 	draw_rect(Rect2(11, 562, 338, 55), Color("#273351"))
 	draw_text("TAP CONNECTED STAR TO JUMP", Vector2(30, 585), 15, WHITE)
 	draw_text("AT FREEPORT: TAP HERE TO REFUEL 4C", Vector2(30, 604), 11, ICE)
-	draw_text("GALAXY CHANGES AFTER EACH JUMP", Vector2(44, 630), 10, LILAC)
+	draw_text("LAST: " + last_expedition_route if not last_expedition_route.is_empty() else "GALAXY CHANGES AFTER EACH JUMP", Vector2(44, 630), 10, LILAC)
+
+func paint_exploration() -> void:
+	draw_rect(Rect2(0, 282, 360, 208), Color("#253d42"))
+	draw_line(Vector2(180, 440), Vector2(55, 340), Color("#639b83"), 32.0, true)
+	draw_line(Vector2(180, 440), Vector2(305, 340), Color("#9c7951"), 32.0, true)
+	draw_texture_rect_region(NOOLI, Rect2(31, 306, 48, 48), Rect2(0, 0, 128, 128))
+	draw_texture_rect_region(MANTIS, Rect2(273, 306, 64, 64), Rect2(0, 0, 192, 192))
+	draw_text("NOOLI REFUGE", Vector2(18, 300), 12, ICE)
+	draw_text("AMBER QUARRY", Vector2(234, 300), 12, GOLD)
+	draw_text("FOLLOW THE TRAILS", Vector2(68, 110), 20, WHITE)
+	draw_text("DRAG TO EXPLORE", Vector2(93, 550), 16, WHITE)
+	paint_hero()
 
 func paint_game() -> void:
 	draw_rect(Rect2(8, 9, 344, 72), Color("#10162f", 0.9))
@@ -550,7 +588,7 @@ func paint_game() -> void:
 	for i in range(5):
 		draw_circle(Vector2(27 + i * 22, 54), 7, CORAL if i < health else Color("#35334b"))
 	draw_text("SCRAP  %02d" % scraps, Vector2(228, 59), 18, GOLD)
-	draw_text("WAVE  %d / 2" % wave, Vector2(20, 111), 15, WHITE)
+	draw_text(expedition_route if not expedition_route.is_empty() else "WAVE  %d / 2" % wave, Vector2(20, 111), 15, WHITE)
 	if combo > 1 and mode == Mode.COMBAT:
 		draw_text("%d HIT COMBO" % combo, Vector2(219, 111), 16, ICE)
 	for e in enemies:
@@ -586,9 +624,15 @@ func paint_enemy(e: Dictionary) -> void:
 	var c := CORAL if kind != 1 else GOLD
 	if float(e["telegraph"]) > 0.0:
 		var target: Vector2 = e["target"]
-		draw_circle(target, 46.0 if kind == 2 else 37.0, Color("#ff5970", 0.17))
-		draw_arc(target, 46.0 if kind == 2 else 37.0, 0.0, TAU, 38, CORAL, 3.0, true)
+		draw_circle(target, 52.0 if kind == 2 else 42.0, Color("#ff5970", 0.17))
+		draw_arc(target, 52.0 if kind == 2 else 42.0, 0.0, TAU, 38, CORAL, 3.0, true)
 		draw_line(p, target, Color("#f87b89", 0.75), 2.0)
+	if kind == 0:
+		var pose := 1 if float(e["telegraph"]) > 0.0 else (2 if float(e["flash"]) > 0.0 else 0)
+		draw_texture_rect_region(MANTIS, Rect2(p - Vector2(48, 56), Vector2(96, 96)), Rect2(pose * 192, 0, 192, 192))
+		draw_rect(Rect2(p.x - 22, p.y - 42, 44, 4), INK)
+		draw_rect(Rect2(p.x - 22, p.y - 42, 44.0 * float(e["hp"]) / float(e["max_hp"]), 4), ICE)
+		return
 	draw_circle(p + Vector2(0, 14), radius + 5.0, Color("#111327", 0.58))
 	draw_circle(p, radius + 4.0, Color("#242241"))
 	draw_circle(p, radius, WHITE if float(e["flash"]) > 0.0 else c)
