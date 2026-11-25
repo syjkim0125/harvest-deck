@@ -72,6 +72,8 @@ func screen_to_game(point: Vector2) -> Vector2:
 
 func start_campaign() -> void:
 	galaxy = GALAXY_SIM.new()
+	expedition_route = ""
+	last_expedition_route = ""
 	campaign_started = true
 	mode = Mode.CAPTAIN
 	queue_redraw()
@@ -215,9 +217,14 @@ func move_hero(offset: Vector2) -> void:
 		if hero.distance_to(Vector2(55, 340)) < 25.0:
 			expedition_route = "Nooli refuge"
 			scraps = 2
+			touch_id = -1
+			move_axis = Vector2.ZERO
 			mode = Mode.CLEAR
 		elif hero.distance_to(Vector2(305, 340)) < 25.0:
 			expedition_route = "Amber quarry"
+			# Consume the exploration gesture; release must not trigger a combat attack or evade.
+			touch_id = -1
+			move_axis = Vector2.ZERO
 			mode = Mode.COMBAT
 			spawn_wave()
 
