@@ -317,16 +317,64 @@ func _input(event: InputEvent) -> void:
 		drag_touch(screen_to_game(event.position))
 	elif event is InputEventKey and event.pressed and not event.echo:
 		if mode != Mode.COMBAT and (event.keycode == KEY_ENTER or event.keycode == KEY_SPACE):
-			start_run()
+			match mode:
+				Mode.INTRO:
+					start_campaign()
+				Mode.CAPTAIN:
+					choose_captain(0)
+				Mode.STARSHIP:
+					choose_starship(0)
+				Mode.GALAXY:
+					for destination in galaxy.systems[galaxy.current_system]["routes"]:
+						if jump_to_system(int(destination)):
+							break
+				Mode.CLEAR:
+					if campaign_started:
+						finish_expedition(true)
+					else:
+						start_run()
+				Mode.DEFEAT:
+					if campaign_started:
+						finish_expedition(false)
+					else:
+						start_run()
 		elif event.keycode == KEY_SPACE or event.keycode == KEY_J:
 			strike()
 		elif event.keycode == KEY_SHIFT or event.keycode == KEY_K:
 			dodge(Vector2(float(facing), 0.0))
 
 func begin_touch(id: int, point: Vector2) -> void:
-	if mode != Mode.COMBAT:
-		start_run()
-		return
+	match mode:
+		Mode.INTRO:
+			start_campaign()
+			return
+		Mode.CAPTAIN:
+			choose_captain(0 if point.x < SIZE.x / 2.0 else 1)
+			return
+		Mode.STARSHIP:
+			choose_starship(0 if point.x < SIZE.x / 2.0 else 1)
+			return
+		Mode.GALAXY:
+			if point.y >= 556.0 and point.y < 615.0:
+				galaxy.refuel_at_freeport()
+				queue_redraw()
+				return
+			var target_index: int = galaxy.nearest_reachable(point, 38.0)
+			if target_index >= 0:
+				jump_to_system(target_index)
+			return
+		Mode.CLEAR:
+			if campaign_started:
+				finish_expedition(true)
+			else:
+				start_run()
+			return
+		Mode.DEFEAT:
+			if campaign_started:
+				finish_expedition(false)
+			else:
+				start_run()
+			return
 	if point.distance_to(STRIKE_POS) < 45.0:
 		strike()
 		return
