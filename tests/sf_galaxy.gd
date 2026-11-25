@@ -46,24 +46,31 @@ func verify() -> void:
 	game.end_touch(0, Vector2(180, 100))
 	test(game.touch_id == -1 and game.hero == initial_hero and game.expedition_route.is_empty(), "HUD taps cannot select an exploration route")
 	game.begin_touch(0, game.hero)
-	game.drag_touch(game.hero + Vector2(-46, -37))
+	game.drag_touch(game.hero + (GAME.REFUGE - game.hero).normalized() * 60.0)
 	for i in range(60):
-		if game.mode != GAME.Mode.EXPLORE:
+		if game.rescue_pending:
 			break
 		game._process(0.016)
-	test(game.mode == GAME.Mode.CLEAR and game.expedition_route == "Nooli refuge" and game.scraps == 2, "actual leftward movement discovers refuge and salvage")
-	game.end_touch(0, Vector2(55, 340))
-	test(game.mode == GAME.Mode.CLEAR and game.touch_id == -1, "refuge drag release does not trigger return")
+	test(game.mode == GAME.Mode.EXPLORE and game.rescue_pending and game.expedition_route == "Nooli refuge" and game.scraps == 2, "actual movement discovers Nooli and starts escort instead of ending the expedition")
+	game.end_touch(0, GAME.REFUGE)
+	test(game.mode == GAME.Mode.EXPLORE and game.touch_id == -1 and not game.nooli_recruited, "discovery is not recruitment before extraction")
+	game.begin_touch(0, game.hero)
+	game.drag_touch(game.hero + (GAME.LANDING - game.hero).normalized() * 60.0)
+	for i in range(90):
+		if game.mode == GAME.Mode.CLEAR:
+			break
+		game._process(0.016)
+	test(game.mode == GAME.Mode.CLEAR and game.scraps == 2, "escort requires returning physically to landing without duplicating salvage")
 	game.finish_expedition(true)
-	test(game.mode == GAME.Mode.GALAXY and game.galaxy.cargo == 2 and game.last_expedition_route == "Nooli refuge", "refuge reward and route persist on return")
+	test(game.mode == GAME.Mode.GALAXY and game.galaxy.cargo == 2 and game.last_expedition_route == "Nooli refuge" and game.nooli_recruited, "refuge reward and recruited crew persist on return")
 	game.start_campaign()
 	game.choose_captain(1)
 	game.choose_starship(1)
 	test(game.galaxy.fuel == 5, "escort ship trades fuel range for extra hull")
-	test(game.last_expedition_route.is_empty(), "new campaign clears previous expedition history")
+	test(game.last_expedition_route.is_empty() and not game.nooli_recruited, "new campaign clears previous expedition history")
 	test(game.jump_to_system(1) and game.health == 6 and game.mode == GAME.Mode.EXPLORE, "escort hull adds one HP for a scavenger captain")
 	game.begin_touch(0, game.hero)
-	game.drag_touch(game.hero + Vector2(46, -37))
+	game.drag_touch(game.hero + (GAME.QUARRY - game.hero).normalized() * 60.0)
 	for i in range(60):
 		if game.mode != GAME.Mode.EXPLORE:
 			break
