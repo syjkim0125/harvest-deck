@@ -1,6 +1,8 @@
 extends Node2D
 ## SF pivot: playable, portrait-first belt-scroll combat experiment A.
 ## The old fruit game remains in legacy/harvest-deck-v0.8.11.
+const NOOLI = preload("res://assets/gameplay/nooli.svg")
+const MANTIS = preload("res://assets/gameplay/amber_mantis.svg")
 const FONT = preload("res://assets/market-sans.otf")
 const GALAXY_SIM = preload("res://scripts/sf_galaxy_sim.gd")
 const SIZE := Vector2(360, 640)
@@ -571,8 +573,8 @@ func paint_exploration() -> void:
 	draw_rect(Rect2(0, 282, 360, 208), Color("#253d42"))
 	draw_line(Vector2(180, 440), Vector2(55, 340), Color("#639b83"), 32.0, true)
 	draw_line(Vector2(180, 440), Vector2(305, 340), Color("#9c7951"), 32.0, true)
-	draw_circle(Vector2(55, 340), 20, ICE)
-	draw_circle(Vector2(305, 340), 20, GOLD)
+	draw_texture_rect_region(NOOLI, Rect2(31, 306, 48, 48), Rect2(0, 0, 128, 128))
+	draw_texture_rect_region(MANTIS, Rect2(273, 306, 64, 64), Rect2(0, 0, 192, 192))
 	draw_text("NOOLI REFUGE", Vector2(18, 300), 12, ICE)
 	draw_text("AMBER QUARRY", Vector2(234, 300), 12, GOLD)
 	draw_text("FOLLOW THE TRAILS", Vector2(68, 110), 20, WHITE)
@@ -625,6 +627,12 @@ func paint_enemy(e: Dictionary) -> void:
 		draw_circle(target, 46.0 if kind == 2 else 37.0, Color("#ff5970", 0.17))
 		draw_arc(target, 46.0 if kind == 2 else 37.0, 0.0, TAU, 38, CORAL, 3.0, true)
 		draw_line(p, target, Color("#f87b89", 0.75), 2.0)
+	if kind == 0:
+		var pose := 1 if float(e["telegraph"]) > 0.0 else (2 if float(e["flash"]) > 0.0 else 0)
+		draw_texture_rect_region(MANTIS, Rect2(p - Vector2(48, 56), Vector2(96, 96)), Rect2(pose * 192, 0, 192, 192))
+		draw_rect(Rect2(p.x - 22, p.y - 42, 44, 4), INK)
+		draw_rect(Rect2(p.x - 22, p.y - 42, 44.0 * float(e["hp"]) / float(e["max_hp"]), 4), ICE)
+		return
 	draw_circle(p + Vector2(0, 14), radius + 5.0, Color("#111327", 0.58))
 	draw_circle(p, radius + 4.0, Color("#242241"))
 	draw_circle(p, radius, WHITE if float(e["flash"]) > 0.0 else c)
