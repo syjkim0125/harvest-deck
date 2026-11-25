@@ -25,6 +25,10 @@ var wave := 1
 var elapsed := 0.0
 var attack_cd := 0.0
 var attack_fx := 0.0
+# Only a confirmed contact briefly freezes combat; a missed swing never does.
+var impact_pause := 0.0
+var impact_fx := 0.0
+var impact_pos := Vector2.ZERO
 var invulnerable := 0.0
 var dodge_fx := 0.0
 var hit_fx := 0.0
@@ -66,6 +70,9 @@ func start_run() -> void:
 	attack_cd = 0.0
 	invulnerable = 0.0
 	attack_fx = 0.0
+	impact_pause = 0.0
+	impact_fx = 0.0
+	impact_pos = Vector2.ZERO
 	hit_fx = 0.0
 	dodge_fx = 0.0
 	next_wave = -1.0
@@ -98,9 +105,16 @@ func make_enemy(kind: int, position: Vector2, hp: int) -> Dictionary:
 
 func _process(delta: float) -> void:
 	var dt := minf(delta, 0.05)
+	# A very short contact pause keeps the impact readable without delaying the input itself.
+	# It freezes enemies, the player, attack cooldowns and impact particles together.
+	if mode == Mode.COMBAT and impact_pause > 0.0:
+		impact_pause = maxf(impact_pause - dt, 0.0)
+		queue_redraw()
+		return
 	elapsed += dt
 	attack_cd = maxf(attack_cd - dt, 0.0)
 	attack_fx = maxf(attack_fx - dt, 0.0)
+	impact_fx = maxf(impact_fx - dt, 0.0)
 	hit_fx = maxf(hit_fx - dt, 0.0)
 	dodge_fx = maxf(dodge_fx - dt, 0.0)
 	invulnerable = maxf(invulnerable - dt, 0.0)
@@ -199,15 +213,23 @@ func strike() -> void:
 			landed += 1
 			e["hp"] = int(e["hp"]) - 1
 			e["flash"] = 0.16
-			e["stagger"] = 0.16
-			e["pos"] = pos + Vector2(float(facing) * 17.0, -5.0)
-			burst(pos, ICE, 7)
+			e["stagger"] = 0.22
+			# Knockback is directional but stays inside the playable belt.
+			e["pos"] = Vector2(
+				clampf(pos.x + float(facing) * 22.0, FIELD.position.x + 12.0, FIELD.end.x - 12.0),
+				clampf(pos.y - 5.0, FIELD.position.y + 30.0, FIELD.end.y - 22.0)
+			)
+			burst(pos, ICE, 9)
+			impact_pos = pos
+			impact_fx = 0.16
 			shake = 3.0
 			if int(e["hp"]) <= 0:
 				scraps += 3 if int(e["kind"]) == 2 else 1
 				burst(pos, GOLD, 14)
 				enemies.remove_at(i)
 	combo = mini(combo + 1, 9) if landed > 0 else 0
+	if landed > 0:
+		impact_pause = 0.055
 	if enemies.is_empty() and next_wave < 0.0:
 		next_wave = 0.86
 
@@ -373,6 +395,13 @@ func paint_game() -> void:
 	paint_hero()
 	for p in particles:
 		draw_circle(p["pos"], 2.2 + float(p["life"]) * 4.0, p["color"])
+	if impact_fx > 0.0:
+		# The radial contact spark only appears on a real hit, not an empty swing.
+		var ring_radius := 8.0 + (0.16 - impact_fx) * 100.0
+		draw_arc(impact_pos, ring_radius, 0.0, TAU, 24, GOLD, 3.0, true)
+		for spark in range(6):
+			var ray := Vector2.RIGHT.rotated(float(spark) * TAU / 6.0)
+			draw_line(impact_pos + ray * (ring_radius + 3.0), impact_pos + ray * (ring_radius + 13.0), WHITE, 2.0)
 	if attack_fx > 0.0:
 		var attack_point := hero + Vector2(float(facing) * 45.0, -9.0)
 		draw_arc(attack_point, 47.0, -1.1 if facing == 1 else 2.0, 1.1 if facing == 1 else 4.2, 17, WHITE, 7.0, true)
