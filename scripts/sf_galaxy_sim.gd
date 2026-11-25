@@ -10,12 +10,12 @@ const CHOIR := "choir"
 const DUSK := "dusk"
 
 const FACTIONS := {
-	FREE: {"name": "Free Drifters", "leader": "", "power": 0, "color": Color("#a8c5d7")},
-	HELION: {"name": "Helion Directorate", "leader": "Marshal Voss", "power": 7, "color": Color("#f3b26d")},
-	VELA: {"name": "Vela Compact", "leader": "Broker Minae", "power": 5, "color": Color("#80e2c8")},
-	ASH: {"name": "Ashline Freefront", "leader": "Captain Rook", "power": 6, "color": Color("#f37491")},
-	CHOIR: {"name": "Choir of the Veil", "leader": "Oracle Sevrin", "power": 5, "color": Color("#bc9ffc")},
-	DUSK: {"name": "Dusk Corsairs", "leader": "Admiral Kest", "power": 6, "color": Color("#ff707f")}
+	"free": {"name": "Free Drifters", "leader": "", "power": 0, "color": Color("#a8c5d7")},
+	"helion": {"name": "Helion Directorate", "leader": "Marshal Voss", "power": 7, "color": Color("#f3b26d")},
+	"vela": {"name": "Vela Compact", "leader": "Broker Minae", "power": 5, "color": Color("#80e2c8")},
+	"ash": {"name": "Ashline Freefront", "leader": "Captain Rook", "power": 6, "color": Color("#f37491")},
+	"choir": {"name": "Choir of the Veil", "leader": "Oracle Sevrin", "power": 5, "color": Color("#bc9ffc")},
+	"dusk": {"name": "Dusk Corsairs", "leader": "Admiral Kest", "power": 6, "color": Color("#ff707f")}
 }
 # Routes are bidirectional. Zone 0 is independent trade space.
 const START_SYSTEMS := [
@@ -58,7 +58,8 @@ func can_travel(index: int) -> bool:
 		return false
 	if index == current_system:
 		return false
-	return Array(systems[current_system]["routes"]).has(index)
+	var routes: Array = systems[current_system]["routes"]
+	return routes.has(index)
 
 func travel_to(index: int) -> Dictionary:
 	if not can_travel(index):
@@ -126,7 +127,7 @@ func advance_factions() -> void:
 func finish_expedition(scrap: int, won: bool) -> void:
 	var secured: int = maxi(scrap, 0)
 	if not won:
-		secured = secured / 2
+		secured = floori(float(secured) / 2.0)
 	cargo += secured
 	credits += secured * 3
 	if won:
