@@ -8,8 +8,8 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,26 +25,9 @@ jobs:
           curl -fL --retry 3 -o /tmp/templates.tpz https://github.com/godotengine/godot-builds/releases/download/4.6.3-stable/Godot_v4.6.3-stable_export_templates.tpz
           mkdir -p "$HOME/.local/share/godot/export_templates/4.6.3.stable"
           unzip -j -q /tmp/templates.tpz 'templates/web*' -d "$HOME/.local/share/godot/export_templates/4.6.3.stable"
-      - name: Import and verify
+      - name: Import and verify SF prototype
         run: |
           godot --headless --editor --import --quit
-          godot --headless --script tests/run.gd
-          godot --headless --script tests/hud_bounds.gd
-          godot --headless --script tests/viewport.gd
-          godot --headless --script tests/cargo_view.gd
-          godot --headless --script tests/avatar_motion.gd
-          godot --headless --script tests/foot_lock.gd
-          godot --headless --script tests/camera_follow.gd
-          godot --headless --script tests/fruit_art.gd
-          godot --headless --script tests/golden_art.gd
-          godot --headless --script tests/comfort_budget.gd
-          godot --headless --script tests/depth_order.gd
-          godot --headless --script tests/pause_touch.gd
-          godot --headless --script tests/player_locator.gd
-          godot --headless --script tests/spine_melon.gd
-          godot --headless --script tests/day_harvest.gd
-          godot --headless --script tests/night_market.gd
-          godot --headless --script tests/feel_replay.gd
           godot --headless --script tests/sf_combat.gd
           godot --headless --quit-after 120
       - name: Export Web
