@@ -110,7 +110,9 @@ func _process(delta: float) -> void:
 	for i in range(particles.size() - 1, -1, -1):
 		var p := particles[i]
 		p["life"] = float(p["life"]) - dt
-		p["pos"] = Vector2(p["pos"]) + Vector2(p["vel"]) * dt
+		var pos: Vector2 = p["pos"]
+		var velocity: Vector2 = p["vel"]
+		p["pos"] = pos + velocity * dt
 		if float(p["life"]) <= 0.0:
 			particles.remove_at(i)
 	if mode == Mode.COMBAT:
@@ -367,7 +369,7 @@ func paint_game() -> void:
 		paint_enemy(e)
 	paint_hero()
 	for p in particles:
-		draw_circle(Vector2(p["pos"]), 2.2 + float(p["life"]) * 4.0, p["color"])
+		draw_circle(p["pos"], 2.2 + float(p["life"]) * 4.0, p["color"])
 	if attack_fx > 0.0:
 		var attack_point := hero + Vector2(float(facing) * 45.0, -9.0)
 		draw_arc(attack_point, 47.0, -1.1 if facing == 1 else 2.0, 1.1 if facing == 1 else 4.2, 17, WHITE, 7.0, true)
