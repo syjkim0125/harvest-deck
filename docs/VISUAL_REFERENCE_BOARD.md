@@ -4,6 +4,8 @@
 > [제품 비전](LIVING_GALAXY_VISION.md) · [현재 플레이 프로토타입](https://syjkim0125.github.io/harvest-deck/) · [직접 플레이 피드백](SF_PLAYTEST_FEEDBACK.md)  
 > 총 **18개** 주요 게임의 **실제 이미지 18종**과 공식 출처, 채택/배제/적용 판단을 연결했다. 이미지 URL은 외부 원격 로드이므로 원본 서버 정책에 따라 로드되지 않을 수 있다. 공식 이미지 또는 게임 스크린샷으로서 출처를 구분해 표기했다.
 
+> **역할 구분**: 이 18개 게임은 주로 **게임 시스템/화면 구조/실무용 비교 이미지** 레퍼런스다. 최종 비주얼 방향은 별도로 사용자 승인된 **[ART_DIRECTION.md: 회화적 2D + Kindchenschema](ART_DIRECTION.md)**가 우선한다. 디자인 제작 시 전체 보드 재열람 대신 **[DESIGN_REFERENCE_ROUTER.md](DESIGN_REFERENCE_ROUTER.md)**의 해당 장면 1행(최대 3개 참고작)을 따른다. 바닐라웨어의 Odin Sphere / 13 Sentinels / Unicorn Overlord / Dragon's Crown은 **아트 원리 레퍼런스**이며 별도의 권리 있는 게임 이미지/캐릭터를 게임 자산으로 복제하지 않는다.
+
 ## 00 · 이 게임은 무엇인가?
 
 > **살아 움직이는 여러 세력의 우주에서 중립 선장으로 시작해 항해·탐험·전투·동료 수집·제작·상점·본거지 확장으로 자신만의 세력을 키워가는 SF 픽셀 RPG.**
