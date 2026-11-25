@@ -2,6 +2,18 @@
 
 > **사용자 새 콘셉트 26개 항목의 최신 승인 방향**. [SF_PIVOT_PLAN.md](SF_PIVOT_PLAN.md)의 SF 전환을 구체화하고, 새 설계 범위에서 이 문서가 더 구체적인 우선순위 기준이다. 실제 구현 여부는 각 단계 수용 테스트로 별도 확인한다. 기존 `legacy/harvest-deck-v0.8.11` 브랜치 수정·삭제 금지.
 
+## 한눈에 보는 레퍼런스 이미지
+
+> [**이미지 18종이 포함된 전체 Visual & System Reference Board 보기 →**](VISUAL_REFERENCE_BOARD.md) · 출처/참고할 것/복제하지 않을 것/우리 게임 적용 판단 수록
+
+| 살아 움직이는 세력 · **Bannerlord** | 우주 사회와 항해 · **EVE Online** | 항해 조우 · **Black Flag** |
+| :---: | :---: | :---: |
+| ![Bannerlord 공식 아트](https://cdn.akamai.steamstatic.com/steam/apps/261550/header.jpg) | ![EVE Online 공식 우주선 이미지](https://content.eveonline.com/www/newssystem/media/67273/1/Kronos.jpg) | ![Black Flag 선박 전투 이미지](https://mperials.com/images/screenshots/assassins-creed-iv-black-flag-illustrious-pirates-pack/original/sc7zd1.jpg) |
+| 탐험↔운영 · **Dave the Diver** | 타격감·분기 · **Absolum** | 함선 내부·생존 · **RimWorld** |
+| ![Dave the Diver 공식 Nintendo 스크린샷](https://www.nintendo.com/eu/media/images/06_screenshots/games_5/nintendo_switch_download_software_2/nswitchds_davethediver/NSwitchDS_DaveTheDiver_02_DEde.jpg) | ![Absolum 공식 프로모션 이미지](https://cdn.akamai.steamstatic.com/steam/apps/1904480/header.jpg) | ![RimWorld 공식 스크린샷](https://rimworldgame.com/biotech/screenshots/impids.jpg) |
+
+*각 이미지의 출처·권리자 및 참고 기준은 별도 보드에 정리했다. 모든 원본 게임 이미지의 게임 자산 재사용은 금지한다.*
+
 ## 플레이어 판타지와 코어 루프
 
 주인공은 **세력 없는 민간 함선의 선장**으로 시작한다. 서로 영토·교역로·신앙을 두고 경쟁하는 여러 정부·반군·상인·종교·해적 세력, 독자적인 네임드 지도자와 함대가 **플레이어가 없는 동안에도 변화**한다. 탐험·전투·밀수·거래·의뢰·기지 건설의 결과가 개인의 승무원, 장비 덱, 함선 구조, 우주 외교관계와 영토에 흔적을 남긴다.
