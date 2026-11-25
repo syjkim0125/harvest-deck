@@ -39,21 +39,48 @@ func verify() -> void:
 	test(game.mode == 5, "captain origin leads to starship choice")
 	game.choose_starship(0)
 	test(game.mode == 6 and game.galaxy.current_system == 0, "chosen civilian ship arrives at the starmap")
-	test(game.jump_to_system(1) and game.mode == 1, "travel enters existing playable alien combat")
-	test(game.active_sector == 1 and game.health == 6 and game.wave == 1, "guardian origin modifies starting HP without rewriting combat")
-	game.scraps = 5
+	test(game.jump_to_system(1) and game.mode == GAME.Mode.EXPLORE, "travel enters spatial exploration instead of automatic combat")
+	test(game.active_sector == 1 and game.health == 6 and game.wave == 1 and game.enemies.is_empty(), "guardian starts exploration without spawning enemies")
+	var initial_hero: Vector2 = game.hero
+	game.begin_touch(0, Vector2(180, 100))
+	game.end_touch(0, Vector2(180, 100))
+	test(game.touch_id == -1 and game.hero == initial_hero and game.expedition_route.is_empty(), "HUD taps cannot select an exploration route")
+	game.begin_touch(0, game.hero)
+	game.drag_touch(game.hero + Vector2(-46, -37))
+	for i in range(60):
+		if game.mode != GAME.Mode.EXPLORE:
+			break
+		game._process(0.016)
+	test(game.mode == GAME.Mode.CLEAR and game.expedition_route == "Nooli refuge" and game.scraps == 2, "actual leftward movement discovers refuge and salvage")
+	game.end_touch(0, Vector2(55, 340))
+	test(game.mode == GAME.Mode.CLEAR and game.touch_id == -1, "refuge drag release does not trigger return")
 	game.finish_expedition(true)
-	test(game.mode == 6 and game.galaxy.cargo == 5, "salvage returns to the living galaxy instead of restarting the arena")
+	test(game.mode == GAME.Mode.GALAXY and game.galaxy.cargo == 2 and game.last_expedition_route == "Nooli refuge", "refuge reward and route persist on return")
 	game.start_campaign()
 	game.choose_captain(1)
 	game.choose_starship(1)
 	test(game.galaxy.fuel == 5, "escort ship trades fuel range for extra hull")
-	test(game.jump_to_system(1) and game.health == 6, "escort hull adds one HP for a scavenger captain")
+	test(game.last_expedition_route.is_empty(), "new campaign clears previous expedition history")
+	test(game.jump_to_system(1) and game.health == 6 and game.mode == GAME.Mode.EXPLORE, "escort hull adds one HP for a scavenger captain")
+	game.begin_touch(0, game.hero)
+	game.drag_touch(game.hero + Vector2(46, -37))
+	for i in range(60):
+		if game.mode != GAME.Mode.EXPLORE:
+			break
+		game._process(0.016)
+	test(game.mode == GAME.Mode.COMBAT and game.expedition_route == "Amber quarry" and game.enemies.size() == 2, "rightward exploration reaches quarry and spawns combat")
+	game.end_touch(0, Vector2(305, 340))
+	test(game.touch_id == -1 and game.move_axis == Vector2.ZERO and game.attack_cd == 0.0 and game.dodge_fx == 0.0, "crossing into combat consumes the exploration gesture without accidental attack or dodge")
+	if game.enemies.is_empty():
+		quit(1)
+		return
 	game.hero = game.enemies[0]["pos"] - Vector2(58, 0)
 	game.facing = 1
 	game.enemies[0]["hp"] = 1
 	game.strike()
 	test(game.scraps == 2, "scavenger captain earns additional salvage from a defeated alien")
+	game.finish_expedition(true)
+	test(game.mode == GAME.Mode.GALAXY and game.last_expedition_route == "Amber quarry" and game.galaxy.cargo == 2, "quarry route and combat salvage persist on return")
 	game.queue_free()
 	await process_frame
 	print("SF GALAXY: %d checks / %d failures" % [checks, errors])
