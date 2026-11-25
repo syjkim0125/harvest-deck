@@ -1,3 +1,7 @@
+> **새 게임 개발 방향 (2026-11-25)**: [SF 행성 탐험 + 외계 동료 + 우주선 제작·상점 + 덱빌딩 계획](docs/SF_PIVOT_PLAN.md)을 공식 채택했다. **이 README 아래와 현재 GitHub Pages의 Harvest Deck v0.8.11은 이전 과일 게임 비교판**이며, 새로운 SF 게임이 이미 구현·배포됐다는 뜻이 아니다. 기존 코드·테스트·타격감은 새 전투/카드/상점에 재사용 가능하며 원본은 안전 보존한다.
+
+---
+
 # Harvest Deck · 모바일 MVP 0.8.11
 
 [휴대폰에서 열기](https://syjkim0125.github.io/harvest-deck/?v=0.8.11) · [이전 수확·판매 비교판](https://syjkim0125.github.io/harvest-deck/?lab=1) · [모바일 설계와 장르 비교](docs/MOBILE_MVP.md) · [플레이테스트 기준](docs/PLAYTEST.md)
