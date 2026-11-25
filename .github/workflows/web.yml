@@ -29,6 +29,7 @@ jobs:
         run: |
           godot --headless --editor --import --quit
           godot --headless --script tests/sf_combat.gd
+          godot --headless --script tests/sf_galaxy.gd
           godot --headless --quit-after 120
       - name: Export Web
         run: |

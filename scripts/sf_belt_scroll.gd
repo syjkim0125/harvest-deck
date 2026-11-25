@@ -2,6 +2,7 @@ extends Node2D
 ## SF pivot: playable, portrait-first belt-scroll combat experiment A.
 ## The old fruit game remains in legacy/harvest-deck-v0.8.11.
 const FONT = preload("res://assets/market-sans.otf")
+const GALAXY_SIM = preload("res://scripts/sf_galaxy_sim.gd")
 const SIZE := Vector2(360, 640)
 const FIELD := Rect2(22, 282, 316, 208)
 const INK := Color("#0b1029")
@@ -14,7 +15,7 @@ const WHITE := Color("#f0f2ff")
 const STRIKE_POS := Vector2(291, 559)
 const DODGE_POS := Vector2(68, 559)
 
-enum Mode { INTRO, COMBAT, CLEAR, DEFEAT }
+enum Mode { INTRO, COMBAT, CLEAR, DEFEAT, CAPTAIN, STARSHIP, GALAXY }
 var mode := Mode.INTRO
 var hero := Vector2(90, 396)
 var facing := 1
@@ -43,6 +44,13 @@ var move_axis := Vector2.ZERO
 var layout_scale := 1.0
 var layout_origin := Vector2.ZERO
 var random := RandomNumberGenerator.new()
+# The civilian captain's journey persists across individual combat expeditions.
+var galaxy = GALAXY_SIM.new()
+var campaign_started := false
+var captain_choice := 0
+var ship_choice := 0
+var active_sector := 0
+var mission_notice := ""
 
 func _ready() -> void:
 	random.seed = 20261125
@@ -58,11 +66,45 @@ func resize() -> void:
 func screen_to_game(point: Vector2) -> Vector2:
 	return (point - layout_origin) / maxf(layout_scale, 0.001)
 
+func start_campaign() -> void:
+	galaxy = GALAXY_SIM.new()
+	campaign_started = true
+	mode = Mode.CAPTAIN
+	queue_redraw()
+
+func choose_captain(choice: int) -> void:
+	captain_choice = clampi(choice, 0, 1)
+	mode = Mode.STARSHIP
+	queue_redraw()
+
+func choose_starship(choice: int) -> void:
+	ship_choice = clampi(choice, 0, 1)
+	galaxy.fuel = 6 if ship_choice == 0 else 5
+	mode = Mode.GALAXY
+	queue_redraw()
+
+func jump_to_system(index: int) -> bool:
+	var result: Dictionary = galaxy.travel_to(index)
+	if not result["ok"]:
+		return false
+	active_sector = index
+	mission_notice = String(result["event"])
+	start_run()
+	return true
+
+func finish_expedition(won: bool) -> void:
+	galaxy.finish_expedition(scraps, won)
+	mode = Mode.GALAXY
+	enemies.clear()
+	particles.clear()
+	impact_pause = 0.0
+	queue_redraw()
+
 func start_run() -> void:
 	mode = Mode.COMBAT
 	hero = Vector2(90, 396)
 	facing = 1
-	health = 5
+	health = 5 + (1 if campaign_started and captain_choice == 0 else 0) + (1 if campaign_started and ship_choice == 1 else 0)
 	scraps = 0
 	combo = 0
 	wave = 1
@@ -84,11 +126,12 @@ func start_run() -> void:
 func spawn_wave() -> void:
 	enemies.clear()
 	next_wave = -1.0
+	var danger: int = int(galaxy.systems[active_sector]["risk"]) if campaign_started else 0
 	if wave == 1:
-		enemies.append(make_enemy(0, Vector2(264, 395), 3))
-		enemies.append(make_enemy(1, Vector2(304, 342), 3))
+		enemies.append(make_enemy(0, Vector2(264, 395), 3 + danger))
+		enemies.append(make_enemy(1, Vector2(304, 342), 3 + danger))
 	else:
-		enemies.append(make_enemy(2, Vector2(279, 386), 8))
+		enemies.append(make_enemy(2, Vector2(279, 386), 8 + danger * 2))
 
 func make_enemy(kind: int, position: Vector2, hp: int) -> Dictionary:
 	return {
@@ -224,7 +267,7 @@ func strike() -> void:
 			impact_fx = 0.16
 			shake = 3.0
 			if int(e["hp"]) <= 0:
-				scraps += 3 if int(e["kind"]) == 2 else 1
+				scraps += (3 if int(e["kind"]) == 2 else 1) + (1 if campaign_started and captain_choice == 1 else 0)
 				burst(pos, GOLD, 14)
 				enemies.remove_at(i)
 	combo = mini(combo + 1, 9) if landed > 0 else 0
@@ -274,16 +317,64 @@ func _input(event: InputEvent) -> void:
 		drag_touch(screen_to_game(event.position))
 	elif event is InputEventKey and event.pressed and not event.echo:
 		if mode != Mode.COMBAT and (event.keycode == KEY_ENTER or event.keycode == KEY_SPACE):
-			start_run()
+			match mode:
+				Mode.INTRO:
+					start_campaign()
+				Mode.CAPTAIN:
+					choose_captain(0)
+				Mode.STARSHIP:
+					choose_starship(0)
+				Mode.GALAXY:
+					for destination in galaxy.systems[galaxy.current_system]["routes"]:
+						if jump_to_system(int(destination)):
+							break
+				Mode.CLEAR:
+					if campaign_started:
+						finish_expedition(true)
+					else:
+						start_run()
+				Mode.DEFEAT:
+					if campaign_started:
+						finish_expedition(false)
+					else:
+						start_run()
 		elif event.keycode == KEY_SPACE or event.keycode == KEY_J:
 			strike()
 		elif event.keycode == KEY_SHIFT or event.keycode == KEY_K:
 			dodge(Vector2(float(facing), 0.0))
 
 func begin_touch(id: int, point: Vector2) -> void:
-	if mode != Mode.COMBAT:
-		start_run()
-		return
+	match mode:
+		Mode.INTRO:
+			start_campaign()
+			return
+		Mode.CAPTAIN:
+			choose_captain(0 if point.x < SIZE.x / 2.0 else 1)
+			return
+		Mode.STARSHIP:
+			choose_starship(0 if point.x < SIZE.x / 2.0 else 1)
+			return
+		Mode.GALAXY:
+			if point.y >= 556.0 and point.y < 615.0:
+				galaxy.refuel_at_freeport()
+				queue_redraw()
+				return
+			var target_index: int = galaxy.nearest_reachable(point, 38.0)
+			if target_index >= 0:
+				jump_to_system(target_index)
+			return
+		Mode.CLEAR:
+			if campaign_started:
+				finish_expedition(true)
+			else:
+				start_run()
+			return
+		Mode.DEFEAT:
+			if campaign_started:
+				finish_expedition(false)
+			else:
+				start_run()
+			return
 	if point.distance_to(STRIKE_POS) < 45.0:
 		strike()
 		return
@@ -325,10 +416,15 @@ func _draw() -> void:
 		jitter = Vector2(random.randf_range(-shake, shake), random.randf_range(-shake, shake))
 	draw_set_transform(layout_origin + jitter * layout_scale, 0.0, Vector2.ONE * layout_scale)
 	paint_world()
-	if mode == Mode.INTRO:
-		paint_title()
-	else:
-		paint_game()
+	match mode:
+		Mode.INTRO:
+			paint_title()
+		Mode.CAPTAIN, Mode.STARSHIP:
+			paint_setup()
+		Mode.GALAXY:
+			paint_galaxy()
+		_:
+			paint_game()
 	draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 
 func paint_world() -> void:
@@ -379,11 +475,78 @@ func paint_title() -> void:
 	draw_text("HUNT  /  SALVAGE  /  RETURN", Vector2(33, 188), 14, LILAC)
 	draw_text("ALIEN FRONTIER", Vector2(97, 474), 17, ICE)
 	draw_rect(Rect2(47, 528, 266, 67), Color("#4adaca"))
-	draw_text("TAP TO LAND", Vector2(90, 571), 26, INK)
+	draw_text("TAP TO BEGIN", Vector2(80, 571), 26, INK)
+
+func paint_setup() -> void:
+	var is_captain := mode == Mode.CAPTAIN
+	draw_rect(Rect2(18, 98, 324, 92), Color("#111a37", 0.96))
+	draw_text("YOUR JOURNEY BEGINS", Vector2(31, 133), 22, ICE)
+	draw_text("NO FLAG. NO MASTER. YOUR CHOICE.", Vector2(31, 164), 12, WHITE)
+	draw_text("1 / 2   CAPTAIN" if is_captain else "2 / 2   STARSHIP", Vector2(26, 252), 17, LILAC)
+	var left: Rect2 = Rect2(18, 288, 154, 196)
+	var right: Rect2 = Rect2(188, 288, 154, 196)
+	draw_rect(left, Color("#233656"))
+	draw_rect(right, Color("#352b53"))
+	for panel in [left, right]:
+		draw_rect(Rect2(panel.position.x, panel.position.y, panel.size.x, 4), ICE if panel == left else GOLD)
+	if is_captain:
+		draw_circle(Vector2(95, 350), 27, ICE)
+		draw_circle(Vector2(265, 350), 27, GOLD)
+		draw_text("GUARDIAN", Vector2(35, 408), 18, WHITE)
+		draw_text("+1 HP", Vector2(49, 440), 17, ICE)
+		draw_text("SCAVENGER", Vector2(198, 408), 16, WHITE)
+		draw_text("+1 SALVAGE", Vector2(200, 440), 12, GOLD)
+	else:
+		draw_colored_polygon(PackedVector2Array([Vector2(95, 325), Vector2(135, 367), Vector2(95, 351), Vector2(55, 367)]), ICE)
+		draw_colored_polygon(PackedVector2Array([Vector2(265, 325), Vector2(313, 369), Vector2(265, 356), Vector2(217, 369)]), GOLD)
+		draw_text("SCOUT", Vector2(55, 408), 21, WHITE)
+		draw_text("6 FUEL", Vector2(52, 440), 17, ICE)
+		draw_text("ESCORT", Vector2(224, 408), 20, WHITE)
+		draw_text("5 FUEL / +1 HP", Vector2(198, 440), 12, GOLD)
+	draw_text("TAP A PORTRAIT TO CHOOSE", Vector2(66, 546), 15, WHITE)
+
+func paint_galaxy() -> void:
+	draw_rect(Rect2(10, 9, 340, 175), Color("#11172f", 0.96))
+	draw_text("VOID CARAVAN  /  NAVIGATION", Vector2(20, 34), 17, ICE)
+	draw_text("FREE CAPTAIN  |  NO ALLEGIANCE", Vector2(20, 59), 12, LILAC)
+	draw_text("CREDITS %d    FUEL %d    CARGO %d" % [galaxy.credits, galaxy.fuel, galaxy.cargo], Vector2(20, 84), 15, GOLD)
+	draw_text("JUMPS %d    RENOWN %d" % [galaxy.turns, galaxy.fame], Vector2(20, 107), 14, WHITE)
+	draw_text(galaxy.last_news.substr(0, 43), Vector2(20, 140), 11, LILAC)
+	draw_text(galaxy.last_encounter.substr(0, 43), Vector2(20, 164), 11, ICE)
+	draw_rect(Rect2(9, 202, 342, 350), Color("#0a132c", 0.9))
+	for i in range(galaxy.systems.size()):
+		var source: Dictionary = galaxy.systems[i]
+		var start: Vector2 = source["pos"]
+		for dest in source["routes"]:
+			var j: int = dest
+			if i < j:
+				var endpoint: Vector2 = galaxy.systems[j]["pos"]
+				draw_line(start, endpoint, Color("#587494", 0.78), 2.0)
+	for i in range(galaxy.systems.size()):
+		var sector: Dictionary = galaxy.systems[i]
+		var p: Vector2 = sector["pos"]
+		var owner: String = sector["owner"]
+		var tint: Color = GALAXY_SIM.FACTIONS[owner]["color"]
+		var reachable: bool = galaxy.can_travel(i)
+		var here: bool = i == galaxy.current_system
+		var r := 16.0 if here else 13.0
+		if reachable:
+			draw_arc(p, 30.0, 0.0, TAU, 36, ICE, 2.5, true)
+		if here:
+			draw_arc(p, 28.0, 0.0, TAU, 36, GOLD, 3.5, true)
+		draw_circle(p, r + 4.0, INK)
+		draw_circle(p, r, tint)
+		draw_circle(p + Vector2(-4, -4), 4.0, WHITE)
+		draw_text(String(sector["name"]), p + Vector2(-33, -33), 10, WHITE if galaxy.visited[i] else LILAC)
+	draw_rect(Rect2(11, 562, 338, 55), Color("#273351"))
+	draw_text("TAP CONNECTED STAR TO JUMP", Vector2(30, 585), 15, WHITE)
+	draw_text("AT FREEPORT: TAP HERE TO REFUEL 4C", Vector2(30, 604), 11, ICE)
+	draw_text("GALAXY CHANGES AFTER EACH JUMP", Vector2(44, 630), 10, LILAC)
 
 func paint_game() -> void:
 	draw_rect(Rect2(8, 9, 344, 72), Color("#10162f", 0.9))
-	draw_text("SECTOR 07    /    TITAN MOON", Vector2(20, 30), 14, ICE)
+	var sector_title := String(galaxy.systems[active_sector]["name"]) if campaign_started else "TITAN MOON"
+	draw_text("PLANET    /    " + sector_title, Vector2(20, 30), 14, ICE)
 	for i in range(5):
 		draw_circle(Vector2(27 + i * 22, 54), 7, CORAL if i < health else Color("#35334b"))
 	draw_text("SCRAP  %02d" % scraps, Vector2(228, 59), 18, GOLD)
@@ -471,5 +634,5 @@ func paint_result(won: bool) -> void:
 	draw_rect(Rect2(14, 304, 332, 176), Color("#11172f", 0.94))
 	draw_text("SALVAGE SECURED" if won else "SIGNAL LOST", Vector2(31, 352), 26, ICE if won else CORAL)
 	draw_text("SCRAP RECOVERED   %d" % scraps, Vector2(41, 392), 17, GOLD)
-	draw_text("TAP TO REDEPLOY", Vector2(57, 453), 23, WHITE)
+	draw_text("TAP TO GALAXY" if campaign_started else "TAP TO REDEPLOY", Vector2(57, 453), 23, WHITE)
 	draw_text("SHIP WORKSHOP: NEXT MILESTONE", Vector2(47, 563), 13, LILAC)

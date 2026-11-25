@@ -1,3 +1,7 @@
+> **2026-11-25 Living Galaxy Alpha 0.2 작업/검증 핸드오프**. 사용자 26항목 신규 게임 비전은 [LIVING_GALAXY_VISION.md](LIVING_GALAXY_VISION.md)가 최신 기준이며, [RESEARCH_LOG.md](RESEARCH_LOG.md)에 이번 구현과 1차 출처/검증 내역 기록. `feature/living-galaxy-alpha` / PR #3: `sf_galaxy_sim.gd`에 중립 선장/5개 별/다섯 세력 지도자/시드 기반 항해 사건/전선 충돌 및 연료·명성·전리품, `sf_belt_scroll.gd`에 선장·함선 2지선다와 터치 별지도→외계 전투→우주 지도 복귀, `tests/sf_galaxy.gd` 추가. PR Actions Godot 4.6.3 `SF GALAXY 21 checks / 0 failures`, `SF COMBAT 15 checks / 0 failures`, Web export 성공(초기 run 45556592764). 문서 수정 이후 최신 head CI/Pages 확인 필요. 주요 미구현: 자유 항해 조작·우주함 전투, 실제 행성 2갈래, 동료 모집/함내 작업·제작/상점, 본거지/방어/덱. 사용자 '타격감·탐험 재미 없음' P0 계속 OPEN; 자동 테스트로 해결 판정 금지. **과일 게임 legacy/harvest-deck-v0.8.11 브랜치 변경 금지.**
+
+---
+
 > **2026-11-25 중요 핸드오프 · SF 게임으로 개발 방향 변경**. 사용자가 과일·체인소·뱀파이어 서바이벌식 자동 사냥과 주스 가게를 계속 확장하지 말고 **SF 행성 탐험·외계 몬스터 전투·귀여운 외계 동료 수집·우주선 제작/판매/확장·교차 카드 덱빌딩**으로 전환하도록 명시했다. 개발 착수 지침 및 수용 기준은 [docs/SF_PIVOT_PLAN.md](SF_PIVOT_PLAN.md). 이 아래의 v0.8.11 등은 안전 보존할 **이전 비교판 개발 로그**이다. 다음 실행은 최초 **벨트스크롤 외계 몬스터 전투 수직 프로토타입**을 실제 구현 시작(세로 한손 조작, 회피·반격·전리품)하라. 동료 1종, 우주선 장비 제작·판매, 모듈 확장으로 연결한다. 원본 코드와 deploy를 덮어쓰지 말고 현재 main을 확인한 다음 검증·커밋한다. 과거 지시에 따라 과일 수확/주스 병목 기능을 더 만들지 않는다.
 
 ---
