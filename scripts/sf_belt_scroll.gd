@@ -104,7 +104,7 @@ func start_run() -> void:
 	mode = Mode.COMBAT
 	hero = Vector2(90, 396)
 	facing = 1
-	health = 5 + (1 if campaign_started and captain_choice == 0 else 0)
+	health = 5 + (1 if campaign_started and captain_choice == 0 else 0) + (1 if campaign_started and ship_choice == 1 else 0)
 	scraps = 0
 	combo = 0
 	wave = 1
@@ -267,7 +267,7 @@ func strike() -> void:
 			impact_fx = 0.16
 			shake = 3.0
 			if int(e["hp"]) <= 0:
-				scraps += 3 if int(e["kind"]) == 2 else 1
+				scraps += (3 if int(e["kind"]) == 2 else 1) + (1 if campaign_started and captain_choice == 1 else 0)
 				burst(pos, GOLD, 14)
 				enemies.remove_at(i)
 	combo = mini(combo + 1, 9) if landed > 0 else 0
@@ -475,7 +475,7 @@ func paint_title() -> void:
 	draw_text("HUNT  /  SALVAGE  /  RETURN", Vector2(33, 188), 14, LILAC)
 	draw_text("ALIEN FRONTIER", Vector2(97, 474), 17, ICE)
 	draw_rect(Rect2(47, 528, 266, 67), Color("#4adaca"))
-	draw_text("TAP TO LAND", Vector2(90, 571), 26, INK)
+	draw_text("TAP TO BEGIN", Vector2(80, 571), 26, INK)
 
 func paint_setup() -> void:
 	var is_captain := mode == Mode.CAPTAIN
@@ -495,14 +495,14 @@ func paint_setup() -> void:
 		draw_text("GUARDIAN", Vector2(35, 408), 18, WHITE)
 		draw_text("+1 HP", Vector2(49, 440), 17, ICE)
 		draw_text("SCAVENGER", Vector2(198, 408), 16, WHITE)
-		draw_text("RISK TAKER", Vector2(200, 440), 12, GOLD)
+		draw_text("+1 SALVAGE", Vector2(200, 440), 12, GOLD)
 	else:
 		draw_colored_polygon(PackedVector2Array([Vector2(95, 325), Vector2(135, 367), Vector2(95, 351), Vector2(55, 367)]), ICE)
 		draw_colored_polygon(PackedVector2Array([Vector2(265, 325), Vector2(313, 369), Vector2(265, 356), Vector2(217, 369)]), GOLD)
 		draw_text("SCOUT", Vector2(55, 408), 21, WHITE)
 		draw_text("6 FUEL", Vector2(52, 440), 17, ICE)
 		draw_text("ESCORT", Vector2(224, 408), 20, WHITE)
-		draw_text("5 FUEL", Vector2(223, 440), 17, GOLD)
+		draw_text("5 FUEL / +1 HP", Vector2(198, 440), 12, GOLD)
 	draw_text("TAP A PORTRAIT TO CHOOSE", Vector2(66, 546), 15, WHITE)
 
 func paint_galaxy() -> void:
