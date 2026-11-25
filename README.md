@@ -5,6 +5,8 @@
 > 🎨 **[이미지 18종 포함 — VOID CARAVAN 비주얼 & 시스템 레퍼런스 보드](docs/VISUAL_REFERENCE_BOARD.md)** · Bannerlord / EVE / Black Flag / Absolum / Dave / RimWorld 등 공식 출처 링크·이미지 및 적용 판단
 
 
+**🎨 사용자 승인 아트 스타일:** [회화적 2D × Kindchenschema 아트 바이블](docs/ART_DIRECTION.md) · [디자인 장면별 레퍼런스 라우터](docs/DESIGN_REFERENCE_ROUTER.md) — 세션은 1~3개만 확인. 기존 18개 게임 레퍼런스는 시스템·이미지 비교 자료로 유지하며, 원작 이미지를 게임 에셋으로 사용하지 않는다.
+
 **우주 RPG의 첫 연결 플레이 빌드** · [게임 플레이](https://syjkim0125.github.io/harvest-deck/?v=galaxy0.2) · [새 설계](docs/LIVING_GALAXY_VISION.md) · [연구·검증 기록](docs/RESEARCH_LOG.md) · [과일 게임 보존 브랜치](https://github.com/syjkim0125/harvest-deck/tree/legacy/harvest-deck-v0.8.11)
 
 - **중립 선장으로 시작:** 첫 화면을 탭하고 선장 성향(Guardian: 체력+1 / Scavenger: 적 처치 시 추가 SCRAP), 출발 함선(Scout: 연료 6 / Escort: 연료 5·전투 체력+1)을 각각 선택한다.
