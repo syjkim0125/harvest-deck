@@ -1,6 +1,6 @@
 # VOID CARAVAN — YouTube Game Design Research (Six user videos verified)
 
-> **Last audit: 2026-11-25 KST.** The original six user-supplied YouTube videos are now resolved via **vidIQ**. **All six original Korean/English caption tracks actually retrieved** (timed transcripts); **four visually analyzed** (U-003, U-004, U-005, U-006), with the remaining two visual analyses requested and pending at the time of this update. The old statement "YouTube could not be accessed" is now superseded.
+> **Last audit: 2026-11-25 KST.** The original six user-supplied YouTube videos are now resolved via **vidIQ**. **All six original Korean/English caption tracks actually retrieved** (timed transcripts); **all six visually analyzed** via timestamped vidIQ walkthroughs. Every video now has both original-caption and automated scene-analysis evidence; **gameplay implementation itself remains unverified**. The old statement "YouTube could not be accessed" is now superseded.
 >
 > **Work split:** [Playable-vision review](SF_VISION_GAP_REVIEW.md) → [Theory & acceptance tests](GAME_DESIGN_THEORY.md) → [mechanic routing](REFERENCE_ROUTER.md) or [design routing](DESIGN_REFERENCE_ROUTER.md) → development/design PR. No copying of original game footage or artwork. Public YouTube presenter claims are **not independently proven scientific/market facts**.
 
@@ -8,8 +8,8 @@
 
 | ID | Verified actual title · channel | Length | Direct video | What we verified and decision |
 | --- | --- | --- | --- | --- |
-| **U-001** | **잘 팔리는 인디 게임의 6가지 유형 (히트작 26개로 보기)** · MGD - Midnight Game Devs | 9:12 | [YouTube](https://youtu.be/gLtH71EnKBU?si=ZIdQ1uJfbE9H-543) | `TRANSCRIPT_VERIFIED`: six marketing archetypes. **EXPERIMENT**: one sentence/gameplay GIF hook; not "six guaranteed success formulas". |
-| **U-002** | **결과가 뻔한 게임이 재미없는 이유 · 눈덩이 vs 아무 장치 없음 vs 역전** · 밥따뚜 | 2:08 | [YouTube Short](https://youtube.com/shorts/kHjA7wGAa_g?si=kX-K6G2kC-fsgLTA) | `TRANSCRIPT_VERIFIED`: simulated auto-battle comeback comparison; **HOLD** for future ship/boss fights, no forced rubberbanding in current exploration. |
+| **U-001** | **잘 팔리는 인디 게임의 6가지 유형 (히트작 26개로 보기)** · MGD - Midnight Game Devs | 9:12 | [YouTube](https://youtu.be/gLtH71EnKBU?si=ZIdQ1uJfbE9H-543) | `TRANSCRIPT_AND_VISUAL_VERIFIED`: six marketing archetypes. **EXPERIMENT**: one sentence/gameplay GIF hook; not "six guaranteed success formulas". |
+| **U-002** | **결과가 뻔한 게임이 재미없는 이유 · 눈덩이 vs 아무 장치 없음 vs 역전** · 밥따뚜 | 2:08 | [YouTube Short](https://youtube.com/shorts/kHjA7wGAa_g?si=kX-K6G2kC-fsgLTA) | `TRANSCRIPT_AND_VISUAL_VERIFIED`: simulated auto-battle comeback comparison; **HOLD** for future ship/boss fights, no forced rubberbanding in current exploration. |
 | **U-003** | **비가 오면 캐릭터가 젖는 도트 인디게임** · Lunacy | 0:22 | [YouTube Short](https://youtube.com/shorts/loCtLnNPDtE?si=PQckC5z9H35Judbd) | `TRANSCRIPT_AND_VISUAL_VERIFIED`: staged rainfall, wet palette, atmosphere. **HOLD until meaningful exploration exists**. |
 | **U-004** | **AI티 안나게 게임 캐릭터 만드는 방법 ┃미친 노하우 전수** · 개발자 김뽑희 | 12:02 | [YouTube](https://youtu.be/U-M_cP3Nw1Q?si=Xl3m0yaUVu39Vt_H) | `TRANSCRIPT_AND_VISUAL_VERIFIED`: visual style guide, silhouette tests, rejection log, side-by-side in-game previews. **ADOPT now for design pipeline.** |
 | **U-005** | **때리는 순간 게임이 멈춘다? 손맛의 비밀은 0.15초, 9프레임** · 몬티 | 1:21 | [YouTube Short](https://youtube.com/shorts/QeXYjJFFF_E?si=t-iRB0cMm0WzHGqS) | `TRANSCRIPT_AND_VISUAL_VERIFIED`: 0 vs 3 vs 9 hit-stop *claimed* frame differences in examples. **EXPERIMENT** in P0 combat; 9 frames is not a universal optimum. |
@@ -19,7 +19,7 @@
 
 ## 2. U-001 · Six kinds of indie games: marketability is not the same as game feel
 
-**Source video:** [gLtH71EnKBU](https://youtu.be/gLtH71EnKBU). Presenter's framing is attributed to [Chris Zukowski, How To Market A Game](https://howtomarketagame.com/2022/11/21/six-types-of-best-selling-games/), *not* an academically proven taxonomy or a guarantee of sales. Sales figures in the video are **presenter-reported**, not independently audited here.
+**Source video:** [gLtH71EnKBU](https://youtu.be/gLtH71EnKBU). Both original caption track and timestamped video-scene overview were retrieved with vidIQ; its examples visually include Tiny Glade, ANIMAL WELL, Untitled Goose Game, Dome Keeper and others. Presenter's framing is attributed to [Chris Zukowski, How To Market A Game](https://howtomarketagame.com/2022/11/21/six-types-of-best-selling-games/), *not* an academically proven taxonomy or a guarantee of sales. Sales figures in the video are **presenter-reported**, not independently audited here.
 
 - **00:35–01:49: Visually beautiful:** Tiny Glade and ANIMAL WELL; a compelling screenshot/GIF can communicate the fantasy. **Our test**: actual *gameplay* capture must visibly show an inviting alien biome/companion; poster mockup alone fails.
 - **01:49–03:16: High concept:** a one-sentence visual hook recognizable immediately. **Our candidate:** "작은 외계 친구들과 함께 살아 움직이는 은하를 항해하고, 위험한 행성을 탐험해 우주선을 키운다". Too many themes at launch dilute comprehension; A/B test an 8-second first-play GIF rather than listing 26 features.
@@ -30,7 +30,7 @@
 
 ## 3. U-002 · Outcomes decided too early, mild comeback instead of forced rubberbanding
 
-**Source:** [kHjA7wGAa_g](https://youtube.com/shorts/kHjA7wGAa_g), by 밥따뚜.
+**Source:** [kHjA7wGAa_g](https://youtube.com/shorts/kHjA7wGAa_g), by 밥따뚜. Original captions **and visual analysis of changing 3v3 match scenes + Monte Carlo probability graph** were retrieved; visual timing notes include **00:29–00:54 snowball, 00:55–01:09 no modifier, 01:10–01:40 comeback/over-tuned case**. Creator's score definition is invented for their demo, not a scientific metric.
 
 - **00:15–00:31:** author models estimated win probability by continuing a copied 3v3 auto-battle state **160 Monte Carlo simulations** per instant, then plots its movement; the "dramatic match score" is **their invented visualization metric**, not an industry-wide established quality measure.
 - **00:31–01:03:** runaway advantage (snowballing) and unmodified battles often became predictable before they actually ended.
@@ -93,4 +93,4 @@
 **Status update contract:** only promote new source findings to [GAME_DESIGN_THEORY.md](GAME_DESIGN_THEORY.md) after actual evidence. A creator-presented number remains a **creator-presented number**. Never mark a game feature `USER_VERIFIED` on the basis of video analysis. Reviewers should keep a small cache of already processed URLs and search for new videos only when a specific unresolved gap needs a different mechanic.
 
 ---
-**Historical note:** all six videos were previously logged `UNVERIFIED_CONTENT` because direct YouTube website retrieval failed. On connection to vidIQ, all six captions and video metadata were obtained, and four videos were visually analyzed. This replaces—not contradicts—the earlier inability to directly browse YouTube.
+**Historical note:** all six videos were previously logged `UNVERIFIED_CONTENT` because direct YouTube website retrieval failed. After connecting vidIQ, **all six** captions, video metadata and automated timestamped visual scene analyses were retrieved. This replaces—not contradicts—the earlier inability to directly browse YouTube.
