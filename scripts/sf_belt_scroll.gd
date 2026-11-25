@@ -2,6 +2,7 @@ extends Node2D
 ## SF pivot: playable, portrait-first belt-scroll combat experiment A.
 ## The old fruit game remains in legacy/harvest-deck-v0.8.11.
 const FONT = preload("res://assets/market-sans.otf")
+const GALAXY_SIM = preload("res://scripts/sf_galaxy_sim.gd")
 const SIZE := Vector2(360, 640)
 const FIELD := Rect2(22, 282, 316, 208)
 const INK := Color("#0b1029")
@@ -14,7 +15,7 @@ const WHITE := Color("#f0f2ff")
 const STRIKE_POS := Vector2(291, 559)
 const DODGE_POS := Vector2(68, 559)
 
-enum Mode { INTRO, COMBAT, CLEAR, DEFEAT }
+enum Mode { INTRO, COMBAT, CLEAR, DEFEAT, CAPTAIN, STARSHIP, GALAXY }
 var mode := Mode.INTRO
 var hero := Vector2(90, 396)
 var facing := 1
@@ -43,6 +44,13 @@ var move_axis := Vector2.ZERO
 var layout_scale := 1.0
 var layout_origin := Vector2.ZERO
 var random := RandomNumberGenerator.new()
+# The civilian captain's journey persists across individual combat expeditions.
+var galaxy = GALAXY_SIM.new()
+var campaign_started := false
+var captain_choice := 0
+var ship_choice := 0
+var active_sector := 0
+var mission_notice := ""
 
 func _ready() -> void:
 	random.seed = 20261125
@@ -58,11 +66,45 @@ func resize() -> void:
 func screen_to_game(point: Vector2) -> Vector2:
 	return (point - layout_origin) / maxf(layout_scale, 0.001)
 
+func start_campaign() -> void:
+	galaxy = GALAXY_SIM.new()
+	campaign_started = true
+	mode = Mode.CAPTAIN
+	queue_redraw()
+
+func choose_captain(choice: int) -> void:
+	captain_choice = clampi(choice, 0, 1)
+	mode = Mode.STARSHIP
+	queue_redraw()
+
+func choose_starship(choice: int) -> void:
+	ship_choice = clampi(choice, 0, 1)
+	galaxy.fuel = 6 if ship_choice == 0 else 5
+	mode = Mode.GALAXY
+	queue_redraw()
+
+func jump_to_system(index: int) -> bool:
+	var result: Dictionary = galaxy.travel_to(index)
+	if not result["ok"]:
+		return false
+	active_sector = index
+	mission_notice = String(result["event"])
+	start_run()
+	return true
+
+func finish_expedition(won: bool) -> void:
+	galaxy.finish_expedition(scraps, won)
+	mode = Mode.GALAXY
+	enemies.clear()
+	particles.clear()
+	impact_pause = 0.0
+	queue_redraw()
+
 func start_run() -> void:
 	mode = Mode.COMBAT
 	hero = Vector2(90, 396)
 	facing = 1
-	health = 5
+	health = 5 + (1 if campaign_started and captain_choice == 0 else 0)
 	scraps = 0
 	combo = 0
 	wave = 1
@@ -84,11 +126,12 @@ func start_run() -> void:
 func spawn_wave() -> void:
 	enemies.clear()
 	next_wave = -1.0
+	var danger: int = int(galaxy.systems[active_sector]["risk"]) if campaign_started else 0
 	if wave == 1:
-		enemies.append(make_enemy(0, Vector2(264, 395), 3))
-		enemies.append(make_enemy(1, Vector2(304, 342), 3))
+		enemies.append(make_enemy(0, Vector2(264, 395), 3 + danger))
+		enemies.append(make_enemy(1, Vector2(304, 342), 3 + danger))
 	else:
-		enemies.append(make_enemy(2, Vector2(279, 386), 8))
+		enemies.append(make_enemy(2, Vector2(279, 386), 8 + danger * 2))
 
 func make_enemy(kind: int, position: Vector2, hp: int) -> Dictionary:
 	return {
