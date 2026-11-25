@@ -3,6 +3,10 @@ extends Node2D
 ## The old fruit game remains in legacy/harvest-deck-v0.8.11.
 const NOOLI = preload("res://assets/gameplay/nooli.svg")
 const MANTIS = preload("res://assets/gameplay/amber_mantis.svg")
+const VEILWOOD = preload("res://assets/gameplay/veilwood_stage.svg")
+const VEILWOOD_FORE = preload("res://assets/gameplay/veilwood_foreground.svg")
+const EXPLORER = preload("res://assets/gameplay/explorer.svg")
+const COMBAT_CUES = preload("res://assets/gameplay/combat_cues.svg")
 const FONT = preload("res://assets/market-sans.otf")
 const GALAXY_SIM = preload("res://scripts/sf_galaxy_sim.gd")
 const SIZE := Vector2(360, 640)
@@ -16,6 +20,9 @@ const CORAL := Color("#ff647e")
 const WHITE := Color("#f0f2ff")
 const STRIKE_POS := Vector2(291, 559)
 const DODGE_POS := Vector2(68, 559)
+const REFUGE := Vector2(99, 392)
+const QUARRY := Vector2(289, 383)
+const LANDING := Vector2(180, 440)
 
 enum Mode { INTRO, COMBAT, CLEAR, DEFEAT, CAPTAIN, STARSHIP, GALAXY, EXPLORE }
 var mode := Mode.INTRO
@@ -55,11 +62,44 @@ var active_sector := 0
 var mission_notice := ""
 var expedition_route := ""
 var last_expedition_route := ""
+var rescue_pending := false
+var nooli_recruited := false
+var buddy_pos := REFUGE
+var attack_landed := false
+var impact_audio: AudioStreamPlayer
+var contact_sound: AudioStreamWAV
+var heavy_sound: AudioStreamWAV
 
 func _ready() -> void:
 	random.seed = 20261125
 	get_viewport().size_changed.connect(resize)
 	resize()
+	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+	impact_audio = AudioStreamPlayer.new()
+	add_child(impact_audio)
+	contact_sound = make_impact_sound(false)
+	heavy_sound = make_impact_sound(true)
+
+func make_impact_sound(heavy: bool) -> AudioStreamWAV:
+	var rate := 22050
+	var count := int(float(rate) * (0.13 if heavy else 0.085))
+	var pcm := PackedByteArray()
+	pcm.resize(count * 2)
+	for i in range(count):
+		var t := float(i) / float(rate)
+		var envelope := exp(-t * (34.0 if heavy else 52.0))
+		var signal_value := sin(TAU * (115.0 if heavy else 185.0) * t) * 0.65 + sin(TAU * 870.0 * t) * 0.20 * exp(-t * 75.0)
+		pcm.encode_s16(i * 2, int(clampf(signal_value * envelope, -1.0, 1.0) * 13000.0))
+	var stream := AudioStreamWAV.new()
+	stream.format = AudioStreamWAV.FORMAT_16_BITS
+	stream.mix_rate = rate
+	stream.data = pcm
+	return stream
+
+func play_contact(heavy: bool) -> void:
+	if impact_audio != null:
+		impact_audio.stream = heavy_sound if heavy else contact_sound
+		impact_audio.play()
 
 func resize() -> void:
 	var screen := get_viewport_rect().size
@@ -74,6 +114,8 @@ func start_campaign() -> void:
 	galaxy = GALAXY_SIM.new()
 	expedition_route = ""
 	last_expedition_route = ""
+	nooli_recruited = false
+	rescue_pending = false
 	campaign_started = true
 	mode = Mode.CAPTAIN
 	queue_redraw()
@@ -97,13 +139,16 @@ func jump_to_system(index: int) -> bool:
 	mission_notice = String(result["event"])
 	start_run()
 	mode = Mode.EXPLORE
-	hero = Vector2(180, 440)
+	hero = LANDING
 	enemies.clear()
 	return true
 
 func finish_expedition(won: bool) -> void:
 	last_expedition_route = expedition_route
 	galaxy.finish_expedition(scraps, won)
+	if won and rescue_pending:
+		nooli_recruited = true
+	rescue_pending = false
 	mode = Mode.GALAXY
 	enemies.clear()
 	particles.clear()
@@ -113,6 +158,9 @@ func finish_expedition(won: bool) -> void:
 func start_run() -> void:
 	mode = Mode.COMBAT
 	expedition_route = ""
+	rescue_pending = false
+	buddy_pos = REFUGE
+	attack_landed = false
 	hero = Vector2(90, 396)
 	facing = 1
 	health = 5 + (1 if campaign_started and captain_choice == 0 else 0) + (1 if campaign_started and ship_choice == 1 else 0)
@@ -154,11 +202,15 @@ func make_enemy(kind: int, position: Vector2, hp: int) -> Dictionary:
 		"telegraph": 0.0,
 		"target": position,
 		"flash": 0.0,
-		"stagger": 0.0
+		"stagger": 0.0,
+		"recovery": 0.0
 	}
 
 func _process(delta: float) -> void:
 	var dt := minf(delta, 0.05)
+	# Gesture duration must advance even during a contact pause.
+	if touch_id != -1:
+		touch_age += delta
 	# A very short contact pause keeps the impact readable without delaying the input itself.
 	# It freezes enemies, the player, attack cooldowns and impact particles together.
 	if mode == Mode.COMBAT and impact_pause > 0.0:
@@ -173,8 +225,6 @@ func _process(delta: float) -> void:
 	dodge_fx = maxf(dodge_fx - dt, 0.0)
 	invulnerable = maxf(invulnerable - dt, 0.0)
 	shake = maxf(shake - dt * 25.0, 0.0)
-	if touch_id >= 0 or touch_id == -2:
-		touch_age += dt
 	for i in range(particles.size() - 1, -1, -1):
 		var p := particles[i]
 		p["life"] = float(p["life"]) - dt
@@ -192,6 +242,9 @@ func _process(delta: float) -> void:
 			)
 		if motion.length_squared() > 0.001:
 			move_hero(motion.normalized() * 146.0 * dt)
+		if mode == Mode.EXPLORE and rescue_pending:
+			var follow_target := hero + Vector2(-float(facing) * 27.0, 12.0)
+			buddy_pos = buddy_pos.move_toward(follow_target, 125.0 * dt)
 		if mode != Mode.COMBAT:
 			queue_redraw()
 			return
@@ -214,13 +267,20 @@ func move_hero(offset: Vector2) -> void:
 		facing = 1 if offset.x > 0.0 else -1
 
 	if mode == Mode.EXPLORE:
-		if hero.distance_to(Vector2(55, 340)) < 25.0:
+		if rescue_pending:
+			if hero.distance_to(LANDING) < 20.0:
+				touch_id = -1
+				move_axis = Vector2.ZERO
+				mode = Mode.CLEAR
+		elif hero.distance_to(REFUGE) < 25.0:
 			expedition_route = "Nooli refuge"
 			scraps = 2
+			rescue_pending = true
+			buddy_pos = REFUGE
 			touch_id = -1
 			move_axis = Vector2.ZERO
-			mode = Mode.CLEAR
-		elif hero.distance_to(Vector2(305, 340)) < 25.0:
+			burst(REFUGE, ICE, 14)
+		elif hero.distance_to(QUARRY) < 25.0:
 			expedition_route = "Amber quarry"
 			# Consume the exploration gesture; release must not trigger a combat attack or evade.
 			touch_id = -1
@@ -232,7 +292,8 @@ func advance_enemies(dt: float) -> void:
 	for e in enemies:
 		e["flash"] = maxf(float(e["flash"]) - dt, 0.0)
 		e["stagger"] = maxf(float(e["stagger"]) - dt, 0.0)
-		if float(e["stagger"]) > 0.0:
+		e["recovery"] = maxf(float(e["recovery"]) - dt, 0.0)
+		if float(e["stagger"]) > 0.0 or float(e["recovery"]) > 0.0:
 			continue
 		if float(e["telegraph"]) > 0.0:
 			e["telegraph"] = float(e["telegraph"]) - dt
@@ -259,9 +320,11 @@ func advance_enemies(dt: float) -> void:
 
 func enemy_attack(e: Dictionary) -> void:
 	var target: Vector2 = e["target"]
-	burst(target, CORAL, 7)
+	e["recovery"] = 0.30
 	if hero.distance_to(target) < (52.0 if int(e["kind"]) == 2 else 42.0):
 		if invulnerable <= 0.0:
+			burst(hero, CORAL, 7)
+			play_contact(true)
 			health -= 2 if int(e["kind"]) == 2 else 1
 			invulnerable = 0.65
 			hit_fx = 0.28
@@ -277,6 +340,8 @@ func strike() -> void:
 	attack_cd = 0.34
 	attack_fx = 0.16
 	var landed := 0
+	var heavy := false
+	attack_landed = false
 	for i in range(enemies.size() - 1, -1, -1):
 		var e := enemies[i]
 		var pos: Vector2 = e["pos"]
@@ -286,6 +351,8 @@ func strike() -> void:
 			e["hp"] = int(e["hp"]) - 1
 			e["flash"] = 0.16
 			e["stagger"] = 0.22
+			e["telegraph"] = 0.0
+			e["recovery"] = 0.30
 			# Knockback is directional but stays inside the playable belt.
 			e["pos"] = Vector2(
 				clampf(pos.x + float(facing) * 22.0, FIELD.position.x + 12.0, FIELD.end.x - 12.0),
@@ -296,12 +363,16 @@ func strike() -> void:
 			impact_fx = 0.16
 			shake = 3.0
 			if int(e["hp"]) <= 0:
+				heavy = true
 				scraps += (3 if int(e["kind"]) == 2 else 1) + (1 if campaign_started and captain_choice == 1 else 0)
 				burst(pos, GOLD, 14)
 				enemies.remove_at(i)
 	combo = mini(combo + 1, 9) if landed > 0 else 0
 	if landed > 0:
-		impact_pause = 0.055
+		attack_landed = true
+		impact_pause = 0.095 if heavy else 0.055
+		shake = 5.0 if heavy else 3.0
+		play_contact(heavy)
 	if enemies.is_empty() and next_wave < 0.0:
 		next_wave = 0.86
 
@@ -446,7 +517,11 @@ func _draw() -> void:
 	if shake > 0.0:
 		jitter = Vector2(random.randf_range(-shake, shake), random.randf_range(-shake, shake))
 	draw_set_transform(layout_origin + jitter * layout_scale, 0.0, Vector2.ONE * layout_scale)
-	paint_world()
+	if mode == Mode.EXPLORE or mode == Mode.COMBAT or mode == Mode.CLEAR or mode == Mode.DEFEAT:
+		draw_texture_rect(VEILWOOD, Rect2(Vector2.ZERO, SIZE), false)
+		draw_texture_rect(VEILWOOD_FORE, Rect2(Vector2.ZERO, SIZE), false)
+	else:
+		paint_world()
 	match mode:
 		Mode.EXPLORE:
 			paint_exploration()
@@ -544,6 +619,9 @@ func paint_galaxy() -> void:
 	draw_text("FREE CAPTAIN  |  NO ALLEGIANCE", Vector2(20, 59), 12, LILAC)
 	draw_text("CREDITS %d    FUEL %d    CARGO %d" % [galaxy.credits, galaxy.fuel, galaxy.cargo], Vector2(20, 84), 15, GOLD)
 	draw_text("JUMPS %d    RENOWN %d" % [galaxy.turns, galaxy.fame], Vector2(20, 107), 14, WHITE)
+	if nooli_recruited:
+		draw_texture_rect_region(NOOLI, Rect2(299, 91, 44, 44), Rect2(256, 0, 128, 128))
+		draw_text("CREW +1", Vector2(272, 146), 10, ICE)
 	draw_text(galaxy.last_news.substr(0, 43), Vector2(20, 140), 11, LILAC)
 	draw_text(galaxy.last_encounter.substr(0, 43), Vector2(20, 164), 11, ICE)
 	draw_rect(Rect2(9, 202, 342, 350), Color("#0a132c", 0.9))
@@ -577,16 +655,28 @@ func paint_galaxy() -> void:
 	draw_text("LAST: " + last_expedition_route if not last_expedition_route.is_empty() else "GALAXY CHANGES AFTER EACH JUMP", Vector2(44, 630), 10, LILAC)
 
 func paint_exploration() -> void:
-	draw_rect(Rect2(0, 282, 360, 208), Color("#253d42"))
-	draw_line(Vector2(180, 440), Vector2(55, 340), Color("#639b83"), 32.0, true)
-	draw_line(Vector2(180, 440), Vector2(305, 340), Color("#9c7951"), 32.0, true)
-	draw_texture_rect_region(NOOLI, Rect2(31, 306, 48, 48), Rect2(0, 0, 128, 128))
-	draw_texture_rect_region(MANTIS, Rect2(273, 306, 64, 64), Rect2(0, 0, 192, 192))
-	draw_text("NOOLI REFUGE", Vector2(18, 300), 12, ICE)
-	draw_text("AMBER QUARRY", Vector2(234, 300), 12, GOLD)
-	draw_text("FOLLOW THE TRAILS", Vector2(68, 110), 20, WHITE)
-	draw_text("DRAG TO EXPLORE", Vector2(93, 550), 16, WHITE)
+	var near_refuge := hero.distance_to(REFUGE) < 65.0
+	var pulse := 0.5 + 0.5 * sin(elapsed * 3.5)
+	draw_rect(Rect2(10, 10, 340, 63), Color("#11243b", 0.82))
+	draw_text("VEILWOOD  /  LIFE SIGN", Vector2(21, 34), 17, WHITE)
+	draw_text("UNMAPPED SURFACE" if not rescue_pending else "ESCORT NOOLI TO LANDING", Vector2(21, 56), 12, ICE)
+	if not rescue_pending:
+		draw_arc(REFUGE, 23.0 + pulse * 3.0, 0.0, TAU, 32, Color(ICE, 0.6), 2.0, true)
+		var frame := 1 if near_refuge else 0
+		draw_texture_rect_region(NOOLI, Rect2(REFUGE - Vector2(28, 35), Vector2(56, 56)), Rect2(frame * 128, 0, 128, 128))
+		draw_texture_rect_region(MANTIS, Rect2(QUARRY - Vector2(40, 47), Vector2(80, 80)), Rect2(0, 0, 192, 192))
+		draw_text("LIFE SIGN", REFUGE + Vector2(-30, -44), 12, ICE)
+		draw_text("DANGER", QUARRY + Vector2(-25, -48), 12, GOLD)
+	else:
+		draw_arc(LANDING, 22.0 + pulse * 4.0, 0.0, TAU, 32, ICE, 3.0, true)
+		draw_texture_rect_region(NOOLI, Rect2(buddy_pos - Vector2(24, 34), Vector2(48, 48)), Rect2(256, 0, 128, 128))
+		for i in range(1, 5):
+			var p := hero.lerp(LANDING, float(i) / 5.0)
+			draw_circle(p, 2.5, Color(ICE, 0.55))
+		draw_text("LANDING", LANDING + Vector2(-30, 34), 12, ICE)
 	paint_hero()
+	draw_rect(Rect2(16, 574, 328, 43), Color("#11243b", 0.83))
+	draw_text("BRING YOUR NEW FRIEND HOME" if rescue_pending else "FOLLOW THE LIGHT  /  DRAG TO MOVE", Vector2(28, 600), 12, WHITE)
 
 func paint_game() -> void:
 	draw_rect(Rect2(8, 9, 344, 72), Color("#10162f", 0.9))
@@ -604,16 +694,12 @@ func paint_game() -> void:
 	for p in particles:
 		draw_circle(p["pos"], 2.2 + float(p["life"]) * 4.0, p["color"])
 	if impact_fx > 0.0:
-		# The radial contact spark only appears on a real hit, not an empty swing.
-		var ring_radius := 8.0 + (0.16 - impact_fx) * 100.0
-		draw_arc(impact_pos, ring_radius, 0.0, TAU, 24, GOLD, 3.0, true)
-		for spark in range(6):
-			var ray := Vector2.RIGHT.rotated(float(spark) * TAU / 6.0)
-			draw_line(impact_pos + ray * (ring_radius + 3.0), impact_pos + ray * (ring_radius + 13.0), WHITE, 2.0)
+		var contact_size := 72.0 + (0.16 - impact_fx) * 115.0
+		draw_texture_rect_region(COMBAT_CUES, Rect2(impact_pos - Vector2.ONE * contact_size * 0.5, Vector2.ONE * contact_size), Rect2(192, 0, 192, 192), Color(1.0, 1.0, 1.0, minf(1.0, impact_fx * 10.0)))
 	if attack_fx > 0.0:
-		var attack_point := hero + Vector2(float(facing) * 45.0, -9.0)
-		draw_arc(attack_point, 47.0, -1.1 if facing == 1 else 2.0, 1.1 if facing == 1 else 4.2, 17, WHITE, 7.0, true)
-		draw_arc(attack_point, 38.0, -1.15 if facing == 1 else 2.0, 1.15 if facing == 1 else 4.3, 17, ICE, 4.0, true)
+		var attack_point := hero + Vector2(float(facing) * 43.0, -9.0)
+		var tint := ICE if attack_landed else Color("#a8bfd8", 0.6)
+		draw_arc(attack_point, 47.0, -1.1 if facing == 1 else 2.0, 1.1 if facing == 1 else 4.2, 17, tint, 5.0 if attack_landed else 2.5, true)
 	if mode == Mode.COMBAT:
 		draw_text("DRAG  MOVE    TAP  STRIKE    FLICK  EVADE", Vector2(25, 514), 10, Color("#c8d0e9"))
 		paint_action(DODGE_POS, LILAC, "EVADE", false)
@@ -631,11 +717,12 @@ func paint_enemy(e: Dictionary) -> void:
 	var c := CORAL if kind != 1 else GOLD
 	if float(e["telegraph"]) > 0.0:
 		var target: Vector2 = e["target"]
-		draw_circle(target, 52.0 if kind == 2 else 42.0, Color("#ff5970", 0.17))
-		draw_arc(target, 52.0 if kind == 2 else 42.0, 0.0, TAU, 38, CORAL, 3.0, true)
+		var hit_radius := 52.0 if kind == 2 else 42.0
+		var cue_size := hit_radius * 192.0 / 74.0
+		draw_texture_rect_region(COMBAT_CUES, Rect2(target - Vector2.ONE * cue_size * 0.5, Vector2.ONE * cue_size), Rect2(0, 0, 192, 192))
 		draw_line(p, target, Color("#f87b89", 0.75), 2.0)
 	if kind == 0:
-		var pose := 1 if float(e["telegraph"]) > 0.0 else (2 if float(e["flash"]) > 0.0 else 0)
+		var pose := 2 if float(e["flash"]) > 0.0 else (1 if float(e["telegraph"]) > 0.0 else (3 if float(e["recovery"]) > 0.0 else 0))
 		draw_texture_rect_region(MANTIS, Rect2(p - Vector2(48, 56), Vector2(96, 96)), Rect2(pose * 192, 0, 192, 192))
 		draw_rect(Rect2(p.x - 22, p.y - 42, 44, 4), INK)
 		draw_rect(Rect2(p.x - 22, p.y - 42, 44.0 * float(e["hp"]) / float(e["max_hp"]), 4), ICE)
@@ -656,14 +743,13 @@ func paint_enemy(e: Dictionary) -> void:
 
 func paint_hero() -> void:
 	var alpha := 0.45 if invulnerable > 0.0 and int(elapsed * 18.0) % 2 == 0 else 1.0
-	draw_circle(hero + Vector2(0, 19), 20, Color("#0b122b", 0.65))
-	draw_circle(hero + Vector2(0, 0), 19, Color("#121b37", alpha))
-	draw_circle(hero + Vector2(0, -4), 15, Color("#c3befb", alpha))
-	draw_rect(Rect2(hero.x - 11, hero.y + 9, 22, 13), Color("#555d91", alpha))
-	draw_rect(Rect2(hero.x - 12, hero.y - 6, 24, 12), Color("#263452", alpha))
-	draw_rect(Rect2(hero.x - 7, hero.y - 4, 14, 7), Color("#9ef9ec", alpha))
-	draw_circle(hero + Vector2(float(facing) * 11, 11), 6, GOLD)
-	draw_line(hero + Vector2(float(facing) * 9, 10), hero + Vector2(float(facing) * 30, 8), WHITE, 5.0)
+	var bob := sin(elapsed * (12.0 if move_axis.length_squared() > 0.01 else 3.0)) * (2.3 if move_axis.length_squared() > 0.01 else 0.7)
+	var lean := float(facing) * (4.0 if attack_fx > 0.0 else 0.0)
+	draw_texture_rect(EXPLORER, Rect2(hero + Vector2(-25.0 + lean, -46.25 + bob), Vector2(50, 70)), false, Color(1.0, 1.0, 1.0, alpha))
+	if mode == Mode.COMBAT:
+		var weapon_start := hero + Vector2(float(facing) * 12.0, 3.0)
+		var weapon_end := hero + Vector2(float(facing) * (37.0 if attack_fx > 0.0 else 26.0), -6.0 if attack_fx > 0.0 else 5.0)
+		draw_line(weapon_start, weapon_end, Color("#b7f4e9", alpha), 5.0, true)
 	if hit_fx > 0.0:
 		draw_arc(hero, 27, 0.0, TAU, 32, CORAL, 4.0)
 	if dodge_fx > 0.0:
@@ -683,7 +769,9 @@ func paint_action(p: Vector2, color: Color, title: String, attack: bool) -> void
 
 func paint_result(won: bool) -> void:
 	draw_rect(Rect2(14, 304, 332, 176), Color("#11172f", 0.94))
-	draw_text("SALVAGE SECURED" if won else "SIGNAL LOST", Vector2(31, 352), 26, ICE if won else CORAL)
+	draw_text("NOOLI RESCUED" if won and rescue_pending else ("SALVAGE SECURED" if won else "SIGNAL LOST"), Vector2(31, 352), 26, ICE if won else CORAL)
+	if won and rescue_pending:
+		draw_texture_rect_region(NOOLI, Rect2(255, 367, 64, 64), Rect2(256, 0, 128, 128))
 	draw_text("SCRAP RECOVERED   %d" % scraps, Vector2(41, 392), 17, GOLD)
 	draw_text("TAP TO GALAXY" if campaign_started else "TAP TO REDEPLOY", Vector2(57, 453), 23, WHITE)
 	draw_text("SHIP WORKSHOP: NEXT MILESTONE", Vector2(47, 563), 13, LILAC)
