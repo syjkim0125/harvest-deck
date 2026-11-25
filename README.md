@@ -1,3 +1,15 @@
+# VOID CARAVAN · Living Galaxy Alpha 0.2 (2026-11-25)
+
+**우주 RPG의 첫 연결 플레이 빌드** · [게임 플레이](https://syjkim0125.github.io/harvest-deck/?v=galaxy0.2) · [새 설계](docs/LIVING_GALAXY_VISION.md) · [연구·검증 기록](docs/RESEARCH_LOG.md) · [과일 게임 보존 브랜치](https://github.com/syjkim0125/harvest-deck/tree/legacy/harvest-deck-v0.8.11)
+
+- **중립 선장으로 시작:** 첫 화면을 탭하고 선장 성향(Guardian: 체력+1 / Scavenger: 기본 능력), 출발 함선(Scout: 연료 6 / Escort: 연료 5)을 각각 선택한다.
+- **살아 있는 우주 지도:** 5개 항성 지역/연결 항로, 정부·종교·저항군·해적·민간 세력이 존재한다. 밝은 링이 표시된 연결 목적지를 탭해 항해한다. 연료 1을 쓰며 세력간 전선 뉴스와 항행 이벤트가 시드 기반으로 진행된다. 세력 지도자는 영입할 수 없다. Vela 상인 연합은 이번 지도에서 별도 소유 지역이 없는 배경 세력이다.
+- **행성 전투로 이어짐:** 목적지 항성을 누르면 기존 외계 괴물 2웨이브 전투로 진입한다. 성공·패배 후 탭하면 우주 지도로 복귀하고 회수한 SCRAP이 CARGO/크레딧에 반영된다. Freeport에서 연료가 부족하면 아래 보급 영역을 탭해 크레딧으로 충전한다.
+- **중요한 현재 제약:** 행성 탐험 갈림길·숨겨진 동료, 우주선 간 전투, 우주선 생존/내부 제작·상점·본거지·덱빌딩·직업 트리는 **아직 미구현**이다. 세력전은 첫 AI 모형이며 장기 전쟁 시뮬레이션 완성 아님. 7세·실기기 UX, 재미/타격감 체감은 여전히 검증 전이다.
+- Godot 4.6.3 / Web export: tests/sf_combat.gd + tests/sf_galaxy.gd, GitHub Pages 자동 배포(상태는 Actions 확인). 구 과일 게임의 기존 `legacy/harvest-deck-v0.8.11` 브랜치와 Git 이력은 변경하지 않는다.
+
+---
+
 # VOID CARAVAN · SF 전투 플레이 프로토타입 0.1 (2026-11-25)
 
 > **SF 게임으로 공식 전환**. [현재 모바일 게임 플레이](https://syjkim0125.github.io/harvest-deck/?v=sf0.1) · [새 개발 계획](docs/SF_PIVOT_PLAN.md) · [과일 게임 v0.8.11 보존 브랜치](https://github.com/syjkim0125/harvest-deck/tree/legacy/harvest-deck-v0.8.11)
