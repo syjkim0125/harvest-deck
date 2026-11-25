@@ -44,6 +44,16 @@ func verify() -> void:
 	game.scraps = 5
 	game.finish_expedition(true)
 	test(game.mode == 6 and game.galaxy.cargo == 5, "salvage returns to the living galaxy instead of restarting the arena")
+	game.start_campaign()
+	game.choose_captain(1)
+	game.choose_starship(1)
+	test(game.galaxy.fuel == 5, "escort ship trades fuel range for extra hull")
+	test(game.jump_to_system(1) and game.health == 6, "escort hull adds one HP for a scavenger captain")
+	game.hero = game.enemies[0]["pos"] - Vector2(58, 0)
+	game.facing = 1
+	game.enemies[0]["hp"] = 1
+	game.strike()
+	test(game.scraps == 2, "scavenger captain earns additional salvage from a defeated alien")
 	game.queue_free()
 	await process_frame
 	print("SF GALAXY: %d checks / %d failures" % [checks, errors])
