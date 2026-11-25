@@ -1,5 +1,7 @@
 # VOID CARAVAN · Living Galaxy Alpha 0.2 (2026-11-25)
 
+> 🔎 **[vidIQ 신규 게임·아트 영상 발굴/검증 로그](docs/VIDEO_RESEARCH_DISCOVERY.md)** — 독립 리뷰가 실제 P0와 맞는 영상을 검색하고 원본 자막/장면을 확인해 후보·실험·도입/보류·수용 테스트를 기록. 개발/디자인은 필요한 후보만 읽고 실제 구현 여부를 따로 검증.
+>
 > 📚 **[재미 이론·실플레이 수용 테스트](docs/GAME_DESIGN_THEORY.md)** · **[사용자 유튜브 6개·개발자 영상 리서치 목록](docs/VIDEO_RESEARCH_INBOX.md)** — 영상 내용은 검증한 뒤에만 채택; 독립 리뷰 → 개발 수정 → 디자인 통합에 사용.
 >
 > 🧭 **[매시간 개발용 기능별 레퍼런스 라우터](docs/REFERENCE_ROUTER.md)** · **[디자인 작업/통합 규칙](docs/DESIGN_HANDOFF.md)** — 작업 중인 기능에 맞는 게임 1~2개만 확인하고, 디자인은 독립 브랜치에서 검증 후 통합
