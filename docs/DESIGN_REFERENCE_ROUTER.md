@@ -1,6 +1,6 @@
 # VOID CARAVAN — Scene-Based Design Reference Router
 
-> **디자인 자동화 3시간 주기의 최소 조회 인덱스** · 2026-11-25. 우선순위: [ART_DIRECTION.md](ART_DIRECTION.md) → **이 문서에서 해당 장면 1행** → 필요 시 [VISUAL_REFERENCE_BOARD.md](VISUAL_REFERENCE_BOARD.md) **해당 절만**. 개발 기능별 출처는 [REFERENCE_ROUTER.md](REFERENCE_ROUTER.md).
+> **디자인 자동화 매시간 :15 최소 조회 인덱스** · 2026-11-25. 우선순위: [ART_DIRECTION.md](ART_DIRECTION.md) → **이 문서에서 해당 장면 1행** → 필요 시 [VISUAL_REFERENCE_BOARD.md](VISUAL_REFERENCE_BOARD.md) **해당 절만**. 개발 기능별 출처는 [REFERENCE_ROUTER.md](REFERENCE_ROUTER.md).
 >
 > **고정 DNA는 매번 재검색하지 않음**: '바닐라웨어 계열의 풍부한 회화적 2D 표현 원리 + Kindchenschema를 활용한 귀엽고 고유한 동료'가 사용자가 선택한 핵심 방향이다. 전체 자료/게임 18개/이 논문을 매회 읽지 말고, 해당 기능 제작에 직접 필요한 레퍼런스 **기본 1~2개(최대 3개)**만. 기존 캐릭터/에셋을 복제하지 않는다.
 
@@ -37,7 +37,7 @@
 ## 2 · 작업 시작 ~ PR 제출까지 최소 루프
 
 1. 최신 GitHub main+관련 UI 코드/실제 화면(가능할 때)과 다른 개발 세션의 PR을 확인. **사용자가 직접 보고한 P0 타격감·탐험 부재**를 우선.
-2. **이번 3시간 동안 실제 제작할 화면 또는 에셋 한 가지**만 지정. 이 표의 **해당 1행** 선택.
+2. **이번 한 시간에 실제 제작할 화면 또는 에셋 한 가지**만 지정. 이 표의 **해당 1행** 선택.
 3. 레퍼런스 1~2개에서 시각적 원리를 추출하고 **원본 독자 미술**로 드로잉/레이어/스프라이트 제작. 먼저 캐릭터·적·상호작용 대상 실루엣을 검증한 뒤 장식/광원 추가.
 4. 360×640과 393×852 게임 뷰포트 기준 실제 표시 크기 확인(실행 환경에 없으면 수치 계산/목업 상태를 구분). **아트 감성보다 모바일 조작과 발견할 대상 인식이 먼저**.
 5. design/<feature> 브랜치 → assets/design-proposals/<feature>/ 원본+preview 파일 및 docs/design/<feature>.md 기록 → PR. **게임 스크립트/scene/main 수정 금지.**
