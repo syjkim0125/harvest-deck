@@ -4,3 +4,5 @@
 
 
 [새 세션 인계](planning/SESSION_RESUME.md) 및 연결 자료를 먼저 읽는다. 승인/시나리오/시각자료/출처를 함께 갱신하고 재조회. 현재 D19 미결.
+
+추가 필수 자료: [대화 기록](planning/CONVERSATION_LOG.md), [실제 이미지·공식 미디어](planning/REFERENCE_EVIDENCE.md), [이론 적용](planning/THEORY_APPLICATION.md). 사용자 승인마다 원문/응답 요약 및 연결 근거를 갱신.

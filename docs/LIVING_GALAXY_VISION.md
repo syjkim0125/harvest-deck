@@ -5,6 +5,8 @@
 - [상세 결정 이력 (D01–D19)](planning/DECISION_HISTORY.md) · [레퍼런스 출처/이미지 주제](planning/REFERENCES.md) · [자체 설명 도식 SVG](planning/VISUAL_ATLAS.md) · [새 세션 인계](planning/SESSION_RESUME.md)
 - 원본 대화의 자동 검색 이미지 파일은 미확보. 저장된 SVG는 재구성 설명 도식이며 완성 인게임 시안 아님. 사용자 승인 여부를 분리한다.
 
+- [대화 보존 기록](planning/CONVERSATION_LOG.md) · [실제 참고 이미지/공식 게임 정보](planning/REFERENCE_EVIDENCE.md) · [이론→설계→검증](planning/THEORY_APPLICATION.md)
+
 ## 1. 승인된 게임 정체성
 모바일 싱글플레이 SF 오픈월드 샌드박스 액션 RPG. 무소속 민간 선장과 작은 함선으로 시작하여 살아 움직이는 은하에서 자기 삶을 선택한다. 탐험가, 상인, 용병, 해적, 개척자, 세력 지도자 등은 고정된 시작 직업이 아니라 플레이로 선택하는 삶의 방향.
 - Bannerlord: 세계·세력·정치의 뼈대.

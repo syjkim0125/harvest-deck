@@ -43,3 +43,6 @@
 | 지상 아트·공간 | painterly isometric alien jungle, cute creatures, ruins/waterfall; interconnected forest/river/ruins map; Tunic paths; Hades II branching rooms |
 
 **향후 기록 규칙:** 각 새 레퍼런스마다 ID, 작품/권리자, 실제 URL, 확인한 장면/시각, 가져올 원리, 가져오지 않을 요소, 연결 결정 ID, 상태를 기록. 검색 결과의 썸네일을 실제 스크린샷 검증으로 간주하지 않음. 사용자 영상은 확인한 원본 자막/장면과 시간코드만 기록. 새 자체 콘셉트나 설명 도식은 파일·버전·사용자 승인 상태를 Git에 남긴다.
+
+## 추가 실제 스크린샷과 게임 정보
+[REFERENCE_EVIDENCE.md](REFERENCE_EVIDENCE.md)에 신규 실제 참고 이미지 4건(권리자/게시처/원격 URL/관찰·적용/결정 ID)과 공식 미디어 링크 보존. [THEORY_APPLICATION.md](THEORY_APPLICATION.md)에서 게임 디자인 이론과 결정·검증을 연결.
