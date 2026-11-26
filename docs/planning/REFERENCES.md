@@ -52,3 +52,6 @@
 
 ## D20 연결
 Tunic의 탐험 중 실시간 교전/실제 보스 구역을 비교하고, Zelda의 환경·행동 선택과 Absolum의 타격 피드백 원리를 참고. 기존 STEP 4-5 이미지 주제: Pokémon Legends Arceus encounter(별도 전투 비교), Tunic forest enemies, Tunic Siege Engine arena. 해당 채팅 이미지 실제 원본 URL 미확보; 새 이미지 검색/영상 검증하지 않음. [자체 도식](visuals/20-ground-encounter.svg).
+
+## D21 연결
+Absolum은 공격 입력·접촉·피격 반응의 참고, Hades II는 쿼터뷰 전투 비교, Cut the Rope/Where's My Water는 직관적 입력 원리, U-008은 모바일 입력/HUD 가독성 참고. PC/콘솔 버튼 배열을 복제하지 않음. 새 외부 이미지 미사용. [자체 조작 도식](visuals/21-ground-input.svg).
