@@ -64,3 +64,6 @@ Absolum의 공격·피격 반응, Hades II의 무기별 리듬, 기존 Chainsaw 
 
 ## D24 연결
 기존 Subnautica의 생태 관찰/발견, Zelda의 환경 상호작용, Bannerlord/RimWorld의 개체·집단 지속 세계 원리를 비교 참고. 특정 작품이 D24의 혼합 생태 알고리즘을 실제 사용한다는 주장은 아님. 대화 이미지 주제: 회화적 외계 숲 군집, 포식자와 먹이, 둥지/알, 생물 이동. 자동 이미지 원본 미확보, 새 외부 출처 검증 없음. [자체 도식](visuals/24-ecology-simulation.svg).
+
+## D25 연결
+Zelda BOTW/TOTK의 곱셈 디자인 EXP-Z04, 일관된 환경 규칙 및 선택 가능한 문제 해결 원리를 참고. STEP 4-14 대화 이미지 주제: BOTW 불/풀 연소, TOTK 전기/물, BOTW Magnesis 물체 이동, BOTW 은신/야생 생물. 해당 자동 이미지 원본 미확보, 이번 원본 영상/이미지 신규 검증 없음. 기존 [Nintendo 개발자 인터뷰](https://www.nintendo.com/us/whatsnew/ask-the-developer-vol-9-the-legend-of-zelda-tears-of-the-kingdom-part-4/)와 GDD 연구 링크 유지. 원작 그래픽/능력 복제 금지. [자체 설명 도식](visuals/25-systemic-environment.svg).
