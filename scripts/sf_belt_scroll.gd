@@ -120,6 +120,10 @@ func make_impact_sound(heavy: bool) -> AudioStreamWAV:
 
 func play_contact(heavy: bool) -> void:
 	contact_count += 1
+	# Headless state tests verify the contact event, not audio-device playback.
+	# Avoid orphaned audio playbacks when the test SceneTree exits immediately.
+	if DisplayServer.get_name() == "headless":
+		return
 	if impact_audio != null:
 		impact_audio.stream = heavy_sound if heavy else contact_sound
 		impact_audio.play()
