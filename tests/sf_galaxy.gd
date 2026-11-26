@@ -41,6 +41,9 @@ func verify() -> void:
 	test(game.mode == 6 and game.galaxy.current_system == 0, "chosen civilian ship arrives at the starmap")
 	test(game.jump_to_system(1) and game.mode == GAME.Mode.EXPLORE, "travel enters spatial exploration instead of automatic combat")
 	test(game.active_sector == 1 and game.health == 6 and game.wave == 1 and game.enemies.is_empty(), "guardian starts exploration without spawning enemies")
+	test(not game.refuge_seen and not game.quarry_seen, "targets are hidden until spatial discovery")
+	var blocked: Vector2 = game.terrain_move(GAME.ROCK + Vector2(0, 36), Vector2(0, -30))
+	test(blocked.distance_to(GAME.ROCK) >= GAME.ROCK_RADIUS - 0.01, "stone blocks direct approach without clipping")
 	var initial_hero: Vector2 = game.hero
 	game.begin_touch(0, Vector2(180, 100))
 	game.end_touch(0, Vector2(180, 100))
@@ -52,23 +55,44 @@ func verify() -> void:
 			break
 		game._process(0.016)
 	test(game.mode == GAME.Mode.EXPLORE and game.rescue_pending and game.expedition_route == "Nooli refuge" and game.scraps == 2, "actual movement discovers Nooli and starts escort instead of ending the expedition")
+	test(game.refuge_seen and not game.quarry_seen, "only the approached route is revealed")
 	game.end_touch(0, GAME.REFUGE)
 	test(game.mode == GAME.Mode.EXPLORE and game.touch_id == -1 and not game.nooli_recruited, "discovery is not recruitment before extraction")
 	game.begin_touch(0, game.hero)
 	game.drag_touch(game.hero + (GAME.LANDING - game.hero).normalized() * 60.0)
 	for i in range(90):
+		if game.hero.distance_to(GAME.LANDING) < 8.0:
+			break
+		game._process(0.016)
+	game.end_touch(0, GAME.LANDING)
+	# Force a distant follower to prove the extraction gate is not hero-only.
+	game.mode = GAME.Mode.EXPLORE
+	game.buddy_pos = GAME.REFUGE
+	game.escort_trail.clear()
+	game.advance_escort(0.016)
+	test(game.mode == GAME.Mode.EXPLORE, "hero alone cannot extract a distant companion")
+	game.finish_expedition(true)
+	test(game.mode == GAME.Mode.EXPLORE and not game.nooli_recruited, "premature return cannot award crew")
+	for i in range(100):
 		if game.mode == GAME.Mode.CLEAR:
 			break
 		game._process(0.016)
 	test(game.mode == GAME.Mode.CLEAR and game.scraps == 2, "escort requires returning physically to landing without duplicating salvage")
 	game.finish_expedition(true)
 	test(game.mode == GAME.Mode.GALAXY and game.galaxy.cargo == 2 and game.last_expedition_route == "Nooli refuge" and game.nooli_recruited, "refuge reward and recruited crew persist on return")
+	game.finish_expedition(true)
+	test(game.galaxy.cargo == 2, "return reward cannot be claimed twice")
 	game.start_campaign()
 	game.choose_captain(1)
 	game.choose_starship(1)
 	test(game.galaxy.fuel == 5, "escort ship trades fuel range for extra hull")
 	test(game.last_expedition_route.is_empty() and not game.nooli_recruited, "new campaign clears previous expedition history")
 	test(game.jump_to_system(1) and game.health == 6 and game.mode == GAME.Mode.EXPLORE, "escort hull adds one HP for a scavenger captain")
+	game.hero = GAME.CACHE
+	game.discover_nearby()
+	game.discover_nearby()
+	test(game.cache_found and game.scraps == 2, "optional cache awards salvage only once")
+	game.hero = GAME.LANDING
 	game.begin_touch(0, game.hero)
 	game.drag_touch(game.hero + (GAME.QUARRY - game.hero).normalized() * 60.0)
 	for i in range(60):
@@ -85,9 +109,9 @@ func verify() -> void:
 	game.facing = 1
 	game.enemies[0]["hp"] = 1
 	game.strike()
-	test(game.scraps == 2, "scavenger captain earns additional salvage from a defeated alien")
+	test(game.scraps == 4, "scavenger captain earns additional salvage from a defeated alien")
 	game.finish_expedition(true)
-	test(game.mode == GAME.Mode.GALAXY and game.last_expedition_route == "Amber quarry" and game.galaxy.cargo == 2, "quarry route and combat salvage persist on return")
+	test(game.mode == GAME.Mode.GALAXY and game.last_expedition_route == "Amber quarry" and game.galaxy.cargo == 4, "quarry route and combat salvage persist on return")
 	game.queue_free()
 	await process_frame
 	print("SF GALAXY: %d checks / %d failures" % [checks, errors])
