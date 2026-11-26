@@ -61,3 +61,6 @@ Absolum 공격/반격/연계, Hades II 무기별 속도·범위·기동, Tunic �
 
 ## D23 연결
 Absolum의 공격·피격 반응, Hades II의 무기별 리듬, 기존 Chainsaw Juice King의 절삭/충격 연구(이전 과일 게임의 시각 원칙만, 게임 루프 복제 금지), 기존 GDC Juice It or Lose It, U-005/U-007 타격 연구 활용. [원본 연구와 출처](../GAME_DESIGN_THEORY.md), [영상 증거와 검증 수준](../VIDEO_RESEARCH_INBOX.md), [자체 타격 도식](visuals/23-combat-impact-timing.svg). 새 외부 이미지/영상 검증 없음.
+
+## D24 연결
+기존 Subnautica의 생태 관찰/발견, Zelda의 환경 상호작용, Bannerlord/RimWorld의 개체·집단 지속 세계 원리를 비교 참고. 특정 작품이 D24의 혼합 생태 알고리즘을 실제 사용한다는 주장은 아님. 대화 이미지 주제: 회화적 외계 숲 군집, 포식자와 먹이, 둥지/알, 생물 이동. 자동 이미지 원본 미확보, 새 외부 출처 검증 없음. [자체 도식](visuals/24-ecology-simulation.svg).
