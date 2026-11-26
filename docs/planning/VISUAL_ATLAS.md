@@ -1,0 +1,41 @@
+# VOID CARAVAN — 시각적 설명 도식 아틀라스
+> 대화에 표시된 설명용 그림을 기반으로 **새로 재구성한 자체 SVG**. 원본 채팅의 SVG 픽셀 단위 복제나 완성 인게임 콘셉트 아님. 저장소 상대 경로로 보존되어 세션 종료 후에도 조회 가능. 영문 라벨은 이미지 렌더링 호환성 목적. GDD의 승인된 방향과 미결 사항을 설명한다.
+
+## 01. 01-world-layers
+![01-world-layers](visuals/01-world-layers.svg)
+
+## 02. 02-faction-life
+![02-faction-life](visuals/02-faction-life.svg)
+
+## 03. 03-ship-controls
+![03-ship-controls](visuals/03-ship-controls.svg)
+
+## 04. 04-discovery-loop
+![04-discovery-loop](visuals/04-discovery-loop.svg)
+
+## 05. 05-encounter
+![05-encounter](visuals/05-encounter.svg)
+
+## 06. 06-damage
+![06-damage](visuals/06-damage.svg)
+
+## 07. 07-combat-outcomes
+![07-combat-outcomes](visuals/07-combat-outcomes.svg)
+
+## 08. 08-defeat
+![08-defeat](visuals/08-defeat.svg)
+
+## 09. 09-fleet
+![09-fleet](visuals/09-fleet.svg)
+
+## 10. 10-planet-exploration
+![10-planet-exploration](visuals/10-planet-exploration.svg)
+
+## 11. 11-information
+![11-information](visuals/11-information.svg)
+
+## 12. 12-camera-comparison
+![12-camera-comparison](visuals/12-camera-comparison.svg)
+
+## 다음 시각 자료
+행성 공간 구조 확정 후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.

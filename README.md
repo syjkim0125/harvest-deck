@@ -5,6 +5,7 @@
 **현재 상태: 기획 재정립 중 / 기존 프로토타입 방향 불합격 / 개발·디자인·독립 리뷰 자동화 중지.**
 
 ## 최신 기준
+- **[새 세션 인계 / 현재 기획 위치](docs/planning/SESSION_RESUME.md)** · [상세 결정 이력](docs/planning/DECISION_HISTORY.md) · [시각 도식 SVG](docs/planning/VISUAL_ATLAS.md) · [레퍼런스 출처](docs/planning/REFERENCES.md)
 - [통합 GDD — 승인 내용과 미결 항목](docs/LIVING_GALAXY_VISION.md)
 - [기획 진행 및 승인 규칙](docs/ROADMAP.md)
 - [아트 방향](docs/ART_DIRECTION.md) · [비주얼 레퍼런스](docs/VISUAL_REFERENCE_BOARD.md) · [기능별 레퍼런스](docs/REFERENCE_ROUTER.md)
