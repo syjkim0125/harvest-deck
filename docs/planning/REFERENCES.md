@@ -58,3 +58,6 @@ Absolum은 공격 입력·접촉·피격 반응의 참고, Hades II는 쿼터뷰
 
 ## D22 연결
 Absolum 공격/반격/연계, Hades II 무기별 속도·범위·기동, Tunic 방어·회피를 원리 비교에 사용. 기존 STEP 4-8 대화 이미지 주제: Absolum parry counter, Hades II axe dodge, Tunic shield block; 회화적 SF 검/방패, 쌍검, 중량 해머, 에너지 소총, 드론, 외계 유물. 대화 이미지 원본 URL/파일 미확보이며 새 외부 이미지 검증 없음. [자체 도식](visuals/22-ground-combat-styles.svg).
+
+## D23 연결
+Absolum의 공격·피격 반응, Hades II의 무기별 리듬, 기존 Chainsaw Juice King의 절삭/충격 연구(이전 과일 게임의 시각 원칙만, 게임 루프 복제 금지), 기존 GDC Juice It or Lose It, U-005/U-007 타격 연구 활용. [원본 연구와 출처](../GAME_DESIGN_THEORY.md), [영상 증거와 검증 수준](../VIDEO_RESEARCH_INBOX.md), [자체 타격 도식](visuals/23-combat-impact-timing.svg). 새 외부 이미지/영상 검증 없음.
