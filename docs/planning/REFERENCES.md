@@ -49,3 +49,6 @@
 
 ## D19 연결
 기존 Tunic/젤다의 연결 지형과 발견 원리를 지속 지표에 참고하고 Hades II의 분기 공간은 일부 절차 생성 구역의 비교 후보로만 활용. Hades II의 전체 원정 초기화나 방 단위 강제 전투를 채택한 것은 아님. [D19 자체 설명 그림](visuals/19-planet-regions-procedural.svg). 새 외부 이미지 미사용.
+
+## D20 연결
+Tunic의 탐험 중 실시간 교전/실제 보스 구역을 비교하고, Zelda의 환경·행동 선택과 Absolum의 타격 피드백 원리를 참고. 기존 STEP 4-5 이미지 주제: Pokémon Legends Arceus encounter(별도 전투 비교), Tunic forest enemies, Tunic Siege Engine arena. 해당 채팅 이미지 실제 원본 URL 미확보; 새 이미지 검색/영상 검증하지 않음. [자체 도식](visuals/20-ground-encounter.svg).
