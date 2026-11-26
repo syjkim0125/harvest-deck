@@ -5,7 +5,8 @@ const NOOLI = preload("res://assets/gameplay/nooli.svg")
 const MANTIS = preload("res://assets/gameplay/amber_mantis.svg")
 const VEILWOOD = preload("res://assets/gameplay/veilwood_stage.svg")
 const VEILWOOD_FORE = preload("res://assets/gameplay/veilwood_foreground.svg")
-const EXPLORER = preload("res://assets/gameplay/explorer.svg")
+const EXPLORER = preload("res://assets/gameplay/explorer_motion.svg")
+const ROCK_ART = preload("res://assets/gameplay/veilwood_rock.svg")
 const COMBAT_CUES = preload("res://assets/gameplay/combat_cues.svg")
 const FONT = preload("res://assets/market-sans.otf")
 const GALAXY_SIM = preload("res://scripts/sf_galaxy_sim.gd")
@@ -23,6 +24,10 @@ const DODGE_POS := Vector2(68, 559)
 const REFUGE := Vector2(99, 392)
 const QUARRY := Vector2(289, 383)
 const LANDING := Vector2(180, 440)
+const ROCK := Vector2(184, 391)
+const ROCK_RADIUS := 23.0
+const CACHE := Vector2(180, 325)
+const LANDING_RADIUS := 24.0
 
 enum Mode { INTRO, COMBAT, CLEAR, DEFEAT, CAPTAIN, STARSHIP, GALAXY, EXPLORE }
 var mode := Mode.INTRO
@@ -66,6 +71,15 @@ var rescue_pending := false
 var nooli_recruited := false
 var buddy_pos := REFUGE
 var attack_landed := false
+var refuge_seen := false
+var quarry_seen := false
+var cache_found := false
+var learned_move := false
+var learned_attack := false
+var learned_evade := false
+var escort_trail: Array[Vector2] = []
+var fallen: Array[Dictionary] = []
+var contact_count := 0
 var impact_audio: AudioStreamPlayer
 var contact_sound: AudioStreamWAV
 var heavy_sound: AudioStreamWAV
@@ -79,6 +93,13 @@ func _ready() -> void:
 	add_child(impact_audio)
 	contact_sound = make_impact_sound(false)
 	heavy_sound = make_impact_sound(true)
+
+func _exit_tree() -> void:
+	if impact_audio != null:
+		impact_audio.stop()
+		impact_audio.stream = null
+	contact_sound = null
+	heavy_sound = null
 
 func make_impact_sound(heavy: bool) -> AudioStreamWAV:
 	var rate := 22050
@@ -97,6 +118,7 @@ func make_impact_sound(heavy: bool) -> AudioStreamWAV:
 	return stream
 
 func play_contact(heavy: bool) -> void:
+	contact_count += 1
 	if impact_audio != null:
 		impact_audio.stream = heavy_sound if heavy else contact_sound
 		impact_audio.play()
@@ -116,6 +138,9 @@ func start_campaign() -> void:
 	last_expedition_route = ""
 	nooli_recruited = false
 	rescue_pending = false
+	learned_move = false
+	learned_attack = false
+	learned_evade = false
 	campaign_started = true
 	mode = Mode.CAPTAIN
 	queue_redraw()
@@ -144,11 +169,15 @@ func jump_to_system(index: int) -> bool:
 	return true
 
 func finish_expedition(won: bool) -> void:
+	if mode == Mode.GALAXY or (rescue_pending and mode != Mode.CLEAR and won):
+		return
 	last_expedition_route = expedition_route
 	galaxy.finish_expedition(scraps, won)
 	if won and rescue_pending:
 		nooli_recruited = true
 	rescue_pending = false
+	escort_trail.clear()
+	fallen.clear()
 	mode = Mode.GALAXY
 	enemies.clear()
 	particles.clear()
@@ -160,6 +189,12 @@ func start_run() -> void:
 	expedition_route = ""
 	rescue_pending = false
 	buddy_pos = REFUGE
+	refuge_seen = false
+	quarry_seen = false
+	cache_found = false
+	escort_trail.clear()
+	fallen.clear()
+	contact_count = 0
 	attack_landed = false
 	hero = Vector2(90, 396)
 	facing = 1
@@ -180,6 +215,9 @@ func start_run() -> void:
 	touch_id = -1
 	move_axis = Vector2.ZERO
 	particles.clear()
+	if impact_audio != null:
+		impact_audio.stop()
+		impact_audio.stream = null
 	spawn_wave()
 
 func spawn_wave() -> void:
@@ -243,12 +281,15 @@ func _process(delta: float) -> void:
 		if motion.length_squared() > 0.001:
 			move_hero(motion.normalized() * 146.0 * dt)
 		if mode == Mode.EXPLORE and rescue_pending:
-			var follow_target := hero + Vector2(-float(facing) * 27.0, 12.0)
-			buddy_pos = buddy_pos.move_toward(follow_target, 125.0 * dt)
+			advance_escort(dt)
 		if mode != Mode.COMBAT:
 			queue_redraw()
 			return
 		advance_enemies(dt)
+		for i in range(fallen.size() - 1, -1, -1):
+			fallen[i]["life"] = float(fallen[i]["life"]) - dt
+			if float(fallen[i]["life"]) <= 0.0:
+				fallen.remove_at(i)
 		if next_wave >= 0.0:
 			next_wave -= dt
 			if next_wave < 0.0:
@@ -259,34 +300,80 @@ func _process(delta: float) -> void:
 					mode = Mode.CLEAR
 	queue_redraw()
 
+func clamp_field(p: Vector2) -> Vector2:
+	return Vector2(clampf(p.x, FIELD.position.x + 12.0, FIELD.end.x - 12.0), clampf(p.y, FIELD.position.y + 30.0, FIELD.end.y - 22.0))
+
+func terrain_move(from: Vector2, offset: Vector2) -> Vector2:
+	# Substep long input so a flick cannot tunnel through the standing stone.
+	var steps := maxi(1, int(ceil(offset.length() / 5.0)))
+	var p := from
+	for i in range(steps):
+		var next := clamp_field(p + offset / float(steps))
+		var away := next - ROCK
+		if away.length() < ROCK_RADIUS:
+			if away.length_squared() < 0.001:
+				away = p - ROCK
+			if away.length_squared() < 0.001:
+				away = Vector2.DOWN
+			next = clamp_field(ROCK + away.normalized() * ROCK_RADIUS)
+		p = next
+	return p
+
+func discover_nearby() -> void:
+	if not refuge_seen and hero.distance_to(REFUGE) < 57.0:
+		refuge_seen = true
+		burst(REFUGE, ICE, 6)
+	if not quarry_seen and hero.distance_to(QUARRY) < 62.0:
+		quarry_seen = true
+	if not cache_found and hero.distance_to(CACHE) < 16.0:
+		cache_found = true
+		scraps += 2
+		burst(CACHE, GOLD, 12)
+
+func advance_escort(dt: float) -> void:
+	# Follow the traveled path rather than cutting across the stone.
+	var target := hero
+	if not escort_trail.is_empty():
+		target = escort_trail[0]
+	buddy_pos = terrain_move(buddy_pos, target - buddy_pos if buddy_pos.distance_to(target) <= 125.0 * dt else (target - buddy_pos).normalized() * 125.0 * dt)
+	if not escort_trail.is_empty() and buddy_pos.distance_to(target) < 6.0:
+		escort_trail.pop_front()
+	if hero.distance_to(LANDING) < LANDING_RADIUS and buddy_pos.distance_to(LANDING) < LANDING_RADIUS:
+		touch_id = -1
+		move_axis = Vector2.ZERO
+		mode = Mode.CLEAR
+
 func move_hero(offset: Vector2) -> void:
-	hero += offset
-	hero.x = clampf(hero.x, FIELD.position.x + 12.0, FIELD.end.x - 12.0)
-	hero.y = clampf(hero.y, FIELD.position.y + 30.0, FIELD.end.y - 22.0)
+	var old := hero
+	hero = terrain_move(hero, offset) if mode == Mode.EXPLORE else clamp_field(hero + offset)
+	if hero.distance_to(old) > 0.5:
+		learned_move = true
 	if absf(offset.x) > 0.05:
 		facing = 1 if offset.x > 0.0 else -1
-
-	if mode == Mode.EXPLORE:
-		if rescue_pending:
-			if hero.distance_to(LANDING) < 20.0:
-				touch_id = -1
-				move_axis = Vector2.ZERO
-				mode = Mode.CLEAR
-		elif hero.distance_to(REFUGE) < 25.0:
-			expedition_route = "Nooli refuge"
-			scraps = 2
-			rescue_pending = true
-			buddy_pos = REFUGE
-			touch_id = -1
-			move_axis = Vector2.ZERO
-			burst(REFUGE, ICE, 14)
-		elif hero.distance_to(QUARRY) < 25.0:
-			expedition_route = "Amber quarry"
-			# Consume the exploration gesture; release must not trigger a combat attack or evade.
-			touch_id = -1
-			move_axis = Vector2.ZERO
-			mode = Mode.COMBAT
-			spawn_wave()
+	if mode != Mode.EXPLORE:
+		return
+	discover_nearby()
+	if rescue_pending:
+		if escort_trail.is_empty() or escort_trail.back().distance_to(hero) > 9.0:
+			escort_trail.append(hero)
+		# Arrival is decided in advance_escort, including while player is stationary.
+		return
+	if refuge_seen and hero.distance_to(REFUGE) < 25.0:
+		expedition_route = "Nooli refuge"
+		scraps += 2
+		rescue_pending = true
+		buddy_pos = REFUGE
+		escort_trail.clear()
+		escort_trail.append(hero)
+		touch_id = -1
+		move_axis = Vector2.ZERO
+		burst(REFUGE, ICE, 14)
+	elif quarry_seen and hero.distance_to(QUARRY) < 25.0:
+		expedition_route = "Amber quarry"
+		touch_id = -1
+		move_axis = Vector2.ZERO
+		mode = Mode.COMBAT
+		spawn_wave()
 
 func advance_enemies(dt: float) -> void:
 	for e in enemies:
@@ -337,6 +424,7 @@ func enemy_attack(e: Dictionary) -> void:
 func strike() -> void:
 	if mode != Mode.COMBAT or attack_cd > 0.0 or next_wave >= 0.0:
 		return
+	learned_attack = true
 	attack_cd = 0.34
 	attack_fx = 0.16
 	var landed := 0
@@ -366,6 +454,7 @@ func strike() -> void:
 				heavy = true
 				scraps += (3 if int(e["kind"]) == 2 else 1) + (1 if campaign_started and captain_choice == 1 else 0)
 				burst(pos, GOLD, 14)
+				fallen.append({"pos": e["pos"], "kind": e["kind"], "life": 0.40, "direction": facing})
 				enemies.remove_at(i)
 	combo = mini(combo + 1, 9) if landed > 0 else 0
 	if landed > 0:
@@ -382,6 +471,7 @@ func dodge(direction: Vector2) -> void:
 	var axis := direction.normalized()
 	if axis.length_squared() < 0.1:
 		axis = Vector2(float(facing), 0.0)
+	learned_evade = true
 	move_hero(axis * 75.0)
 	invulnerable = maxf(invulnerable, 0.32)
 	dodge_fx = 0.50
@@ -519,7 +609,6 @@ func _draw() -> void:
 	draw_set_transform(layout_origin + jitter * layout_scale, 0.0, Vector2.ONE * layout_scale)
 	if mode == Mode.EXPLORE or mode == Mode.COMBAT or mode == Mode.CLEAR or mode == Mode.DEFEAT:
 		draw_texture_rect(VEILWOOD, Rect2(Vector2.ZERO, SIZE), false)
-		draw_texture_rect(VEILWOOD_FORE, Rect2(Vector2.ZERO, SIZE), false)
 	else:
 		paint_world()
 	match mode:
@@ -654,43 +743,59 @@ func paint_galaxy() -> void:
 	draw_text("AT FREEPORT: TAP HERE TO REFUEL 4C", Vector2(30, 604), 11, ICE)
 	draw_text("LAST: " + last_expedition_route if not last_expedition_route.is_empty() else "GALAXY CHANGES AFTER EACH JUMP", Vector2(44, 630), 10, LILAC)
 
+func paint_stone() -> void:
+	draw_texture_rect(ROCK_ART, Rect2(ROCK + Vector2(-26, -34), Vector2(52, 60)), false)
+
 func paint_exploration() -> void:
-	var near_refuge := hero.distance_to(REFUGE) < 65.0
 	var pulse := 0.5 + 0.5 * sin(elapsed * 3.5)
-	draw_rect(Rect2(10, 10, 340, 63), Color("#11243b", 0.82))
-	draw_text("VEILWOOD  /  LIFE SIGN", Vector2(21, 34), 17, WHITE)
-	draw_text("UNMAPPED SURFACE" if not rescue_pending else "ESCORT NOOLI TO LANDING", Vector2(21, 56), 12, ICE)
+	if hero.y >= ROCK.y:
+		paint_stone()
 	if not rescue_pending:
-		draw_arc(REFUGE, 23.0 + pulse * 3.0, 0.0, TAU, 32, Color(ICE, 0.6), 2.0, true)
-		var frame := 1 if near_refuge else 0
-		draw_texture_rect_region(NOOLI, Rect2(REFUGE - Vector2(28, 35), Vector2(56, 56)), Rect2(frame * 128, 0, 128, 128))
-		draw_texture_rect_region(MANTIS, Rect2(QUARRY - Vector2(40, 47), Vector2(80, 80)), Rect2(0, 0, 192, 192))
-		draw_text("LIFE SIGN", REFUGE + Vector2(-30, -44), 12, ICE)
-		draw_text("DANGER", QUARRY + Vector2(-25, -48), 12, GOLD)
+		for i in range(3):
+			var p := LANDING.lerp(REFUGE, 0.30 + float(i) * 0.18)
+			draw_circle(p, 2.0 + pulse * 1.5, Color(ICE, 0.70))
+		if refuge_seen:
+			draw_arc(REFUGE, 23.0 + pulse * 3.0, 0.0, TAU, 32, Color(ICE, 0.6), 2.0, true)
+			draw_texture_rect_region(NOOLI, Rect2(REFUGE - Vector2(28, 35), Vector2(56, 56)), Rect2(128, 0, 128, 128))
+		if quarry_seen:
+			draw_texture_rect_region(MANTIS, Rect2(QUARRY - Vector2(40, 47), Vector2(80, 80)), Rect2(192, 0, 192, 192))
 	else:
-		draw_arc(LANDING, 22.0 + pulse * 4.0, 0.0, TAU, 32, ICE, 3.0, true)
-		draw_texture_rect_region(NOOLI, Rect2(buddy_pos - Vector2(24, 34), Vector2(48, 48)), Rect2(256, 0, 128, 128))
-		for i in range(1, 5):
-			var p := hero.lerp(LANDING, float(i) / 5.0)
-			draw_circle(p, 2.5, Color(ICE, 0.55))
-		draw_text("LANDING", LANDING + Vector2(-30, 34), 12, ICE)
+		draw_arc(LANDING, LANDING_RADIUS, 0.0, TAU, 32, ICE, 3.0, true)
+		draw_texture_rect_region(NOOLI, Rect2(buddy_pos - Vector2(24, 34 + sin(elapsed * 9.0) * 1.5), Vector2(48, 48)), Rect2(256, 0, 128, 128))
+		if hero.distance_to(LANDING) < LANDING_RADIUS and buddy_pos.distance_to(LANDING) >= LANDING_RADIUS:
+			draw_arc(buddy_pos, 19.0 + pulse * 4.0, 0.0, TAU, 24, ICE, 2.0, true)
+	if not cache_found:
+		draw_colored_polygon(PackedVector2Array([CACHE + Vector2(0,-9), CACHE + Vector2(7,0), CACHE + Vector2(0,9), CACHE + Vector2(-7,0)]), Color(GOLD, 0.45 + pulse * 0.45))
 	paint_hero()
-	draw_rect(Rect2(16, 574, 328, 43), Color("#11243b", 0.83))
-	draw_text("BRING YOUR NEW FRIEND HOME" if rescue_pending else "FOLLOW THE LIGHT  /  DRAG TO MOVE", Vector2(28, 600), 12, WHITE)
+	if hero.y < ROCK.y:
+		paint_stone()
+	draw_texture_rect(VEILWOOD_FORE, Rect2(Vector2.ZERO, SIZE), false)
+	for p in particles:
+		draw_circle(p["pos"], 2.2 + float(p["life"]) * 4.0, p["color"])
+	draw_rect(Rect2(10, 10, 340, 48), Color("#11243b", 0.82))
+	draw_text("VEILWOOD", Vector2(21, 40), 17, WHITE)
+	draw_text("SCRAP %02d" % scraps, Vector2(240, 40), 13, GOLD)
+	if rescue_pending:
+		draw_text("WAIT FOR NOOLI" if hero.distance_to(LANDING) < LANDING_RADIUS else "RETURN TO LANDING", Vector2(78, 600), 14, ICE)
+	elif not learned_move:
+		draw_text("DRAG TO MOVE", Vector2(122, 600), 14, WHITE)
 
 func paint_game() -> void:
 	draw_rect(Rect2(8, 9, 344, 72), Color("#10162f", 0.9))
 	var sector_title := String(galaxy.systems[active_sector]["name"]) if campaign_started else "TITAN MOON"
 	draw_text("PLANET    /    " + sector_title, Vector2(20, 30), 14, ICE)
-	for i in range(5):
+	for i in range(5 + (1 if campaign_started and captain_choice == 0 else 0) + (1 if campaign_started and ship_choice == 1 else 0)):
 		draw_circle(Vector2(27 + i * 22, 54), 7, CORAL if i < health else Color("#35334b"))
 	draw_text("SCRAP  %02d" % scraps, Vector2(228, 59), 18, GOLD)
 	draw_text(expedition_route if not expedition_route.is_empty() else "WAVE  %d / 2" % wave, Vector2(20, 111), 15, WHITE)
 	if combo > 1 and mode == Mode.COMBAT:
 		draw_text("%d HIT COMBO" % combo, Vector2(219, 111), 16, ICE)
+	for corpse in fallen:
+		paint_fallen(corpse)
 	for e in enemies:
 		paint_enemy(e)
 	paint_hero()
+	draw_texture_rect(VEILWOOD_FORE, Rect2(Vector2.ZERO, SIZE), false)
 	for p in particles:
 		draw_circle(p["pos"], 2.2 + float(p["life"]) * 4.0, p["color"])
 	if impact_fx > 0.0:
@@ -701,10 +806,10 @@ func paint_game() -> void:
 		var tint := ICE if attack_landed else Color("#a8bfd8", 0.6)
 		draw_arc(attack_point, 47.0, -1.1 if facing == 1 else 2.0, 1.1 if facing == 1 else 4.2, 17, tint, 5.0 if attack_landed else 2.5, true)
 	if mode == Mode.COMBAT:
-		draw_text("DRAG  MOVE    TAP  STRIKE    FLICK  EVADE", Vector2(25, 514), 10, Color("#c8d0e9"))
+		if not learned_attack or not learned_evade:
+			draw_text("TAP TO STRIKE" if not learned_attack else "FLICK TO EVADE", Vector2(114, 514), 12, WHITE)
 		paint_action(DODGE_POS, LILAC, "EVADE", false)
 		paint_action(STRIKE_POS, ICE, "STRIKE", true)
-		draw_text("WASD  /  SPACE  /  SHIFT", Vector2(93, 631), 10, Color("#777eaa"))
 	elif mode == Mode.CLEAR:
 		paint_result(true)
 	elif mode == Mode.DEFEAT:
@@ -741,15 +846,30 @@ func paint_enemy(e: Dictionary) -> void:
 	draw_rect(Rect2(p.x - 22, p.y - radius - 16, 44, 4), INK)
 	draw_rect(Rect2(p.x - 22, p.y - radius - 16, 44.0 * float(e["hp"]) / float(e["max_hp"]), 4), ICE)
 
+func paint_fallen(corpse: Dictionary) -> void:
+	var p: Vector2 = corpse["pos"]
+	var life := float(corpse["life"]) / 0.40
+	var direction := float(corpse["direction"])
+	var kind := int(corpse["kind"])
+	var size := 96.0 if kind != 2 else 120.0
+	p += Vector2(direction * (1.0 - life) * 18.0, (1.0 - life) * 9.0)
+	draw_texture_rect_region(MANTIS, Rect2(p - Vector2(size * 0.5, size * 0.58), Vector2(size, size)), Rect2(384, 0, 192, 192), Color(1.0, 0.85, 0.72, life))
+
+func hero_pose() -> int:
+	if attack_fx > 0.08:
+		return 2 if attack_landed else 3
+	if attack_cd > 0.0:
+		return 4
+	if move_axis.length_squared() > 0.01:
+		return 1 if int(elapsed * 12.0) % 2 == 0 else 0
+	return 0
+
 func paint_hero() -> void:
 	var alpha := 0.45 if invulnerable > 0.0 and int(elapsed * 18.0) % 2 == 0 else 1.0
-	var bob := sin(elapsed * (12.0 if move_axis.length_squared() > 0.01 else 3.0)) * (2.3 if move_axis.length_squared() > 0.01 else 0.7)
-	var lean := float(facing) * (4.0 if attack_fx > 0.0 else 0.0)
-	draw_texture_rect(EXPLORER, Rect2(hero + Vector2(-25.0 + lean, -46.25 + bob), Vector2(50, 70)), false, Color(1.0, 1.0, 1.0, alpha))
-	if mode == Mode.COMBAT:
-		var weapon_start := hero + Vector2(float(facing) * 12.0, 3.0)
-		var weapon_end := hero + Vector2(float(facing) * (37.0 if attack_fx > 0.0 else 26.0), -6.0 if attack_fx > 0.0 else 5.0)
-		draw_line(weapon_start, weapon_end, Color("#b7f4e9", alpha), 5.0, true)
+	var pose := hero_pose()
+	var frame := pose + (5 if facing < 0 else 0)
+	var bob := sin(elapsed * 12.0) * 1.5 if pose == 1 else 0.0
+	draw_texture_rect_region(EXPLORER, Rect2(hero + Vector2(-38.0, -48.0 + bob), Vector2(76, 76)), Rect2(frame * 192, 0, 192, 192), Color(1.0, 1.0, 1.0, alpha))
 	if hit_fx > 0.0:
 		draw_arc(hero, 27, 0.0, TAU, 32, CORAL, 4.0)
 	if dodge_fx > 0.0:
