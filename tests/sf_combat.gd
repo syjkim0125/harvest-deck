@@ -20,7 +20,9 @@ func verify() -> void:
 	game.strike()
 	test(int(game.enemies[0]["hp"]) == 2, "close-range facing attack damages the crawler")
 	test(game.attack_landed and float(game.enemies[0]["telegraph"]) == 0.0 and float(game.enemies[0]["recovery"]) > 0.0, "confirmed hit interrupts enemy windup and enters recovery")
-	test(game.hero_pose() == 2 and game.contact_count == 1, "contact pose and sound share a confirmed event")
+	test(game.hero_pose() == 2 and game.contact_count == 1, "contact pose and sound request share a confirmed event")
+	if DisplayServer.get_name() == "headless":
+		test(not game.impact_audio.playing, "headless tests verify sound request without creating a playback")
 	test(game.combo == 1 and game.attack_cd > 0.0, "confirmed strike has combo and cooldown")
 	test(game.impact_pause > 0.0 and game.impact_fx > 0.0, "confirmed contact starts a visible impact stop")
 	var stop_before: float = game.impact_pause
