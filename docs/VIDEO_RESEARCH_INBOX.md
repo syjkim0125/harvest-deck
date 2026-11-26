@@ -94,3 +94,12 @@
 
 ---
 **Historical note:** all six videos were previously logged `UNVERIFIED_CONTENT` because direct YouTube website retrieval failed. After connecting vidIQ, **all six** captions, video metadata and automated timestamped visual scene analyses were retrieved. This replaces—not contradicts—the earlier inability to directly browse YouTube.
+
+## U-007 — Synchronized impact feedback (2026-11-26)
+Source: https://youtube.com/shorts/cv0-_-mYhsU ; 74 seconds; title/author/publication date not independently verified. vidIQ automated scene analysis, 10 credits previously charged, zero additional polling credits. 00:19–00:27 flat damage demo; 00:28–00:39 hitstop, knockback and synchronized sound comparison; 01:00–01:02 hit flash. Not direct gameplay or proof of universal optimal timing. EXPERIMENT, extends U-005 with audio synchronization. P0-VISION-002: after existing exploration priority, inspect sf_belt_scroll.gd strike/impact_pause and route confirmed hits through one synchronized feedback event; misses must not trigger it. Compare existing ~55ms baseline with light 40–60ms and heavy 90–120ms as proposed trial values only. Test hit/miss/evade, input buffering and 60fps/variable mobile fps; capture identical encounter A/B with audio and obtain human feedback. Design: Amber Mantis PR #5 contact/recoil poses, compare in actual 360×640 screen, not poster. No game code changed or play verification performed. Development and design sessions should read this PR; retain P0-VISION-001 as first priority.
+
+## U-008 — Mobile UX (2026-11-26)
+Source https://youtu.be/bnN0bVD4KgY. Korean transcript previously verified 0:00–8:07; visuals not independently inspected. ADOPT consistent roles, smaller HUD, contextual hints, touch state and clear waiting/undo safeguards. See design PR #4 docs/design/u008-mobile-ux-acceptance-20261126.md. #11 integrates exploration/combat hints and extraction waiting; navigation HUD experiment in next development PR. Native capture and human mobile acceptance remain separate.
+
+## U-009 — pending source verification
+Source https://youtu.be/-nomd_TO3pg. PENDING_SOURCE_VERIFICATION; vidIQ credit balance exhausted and direct source unavailable in prior sessions. No interpretation, title, claims or adoption until source verified. Do not buy additional credits or repeat paid calls.
