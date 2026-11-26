@@ -1,3 +1,5 @@
+> **연구/기술 기록 전용 (2026-11-26):** [통합 GDD](LIVING_GALAXY_VISION.md)가 우선. 기존 시간별 실행 규칙, 구현 요청과 우선순위는 폐기. 연구 결과는 가설이며 구현 승인 아님. 자동화 중지. 원본 검증 없는 주장 금지; vidIQ 잔액 부족 시 반복 호출 금지.
+
 # VOID CARAVAN — New Game Design & Art Video Discovery Log
 
 > **Independent hourly-review research cache** · established 2026-11-25.  
@@ -5,23 +7,8 @@
 >
 > **Goal:** proactive discovery of game design and art-production lessons through vidIQ, but only when linked to a currently observed deficit in actual VOID CARAVAN gameplay or a design PR. Search results are not an instruction to blindly increase features. Verified videos are references, not reusable audiovisual assets.
 
-## Search / analysis loop (used by independent reviewer)
-
-1. **Check the current game first:** `main` commit, deployed Godot/Pages screen if executable, user's stated P0, latest independent review and design/development PRs. Choose only **one missing playable behavior** or **one visible design issue**.
-2. **Keyword discovery:** search for the issue with `vidiq_youtube_search` (not a generic 'game tips' query); when relevant, use `vidiq_outliers` to find niche maker demonstrations. Prefer game developers, official talks/production diaries, reputable original sources, then practitioner experiments. Popularity and clickbait titles **are not evidence**.
-3. **Deduplicate:** check this log, `VIDEO_RESEARCH_INBOX.md`, `GAME_DESIGN_THEORY.md`; do not repeatedly fetch the same canonical video. Metadata alone = `METADATA_ONLY`.
-4. **Verify progressively:** `vidiq_get_videos_by_ids` can batch metadata; `vidiq_video_transcript` gives original captions and timestamps. If visual motion/animation/effects matter, use `vidiq_video_watch` for long-form or `vidiq_watch_shortform_content` for Shorts **only after one concrete candidate is clearly worth its credits**. Tag as `TRANSCRIPT_VERIFIED` or `TRANSCRIPT_AND_VISUAL_VERIFIED`. A video narrator's numbers remain creator claims until independently reproduced.
-5. **Decide** `ADOPT` (low-risk, evidence-based design requirement), `EXPERIMENT` (test in Godot/side-by-side art), `HOLD` (useful later but not now), or `REJECT` (incompatible with user vision). Record exact timestamp/URL, observed cue, why it helps this user, expected implementation behavior, acceptance test, and implementation/design owner.
-6. **Hand off:** independent reviewer records **one action** in a `review/*` PR or `SF_VISION_GAP_REVIEW.md`. Actual gameplay developer uses `scripts/`, `scenes/`, `tests/` + CI/Pages to implement. Designer uses `design/*` proposal branches with original art + mobile composition tests. Reviewer does **not** merge experimental game code or copy third-party sprites.
-7. **Recheck result:** only claim `CODED`, `CI_CHECKED`, `PLAYABLE`, `USER_VERIFIED` with matching evidence. An accessible tutorial does not imply a successful Godot implementation.
-
-### Credit / permission safety
-
-- **Review every hour; do not pay to research every hour.** Reuse same-topic research for at least 24 hours unless actual P0 changes. Target **one new search and one promising transcript per day** (roughly 10 vidIQ credits at listed rates); optional expensive scene analysis only when distinctly needed for movement/art and current credit availability supports it. Keep new spend ordinarily below **30 credits/day**, with no purchase/subscription changes.
-- This project uses **public videos only**. Never link/manage a private YouTube channel, edit videos/playlists, upload/publish, or request new permissions through research automation. Personal creator analytics is irrelevant.
-- When rate limits / credits / access prevent a video, record `BLOCKED` and instead use prior verified material, official written GDC talk summaries or high-quality primary developer articles.
-- Do not collect irrelevant personal data or make copyrighted commercial game footage/characters the final game assets.
-- **Last search key:** `2D combat readable enemy windup / lunge / recovery` (2026-11-25). If unchanged P0, don't run the same query again within 24h.
+## Credit safety
+No automatic searches while paused. No paid calls or repeated balance checks before credit restoration. Candidate records below are historical evidence, not instructions.
 
 ## Candidate registry
 

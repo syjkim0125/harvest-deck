@@ -1,18 +1,11 @@
+> **연구/기술 기록 전용 (2026-11-26):** [통합 GDD](LIVING_GALAXY_VISION.md)가 우선. 기존 시간별 실행 규칙, 구현 요청과 우선순위는 폐기. 연구 결과는 가설이며 구현 승인 아님. 자동화 중지. 원본 검증 없는 주장 금지; vidIQ 잔액 부족 시 반복 호출 금지.
+
 # VOID CARAVAN — Game Design Theory & Playtest Knowledge Base
 
 > **2026-11-25 / independent review & development reference / version 1**  
 > Primary purpose: turn **player-observable game design principles** into specific experiments and acceptance tests, **not** turn videos into endless inspiration lists.
 >
 > [User-supplied video inbox](VIDEO_RESEARCH_INBOX.md) · [Actual game vision-gap review](SF_VISION_GAP_REVIEW.md) · [mechanic reference router](REFERENCE_ROUTER.md) · [art reference router](DESIGN_REFERENCE_ROUTER.md) · [Living Galaxy Vision](LIVING_GALAXY_VISION.md) · [Art Direction](ART_DIRECTION.md)
-
-## 0. How the independent review should use this file (token/time budget)
-
-1. Check latest **playable main**, live deployment when accessible, relevant design PRs, last review SHA, user's direct complaints (**"no impact / no exploration / nothing like references"**) and latest implementation.
-2. Select **one gap** (action feel, discovery, freedom/agency, factions, recruitable creature, production/shop, painterly 2D / cute readable characters, or mobile UX).
-3. Read **one numbered design principle** below and **at most two matching game references**. Reuse cached research; do not reread an 18-game image gallery, theories, or six video links every hour.
-4. If a new high-quality source materially changes a hypothesis, use web search to collect it (prefer developers' original talks, official studios, GDC, peer-reviewed research), register with confidence level and date, and write **one hypothesis and one test**.
-5. Give gameplay developer **one concrete, small playable correction** and designer **one corresponding visual correction**; compare `CODED / PLAYABLE / USER-VERIFIED` separately. If no relevant changes, avoid duplicate advice and report unchanged evidence.
-6. **Do not fabricate video titles, transcripts, timestamps, observed footage, game completion, or subjective fun.** If access was blocked, mark the source `UNVERIFIED_CONTENT` and postpone conclusions.
 
 ## 1. Raph Koster's fun theory → operational rules
 
@@ -78,17 +71,6 @@
 | **Painterly 2D sci-fi & cute but legible cast** | Odin Sphere / 13 Sentinels / Art Bible | Main playable sprite layers and scale vs disconnected mood-board images | Actual mobile viewport screen + layer/character comparison |
 | **Mobile 7yo-simple interaction goal** | Cut the Rope | Tap/swipe on objects, little text, hit targets and feedback | 360x640/393x852 screen and first-time observed play; child claims only after actual tests |
 
-## 4. Critique output contract (hourly feedback)
-
-**Minimum useful review card**:
-
-- Date / latest main SHA / Pages version / design PR and asset integration state.
-- **Evidence classification**: `DIRECT_PLAY` (with screen/capture/inputs), `SOURCE_AND_TEST_ONLY`, or `UNVERIFIED`. Human fun/7yo comprehension can't be inferred from unit tests.
-- **One gap:** current behavior → reference *principle* (not screenshot copying) → missing learnable action/feedback/choice → why user would notice → proposed tiny change.
-- **One measurable acceptance test** + optional design artifact PR; `P0/P1/P2`, `OPEN/IN_PROGRESS/VALIDATED`. Existing unresolved P0 higher priority than new cosmetics.
-- Theory ID and **exact original source URL**; new source only if not already in this file or substantively changes the test.
-- Developer next action and designer next action; don't rewrite old sections or flood automation runs with identical observations.
-
 ## 5. Research policy / dedup and sources
 
 Maintain [VIDEO_RESEARCH_INBOX.md](VIDEO_RESEARCH_INBOX.md) for user videos. **All six supplied videos' caption tracks and automated scene analyses are now available;** do not downgrade them to unverified due to an earlier direct YouTube website fetch failure. **Never infer content from a link alone.** Add status `UNVERIFIED_CONTENT / TITLE_VERIFIED / TRANSCRIPT_VERIFIED / ACTUALLY_VIEWED / ADOPTED_FOR_TEST / REJECTED` and unique video ID; a new source earns a place in this file only after a verifiable teaching is extracted. Once a lesson is written, don't research it again unless new gameplay evidence changes the decision. Keep user-provided video list intact with URLs, even when blocked.
@@ -115,3 +97,6 @@ Treat original game IP and screenshot art as copyrighted external references onl
 
 **Priority protection:** U-004 art pipeline improves *consistency*, but does not automatically solve poor exploration. U-005 hitstop alone does not create a rewarding action game. U-001's sales-oriented inspiration must never force a new genre or growth-hacking feature. First make **direct player movement + spatial discovery + clearly visible consequence** feel alive; then improve presentation and commercial hook.
 
+
+## Zelda exploration research
+See EXP-Z01–06 in [GDD](LIVING_GALAXY_VISION.md#4-탐험-연구-사용자가-젤다를-레퍼런스로-채택-세부-적용은-가설). User video P35fOgNdx_k pending original verification.

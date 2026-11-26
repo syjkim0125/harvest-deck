@@ -1,3 +1,5 @@
+> **연구/기술 기록 전용 (2026-11-26):** [통합 GDD](LIVING_GALAXY_VISION.md)가 우선. 기존 시간별 실행 규칙, 구현 요청과 우선순위는 폐기. 연구 결과는 가설이며 구현 승인 아님. 자동화 중지. 원본 검증 없는 주장 금지; vidIQ 잔액 부족 시 반복 호출 금지.
+
 # VOID CARAVAN — YouTube Game Design Research (Six user videos verified)
 
 > **Last audit: 2026-11-25 KST.** The original six user-supplied YouTube videos are now resolved via **vidIQ**. **All six original Korean/English caption tracks actually retrieved** (timed transcripts); **all six visually analyzed** via timestamped vidIQ walkthroughs. Every video now has both original-caption and automated scene-analysis evidence; **gameplay implementation itself remains unverified**. The old statement "YouTube could not be accessed" is now superseded.
@@ -78,23 +80,6 @@
 - [PixelOE](https://github.com/KohakuBlueleaf/PixelOE) — contrast-aware pixelization/outline retention. **HOLD by default** because VOID CARAVAN's latest approval favors painterly, layered higher-resolution 2D **over forcing every image to a low-res pixel grid**.
 - **Practical pipeline:** original approved style sheet → one creature with 3 distinct silhouette/pose states → a single animation tool pilot → clean transparent atlas → Godot import + linear/nearest compatibility and alignment check → mobile 360×640 preview → side-by-side with existing actual game art → PR. **No wholesale switch of rendering style, no copy of demo sprites and no assumed zero cost for external AI APIs.**
 
-## 8. Independent review selection rules (stop token waste)
-
-| Game development work | Relevant user video | Max source use | Experimental outcome |
-| --- | --- | --- | --- |
-| P0 combat and physical contact | **U-005** | Intro + 00:31–01:13; [GDC game feel theory](GAME_DESIGN_THEORY.md) K-02/G-02 | A/B hit vs miss, hit reaction, input timing |
-| P0 visual character and in-game art inconsistency | **U-004** | 02:47–05:06 and 07:07–10:07 | Original style lock + silhouette contrast + target-screen preview |
-| P0 too little actual discovery | **U-001** or GDC Subnautica | 01:49–04:50 and [theory](GAME_DESIGN_THEORY.md) G-01 | Two routes, one surprising reward, one visible outcome |
-| World-feels-alive environmental polish | **U-003** | 00:00–00:12 only | Rain/mist changes character sprite AND an interaction; defer until exploration |
-| Later ship/boss fights lack tension | **U-002** | 00:15–01:34 only | Test meaningful comeback choice, no forced luck |
-| Art production pipeline bottleneck | **U-006** | 00:13–01:47 plus official repo README | Pilot one 3-pose sheet, not all four tools |
-| Marketing/value proposition or itch to replay | **U-001** | 00:35–04:50 only | Film 8-second real gameplay hook, not poster or claimed sales |
-
-**Status update contract:** only promote new source findings to [GAME_DESIGN_THEORY.md](GAME_DESIGN_THEORY.md) after actual evidence. A creator-presented number remains a **creator-presented number**. Never mark a game feature `USER_VERIFIED` on the basis of video analysis. Reviewers should keep a small cache of already processed URLs and search for new videos only when a specific unresolved gap needs a different mechanic.
-
----
-**Historical note:** all six videos were previously logged `UNVERIFIED_CONTENT` because direct YouTube website retrieval failed. After connecting vidIQ, **all six** captions, video metadata and automated timestamped visual scene analyses were retrieved. This replaces—not contradicts—the earlier inability to directly browse YouTube.
-
 ## U-007 — Synchronized impact feedback (2026-11-26)
 Source: https://youtube.com/shorts/cv0-_-mYhsU ; 74 seconds; title/author/publication date not independently verified. vidIQ automated scene analysis, 10 credits previously charged, zero additional polling credits. 00:19–00:27 flat damage demo; 00:28–00:39 hitstop, knockback and synchronized sound comparison; 01:00–01:02 hit flash. Not direct gameplay or proof of universal optimal timing. EXPERIMENT, extends U-005 with audio synchronization. P0-VISION-002: after existing exploration priority, inspect sf_belt_scroll.gd strike/impact_pause and route confirmed hits through one synchronized feedback event; misses must not trigger it. Compare existing ~55ms baseline with light 40–60ms and heavy 90–120ms as proposed trial values only. Test hit/miss/evade, input buffering and 60fps/variable mobile fps; capture identical encounter A/B with audio and obtain human feedback. Design: Amber Mantis PR #5 contact/recoil poses, compare in actual 360×640 screen, not poster. No game code changed or play verification performed. Development and design sessions should read this PR; retain P0-VISION-001 as first priority.
 
@@ -103,3 +88,6 @@ Source https://youtu.be/bnN0bVD4KgY. Korean transcript previously verified 0:00�
 
 ## U-009 — pending source verification
 Source https://youtu.be/-nomd_TO3pg. PENDING_SOURCE_VERIFICATION; vidIQ credit balance exhausted and direct source unavailable in prior sessions. No interpretation, title, claims or adoption until source verified. Do not buy additional credits or repeat paid calls.
+
+## User video — P35fOgNdx_k
+[P35fOgNdx_k](https://youtu.be/P35fOgNdx_k): PENDING_SOURCE_VERIFICATION. No title, transcript, timestamp or scene claim. Zelda design research based on developer sources in GDD. No vidIQ credit used.

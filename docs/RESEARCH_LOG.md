@@ -1,3 +1,5 @@
+> **연구/기술 기록 전용 (2026-11-26):** [통합 GDD](LIVING_GALAXY_VISION.md)가 우선. 기존 시간별 실행 규칙, 구현 요청과 우선순위는 폐기. 연구 결과는 가설이며 구현 승인 아님. 자동화 중지. 원본 검증 없는 주장 금지; vidIQ 잔액 부족 시 반복 호출 금지.
+
 # SF 게임 리서치·실험 기록
 
 ## 2026-11-25 · Living Galaxy Alpha 0.2 · 브랜치 feature/living-galaxy-alpha / PR #3
