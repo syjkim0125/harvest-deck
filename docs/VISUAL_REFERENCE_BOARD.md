@@ -4,7 +4,7 @@
 
 > **Living Galaxy RPG / 2026-11-25 / 실무용 레퍼런스 아틀라스**  
 > [제품 비전](LIVING_GALAXY_VISION.md) · [현재 플레이 프로토타입](https://syjkim0125.github.io/harvest-deck/) · [직접 플레이 피드백](SF_PLAYTEST_FEEDBACK.md)  
-> 총 **18개** 주요 게임의 **실제 이미지 18종**과 공식 출처, 채택/배제/적용 판단을 연결했다. 이미지 URL은 외부 원격 로드이므로 원본 서버 정책에 따라 로드되지 않을 수 있다. 공식 이미지 또는 게임 스크린샷으로서 출처를 구분해 표기했다.
+> 기존 참고 게임의 **외부 이미지 참조 23건(중복 포함)**과 공식 출처, 채택/배제/적용 판단을 연결했다. 이미지 URL은 외부 원격 로드이므로 원본 서버 정책에 따라 로드되지 않을 수 있다. 공식 이미지 또는 게임 스크린샷으로서 출처를 구분해 표기했다.
 
 > **역할 구분**: 이 18개 게임은 주로 **게임 시스템/화면 구조/실무용 비교 이미지** 레퍼런스다. 최종 비주얼 방향은 별도로 사용자 승인된 **[ART_DIRECTION.md: 회화적 2D + Kindchenschema](ART_DIRECTION.md)**가 우선한다. 디자인 제작 시 전체 보드 재열람 대신 **[DESIGN_REFERENCE_ROUTER.md](DESIGN_REFERENCE_ROUTER.md)**의 해당 장면 1행(최대 3개 참고작)을 따른다. 바닐라웨어의 Odin Sphere / 13 Sentinels / Unicorn Overlord / Dragon's Crown은 **아트 원리 레퍼런스**이며 별도의 권리 있는 게임 이미지/캐릭터를 게임 자산으로 복제하지 않는다.
 
@@ -27,7 +27,7 @@
 
 | <img src="https://cdn.akamai.steamstatic.com/steam/apps/1904480/header.jpg" width="340" alt="Absolum — 이미지 출처: Steam / Dotemu 공식 프로모션 이미지; 게임플레이는 공식 Press Kit 참조" loading="lazy" /> | <img src="https://rimworldgame.com/biotech/screenshots/impids.jpg" width="340" alt="RimWorld — 이미지 출처: RimWorld 공식 스크린샷 (Ludeon)" loading="lazy" /> |
 | --- | --- |
-| **Absolum** · [공식 자료](https://www.dotemu.com/PressKit/project/Games/Absolum)  <br>참고할 것: 수동 회피·반격 타이밍, 타격감·애니메이션, 경로 분기  <br>피할 것: 특정 캐릭터·배경·애니메이션/전투 기술의 복제  <br>**VOID CARAVAN 적용:** 현재 타격감 P0를 실제 피격 경직·충돌 방향·입력 피드백으로 개선  <br><sub>이미지: Steam / Dotemu 공식 프로모션 이미지; 게임플레이는 공식 Press Kit 참조. 이미지가 표시되지 않으면 [원본 열기](https://cdn.akamai.steamstatic.com/steam/apps/1904480/header.jpg)</sub> | **RimWorld** · [공식 자료](https://rimworldgame.com/biotech/)  <br>참고할 것: 작업 가능한 내부 공간·승무원 행동·사건의 인과관계  <br>피할 것: 초반부터 과도한 생존 게이지와 복잡한 명령창  <br>**VOID CARAVAN 적용:** 승무원 1명이 실제 이동해 정비·제작·휴식을 하는 작은 함내 모듈부터  <br><sub>이미지: RimWorld 공식 스크린샷 (Ludeon). 이미지가 표시되지 않으면 [원본 열기](https://rimworldgame.com/biotech/screenshots/impids.jpg)</sub> |
+| **Absolum** · [공식 자료](https://www.dotemu.com/PressKit/project/Games/Absolum)  <br>참고할 것: 수동 회피·반격 타이밍, 타격감·애니메이션, 경로 분기  <br>피할 것: 특정 캐릭터·배경·애니메이션/전투 기술의 복제  <br>**VOID CARAVAN 적용:** 타격감 연구 후보: 실제 피격 경직·충돌 방향·입력 피드백  <br><sub>이미지: Steam / Dotemu 공식 프로모션 이미지; 게임플레이는 공식 Press Kit 참조. 이미지가 표시되지 않으면 [원본 열기](https://cdn.akamai.steamstatic.com/steam/apps/1904480/header.jpg)</sub> | **RimWorld** · [공식 자료](https://rimworldgame.com/biotech/)  <br>참고할 것: 작업 가능한 내부 공간·승무원 행동·사건의 인과관계  <br>피할 것: 초반부터 과도한 생존 게이지와 복잡한 명령창  <br>**VOID CARAVAN 적용:** 승무원 1명이 실제 이동해 정비·제작·휴식을 하는 작은 함내 모듈부터  <br><sub>이미지: RimWorld 공식 스크린샷 (Ludeon). 이미지가 표시되지 않으면 [원본 열기](https://rimworldgame.com/biotech/screenshots/impids.jpg)</sub> |
 
 **이 6개의 조합이 답안이라는 뜻은 아니다.** 장면의 종류와 정보 밀도/전투 읽기/운영 감성을 비교하기 위한 도구이다. 시각적으로는 특정 게임을 섞어 붙이지 않고 **VOID CARAVAN 고유의 선명한 2D 픽셀 아트 + 세력별 실루엣/색 + 차별화된 UI**로 하나의 스타일 가이드를 만든다.
 
@@ -55,7 +55,7 @@
 
 | <img src="https://cdn.akamai.steamstatic.com/steam/apps/1904480/header.jpg" width="300" alt="Absolum — 이미지 출처: Steam / Dotemu 공식 프로모션 이미지; 게임플레이는 공식 Press Kit 참조" loading="lazy" /> | <img src="https://bitvint.com/cdn/shop/files/Dungeons_Dragons_Shadow_over_Mystara_1996_Arcade_Gameplay_Capcom_Fighter.png?v=1746455928&amp;width=1000" width="300" alt="Dungeons & Dragons: Shadow over Mystara — 이미지 출처: Bitvint에 게시된 Capcom 원작 게임 화면" loading="lazy" /> |
 | :--- | :--- |
-| **Absolum** · [공식 자료](https://www.dotemu.com/PressKit/project/Games/Absolum)  <br>참고할 것: 수동 회피·반격 타이밍, 타격감·애니메이션, 경로 분기  <br>피할 것: 특정 캐릭터·배경·애니메이션/전투 기술의 복제  <br>**VOID CARAVAN 적용:** 현재 타격감 P0를 실제 피격 경직·충돌 방향·입력 피드백으로 개선  <br><sub>이미지: Steam / Dotemu 공식 프로모션 이미지; 게임플레이는 공식 Press Kit 참조. 이미지가 표시되지 않으면 [원본 열기](https://cdn.akamai.steamstatic.com/steam/apps/1904480/header.jpg)</sub> | **Dungeons & Dragons: Shadow over Mystara** · [공식 자료](https://store.steampowered.com/app/229480/Dungeons__Dragons_Chronicles_of_Mystara/)  <br>참고할 것: 명확한 피격 판정, 직업별 기술, 전투 진행 분기  <br>피할 것: 픽셀·몬스터·UI 원본 복제  <br>**VOID CARAVAN 적용:** 지상전 벨트스크롤 안과 쿼터뷰 안을 비교  <br><sub>이미지: Bitvint에 게시된 Capcom 원작 게임 화면. 이미지가 표시되지 않으면 [원본 열기](https://bitvint.com/cdn/shop/files/Dungeons_Dragons_Shadow_over_Mystara_1996_Arcade_Gameplay_Capcom_Fighter.png?v=1746455928&width=1000)</sub> |
+| **Absolum** · [공식 자료](https://www.dotemu.com/PressKit/project/Games/Absolum)  <br>참고할 것: 수동 회피·반격 타이밍, 타격감·애니메이션, 경로 분기  <br>피할 것: 특정 캐릭터·배경·애니메이션/전투 기술의 복제  <br>**VOID CARAVAN 적용:** 타격감 연구 후보: 실제 피격 경직·충돌 방향·입력 피드백  <br><sub>이미지: Steam / Dotemu 공식 프로모션 이미지; 게임플레이는 공식 Press Kit 참조. 이미지가 표시되지 않으면 [원본 열기](https://cdn.akamai.steamstatic.com/steam/apps/1904480/header.jpg)</sub> | **Dungeons & Dragons: Shadow over Mystara** · [공식 자료](https://store.steampowered.com/app/229480/Dungeons__Dragons_Chronicles_of_Mystara/)  <br>참고할 것: 명확한 피격 판정, 직업별 기술, 전투 진행 분기  <br>피할 것: 픽셀·몬스터·UI 원본 복제  <br>**VOID CARAVAN 적용:** 지상전 벨트스크롤 안과 쿼터뷰 안을 비교  <br><sub>이미지: Bitvint에 게시된 Capcom 원작 게임 화면. 이미지가 표시되지 않으면 [원본 열기](https://bitvint.com/cdn/shop/files/Dungeons_Dragons_Shadow_over_Mystara_1996_Arcade_Gameplay_Capcom_Fighter.png?v=1746455928&width=1000)</sub> |
 
 
 ## 04 · 동료·생물·직업 수집
@@ -121,27 +121,29 @@
 
 ## 10 · 화면 시점 및 아트 선택
 
+시점은 최신 D07/D18 기준. 아래 구현 상태는 과거 관찰이며 최신 배포/코드 검증 아님.
+
 | 화면 | 현재 권장 시점 | 사용자에게 보여야 할 것 | 상태 |
 | --- | --- | --- | --- |
 | 은하 항행·세력전 | 탑다운 성도 | 소유 영토/교역로/항행 위험/실제 함선 위치 | 기본 성도 Alpha 0.2, 시뮬레이션 심화 전 |
 | 함선 간 포격 | 탑다운 전술 액션 | 방향·속도·엄폐·적 함선 피해·승무원 역할 | 미구현 |
-| 행성 탐험·잠입 | 쿼터뷰 액션 후보, 기존 벨트스크롤 비교 | 갈림길·비밀·외계 생물·위험-보상·회피/반격 | 지상 전투 실험만 구현 |
-| 우주선 내부 | 쿼터뷰/축소 도트 | 사람의 이동, 제작·수리·휴식 실물 행동 | 미구현 |
-| 본거지·상점·방어 | 쿼터뷰 | 실제 시설 증가, 고객 방문, 터렛·방벽 반응 | 미구현 |
+| 행성 탐험·잠입 | 쿼터뷰 액션 승인(D18); 벨트스크롤은 비교 이력 | 갈림길·비밀·외계 생물·위험-보상·회피/반격 | 지상 전투 실험만 구현 |
+| 우주선 내부 | 미결(쿼터뷰 등 비교 후보; 픽셀/도트 강제 금지) | 사람의 이동, 제작·수리·휴식 실물 행동 | 미구현 |
+| 본거지·상점·방어 | 미결(쿼터뷰 등 후보) | 실제 시설 증가, 고객 방문, 터렛·방벽 반응 | 미구현 |
 
 **아트 원칙:** (1) 모바일 세로에서 플레이어·동료·위험과 조작 가능한 사물이 한눈에 구분될 것. (2) 세력마다 고유 형태·색·재료 문화가 있을 것. (3) UI는 항해/전투/관리 세 장면에서 통일된 SF 시각 언어를 사용할 것. (4) 과도한 가짜 CRT/글리치와 알아보기 힘든 극소 아이콘 배제. (5) 타격감은 화면 흔들림 하나가 아니라 예고·탄착·경직·음향·후속 행동을 통해 검증.
 
-## 11 · 26개 게임 비전과 이미지 연결
+## 11 · 과거 비전과 이미지 연결 (참고 후보, 구현 지시 아님)
 
-| 개발 시스템 | 먼저 볼 레퍼런스 | 다음 플레이 가능한 수용 테스트 |
+| 개발 시스템 | 먼저 볼 레퍼런스 | 과거 수용 테스트 후보 (재승인 필요) |
 | --- | --- | --- |
 | 정부/민간/반란/종교/해적의 자율 행동, 네임드 | Bannerlord + EVE | 동일 시드에서 NPC끼리 세력 충돌이 재현되고 항로 위험에 반영 |
 | 중립 선장 생성/함선 선택, 직업/하이브리드 | Langrisser + Uncharted Waters | 서로 다른 출신·함선 선택이 항행/전투/교섭의 결과를 변화 |
 | 항해 도중 발견·조우, 함선 간 전투, 잠입 | Black Flag + EVE | 플레이어가 거리/위험을 보고 싸움/도주/탐험 중 선택 |
 | 행성 탐험·전투·희귀 생물 동료 수집 | Absolum + Monster Sanctuary + Cassette Beasts | 두 갈래에서 실제 다른 위험/보상, 동료 1종 구조 |
 | 승무원 생존·제작·장비 강화 | RimWorld + Monster Sanctuary | 같은 승무원이 함선과 행성에서 다른 행동 |
-| 행성 본거지·상점·시설 확장·습격 방어 | Moonlighter + Dave + Overcooked + Dome Keeper + Fallout 4 | 전리품 제작→NPC 판매→시설 건설이 장면 안에서 반복 |
-| 설명 없는 터치/카드 선택/반복 재미 | Cut the Rope + Vampire Survivors | 첫 90초 초견 행동 관찰, 자동 테스트만으로 인증하지 않음 |
+| 행성 본거지·상점·시설 확장·습격 방어 | Moonlighter + Dave + Overcooked + Dome Keeper + Fallout 4 | 선택 가능한 경제 활동 후보: 전리품 제작→NPC 판매→시설 건설; 강제 루프 아님 |
+| 설명 없는 터치/입력 발견/반복 재미 | Cut the Rope + Vampire Survivors | 첫 90초 초견 행동 관찰, 자동 테스트만으로 인증하지 않음 |
 
 ## 12 · 사용 제한 및 이미지 출처 관리
 
