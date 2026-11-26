@@ -37,5 +37,24 @@
 ## 12. 12-camera-comparison
 ![12-camera-comparison](visuals/12-camera-comparison.svg)
 
+## 공간 배치 설명 그림 (대화 도식의 재구성)
+### 13-galaxy-map
+![13-galaxy-map](visuals/13-galaxy-map.svg)
+
+### 14-navigation-layout
+![14-navigation-layout](visuals/14-navigation-layout.svg)
+
+### 15-occlusion-detour
+![15-occlusion-detour](visuals/15-occlusion-detour.svg)
+
+### 16-ship-anatomy-arcs
+![16-ship-anatomy-arcs](visuals/16-ship-anatomy-arcs.svg)
+
+### 17-quarter-view-layout
+![17-quarter-view-layout](visuals/17-quarter-view-layout.svg)
+
+### 18-free-drag-gesture
+![18-free-drag-gesture](visuals/18-free-drag-gesture.svg)
+
 ## 다음 시각 자료
 행성 공간 구조 확정 후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.
