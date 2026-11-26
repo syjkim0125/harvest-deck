@@ -24,7 +24,7 @@ window/size/viewport_width=512
 window/size/viewport_height=1108
 window/size/window_width_override=416
 window/size/window_height_override=900
-window/stretch/mode="canvas_items"
+window/stretch/mode="disabled"
 
 [rendering]
 
