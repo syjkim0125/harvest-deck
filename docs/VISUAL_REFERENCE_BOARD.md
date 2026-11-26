@@ -1,3 +1,5 @@
+> **기획 재정립 기준:** 아래는 비교용 원본 이미지/참고 원리 아카이브이며 화면 또는 기능 승인 아님. 최종 기준은 [GDD](LIVING_GALAXY_VISION.md). 이전 구현·제작 우선순위는 무효. 현재 핵심 참고작 Bannerlord / 대항해시대 / Black Flag / RimWorld / Absolum / Vanillaware / Zelda BOTW·TOTK. [젤다 개발자 자료](https://www.nintendo.com/us/whatsnew/ask-the-developer-vol-9-the-legend-of-zelda-tears-of-the-kingdom-part-4/).
+
 # VOID CARAVAN — Visual & System Reference Board
 
 > **Living Galaxy RPG / 2026-11-25 / 실무용 레퍼런스 아틀라스**  
@@ -8,7 +10,7 @@
 
 ## 00 · 이 게임은 무엇인가?
 
-> **살아 움직이는 여러 세력의 우주에서 중립 선장으로 시작해 항해·탐험·전투·동료 수집·제작·상점·본거지 확장으로 자신만의 세력을 키워가는 SF 픽셀 RPG.**
+> **살아 움직이는 여러 세력의 우주에서 중립 선장으로 시작해 항해·탐험·전투·동료 수집·제작·상점·본거지 확장으로 자신만의 세력을 키워가는 SF 회화적 2D 샌드박스 RPG.**
 
 **1회 루프:** 민간 선장/함선 선택 → 세력 변화가 보이는 우주 항해 → 조우·행성 탐험 → 선택과 전투 → 전리품·동료 회수 → 함내 제작·판매 → 우주선/거점 확장 → 다음 항로.  
 **장기 루프:** 인물의 직업·관계·두 종류의 덱 → 외교·교역·생존·영토 변화 → 평판과 세력 성장.
@@ -17,7 +19,7 @@
 
 | <img src="https://cdn.akamai.steamstatic.com/steam/apps/261550/header.jpg" width="340" alt="Mount & Blade II: Bannerlord — 이미지 출처: Steam / TaleWorlds 공식 프로모션 이미지" loading="lazy" /> | <img src="https://content.eveonline.com/www/newssystem/media/67273/1/Kronos.jpg" width="340" alt="EVE Online — 이미지 출처: EVE Online 공식 뉴스 이미지 (CCP)" loading="lazy" /> |
 | --- | --- |
-| **Mount & Blade II: Bannerlord** · [공식 자료](https://www.taleworlds.com/en/Games/Bannerlord/Media)  <br>참고할 것: 플레이어와 무관한 세력의 외교·전쟁·영토 변화, 지역 인물과 사건  <br>피할 것: 중세 분위기와 군대 규모, 전투 애니메이션 복제  <br>**VOID CARAVAN 적용:** 세력 AI를 매 항행 시뮬레이션하고 결과를 항로·물가·의뢰에 반영  <br><sub>이미지: Steam / TaleWorlds 공식 프로모션 이미지. 이미지가 표시되지 않으면 [원본 열기](https://cdn.akamai.steamstatic.com/steam/apps/261550/header.jpg)</sub> | **EVE Online** · [공식 자료](https://www.eveonline.com/)  <br>참고할 것: 우주선 중심의 거대 세계, 정치·경제·전쟁·탐사  <br>피할 것: MMO의 UI 밀도와 플레이 시간 압박  <br>**VOID CARAVAN 적용:** 지역 세력전의 결과가 항성 위험도와 자원 수요를 바꾸도록  <br><sub>이미지: EVE Online 공식 뉴스 이미지 (CCP). 이미지가 표시되지 않으면 [원본 열기](https://content.eveonline.com/www/newssystem/media/67273/1/Kronos.jpg)</sub> |
+| **Mount & Blade II: Bannerlord** · [공식 자료](https://www.taleworlds.com/en/Games/Bannerlord/Media)  <br>참고할 것: 플레이어와 무관한 세력의 외교·전쟁·영토 변화, 지역 인물과 사건  <br>피할 것: 중세 분위기와 군대 규모, 전투 애니메이션 복제  <br>**VOID CARAVAN 적용:** 플레이 중 실시간 세력 AI를 시뮬레이션하고 결과를 항로·물가·의뢰에 반영  <br><sub>이미지: Steam / TaleWorlds 공식 프로모션 이미지. 이미지가 표시되지 않으면 [원본 열기](https://cdn.akamai.steamstatic.com/steam/apps/261550/header.jpg)</sub> | **EVE Online** · [공식 자료](https://www.eveonline.com/)  <br>참고할 것: 우주선 중심의 거대 세계, 정치·경제·전쟁·탐사  <br>피할 것: MMO의 UI 밀도와 플레이 시간 압박  <br>**VOID CARAVAN 적용:** 지역 세력전의 결과가 항성 위험도와 자원 수요를 바꾸도록  <br><sub>이미지: EVE Online 공식 뉴스 이미지 (CCP). 이미지가 표시되지 않으면 [원본 열기](https://content.eveonline.com/www/newssystem/media/67273/1/Kronos.jpg)</sub> |
 
 | <img src="https://mperials.com/images/screenshots/assassins-creed-iv-black-flag-illustrious-pirates-pack/original/sc7zd1.jpg" width="340" alt="Assassin’s Creed IV: Black Flag — 이미지 출처: MPERIALS에 게시된 Ubisoft 게임 스크린샷" loading="lazy" /> | <img src="https://www.nintendo.com/eu/media/images/06_screenshots/games_5/nintendo_switch_download_software_2/nswitchds_davethediver/NSwitchDS_DaveTheDiver_02_DEde.jpg" width="340" alt="DAVE THE DIVER — 이미지 출처: Nintendo 공식 게임 페이지 / MINTROCKET 제공" loading="lazy" /> |
 | --- | --- |
@@ -37,7 +39,7 @@
 
 | <img src="https://cdn.akamai.steamstatic.com/steam/apps/261550/header.jpg" width="300" alt="Mount & Blade II: Bannerlord — 이미지 출처: Steam / TaleWorlds 공식 프로모션 이미지" loading="lazy" /> | <img src="https://content.eveonline.com/www/newssystem/media/67273/1/Kronos.jpg" width="300" alt="EVE Online — 이미지 출처: EVE Online 공식 뉴스 이미지 (CCP)" loading="lazy" /> |
 | :--- | :--- |
-| **Mount & Blade II: Bannerlord** · [공식 자료](https://www.taleworlds.com/en/Games/Bannerlord/Media)  <br>참고할 것: 플레이어와 무관한 세력의 외교·전쟁·영토 변화, 지역 인물과 사건  <br>피할 것: 중세 분위기와 군대 규모, 전투 애니메이션 복제  <br>**VOID CARAVAN 적용:** 세력 AI를 매 항행 시뮬레이션하고 결과를 항로·물가·의뢰에 반영  <br><sub>이미지: Steam / TaleWorlds 공식 프로모션 이미지. 이미지가 표시되지 않으면 [원본 열기](https://cdn.akamai.steamstatic.com/steam/apps/261550/header.jpg)</sub> | **EVE Online** · [공식 자료](https://www.eveonline.com/)  <br>참고할 것: 우주선 중심의 거대 세계, 정치·경제·전쟁·탐사  <br>피할 것: MMO의 UI 밀도와 플레이 시간 압박  <br>**VOID CARAVAN 적용:** 지역 세력전의 결과가 항성 위험도와 자원 수요를 바꾸도록  <br><sub>이미지: EVE Online 공식 뉴스 이미지 (CCP). 이미지가 표시되지 않으면 [원본 열기](https://content.eveonline.com/www/newssystem/media/67273/1/Kronos.jpg)</sub> |
+| **Mount & Blade II: Bannerlord** · [공식 자료](https://www.taleworlds.com/en/Games/Bannerlord/Media)  <br>참고할 것: 플레이어와 무관한 세력의 외교·전쟁·영토 변화, 지역 인물과 사건  <br>피할 것: 중세 분위기와 군대 규모, 전투 애니메이션 복제  <br>**VOID CARAVAN 적용:** 플레이 중 실시간 세력 AI를 시뮬레이션하고 결과를 항로·물가·의뢰에 반영  <br><sub>이미지: Steam / TaleWorlds 공식 프로모션 이미지. 이미지가 표시되지 않으면 [원본 열기](https://cdn.akamai.steamstatic.com/steam/apps/261550/header.jpg)</sub> | **EVE Online** · [공식 자료](https://www.eveonline.com/)  <br>참고할 것: 우주선 중심의 거대 세계, 정치·경제·전쟁·탐사  <br>피할 것: MMO의 UI 밀도와 플레이 시간 압박  <br>**VOID CARAVAN 적용:** 지역 세력전의 결과가 항성 위험도와 자원 수요를 바꾸도록  <br><sub>이미지: EVE Online 공식 뉴스 이미지 (CCP). 이미지가 표시되지 않으면 [원본 열기](https://content.eveonline.com/www/newssystem/media/67273/1/Kronos.jpg)</sub> |
 
 
 ## 02 · 항해·발견·조우
@@ -117,20 +119,6 @@
 <sub>이미지: MobyGames의 ZeptoLab 원작 게임 스크린샷. 이미지가 표시되지 않으면 [원본 열기](https://cdn.mobygames.com/screenshots/7040818-cut-the-rope-android-the-spiders-are-gonna-get-that-candy.png)</sub>
 
 
-## 09 · 기존 프로토타입 비교군
-
-### Vampire Survivors
-
-<img src="https://cdn.akamai.steamstatic.com/steam/apps/1794680/header.jpg" width="420" alt="Vampire Survivors — 이미지 출처: Steam / poncle 공식 프로모션 이미지" loading="lazy" />
-
-**Vampire Survivors** · [공식 자료](https://poncle.games/vampire-survivors)  
-참고할 것: 짧은 루프와 빌드 선택의 누적  
-피할 것: 수동 전술/탐험 없는 자동 공격 웨이브  
-**VOID CARAVAN 적용:** 기존 과일 게임과 비교용, 새 SF의 주 전투 장르로 되돌리지 않음  
-<sub>이미지: Steam / poncle 공식 프로모션 이미지. 이미지가 표시되지 않으면 [원본 열기](https://cdn.akamai.steamstatic.com/steam/apps/1794680/header.jpg)</sub>
-
-
-
 ## 10 · 화면 시점 및 아트 선택
 
 | 화면 | 현재 권장 시점 | 사용자에게 보여야 할 것 | 상태 |
@@ -163,13 +151,3 @@
 - 각 게임은 **레퍼런스**이며 사용자의 프로젝트와 제휴/공식 관계가 없다. 조작/작품 자산을 그대로 카피하지 않는다.
 - 과거 참고작인 **Chainsaw Juice King**(절삭 타격감), **Where's My Water? / Swampy**(제로 매뉴얼 터치), **Probably Stolen**(상점 운영) 등은 이전 과일 게임 연구 이력이며, SF RPG의 핵심 비주얼 보드에는 넣지 않았다. 필요 시 별도 Legacy 비교 문서로 관리한다.
 
-## 13 · 다음 디자인 산출물
-
-1. 공식 레퍼런스 **활용 판단**을 바탕으로 기존 상용 게임 이미지를 섞지 않은 원본 SF 세계/우주선/항성/생물/행성/본거지의 5~6장 자체 콘셉트 시트.
-2. 3개 화면(은하 항해, 행성 탐험, 우주선 내부)의 실제 플레이 기반 UI 구성 비교와 **2D 픽셀 그리드·실루엣·타이포·색·명암** 규칙.
-3. 유저 직접 플레이 P0(타격감/탐험 발견) 수용 테스트 전에 단순 포스터 이미지로 기능 완성을 주장하지 않기.
-
----
-
-**원본 이미지·권리자:** 개별 카드의 **이미지 출처** 및 공식 링크를 확인. 문서 이미지 전체는 외부 소스 참조로 관리한다.  
-**작성:** VOID CARAVAN 내부 게임디자인용 레퍼런스 문서.
