@@ -80,6 +80,7 @@ var learned_evade := false
 var escort_trail: Array[Vector2] = []
 var fallen: Array[Dictionary] = []
 var contact_count := 0
+var galaxy_details := false
 var impact_audio: AudioStreamPlayer
 var contact_sound: AudioStreamWAV
 var heavy_sound: AudioStreamWAV
@@ -141,6 +142,7 @@ func start_campaign() -> void:
 	learned_move = false
 	learned_attack = false
 	learned_evade = false
+	galaxy_details = false
 	campaign_started = true
 	mode = Mode.CAPTAIN
 	queue_redraw()
@@ -241,7 +243,8 @@ func make_enemy(kind: int, position: Vector2, hp: int) -> Dictionary:
 		"target": position,
 		"flash": 0.0,
 		"stagger": 0.0,
-		"recovery": 0.0
+		"recovery": 0.0,
+		"charge_left": 0.0
 	}
 
 func _process(delta: float) -> void:
@@ -382,10 +385,21 @@ func advance_enemies(dt: float) -> void:
 		e["recovery"] = maxf(float(e["recovery"]) - dt, 0.0)
 		if float(e["stagger"]) > 0.0 or float(e["recovery"]) > 0.0:
 			continue
-		if float(e["telegraph"]) > 0.0:
-			e["telegraph"] = float(e["telegraph"]) - dt
-			if float(e["telegraph"]) <= 0.0:
+		if float(e["charge_left"]) > 0.0:
+			var charge_pos: Vector2 = e["pos"]
+			var locked_target: Vector2 = e["target"]
+			e["pos"] = clamp_field(charge_pos.move_toward(locked_target, 370.0 * dt))
+			e["charge_left"] = maxf(0.0, float(e["charge_left"]) - dt)
+			if float(e["charge_left"]) <= 0.0:
 				enemy_attack(e)
+			continue
+		if float(e["telegraph"]) > 0.0:
+			e["telegraph"] = maxf(0.0, float(e["telegraph"]) - dt)
+			if float(e["telegraph"]) <= 0.0:
+				if int(e["kind"]) == 0:
+					e["charge_left"] = 0.18
+				else:
+					enemy_attack(e)
 			continue
 		e["cooldown"] = maxf(float(e["cooldown"]) - dt, 0.0)
 		var pos: Vector2 = e["pos"]
@@ -440,6 +454,7 @@ func strike() -> void:
 			e["flash"] = 0.16
 			e["stagger"] = 0.22
 			e["telegraph"] = 0.0
+			e["charge_left"] = 0.0
 			e["recovery"] = 0.30
 			# Knockback is directional but stays inside the playable belt.
 			e["pos"] = Vector2(
@@ -545,6 +560,10 @@ func begin_touch(id: int, point: Vector2) -> void:
 			choose_starship(0 if point.x < SIZE.x / 2.0 else 1)
 			return
 		Mode.GALAXY:
+			if Rect2(10, 9, 340, 105).has_point(point):
+				galaxy_details = not galaxy_details
+				queue_redraw()
+				return
 			if point.y >= 556.0 and point.y < 615.0:
 				galaxy.refuel_at_freeport()
 				queue_redraw()
@@ -703,16 +722,18 @@ func paint_setup() -> void:
 	draw_text("TAP A PORTRAIT TO CHOOSE", Vector2(66, 546), 15, WHITE)
 
 func paint_galaxy() -> void:
-	draw_rect(Rect2(10, 9, 340, 175), Color("#11172f", 0.96))
-	draw_text("VOID CARAVAN  /  NAVIGATION", Vector2(20, 34), 17, ICE)
-	draw_text("FREE CAPTAIN  |  NO ALLEGIANCE", Vector2(20, 59), 12, LILAC)
-	draw_text("CREDITS %d    FUEL %d    CARGO %d" % [galaxy.credits, galaxy.fuel, galaxy.cargo], Vector2(20, 84), 15, GOLD)
-	draw_text("JUMPS %d    RENOWN %d" % [galaxy.turns, galaxy.fame], Vector2(20, 107), 14, WHITE)
+	draw_rect(Rect2(10, 9, 340, 105), Color("#11172f", 0.96))
+	draw_text("NAVIGATION", Vector2(20, 34), 19, ICE)
+	draw_text("FUEL %d    CARGO %d    C %d" % [galaxy.fuel, galaxy.cargo, galaxy.credits], Vector2(20, 61), 16, GOLD)
 	if nooli_recruited:
-		draw_texture_rect_region(NOOLI, Rect2(299, 91, 44, 44), Rect2(256, 0, 128, 128))
-		draw_text("CREW +1", Vector2(272, 146), 10, ICE)
-	draw_text(galaxy.last_news.substr(0, 43), Vector2(20, 140), 11, LILAC)
-	draw_text(galaxy.last_encounter.substr(0, 43), Vector2(20, 164), 11, ICE)
+		draw_texture_rect_region(NOOLI, Rect2(303, 14, 38, 38), Rect2(256, 0, 128, 128))
+	draw_text(galaxy.last_encounter.substr(0, 43) if not galaxy.last_encounter.is_empty() else "Choose a connected star", Vector2(20, 90), 12, WHITE)
+	draw_text("−" if galaxy_details else "+", Vector2(326, 104), 14, ICE)
+	if galaxy_details:
+		draw_rect(Rect2(10, 116, 340, 80), Color("#11172f", 0.94))
+		draw_text("FREE CAPTAIN   /   RENOWN %d   /   JUMPS %d" % [galaxy.fame, galaxy.turns], Vector2(20, 141), 11, LILAC)
+		draw_text(galaxy.last_news.substr(0, 45), Vector2(20, 166), 11, WHITE)
+		draw_text("CREW: NOOLI" if nooli_recruited else "CREW: CAPTAIN", Vector2(20, 186), 11, ICE)
 	draw_rect(Rect2(9, 202, 342, 350), Color("#0a132c", 0.9))
 	for i in range(galaxy.systems.size()):
 		var source: Dictionary = galaxy.systems[i]
@@ -738,10 +759,13 @@ func paint_galaxy() -> void:
 		draw_circle(p, r, tint)
 		draw_circle(p + Vector2(-4, -4), 4.0, WHITE)
 		draw_text(String(sector["name"]), p + Vector2(-33, -33), 10, WHITE if galaxy.visited[i] else LILAC)
-	draw_rect(Rect2(11, 562, 338, 55), Color("#273351"))
-	draw_text("TAP CONNECTED STAR TO JUMP", Vector2(30, 585), 15, WHITE)
-	draw_text("AT FREEPORT: TAP HERE TO REFUEL 4C", Vector2(30, 604), 11, ICE)
-	draw_text("LAST: " + last_expedition_route if not last_expedition_route.is_empty() else "GALAXY CHANGES AFTER EACH JUMP", Vector2(44, 630), 10, LILAC)
+	if galaxy.current_system == 0 and galaxy.fuel < 6:
+		draw_rect(Rect2(11, 562, 338, 55), Color("#273351"))
+		draw_text("REFUEL  /  4 CREDITS", Vector2(70, 595), 15, ICE)
+	elif galaxy.turns == 0:
+		draw_text("TAP A CONNECTED STAR", Vector2(82, 590), 15, WHITE)
+	if not last_expedition_route.is_empty():
+		draw_text("LAST: " + last_expedition_route, Vector2(44, 630), 11, LILAC)
 
 func paint_stone() -> void:
 	draw_texture_rect(ROCK_ART, Rect2(ROCK + Vector2(-26, -34), Vector2(52, 60)), false)
@@ -820,7 +844,7 @@ func paint_enemy(e: Dictionary) -> void:
 	var kind: int = e["kind"]
 	var radius := 22.0 if kind == 2 else 15.0
 	var c := CORAL if kind != 1 else GOLD
-	if float(e["telegraph"]) > 0.0:
+	if float(e["telegraph"]) > 0.0 or float(e["charge_left"]) > 0.0:
 		var target: Vector2 = e["target"]
 		var hit_radius := 52.0 if kind == 2 else 42.0
 		var cue_size := hit_radius * 192.0 / 74.0
@@ -828,7 +852,13 @@ func paint_enemy(e: Dictionary) -> void:
 		draw_line(p, target, Color("#f87b89", 0.75), 2.0)
 	if kind == 0:
 		var pose := 2 if float(e["flash"]) > 0.0 else (1 if float(e["telegraph"]) > 0.0 else (3 if float(e["recovery"]) > 0.0 else 0))
-		draw_texture_rect_region(MANTIS, Rect2(p - Vector2(48, 56), Vector2(96, 96)), Rect2(pose * 192, 0, 192, 192))
+		var charging := float(e["charge_left"]) > 0.0
+		var sprite_size := Vector2(112, 83) if charging else Vector2(96, 96)
+		if charging:
+			var locked: Vector2 = e["target"]
+			var direction := (locked - p).normalized()
+			draw_line(p - direction * 21.0, p - direction * 53.0, Color(GOLD, 0.55), 4.0, true)
+		draw_texture_rect_region(MANTIS, Rect2(p - Vector2(sprite_size.x * 0.5, sprite_size.y * (112.0 / 192.0)), sprite_size), Rect2(pose * 192, 0, 192, 192))
 		draw_rect(Rect2(p.x - 22, p.y - 42, 44, 4), INK)
 		draw_rect(Rect2(p.x - 22, p.y - 42, 44.0 * float(e["hp"]) / float(e["max_hp"]), 4), ICE)
 		return
