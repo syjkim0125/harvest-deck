@@ -41,13 +41,14 @@ func move_toward_target(target: Vector2, limit: int = 120) -> void:
 		game._process(0.016)
 	touch(0, target, false)
 
-func shot(prefix: String, label: String) -> void:
+func shot(prefix: String, label: String, expected: Vector2i) -> void:
 	game.queue_redraw()
 	await render_frames()
 	var img := root.get_texture().get_image()
 	check(img != null and not img.is_empty(), prefix + " " + label + " actual render")
 	if img != null and not img.is_empty():
 		var path := "res://build/captures/" + prefix + "-" + label + ".png"
+		check(img.get_size() == expected, prefix + " exact rendered pixel size, got " + str(img.get_size()))
 		check(img.save_png(path) == OK, "saved " + path)
 		print("CAPTURE ", img.get_size(), " ", path)
 
@@ -66,29 +67,29 @@ func verify() -> void:
 		game.start_campaign()
 		game.choose_captain(0)
 		game.choose_starship(0)
-		await shot(prefix, "navigation")
+		await shot(prefix, "navigation", size)
 		check(game.jump_to_system(1), prefix + " connected jump")
-		await shot(prefix, "unmapped")
+		await shot(prefix, "unmapped", size)
 		move_toward_target(GAME.REFUGE)
 		check(game.rescue_pending and game.refuge_seen, prefix + " touch discovery")
-		await shot(prefix, "rescue")
+		await shot(prefix, "rescue", size)
 		move_toward_target(GAME.LANDING)
 		for i in range(120):
 			if game.mode == GAME.Mode.CLEAR:
 				break
 			game._process(0.016)
 		check(game.mode == GAME.Mode.CLEAR, prefix + " dual extraction")
-		await shot(prefix, "extraction")
+		await shot(prefix, "extraction", size)
 		game.finish_expedition(true)
 		check(game.nooli_recruited, prefix + " crew persists")
 		game.start_run()
 		game.hero = game.enemies[0]["pos"] - Vector2(58, 0)
 		game.enemies[0]["cooldown"] = 0.0
 		game.advance_enemies(0.016)
-		await shot(prefix, "telegraph")
+		await shot(prefix, "telegraph", size)
 		game.strike()
 		check(game.attack_landed, prefix + " confirmed contact")
-		await shot(prefix, "hit")
+		await shot(prefix, "hit", size)
 		game.free()
 		game = null
 		await render_frames()
