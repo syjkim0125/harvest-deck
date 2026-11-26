@@ -55,3 +55,6 @@ Tunic의 탐험 중 실시간 교전/실제 보스 구역을 비교하고, Zelda
 
 ## D21 연결
 Absolum은 공격 입력·접촉·피격 반응의 참고, Hades II는 쿼터뷰 전투 비교, Cut the Rope/Where's My Water는 직관적 입력 원리, U-008은 모바일 입력/HUD 가독성 참고. PC/콘솔 버튼 배열을 복제하지 않음. 새 외부 이미지 미사용. [자체 조작 도식](visuals/21-ground-input.svg).
+
+## D22 연결
+Absolum 공격/반격/연계, Hades II 무기별 속도·범위·기동, Tunic 방어·회피를 원리 비교에 사용. 기존 STEP 4-8 대화 이미지 주제: Absolum parry counter, Hades II axe dodge, Tunic shield block; 회화적 SF 검/방패, 쌍검, 중량 해머, 에너지 소총, 드론, 외계 유물. 대화 이미지 원본 URL/파일 미확보이며 새 외부 이미지 검증 없음. [자체 도식](visuals/22-ground-combat-styles.svg).
