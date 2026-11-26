@@ -14,3 +14,7 @@
 - **자체 리뷰 — 남은 문제:** 현재 별지도는 거점 이동·전투 연결만 있으며 실제 행성의 공간 분기 탐험/숨겨진 보상·외계 생물 구조, 선체 우주전·생존/직업·장비 제작/상점·덱/거점은 미구현. 진영 전투는 인접 관계 기반 단순 난수 시뮬레이션이며 역사적 유사성/장기 밸런스 미검증. '탐험 재미 개선 성공'이라고 단정하지 않음.
 - **다음 수용 테스트:** 사용자에게 2개 서로 다른 항로 탭→섹터 전투→부품 회수→다른 항로 점프를 수행하게 하고, 자신이 어떤 위험/보상을 보고 선택했는지, 무엇을 발견했는지 설명할 수 있는지 확인. 휴대폰 실기기/아동/청음/전투 손맛은 미검증.
 - **다음 1개 구현:** 행성 한 지역에 위험도가 다른 2갈래 **물리적인 탐험 분기**와 숨겨진 외계 생물 단서 1종을 연결. 별지도 버튼·텍스트만 추가하지 않음.
+
+## 2026-11-26 · P0 integration catch-up
+- #9 main 6d7ffe87, Actions main push 45723494190 build+deploy successful. #11 merge 83db196b, CI 45737457468 combat 21/21 and galaxy 39/39, export+build-info artifact. Hidden targets, terrain, cache, escort extraction, original explorer poses and defeat visual, contextual hints. ObjectDB warnings persisted after audio cleanup.
+- Current follow-up: V-001 locked lunge/counter/one damage event, compact galaxy header and on-demand details, 360×640/393×852 native render + synthetic touch screenshot artifact, public SHA verification step, research ledger U007–009. Cached references: https://playabsolum.com/ and https://www.mintrocketgames.com/ (principles only, no asset copying). Review evidence issue #10 comment 7178910288. CI pending at branch creation; native capture does not certify real mobile or fun. User quality FAIL; remaining multi-room terrain, distinct enemy art and human audio/motion A/B.
