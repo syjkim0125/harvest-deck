@@ -56,6 +56,45 @@ func verify() -> void:
 	test(game.hero_pose() == 3 and game.contact_count == 0, "whiff pose never triggers contact sound")
 	test(not game.attack_landed, "miss uses a distinct swing state, never confirmed contact")
 	test(game.combo == 0 and int(game.enemies[0]["hp"]) == 3, "a missed swing never rewards combo or damage")
+	# V-001: warn, lock, lunge, recover. Changing hero position never retargets the lunge.
+	game.start_run()
+	game.enemies.resize(1)
+	var crawler: Dictionary = game.enemies[0]
+	game.hero = Vector2(205, 395)
+	crawler["pos"] = Vector2(264, 395)
+	crawler["cooldown"] = 0.0
+	game.advance_enemies(0.016)
+	var locked: Vector2 = crawler["target"]
+	test(float(crawler["telegraph"]) > 0.0 and locked == game.hero, "crawler warns and locks a destination")
+	game.hero = Vector2(205, 462)
+	for i in range(48):
+		game.advance_enemies(0.016)
+		if float(crawler["charge_left"]) > 0.0:
+			break
+	test(float(crawler["charge_left"]) > 0.0 and crawler["target"] == locked, "enemy begins locked lunge without tracking escape")
+	var precharge: Vector2 = crawler["pos"]
+	var prior_hp: int = game.health
+	game.advance_enemies(0.05)
+	test(crawler["pos"] != precharge, "charge visibly moves the enemy")
+	for i in range(16):
+		game.advance_enemies(0.016)
+	test(game.health == prior_hp and game.contact_count == 0, "escaping locked charge avoids damage and contact audio")
+	game.start_run()
+	game.enemies.resize(1)
+	crawler = game.enemies[0]
+	game.hero = Vector2(205, 395)
+	crawler["target"] = game.hero
+	crawler["charge_left"] = 0.03
+	prior_hp = game.health
+	game.advance_enemies(0.05)
+	game.invulnerable = 0.0
+	game.advance_enemies(0.05)
+	test(game.health == prior_hp - 1 and game.contact_count == 1, "locked lunge applies damage and sound only once before recovery")
+	game.start_run()
+	game.hero = game.enemies[0]["pos"] - Vector2(58, 0)
+	game.enemies[0]["charge_left"] = 0.18
+	game.strike()
+	test(float(game.enemies[0]["charge_left"]) == 0.0, "confirmed counterattack cancels an active charge")
 	game.queue_free()
 	await process_frame
 	print("SF COMBAT: %d checks / %d failures" % [checks, errors])
