@@ -46,3 +46,6 @@
 
 ## 추가 실제 스크린샷과 게임 정보
 [REFERENCE_EVIDENCE.md](REFERENCE_EVIDENCE.md)에 신규 실제 참고 이미지 4건(권리자/게시처/원격 URL/관찰·적용/결정 ID)과 공식 미디어 링크 보존. [THEORY_APPLICATION.md](THEORY_APPLICATION.md)에서 게임 디자인 이론과 결정·검증을 연결.
+
+## D19 연결
+기존 Tunic/젤다의 연결 지형과 발견 원리를 지속 지표에 참고하고 Hades II의 분기 공간은 일부 절차 생성 구역의 비교 후보로만 활용. Hades II의 전체 원정 초기화나 방 단위 강제 전투를 채택한 것은 아님. [D19 자체 설명 그림](visuals/19-planet-regions-procedural.svg). 새 외부 이미지 미사용.

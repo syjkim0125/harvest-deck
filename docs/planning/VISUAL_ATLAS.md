@@ -56,5 +56,11 @@
 ### 18-free-drag-gesture
 ![18-free-drag-gesture](visuals/18-free-drag-gesture.svg)
 
+## 19. Planet regions and procedural spaces
+
+![D19 persistent regions and procedural spaces](visuals/19-planet-regions-procedural.svg)
+
+D19 승인 구조 설명. 실제 행성 크기·지도 배치·갱신 규칙 미확정. 지표가 지속되고 일부 공간에 절차적 생성 적용.
+
 ## 다음 시각 자료
 행성 공간 구조 확정 후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.
