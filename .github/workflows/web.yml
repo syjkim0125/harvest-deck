@@ -28,9 +28,20 @@ jobs:
       - name: Import and verify SF prototype
         run: |
           godot --headless --editor --import --quit
-          godot --headless --script tests/sf_combat.gd
-          godot --headless --script tests/sf_galaxy.gd
+          godot --headless --verbose --script tests/sf_combat.gd
+          godot --headless --verbose --script tests/sf_galaxy.gd
           godot --headless --quit-after 120
+      - name: Render mobile viewport evidence
+        timeout-minutes: 4
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: |
+          xvfb-run -a -s '-screen 0 1280x1024x24' godot --audio-driver Dummy --rendering-method gl_compatibility --script tests/sf_capture.gd
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mobile-captures
+          path: build/captures/*.png
+          if-no-files-found: error
       - name: Export Web
         run: |
           mkdir -p build/web
@@ -59,3 +70,16 @@ jobs:
       - name: Deploy Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify public build identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in {1..12}; do
+            if curl -fsS --max-time 15 "https://syjkim0125.github.io/harvest-deck/build-info.json?v=$GITHUB_SHA" -o /tmp/build-info.json && python3 -c 'import json,os; assert json.load(open("/tmp/build-info.json"))["commit"] == os.environ["GITHUB_SHA"]'; then
+              cat /tmp/build-info.json
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "Public build SHA did not match deployed commit"
+          exit 1
