@@ -139,11 +139,11 @@ D19 승인 구조 설명. 실제 행성 크기·지도 배치·갱신 규칙 미
 - [상세 예시 보존](EXAMPLE_ARCHIVE.md)
 - [D30/D31 캐릭터 생성 HTML 재구성](prototypes/character-creation-example.html) · [데이터](prototypes/character-creation-example.json) — 원래 채팅 UI의 재구성, 실제 게임 화면 아님.
 
-## 32. Starting ships (D32 미승인 제안)
+## 32. Starting ships (D32 구조 승인)
 
 ![D32 starting ships proposal](visuals/32-starting-ships-proposal.svg)
 
-3종 시작 함선과 제한적 장비 선택 비교. 자체 실루엣 설명 도식이며 실제 아트/함선 수치/목록 승인 아님.
+3종 시작 함선과 제한적 장비 선택 비교. 자체 실루엣 설명 도식이며 3종+제한 장비 구조 승인. 실제 아트/함선 수치/세부 목록 승인 아님.
 
 ## 다음 시각 자료
 STEP 4 핵심 방향 확정 이후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.

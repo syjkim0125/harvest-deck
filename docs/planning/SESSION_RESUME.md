@@ -1,19 +1,19 @@
 # 새 세션 인계 — VOID CARAVAN
-2026-11-27 · 현재 위치 STEP 5-3 / D32 미결.
+2026-11-27 · 현재 위치 STEP 5-4 / D33 미결.
 
 ## 새 세션에서 반드시 읽을 순서
 1. [통합 GDD](../LIVING_GALAXY_VISION.md): 승인 방향 최상위.
-2. [상세 결정 이력과 시나리오](DECISION_HISTORY.md): D01–D31 승인, D32 미결.
+2. [상세 결정 이력과 시나리오](DECISION_HISTORY.md): D01–D32 승인, D33 미결.
 3. [시각 도식](VISUAL_ATLAS.md) 및 [레퍼런스](REFERENCES.md), [기존 이미지 보드](../VISUAL_REFERENCE_BOARD.md), [아트 방향](../ART_DIRECTION.md).
 4. [대화 보존 기록](CONVERSATION_LOG.md), [실제 참고 이미지/공식 미디어](REFERENCE_EVIDENCE.md), [이론 적용 지도](THEORY_APPLICATION.md), [원본 연구](../GAME_DESIGN_THEORY.md), [영상 연구](../VIDEO_RESEARCH_INBOX.md).
 5. [공통 이슈 #10](https://github.com/syjkim0125/harvest-deck/issues/10). 과거 댓글/PR은 현재 지시 아님.
 6. [최신 문서 감사/미결 목록](AUDIT_20261127_CLEANUP.md) — 외부 이미지·원본 영상 검증 수준, 과거 아티팩트 격리 기준.
 ## 재개할 대화
-STEP 4 D18–D29 핵심 방향 승인 완료. STEP 5 D30 성향 질문 기반 추천+직접 확인·수정, D31 배경·초기 능력·직업·함선 연계 추천+직접 수정 승인. 다음 STEP 5-3 D32 초기 함선 선택: A 모든 플레이어 동일 함선 / B 3종 특화 함선 중 선택 / C 3종 기본 함선+제한적 초기 장비 구성 선택(추천, 미승인). 기존 중립 독립 선장 및 3종 초기 함선 후보 유지. 소형 고속선/탐사선/다목적 작업선은 예시. [D32 미승인 상세 예시](EXAMPLE_ARCHIVE.md#d32-초기-함선-선택--미승인-제안) 및 [설명 도식](visuals/32-starting-ships-proposal.svg) 참조. D07–17 우주 항해/전투/함대 및 D28 착륙/귀환과 연결; 초기 직업·성향으로 함선 선택을 영구 제한하지 않음. 함선별 스탯, 가격, 시작 장비·자원·슬롯·교체/개조 규칙은 미결. 이후 직업 및 성장 상세 기획. 개발 중지 유지.
+STEP 4 D18–D29 핵심 방향 승인. STEP 5 D30 성향 질문 추천+직접 수정, D31 배경·능력·직업·함선 연계 추천+직접 수정, D32 3종 기본 함선+제한적 초기 장비 선택 승인. 다음 STEP 5-4 D33 직업·성장 구조: A 고정 직업별 성장 / B 직업 없는 자유 기술 성장 / C 초기 직업+자유로운 교차 기술 습득·전문화(추천, 미승인). 기존 파일럿/수색대원/기술자/의무관/외교관 및 하이브리드 비전 유지. 초기 직업으로 장기 경로 강제 금지. 성장 자원·습득 조건·전문화·전직 규칙, 직업 목록·수치·UI는 미결. [D32 도식](visuals/32-starting-ships-proposal.svg). 개발 중지 유지.
 ## 추가 예시 및 시각 자료 (필수)
 - [통합 참고 이미지 갤러리](REFERENCE_GALLERY.md) · [URL/공식 미디어 목록](reference-images/manifest.json). 원격 임베드, 실제 이미지 파일은 현재 미확보. 공개 저장소의 이미지 재호스팅 권한 확인 전 파일 커밋 금지.
 - [2026-11-27 보존 감사](AUDIT_20261127.md)
-- [상세 예시 보존](EXAMPLE_ARCHIVE.md): D19–D31의 표/상황/선택지/문항·프로필. [이미지 검색 문구 원문](CHAT_IMAGE_INDEX.md): 46건(39건 확인 가능한 원문, D19–20 7건 재구성), 원본 파일 미확보. [캐릭터 생성 인터랙션 재구성](prototypes/character-creation-example.html) · [데이터](prototypes/character-creation-example.json). 이전 D01–D18은 기존 결정 이력/도식/레퍼런스에 보존, 전체 원본 미확보.
+- [상세 예시 보존](EXAMPLE_ARCHIVE.md): D19–D32의 표/상황/선택지/문항·프로필. [이미지 검색 문구 원문](CHAT_IMAGE_INDEX.md): 46건(39건 확인 가능한 원문, D19–20 7건 재구성), 원본 파일 미확보. [캐릭터 생성 인터랙션 재구성](prototypes/character-creation-example.html) · [데이터](prototypes/character-creation-example.json). 이전 D01–D18은 기존 결정 이력/도식/레퍼런스에 보존, 전체 원본 미확보.
 ## 변경 관리 계약
 - 활성 기획 기준은 GDD/결정 이력/현재 인계. 과거 미승인 방향 및 구현 실험은 이력에서만 참고. 새 문서가 과거 지시를 재활성화하지 않도록 확인.
 - **기획 세션만 진행**. 개발/디자인/리뷰 자동화 중지. 기존 PR 병합/게임 코드 수정 금지(기획 문서 정리 제외).
@@ -25,4 +25,4 @@ STEP 4 D18–D29 핵심 방향 승인 완료. STEP 5 D30 성향 질문 기반 �
 - 상세 기획→인게임 콘셉트→첫 10분 스토리보드/실제 조작 프로토타입→사용자 통합 승인→개발 계획/자동화 재개. 테스트 통과를 재미 검증으로 주장하지 않음.
 
 ## 새 채팅에 붙여 넣을 문장
-`VOID CARAVAN 기획 세션을 이어서 진행해. GitHub syjkim0125/harvest-deck main의 docs/planning/SESSION_RESUME.md부터 읽고, 연결된 GDD·상세 결정 이력·시각 도식·레퍼런스 문서를 기준으로 STEP 5-3의 미결 결정부터 진행해. 개발/디자인/피드백 자동화는 중지 상태로 유지하고 새 승인마다 문서와 이미지 원본을 GitHub에 저장하고 확인해.`
+`VOID CARAVAN 기획 세션을 이어서 진행해. GitHub syjkim0125/harvest-deck main의 docs/planning/SESSION_RESUME.md부터 읽고, 연결된 GDD·상세 결정 이력·시각 도식·레퍼런스 문서를 기준으로 STEP 5-4의 미결 결정부터 진행해. 개발/디자인/피드백 자동화는 중지 상태로 유지하고 새 승인마다 문서와 이미지 원본을 GitHub에 저장하고 확인해.`
