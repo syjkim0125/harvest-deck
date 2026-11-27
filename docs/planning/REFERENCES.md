@@ -67,3 +67,6 @@ Absolum의 공격·피격 반응, Hades II의 무기별 리듬, 기존 Chainsaw 
 
 ## D25 연결
 Zelda BOTW/TOTK의 곱셈 디자인 EXP-Z04, 일관된 환경 규칙 및 선택 가능한 문제 해결 원리를 참고. STEP 4-14 대화 이미지 주제: BOTW 불/풀 연소, TOTK 전기/물, BOTW Magnesis 물체 이동, BOTW 은신/야생 생물. 해당 자동 이미지 원본 미확보, 이번 원본 영상/이미지 신규 검증 없음. 기존 [Nintendo 개발자 인터뷰](https://www.nintendo.com/us/whatsnew/ask-the-developer-vol-9-the-legend-of-zelda-tears-of-the-kingdom-part-4/)와 GDD 연구 링크 유지. 원작 그래픽/능력 복제 금지. [자체 설명 도식](visuals/25-systemic-environment.svg).
+
+## D26–D27 연결
+기존 Chainsaw Juice King의 절삭/파괴 피드백(D23), Zelda 공통 환경 속성(D25), Subnautica의 자원·환경 탐험, 대항해시대/Black Flag의 항해/화물, RimWorld의 운반·동료 역할을 원리 비교로 참고. 원작의 정확한 적재/손실 규칙 복제 아님. STEP 4-16 자동 이미지 주제: 외계 광물 채굴, 발광 식물, 함선 잔해 해체, 외계 동료의 광물 운반. 원본 URL/파일 미확보, 새 외부 이미지/영상 검증 없음. [채집](visuals/26-resource-gathering.svg), [운반](visuals/27-resource-transport.svg) 자체 도식.
