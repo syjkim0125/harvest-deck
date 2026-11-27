@@ -94,3 +94,6 @@ D30의 Langrisser식 질문/Bannerlord 배경 선택/Fallout New Vegas 직접 �
 
 ## D33 연결
 기존 Langrisser 초기 선택, Bannerlord/RimWorld의 역할 및 능력 차이 원리를 비교 참고. 원작 스킬 트리나 직업 규칙을 채택했다는 의미 아님. 신규 외부 이미지 사용 없음. [자체 하이브리드 도식](visuals/33-cross-profession-growth.svg).
+
+## D34 연결
+Skyrim의 활동 기반 숙련과 특성 선택, Bannerlord의 활동/능력 성장과 전문 분야 선택을 비교 원리로 참고. 새 외부 출처/게임 플레이 검증 없음. 대화 이미지 검색 문구 2건은 [CHAT_IMAGE_INDEX](CHAT_IMAGE_INDEX.md); 원본 파일/URL 미확보. [자체 도식](visuals/34-activity-skill-growth.svg)과 [기술 선택 시안](prototypes/skill-choice-example.html) 보존. 원작 수치/스킬 트리 복제 금지.
