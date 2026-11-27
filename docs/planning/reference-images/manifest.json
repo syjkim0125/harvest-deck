@@ -1995,6 +1995,16 @@
       "path": "docs/planning/visuals/46-ship-interior-proposal.svg",
       "purpose": "생활하는 함선 내부와 간편한 관리 접근의 결합",
       "mappingEvidence": "decision-specific proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-47",
+      "decisionIds": [
+        "D47"
+      ],
+      "path": "docs/planning/visuals/47-ship-interior-camera-proposal.svg",
+      "purpose": "탑다운·측면 단면·쿼터뷰 내부 및 관리용 배치도 비교",
+      "mappingEvidence": "decision-specific proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -2005,9 +2015,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D46",
-    "approvedThrough": "D45",
-    "pending": "D46",
+    "decisionRange": "D01–D47",
+    "approvedThrough": "D46",
+    "pending": "D47",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 31,
