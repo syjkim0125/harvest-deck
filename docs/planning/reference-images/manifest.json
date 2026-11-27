@@ -1,0 +1,228 @@
+{
+  "date": "2026-11-27",
+  "repositoryVisibility": "public",
+  "note": "기존 실제 URL을 중복 제거한 목록. 개별 이미지 바이트/렌더링/재호스팅 권한 미검증. 채팅의 정확한 이미지 원본 아님. 로컬 캐시만 허용된 범위에서 사용; 공개 저장소에는 허가 확인 전 업로드 금지.",
+  "entries": [
+    {
+      "id": "REF-01",
+      "title": "Mount & Blade II: Bannerlord",
+      "source": "Mount & Blade II: Bannerlord — 이미지 출처: Steam / TaleWorlds 공식 프로모션 이미지",
+      "url": "https://cdn.akamai.steamstatic.com/steam/apps/261550/header.jpg",
+      "status": "active",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting"
+    },
+    {
+      "id": "REF-02",
+      "title": "EVE Online",
+      "source": "EVE Online — 이미지 출처: EVE Online 공식 뉴스 이미지 (CCP)",
+      "url": "https://content.eveonline.com/www/newssystem/media/67273/1/Kronos.jpg",
+      "status": "active",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting"
+    },
+    {
+      "id": "REF-03",
+      "title": "Assassin’s Creed IV: Black Flag",
+      "source": "Assassin’s Creed IV: Black Flag — 이미지 출처: MPERIALS에 게시된 Ubisoft 게임 스크린샷",
+      "url": "https://mperials.com/images/screenshots/assassins-creed-iv-black-flag-illustrious-pirates-pack/original/sc7zd1.jpg",
+      "status": "active",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting"
+    },
+    {
+      "id": "REF-04",
+      "title": "DAVE THE DIVER",
+      "source": "DAVE THE DIVER — 이미지 출처: Nintendo 공식 게임 페이지 / MINTROCKET 제공",
+      "url": "https://www.nintendo.com/eu/media/images/06_screenshots/games_5/nintendo_switch_download_software_2/nswitchds_davethediver/NSwitchDS_DaveTheDiver_02_DEde.jpg",
+      "status": "deferred",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting"
+    },
+    {
+      "id": "REF-05",
+      "title": "Absolum",
+      "source": "Absolum — 이미지 출처: Steam / Dotemu 공식 프로모션 이미지; 게임플레이는 공식 Press Kit 참조",
+      "url": "https://cdn.akamai.steamstatic.com/steam/apps/1904480/header.jpg",
+      "status": "active",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting"
+    },
+    {
+      "id": "REF-06",
+      "title": "RimWorld",
+      "source": "RimWorld — 이미지 출처: RimWorld 공식 스크린샷 (Ludeon)",
+      "url": "https://rimworldgame.com/biotech/screenshots/impids.jpg",
+      "status": "active",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting"
+    },
+    {
+      "id": "REF-07",
+      "title": "Uncharted Waters Origin",
+      "source": "Uncharted Waters Origin — 이미지 출처: JeuxOnLine 게임 스크린샷 (LINE Games 제공 타이틀)",
+      "url": "https://jolstatic.fr/www/captures/6693/1/161971.jpg",
+      "status": "active",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting"
+    },
+    {
+      "id": "REF-08",
+      "title": "Dungeons & Dragons: Shadow over Mystara",
+      "source": "Dungeons & Dragons: Shadow over Mystara — 이미지 출처: Bitvint에 게시된 Capcom 원작 게임 화면",
+      "url": "https://bitvint.com/cdn/shop/files/Dungeons_Dragons_Shadow_over_Mystara_1996_Arcade_Gameplay_Capcom_Fighter.png?v=1746455928&width=1000",
+      "status": "historical",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting"
+    },
+    {
+      "id": "REF-09",
+      "title": "Monster Sanctuary",
+      "source": "Monster Sanctuary — 이미지 출처: Steam / Moi Rai Games 공식 프로모션 이미지",
+      "url": "https://cdn.akamai.steamstatic.com/steam/apps/814370/header.jpg",
+      "status": "deferred",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting"
+    },
+    {
+      "id": "REF-10",
+      "title": "Cassette Beasts",
+      "source": "Cassette Beasts — 이미지 출처: Steam / Bytten Studio 공식 프로모션 이미지",
+      "url": "https://cdn.akamai.steamstatic.com/steam/apps/1321440/header.jpg",
+      "status": "deferred",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting"
+    },
+    {
+      "id": "REF-11",
+      "title": "Cult of the Lamb",
+      "source": "Cult of the Lamb — 이미지 출처: Everyeye에 게시된 Massive Monster 게임 스크린샷",
+      "url": "https://images.everyeye.it/img-notizie/che-tipo-gioco-cult-of-the-lamb-come-funziona-v6-602875-1200x1200.webp",
+      "status": "deferred",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting"
+    },
+    {
+      "id": "REF-12",
+      "title": "Langrisser I & II",
+      "source": "Langrisser I & II — 이미지 출처: Steam / NIS America 게임 스크린샷",
+      "url": "https://cdn.akamai.steamstatic.com/steam/apps/1060220/ss_5a60f8b41afb5e1f74406d0560c285648968b79f.1920x1080.jpg?t=1668469958",
+      "status": "active",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting"
+    },
+    {
+      "id": "REF-13",
+      "title": "Moonlighter",
+      "source": "Moonlighter — 이미지 출처: AIPT 리뷰에 게시된 Digital Sun 게임 화면",
+      "url": "https://i0.wp.com/aiptcomics.com/wp-content/uploads/2018/06/Screen-Shot-2018-06-05-at-4.26.36-PM.png?fit=740%2C433&ssl=1",
+      "status": "deferred",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting"
+    },
+    {
+      "id": "REF-14",
+      "title": "Overcooked! 2",
+      "source": "Overcooked! 2 — 이미지 출처: Nintendo 공식 판매 페이지 / Team17 게임 스크린샷",
+      "url": "https://img-eshop.cdn.nintendo.net/i/43b02178d85638fee4982f5b286c3aae8b91f6034b39e34512ed9ae082ca4e20.jpg",
+      "status": "deferred",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting"
+    },
+    {
+      "id": "REF-15",
+      "title": "Dome Keeper",
+      "source": "Dome Keeper — 이미지 출처: Xbox Wire 공식 게임 소개 이미지 / Raw Fury",
+      "url": "https://xboxwire.thesourcemediaassets.com/sites/2/2025/12/Screenshot2_DK_XSX-03716d193c63d680218a.png",
+      "status": "deferred",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting"
+    },
+    {
+      "id": "REF-16",
+      "title": "Fallout 4",
+      "source": "Fallout 4 — 이미지 출처: GIGA에 게시된 Bethesda 게임 스크린샷",
+      "url": "https://files.giga-video.de/81/ee/73/83afb144bc6ccd1cb553df1b5a_AzhlOGY0Y2NjNWY1.jpg",
+      "status": "deferred",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting"
+    },
+    {
+      "id": "REF-17",
+      "title": "Cut the Rope",
+      "source": "Cut the Rope — 이미지 출처: MobyGames의 ZeptoLab 원작 게임 스크린샷",
+      "url": "https://cdn.mobygames.com/screenshots/7040818-cut-the-rope-android-the-spiders-are-gonna-get-that-candy.png",
+      "status": "active",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting"
+    },
+    {
+      "id": "REF-18",
+      "title": "Starsector — top-down combat",
+      "source": "기존 REFERENCE_EVIDENCE 원본 출처 기록",
+      "url": "https://www.gamingonlinux.com/uploads/articles/tagline_images/1754243259id12996gol.jpg",
+      "status": "active",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting"
+    },
+    {
+      "id": "REF-19",
+      "title": "Tunic — isometric ruins",
+      "source": "기존 REFERENCE_EVIDENCE 원본 출처 기록",
+      "url": "https://multiplayer.net-cdn.it/thumbs/images/2021/04/26/tunic_01_jpg_1400x0_q85.jpg",
+      "status": "active",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting"
+    },
+    {
+      "id": "REF-20",
+      "title": "Hades II — quarter-view combat",
+      "source": "기존 REFERENCE_EVIDENCE 원본 출처 기록",
+      "url": "https://storage.ghost.io/c/86/e7/86e7c943-181b-4d95-84cf-11e4a7c6b083/content/images/2024/mai/1005-hades-ii-divin-et-diabolique/hades-ii-3.jpg",
+      "status": "active",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting"
+    },
+    {
+      "id": "REF-21",
+      "title": "Absolum — attack impact",
+      "source": "기존 REFERENCE_EVIDENCE 원본 출처 기록",
+      "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1904480/ea0656207cbaf00003294eee4ce963b6df166916/ss_ea0656207cbaf00003294eee4ce963b6df166916.1920x1080.jpg?t=1759486757",
+      "status": "active",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting"
+    }
+  ],
+  "kits": [
+    {
+      "game": "Absolum",
+      "page": "https://www.dotemu.com/PressKit/project/Games/Absolum",
+      "archive": "https://www.dotemu.com/PressKit/cache/Games/Absolum/images.zip",
+      "status": "공식 이미지 ZIP 링크 확인; 웹 다운로드 403"
+    },
+    {
+      "game": "Hades II",
+      "page": "https://www.supergiantgames.com/games/hades-ii/",
+      "archive": "https://downloads.ctfassets.net/5owu3y35gz1g/vRwEWq1xoN4gc0UGR7RmL/e9f5e4777450ffe0e3a475e927d46c03/Hades_II_Asset_Pack.rar",
+      "status": "공식 미디어 RAR 링크 확인; 웹 도구 형식 미지원"
+    },
+    {
+      "game": "TUNIC",
+      "page": "https://finji.co/games/tunic/",
+      "archive": null,
+      "status": "퍼블리셔 Press Kit 안내 확인"
+    },
+    {
+      "game": "Subnautica",
+      "page": "https://unknownworlds.com/en/pages/press",
+      "archive": null,
+      "status": "공식 미디어 페이지 확인"
+    },
+    {
+      "game": "Starsector",
+      "page": "https://www.terminals.io/games/starsector",
+      "archive": null,
+      "status": "개발사 정보 및 Press Kit 링크 확인"
+    }
+  ]
+}
