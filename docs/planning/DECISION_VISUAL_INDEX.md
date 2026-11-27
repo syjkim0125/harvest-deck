@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 41건 / 미결 D42. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 42건 / 미결 D43. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -256,7 +256,12 @@
 - 자체 설명 도식: [SVG-41: 개체의 성격·목표·환경에 따른 사건별 반응과 관계 변화](visuals/41-companion-relationship-proposal.svg). 실제 아트 아님.
 
 ## D42
-**동료의 자율 행동과 직접 명령** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d42).
+**C. 역할·우선순위 기반 자율 행동 + 상황별 직접 명령** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d42).
 
 - 자체 설명 도식: [SVG-42: 역할·우선순위 기반 자율 행동과 상황별 직접 명령](visuals/42-companion-autonomy-proposal.svg). 실제 아트 아님.
+
+## D43
+**동료의 업무·활동 장소 배치** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d43).
+
+- 자체 설명 도식: [SVG-43: 동료의 함선·탐험·독립 임무 배치와 기회비용](visuals/43-companion-deployment-proposal.svg). 실제 아트 아님.
 
