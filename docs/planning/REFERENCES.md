@@ -79,3 +79,6 @@ Zelda BOTW/TOTK의 곱셈 디자인 EXP-Z04, 일관된 환경 규칙 및 선택 
 
 ## D30 연결
 기존 Langrisser식 성향 질문, Bannerlord의 배경/성장 과정 선택, Fallout: New Vegas의 초기 성향 질문과 직접 선택을 원리 참고로 사용. 대화 이미지 주제: Langrisser I & II 여신 질문, Bannerlord 성장 배경 선택, Fallout New Vegas 성향 검사, 회화적 SF 조종석. 해당 이미지 원본 URL 미확보, 이번 신규 외부 출처/게임 플레이 검증 없음. 기존 [비주얼 보드](../VISUAL_REFERENCE_BOARD.md), [자체 도식](visuals/30-character-creation.svg). 원작 문항/그래픽/정확한 수치 복제 금지.
+
+## D31 연결
+D30의 Langrisser식 질문/Bannerlord 배경 선택/Fallout New Vegas 직접 선택 비교 유지. STEP 5-2 이미지 주제: 민간 파일럿, 행성 수색대원, 엔지니어/드론, 의무관, 성간 외교관, 초기 프로필 화면. 자동 이미지 원본 미확보, 새 외부 출처/플레이 검증 없음. [자체 도식](visuals/31-starting-profile.svg). 캐릭터 외형이나 원작 능력치/직업 규칙 복제 금지.
