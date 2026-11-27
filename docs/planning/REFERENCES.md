@@ -16,13 +16,13 @@
 | Subnautica | [기존 보드](../VISUAL_REFERENCE_BOARD.md) | 미지 생태/발견 | 1인칭/3D 복제 금지 |
 | FTL | [기존 참고 보드](../VISUAL_REFERENCE_BOARD.md) | 승선, 함선 내부·부위 상태 비교 | 전체 시설 정밀 피해는 선택하지 않음 |
 | Tunic | [퍼블리셔 Steam 페이지/게임 스크린샷](https://store.steampowered.com/app/553420/TUNIC/) | 쿼터뷰 지형과 숨은 길 | 원작 미술/퍼즐 복제 금지 |
-| Hades II | [Supergiant 공식 페이지/미디어](https://www.supergiantgames.com/games/hades-ii/) | 쿼터뷰 액션/회피/적 행동 | 로그라이크 방 구조는 미결 |
-| Hyper Light Drifter / Zelda A Link Between Worlds | 카메라 비교 당시 탑다운 예시 | 시점 비교 | 행성 시점 선택에서는 제외 |
-| Everspace 2 / Transistor | 우주 카메라 비교 당시 3D/쿼터뷰 예시 | 시점 비교 | 우주 시점 선택에서는 제외 |
+| Hades II | [Supergiant 공식 페이지/미디어](https://www.supergiantgames.com/games/hades-ii/) | 쿼터뷰 액션/회피/적 행동 | 전체 원정 초기화/강제 방 전투 제외(D19–20); 일부 절차 생성 비교 |
+| Hyper Light Drifter / Zelda A Link Between Worlds | 카메라 비교 당시 탑다운 예시 | 시점 비교 | 기각된 행성 카메라 비교; 활성 참고에서 제외 |
+| Everspace 2 / Transistor | 우주 카메라 비교 당시 3D/쿼터뷰 예시 | 시점 비교 | 기각된 우주 카메라 비교; 활성 참고에서 제외 |
 | Cut the Rope / Where's My Water? | [기존 보드 §08](../VISUAL_REFERENCE_BOARD.md) | 설명 최소·직관적 입력 | 기존 UI/퍼즐 복제 금지 |
-| Dave the Diver, Monster Sanctuary, Langrisser, Overcooked 등 | [기존 보드](../VISUAL_REFERENCE_BOARD.md) | 귀환·동료·성장·운영 참고 후보 | 옛 낮밤/상점 중심 강제 금지, 해당 상세 기획에서 재검토 |
+| Dave the Diver, Monster Sanctuary, Langrisser, Overcooked 등 | [기존 보드](../VISUAL_REFERENCE_BOARD.md) | 귀환·동료·성장·운영 참고 후보 | 후속 STEP 6–8에서만 재검토; 구 낮밤/상점 강제 루프 폐기 |
 
-## 대화 이미지 주제 색인 (원본 파일 미확보)
+## 대화 이미지 주제 색인 (과거 비교·기각 포함, 원본 파일 미확보)
 아래 주제의 레퍼런스는 검색/시각 설명으로 사용했다. 이미지의 정확한 원본을 확보해야 하면 해당 페이지에서 권리자/URL/장면을 별도 확인 후 승인된 참고 스크린샷으로 추가한다.
 | 구간 | 이미지 검색 주제 / 의도 |
 |---|---|
@@ -85,3 +85,6 @@ D30의 Langrisser식 질문/Bannerlord 배경 선택/Fallout New Vegas 직접 �
 
 ## 대화 이미지 원문 색인 (2026-11-27)
 [CHAT_IMAGE_INDEX](CHAT_IMAGE_INDEX.md)에 현재 확인 가능한 D19–D31 이미지 검색 문구 46건을 원문으로 기록했다. 검색 결과 이미지 바이너리나 정확한 URL은 미확보이며 실제 파일로 오인하지 않는다. [EXAMPLE_ARCHIVE](EXAMPLE_ARCHIVE.md)에서 각 예시의 적용 맥락 확인.
+
+## 최신 이미지 갤러리
+[통합 갤러리](REFERENCE_GALLERY.md) · [중복 제거 URL/공식 미디어 목록](reference-images/manifest.json). 실제 원본 바이너리 미확보. 과거 비교/제외 후보는 역사 기록에서만 참고.

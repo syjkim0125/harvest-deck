@@ -1,5 +1,5 @@
 # 대화 이미지 참조 원문 색인 (2026-11-27)
-현재 대화에서 직접 확인 가능한 D19–D31의 자동 표시 이미지 검색 문구 46건을 그대로 보존. 아래 문구는 실제 이미지 파일/URL/생성 프롬프트와 동일하지 않다. 당시 반환된 이미지의 바이너리·정확한 URL·권리자 메타데이터는 확보되지 않았다. 동일 검색을 해도 같은 이미지가 나온다는 보장 없음. 원본 게임/권리자 자료는 [REFERENCE_EVIDENCE](REFERENCE_EVIDENCE.md), [기존 비주얼 보드](../VISUAL_REFERENCE_BOARD.md), [REFERENCES](REFERENCES.md)에서 확인. 자체 도식은 [VISUAL_ATLAS](VISUAL_ATLAS.md)의 실제 SVG 파일로 보존. 이미지 원본을 확보하기 전 임의의 다른 이미지를 과거 원본이라고 표시하지 않는다. D21/D23/D27은 현재 확인 가능한 해당 선택지의 이미지가 자체 도식/텍스트였음. D01–D18은 기존 색인/도식에 남아 있는 것만 확인되며 원문 검색 문구 전체는 미확보.
+D19–D31의 자동 표시 이미지 검색 문구/재구성 주제 46건을 보존. D19–D20의 7개는 이전 대화의 주제를 바탕으로 복원한 검색 문구 후보이며 정확한 원문 확인 불가. D22–D31의 39개는 현재 확인 가능한 검색 문구 원문. 아래 문구는 실제 이미지 파일/URL/생성 프롬프트와 동일하지 않다. 당시 반환된 이미지의 바이너리·정확한 URL·권리자 메타데이터는 확보되지 않았다. 동일 검색을 해도 같은 이미지가 나온다는 보장 없음. 원본 게임/권리자 자료는 [REFERENCE_EVIDENCE](REFERENCE_EVIDENCE.md), [기존 비주얼 보드](../VISUAL_REFERENCE_BOARD.md), [REFERENCES](REFERENCES.md)에서 확인. 자체 도식은 [VISUAL_ATLAS](VISUAL_ATLAS.md)의 실제 SVG 파일로 보존. 이미지 원본을 확보하기 전 임의의 다른 이미지를 과거 원본이라고 표시하지 않는다. D21/D23/D27은 현재 확인 가능한 해당 선택지의 이미지가 자체 도식/텍스트였음. D01–D18은 기존 색인/도식에 남아 있는 것만 확인되며 원문 검색 문구 전체는 미확보. [통합 갤러리](REFERENCE_GALLERY.md)에는 별도로 21개 기존 URL을 중복 제거해 표시; 실제 이미지 파일 미확보.
 
 ## D19
 - D19-IMG01: `Zelda breath of the wild vast open world landscape mountain forest village exploration gameplay` — 원본 미확보

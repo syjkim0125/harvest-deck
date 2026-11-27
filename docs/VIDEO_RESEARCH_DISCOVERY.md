@@ -5,7 +5,7 @@
 > **Independent hourly-review research cache** · established 2026-11-25.  
 > [Verified creator-provided videos U-001–U-006](VIDEO_RESEARCH_INBOX.md) · [Game design theory and acceptance tests](GAME_DESIGN_THEORY.md) · [Vision gap review](SF_VISION_GAP_REVIEW.md) · [Gameplay references](REFERENCE_ROUTER.md) · [Art references](DESIGN_REFERENCE_ROUTER.md).
 >
-> **Goal:** proactive discovery of game design and art-production lessons through vidIQ, but only when linked to a currently observed deficit in actual VOID CARAVAN gameplay or a design PR. Search results are not an instruction to blindly increase features. Verified videos are references, not reusable audiovisual assets.
+> **Historical goal:** proactive discovery of design/art lessons through vidIQ. Current planning uses approved decisions only; automatic research/design/development loops remain stopped. Search results are not an instruction to blindly increase features. Verified videos are references, not reusable audiovisual assets.
 
 ## Credit safety
 No automatic searches while paused. No paid calls or repeated balance checks before credit restoration. Candidate records below are historical evidence, not instructions.
@@ -33,7 +33,7 @@ No automatic searches while paused. No paid calls or repeated balance checks bef
 
 **Design session action:** Create **original** enemy telegraph/attack/recovery silhouette frames with readable contrast at 360×640 and 393×852. Avoid rendering the enemy animation from the linked Unity footage. Check against approved Vanillaware-derived painterly 2D principles and companion Kindchenschema separation.
 
-**Why not auto-promote to full implementation now?** P0 exploration (spatial choice and discovery) is also unresolved; the independent reviewer should pick whichever of the *current actual main/PR* defects is highest impact. A verified YouTube tip is not permission to divert a developer away from an unfinished vertical slice.
+**Current status:** historical research only. Do not auto-promote to implementation or revive P0 tasks. Use verified principles during the appropriate approved design phase.
 
 ---
 
