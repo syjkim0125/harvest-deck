@@ -73,3 +73,6 @@ Zelda BOTW/TOTK의 곱셈 디자인 EXP-Z04, 일관된 환경 규칙 및 선택 
 
 ## D28 연결
 기존 Black Flag/대항해시대의 함선 중심 항해와 Subnautica의 이동식 탐험 기반, RimWorld의 동료·물류 역할을 설계 원리 비교로 활용. 원작 착륙/회수 기능을 그대로 복제하거나 동일 규칙 사용을 주장하지 않음. STEP 4-18 대화 이미지 주제: 외계 숲 착륙지, 정착지 우주항, 유적 근처 착륙, 조건부 구조/수송. 자동 이미지 원본 미확보, 새 외부 이미지/영상 검증 없음. [자체 도식](visuals/28-landing-return.svg).
+
+## D29 연결
+기존 Zelda/Tunic의 발견과 연쇄 단서(EXP-Z01~06), Subnautica의 환경·생태 관찰, Bannerlord/Black Flag/대항해시대의 세계·교역·관계 변화 원리 비교. STEP 4-19 대화 이미지 주제: Subnautica 발광 Lost River, Tunic 숨은 유적 통로, 외계 생물 교감, 외계 정착지 발전. 자동 이미지 원본 미확보, 신규 출처/영상 검증 없음. [자체 도식](visuals/29-discovery-reward-loop.svg). STEP 5 D30 비교는 기존 Langrisser식 성향 질문 방향에서 출발하며 질문 방식과 결과 반영 범위는 미승인.
