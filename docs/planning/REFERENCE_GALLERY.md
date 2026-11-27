@@ -38,6 +38,279 @@ D36 검토 기준 · 이미지를 한 문서 안에 표시하도록 통합. 아�
 - 원문 검색: `painterly isometric science fiction explorer discovering secret hidden passage behind ancient alien ruins waterfall game concept art`
 - [결정·예시 연결](DECISION_VISUAL_INDEX.md#d36) · 원본 파일/URL 미확보 · 사용자가 선호한 예시
 
+## 대화 예시별 이미지 카드 (D19–D35)
+아래 카드는 당시 검색 문구 또는 재구성 주제이며 실제 픽셀/URL 미확보. D36 카드는 위에 별도 표시. 각 카드에서 당시 예시와 결정으로 이동 가능.
+
+### D19-IMG01
+**넓은 지형과 시각 단서** · 행성 공간 구조 비교 · [예시](EXAMPLE_ARCHIVE.md#example-d19) · [결정](DECISION_VISUAL_INDEX.md#d19)
+
+검색 문구: `Zelda breath of the wild vast open world landscape mountain forest village exploration gameplay` · reconstructed query · 원본/캡처 미확보.
+
+### D19-IMG02
+**연결된 유적·숨은 길** · 행성 공간 구조 비교 · [예시](EXAMPLE_ARCHIVE.md#example-d19) · [결정](DECISION_VISUAL_INDEX.md#d19)
+
+검색 문구: `Tunic isometric interconnected forest ruins secret paths gameplay` · reconstructed query · 원본/캡처 미확보.
+
+### D19-IMG03
+**일부 절차 생성 분기 비교** · 행성 공간 구조 비교 · [예시](EXAMPLE_ARCHIVE.md#example-d19) · [결정](DECISION_VISUAL_INDEX.md#d19)
+
+검색 문구: `Hades II dungeon chamber branching paths exploration gameplay` · reconstructed query · 원본/캡처 미확보.
+
+### D19-IMG04
+**외계 숲과 유적 연결** · 행성 공간 구조 비교 · [예시](EXAMPLE_ARCHIVE.md#example-d19) · [결정](DECISION_VISUAL_INDEX.md#d19)
+
+검색 문구: `isometric fantasy alien forest interconnected ruins cave entrance hand painted game environment` · reconstructed query · 원본/캡처 미확보.
+
+### D20-IMG01
+**생태 관찰·동일 공간 조우** · 행성 탐험 중 조우와 특수 전투 구역 · [예시](EXAMPLE_ARCHIVE.md#example-d20) · [결정](DECISION_VISUAL_INDEX.md#d20)
+
+검색 문구: `Pokemon Legends Arceus wild pokemon encounter battle gameplay screenshot` · reconstructed query · 원본/캡처 미확보.
+
+### D20-IMG02
+**탐험 중 교전** · 행성 탐험 중 조우와 특수 전투 구역 · [예시](EXAMPLE_ARCHIVE.md#example-d20) · [결정](DECISION_VISUAL_INDEX.md#d20)
+
+검색 문구: `Tunic game isometric forest combat enemies exploration gameplay screenshot` · reconstructed query · 원본/캡처 미확보.
+
+### D20-IMG03
+**특수 보스 구역** · 행성 탐험 중 조우와 특수 전투 구역 · [예시](EXAMPLE_ARCHIVE.md#example-d20) · [결정](DECISION_VISUAL_INDEX.md#d20)
+
+검색 문구: `Tunic isometric boss arena siege engine gameplay screenshot` · reconstructed query · 원본/캡처 미확보.
+
+### D22-IMG01
+**패링·반격 피드백** · 무기·직업별 전투 스타일 비교 · [예시](EXAMPLE_ARCHIVE.md#example-d22) · [결정](DECISION_VISUAL_INDEX.md#d22)
+
+검색 문구: `Absolum game gameplay parry counter attack combat hand drawn animation screenshot` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D22-IMG02
+**중량 무기와 회피** · 무기·직업별 전투 스타일 비교 · [예시](EXAMPLE_ARCHIVE.md#example-d22) · [결정](DECISION_VISUAL_INDEX.md#d22)
+
+검색 문구: `Hades II gameplay axe weapon attack dodge combat screenshot` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D22-IMG03
+**방패 대응** · 무기·직업별 전투 스타일 비교 · [예시](EXAMPLE_ARCHIVE.md#example-d22) · [결정](DECISION_VISUAL_INDEX.md#d22)
+
+검색 문구: `Tunic game shield block enemy combat gameplay isometric screenshot` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D22-IMG04
+**검·방패 실루엣** · 무기·직업별 전투 스타일 비교 · [예시](EXAMPLE_ARCHIVE.md#example-d22) · [결정](DECISION_VISUAL_INDEX.md#d22)
+
+검색 문구: `painterly science fiction energy sword and compact shield adventurer character concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D22-IMG05
+**기동형 쌍검** · 무기·직업별 전투 스타일 비교 · [예시](EXAMPLE_ARCHIVE.md#example-d22) · [결정](DECISION_VISUAL_INDEX.md#d22)
+
+검색 문구: `painterly sci fi adventurer dual energy daggers agile character concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D22-IMG06
+**중량 무기 무게감** · 무기·직업별 전투 스타일 비교 · [예시](EXAMPLE_ARCHIVE.md#example-d22) · [결정](DECISION_VISUAL_INDEX.md#d22)
+
+검색 문구: `painterly science fiction adventurer wielding massive mechanical hammer concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D22-IMG07
+**원거리 조준·드론** · 무기·직업별 전투 스타일 비교 · [예시](EXAMPLE_ARCHIVE.md#example-d22) · [결정](DECISION_VISUAL_INDEX.md#d22)
+
+검색 문구: `painterly science fiction explorer energy rifle shoulder drone character concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D22-IMG08
+**기술자·드론** · 무기·직업별 전투 스타일 비교 · [예시](EXAMPLE_ARCHIVE.md#example-d22) · [결정](DECISION_VISUAL_INDEX.md#d22)
+
+검색 문구: `painterly sci fi engineer adventurer with adorable mechanical combat drones concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D22-IMG09
+**외계 기술** · 무기·직업별 전투 스타일 비교 · [예시](EXAMPLE_ARCHIVE.md#example-d22) · [결정](DECISION_VISUAL_INDEX.md#d22)
+
+검색 문구: `painterly science fantasy explorer glowing alien artifact energy manipulation character concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D24-IMG01
+**초식 군집** · 행성 생태계 시뮬레이션 예시 · [예시](EXAMPLE_ARCHIVE.md#example-d24) · [결정](DECISION_VISUAL_INDEX.md#d24)
+
+검색 문구: `painterly isometric alien forest small cute alien creatures herd grazing game environment concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D24-IMG02
+**포식 행동** · 행성 생태계 시뮬레이션 예시 · [예시](EXAMPLE_ARCHIVE.md#example-d24) · [결정](DECISION_VISUAL_INDEX.md#d24)
+
+검색 문구: `painterly isometric alien jungle giant predator hunting alien creatures game concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D24-IMG03
+**둥지·번식** · 행성 생태계 시뮬레이션 예시 · [예시](EXAMPLE_ARCHIVE.md#example-d24) · [결정](DECISION_VISUAL_INDEX.md#d24)
+
+검색 문구: `hand painted alien creature nest glowing eggs forest game environment concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D24-IMG04
+**군집 이동** · 행성 생태계 시뮬레이션 예시 · [예시](EXAMPLE_ARCHIVE.md#example-d24) · [결정](DECISION_VISUAL_INDEX.md#d24)
+
+검색 문구: `painterly science fiction alien wildlife herd migration colorful alien landscape concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D25-IMG01
+**열·연소** · 환경 속성·도구 조합 레퍼런스 · [예시](EXAMPLE_ARCHIVE.md#example-d25) · [결정](DECISION_VISUAL_INDEX.md#d25)
+
+검색 문구: `Zelda Breath of the Wild burning grass fire spreading gameplay screenshot` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D25-IMG02
+**전기·전도성** · 환경 속성·도구 조합 레퍼런스 · [예시](EXAMPLE_ARCHIVE.md#example-d25) · [결정](DECISION_VISUAL_INDEX.md#d25)
+
+검색 문구: `Zelda Tears of the Kingdom electric shock water lightning gameplay` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D25-IMG03
+**무게·물리력** · 환경 속성·도구 조합 레퍼런스 · [예시](EXAMPLE_ARCHIVE.md#example-d25) · [결정](DECISION_VISUAL_INDEX.md#d25)
+
+검색 문구: `Zelda Breath of the Wild magnesis metal object physics puzzle gameplay` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D25-IMG04
+**은신·가시성** · 환경 속성·도구 조합 레퍼런스 · [예시](EXAMPLE_ARCHIVE.md#example-d25) · [결정](DECISION_VISUAL_INDEX.md#d25)
+
+검색 문구: `Zelda Breath of the Wild stealth wildlife hunting grass crouch gameplay` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D26-IMG01
+**광물 채굴 타격** · 일반/특수 채집 예시 · [예시](EXAMPLE_ARCHIVE.md#example-d26) · [결정](DECISION_VISUAL_INDEX.md#d26)
+
+검색 문구: `painterly isometric science fiction alien planet glowing crystal mining adventurer game concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D26-IMG02
+**식물 채집** · 일반/특수 채집 예시 · [예시](EXAMPLE_ARCHIVE.md#example-d26) · [결정](DECISION_VISUAL_INDEX.md#d26)
+
+검색 문구: `painterly isometric alien forest colorful luminous plants harvesting exploration game environment` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D26-IMG03
+**잔해 해체** · 일반/특수 채집 예시 · [예시](EXAMPLE_ARCHIVE.md#example-d26) · [결정](DECISION_VISUAL_INDEX.md#d26)
+
+검색 문구: `isometric hand painted science fiction ancient crashed spacecraft salvage exploration game concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D26-IMG04
+**동료 운반** · 일반/특수 채집 예시 · [예시](EXAMPLE_ARCHIVE.md#example-d26) · [결정](DECISION_VISUAL_INDEX.md#d26)
+
+검색 문구: `painterly isometric cute alien creature companion carrying glowing mineral explorer fantasy science fiction game art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D28-IMG01
+**미개척 착륙지** · 착륙 장소와 조건부 회수 · [예시](EXAMPLE_ARCHIVE.md#example-d28) · [결정](DECISION_VISUAL_INDEX.md#d28)
+
+검색 문구: `hand painted isometric science fiction spaceship landing in lush alien forest clearing game concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D28-IMG02
+**정착지 우주항** · 착륙 장소와 조건부 회수 · [예시](EXAMPLE_ARCHIVE.md#example-d28) · [결정](DECISION_VISUAL_INDEX.md#d28)
+
+검색 문구: `painterly isometric science fiction alien settlement spaceport small spaceship landing platform game environment` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D28-IMG03
+**유적 근처 착륙** · 착륙 장소와 조건부 회수 · [예시](EXAMPLE_ARCHIVE.md#example-d28) · [결정](DECISION_VISUAL_INDEX.md#d28)
+
+검색 문구: `painterly sci fi small spaceship landed near ancient alien temple ruins isometric environment concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D28-IMG04
+**조건부 회수** · 착륙 장소와 조건부 회수 · [예시](EXAMPLE_ARCHIVE.md#example-d28) · [결정](DECISION_VISUAL_INDEX.md#d28)
+
+검색 문구: `science fiction painterly alien jungle small shuttle rescue extraction adventurer game concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D29-IMG01
+**환경 발견 자체** · 다양한 발견의 즐거움 · [예시](EXAMPLE_ARCHIVE.md#example-d29) · [결정](DECISION_VISUAL_INDEX.md#d29)
+
+검색 문구: `Subnautica glowing giant alien underwater tree beautiful bioluminescent lost river gameplay` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D29-IMG02
+**지식·숨은 길** · 다양한 발견의 즐거움 · [예시](EXAMPLE_ARCHIVE.md#example-d29) · [결정](DECISION_VISUAL_INDEX.md#d29)
+
+검색 문구: `Tunic mysterious ancient temple hidden passage exploration gameplay` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D29-IMG03
+**교감·관계** · 다양한 발견의 즐거움 · [예시](EXAMPLE_ARCHIVE.md#example-d29) · [결정](DECISION_VISUAL_INDEX.md#d29)
+
+검색 문구: `painterly isometric adorable alien creature befriending human space explorer game concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D29-IMG04
+**정착지 변화** · 다양한 발견의 즐거움 · [예시](EXAMPLE_ARCHIVE.md#example-d29) · [결정](DECISION_VISUAL_INDEX.md#d29)
+
+검색 문구: `hand painted isometric science fiction thriving alien settlement space colony trading market environment concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D30-IMG01
+**성향 질문** · 캐릭터 생성 레퍼런스·성향 질문 화면 · [예시](EXAMPLE_ARCHIVE.md#example-d30) · [결정](DECISION_VISUAL_INDEX.md#d30)
+
+검색 문구: `Langrisser I II character creation goddess questions character class selection screenshot` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D30-IMG02
+**성장 배경** · 캐릭터 생성 레퍼런스·성향 질문 화면 · [예시](EXAMPLE_ARCHIVE.md#example-d30) · [결정](DECISION_VISUAL_INDEX.md#d30)
+
+검색 문구: `Mount and Blade II Bannerlord character creation childhood background family selection screenshot` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D30-IMG03
+**질문과 직접 선택** · 캐릭터 생성 레퍼런스·성향 질문 화면 · [예시](EXAMPLE_ARCHIVE.md#example-d30) · [결정](DECISION_VISUAL_INDEX.md#d30)
+
+검색 문구: `Fallout New Vegas character creation psychological personality test character traits screenshot` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D30-IMG04
+**조종석 분위기** · 캐릭터 생성 레퍼런스·성향 질문 화면 · [예시](EXAMPLE_ARCHIVE.md#example-d30) · [결정](DECISION_VISUAL_INDEX.md#d30)
+
+검색 문구: `cinematic painterly retro science fiction spaceship cockpit window overlooking mysterious nebula and stars illustrated video game art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D31-IMG01
+**파일럿 외형** · 초기 캐릭터 구성 및 결과 화면 · [예시](EXAMPLE_ARCHIVE.md#example-d31) · [결정](DECISION_VISUAL_INDEX.md#d31)
+
+검색 문구: `hand painted science fiction adventurous young spaceship pilot explorer character portrait concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D31-IMG02
+**수색대원 외형** · 초기 캐릭터 구성 및 결과 화면 · [예시](EXAMPLE_ARCHIVE.md#example-d31) · [결정](DECISION_VISUAL_INDEX.md#d31)
+
+검색 문구: `hand painted science fiction wilderness scout explorer alien planet character portrait concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D31-IMG03
+**기술자 외형** · 초기 캐릭터 구성 및 결과 화면 · [예시](EXAMPLE_ARCHIVE.md#example-d31) · [결정](DECISION_VISUAL_INDEX.md#d31)
+
+검색 문구: `hand painted science fiction spaceship mechanic engineer carrying tools small cute drone character portrait concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D31-IMG04
+**의무관 외형** · 초기 캐릭터 구성 및 결과 화면 · [예시](EXAMPLE_ARCHIVE.md#example-d31) · [결정](DECISION_VISUAL_INDEX.md#d31)
+
+검색 문구: `hand painted science fiction field medic with futuristic medical equipment gentle character portrait concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D31-IMG05
+**외교관 외형** · 초기 캐릭터 구성 및 결과 화면 · [예시](EXAMPLE_ARCHIVE.md#example-d31) · [결정](DECISION_VISUAL_INDEX.md#d31)
+
+검색 문구: `hand painted science fiction interstellar merchant diplomat elegant traveler character portrait concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D31-IMG06
+**시작 프로필 분위기** · 초기 캐릭터 구성 및 결과 화면 · [예시](EXAMPLE_ARCHIVE.md#example-d31) · [결정](DECISION_VISUAL_INDEX.md#d31)
+
+검색 문구: `vanillaware inspired painterly original science fiction young space explorer wearing blue green expedition jacket character portrait illustration` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D32-IMG01
+**고속선 실루엣** · 초기 함선 3종 후보 · [예시](EXAMPLE_ARCHIVE.md#example-d32) · [결정](DECISION_VISUAL_INDEX.md#d32)
+
+검색 문구: `hand painted top down science fiction small agile civilian courier spaceship compact sleek retro futuristic spaceship concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D32-IMG02
+**탐사선 실루엣** · 초기 함선 3종 후보 · [예시](EXAMPLE_ARCHIVE.md#example-d32) · [결정](DECISION_VISUAL_INDEX.md#d32)
+
+검색 문구: `painterly top down science fiction compact exploration survey spacecraft sensor antenna rounded cockpit spaceship concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D32-IMG03
+**작업선 실루엣** · 초기 함선 3종 후보 · [예시](EXAMPLE_ARCHIVE.md#example-d32) · [결정](DECISION_VISUAL_INDEX.md#d32)
+
+검색 문구: `hand painted top down science fiction small industrial cargo utility spaceship modular cargo containers rugged retro futuristic concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D34-IMG01
+**숙련과 특성 선택** · 성장 방식 레퍼런스 · [예시](EXAMPLE_ARCHIVE.md#example-d34) · [결정](DECISION_VISUAL_INDEX.md#d34)
+
+검색 문구: `Skyrim skills constellation perk tree gameplay screenshot` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D34-IMG02
+**활동과 전문 분야** · 성장 방식 레퍼런스 · [예시](EXAMPLE_ARCHIVE.md#example-d34) · [결정](DECISION_VISUAL_INDEX.md#d34)
+
+검색 문구: `Mount and Blade II Bannerlord character skills focus points perks character screen gameplay` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D35-IMG01
+**플레이어 파일럿** · 전문화와 동료의 연결 · [예시](EXAMPLE_ARCHIVE.md#example-d35) · [결정](DECISION_VISUAL_INDEX.md#d35)
+
+검색 문구: `painterly science fiction civilian spaceship pilot adventurer character portrait` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D35-IMG02
+**엔지니어 동료** · 전문화와 동료의 연결 · [예시](EXAMPLE_ARCHIVE.md#example-d35) · [결정](DECISION_VISUAL_INDEX.md#d35)
+
+검색 문구: `hand painted science fiction spaceship mechanic friendly engineer character portrait` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
+### D35-IMG03
+**환경 탐지 생물 동료** · 전문화와 동료의 연결 · [예시](EXAMPLE_ARCHIVE.md#example-d35) · [결정](DECISION_VISUAL_INDEX.md#d35)
+
+검색 문구: `adorable original alien creature with large expressive eyes small rounded body painterly fantasy science fiction companion concept art` · exact visible query; original rendered image unknown · 원본/캡처 미확보.
+
 ## 현재 기획에 직접 연결
 
 ### REF-01
@@ -239,6 +512,9 @@ Dungeons & Dragons: Shadow over Mystara — 이미지 출처: Bitvint에 게시�
 - **TUNIC**: [공식/PR 자료](https://finji.co/games/tunic/) — 퍼블리셔 Press Kit 안내 확인.
 - **Subnautica**: [공식/PR 자료](https://unknownworlds.com/en/pages/press) — 공식 미디어 페이지 확인.
 - **Starsector**: [공식/PR 자료](https://www.terminals.io/games/starsector) — 개발사 정보 및 Press Kit 링크 확인.
+
+## 원본·캡처 확보 대기
+[복구 대기 목록](VISUAL_RECOVERY_QUEUE.md). 원격 이미지 21개, 채팅 검색 기록 59개, 자체 SVG 35개를 구분하고 원본이 없는 상태를 명시. 화면 캡처는 실제 접근 가능한 파일과 권리 확인 시 등록.
 
 ## 보존 원칙
 공개 저장소에는 원 권리자의 재배포 허용 조건을 확인한 실제 이미지 또는 자체 제작 이미지 파일만 추가. 로컬 연구용 파일은 별도의 비공개 위치에 보존하고 공개 게임/마케팅 에셋으로 포함하지 않는다. 과거 전체 보드의 적용 설명은 [고정 이력](https://github.com/syjkim0125/harvest-deck/blob/0b7f09a8ef09cf5ce11c7259b26c24a3850bac90/docs/VISUAL_REFERENCE_BOARD.md)에서 확인 가능.

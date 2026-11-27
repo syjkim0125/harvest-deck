@@ -412,7 +412,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "행성 공간 구조 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d19",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d19-img01",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D19-IMG02",
@@ -426,7 +431,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "행성 공간 구조 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d19",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d19-img02",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D19-IMG03",
@@ -440,7 +450,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "행성 공간 구조 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d19",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d19-img03",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D19-IMG04",
@@ -454,7 +469,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "행성 공간 구조 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d19",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d19-img04",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D20-IMG01",
@@ -468,7 +488,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "행성 탐험 중 조우와 특수 전투 구역",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d20",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d20-img01",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D20-IMG02",
@@ -482,7 +507,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "행성 탐험 중 조우와 특수 전투 구역",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d20",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d20-img02",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D20-IMG03",
@@ -496,7 +526,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "행성 탐험 중 조우와 특수 전투 구역",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d20",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d20-img03",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D22-IMG01",
@@ -510,7 +545,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "무기·직업별 전투 스타일 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d22",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d22-img01",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D22-IMG02",
@@ -524,7 +564,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "무기·직업별 전투 스타일 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d22",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d22-img02",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D22-IMG03",
@@ -538,7 +583,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "무기·직업별 전투 스타일 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d22",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d22-img03",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D22-IMG04",
@@ -552,7 +602,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "무기·직업별 전투 스타일 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d22",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d22-img04",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D22-IMG05",
@@ -566,7 +621,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "무기·직업별 전투 스타일 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d22",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d22-img05",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D22-IMG06",
@@ -580,7 +640,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "무기·직업별 전투 스타일 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d22",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d22-img06",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D22-IMG07",
@@ -594,7 +659,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "무기·직업별 전투 스타일 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d22",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d22-img07",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D22-IMG08",
@@ -608,7 +678,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "무기·직업별 전투 스타일 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d22",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d22-img08",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D22-IMG09",
@@ -622,7 +697,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "무기·직업별 전투 스타일 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d22",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d22-img09",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D24-IMG01",
@@ -636,7 +716,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "행성 생태계 시뮬레이션 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d24",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d24-img01",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D24-IMG02",
@@ -650,7 +735,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "행성 생태계 시뮬레이션 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d24",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d24-img02",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D24-IMG03",
@@ -664,7 +754,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "행성 생태계 시뮬레이션 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d24",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d24-img03",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D24-IMG04",
@@ -678,7 +773,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "행성 생태계 시뮬레이션 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d24",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d24-img04",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D25-IMG01",
@@ -692,7 +792,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "환경 속성·도구 조합 레퍼런스",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d25",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d25-img01",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D25-IMG02",
@@ -706,7 +811,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "환경 속성·도구 조합 레퍼런스",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d25",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d25-img02",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D25-IMG03",
@@ -720,7 +830,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "환경 속성·도구 조합 레퍼런스",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d25",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d25-img03",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D25-IMG04",
@@ -734,7 +849,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "환경 속성·도구 조합 레퍼런스",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d25",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d25-img04",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D26-IMG01",
@@ -748,7 +868,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "일반/특수 채집 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d26",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d26-img01",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D26-IMG02",
@@ -762,7 +887,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "일반/특수 채집 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d26",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d26-img02",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D26-IMG03",
@@ -776,7 +906,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "일반/특수 채집 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d26",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d26-img03",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D26-IMG04",
@@ -790,7 +925,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "일반/특수 채집 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d26",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d26-img04",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D28-IMG01",
@@ -804,7 +944,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "착륙 장소와 조건부 회수",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d28",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d28-img01",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D28-IMG02",
@@ -818,7 +963,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "착륙 장소와 조건부 회수",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d28",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d28-img02",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D28-IMG03",
@@ -832,7 +982,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "착륙 장소와 조건부 회수",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d28",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d28-img03",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D28-IMG04",
@@ -846,7 +1001,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "착륙 장소와 조건부 회수",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d28",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d28-img04",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D29-IMG01",
@@ -860,7 +1020,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "다양한 발견의 즐거움",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d29",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d29-img01",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D29-IMG02",
@@ -874,7 +1039,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "다양한 발견의 즐거움",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d29",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d29-img02",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D29-IMG03",
@@ -888,7 +1058,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "다양한 발견의 즐거움",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d29",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d29-img03",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D29-IMG04",
@@ -902,7 +1077,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "다양한 발견의 즐거움",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d29",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d29-img04",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D30-IMG01",
@@ -916,7 +1096,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "캐릭터 생성 레퍼런스·성향 질문 화면",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d30",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d30-img01",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D30-IMG02",
@@ -930,7 +1115,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "캐릭터 생성 레퍼런스·성향 질문 화면",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d30",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d30-img02",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D30-IMG03",
@@ -944,7 +1134,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "캐릭터 생성 레퍼런스·성향 질문 화면",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d30",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d30-img03",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D30-IMG04",
@@ -958,7 +1153,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "캐릭터 생성 레퍼런스·성향 질문 화면",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d30",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d30-img04",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D31-IMG01",
@@ -972,7 +1172,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "초기 캐릭터 구성 및 결과 화면",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d31",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d31-img01",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D31-IMG02",
@@ -986,7 +1191,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "초기 캐릭터 구성 및 결과 화면",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d31",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d31-img02",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D31-IMG03",
@@ -1000,7 +1210,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "초기 캐릭터 구성 및 결과 화면",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d31",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d31-img03",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D31-IMG04",
@@ -1014,7 +1229,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "초기 캐릭터 구성 및 결과 화면",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d31",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d31-img04",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D31-IMG05",
@@ -1028,7 +1248,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "초기 캐릭터 구성 및 결과 화면",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d31",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d31-img05",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D31-IMG06",
@@ -1042,7 +1267,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "초기 캐릭터 구성 및 결과 화면",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d31",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d31-img06",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D32-IMG01",
@@ -1056,7 +1286,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "초기 함선 3종 후보",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d32",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d32-img01",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D32-IMG02",
@@ -1070,7 +1305,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "초기 함선 3종 후보",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d32",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d32-img02",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D32-IMG03",
@@ -1084,7 +1324,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "초기 함선 3종 후보",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d32",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d32-img03",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D34-IMG01",
@@ -1098,7 +1343,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "성장 방식 레퍼런스",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d34",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d34-img01",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D34-IMG02",
@@ -1112,7 +1362,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "성장 방식 레퍼런스",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d34",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d34-img02",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D35-IMG01",
@@ -1126,7 +1381,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "전문화와 동료의 연결",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d35",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d35-img01",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D35-IMG02",
@@ -1140,7 +1400,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "전문화와 동료의 연결",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d35",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d35-img02",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D35-IMG03",
@@ -1154,7 +1419,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "illustrative reference; decision approved, art not approved",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "전문화와 동료의 연결",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d35",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d35-img03",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "recover when original accessible"
     },
     {
       "id": "D36-IMG01",
@@ -1168,7 +1438,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "liked visual example; gameplay decision pending",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "실제 플레이 상황: 고대 유적 입구",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d36",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d36-img01",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "user-liked; highest recovery priority"
     },
     {
       "id": "D36-IMG02",
@@ -1182,7 +1457,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "liked visual example; gameplay decision pending",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "실제 플레이 상황: 고대 유적 입구",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d36",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d36-img02",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "user-liked; highest recovery priority"
     },
     {
       "id": "D36-IMG03",
@@ -1196,7 +1476,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "liked visual example; gameplay decision pending",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "실제 플레이 상황: 고대 유적 입구",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d36",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d36-img03",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "user-liked; highest recovery priority"
     },
     {
       "id": "D36-IMG04",
@@ -1210,7 +1495,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "liked visual example; gameplay decision pending",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "실제 플레이 상황: 고대 유적 입구",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d36",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d36-img04",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "user-liked; highest recovery priority"
     },
     {
       "id": "D36-IMG05",
@@ -1224,7 +1514,12 @@
       "localFile": null,
       "bytes": "unavailable",
       "status": "liked visual example; gameplay decision pending",
-      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
+      "conversationSection": "실제 플레이 상황: 고대 유적 입구",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d36",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d36-img05",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "user-liked; highest recovery priority"
     }
   ],
   "diagrams": [
@@ -1593,5 +1888,21 @@
     "status": "visible in user message; image bytes unavailable in current file listing and runtime",
     "publicRehosting": "not verified",
     "note": "Do not invent a screenshot file or substitute another image as original."
+  },
+  "coverage": {
+    "decisionRange": "D01–D36",
+    "approvedThrough": "D35",
+    "pending": "D36",
+    "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
+    "reconstructedQueries": 7,
+    "exactVisibleQueries": 52,
+    "missingChatRenderedImages": 59,
+    "missingIndividualVisualDecisions": [
+      "D02",
+      "D06",
+      "D09"
+    ],
+    "screenshot": "No file in current conversation file listing or /mnt/data; browser connector is read-only and has no screenshot capability; user-supplied capture visible only as message content. No screenshot stored.",
+    "recoverySearch": "Prior conversation search found summaries and historical references, not exact image bytes/URLs or full transcripts."
   }
 }
