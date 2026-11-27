@@ -106,3 +106,6 @@ D25의 복수 환경 해결, D33–35의 교차 성장·전문화 원리를 연�
 
 ## D37 연결
 D22 무기별 행동, D25 환경 조합, D33–36 성장과 새 해결 경로를 장비 활용과 연결. [D37 도식](visuals/37-equipment-skill-proposal.svg). 외부 이미지 신규 사용 없음. D38 동료 제안은 D04/D17/D24/D35 및 기존 RimWorld/동료 역할 비교 원리에 연결; [D38 시각 자료](DECISION_VISUAL_INDEX.md#d38) 미승인.
+
+## D38 연결
+D04/D17/D24/D29/D35 및 기존 RimWorld의 동료 역할·생활·자율 행동 비교 원리를 연결. [D38 도식](visuals/38-companion-identity-proposal.svg) · [동료 프로필 예시](EXAMPLE_ARCHIVE.md#example-d38). 원작 규칙·캐릭터·아트 복제 아님. D39는 일반 NPC 영입 경로의 자체 설명 도식, 미승인. 새 외부 이미지 없음.

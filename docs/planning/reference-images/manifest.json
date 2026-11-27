@@ -1910,7 +1910,17 @@
       "path": "docs/planning/visuals/38-companion-identity-proposal.svg",
       "purpose": "정거장 정비공과 외계 생명체의 개별 정체성·역할",
       "mappingEvidence": "decision-specific proposal",
-      "status": "local SVG; proposal pending, not final character art"
+      "status": "local SVG; approved principle, not final character art"
+    },
+    {
+      "id": "SVG-39",
+      "decisionIds": [
+        "D39"
+      ],
+      "path": "docs/planning/visuals/39-recruitment-paths-proposal.svg",
+      "purpose": "고용·공동 경험·구조·목표 일치와 상호 합의",
+      "mappingEvidence": "decision-specific proposal",
+      "status": "local SVG; proposal pending, not final game art"
     }
   ],
   "userCapture": {
@@ -1920,9 +1930,9 @@
     "note": "User screenshot shows initial character profiles (pilot, scout, engineer), not D36 ruins. Actual bytes and public rehosting rights still unverified."
   },
   "coverage": {
-    "decisionRange": "D01–D38",
-    "approvedThrough": "D37",
-    "pending": "D38",
+    "decisionRange": "D01–D39",
+    "approvedThrough": "D38",
+    "pending": "D39",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 7,
     "exactVisibleQueries": 52,

@@ -1,6 +1,6 @@
 # VOID CARAVAN — 결정별 시각 자료 색인
 
-D01–D37 승인, D38 미결. 외부 이미지 21개는 기존 URL의 주제 기반 사후 연결, 채팅 검색 문구 59개(52개 확인 가능한 원문·7개 재구성)는 표시 원본 미확보, 자체 SVG 38개는 실제 저장 파일. 그림을 좋아했다는 평가와 기획/아트 확정은 구분. [갤러리](REFERENCE_GALLERY.md) · [기계 판독 목록](reference-images/manifest.json) · [결정 기록](DECISION_HISTORY.md) · [상세 예시](EXAMPLE_ARCHIVE.md).
+D01–D38 승인, D39 미결. 외부 이미지 21개는 기존 URL의 주제 기반 사후 연결, 채팅 검색 문구 59개(52개 확인 가능한 원문·7개 재구성)는 표시 원본 미확보, 자체 SVG 39개는 실제 저장 파일. 그림을 좋아했다는 평가와 기획/아트 확정은 구분. [갤러리](REFERENCE_GALLERY.md) · [기계 판독 목록](reference-images/manifest.json) · [결정 기록](DECISION_HISTORY.md) · [상세 예시](EXAMPLE_ARCHIVE.md).
 
 ## D01
 **Bannerlord 구조 + 대항해시대/Black Flag 항해 + RimWorld 성장/운영; Absolum 액션, Vanillaware 회화적 표현** — 승인된 기획 방향.
@@ -328,10 +328,15 @@ D01–D37 승인, D38 미결. 외부 이미지 21개는 기존 URL의 주제 기
 - **SVG-37** [스캐너 기본 사용·숙련·전문 기술 조합](visuals/37-equipment-skill-proposal.svg) — 자체 설명 도식. [예시](EXAMPLE_ARCHIVE.md#example-d37). 외부 이미지 신규 사용 없음.
 
 ## D38
-**동료의 정체성과 역할 구조** — 미승인.
+**C. 개별 정체성과 자율 행동을 가진 일반 NPC·외계 생명체 동료** — 승인된 기획 방향.
 
 - **SVG-38** [정거장 정비공과 외계 생명체 동료 예시](visuals/38-companion-identity-proposal.svg) — 자체 설명 도식, 실제 아트 아님. [예시](EXAMPLE_ARCHIVE.md#example-d38).
 - 관련 기존 자료: [D04](#d04), [D17](#d17), [D24](#d24), [D35](#d35). 원본 이미지 새로 사용하지 않음.
+
+## D39
+**일반 NPC 영입 방식** — 미승인.
+
+- **SVG-39** [여러 영입 경로와 상호 합의](visuals/39-recruitment-paths-proposal.svg) — 자체 설명 도식. [예시](EXAMPLE_ARCHIVE.md#example-d39). 새 외부 이미지 사용 없음.
 
 ## 원본 확보 상태 및 누락 추적
 [복구 대기 목록](VISUAL_RECOVERY_QUEUE.md) — 정확한 채팅 이미지 59건 모두 파일 미확보, 이전 D01–D18 원본 전체 목록 미복구. 실제 표시된 이미지를 확인하기 전 대체 그림을 원본으로 표시하지 않는다.
