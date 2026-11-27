@@ -157,5 +157,11 @@ D19 승인 구조 설명. 실제 행성 크기·지도 배치·갱신 규칙 미
 
 활동→숙련→선택의 예시. [기술 선택 HTML 재구성](prototypes/skill-choice-example.html). 실제 기술 이름·조건·숙련 수치·UI 미확정.
 
+## 35. Specialization profiles (D35 구조 승인)
+
+![D35 specialization profiles](visuals/35-specialization-profiles.svg)
+
+전문화/교차 전문화/다재다능함의 예시 비교 및 동료 역할. 수치·상한·동일 비용 비교 아님.
+
 ## 다음 시각 자료
 STEP 4 핵심 방향 확정 이후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.
