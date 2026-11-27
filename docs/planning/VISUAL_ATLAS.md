@@ -199,7 +199,7 @@ D19 승인 구조 설명. 실제 행성 크기·지도 배치·갱신 규칙 미
 성향 질문 기반 프로필과 배경/직업/초기 능력/함선 항목별 수정. 화면·수치·함선 목록은 예시이며 확정 UI 아님.
 
 ## 대화 이미지와 인터랙션 보존
-- [이미지 검색 문구 원문](CHAT_IMAGE_INDEX.md) (59건; 원본 파일 미확보)
+- [이미지 검색 문구 원문](CHAT_IMAGE_INDEX.md) (원본 파일 미확보; 최신 수치는 manifest)
 - [상세 예시 보존](EXAMPLE_ARCHIVE.md)
 - [D30/D31 캐릭터 생성 HTML 재구성](prototypes/character-creation-example.html) · [데이터](prototypes/character-creation-example.json) — 원래 채팅 UI의 재구성, 실제 게임 화면 아님.
 

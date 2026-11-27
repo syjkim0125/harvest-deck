@@ -75,7 +75,7 @@ Zelda BOTW/TOTK의 곱셈 디자인 EXP-Z04, 일관된 환경 규칙 및 선택 
 기존 Black Flag/대항해시대의 함선 중심 항해와 Subnautica의 이동식 탐험 기반, RimWorld의 동료·물류 역할을 설계 원리 비교로 활용. 원작 착륙/회수 기능을 그대로 복제하거나 동일 규칙 사용을 주장하지 않음. STEP 4-18 대화 이미지 주제: 외계 숲 착륙지, 정착지 우주항, 유적 근처 착륙, 조건부 구조/수송. 자동 이미지 원본 미확보, 새 외부 이미지/영상 검증 없음. [자체 도식](visuals/28-landing-return.svg).
 
 ## D29 연결
-기존 Zelda/Tunic의 발견과 연쇄 단서(EXP-Z01~06), Subnautica의 환경·생태 관찰, Bannerlord/Black Flag/대항해시대의 세계·교역·관계 변화 원리 비교. STEP 4-19 대화 이미지 주제: Subnautica 발광 Lost River, Tunic 숨은 유적 통로, 외계 생물 교감, 외계 정착지 발전. 자동 이미지 원본 미확보, 신규 출처/영상 검증 없음. [자체 도식](visuals/29-discovery-reward-loop.svg). STEP 5 D30 비교는 기존 Langrisser식 성향 질문 방향에서 출발하며 질문 방식과 결과 반영 범위는 미승인.
+기존 Zelda/Tunic의 발견과 연쇄 단서(EXP-Z01~06), Subnautica의 환경·생태 관찰, Bannerlord/Black Flag/대항해시대의 세계·교역·관계 변화 원리 비교. STEP 4-19 대화 이미지 주제: Subnautica 발광 Lost River, Tunic 숨은 유적 통로, 외계 생물 교감, 외계 정착지 발전. 자동 이미지 원본 미확보, 신규 출처/영상 검증 없음. [자체 도식](visuals/29-discovery-reward-loop.svg). STEP 5 D30 비교는 기존 Langrisser식 성향 질문 방향에서 출발하며 D30–D31 구조 승인; 구체 문항/효과 미확정.
 
 ## D30 연결
 기존 Langrisser식 성향 질문, Bannerlord의 배경/성장 과정 선택, Fallout: New Vegas의 초기 성향 질문과 직접 선택을 원리 참고로 사용. 대화 이미지 주제: Langrisser I & II 여신 질문, Bannerlord 성장 배경 선택, Fallout New Vegas 성향 검사, 회화적 SF 조종석. 해당 이미지 원본 URL 미확보, 이번 신규 외부 출처/게임 플레이 검증 없음. 기존 [비주얼 보드](../VISUAL_REFERENCE_BOARD.md), [자체 도식](visuals/30-character-creation.svg). 원작 문항/그래픽/정확한 수치 복제 금지.
@@ -84,7 +84,7 @@ Zelda BOTW/TOTK의 곱셈 디자인 EXP-Z04, 일관된 환경 규칙 및 선택 
 D30의 Langrisser식 질문/Bannerlord 배경 선택/Fallout New Vegas 직접 선택 비교 유지. STEP 5-2 이미지 주제: 민간 파일럿, 행성 수색대원, 엔지니어/드론, 의무관, 성간 외교관, 초기 프로필 화면. 자동 이미지 원본 미확보, 새 외부 출처/플레이 검증 없음. [자체 도식](visuals/31-starting-profile.svg). 캐릭터 외형이나 원작 능력치/직업 규칙 복제 금지.
 
 ## 대화 이미지 원문 색인 (2026-11-27)
-[CHAT_IMAGE_INDEX](CHAT_IMAGE_INDEX.md)에 D19–D31 검색 기록 46건(39건 현재 확인 가능한 원문, D19–20 7건 재구성 후보)을 보존했다. 검색 결과 이미지 바이너리나 정확한 URL은 미확보이며 실제 파일로 오인하지 않는다. [EXAMPLE_ARCHIVE](EXAMPLE_ARCHIVE.md)에서 각 예시의 적용 맥락 확인.
+검색 문구와 정확성은 [manifest](reference-images/manifest.json) 및 생성된 [검색 기록](CHAT_IMAGE_INDEX.md) 기준. 실제 표시 원본 미확보. [상세 예시](EXAMPLE_ARCHIVE.md).
 
 ## 최신 이미지 갤러리
 [통합 갤러리](REFERENCE_GALLERY.md) · [중복 제거 URL/공식 미디어 목록](reference-images/manifest.json). 실제 원본 바이너리 미확보. 과거 비교/제외 후보는 역사 기록에서만 참고.
@@ -102,16 +102,16 @@ Skyrim의 활동 기반 숙련과 특성 선택, Bannerlord의 활동/능력 성
 D33–34의 초기 직업과 활동 기반 성장 원리 유지. 플레이어의 전문성과 동료의 역할 상호 보완은 기존 RimWorld/Bannerlord 비교 원리와 연결. 실제 게임의 성장 상한이나 비용을 복제하지 않는다. [전문화 비교 도식](visuals/35-specialization-profiles.svg). 대화 이미지 검색 3건은 [CHAT_IMAGE_INDEX](CHAT_IMAGE_INDEX.md), 원본 이미지 파일 및 URL은 미확보. 신규 외부 출처·플레이 검증 없음.
 
 ## D36 연결
-D25의 복수 환경 해결, D33–35의 교차 성장·전문화 원리를 연결. [D36 자체 도식](visuals/36-skill-solution-paths.svg) · [사용자 선호 이미지 5건](DECISION_VISUAL_INDEX.md#d36). 검색 문구만 확보, 정확한 외부 원본/URL 미확보. D37은 장비와 기술 결합의 미승인 자체 설명 도식이며 새 외부 이미지 없음.
+D25의 복수 환경 해결, D33–35의 교차 성장·전문화 원리를 연결. [D36 자체 도식](visuals/36-skill-solution-paths.svg) · [사용자 선호 이미지 5건](DECISION_VISUAL_INDEX.md#d36). 검색 문구만 확보, 정확한 외부 원본/URL 미확보. D37 장비와 기술 결합 구조 승인, 세부 효과 미확정.
 
 ## D37 연결
-D22 무기별 행동, D25 환경 조합, D33–36 성장과 새 해결 경로를 장비 활용과 연결. [D37 도식](visuals/37-equipment-skill-proposal.svg). 외부 이미지 신규 사용 없음. D38 동료 제안은 D04/D17/D24/D35 및 기존 RimWorld/동료 역할 비교 원리에 연결; [D38 시각 자료](DECISION_VISUAL_INDEX.md#d38) 미승인.
+D22 무기별 행동, D25 환경 조합, D33–36 성장과 새 해결 경로를 장비 활용과 연결. [D37 도식](visuals/37-equipment-skill-proposal.svg). 외부 이미지 신규 사용 없음. D38 동료 구조는 D04/D17/D24/D35 및 기존 RimWorld/동료 역할 비교 원리에 연결; [D38 시각 자료](DECISION_VISUAL_INDEX.md#d38), 구조 승인.
 
 ## D38 연결
-D04/D17/D24/D29/D35 및 기존 RimWorld의 동료 역할·생활·자율 행동 비교 원리를 연결. [D38 도식](visuals/38-companion-identity-proposal.svg) · [동료 프로필 예시](EXAMPLE_ARCHIVE.md#example-d38). 원작 규칙·캐릭터·아트 복제 아님. D39는 일반 NPC 영입 경로의 자체 설명 도식, 미승인. 새 외부 이미지 없음.
+D04/D17/D24/D29/D35 및 기존 RimWorld의 동료 역할·생활·자율 행동 비교 원리를 연결. [D38 도식](visuals/38-companion-identity-proposal.svg) · [동료 프로필 예시](EXAMPLE_ARCHIVE.md#example-d38). 원작 규칙·캐릭터·아트 복제 아님. D39 일반 NPC 영입 구조 승인, 도식은 설명용. 새 외부 이미지 없음.
 
 ## D39 연결
-D04/D17/D29/D38의 개인 목표·관계·역할 연결. [D39 도식](visuals/39-recruitment-paths-proposal.svg) · [정비공 반응 예시](prototypes/recruitment-reaction-example.html). 새로운 외부 이미지 없음. [D40 자체 도식](visuals/40-alien-bonding-proposal.svg)은 미승인 교감 제안.
+D04/D17/D29/D38의 개인 목표·관계·역할 연결. [D39 도식](visuals/39-recruitment-paths-proposal.svg) · [정비공 반응 예시](prototypes/recruitment-reaction-example.html). 새로운 외부 이미지 없음. [D40 자체 도식](visuals/40-alien-bonding-proposal.svg)은 승인 구조의 예시.
 
 ## D40 연결
 D24 생태 시뮬레이션, D29 관계 보상, D38 개체 정체성의 연계. [D40 도식](visuals/40-alien-bonding-proposal.svg) · [교감 예시](EXAMPLE_ARCHIVE.md#example-d40). 기존 생명체 레퍼런스는 관련 결정 색인에서 참조. 외부 이미지 신규 사용 없음. [D41 도식](visuals/41-companion-relationship-proposal.svg)은 미승인 관계 구조 제안.

@@ -2,12 +2,7 @@
 > 2026-11-27 · 기획 단계 / 사용자 승인 사항의 단일 기준. 기존 프로토타입은 방향 불합격. 개발·디자인·독립 리뷰 자동화 중지. 이 문서의 미결 항목과 연구 가설은 구현 승인 아님. 기획, 화면 콘셉트, 첫 10분 스토리보드, 조작 프로토타입을 사용자 확인 후 개발 재개.
 
 ## 기획 자료 및 세션 인계
-- [최신 문서 감사](planning/AUDIT_20261127_CLEANUP.md) · [과거 감사](planning/AUDIT_20261126.md) — 기록 정합성, 출처 검증 수준 및 과거 자료의 구분.
-- [상세 결정 이력 (D01–D40)](planning/DECISION_HISTORY.md) · [레퍼런스 출처/이미지 주제](planning/REFERENCES.md) · [자체 설명 도식 SVG](planning/VISUAL_ATLAS.md) · [새 세션 인계](planning/SESSION_RESUME.md)
-- [통합 참고 이미지 갤러리](planning/REFERENCE_GALLERY.md) · [URL 목록](planning/reference-images/manifest.json). 원본 대화의 자동 검색 이미지 파일은 미확보. 저장된 SVG는 재구성 설명 도식이며 완성 인게임 시안 아님. 사용자 승인 여부를 분리한다.
-
-- [대화 예시 상세 보존](planning/EXAMPLE_ARCHIVE.md) · [대화 이미지 검색 원문](planning/CHAT_IMAGE_INDEX.md) · [캐릭터 생성 인터랙션 재구성](planning/prototypes/character-creation-example.html)
-- [대화 보존 기록](planning/CONVERSATION_LOG.md) · [실제 참고 이미지/공식 게임 정보](planning/REFERENCE_EVIDENCE.md) · [이론→설계→검증](planning/THEORY_APPLICATION.md)
+[현재 기획 위치·자료 탐색](planning/SESSION_RESUME.md) · [결정 이력](planning/DECISION_HISTORY.md) · [결정별 시각 자료](planning/DECISION_VISUAL_INDEX.md). GDD는 승인 규칙의 기준, 결정 이력은 승인 여부의 기준.
 
 ## 1. 승인된 게임 정체성
 모바일 싱글플레이 SF 오픈월드 샌드박스 액션 RPG. 무소속 민간 선장과 작은 함선으로 시작하여 살아 움직이는 은하에서 자기 삶을 선택한다. 탐험가, 상인, 용병, 해적, 개척자, 세력 지도자 등은 고정된 시작 직업이 아니라 플레이로 선택하는 삶의 방향.
