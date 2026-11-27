@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 42건 / 미결 D43. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 43건 / 미결 D44. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -261,7 +261,12 @@
 - 자체 설명 도식: [SVG-42: 역할·우선순위 기반 자율 행동과 상황별 직접 명령](visuals/42-companion-autonomy-proposal.svg). 실제 아트 아님.
 
 ## D43
-**동료의 업무·활동 장소 배치** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d43).
+**C. 유연한 역할·활동 장소 배치 + 수용 능력·기회비용** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d43).
 
 - 자체 설명 도식: [SVG-43: 동료의 함선·탐험·독립 임무 배치와 기회비용](visuals/43-companion-deployment-proposal.svg). 실제 아트 아님.
+
+## D44
+**동료의 성장과 전문화** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d44).
+
+- 자체 설명 도식: [SVG-44: 일반 NPC 활동 숙련·전문화와 생명체 종별 능력·교감 성장 비교](visuals/44-companion-growth-proposal.svg). 실제 아트 아님.
 

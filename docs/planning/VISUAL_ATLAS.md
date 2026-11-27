@@ -263,9 +263,13 @@ D19 승인 구조 설명. 실제 행성 크기·지도 배치·갱신 규칙 미
 ![D42](visuals/42-companion-autonomy-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d42). 역할/우선순위 및 상황별 명령의 설명 도식; 실제 AI·UI·아트 아님.
 
-## 43. Companion deployment (D43 미승인)
+## 43. Companion deployment (D43 구조 승인)
 ![D43](visuals/43-companion-deployment-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d43). 함선·탐험·후속 독립 함대/거점 배치와 기회비용 설명 도식, 실제 UI·역할·슬롯 미확정.
+
+## 44. Companion growth (D44 미승인)
+![D44](visuals/44-companion-growth-proposal.svg)
+[결정·예시](DECISION_VISUAL_INDEX.md#d44). NPC와 외계 생명체의 성장 원리 비교, 실제 기술·수치·형태·UI 미확정.
 
 ## 다음 시각 자료
 STEP 4 핵심 방향 확정 이후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.
