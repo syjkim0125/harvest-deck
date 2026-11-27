@@ -1975,6 +1975,16 @@
       "path": "docs/planning/visuals/44-companion-growth-proposal.svg",
       "purpose": "일반 NPC 활동 숙련·전문화와 생명체 종별 능력·교감 성장 비교",
       "mappingEvidence": "decision-specific proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-45",
+      "decisionIds": [
+        "D45"
+      ],
+      "path": "docs/planning/visuals/45-companion-loss-recovery-proposal.svg",
+      "purpose": "동료의 부상·실종·갈등·이별과 회복 및 조건부 영구 손실 비교",
+      "mappingEvidence": "decision-specific proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -1985,9 +1995,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D44",
-    "approvedThrough": "D43",
-    "pending": "D44",
+    "decisionRange": "D01–D45",
+    "approvedThrough": "D44",
+    "pending": "D45",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 31,

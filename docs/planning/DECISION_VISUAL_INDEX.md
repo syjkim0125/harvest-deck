@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 43건 / 미결 D44. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 44건 / 미결 D45. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -266,7 +266,12 @@
 - 자체 설명 도식: [SVG-43: 동료의 함선·탐험·독립 임무 배치와 기회비용](visuals/43-companion-deployment-proposal.svg). 실제 아트 아님.
 
 ## D44
-**동료의 성장과 전문화** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d44).
+**C. 실제 활동 기반 성장 + NPC 전문화·외계 생명체의 종별 능력 및 교감 성장** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d44).
 
 - 자체 설명 도식: [SVG-44: 일반 NPC 활동 숙련·전문화와 생명체 종별 능력·교감 성장 비교](visuals/44-companion-growth-proposal.svg). 실제 아트 아님.
+
+## D45
+**동료의 부상·갈등·이탈·손실** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d45).
+
+- 자체 설명 도식: [SVG-45: 동료의 부상·실종·갈등·이별과 회복 및 조건부 영구 손실 비교](visuals/45-companion-loss-recovery-proposal.svg). 실제 아트 아님.
 
