@@ -1,76 +1,148 @@
 # VOID CARAVAN — 현재 참고 이미지 갤러리
 
-D31 기준 · 이미지를 한 문서 안에 표시하도록 통합. 아래는 원격 임베드이며 인터넷 연결이 필요하다. **원본 파일 저장은 아직 완료되지 않았다.** 공개 저장소의 재호스팅 권한 미확인 및 실행 환경 외부 다운로드 제한. 출처 원본은 [증거 기록](REFERENCE_EVIDENCE.md). 이 목록은 채팅에 실제 반환된 정확한 이미지와 동일하다고 주장하지 않는다. 중복 URL 제거; 게임별 레퍼런스 우선순위는 GDD 및 REFERENCES가 결정한다.
+D36 검토 기준 · 이미지를 한 문서 안에 표시하도록 통합. 아래는 원격 임베드이며 인터넷 연결이 필요하다. **원본 파일 저장은 아직 완료되지 않았다.** 공개 저장소의 재호스팅 권한 미확인 및 실행 환경 외부 다운로드 제한. 출처 원본은 [증거 기록](REFERENCE_EVIDENCE.md). 이 목록은 채팅에 실제 반환된 정확한 이미지와 동일하다고 주장하지 않는다. 중복 URL 제거; 게임별 레퍼런스 우선순위는 GDD 및 REFERENCES가 결정한다.
+
+## 결정별 찾아보기
+[결정별 시각 자료 색인 D01–D36](DECISION_VISUAL_INDEX.md) — 기획 결정·사용 의도·원본 확보 상태를 양방향으로 연결. 외부 URL 21개, 채팅 이미지 검색 기록 59개, 실제 로컬 SVG 35개. 이 중 검색 기록은 이미지 파일이 아님.
+
+## D36 — 사용자가 특히 좋아한 유적 탐험 예시
+**기술 효과 방식은 미승인. 시각 방향 선호만 기록.** 원래 채팅의 5개 이미지와 첨부 캡처의 실제 파일/URL을 현재 도구에서 확보하지 못했으므로 아래는 원본 대체 이미지가 아니라 개별 참조 카드다.
+
+### D36-IMG01
+**고대 유적 입구·수호 생물** — 쿼터뷰에서 탐험 목적과 장애물을 읽기 쉽게 표현; 식생·고대 기술 광원·생물 대비.
+
+- 원문 검색: `hand painted isometric science fiction ancient alien temple entrance overgrown ruins glowing technology mysterious alien guardian creature game environment concept art`
+- [결정·예시 연결](DECISION_VISUAL_INDEX.md#d36) · 원본 파일/URL 미확보 · 사용자가 선호한 예시
+
+### D36-IMG02
+**전투 전문가** — 수호 생물 무력화, 공격 예고·피격 가독성; 살해 필수 아님.
+
+- 원문 검색: `painterly isometric science fiction adventurer fighting large alien guardian energy sword ancient temple game concept art`
+- [결정·예시 연결](DECISION_VISUAL_INDEX.md#d36) · 원본 파일/URL 미확보 · 사용자가 선호한 예시
+
+### D36-IMG03
+**기술 전문가** — 고대 제어 장치 복구로 다른 입구 개방; 장치와 결과를 공간적으로 연결.
+
+- 원문 검색: `painterly isometric science fiction engineer repairing ancient alien technological control terminal glowing door game concept art`
+- [결정·예시 연결](DECISION_VISUAL_INDEX.md#d36) · 원본 파일/URL 미확보 · 사용자가 선호한 예시
+
+### D36-IMG04
+**생태·의학 전문가** — 생명체 진정·교감으로 비전투 통과; 표정·자세·거리.
+
+- 원문 검색: `painterly science fiction explorer gently calming adorable large alien creature in mysterious forest game concept art`
+- [결정·예시 연결](DECISION_VISUAL_INDEX.md#d36) · 원본 파일/URL 미확보 · 사용자가 선호한 예시
+
+### D36-IMG05
+**탐색 전문가** — 폭포·유적 뒤 숨은 우회로 발견; 가림과 환경 단서.
+
+- 원문 검색: `painterly isometric science fiction explorer discovering secret hidden passage behind ancient alien ruins waterfall game concept art`
+- [결정·예시 연결](DECISION_VISUAL_INDEX.md#d36) · 원본 파일/URL 미확보 · 사용자가 선호한 예시
 
 ## 현재 기획에 직접 연결
 
-### REF-01 · Mount & Blade II: Bannerlord
+### REF-01
+**Mount & Blade II: Bannerlord**
+
+연결: [D01](DECISION_VISUAL_INDEX.md#d01) · [D04](DECISION_VISUAL_INDEX.md#d04) · [D05](DECISION_VISUAL_INDEX.md#d05) · [D16](DECISION_VISUAL_INDEX.md#d16) · [D30](DECISION_VISUAL_INDEX.md#d30) · [D31](DECISION_VISUAL_INDEX.md#d31) · [D34](DECISION_VISUAL_INDEX.md#d34). 참고 목적: 세력·인물·재기·배경과 성장 비교; 홍보 이미지 자체로 세부 UI 확인 불가. (사후 주제 연결; 당시 이미지와 동일하다는 증거 없음.)
 
 ![Mount & Blade II: Bannerlord](https://cdn.akamai.steamstatic.com/steam/apps/261550/header.jpg)
 
 Mount & Blade II: Bannerlord — 이미지 출처: Steam / TaleWorlds 공식 프로모션 이미지 · [이미지 주소](https://cdn.akamai.steamstatic.com/steam/apps/261550/header.jpg) · 파일 미저장, 공개 재호스팅 권한 미확인.
 
-### REF-02 · EVE Online
+### REF-02
+**EVE Online**
+
+연결: [D03](DECISION_VISUAL_INDEX.md#d03) · [D05](DECISION_VISUAL_INDEX.md#d05) · [D17](DECISION_VISUAL_INDEX.md#d17). 참고 목적: 우주 세력과 함선 규모 비교; MMO 제외. (사후 주제 연결; 당시 이미지와 동일하다는 증거 없음.)
 
 ![EVE Online](https://content.eveonline.com/www/newssystem/media/67273/1/Kronos.jpg)
 
 EVE Online — 이미지 출처: EVE Online 공식 뉴스 이미지 (CCP) · [이미지 주소](https://content.eveonline.com/www/newssystem/media/67273/1/Kronos.jpg) · 파일 미저장, 공개 재호스팅 권한 미확인.
 
-### REF-03 · Assassin’s Creed IV: Black Flag
+### REF-03
+**Assassin’s Creed IV: Black Flag**
+
+연결: [D01](DECISION_VISUAL_INDEX.md#d01) · [D11](DECISION_VISUAL_INDEX.md#d11) · [D12](DECISION_VISUAL_INDEX.md#d12) · [D15](DECISION_VISUAL_INDEX.md#d15). 참고 목적: 항해·관찰·조우·승선 비교; 3D/해적 미술 제외. (사후 주제 연결; 당시 이미지와 동일하다는 증거 없음.)
 
 ![Assassin’s Creed IV: Black Flag](https://mperials.com/images/screenshots/assassins-creed-iv-black-flag-illustrious-pirates-pack/original/sc7zd1.jpg)
 
 Assassin’s Creed IV: Black Flag — 이미지 출처: MPERIALS에 게시된 Ubisoft 게임 스크린샷 · [이미지 주소](https://mperials.com/images/screenshots/assassins-creed-iv-black-flag-illustrious-pirates-pack/original/sc7zd1.jpg) · 파일 미저장, 공개 재호스팅 권한 미확인.
 
-### REF-05 · Absolum
+### REF-05
+**Absolum**
+
+연결: [D01](DECISION_VISUAL_INDEX.md#d01) · [D22](DECISION_VISUAL_INDEX.md#d22) · [D23](DECISION_VISUAL_INDEX.md#d23). 참고 목적: 액션 표현 원리; 홍보 이미지는 타이밍 증거 아님. (사후 주제 연결; 당시 이미지와 동일하다는 증거 없음.)
 
 ![Absolum](https://cdn.akamai.steamstatic.com/steam/apps/1904480/header.jpg)
 
 Absolum — 이미지 출처: Steam / Dotemu 공식 프로모션 이미지; 게임플레이는 공식 Press Kit 참조 · [이미지 주소](https://cdn.akamai.steamstatic.com/steam/apps/1904480/header.jpg) · 파일 미저장, 공개 재호스팅 권한 미확인.
 
-### REF-06 · RimWorld
+### REF-06
+**RimWorld**
+
+연결: [D01](DECISION_VISUAL_INDEX.md#d01) · [D04](DECISION_VISUAL_INDEX.md#d04) · [D17](DECISION_VISUAL_INDEX.md#d17) · [D33](DECISION_VISUAL_INDEX.md#d33) · [D35](DECISION_VISUAL_INDEX.md#d35). 참고 목적: 동료·역할 보완·자율 작업 원리. (사후 주제 연결; 당시 이미지와 동일하다는 증거 없음.)
 
 ![RimWorld](https://rimworldgame.com/biotech/screenshots/impids.jpg)
 
 RimWorld — 이미지 출처: RimWorld 공식 스크린샷 (Ludeon) · [이미지 주소](https://rimworldgame.com/biotech/screenshots/impids.jpg) · 파일 미저장, 공개 재호스팅 권한 미확인.
 
-### REF-07 · Uncharted Waters Origin
+### REF-07
+**Uncharted Waters Origin**
+
+연결: [D01](DECISION_VISUAL_INDEX.md#d01) · [D03](DECISION_VISUAL_INDEX.md#d03) · [D11](DECISION_VISUAL_INDEX.md#d11) · [D12](DECISION_VISUAL_INDEX.md#d12) · [D32](DECISION_VISUAL_INDEX.md#d32). 참고 목적: 직접 항해·발견·교역·함선 선택. (사후 주제 연결; 당시 이미지와 동일하다는 증거 없음.)
 
 ![Uncharted Waters Origin](https://jolstatic.fr/www/captures/6693/1/161971.jpg)
 
 Uncharted Waters Origin — 이미지 출처: JeuxOnLine 게임 스크린샷 (LINE Games 제공 타이틀) · [이미지 주소](https://jolstatic.fr/www/captures/6693/1/161971.jpg) · 파일 미저장, 공개 재호스팅 권한 미확인.
 
-### REF-12 · Langrisser I & II
+### REF-12
+**Langrisser I & II**
+
+연결: [D30](DECISION_VISUAL_INDEX.md#d30) · [D31](DECISION_VISUAL_INDEX.md#d31). 참고 목적: 성향 질문/초기 프로필 비교; 해당 장면 여부 미검증. (사후 주제 연결; 당시 이미지와 동일하다는 증거 없음.)
 
 ![Langrisser I & II](https://cdn.akamai.steamstatic.com/steam/apps/1060220/ss_5a60f8b41afb5e1f74406d0560c285648968b79f.1920x1080.jpg?t=1668469958)
 
 Langrisser I & II — 이미지 출처: Steam / NIS America 게임 스크린샷 · [이미지 주소](https://cdn.akamai.steamstatic.com/steam/apps/1060220/ss_5a60f8b41afb5e1f74406d0560c285648968b79f.1920x1080.jpg?t=1668469958) · 파일 미저장, 공개 재호스팅 권한 미확인.
 
-### REF-17 · Cut the Rope
+### REF-17
+**Cut the Rope**
+
+연결: [D08](DECISION_VISUAL_INDEX.md#d08) · [D21](DECISION_VISUAL_INDEX.md#d21). 참고 목적: 직관 터치·설명 최소화. (사후 주제 연결; 당시 이미지와 동일하다는 증거 없음.)
 
 ![Cut the Rope](https://cdn.mobygames.com/screenshots/7040818-cut-the-rope-android-the-spiders-are-gonna-get-that-candy.png)
 
 Cut the Rope — 이미지 출처: MobyGames의 ZeptoLab 원작 게임 스크린샷 · [이미지 주소](https://cdn.mobygames.com/screenshots/7040818-cut-the-rope-android-the-spiders-are-gonna-get-that-candy.png) · 파일 미저장, 공개 재호스팅 권한 미확인.
 
-### REF-18 · Starsector — top-down combat
+### REF-18
+**Starsector — top-down combat**
+
+연결: [D03](DECISION_VISUAL_INDEX.md#d03) · [D07](DECISION_VISUAL_INDEX.md#d07) · [D12](DECISION_VISUAL_INDEX.md#d12) · [D13](DECISION_VISUAL_INDEX.md#d13) · [D14](DECISION_VISUAL_INDEX.md#d14) · [D17](DECISION_VISUAL_INDEX.md#d17) · [D32](DECISION_VISUAL_INDEX.md#d32). 참고 목적: 탑다운 함선·거리·방향·전투 비교. (사후 주제 연결; 당시 이미지와 동일하다는 증거 없음.)
 
 ![Starsector — top-down combat](https://www.gamingonlinux.com/uploads/articles/tagline_images/1754243259id12996gol.jpg)
 
 기존 REFERENCE_EVIDENCE 원본 출처 기록 · [이미지 주소](https://www.gamingonlinux.com/uploads/articles/tagline_images/1754243259id12996gol.jpg) · 파일 미저장, 공개 재호스팅 권한 미확인.
 
-### REF-19 · Tunic — isometric ruins
+### REF-19
+**Tunic — isometric ruins**
+
+연결: [D18](DECISION_VISUAL_INDEX.md#d18) · [D19](DECISION_VISUAL_INDEX.md#d19) · [D20](DECISION_VISUAL_INDEX.md#d20) · [D25](DECISION_VISUAL_INDEX.md#d25) · [D29](DECISION_VISUAL_INDEX.md#d29) · [D36](DECISION_VISUAL_INDEX.md#d36). 참고 목적: 쿼터뷰 경로·가림·숨은 길; D36 미승인. (사후 주제 연결; 당시 이미지와 동일하다는 증거 없음.)
 
 ![Tunic — isometric ruins](https://multiplayer.net-cdn.it/thumbs/images/2021/04/26/tunic_01_jpg_1400x0_q85.jpg)
 
 기존 REFERENCE_EVIDENCE 원본 출처 기록 · [이미지 주소](https://multiplayer.net-cdn.it/thumbs/images/2021/04/26/tunic_01_jpg_1400x0_q85.jpg) · 파일 미저장, 공개 재호스팅 권한 미확인.
 
-### REF-20 · Hades II — quarter-view combat
+### REF-20
+**Hades II — quarter-view combat**
+
+연결: [D18](DECISION_VISUAL_INDEX.md#d18) · [D19](DECISION_VISUAL_INDEX.md#d19) · [D22](DECISION_VISUAL_INDEX.md#d22) · [D23](DECISION_VISUAL_INDEX.md#d23). 참고 목적: 쿼터뷰 액션·피격·예고; 강제 방 전투 제외. (사후 주제 연결; 당시 이미지와 동일하다는 증거 없음.)
 
 ![Hades II — quarter-view combat](https://storage.ghost.io/c/86/e7/86e7c943-181b-4d95-84cf-11e4a7c6b083/content/images/2024/mai/1005-hades-ii-divin-et-diabolique/hades-ii-3.jpg)
 
 기존 REFERENCE_EVIDENCE 원본 출처 기록 · [이미지 주소](https://storage.ghost.io/c/86/e7/86e7c943-181b-4d95-84cf-11e4a7c6b083/content/images/2024/mai/1005-hades-ii-divin-et-diabolique/hades-ii-3.jpg) · 파일 미저장, 공개 재호스팅 권한 미확인.
 
-### REF-21 · Absolum — attack impact
+### REF-21
+**Absolum — attack impact**
+
+연결: [D18](DECISION_VISUAL_INDEX.md#d18) · [D22](DECISION_VISUAL_INDEX.md#d22) · [D23](DECISION_VISUAL_INDEX.md#d23). 참고 목적: 공격 자세·궤적·피격 가독성; 벨트스크롤 제외. (사후 주제 연결; 당시 이미지와 동일하다는 증거 없음.)
 
 ![Absolum — attack impact](https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1904480/ea0656207cbaf00003294eee4ce963b6df166916/ss_ea0656207cbaf00003294eee4ce963b6df166916.1920x1080.jpg?t=1759486757)
 
@@ -78,49 +150,73 @@ Cut the Rope — 이미지 출처: MobyGames의 ZeptoLab 원작 게임 스크린
 
 ## 후속 상세 기획에서 검토할 후보
 
-### REF-04 · DAVE THE DIVER
+### REF-04
+**DAVE THE DIVER**
+
+연결: [D28](DECISION_VISUAL_INDEX.md#d28) · [D29](DECISION_VISUAL_INDEX.md#d29). 참고 목적: 귀환과 탐험 보상 후보; 강제 낮밤 루프 제외. (사후 주제 연결; 당시 이미지와 동일하다는 증거 없음.)
 
 ![DAVE THE DIVER](https://www.nintendo.com/eu/media/images/06_screenshots/games_5/nintendo_switch_download_software_2/nswitchds_davethediver/NSwitchDS_DaveTheDiver_02_DEde.jpg)
 
 DAVE THE DIVER — 이미지 출처: Nintendo 공식 게임 페이지 / MINTROCKET 제공 · [이미지 주소](https://www.nintendo.com/eu/media/images/06_screenshots/games_5/nintendo_switch_download_software_2/nswitchds_davethediver/NSwitchDS_DaveTheDiver_02_DEde.jpg) · 파일 미저장, 공개 재호스팅 권한 미확인.
 
-### REF-09 · Monster Sanctuary
+### REF-09
+**Monster Sanctuary**
+
+연결: [D24](DECISION_VISUAL_INDEX.md#d24) · [D29](DECISION_VISUAL_INDEX.md#d29). 참고 목적: 후속 생물 동료 수집 후보. (사후 주제 연결; 당시 이미지와 동일하다는 증거 없음.)
 
 ![Monster Sanctuary](https://cdn.akamai.steamstatic.com/steam/apps/814370/header.jpg)
 
 Monster Sanctuary — 이미지 출처: Steam / Moi Rai Games 공식 프로모션 이미지 · [이미지 주소](https://cdn.akamai.steamstatic.com/steam/apps/814370/header.jpg) · 파일 미저장, 공개 재호스팅 권한 미확인.
 
-### REF-10 · Cassette Beasts
+### REF-10
+**Cassette Beasts**
+
+연결: [D24](DECISION_VISUAL_INDEX.md#d24) · [D29](DECISION_VISUAL_INDEX.md#d29). 참고 목적: 후속 생물 수집 후보; 원작 시스템 채택 아님. (사후 주제 연결; 당시 이미지와 동일하다는 증거 없음.)
 
 ![Cassette Beasts](https://cdn.akamai.steamstatic.com/steam/apps/1321440/header.jpg)
 
 Cassette Beasts — 이미지 출처: Steam / Bytten Studio 공식 프로모션 이미지 · [이미지 주소](https://cdn.akamai.steamstatic.com/steam/apps/1321440/header.jpg) · 파일 미저장, 공개 재호스팅 권한 미확인.
 
-### REF-11 · Cult of the Lamb
+### REF-11
+**Cult of the Lamb**
+
+연결: [D17](DECISION_VISUAL_INDEX.md#d17) · [D29](DECISION_VISUAL_INDEX.md#d29). 참고 목적: 후속 동료·정착지 운영 후보. (사후 주제 연결; 당시 이미지와 동일하다는 증거 없음.)
 
 ![Cult of the Lamb](https://images.everyeye.it/img-notizie/che-tipo-gioco-cult-of-the-lamb-come-funziona-v6-602875-1200x1200.webp)
 
 Cult of the Lamb — 이미지 출처: Everyeye에 게시된 Massive Monster 게임 스크린샷 · [이미지 주소](https://images.everyeye.it/img-notizie/che-tipo-gioco-cult-of-the-lamb-come-funziona-v6-602875-1200x1200.webp) · 파일 미저장, 공개 재호스팅 권한 미확인.
 
-### REF-13 · Moonlighter
+### REF-13
+**Moonlighter**
+
+연결: [D27](DECISION_VISUAL_INDEX.md#d27) · [D29](DECISION_VISUAL_INDEX.md#d29). 참고 목적: 후속 제작·판매 후보; 강제 상점 루프 제외. (사후 주제 연결; 당시 이미지와 동일하다는 증거 없음.)
 
 ![Moonlighter](https://i0.wp.com/aiptcomics.com/wp-content/uploads/2018/06/Screen-Shot-2018-06-05-at-4.26.36-PM.png?fit=740%2C433&ssl=1)
 
 Moonlighter — 이미지 출처: AIPT 리뷰에 게시된 Digital Sun 게임 화면 · [이미지 주소](https://i0.wp.com/aiptcomics.com/wp-content/uploads/2018/06/Screen-Shot-2018-06-05-at-4.26.36-PM.png?fit=740%2C433&ssl=1) · 파일 미저장, 공개 재호스팅 권한 미확인.
 
-### REF-14 · Overcooked! 2
+### REF-14
+**Overcooked! 2**
+
+연결: [D17](DECISION_VISUAL_INDEX.md#d17) · [D29](DECISION_VISUAL_INDEX.md#d29). 참고 목적: 후속 공간·동료 업무 운영 후보. (사후 주제 연결; 당시 이미지와 동일하다는 증거 없음.)
 
 ![Overcooked! 2](https://img-eshop.cdn.nintendo.net/i/43b02178d85638fee4982f5b286c3aae8b91f6034b39e34512ed9ae082ca4e20.jpg)
 
 Overcooked! 2 — 이미지 출처: Nintendo 공식 판매 페이지 / Team17 게임 스크린샷 · [이미지 주소](https://img-eshop.cdn.nintendo.net/i/43b02178d85638fee4982f5b286c3aae8b91f6034b39e34512ed9ae082ca4e20.jpg) · 파일 미저장, 공개 재호스팅 권한 미확인.
 
-### REF-15 · Dome Keeper
+### REF-15
+**Dome Keeper**
+
+연결: [D27](DECISION_VISUAL_INDEX.md#d27) · [D28](DECISION_VISUAL_INDEX.md#d28). 참고 목적: 위험과 귀환 판단 비교 후보. (사후 주제 연결; 당시 이미지와 동일하다는 증거 없음.)
 
 ![Dome Keeper](https://xboxwire.thesourcemediaassets.com/sites/2/2025/12/Screenshot2_DK_XSX-03716d193c63d680218a.png)
 
 Dome Keeper — 이미지 출처: Xbox Wire 공식 게임 소개 이미지 / Raw Fury · [이미지 주소](https://xboxwire.thesourcemediaassets.com/sites/2/2025/12/Screenshot2_DK_XSX-03716d193c63d680218a.png) · 파일 미저장, 공개 재호스팅 권한 미확인.
 
-### REF-16 · Fallout 4
+### REF-16
+**Fallout 4**
+
+연결: [D29](DECISION_VISUAL_INDEX.md#d29). 참고 목적: 후속 거점 변화 후보; FPS 제외. (사후 주제 연결; 당시 이미지와 동일하다는 증거 없음.)
 
 ![Fallout 4](https://files.giga-video.de/81/ee/73/83afb144bc6ccd1cb553df1b5a_AzhlOGY0Y2NjNWY1.jpg)
 
@@ -128,7 +224,10 @@ Fallout 4 — 이미지 출처: GIGA에 게시된 Bethesda 게임 스크린샷 �
 
 ## 제외된 방향의 역사적 자료 (활성 참조 금지)
 
-### REF-08 · Dungeons & Dragons: Shadow over Mystara
+### REF-08
+**Dungeons & Dragons: Shadow over Mystara**
+
+연결: [D18](DECISION_VISUAL_INDEX.md#d18). 참고 목적: 기각된 벨트스크롤 비교; 활성 참조 금지. (사후 주제 연결; 당시 이미지와 동일하다는 증거 없음.)
 
 [과거 이미지 URL](https://bitvint.com/cdn/shop/files/Dungeons_Dragons_Shadow_over_Mystara_1996_Arcade_Gameplay_Capcom_Fighter.png?v=1746455928&width=1000)
 

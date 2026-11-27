@@ -1,5 +1,5 @@
 # 대화 이미지 참조 원문 색인 (2026-11-27)
-D19–D35의 자동 표시 이미지 검색 문구/재구성 주제 54건을 보존. D19–D20의 7개는 이전 대화의 주제를 바탕으로 복원한 검색 문구 후보이며 정확한 원문 확인 불가. D22–D35의 47개는 현재 확인 가능한 검색 문구 원문. 아래 문구는 실제 이미지 파일/URL/생성 프롬프트와 동일하지 않다. 당시 반환된 이미지의 바이너리·정확한 URL·권리자 메타데이터는 확보되지 않았다. 동일 검색을 해도 같은 이미지가 나온다는 보장 없음. 원본 게임/권리자 자료는 [REFERENCE_EVIDENCE](REFERENCE_EVIDENCE.md), [기존 비주얼 보드](../VISUAL_REFERENCE_BOARD.md), [REFERENCES](REFERENCES.md)에서 확인. 자체 도식은 [VISUAL_ATLAS](VISUAL_ATLAS.md)의 실제 SVG 파일로 보존. 이미지 원본을 확보하기 전 임의의 다른 이미지를 과거 원본이라고 표시하지 않는다. D21/D23/D27은 현재 확인 가능한 해당 선택지의 이미지가 자체 도식/텍스트였음. D01–D18은 기존 색인/도식에 남아 있는 것만 확인되며 원문 검색 문구 전체는 미확보. [통합 갤러리](REFERENCE_GALLERY.md)에는 별도로 21개 기존 URL을 중복 제거해 표시; 실제 이미지 파일 미확보.
+D19–D36의 자동 표시 이미지 검색 문구/재구성 주제 59건을 보존. D19–D20의 7개는 이전 대화의 주제를 바탕으로 복원한 검색 문구 후보이며 정확한 원문 확인 불가. D22–D36의 52개는 현재 확인 가능한 검색 문구 원문. 아래 문구는 실제 이미지 파일/URL/생성 프롬프트와 동일하지 않다. 당시 반환된 이미지의 바이너리·정확한 URL·권리자 메타데이터는 확보되지 않았다. 동일 검색을 해도 같은 이미지가 나온다는 보장 없음. 원본 게임/권리자 자료는 [REFERENCE_EVIDENCE](REFERENCE_EVIDENCE.md), [기존 비주얼 보드](../VISUAL_REFERENCE_BOARD.md), [REFERENCES](REFERENCES.md)에서 확인. 자체 도식은 [VISUAL_ATLAS](VISUAL_ATLAS.md)의 실제 SVG 파일로 보존. 이미지 원본을 확보하기 전 임의의 다른 이미지를 과거 원본이라고 표시하지 않는다. D21/D23/D27은 현재 확인 가능한 해당 선택지의 이미지가 자체 도식/텍스트였음. D01–D18은 기존 색인/도식에 남아 있는 것만 확인되며 원문 검색 문구 전체는 미확보. [통합 갤러리](REFERENCE_GALLERY.md)에는 별도로 21개 기존 URL을 중복 제거해 표시; 실제 이미지 파일 미확보.
 
 ## D19
 - D19-IMG01: `Zelda breath of the wild vast open world landscape mountain forest village exploration gameplay` — 원본 미확보
@@ -80,6 +80,14 @@ D19–D35의 자동 표시 이미지 검색 문구/재구성 주제 54건을 보
 - D35-IMG01: `painterly science fiction civilian spaceship pilot adventurer character portrait` — 원본 미확보
 - D35-IMG02: `hand painted science fiction spaceship mechanic friendly engineer character portrait` — 원본 미확보
 - D35-IMG03: `adorable original alien creature with large expressive eyes small rounded body painterly fantasy science fiction companion concept art` — 원본 미확보
+
+## D36
+사용자가 시각 예시를 특히 좋다고 평가. D36 기획 결정 자체는 미승인. [결정별 카드](DECISION_VISUAL_INDEX.md#d36).
+- D36-IMG01: `hand painted isometric science fiction ancient alien temple entrance overgrown ruins glowing technology mysterious alien guardian creature game environment concept art` — 고대 유적 입구·수호 생물: 쿼터뷰에서 탐험 목적과 장애물을 읽기 쉽게 표현; 식생·고대 기술 광원·생물 대비. 원본 미확보.
+- D36-IMG02: `painterly isometric science fiction adventurer fighting large alien guardian energy sword ancient temple game concept art` — 전투 전문가: 수호 생물 무력화, 공격 예고·피격 가독성; 살해 필수 아님. 원본 미확보.
+- D36-IMG03: `painterly isometric science fiction engineer repairing ancient alien technological control terminal glowing door game concept art` — 기술 전문가: 고대 제어 장치 복구로 다른 입구 개방; 장치와 결과를 공간적으로 연결. 원본 미확보.
+- D36-IMG04: `painterly science fiction explorer gently calming adorable large alien creature in mysterious forest game concept art` — 생태·의학 전문가: 생명체 진정·교감으로 비전투 통과; 표정·자세·거리. 원본 미확보.
+- D36-IMG05: `painterly isometric science fiction explorer discovering secret hidden passage behind ancient alien ruins waterfall game concept art` — 탐색 전문가: 폭포·유적 뒤 숨은 우회로 발견; 가림과 환경 단서. 원본 미확보.
 
 ## 이후 기록 계약
 각 새 이미지에 결정 ID, 원문 검색/생성 설명, 실제 파일 또는 확인된 원본 URL, 출처/권리, 선택 이유, 적용/제외 범위, 원본 확보 상태를 기록한다. 실제 제공된 파일은 저장하고, 외부 검색 이미지의 원본 확보 실패는 명시한다. 기획 예시의 이미지는 디자인 승인이나 제작 에셋 라이선스가 아니다.

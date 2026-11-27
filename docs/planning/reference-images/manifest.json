@@ -1,7 +1,7 @@
 {
   "date": "2026-11-27",
   "repositoryVisibility": "public",
-  "note": "기존 실제 URL을 중복 제거한 목록. 개별 이미지 바이트/렌더링/재호스팅 권한 미검증. 채팅의 정확한 이미지 원본 아님. 로컬 캐시만 허용된 범위에서 사용; 공개 저장소에는 허가 확인 전 업로드 금지.",
+  "note": "기존 실제 URL을 중복 제거한 목록. 개별 이미지 바이트/렌더링/재호스팅 권한 미검증. 채팅의 정확한 이미지 원본 아님. 로컬 캐시만 허용된 범위에서 사용; 공개 저장소에는 허가 확인 전 업로드 금지. 결정 연결은 기존 기획에 대한 이번 의미 기반 역매핑이며 당시 채팅의 정확한 표시 이미지라는 증거가 아님.",
   "entries": [
     {
       "id": "REF-01",
@@ -10,7 +10,19 @@
       "url": "https://cdn.akamai.steamstatic.com/steam/apps/261550/header.jpg",
       "status": "active",
       "bytes": "not downloaded",
-      "license": "not verified for public rehosting"
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D01",
+        "D04",
+        "D05",
+        "D16",
+        "D30",
+        "D31",
+        "D34"
+      ],
+      "referencePurpose": "세력·인물·재기·배경과 성장 비교; 홍보 이미지 자체로 세부 UI 확인 불가",
+      "mappingEvidence": "retrospective thematic association; exact chat occurrence unverified",
+      "exclusions": "원작 IP·에셋 복제 금지; GDD 및 상태 기준"
     },
     {
       "id": "REF-02",
@@ -19,7 +31,15 @@
       "url": "https://content.eveonline.com/www/newssystem/media/67273/1/Kronos.jpg",
       "status": "active",
       "bytes": "not downloaded",
-      "license": "not verified for public rehosting"
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D03",
+        "D05",
+        "D17"
+      ],
+      "referencePurpose": "우주 세력과 함선 규모 비교; MMO 제외",
+      "mappingEvidence": "retrospective thematic association; exact chat occurrence unverified",
+      "exclusions": "원작 IP·에셋 복제 금지; GDD 및 상태 기준"
     },
     {
       "id": "REF-03",
@@ -28,7 +48,16 @@
       "url": "https://mperials.com/images/screenshots/assassins-creed-iv-black-flag-illustrious-pirates-pack/original/sc7zd1.jpg",
       "status": "active",
       "bytes": "not downloaded",
-      "license": "not verified for public rehosting"
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D01",
+        "D11",
+        "D12",
+        "D15"
+      ],
+      "referencePurpose": "항해·관찰·조우·승선 비교; 3D/해적 미술 제외",
+      "mappingEvidence": "retrospective thematic association; exact chat occurrence unverified",
+      "exclusions": "원작 IP·에셋 복제 금지; GDD 및 상태 기준"
     },
     {
       "id": "REF-04",
@@ -37,7 +66,14 @@
       "url": "https://www.nintendo.com/eu/media/images/06_screenshots/games_5/nintendo_switch_download_software_2/nswitchds_davethediver/NSwitchDS_DaveTheDiver_02_DEde.jpg",
       "status": "deferred",
       "bytes": "not downloaded",
-      "license": "not verified for public rehosting"
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D28",
+        "D29"
+      ],
+      "referencePurpose": "귀환과 탐험 보상 후보; 강제 낮밤 루프 제외",
+      "mappingEvidence": "retrospective thematic association; exact chat occurrence unverified",
+      "exclusions": "원작 IP·에셋 복제 금지; GDD 및 상태 기준"
     },
     {
       "id": "REF-05",
@@ -46,7 +82,15 @@
       "url": "https://cdn.akamai.steamstatic.com/steam/apps/1904480/header.jpg",
       "status": "active",
       "bytes": "not downloaded",
-      "license": "not verified for public rehosting"
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D01",
+        "D22",
+        "D23"
+      ],
+      "referencePurpose": "액션 표현 원리; 홍보 이미지는 타이밍 증거 아님",
+      "mappingEvidence": "retrospective thematic association; exact chat occurrence unverified",
+      "exclusions": "원작 IP·에셋 복제 금지; GDD 및 상태 기준"
     },
     {
       "id": "REF-06",
@@ -55,7 +99,17 @@
       "url": "https://rimworldgame.com/biotech/screenshots/impids.jpg",
       "status": "active",
       "bytes": "not downloaded",
-      "license": "not verified for public rehosting"
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D01",
+        "D04",
+        "D17",
+        "D33",
+        "D35"
+      ],
+      "referencePurpose": "동료·역할 보완·자율 작업 원리",
+      "mappingEvidence": "retrospective thematic association; exact chat occurrence unverified",
+      "exclusions": "원작 IP·에셋 복제 금지; GDD 및 상태 기준"
     },
     {
       "id": "REF-07",
@@ -64,7 +118,17 @@
       "url": "https://jolstatic.fr/www/captures/6693/1/161971.jpg",
       "status": "active",
       "bytes": "not downloaded",
-      "license": "not verified for public rehosting"
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D01",
+        "D03",
+        "D11",
+        "D12",
+        "D32"
+      ],
+      "referencePurpose": "직접 항해·발견·교역·함선 선택",
+      "mappingEvidence": "retrospective thematic association; exact chat occurrence unverified",
+      "exclusions": "원작 IP·에셋 복제 금지; GDD 및 상태 기준"
     },
     {
       "id": "REF-08",
@@ -73,7 +137,13 @@
       "url": "https://bitvint.com/cdn/shop/files/Dungeons_Dragons_Shadow_over_Mystara_1996_Arcade_Gameplay_Capcom_Fighter.png?v=1746455928&width=1000",
       "status": "historical",
       "bytes": "not downloaded",
-      "license": "not verified for public rehosting"
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D18"
+      ],
+      "referencePurpose": "기각된 벨트스크롤 비교; 활성 참조 금지",
+      "mappingEvidence": "retrospective thematic association; exact chat occurrence unverified",
+      "exclusions": "원작 IP·에셋 복제 금지; GDD 및 상태 기준"
     },
     {
       "id": "REF-09",
@@ -82,7 +152,14 @@
       "url": "https://cdn.akamai.steamstatic.com/steam/apps/814370/header.jpg",
       "status": "deferred",
       "bytes": "not downloaded",
-      "license": "not verified for public rehosting"
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D24",
+        "D29"
+      ],
+      "referencePurpose": "후속 생물 동료 수집 후보",
+      "mappingEvidence": "retrospective thematic association; exact chat occurrence unverified",
+      "exclusions": "원작 IP·에셋 복제 금지; GDD 및 상태 기준"
     },
     {
       "id": "REF-10",
@@ -91,7 +168,14 @@
       "url": "https://cdn.akamai.steamstatic.com/steam/apps/1321440/header.jpg",
       "status": "deferred",
       "bytes": "not downloaded",
-      "license": "not verified for public rehosting"
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D24",
+        "D29"
+      ],
+      "referencePurpose": "후속 생물 수집 후보; 원작 시스템 채택 아님",
+      "mappingEvidence": "retrospective thematic association; exact chat occurrence unverified",
+      "exclusions": "원작 IP·에셋 복제 금지; GDD 및 상태 기준"
     },
     {
       "id": "REF-11",
@@ -100,7 +184,14 @@
       "url": "https://images.everyeye.it/img-notizie/che-tipo-gioco-cult-of-the-lamb-come-funziona-v6-602875-1200x1200.webp",
       "status": "deferred",
       "bytes": "not downloaded",
-      "license": "not verified for public rehosting"
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D17",
+        "D29"
+      ],
+      "referencePurpose": "후속 동료·정착지 운영 후보",
+      "mappingEvidence": "retrospective thematic association; exact chat occurrence unverified",
+      "exclusions": "원작 IP·에셋 복제 금지; GDD 및 상태 기준"
     },
     {
       "id": "REF-12",
@@ -109,7 +200,14 @@
       "url": "https://cdn.akamai.steamstatic.com/steam/apps/1060220/ss_5a60f8b41afb5e1f74406d0560c285648968b79f.1920x1080.jpg?t=1668469958",
       "status": "active",
       "bytes": "not downloaded",
-      "license": "not verified for public rehosting"
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D30",
+        "D31"
+      ],
+      "referencePurpose": "성향 질문/초기 프로필 비교; 해당 장면 여부 미검증",
+      "mappingEvidence": "retrospective thematic association; exact chat occurrence unverified",
+      "exclusions": "원작 IP·에셋 복제 금지; GDD 및 상태 기준"
     },
     {
       "id": "REF-13",
@@ -118,7 +216,14 @@
       "url": "https://i0.wp.com/aiptcomics.com/wp-content/uploads/2018/06/Screen-Shot-2018-06-05-at-4.26.36-PM.png?fit=740%2C433&ssl=1",
       "status": "deferred",
       "bytes": "not downloaded",
-      "license": "not verified for public rehosting"
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D27",
+        "D29"
+      ],
+      "referencePurpose": "후속 제작·판매 후보; 강제 상점 루프 제외",
+      "mappingEvidence": "retrospective thematic association; exact chat occurrence unverified",
+      "exclusions": "원작 IP·에셋 복제 금지; GDD 및 상태 기준"
     },
     {
       "id": "REF-14",
@@ -127,7 +232,14 @@
       "url": "https://img-eshop.cdn.nintendo.net/i/43b02178d85638fee4982f5b286c3aae8b91f6034b39e34512ed9ae082ca4e20.jpg",
       "status": "deferred",
       "bytes": "not downloaded",
-      "license": "not verified for public rehosting"
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D17",
+        "D29"
+      ],
+      "referencePurpose": "후속 공간·동료 업무 운영 후보",
+      "mappingEvidence": "retrospective thematic association; exact chat occurrence unverified",
+      "exclusions": "원작 IP·에셋 복제 금지; GDD 및 상태 기준"
     },
     {
       "id": "REF-15",
@@ -136,7 +248,14 @@
       "url": "https://xboxwire.thesourcemediaassets.com/sites/2/2025/12/Screenshot2_DK_XSX-03716d193c63d680218a.png",
       "status": "deferred",
       "bytes": "not downloaded",
-      "license": "not verified for public rehosting"
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D27",
+        "D28"
+      ],
+      "referencePurpose": "위험과 귀환 판단 비교 후보",
+      "mappingEvidence": "retrospective thematic association; exact chat occurrence unverified",
+      "exclusions": "원작 IP·에셋 복제 금지; GDD 및 상태 기준"
     },
     {
       "id": "REF-16",
@@ -145,7 +264,13 @@
       "url": "https://files.giga-video.de/81/ee/73/83afb144bc6ccd1cb553df1b5a_AzhlOGY0Y2NjNWY1.jpg",
       "status": "deferred",
       "bytes": "not downloaded",
-      "license": "not verified for public rehosting"
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D29"
+      ],
+      "referencePurpose": "후속 거점 변화 후보; FPS 제외",
+      "mappingEvidence": "retrospective thematic association; exact chat occurrence unverified",
+      "exclusions": "원작 IP·에셋 복제 금지; GDD 및 상태 기준"
     },
     {
       "id": "REF-17",
@@ -154,7 +279,14 @@
       "url": "https://cdn.mobygames.com/screenshots/7040818-cut-the-rope-android-the-spiders-are-gonna-get-that-candy.png",
       "status": "active",
       "bytes": "not downloaded",
-      "license": "not verified for public rehosting"
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D08",
+        "D21"
+      ],
+      "referencePurpose": "직관 터치·설명 최소화",
+      "mappingEvidence": "retrospective thematic association; exact chat occurrence unverified",
+      "exclusions": "원작 IP·에셋 복제 금지; GDD 및 상태 기준"
     },
     {
       "id": "REF-18",
@@ -163,7 +295,19 @@
       "url": "https://www.gamingonlinux.com/uploads/articles/tagline_images/1754243259id12996gol.jpg",
       "status": "active",
       "bytes": "not downloaded",
-      "license": "not verified for public rehosting"
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D03",
+        "D07",
+        "D12",
+        "D13",
+        "D14",
+        "D17",
+        "D32"
+      ],
+      "referencePurpose": "탑다운 함선·거리·방향·전투 비교",
+      "mappingEvidence": "retrospective thematic association; exact chat occurrence unverified",
+      "exclusions": "원작 IP·에셋 복제 금지; GDD 및 상태 기준"
     },
     {
       "id": "REF-19",
@@ -172,7 +316,18 @@
       "url": "https://multiplayer.net-cdn.it/thumbs/images/2021/04/26/tunic_01_jpg_1400x0_q85.jpg",
       "status": "active",
       "bytes": "not downloaded",
-      "license": "not verified for public rehosting"
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D18",
+        "D19",
+        "D20",
+        "D25",
+        "D29",
+        "D36"
+      ],
+      "referencePurpose": "쿼터뷰 경로·가림·숨은 길; D36 미승인",
+      "mappingEvidence": "retrospective thematic association; exact chat occurrence unverified",
+      "exclusions": "원작 IP·에셋 복제 금지; GDD 및 상태 기준"
     },
     {
       "id": "REF-20",
@@ -181,7 +336,16 @@
       "url": "https://storage.ghost.io/c/86/e7/86e7c943-181b-4d95-84cf-11e4a7c6b083/content/images/2024/mai/1005-hades-ii-divin-et-diabolique/hades-ii-3.jpg",
       "status": "active",
       "bytes": "not downloaded",
-      "license": "not verified for public rehosting"
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D18",
+        "D19",
+        "D22",
+        "D23"
+      ],
+      "referencePurpose": "쿼터뷰 액션·피격·예고; 강제 방 전투 제외",
+      "mappingEvidence": "retrospective thematic association; exact chat occurrence unverified",
+      "exclusions": "원작 IP·에셋 복제 금지; GDD 및 상태 기준"
     },
     {
       "id": "REF-21",
@@ -190,7 +354,15 @@
       "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1904480/ea0656207cbaf00003294eee4ce963b6df166916/ss_ea0656207cbaf00003294eee4ce963b6df166916.1920x1080.jpg?t=1759486757",
       "status": "active",
       "bytes": "not downloaded",
-      "license": "not verified for public rehosting"
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D18",
+        "D22",
+        "D23"
+      ],
+      "referencePurpose": "공격 자세·궤적·피격 가독성; 벨트스크롤 제외",
+      "mappingEvidence": "retrospective thematic association; exact chat occurrence unverified",
+      "exclusions": "원작 IP·에셋 복제 금지; GDD 및 상태 기준"
     }
   ],
   "kits": [
@@ -224,5 +396,1202 @@
       "archive": null,
       "status": "개발사 정보 및 Press Kit 링크 확인"
     }
-  ]
+  ],
+  "schemaVersion": 2,
+  "decisionIndex": "docs/planning/DECISION_VISUAL_INDEX.md",
+  "chatExamples": [
+    {
+      "id": "D19-IMG01",
+      "decisionIds": [
+        "D19"
+      ],
+      "query": "Zelda breath of the wild vast open world landscape mountain forest village exploration gameplay",
+      "purpose": "넓은 지형과 시각 단서",
+      "sourceEvidence": "reconstructed query",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D19-IMG02",
+      "decisionIds": [
+        "D19"
+      ],
+      "query": "Tunic isometric interconnected forest ruins secret paths gameplay",
+      "purpose": "연결된 유적·숨은 길",
+      "sourceEvidence": "reconstructed query",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D19-IMG03",
+      "decisionIds": [
+        "D19"
+      ],
+      "query": "Hades II dungeon chamber branching paths exploration gameplay",
+      "purpose": "일부 절차 생성 분기 비교",
+      "sourceEvidence": "reconstructed query",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D19-IMG04",
+      "decisionIds": [
+        "D19"
+      ],
+      "query": "isometric fantasy alien forest interconnected ruins cave entrance hand painted game environment",
+      "purpose": "외계 숲과 유적 연결",
+      "sourceEvidence": "reconstructed query",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D20-IMG01",
+      "decisionIds": [
+        "D20"
+      ],
+      "query": "Pokemon Legends Arceus wild pokemon encounter battle gameplay screenshot",
+      "purpose": "생태 관찰·동일 공간 조우",
+      "sourceEvidence": "reconstructed query",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D20-IMG02",
+      "decisionIds": [
+        "D20"
+      ],
+      "query": "Tunic game isometric forest combat enemies exploration gameplay screenshot",
+      "purpose": "탐험 중 교전",
+      "sourceEvidence": "reconstructed query",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D20-IMG03",
+      "decisionIds": [
+        "D20"
+      ],
+      "query": "Tunic isometric boss arena siege engine gameplay screenshot",
+      "purpose": "특수 보스 구역",
+      "sourceEvidence": "reconstructed query",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D22-IMG01",
+      "decisionIds": [
+        "D22"
+      ],
+      "query": "Absolum game gameplay parry counter attack combat hand drawn animation screenshot",
+      "purpose": "패링·반격 피드백",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D22-IMG02",
+      "decisionIds": [
+        "D22"
+      ],
+      "query": "Hades II gameplay axe weapon attack dodge combat screenshot",
+      "purpose": "중량 무기와 회피",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D22-IMG03",
+      "decisionIds": [
+        "D22"
+      ],
+      "query": "Tunic game shield block enemy combat gameplay isometric screenshot",
+      "purpose": "방패 대응",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D22-IMG04",
+      "decisionIds": [
+        "D22"
+      ],
+      "query": "painterly science fiction energy sword and compact shield adventurer character concept art",
+      "purpose": "검·방패 실루엣",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D22-IMG05",
+      "decisionIds": [
+        "D22"
+      ],
+      "query": "painterly sci fi adventurer dual energy daggers agile character concept art",
+      "purpose": "기동형 쌍검",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D22-IMG06",
+      "decisionIds": [
+        "D22"
+      ],
+      "query": "painterly science fiction adventurer wielding massive mechanical hammer concept art",
+      "purpose": "중량 무기 무게감",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D22-IMG07",
+      "decisionIds": [
+        "D22"
+      ],
+      "query": "painterly science fiction explorer energy rifle shoulder drone character concept art",
+      "purpose": "원거리 조준·드론",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D22-IMG08",
+      "decisionIds": [
+        "D22"
+      ],
+      "query": "painterly sci fi engineer adventurer with adorable mechanical combat drones concept art",
+      "purpose": "기술자·드론",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D22-IMG09",
+      "decisionIds": [
+        "D22"
+      ],
+      "query": "painterly science fantasy explorer glowing alien artifact energy manipulation character concept art",
+      "purpose": "외계 기술",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D24-IMG01",
+      "decisionIds": [
+        "D24"
+      ],
+      "query": "painterly isometric alien forest small cute alien creatures herd grazing game environment concept art",
+      "purpose": "초식 군집",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D24-IMG02",
+      "decisionIds": [
+        "D24"
+      ],
+      "query": "painterly isometric alien jungle giant predator hunting alien creatures game concept art",
+      "purpose": "포식 행동",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D24-IMG03",
+      "decisionIds": [
+        "D24"
+      ],
+      "query": "hand painted alien creature nest glowing eggs forest game environment concept art",
+      "purpose": "둥지·번식",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D24-IMG04",
+      "decisionIds": [
+        "D24"
+      ],
+      "query": "painterly science fiction alien wildlife herd migration colorful alien landscape concept art",
+      "purpose": "군집 이동",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D25-IMG01",
+      "decisionIds": [
+        "D25"
+      ],
+      "query": "Zelda Breath of the Wild burning grass fire spreading gameplay screenshot",
+      "purpose": "열·연소",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D25-IMG02",
+      "decisionIds": [
+        "D25"
+      ],
+      "query": "Zelda Tears of the Kingdom electric shock water lightning gameplay",
+      "purpose": "전기·전도성",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D25-IMG03",
+      "decisionIds": [
+        "D25"
+      ],
+      "query": "Zelda Breath of the Wild magnesis metal object physics puzzle gameplay",
+      "purpose": "무게·물리력",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D25-IMG04",
+      "decisionIds": [
+        "D25"
+      ],
+      "query": "Zelda Breath of the Wild stealth wildlife hunting grass crouch gameplay",
+      "purpose": "은신·가시성",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D26-IMG01",
+      "decisionIds": [
+        "D26"
+      ],
+      "query": "painterly isometric science fiction alien planet glowing crystal mining adventurer game concept art",
+      "purpose": "광물 채굴 타격",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D26-IMG02",
+      "decisionIds": [
+        "D26"
+      ],
+      "query": "painterly isometric alien forest colorful luminous plants harvesting exploration game environment",
+      "purpose": "식물 채집",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D26-IMG03",
+      "decisionIds": [
+        "D26"
+      ],
+      "query": "isometric hand painted science fiction ancient crashed spacecraft salvage exploration game concept art",
+      "purpose": "잔해 해체",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D26-IMG04",
+      "decisionIds": [
+        "D26"
+      ],
+      "query": "painterly isometric cute alien creature companion carrying glowing mineral explorer fantasy science fiction game art",
+      "purpose": "동료 운반",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D28-IMG01",
+      "decisionIds": [
+        "D28"
+      ],
+      "query": "hand painted isometric science fiction spaceship landing in lush alien forest clearing game concept art",
+      "purpose": "미개척 착륙지",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D28-IMG02",
+      "decisionIds": [
+        "D28"
+      ],
+      "query": "painterly isometric science fiction alien settlement spaceport small spaceship landing platform game environment",
+      "purpose": "정착지 우주항",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D28-IMG03",
+      "decisionIds": [
+        "D28"
+      ],
+      "query": "painterly sci fi small spaceship landed near ancient alien temple ruins isometric environment concept art",
+      "purpose": "유적 근처 착륙",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D28-IMG04",
+      "decisionIds": [
+        "D28"
+      ],
+      "query": "science fiction painterly alien jungle small shuttle rescue extraction adventurer game concept art",
+      "purpose": "조건부 회수",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D29-IMG01",
+      "decisionIds": [
+        "D29"
+      ],
+      "query": "Subnautica glowing giant alien underwater tree beautiful bioluminescent lost river gameplay",
+      "purpose": "환경 발견 자체",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D29-IMG02",
+      "decisionIds": [
+        "D29"
+      ],
+      "query": "Tunic mysterious ancient temple hidden passage exploration gameplay",
+      "purpose": "지식·숨은 길",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D29-IMG03",
+      "decisionIds": [
+        "D29"
+      ],
+      "query": "painterly isometric adorable alien creature befriending human space explorer game concept art",
+      "purpose": "교감·관계",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D29-IMG04",
+      "decisionIds": [
+        "D29"
+      ],
+      "query": "hand painted isometric science fiction thriving alien settlement space colony trading market environment concept art",
+      "purpose": "정착지 변화",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D30-IMG01",
+      "decisionIds": [
+        "D30"
+      ],
+      "query": "Langrisser I II character creation goddess questions character class selection screenshot",
+      "purpose": "성향 질문",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D30-IMG02",
+      "decisionIds": [
+        "D30"
+      ],
+      "query": "Mount and Blade II Bannerlord character creation childhood background family selection screenshot",
+      "purpose": "성장 배경",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D30-IMG03",
+      "decisionIds": [
+        "D30"
+      ],
+      "query": "Fallout New Vegas character creation psychological personality test character traits screenshot",
+      "purpose": "질문과 직접 선택",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D30-IMG04",
+      "decisionIds": [
+        "D30"
+      ],
+      "query": "cinematic painterly retro science fiction spaceship cockpit window overlooking mysterious nebula and stars illustrated video game art",
+      "purpose": "조종석 분위기",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D31-IMG01",
+      "decisionIds": [
+        "D31"
+      ],
+      "query": "hand painted science fiction adventurous young spaceship pilot explorer character portrait concept art",
+      "purpose": "파일럿 외형",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D31-IMG02",
+      "decisionIds": [
+        "D31"
+      ],
+      "query": "hand painted science fiction wilderness scout explorer alien planet character portrait concept art",
+      "purpose": "수색대원 외형",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D31-IMG03",
+      "decisionIds": [
+        "D31"
+      ],
+      "query": "hand painted science fiction spaceship mechanic engineer carrying tools small cute drone character portrait concept art",
+      "purpose": "기술자 외형",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D31-IMG04",
+      "decisionIds": [
+        "D31"
+      ],
+      "query": "hand painted science fiction field medic with futuristic medical equipment gentle character portrait concept art",
+      "purpose": "의무관 외형",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D31-IMG05",
+      "decisionIds": [
+        "D31"
+      ],
+      "query": "hand painted science fiction interstellar merchant diplomat elegant traveler character portrait concept art",
+      "purpose": "외교관 외형",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D31-IMG06",
+      "decisionIds": [
+        "D31"
+      ],
+      "query": "vanillaware inspired painterly original science fiction young space explorer wearing blue green expedition jacket character portrait illustration",
+      "purpose": "시작 프로필 분위기",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D32-IMG01",
+      "decisionIds": [
+        "D32"
+      ],
+      "query": "hand painted top down science fiction small agile civilian courier spaceship compact sleek retro futuristic spaceship concept art",
+      "purpose": "고속선 실루엣",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D32-IMG02",
+      "decisionIds": [
+        "D32"
+      ],
+      "query": "painterly top down science fiction compact exploration survey spacecraft sensor antenna rounded cockpit spaceship concept art",
+      "purpose": "탐사선 실루엣",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D32-IMG03",
+      "decisionIds": [
+        "D32"
+      ],
+      "query": "hand painted top down science fiction small industrial cargo utility spaceship modular cargo containers rugged retro futuristic concept art",
+      "purpose": "작업선 실루엣",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D34-IMG01",
+      "decisionIds": [
+        "D34"
+      ],
+      "query": "Skyrim skills constellation perk tree gameplay screenshot",
+      "purpose": "숙련과 특성 선택",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D34-IMG02",
+      "decisionIds": [
+        "D34"
+      ],
+      "query": "Mount and Blade II Bannerlord character skills focus points perks character screen gameplay",
+      "purpose": "활동과 전문 분야",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D35-IMG01",
+      "decisionIds": [
+        "D35"
+      ],
+      "query": "painterly science fiction civilian spaceship pilot adventurer character portrait",
+      "purpose": "플레이어 파일럿",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D35-IMG02",
+      "decisionIds": [
+        "D35"
+      ],
+      "query": "hand painted science fiction spaceship mechanic friendly engineer character portrait",
+      "purpose": "엔지니어 동료",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D35-IMG03",
+      "decisionIds": [
+        "D35"
+      ],
+      "query": "adorable original alien creature with large expressive eyes small rounded body painterly fantasy science fiction companion concept art",
+      "purpose": "환경 탐지 생물 동료",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "illustrative reference; decision approved, art not approved",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D36-IMG01",
+      "decisionIds": [
+        "D36"
+      ],
+      "query": "hand painted isometric science fiction ancient alien temple entrance overgrown ruins glowing technology mysterious alien guardian creature game environment concept art",
+      "purpose": "쿼터뷰에서 탐험 목적과 장애물을 읽기 쉽게 표현; 식생·고대 기술 광원·생물 대비",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "liked visual example; gameplay decision pending",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D36-IMG02",
+      "decisionIds": [
+        "D36"
+      ],
+      "query": "painterly isometric science fiction adventurer fighting large alien guardian energy sword ancient temple game concept art",
+      "purpose": "수호 생물 무력화, 공격 예고·피격 가독성; 살해 필수 아님",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "liked visual example; gameplay decision pending",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D36-IMG03",
+      "decisionIds": [
+        "D36"
+      ],
+      "query": "painterly isometric science fiction engineer repairing ancient alien technological control terminal glowing door game concept art",
+      "purpose": "고대 제어 장치 복구로 다른 입구 개방; 장치와 결과를 공간적으로 연결",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "liked visual example; gameplay decision pending",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D36-IMG04",
+      "decisionIds": [
+        "D36"
+      ],
+      "query": "painterly science fiction explorer gently calming adorable large alien creature in mysterious forest game concept art",
+      "purpose": "생명체 진정·교감으로 비전투 통과; 표정·자세·거리",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "liked visual example; gameplay decision pending",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    },
+    {
+      "id": "D36-IMG05",
+      "decisionIds": [
+        "D36"
+      ],
+      "query": "painterly isometric science fiction explorer discovering secret hidden passage behind ancient alien ruins waterfall game concept art",
+      "purpose": "폭포·유적 뒤 숨은 우회로 발견; 가림과 환경 단서",
+      "sourceEvidence": "exact visible query; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "liked visual example; gameplay decision pending",
+      "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지"
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "SVG-01",
+      "decisionIds": [
+        "D03"
+      ],
+      "path": "docs/planning/visuals/01-world-layers.svg",
+      "purpose": "world layers",
+      "mappingEvidence": "retrospective content mapping, not original decision number",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-02",
+      "decisionIds": [
+        "D04",
+        "D05"
+      ],
+      "path": "docs/planning/visuals/02-faction-life.svg",
+      "purpose": "faction life",
+      "mappingEvidence": "retrospective content mapping, not original decision number",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-03",
+      "decisionIds": [
+        "D07",
+        "D08"
+      ],
+      "path": "docs/planning/visuals/03-ship-controls.svg",
+      "purpose": "ship controls",
+      "mappingEvidence": "retrospective content mapping, not original decision number",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-04",
+      "decisionIds": [
+        "D10",
+        "D11"
+      ],
+      "path": "docs/planning/visuals/04-discovery-loop.svg",
+      "purpose": "discovery loop",
+      "mappingEvidence": "retrospective content mapping, not original decision number",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-05",
+      "decisionIds": [
+        "D12"
+      ],
+      "path": "docs/planning/visuals/05-encounter.svg",
+      "purpose": "encounter",
+      "mappingEvidence": "retrospective content mapping, not original decision number",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-06",
+      "decisionIds": [
+        "D14"
+      ],
+      "path": "docs/planning/visuals/06-damage.svg",
+      "purpose": "damage",
+      "mappingEvidence": "retrospective content mapping, not original decision number",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-07",
+      "decisionIds": [
+        "D15"
+      ],
+      "path": "docs/planning/visuals/07-combat-outcomes.svg",
+      "purpose": "combat outcomes",
+      "mappingEvidence": "retrospective content mapping, not original decision number",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-08",
+      "decisionIds": [
+        "D16"
+      ],
+      "path": "docs/planning/visuals/08-defeat.svg",
+      "purpose": "defeat",
+      "mappingEvidence": "retrospective content mapping, not original decision number",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-09",
+      "decisionIds": [
+        "D17"
+      ],
+      "path": "docs/planning/visuals/09-fleet.svg",
+      "purpose": "fleet",
+      "mappingEvidence": "retrospective content mapping, not original decision number",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-10",
+      "decisionIds": [
+        "D18",
+        "D19"
+      ],
+      "path": "docs/planning/visuals/10-planet-exploration.svg",
+      "purpose": "planet exploration",
+      "mappingEvidence": "retrospective content mapping, not original decision number",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-11",
+      "decisionIds": [
+        "D11"
+      ],
+      "path": "docs/planning/visuals/11-information.svg",
+      "purpose": "information",
+      "mappingEvidence": "retrospective content mapping, not original decision number",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-12",
+      "decisionIds": [
+        "D07",
+        "D18"
+      ],
+      "path": "docs/planning/visuals/12-camera-comparison.svg",
+      "purpose": "camera comparison",
+      "mappingEvidence": "retrospective content mapping, not original decision number",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-13",
+      "decisionIds": [
+        "D03"
+      ],
+      "path": "docs/planning/visuals/13-galaxy-map.svg",
+      "purpose": "galaxy map",
+      "mappingEvidence": "retrospective content mapping, not original decision number",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-14",
+      "decisionIds": [
+        "D03",
+        "D07",
+        "D08"
+      ],
+      "path": "docs/planning/visuals/14-navigation-layout.svg",
+      "purpose": "navigation layout",
+      "mappingEvidence": "retrospective content mapping, not original decision number",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-15",
+      "decisionIds": [
+        "D10",
+        "D11"
+      ],
+      "path": "docs/planning/visuals/15-occlusion-detour.svg",
+      "purpose": "occlusion detour",
+      "mappingEvidence": "retrospective content mapping, not original decision number",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-16",
+      "decisionIds": [
+        "D13",
+        "D14"
+      ],
+      "path": "docs/planning/visuals/16-ship-anatomy-arcs.svg",
+      "purpose": "ship anatomy arcs",
+      "mappingEvidence": "retrospective content mapping, not original decision number",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-17",
+      "decisionIds": [
+        "D18"
+      ],
+      "path": "docs/planning/visuals/17-quarter-view-layout.svg",
+      "purpose": "quarter view layout",
+      "mappingEvidence": "retrospective content mapping, not original decision number",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-18",
+      "decisionIds": [
+        "D08"
+      ],
+      "path": "docs/planning/visuals/18-free-drag-gesture.svg",
+      "purpose": "free drag gesture",
+      "mappingEvidence": "retrospective content mapping, not original decision number",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-19",
+      "decisionIds": [
+        "D19"
+      ],
+      "path": "docs/planning/visuals/19-planet-regions-procedural.svg",
+      "purpose": "planet regions procedural",
+      "mappingEvidence": "decision-specific reconstruction",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-20",
+      "decisionIds": [
+        "D20"
+      ],
+      "path": "docs/planning/visuals/20-ground-encounter.svg",
+      "purpose": "ground encounter",
+      "mappingEvidence": "decision-specific reconstruction",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-21",
+      "decisionIds": [
+        "D21"
+      ],
+      "path": "docs/planning/visuals/21-ground-input.svg",
+      "purpose": "ground input",
+      "mappingEvidence": "decision-specific reconstruction",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-22",
+      "decisionIds": [
+        "D22"
+      ],
+      "path": "docs/planning/visuals/22-ground-combat-styles.svg",
+      "purpose": "ground combat styles",
+      "mappingEvidence": "decision-specific reconstruction",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-23",
+      "decisionIds": [
+        "D23"
+      ],
+      "path": "docs/planning/visuals/23-combat-impact-timing.svg",
+      "purpose": "combat impact timing",
+      "mappingEvidence": "decision-specific reconstruction",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-24",
+      "decisionIds": [
+        "D24"
+      ],
+      "path": "docs/planning/visuals/24-ecology-simulation.svg",
+      "purpose": "ecology simulation",
+      "mappingEvidence": "decision-specific reconstruction",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-25",
+      "decisionIds": [
+        "D25"
+      ],
+      "path": "docs/planning/visuals/25-systemic-environment.svg",
+      "purpose": "systemic environment",
+      "mappingEvidence": "decision-specific reconstruction",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-26",
+      "decisionIds": [
+        "D26"
+      ],
+      "path": "docs/planning/visuals/26-resource-gathering.svg",
+      "purpose": "resource gathering",
+      "mappingEvidence": "decision-specific reconstruction",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-27",
+      "decisionIds": [
+        "D27"
+      ],
+      "path": "docs/planning/visuals/27-resource-transport.svg",
+      "purpose": "resource transport",
+      "mappingEvidence": "decision-specific reconstruction",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-28",
+      "decisionIds": [
+        "D28"
+      ],
+      "path": "docs/planning/visuals/28-landing-return.svg",
+      "purpose": "landing return",
+      "mappingEvidence": "decision-specific reconstruction",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-29",
+      "decisionIds": [
+        "D29"
+      ],
+      "path": "docs/planning/visuals/29-discovery-reward-loop.svg",
+      "purpose": "discovery reward loop",
+      "mappingEvidence": "decision-specific reconstruction",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-30",
+      "decisionIds": [
+        "D30"
+      ],
+      "path": "docs/planning/visuals/30-character-creation.svg",
+      "purpose": "character creation",
+      "mappingEvidence": "decision-specific reconstruction",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-31",
+      "decisionIds": [
+        "D31"
+      ],
+      "path": "docs/planning/visuals/31-starting-profile.svg",
+      "purpose": "starting profile",
+      "mappingEvidence": "decision-specific reconstruction",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-32",
+      "decisionIds": [
+        "D32"
+      ],
+      "path": "docs/planning/visuals/32-starting-ships-proposal.svg",
+      "purpose": "starting ships proposal",
+      "mappingEvidence": "decision-specific reconstruction",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-33",
+      "decisionIds": [
+        "D33"
+      ],
+      "path": "docs/planning/visuals/33-cross-profession-growth.svg",
+      "purpose": "cross profession growth",
+      "mappingEvidence": "decision-specific reconstruction",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-34",
+      "decisionIds": [
+        "D34"
+      ],
+      "path": "docs/planning/visuals/34-activity-skill-growth.svg",
+      "purpose": "activity skill growth",
+      "mappingEvidence": "decision-specific reconstruction",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-35",
+      "decisionIds": [
+        "D35"
+      ],
+      "path": "docs/planning/visuals/35-specialization-profiles.svg",
+      "purpose": "specialization profiles",
+      "mappingEvidence": "decision-specific reconstruction",
+      "status": "local SVG; explanatory not original screenshot or final art"
+    }
+  ],
+  "userCapture": {
+    "decisionId": "D36",
+    "status": "visible in user message; image bytes unavailable in current file listing and runtime",
+    "publicRehosting": "not verified",
+    "note": "Do not invent a screenshot file or substitute another image as original."
+  }
 }
