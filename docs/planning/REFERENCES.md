@@ -76,3 +76,6 @@ Zelda BOTW/TOTK의 곱셈 디자인 EXP-Z04, 일관된 환경 규칙 및 선택 
 
 ## D29 연결
 기존 Zelda/Tunic의 발견과 연쇄 단서(EXP-Z01~06), Subnautica의 환경·생태 관찰, Bannerlord/Black Flag/대항해시대의 세계·교역·관계 변화 원리 비교. STEP 4-19 대화 이미지 주제: Subnautica 발광 Lost River, Tunic 숨은 유적 통로, 외계 생물 교감, 외계 정착지 발전. 자동 이미지 원본 미확보, 신규 출처/영상 검증 없음. [자체 도식](visuals/29-discovery-reward-loop.svg). STEP 5 D30 비교는 기존 Langrisser식 성향 질문 방향에서 출발하며 질문 방식과 결과 반영 범위는 미승인.
+
+## D30 연결
+기존 Langrisser식 성향 질문, Bannerlord의 배경/성장 과정 선택, Fallout: New Vegas의 초기 성향 질문과 직접 선택을 원리 참고로 사용. 대화 이미지 주제: Langrisser I & II 여신 질문, Bannerlord 성장 배경 선택, Fallout New Vegas 성향 검사, 회화적 SF 조종석. 해당 이미지 원본 URL 미확보, 이번 신규 외부 출처/게임 플레이 검증 없음. 기존 [비주얼 보드](../VISUAL_REFERENCE_BOARD.md), [자체 도식](visuals/30-character-creation.svg). 원작 문항/그래픽/정확한 수치 복제 금지.
