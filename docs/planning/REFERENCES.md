@@ -70,3 +70,6 @@ Zelda BOTW/TOTK의 곱셈 디자인 EXP-Z04, 일관된 환경 규칙 및 선택 
 
 ## D26–D27 연결
 기존 Chainsaw Juice King의 절삭/파괴 피드백(D23), Zelda 공통 환경 속성(D25), Subnautica의 자원·환경 탐험, 대항해시대/Black Flag의 항해/화물, RimWorld의 운반·동료 역할을 원리 비교로 참고. 원작의 정확한 적재/손실 규칙 복제 아님. STEP 4-16 자동 이미지 주제: 외계 광물 채굴, 발광 식물, 함선 잔해 해체, 외계 동료의 광물 운반. 원본 URL/파일 미확보, 새 외부 이미지/영상 검증 없음. [채집](visuals/26-resource-gathering.svg), [운반](visuals/27-resource-transport.svg) 자체 도식.
+
+## D28 연결
+기존 Black Flag/대항해시대의 함선 중심 항해와 Subnautica의 이동식 탐험 기반, RimWorld의 동료·물류 역할을 설계 원리 비교로 활용. 원작 착륙/회수 기능을 그대로 복제하거나 동일 규칙 사용을 주장하지 않음. STEP 4-18 대화 이미지 주제: 외계 숲 착륙지, 정착지 우주항, 유적 근처 착륙, 조건부 구조/수송. 자동 이미지 원본 미확보, 새 외부 이미지/영상 검증 없음. [자체 도식](visuals/28-landing-return.svg).
