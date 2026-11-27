@@ -6,6 +6,7 @@
 - [상세 결정 이력 (D01–D31)](planning/DECISION_HISTORY.md) · [레퍼런스 출처/이미지 주제](planning/REFERENCES.md) · [자체 설명 도식 SVG](planning/VISUAL_ATLAS.md) · [새 세션 인계](planning/SESSION_RESUME.md)
 - 원본 대화의 자동 검색 이미지 파일은 미확보. 저장된 SVG는 재구성 설명 도식이며 완성 인게임 시안 아님. 사용자 승인 여부를 분리한다.
 
+- [대화 예시 상세 보존](planning/EXAMPLE_ARCHIVE.md) · [대화 이미지 검색 원문](planning/CHAT_IMAGE_INDEX.md) · [캐릭터 생성 인터랙션 재구성](planning/prototypes/character-creation-example.html)
 - [대화 보존 기록](planning/CONVERSATION_LOG.md) · [실제 참고 이미지/공식 게임 정보](planning/REFERENCE_EVIDENCE.md) · [이론→설계→검증](planning/THEORY_APPLICATION.md)
 
 ## 1. 승인된 게임 정체성

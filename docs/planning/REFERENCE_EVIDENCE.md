@@ -48,3 +48,6 @@
 감사 확인: Tunic/Absolum 공식 Steam, Supergiant Hades II 공식 미디어, Dotemu Absolum press kit, Nintendo TOTK 개발자 인터뷰 및 3개 위 2차 출처 페이지 열람 성공. Hades II 기사 이미지는 2024년 EA 버전 자료임. Starsector 공식 사이트와 FTL 자체 홈페이지는 직접 접근 제한; 전체 외부 링크/이미지의 전수 성공으로 간주 금지.
 
 향후 추가 시 고유 ID, 실제 이미지 URL, 원본 페이지, 권리자, 직접 확인한 장면, 연결 결정, 적용·제외 범위와 파일 보존/검증 상태를 기록. 자체 제작 이미지는 저장 가능한 실제 파일로 보존하고, 게임 레퍼런스는 권리와 출처를 명시.
+
+## 추가 보존 감사 (2026-11-27)
+[CHAT_IMAGE_INDEX](CHAT_IMAGE_INDEX.md)의 46건은 확인된 검색 문구이며 실제 이전 이미지 원본이 아니다. D01–D18 이전 원본 대화/이미지 복구 검색에서도 추가 원본 미확보. 기존 4건 외부 이미지 참조/기존 비주얼 보드와 자체 SVG를 유지. 새 외부 파일 다운로드/검증을 했다는 주장은 하지 않는다. [EXAMPLE_ARCHIVE](EXAMPLE_ARCHIVE.md)에서 상세 예시를 확인.

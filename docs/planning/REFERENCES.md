@@ -82,3 +82,6 @@ Zelda BOTW/TOTK의 곱셈 디자인 EXP-Z04, 일관된 환경 규칙 및 선택 
 
 ## D31 연결
 D30의 Langrisser식 질문/Bannerlord 배경 선택/Fallout New Vegas 직접 선택 비교 유지. STEP 5-2 이미지 주제: 민간 파일럿, 행성 수색대원, 엔지니어/드론, 의무관, 성간 외교관, 초기 프로필 화면. 자동 이미지 원본 미확보, 새 외부 출처/플레이 검증 없음. [자체 도식](visuals/31-starting-profile.svg). 캐릭터 외형이나 원작 능력치/직업 규칙 복제 금지.
+
+## 대화 이미지 원문 색인 (2026-11-27)
+[CHAT_IMAGE_INDEX](CHAT_IMAGE_INDEX.md)에 현재 확인 가능한 D19–D31 이미지 검색 문구 46건을 원문으로 기록했다. 검색 결과 이미지 바이너리나 정확한 URL은 미확보이며 실제 파일로 오인하지 않는다. [EXAMPLE_ARCHIVE](EXAMPLE_ARCHIVE.md)에서 각 예시의 적용 맥락 확인.
