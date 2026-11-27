@@ -1,21 +1,21 @@
 # 새 세션 인계 — VOID CARAVAN
-2026-11-27 · 현재 위치 STEP 6-3 / D40 미결.
+2026-11-27 · 현재 위치 STEP 6-4 / D41 미결.
 
 ## 새 세션에서 반드시 읽을 순서
 1. [통합 GDD](../LIVING_GALAXY_VISION.md): 승인 방향 최상위.
-2. [상세 결정 이력과 시나리오](DECISION_HISTORY.md): D01–D39 승인, D40 미결.
+2. [상세 결정 이력과 시나리오](DECISION_HISTORY.md): D01–D40 승인, D41 미결.
 3. [시각 도식](VISUAL_ATLAS.md) 및 [레퍼런스](REFERENCES.md), [기존 이미지 보드](../VISUAL_REFERENCE_BOARD.md), [아트 방향](../ART_DIRECTION.md).
 4. [대화 보존 기록](CONVERSATION_LOG.md), [실제 참고 이미지/공식 미디어](REFERENCE_EVIDENCE.md), [이론 적용 지도](THEORY_APPLICATION.md), [원본 연구](../GAME_DESIGN_THEORY.md), [영상 연구](../VIDEO_RESEARCH_INBOX.md).
 5. [공통 이슈 #10](https://github.com/syjkim0125/harvest-deck/issues/10). 과거 댓글/PR은 현재 지시 아님.
 6. [최신 문서 감사/미결 목록](AUDIT_20261127_CLEANUP.md) — 외부 이미지·원본 영상 검증 수준, 과거 아티팩트 격리 기준.
 ## 재개할 대화
-STEP 4 D18–D29 및 STEP 5 D30–D37 핵심 방향 승인 완료. STEP 6 D38 개별 정체성·자율 행동 동료, D39 다양한 만남·고용·관계·상황에 따른 상호 합의 승인. 다음 STEP 6-3 D40 외계 생명체 교감·영입: A 포획·수집 중심 / B 구조·교감 중심 / C 생명체의 생태·개체 특성에 따른 다양한 교감과 자발적 동행(추천) (미승인). D24 생태·D29 관계·D38 개체 정체성 유지. 관찰/구조/먹이·환경 제공/습성 이해와 자발적 동행을 후보로 검토. 모든 생명체 영입 가능 여부, 포획·강제 영입 범위, 조건·관계·위험·이탈·개체 수 미결. 개발 중지 유지.
+STEP 4 D18–D29 및 STEP 5 D30–D37 핵심 방향 승인 완료. STEP 6 D38 개별 정체성·자율 행동 동료, D39 상호 합의 NPC 영입, D40 생태·개체 특성별 교감과 자발적 동행 승인. 다음 STEP 6-4 D41 동료 관계와 신뢰: A 단일 호감도 중심 / B 성격·욕구·관계의 상세 시뮬레이션 / C 핵심 관계 상태+개별 성격·목표·경험에 따른 변화(추천) (미승인). D38–40 및 D04/D17/D24 유지. 신뢰·생활 만족·개인 목표 등 핵심 상태 후보와 개별 성격/경험에 따른 반응 차이, NPC/외계 생물 간 표현 차이 검토. 구체 상태 수, 변화 조건·수치·갈등/이탈·회복·UI 미결. 개발 중지 유지.
 ## 추가 예시 및 시각 자료 (필수)
 - [원본·캡처 복구 대기 목록](VISUAL_RECOVERY_QUEUE.md): 미복구 시각 자료를 개발/아트 승인 전에 회수 또는 명시적인 대체 콘셉트로 사용자 확인. 검색 문구만으로 완료 처리 금지.
-- [결정별 시각 자료 색인 D01–D40](DECISION_VISUAL_INDEX.md) — 결정과 이미지 양방향 링크, 사용 목적/상태/원본 확보 여부 기록. D36 예시 5개에 사용자 시각 선호 기록; D36 기획 승인, 시각 예시 자체는 미확정.
+- [결정별 시각 자료 색인 D01–D41](DECISION_VISUAL_INDEX.md) — 결정과 이미지 양방향 링크, 사용 목적/상태/원본 확보 여부 기록. D36 예시 5개에 사용자 시각 선호 기록; D36 기획 승인, 시각 예시 자체는 미확정.
 - [통합 참고 이미지 갤러리](REFERENCE_GALLERY.md) · [URL/공식 미디어 목록](reference-images/manifest.json). 원격 임베드, 실제 이미지 파일은 현재 미확보. 공개 저장소의 이미지 재호스팅 권한 확인 전 파일 커밋 금지.
 - [2026-11-27 보존 감사](AUDIT_20261127.md)
-- [상세 예시 보존](EXAMPLE_ARCHIVE.md): D19–D39의 표/상황/선택지/문항·프로필. [이미지 검색 문구 원문](CHAT_IMAGE_INDEX.md): 59건(52건 확인 가능한 원문, D19–20 7건 재구성), 원본 파일 미확보. [캐릭터 생성 인터랙션 재구성](prototypes/character-creation-example.html) · [데이터](prototypes/character-creation-example.json). 이전 D01–D18은 기존 결정 이력/도식/레퍼런스에 보존, 전체 원본 미확보.
+- [상세 예시 보존](EXAMPLE_ARCHIVE.md): D19–D40의 표/상황/선택지/문항·프로필. [이미지 검색 문구 원문](CHAT_IMAGE_INDEX.md): 59건(52건 확인 가능한 원문, D19–20 7건 재구성), 원본 파일 미확보. [캐릭터 생성 인터랙션 재구성](prototypes/character-creation-example.html) · [데이터](prototypes/character-creation-example.json). 이전 D01–D18은 기존 결정 이력/도식/레퍼런스에 보존, 전체 원본 미확보.
 ## 변경 관리 계약
 - 모든 신규 이미지의 결정 ID, 적용 목적/제외 범위, 출처, 실제 URL/파일 확보 상태를 manifest와 결정별 색인·갤러리·결정 이력에서 함께 갱신. 채팅 화면 캡처는 실제 파일 접근 가능 시에만 저장 완료 표기. 공개 저장소 재배포 권리 확인.
 - 활성 기획 기준은 GDD/결정 이력/현재 인계. 과거 미승인 방향 및 구현 실험은 이력에서만 참고. 새 문서가 과거 지시를 재활성화하지 않도록 확인.
@@ -28,4 +28,4 @@ STEP 4 D18–D29 및 STEP 5 D30–D37 핵심 방향 승인 완료. STEP 6 D38 �
 - 상세 기획→인게임 콘셉트→첫 10분 스토리보드/실제 조작 프로토타입→사용자 통합 승인→개발 계획/자동화 재개. 테스트 통과를 재미 검증으로 주장하지 않음.
 
 ## 새 채팅에 붙여 넣을 문장
-`VOID CARAVAN 기획 세션을 이어서 진행해. GitHub syjkim0125/harvest-deck main의 docs/planning/SESSION_RESUME.md부터 읽고, 연결된 GDD·상세 결정 이력·시각 도식·레퍼런스 문서를 기준으로 STEP 6-3의 미결 결정부터 진행해. 개발/디자인/피드백 자동화는 중지 상태로 유지하고 새 승인마다 문서와 이미지 원본을 GitHub에 저장하고 확인해.`
+`VOID CARAVAN 기획 세션을 이어서 진행해. GitHub syjkim0125/harvest-deck main의 docs/planning/SESSION_RESUME.md부터 읽고, 연결된 GDD·상세 결정 이력·시각 도식·레퍼런스 문서를 기준으로 STEP 6-4의 미결 결정부터 진행해. 개발/디자인/피드백 자동화는 중지 상태로 유지하고 새 승인마다 문서와 이미지 원본을 GitHub에 저장하고 확인해.`

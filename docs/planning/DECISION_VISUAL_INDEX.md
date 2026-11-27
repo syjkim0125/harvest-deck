@@ -1,6 +1,6 @@
 # VOID CARAVAN — 결정별 시각 자료 색인
 
-D01–D39 승인, D40 미결. 외부 이미지 21개는 기존 URL의 주제 기반 사후 연결, 채팅 검색 문구 59개(52개 확인 가능한 원문·7개 재구성)는 표시 원본 미확보, 자체 SVG 40개는 실제 저장 파일. 그림을 좋아했다는 평가와 기획/아트 확정은 구분. [갤러리](REFERENCE_GALLERY.md) · [기계 판독 목록](reference-images/manifest.json) · [결정 기록](DECISION_HISTORY.md) · [상세 예시](EXAMPLE_ARCHIVE.md).
+D01–D40 승인, D41 미결. 외부 이미지 21개는 기존 URL의 주제 기반 사후 연결, 채팅 검색 문구 59개(52개 확인 가능한 원문·7개 재구성)는 표시 원본 미확보, 자체 SVG 41개는 실제 저장 파일. 그림을 좋아했다는 평가와 기획/아트 확정은 구분. [갤러리](REFERENCE_GALLERY.md) · [기계 판독 목록](reference-images/manifest.json) · [결정 기록](DECISION_HISTORY.md) · [상세 예시](EXAMPLE_ARCHIVE.md).
 
 ## D01
 **Bannerlord 구조 + 대항해시대/Black Flag 항해 + RimWorld 성장/운영; Absolum 액션, Vanillaware 회화적 표현** — 승인된 기획 방향.
@@ -339,10 +339,16 @@ D01–D39 승인, D40 미결. 외부 이미지 21개는 기존 URL의 주제 기
 - **SVG-39** [여러 영입 경로와 상호 합의](visuals/39-recruitment-paths-proposal.svg) — 자체 설명 도식. [예시](EXAMPLE_ARCHIVE.md#example-d39). 새 외부 이미지 사용 없음.
 
 ## D40
-**외계 생명체 교감·영입 방식** — 미승인.
+**C. 생명체의 생태·개체 특성에 따른 다양한 교감과 자발적 동행** — 승인된 기획 방향.
 
 - **SVG-40** [생명체별 교감과 동행](visuals/40-alien-bonding-proposal.svg) — 자체 설명 도식. [예시](EXAMPLE_ARCHIVE.md#example-d40). 새로운 외부 이미지 없음.
 - 기존 관련 시각 자료: [D24](#d24), [D29](#d29), [D35](#d35), [D38](#d38).
+
+## D41
+**동료 관계와 신뢰 구조** — 미승인.
+
+- **SVG-41** [동료별 관계와 사건 반응](visuals/41-companion-relationship-proposal.svg) — 자체 설명 도식. [예시](EXAMPLE_ARCHIVE.md#example-d41). 새로운 외부 이미지 없음.
+- 관련 기존 시각 자료: [D38](#d38), [D39](#d39), [D40](#d40).
 
 ## 원본 확보 상태 및 누락 추적
 [복구 대기 목록](VISUAL_RECOVERY_QUEUE.md) — 정확한 채팅 이미지 59건 모두 파일 미확보, 이전 D01–D18 원본 전체 목록 미복구. 실제 표시된 이미지를 확인하기 전 대체 그림을 원본으로 표시하지 않는다.

@@ -1930,6 +1930,16 @@
       "path": "docs/planning/visuals/40-alien-bonding-proposal.svg",
       "purpose": "종·개체별 관찰과 교감, 자발적 동행 또는 서식지 복귀",
       "mappingEvidence": "decision-specific proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-41",
+      "decisionIds": [
+        "D41"
+      ],
+      "path": "docs/planning/visuals/41-companion-relationship-proposal.svg",
+      "purpose": "개체의 성격·목표·환경에 따른 사건별 반응과 관계 변화",
+      "mappingEvidence": "decision-specific proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -1940,9 +1950,9 @@
     "note": "User screenshot shows initial character profiles (pilot, scout, engineer), not D36 ruins. Actual bytes and public rehosting rights still unverified."
   },
   "coverage": {
-    "decisionRange": "D01–D40",
-    "approvedThrough": "D39",
-    "pending": "D40",
+    "decisionRange": "D01–D41",
+    "approvedThrough": "D40",
+    "pending": "D41",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 7,
     "exactVisibleQueries": 52,

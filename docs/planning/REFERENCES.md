@@ -112,3 +112,6 @@ D04/D17/D24/D29/D35 및 기존 RimWorld의 동료 역할·생활·자율 행동 
 
 ## D39 연결
 D04/D17/D29/D38의 개인 목표·관계·역할 연결. [D39 도식](visuals/39-recruitment-paths-proposal.svg) · [정비공 반응 예시](prototypes/recruitment-reaction-example.html). 새로운 외부 이미지 없음. [D40 자체 도식](visuals/40-alien-bonding-proposal.svg)은 미승인 교감 제안.
+
+## D40 연결
+D24 생태 시뮬레이션, D29 관계 보상, D38 개체 정체성의 연계. [D40 도식](visuals/40-alien-bonding-proposal.svg) · [교감 예시](EXAMPLE_ARCHIVE.md#example-d40). 기존 생명체 레퍼런스는 관련 결정 색인에서 참조. 외부 이미지 신규 사용 없음. [D41 도식](visuals/41-companion-relationship-proposal.svg)은 미승인 관계 구조 제안.
