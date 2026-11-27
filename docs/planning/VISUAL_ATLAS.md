@@ -243,9 +243,13 @@ D19 승인 구조 설명. 실제 행성 크기·지도 배치·갱신 규칙 미
 ![D37](visuals/37-equipment-skill-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d37). 스캐너의 기본 사용/숙련/전문 기술 조합 예시. 구조 승인; 구체 효과 미확정.
 
-## 38. Companion identity and roles (D38 미승인)
+## 38. Companion identity and roles (D38 구조 승인)
 ![D38](visuals/38-companion-identity-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d38). 개별 동료 정체성과 역할의 예시, 실제 캐릭터/아트/영입 규칙 아님.
+
+## 39. Recruitment paths (D39 미승인)
+![D39](visuals/39-recruitment-paths-proposal.svg)
+[결정·예시](DECISION_VISUAL_INDEX.md#d39). 여러 만남 경로와 상호 합의의 설명 도식, 실제 UI·영입 규칙 아님.
 
 ## 다음 시각 자료
 STEP 4 핵심 방향 확정 이후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.
