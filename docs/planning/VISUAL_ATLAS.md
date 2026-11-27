@@ -283,9 +283,13 @@ D19 승인 구조 설명. 실제 행성 크기·지도 배치·갱신 규칙 미
 ![D47](visuals/47-ship-interior-camera-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d47). 탑다운·측면 단면·쿼터뷰 및 보조 배치도 비교. 최종 카메라·UI·아트 아님.
 
-## 48. Ship facilities and expansion (D48 미승인)
+## 48. Ship facilities and expansion (D48 구조 승인)
 ![D48](visuals/48-ship-modules-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d48). 모듈 교체·확장과 기회비용의 설명 도식. 실제 구조·슬롯·아트 아님.
+
+## 49. Ship living conditions and survival (D49 미승인)
+![D49](visuals/49-ship-life-support-proposal.svg)
+[결정·예시](DECISION_VISUAL_INDEX.md#d49). 평시 자율 관리, 준비 및 위기 대응의 구분; 실제 자원·수치·UI·아트 아님.
 
 ## 다음 시각 자료
 STEP 4 핵심 방향 확정 이후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.

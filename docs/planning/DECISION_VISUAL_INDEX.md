@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 47건 / 미결 D48. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 48건 / 미결 D49. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -287,7 +287,13 @@
 - 외부 참고(사후 연결): [REF-22](REFERENCE_GALLERY.md#ref-22) FTL — top-down ship interior (deferred) · [REF-23](REFERENCE_GALLERY.md#ref-23) Fallout Shelter — side cutaway (deferred) · [REF-24](REFERENCE_GALLERY.md#ref-24) Space Haven — ship overview (active) · [REF-25](REFERENCE_GALLERY.md#ref-25) Space Haven — living deck (active) · [REF-26](REFERENCE_GALLERY.md#ref-26) Space Haven — boarding (active).
 
 ## D48
-**함선 시설과 확장 방식** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d48).
+**C. 함선별 기본 구조 + 확장·교체 가능한 기능 모듈** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d48).
 
 - 자체 설명 도식: [SVG-48: 함선 기본 구조와 교체·확장 가능한 기능 모듈 비교](visuals/48-ship-modules-proposal.svg). 실제 아트 아님.
+- 대화 이미지: [D48-IMG01](REFERENCE_GALLERY.md#d48-img01) 실제 기능을 가진 시설 · [D48-IMG02](REFERENCE_GALLERY.md#d48-img02) 생활 환경과 동료의 관계 · [D48-IMG03](REFERENCE_GALLERY.md#d48-img03) 난파선 탐험 · [D48-IMG04](REFERENCE_GALLERY.md#d48-img04) 함선 건설과 확장 · [D48-IMG05](REFERENCE_GALLERY.md#d48-img05) 물류와 독립 업무 · [D48-IMG06](REFERENCE_GALLERY.md#d48-img06) 대안 A 고정 시설 비교 · [D48-IMG07](REFERENCE_GALLERY.md#d48-img07) 대안 B 자유 타일 건설 비교.
+
+## D49
+**함선 생활 환경과 생존 관리 범위** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d49).
+
+- 자체 설명 도식: [SVG-49: 평시 자율 생활 관리·탐험 전 준비·위기 상황 대응 비교](visuals/49-ship-life-support-proposal.svg). 실제 아트 아님.
 

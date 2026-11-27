@@ -1,8 +1,8 @@
 # 대화 이미지 검색 기록
 
-> 승인 47건 / 미결 D48. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 48건 / 미결 D49. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
-총 59건: 검색 문구 확인 31건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
+총 66건: 검색 문구 확인 38건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
 
 ## D19
 - [D19-IMG01](REFERENCE_GALLERY.md#d19-img01) · `Zelda breath of the wild vast open world landscape mountain forest village exploration gameplay` — 원문 미검증; 원본 미확보.
@@ -90,4 +90,13 @@
 - [D36-IMG03](REFERENCE_GALLERY.md#d36-img03) · `painterly isometric science fiction engineer repairing ancient alien technological control terminal glowing door game concept art` — 문구 확인; 원본 미확보.
 - [D36-IMG04](REFERENCE_GALLERY.md#d36-img04) · `painterly science fiction explorer gently calming adorable large alien creature in mysterious forest game concept art` — 문구 확인; 원본 미확보.
 - [D36-IMG05](REFERENCE_GALLERY.md#d36-img05) · `painterly isometric science fiction explorer discovering secret hidden passage behind ancient alien ruins waterfall game concept art` — 문구 확인; 원본 미확보.
+
+## D48
+- [D48-IMG01](REFERENCE_GALLERY.md#d48-img01) · `Space Haven game spaceship interior functional crew workshop manufacturing room screenshot` — 문구 확인; 원본 미확보.
+- [D48-IMG02](REFERENCE_GALLERY.md#d48-img02) · `Space Haven game crew living quarters leisure beds dining room screenshot` — 문구 확인; 원본 미확보.
+- [D48-IMG03](REFERENCE_GALLERY.md#d48-img03) · `Space Haven game derelict spaceship boarding away team alien exploration screenshot` — 문구 확인; 원본 미확보.
+- [D48-IMG04](REFERENCE_GALLERY.md#d48-img04) · `Space Haven game custom spaceship construction hull building modules screenshot` — 문구 확인; 원본 미확보.
+- [D48-IMG05](REFERENCE_GALLERY.md#d48-img05) · `Space Haven game shuttle cargo logistics multiple spaceships screenshot` — 문구 확인; 원본 미확보.
+- [D48-IMG06](REFERENCE_GALLERY.md#d48-img06) · `FTL faster than light kestrel spaceship fixed interior rooms layout gameplay` — 문구 확인; 원본 미확보.
+- [D48-IMG07](REFERENCE_GALLERY.md#d48-img07) · `Space Haven spaceship hull construction tile by tile ship building game screenshot` — 문구 확인; 원본 미확보.
 

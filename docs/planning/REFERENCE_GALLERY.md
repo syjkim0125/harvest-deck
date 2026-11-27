@@ -1,10 +1,10 @@
 # 참고 이미지 갤러리
 
-> 승인 47건 / 미결 D48. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 48건 / 미결 D49. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
-[결정별 찾아보기](DECISION_VISUAL_INDEX.md) · [자체 도식 48개](VISUAL_ATLAS.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md).
+[결정별 찾아보기](DECISION_VISUAL_INDEX.md) · [자체 도식 49개](VISUAL_ATLAS.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md).
 
-외부 URL 26개는 원격 임베드(렌더링·권리·바이트 미검증), 대화 참조 59건은 원본 상태를 표시. 과거 표시 이미지와 동일성 미확인. 사용자 선호는 최종 아트 승인 아님.
+외부 URL 26개는 원격 임베드(렌더링·권리·바이트 미검증), 대화 참조 66건은 원본 상태를 표시. 과거 표시 이미지와 동일성 미확인. 사용자 선호는 최종 아트 승인 아님.
 
 ## 사용자 선호 시각 예시 (D36)
 ### D36-IMG01
@@ -370,6 +370,27 @@ B 측면 단면 비교: 층별 생활·시설 표현; 지상 쿼터뷰 대체 �
 
 ### D35-IMG03
 환경 탐지 생물 동료. [D35](DECISION_VISUAL_INDEX.md#d35) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d35) · [검색 기록](CHAT_IMAGE_INDEX.md#d35). 원본/캡처 미확보.
+
+### D48-IMG01
+실제 기능을 가진 시설. [D48](DECISION_VISUAL_INDEX.md#d48) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d48) · [검색 기록](CHAT_IMAGE_INDEX.md#d48). 원본/캡처 미확보.
+
+### D48-IMG02
+생활 환경과 동료의 관계. [D48](DECISION_VISUAL_INDEX.md#d48) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d48) · [검색 기록](CHAT_IMAGE_INDEX.md#d48). 원본/캡처 미확보.
+
+### D48-IMG03
+난파선 탐험. [D48](DECISION_VISUAL_INDEX.md#d48) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d48) · [검색 기록](CHAT_IMAGE_INDEX.md#d48). 원본/캡처 미확보.
+
+### D48-IMG04
+함선 건설과 확장. [D48](DECISION_VISUAL_INDEX.md#d48) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d48) · [검색 기록](CHAT_IMAGE_INDEX.md#d48). 원본/캡처 미확보.
+
+### D48-IMG05
+물류와 독립 업무. [D48](DECISION_VISUAL_INDEX.md#d48) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d48) · [검색 기록](CHAT_IMAGE_INDEX.md#d48). 원본/캡처 미확보.
+
+### D48-IMG06
+대안 A 고정 시설 비교. [D48](DECISION_VISUAL_INDEX.md#d48) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d48) · [검색 기록](CHAT_IMAGE_INDEX.md#d48). 원본/캡처 미확보.
+
+### D48-IMG07
+대안 B 자유 타일 건설 비교. [D48](DECISION_VISUAL_INDEX.md#d48) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d48) · [검색 기록](CHAT_IMAGE_INDEX.md#d48). 원본/캡처 미확보.
 
 ## 공식 미디어
 - **Absolum**: [공식/PR](https://www.dotemu.com/PressKit/project/Games/Absolum) · [압축파일](https://www.dotemu.com/PressKit/cache/Games/Absolum/images.zip) — 공식 이미지 ZIP 링크 확인; 웹 다운로드 403.

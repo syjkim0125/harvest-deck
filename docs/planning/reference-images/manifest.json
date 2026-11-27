@@ -1611,6 +1611,139 @@
       "captureStatus": "missing; exact chat-rendered pixels unavailable",
       "priority": "user-liked; highest recovery priority",
       "title": "탐색 전문가"
+    },
+    {
+      "id": "D48-IMG01",
+      "decisionIds": [
+        "D48"
+      ],
+      "query": "Space Haven game spaceship interior functional crew workshop manufacturing room screenshot",
+      "purpose": "실제 기능을 가진 시설",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "비교 및 연구용, 최종 아트 또는 원작 시스템 승인 아님",
+      "conversationSection": "Space Haven에서 가져올 게임 디자인",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d48",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d48-img01",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D48-IMG02",
+      "decisionIds": [
+        "D48"
+      ],
+      "query": "Space Haven game crew living quarters leisure beds dining room screenshot",
+      "purpose": "생활 환경과 동료의 관계",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "비교 및 연구용, 최종 아트 또는 원작 시스템 승인 아님",
+      "conversationSection": "Space Haven에서 가져올 게임 디자인",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d48",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d48-img02",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D48-IMG03",
+      "decisionIds": [
+        "D48"
+      ],
+      "query": "Space Haven game derelict spaceship boarding away team alien exploration screenshot",
+      "purpose": "난파선 탐험",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "비교 및 연구용, 최종 아트 또는 원작 시스템 승인 아님",
+      "conversationSection": "Space Haven에서 가져올 게임 디자인",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d48",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d48-img03",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D48-IMG04",
+      "decisionIds": [
+        "D48"
+      ],
+      "query": "Space Haven game custom spaceship construction hull building modules screenshot",
+      "purpose": "함선 건설과 확장",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "비교 및 연구용, 최종 아트 또는 원작 시스템 승인 아님",
+      "conversationSection": "Space Haven에서 가져올 게임 디자인",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d48",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d48-img04",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D48-IMG05",
+      "decisionIds": [
+        "D48"
+      ],
+      "query": "Space Haven game shuttle cargo logistics multiple spaceships screenshot",
+      "purpose": "물류와 독립 업무",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "비교 및 연구용, 최종 아트 또는 원작 시스템 승인 아님",
+      "conversationSection": "Space Haven에서 가져올 게임 디자인",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d48",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d48-img05",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D48-IMG06",
+      "decisionIds": [
+        "D48"
+      ],
+      "query": "FTL faster than light kestrel spaceship fixed interior rooms layout gameplay",
+      "purpose": "대안 A 고정 시설 비교",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "비교 및 연구용, 최종 아트 또는 원작 시스템 승인 아님",
+      "conversationSection": "D48 시설과 확장 방식 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d48",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d48-img06",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D48-IMG07",
+      "decisionIds": [
+        "D48"
+      ],
+      "query": "Space Haven spaceship hull construction tile by tile ship building game screenshot",
+      "purpose": "대안 B 자유 타일 건설 비교",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "비교 및 연구용, 최종 아트 또는 원작 시스템 승인 아님",
+      "conversationSection": "D48 시설과 확장 방식 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d48",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d48-img07",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
     }
   ],
   "diagrams": [
@@ -2101,6 +2234,16 @@
       "path": "docs/planning/visuals/48-ship-modules-proposal.svg",
       "purpose": "함선 기본 구조와 교체·확장 가능한 기능 모듈 비교",
       "mappingEvidence": "decision-specific proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-49",
+      "decisionIds": [
+        "D49"
+      ],
+      "path": "docs/planning/visuals/49-ship-life-support-proposal.svg",
+      "purpose": "평시 자율 생활 관리·탐험 전 준비·위기 상황 대응 비교",
+      "mappingEvidence": "decision-specific proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -2111,13 +2254,13 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D48",
-    "approvedThrough": "D47",
-    "pending": "D48",
+    "decisionRange": "D01–D49",
+    "approvedThrough": "D48",
+    "pending": "D49",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
-    "exactVisibleQueries": 31,
-    "missingChatRenderedImages": 59,
+    "exactVisibleQueries": 38,
+    "missingChatRenderedImages": 66,
     "missingIndividualVisualDecisions": [
       "D02",
       "D06",
@@ -2125,7 +2268,7 @@
     ],
     "screenshot": "Prior attempt did not obtain a saved capture. Direct chat UI screenshot capability not established. D31 capture remains unrecovered.",
     "recoverySearch": "Prior retrieval yielded summaries, not a complete transcript or rendered images.",
-    "provenanceNote": "D19–D26 28건 재구성 또는 원문 미검증. D28–D36 31건 응답 기록 검색 문구. 모두 실제 표시 원본 미확보.",
+    "provenanceNote": "D19–D26 28건 재구성 또는 원문 미검증. D28–D36 31건 응답 기록 검색 문구. 모두 실제 표시 원본 미확보. D48 직전 응답의 정확한 검색 문구 7건 추가; 표시 원본 미확보.",
     "latestDownloadAttempt": {
       "date": "2026-11-27",
       "knownUrls": 26,
