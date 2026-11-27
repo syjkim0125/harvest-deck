@@ -1,6 +1,6 @@
 # VOID CARAVAN — 결정별 시각 자료 색인
 
-D01–D35 승인, D36 미결. 외부 이미지 21개는 기존 URL의 주제 기반 사후 연결, 채팅 검색 문구 59개(52개 확인 가능한 원문·7개 재구성)는 표시 원본 미확보, 자체 SVG 35개는 실제 저장 파일. 그림을 좋아했다는 평가와 기획/아트 확정은 구분. [갤러리](REFERENCE_GALLERY.md) · [기계 판독 목록](reference-images/manifest.json) · [결정 기록](DECISION_HISTORY.md) · [상세 예시](EXAMPLE_ARCHIVE.md).
+D01–D36 승인, D37 미결. 외부 이미지 21개는 기존 URL의 주제 기반 사후 연결, 채팅 검색 문구 59개(52개 확인 가능한 원문·7개 재구성)는 표시 원본 미확보, 자체 SVG 37개는 실제 저장 파일. 그림을 좋아했다는 평가와 기획/아트 확정은 구분. [갤러리](REFERENCE_GALLERY.md) · [기계 판독 목록](reference-images/manifest.json) · [결정 기록](DECISION_HISTORY.md) · [상세 예시](EXAMPLE_ARCHIVE.md).
 
 ## D01
 **Bannerlord 구조 + 대항해시대/Black Flag 항해 + RimWorld 성장/운영; Absolum 액션, Vanillaware 회화적 표현** — 승인된 기획 방향.
@@ -131,7 +131,7 @@ D01–D35 승인, D36 미결. 외부 이미지 21개는 기존 URL의 주제 기
 - **SVG-12** [camera comparison](visuals/12-camera-comparison.svg) — 자체 설명 도식; retrospective content mapping, not original decision number.
 - **SVG-17** [quarter view layout](visuals/17-quarter-view-layout.svg) — 자체 설명 도식; retrospective content mapping, not original decision number.
 - **REF-08** [Dungeons & Dragons: Shadow over Mystara](REFERENCE_GALLERY.md#ref-08) — 기각된 벨트스크롤 비교; 활성 참조 금지; historical, 원격 URL, 원본 미저장.
-- **REF-19** [Tunic — isometric ruins](REFERENCE_GALLERY.md#ref-19) — 쿼터뷰 경로·가림·숨은 길; D36 미승인; active, 원격 URL, 원본 미저장.
+- **REF-19** [Tunic — isometric ruins](REFERENCE_GALLERY.md#ref-19) — 쿼터뷰 경로·가림·숨은 길; D36 구조 승인, 세부 예시 미확정; active, 원격 URL, 원본 미저장.
 - **REF-20** [Hades II — quarter-view combat](REFERENCE_GALLERY.md#ref-20) — 쿼터뷰 액션·피격·예고; 강제 방 전투 제외; active, 원격 URL, 원본 미저장.
 - **REF-21** [Absolum — attack impact](REFERENCE_GALLERY.md#ref-21) — 공격 자세·궤적·피격 가독성; 벨트스크롤 제외; active, 원격 URL, 원본 미저장.
 
@@ -140,7 +140,7 @@ D01–D35 승인, D36 미결. 외부 이미지 21개는 기존 URL의 주제 기
 
 - **SVG-10** [planet exploration](visuals/10-planet-exploration.svg) — 자체 설명 도식; retrospective content mapping, not original decision number.
 - **SVG-19** [planet regions procedural](visuals/19-planet-regions-procedural.svg) — 자체 설명 도식; decision-specific reconstruction.
-- **REF-19** [Tunic — isometric ruins](REFERENCE_GALLERY.md#ref-19) — 쿼터뷰 경로·가림·숨은 길; D36 미승인; active, 원격 URL, 원본 미저장.
+- **REF-19** [Tunic — isometric ruins](REFERENCE_GALLERY.md#ref-19) — 쿼터뷰 경로·가림·숨은 길; D36 구조 승인, 세부 예시 미확정; active, 원격 URL, 원본 미저장.
 - **REF-20** [Hades II — quarter-view combat](REFERENCE_GALLERY.md#ref-20) — 쿼터뷰 액션·피격·예고; 강제 방 전투 제외; active, 원격 URL, 원본 미저장.
 - **[D19-IMG01](REFERENCE_GALLERY.md#d19-img01)** 넓은 지형과 시각 단서. 행성 공간 구조 비교 · [당시 예시](EXAMPLE_ARCHIVE.md#example-d19). 원문 검색: `Zelda breath of the wild vast open world landscape mountain forest village exploration gameplay`. reconstructed query; 원본 URL/파일 미확보.
 - **[D19-IMG02](REFERENCE_GALLERY.md#d19-img02)** 연결된 유적·숨은 길. 행성 공간 구조 비교 · [당시 예시](EXAMPLE_ARCHIVE.md#example-d19). 원문 검색: `Tunic isometric interconnected forest ruins secret paths gameplay`. reconstructed query; 원본 URL/파일 미확보.
@@ -151,7 +151,7 @@ D01–D35 승인, D36 미결. 외부 이미지 21개는 기존 URL의 주제 기
 **C. 동일 공간 전투 + 특수 전투 구역** — 승인된 기획 방향.
 
 - **SVG-20** [ground encounter](visuals/20-ground-encounter.svg) — 자체 설명 도식; decision-specific reconstruction.
-- **REF-19** [Tunic — isometric ruins](REFERENCE_GALLERY.md#ref-19) — 쿼터뷰 경로·가림·숨은 길; D36 미승인; active, 원격 URL, 원본 미저장.
+- **REF-19** [Tunic — isometric ruins](REFERENCE_GALLERY.md#ref-19) — 쿼터뷰 경로·가림·숨은 길; D36 구조 승인, 세부 예시 미확정; active, 원격 URL, 원본 미저장.
 - **[D20-IMG01](REFERENCE_GALLERY.md#d20-img01)** 생태 관찰·동일 공간 조우. 행성 탐험 중 조우와 특수 전투 구역 · [당시 예시](EXAMPLE_ARCHIVE.md#example-d20). 원문 검색: `Pokemon Legends Arceus wild pokemon encounter battle gameplay screenshot`. reconstructed query; 원본 URL/파일 미확보.
 - **[D20-IMG02](REFERENCE_GALLERY.md#d20-img02)** 탐험 중 교전. 행성 탐험 중 조우와 특수 전투 구역 · [당시 예시](EXAMPLE_ARCHIVE.md#example-d20). 원문 검색: `Tunic game isometric forest combat enemies exploration gameplay screenshot`. reconstructed query; 원본 URL/파일 미확보.
 - **[D20-IMG03](REFERENCE_GALLERY.md#d20-img03)** 특수 보스 구역. 행성 탐험 중 조우와 특수 전투 구역 · [당시 예시](EXAMPLE_ARCHIVE.md#example-d20). 원문 검색: `Tunic isometric boss arena siege engine gameplay screenshot`. reconstructed query; 원본 URL/파일 미확보.
@@ -202,7 +202,7 @@ D01–D35 승인, D36 미결. 외부 이미지 21개는 기존 URL의 주제 기
 **C. 제한된 공통 환경 속성 + 도구 조합** — 승인된 기획 방향.
 
 - **SVG-25** [systemic environment](visuals/25-systemic-environment.svg) — 자체 설명 도식; decision-specific reconstruction.
-- **REF-19** [Tunic — isometric ruins](REFERENCE_GALLERY.md#ref-19) — 쿼터뷰 경로·가림·숨은 길; D36 미승인; active, 원격 URL, 원본 미저장.
+- **REF-19** [Tunic — isometric ruins](REFERENCE_GALLERY.md#ref-19) — 쿼터뷰 경로·가림·숨은 길; D36 구조 승인, 세부 예시 미확정; active, 원격 URL, 원본 미저장.
 - **[D25-IMG01](REFERENCE_GALLERY.md#d25-img01)** 열·연소. 환경 속성·도구 조합 레퍼런스 · [당시 예시](EXAMPLE_ARCHIVE.md#example-d25). 원문 검색: `Zelda Breath of the Wild burning grass fire spreading gameplay screenshot`. exact visible query; original rendered image unknown; 원본 URL/파일 미확보.
 - **[D25-IMG02](REFERENCE_GALLERY.md#d25-img02)** 전기·전도성. 환경 속성·도구 조합 레퍼런스 · [당시 예시](EXAMPLE_ARCHIVE.md#example-d25). 원문 검색: `Zelda Tears of the Kingdom electric shock water lightning gameplay`. exact visible query; original rendered image unknown; 원본 URL/파일 미확보.
 - **[D25-IMG03](REFERENCE_GALLERY.md#d25-img03)** 무게·물리력. 환경 속성·도구 조합 레퍼런스 · [당시 예시](EXAMPLE_ARCHIVE.md#example-d25). 원문 검색: `Zelda Breath of the Wild magnesis metal object physics puzzle gameplay`. exact visible query; original rendered image unknown; 원본 URL/파일 미확보.
@@ -246,7 +246,7 @@ D01–D35 승인, D36 미결. 외부 이미지 21개는 기존 URL의 주제 기
 - **REF-13** [Moonlighter](REFERENCE_GALLERY.md#ref-13) — 후속 제작·판매 후보; 강제 상점 루프 제외; deferred, 원격 URL, 원본 미저장.
 - **REF-14** [Overcooked! 2](REFERENCE_GALLERY.md#ref-14) — 후속 공간·동료 업무 운영 후보; deferred, 원격 URL, 원본 미저장.
 - **REF-16** [Fallout 4](REFERENCE_GALLERY.md#ref-16) — 후속 거점 변화 후보; FPS 제외; deferred, 원격 URL, 원본 미저장.
-- **REF-19** [Tunic — isometric ruins](REFERENCE_GALLERY.md#ref-19) — 쿼터뷰 경로·가림·숨은 길; D36 미승인; active, 원격 URL, 원본 미저장.
+- **REF-19** [Tunic — isometric ruins](REFERENCE_GALLERY.md#ref-19) — 쿼터뷰 경로·가림·숨은 길; D36 구조 승인, 세부 예시 미확정; active, 원격 URL, 원본 미저장.
 - **[D29-IMG01](REFERENCE_GALLERY.md#d29-img01)** 환경 발견 자체. 다양한 발견의 즐거움 · [당시 예시](EXAMPLE_ARCHIVE.md#example-d29). 원문 검색: `Subnautica glowing giant alien underwater tree beautiful bioluminescent lost river gameplay`. exact visible query; original rendered image unknown; 원본 URL/파일 미확보.
 - **[D29-IMG02](REFERENCE_GALLERY.md#d29-img02)** 지식·숨은 길. 다양한 발견의 즐거움 · [당시 예시](EXAMPLE_ARCHIVE.md#example-d29). 원문 검색: `Tunic mysterious ancient temple hidden passage exploration gameplay`. exact visible query; original rendered image unknown; 원본 URL/파일 미확보.
 - **[D29-IMG03](REFERENCE_GALLERY.md#d29-img03)** 교감·관계. 다양한 발견의 즐거움 · [당시 예시](EXAMPLE_ARCHIVE.md#example-d29). 원문 검색: `painterly isometric adorable alien creature befriending human space explorer game concept art`. exact visible query; original rendered image unknown; 원본 URL/파일 미확보.
@@ -310,15 +310,22 @@ D01–D35 승인, D36 미결. 외부 이미지 21개는 기존 URL의 주제 기
 - **[D35-IMG03](REFERENCE_GALLERY.md#d35-img03)** 환경 탐지 생물 동료. 전문화와 동료의 연결 · [당시 예시](EXAMPLE_ARCHIVE.md#example-d35). 원문 검색: `adorable original alien creature with large expressive eyes small rounded body painterly fantasy science fiction companion concept art`. exact visible query; original rendered image unknown; 원본 URL/파일 미확보.
 
 ## D36
-**기술의 실제 효과 구조** — 미승인.
+**C. 기초 숙련의 수치·안정성 개선 + 핵심 기술의 새로운 행동·해결 경로** — 승인된 기획 방향.
 
-- **REF-19** [Tunic — isometric ruins](REFERENCE_GALLERY.md#ref-19) — 쿼터뷰 경로·가림·숨은 길; D36 미승인; active, 원격 URL, 원본 미저장.
+- **SVG-36** [고대 유적 네 가지 해결 경로](visuals/36-skill-solution-paths.svg) — 새로 재구성한 자체 설명 도식, 원본 콘셉트 이미지 아님.
+
+- **REF-19** [Tunic — isometric ruins](REFERENCE_GALLERY.md#ref-19) — 쿼터뷰 경로·가림·숨은 길; D36 구조 승인, 세부 예시 미확정; active, 원격 URL, 원본 미저장.
 - **[D36-IMG01](REFERENCE_GALLERY.md#d36-img01)** 쿼터뷰에서 탐험 목적과 장애물을 읽기 쉽게 표현; 식생·고대 기술 광원·생물 대비. 실제 플레이 상황: 고대 유적 입구 · [당시 예시](EXAMPLE_ARCHIVE.md#example-d36). 원문 검색: `hand painted isometric science fiction ancient alien temple entrance overgrown ruins glowing technology mysterious alien guardian creature game environment concept art`. exact visible query; original rendered image unknown; 원본 URL/파일 미확보.
 - **[D36-IMG02](REFERENCE_GALLERY.md#d36-img02)** 수호 생물 무력화, 공격 예고·피격 가독성; 살해 필수 아님. 실제 플레이 상황: 고대 유적 입구 · [당시 예시](EXAMPLE_ARCHIVE.md#example-d36). 원문 검색: `painterly isometric science fiction adventurer fighting large alien guardian energy sword ancient temple game concept art`. exact visible query; original rendered image unknown; 원본 URL/파일 미확보.
 - **[D36-IMG03](REFERENCE_GALLERY.md#d36-img03)** 고대 제어 장치 복구로 다른 입구 개방; 장치와 결과를 공간적으로 연결. 실제 플레이 상황: 고대 유적 입구 · [당시 예시](EXAMPLE_ARCHIVE.md#example-d36). 원문 검색: `painterly isometric science fiction engineer repairing ancient alien technological control terminal glowing door game concept art`. exact visible query; original rendered image unknown; 원본 URL/파일 미확보.
 - **[D36-IMG04](REFERENCE_GALLERY.md#d36-img04)** 생명체 진정·교감으로 비전투 통과; 표정·자세·거리. 실제 플레이 상황: 고대 유적 입구 · [당시 예시](EXAMPLE_ARCHIVE.md#example-d36). 원문 검색: `painterly science fiction explorer gently calming adorable large alien creature in mysterious forest game concept art`. exact visible query; original rendered image unknown; 원본 URL/파일 미확보.
 - **[D36-IMG05](REFERENCE_GALLERY.md#d36-img05)** 폭포·유적 뒤 숨은 우회로 발견; 가림과 환경 단서. 실제 플레이 상황: 고대 유적 입구 · [당시 예시](EXAMPLE_ARCHIVE.md#example-d36). 원문 검색: `painterly isometric science fiction explorer discovering secret hidden passage behind ancient alien ruins waterfall game concept art`. exact visible query; original rendered image unknown; 원본 URL/파일 미확보.
-- 사용자 선호: 해당 5개 예시 이미지. 사용자 첨부 화면은 시각적으로 전달되었으나 파일 목록/런타임에 바이트 미노출; 실제 스크린샷 파일 미저장. D36 결정 자체 미승인.
+- 사용자 선호: 해당 5개 예시 이미지. D36 구조 승인, 아트/구체 기술 미확정. 사용자가 별도로 제공한 캐릭터 구성 캡처는 D31 자료이며 실제 파일 미확보.
+
+## D37
+**장비와 기술의 관계** — 미승인.
+
+- **SVG-37** [스캐너 기본 사용·숙련·전문 기술 조합](visuals/37-equipment-skill-proposal.svg) — 자체 설명 도식. [예시](EXAMPLE_ARCHIVE.md#example-d37). 외부 이미지 신규 사용 없음.
 
 ## 원본 확보 상태 및 누락 추적
 [복구 대기 목록](VISUAL_RECOVERY_QUEUE.md) — 정확한 채팅 이미지 59건 모두 파일 미확보, 이전 D01–D18 원본 전체 목록 미복구. 실제 표시된 이미지를 확인하기 전 대체 그림을 원본으로 표시하지 않는다.

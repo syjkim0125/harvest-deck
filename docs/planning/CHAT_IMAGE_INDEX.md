@@ -82,7 +82,7 @@ D19–D36의 자동 표시 이미지 검색 문구/재구성 주제 59건을 보
 - D35-IMG03: `adorable original alien creature with large expressive eyes small rounded body painterly fantasy science fiction companion concept art` — 원본 미확보
 
 ## D36
-사용자가 시각 예시를 특히 좋다고 평가. D36 기획 결정 자체는 미승인. [결정별 카드](DECISION_VISUAL_INDEX.md#d36).
+사용자가 시각 예시를 특히 좋다고 평가. D36 기획 구조 승인, 구체 아트는 미승인. [결정별 카드](DECISION_VISUAL_INDEX.md#d36).
 - D36-IMG01: `hand painted isometric science fiction ancient alien temple entrance overgrown ruins glowing technology mysterious alien guardian creature game environment concept art` — 고대 유적 입구·수호 생물: 쿼터뷰에서 탐험 목적과 장애물을 읽기 쉽게 표현; 식생·고대 기술 광원·생물 대비. 원본 미확보.
 - D36-IMG02: `painterly isometric science fiction adventurer fighting large alien guardian energy sword ancient temple game concept art` — 전투 전문가: 수호 생물 무력화, 공격 예고·피격 가독성; 살해 필수 아님. 원본 미확보.
 - D36-IMG03: `painterly isometric science fiction engineer repairing ancient alien technological control terminal glowing door game concept art` — 기술 전문가: 고대 제어 장치 복구로 다른 입구 개방; 장치와 결과를 공간적으로 연결. 원본 미확보.

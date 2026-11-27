@@ -100,3 +100,6 @@ Skyrim의 활동 기반 숙련과 특성 선택, Bannerlord의 활동/능력 성
 
 ## D35 연결
 D33–34의 초기 직업과 활동 기반 성장 원리 유지. 플레이어의 전문성과 동료의 역할 상호 보완은 기존 RimWorld/Bannerlord 비교 원리와 연결. 실제 게임의 성장 상한이나 비용을 복제하지 않는다. [전문화 비교 도식](visuals/35-specialization-profiles.svg). 대화 이미지 검색 3건은 [CHAT_IMAGE_INDEX](CHAT_IMAGE_INDEX.md), 원본 이미지 파일 및 URL은 미확보. 신규 외부 출처·플레이 검증 없음.
+
+## D36 연결
+D25의 복수 환경 해결, D33–35의 교차 성장·전문화 원리를 연결. [D36 자체 도식](visuals/36-skill-solution-paths.svg) · [사용자 선호 이미지 5건](DECISION_VISUAL_INDEX.md#d36). 검색 문구만 확보, 정확한 외부 원본/URL 미확보. D37은 장비와 기술 결합의 미승인 자체 설명 도식이며 새 외부 이미지 없음.

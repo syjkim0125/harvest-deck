@@ -325,7 +325,7 @@
         "D29",
         "D36"
       ],
-      "referencePurpose": "쿼터뷰 경로·가림·숨은 길; D36 미승인",
+      "referencePurpose": "쿼터뷰 경로·가림·숨은 길; D36 구조 승인, 세부 예시 미확정",
       "mappingEvidence": "retrospective thematic association; exact chat occurrence unverified",
       "exclusions": "원작 IP·에셋 복제 금지; GDD 및 상태 기준"
     },
@@ -1437,7 +1437,7 @@
       "url": null,
       "localFile": null,
       "bytes": "unavailable",
-      "status": "liked visual example; gameplay decision pending",
+      "status": "liked visual example; gameplay principle approved, artwork not approved",
       "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
       "conversationSection": "실제 플레이 상황: 고대 유적 입구",
       "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d36",
@@ -1456,7 +1456,7 @@
       "url": null,
       "localFile": null,
       "bytes": "unavailable",
-      "status": "liked visual example; gameplay decision pending",
+      "status": "liked visual example; gameplay principle approved, artwork not approved",
       "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
       "conversationSection": "실제 플레이 상황: 고대 유적 입구",
       "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d36",
@@ -1475,7 +1475,7 @@
       "url": null,
       "localFile": null,
       "bytes": "unavailable",
-      "status": "liked visual example; gameplay decision pending",
+      "status": "liked visual example; gameplay principle approved, artwork not approved",
       "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
       "conversationSection": "실제 플레이 상황: 고대 유적 입구",
       "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d36",
@@ -1494,7 +1494,7 @@
       "url": null,
       "localFile": null,
       "bytes": "unavailable",
-      "status": "liked visual example; gameplay decision pending",
+      "status": "liked visual example; gameplay principle approved, artwork not approved",
       "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
       "conversationSection": "실제 플레이 상황: 고대 유적 입구",
       "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d36",
@@ -1513,7 +1513,7 @@
       "url": null,
       "localFile": null,
       "bytes": "unavailable",
-      "status": "liked visual example; gameplay decision pending",
+      "status": "liked visual example; gameplay principle approved, artwork not approved",
       "exclusions": "기획 예시; 원작/외부 이미지 그대로 게임 에셋화 금지",
       "conversationSection": "실제 플레이 상황: 고대 유적 입구",
       "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d36",
@@ -1881,18 +1881,38 @@
       "purpose": "specialization profiles",
       "mappingEvidence": "decision-specific reconstruction",
       "status": "local SVG; explanatory not original screenshot or final art"
+    },
+    {
+      "id": "SVG-36",
+      "decisionIds": [
+        "D36"
+      ],
+      "path": "docs/planning/visuals/36-skill-solution-paths.svg",
+      "purpose": "고대 유적 네 가지 해결 경로",
+      "mappingEvidence": "decision-specific reconstruction",
+      "status": "local SVG; explanatory reconstruction; approved principle, not original art"
+    },
+    {
+      "id": "SVG-37",
+      "decisionIds": [
+        "D37"
+      ],
+      "path": "docs/planning/visuals/37-equipment-skill-proposal.svg",
+      "purpose": "스캐너 기본 사용·숙련·전문 기술 조합",
+      "mappingEvidence": "decision-specific reconstruction",
+      "status": "local SVG; proposal pending, not final art"
     }
   ],
   "userCapture": {
-    "decisionId": "D36",
+    "decisionId": "D31",
     "status": "visible in user message; image bytes unavailable in current file listing and runtime",
     "publicRehosting": "not verified",
-    "note": "Do not invent a screenshot file or substitute another image as original."
+    "note": "User screenshot shows initial character profiles (pilot, scout, engineer), not D36 ruins. Actual bytes and public rehosting rights still unverified."
   },
   "coverage": {
-    "decisionRange": "D01–D36",
-    "approvedThrough": "D35",
-    "pending": "D36",
+    "decisionRange": "D01–D37",
+    "approvedThrough": "D36",
+    "pending": "D37",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 7,
     "exactVisibleQueries": 52,
