@@ -13,7 +13,7 @@ STEP 4 D18–D29 핵심 방향 승인. STEP 5 D30 성향 질문 추천+직접 �
 ## 추가 예시 및 시각 자료 (필수)
 - [통합 참고 이미지 갤러리](REFERENCE_GALLERY.md) · [URL/공식 미디어 목록](reference-images/manifest.json). 원격 임베드, 실제 이미지 파일은 현재 미확보. 공개 저장소의 이미지 재호스팅 권한 확인 전 파일 커밋 금지.
 - [2026-11-27 보존 감사](AUDIT_20261127.md)
-- [상세 예시 보존](EXAMPLE_ARCHIVE.md): D19–D32의 표/상황/선택지/문항·프로필. [이미지 검색 문구 원문](CHAT_IMAGE_INDEX.md): 46건(39건 확인 가능한 원문, D19–20 7건 재구성), 원본 파일 미확보. [캐릭터 생성 인터랙션 재구성](prototypes/character-creation-example.html) · [데이터](prototypes/character-creation-example.json). 이전 D01–D18은 기존 결정 이력/도식/레퍼런스에 보존, 전체 원본 미확보.
+- [상세 예시 보존](EXAMPLE_ARCHIVE.md): D19–D32의 표/상황/선택지/문항·프로필. [이미지 검색 문구 원문](CHAT_IMAGE_INDEX.md): 49건(42건 확인 가능한 원문, D19–20 7건 재구성), 원본 파일 미확보. [캐릭터 생성 인터랙션 재구성](prototypes/character-creation-example.html) · [데이터](prototypes/character-creation-example.json). 이전 D01–D18은 기존 결정 이력/도식/레퍼런스에 보존, 전체 원본 미확보.
 ## 변경 관리 계약
 - 활성 기획 기준은 GDD/결정 이력/현재 인계. 과거 미승인 방향 및 구현 실험은 이력에서만 참고. 새 문서가 과거 지시를 재활성화하지 않도록 확인.
 - **기획 세션만 진행**. 개발/디자인/리뷰 자동화 중지. 기존 PR 병합/게임 코드 수정 금지(기획 문서 정리 제외).

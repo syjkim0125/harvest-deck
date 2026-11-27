@@ -88,3 +88,6 @@ D30의 Langrisser식 질문/Bannerlord 배경 선택/Fallout New Vegas 직접 �
 
 ## 최신 이미지 갤러리
 [통합 갤러리](REFERENCE_GALLERY.md) · [중복 제거 URL/공식 미디어 목록](reference-images/manifest.json). 실제 원본 바이너리 미확보. 과거 비교/제외 후보는 역사 기록에서만 참고.
+
+## D32 연결
+기존 Starsector/대항해시대/Black Flag의 함선 개성·항해, FTL의 장비/함선 구성 비교 원리를 참고. D32 대화 이미지 검색 문구 3건은 [CHAT_IMAGE_INDEX](CHAT_IMAGE_INDEX.md)에 원문 보존. 실제 이미지 파일/URL 미확보; [자체 함선 도식](visuals/32-starting-ships-proposal.svg) 보존. 원작 함선 디자인과 상세 규칙 복제 금지.
