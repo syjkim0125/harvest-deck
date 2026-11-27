@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 40건 / 미결 D41. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 41건 / 미결 D42. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -251,7 +251,12 @@
 - 자체 설명 도식: [SVG-40: 종·개체별 관찰과 교감, 자발적 동행 또는 서식지 복귀](visuals/40-alien-bonding-proposal.svg). 실제 아트 아님.
 
 ## D41
-**동료 관계와 신뢰 구조** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d41).
+**C. 핵심 관계 상태 + 개별 성격·목표·경험에 따른 변화** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d41).
 
 - 자체 설명 도식: [SVG-41: 개체의 성격·목표·환경에 따른 사건별 반응과 관계 변화](visuals/41-companion-relationship-proposal.svg). 실제 아트 아님.
+
+## D42
+**동료의 자율 행동과 직접 명령** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d42).
+
+- 자체 설명 도식: [SVG-42: 역할·우선순위 기반 자율 행동과 상황별 직접 명령](visuals/42-companion-autonomy-proposal.svg). 실제 아트 아님.
 

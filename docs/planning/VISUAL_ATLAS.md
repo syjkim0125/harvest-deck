@@ -255,9 +255,13 @@ D19 승인 구조 설명. 실제 행성 크기·지도 배치·갱신 규칙 미
 ![D40](visuals/40-alien-bonding-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d40). 생태 관찰, 적절한 교감 행동, 자발적 동행의 예시. 실제 종·아트·영입 규칙 아님.
 
-## 41. Companion relationships (D41 미승인)
+## 41. Companion relationships (D41 구조 승인)
 ![D41](visuals/41-companion-relationship-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d41). 동일 사건의 개체별 반응 비교, 실제 수치·UI·아트 아님.
+
+## 42. Companion autonomy and commands (D42 미승인)
+![D42](visuals/42-companion-autonomy-proposal.svg)
+[결정·예시](DECISION_VISUAL_INDEX.md#d42). 역할/우선순위 및 상황별 명령의 설명 도식; 실제 AI·UI·아트 아님.
 
 ## 다음 시각 자료
 STEP 4 핵심 방향 확정 이후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.

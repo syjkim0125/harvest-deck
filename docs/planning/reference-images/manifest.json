@@ -1945,6 +1945,16 @@
       "path": "docs/planning/visuals/41-companion-relationship-proposal.svg",
       "purpose": "개체의 성격·목표·환경에 따른 사건별 반응과 관계 변화",
       "mappingEvidence": "decision-specific proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-42",
+      "decisionIds": [
+        "D42"
+      ],
+      "path": "docs/planning/visuals/42-companion-autonomy-proposal.svg",
+      "purpose": "역할·우선순위 기반 자율 행동과 상황별 직접 명령",
+      "mappingEvidence": "decision-specific proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -1955,9 +1965,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D41",
-    "approvedThrough": "D40",
-    "pending": "D41",
+    "decisionRange": "D01–D42",
+    "approvedThrough": "D41",
+    "pending": "D42",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 31,
