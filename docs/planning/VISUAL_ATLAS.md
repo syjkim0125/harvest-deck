@@ -271,9 +271,13 @@ D19 승인 구조 설명. 실제 행성 크기·지도 배치·갱신 규칙 미
 ![D44](visuals/44-companion-growth-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d44). NPC와 외계 생명체의 성장 원리 비교, 실제 기술·수치·형태·UI 미확정.
 
-## 45. Companion loss and recovery (D45 미승인)
+## 45. Companion loss and recovery (D45 구조 승인)
 ![D45](visuals/45-companion-loss-recovery-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d45). 부상·실종·갈등과 회복 기회, 조건부 영구 손실 후보 설명 도식; 구체 규칙 및 아트 아님.
+
+## 46. Ship interior and management (D46 미승인)
+![D46](visuals/46-ship-interior-proposal.svg)
+[결정·예시](DECISION_VISUAL_INDEX.md#d46). 생활하는 내부 공간과 간편 관리 접근을 비교한 자체 도식, 실제 카메라·시설·UI·아트 아님.
 
 ## 다음 시각 자료
 STEP 4 핵심 방향 확정 이후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.

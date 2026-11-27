@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 44건 / 미결 D45. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 45건 / 미결 D46. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -271,7 +271,12 @@
 - 자체 설명 도식: [SVG-44: 일반 NPC 활동 숙련·전문화와 생명체 종별 능력·교감 성장 비교](visuals/44-companion-growth-proposal.svg). 실제 아트 아님.
 
 ## D45
-**동료의 부상·갈등·이탈·손실** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d45).
+**C. 부상·갈등·일시적 이별과 회복 기회 중심 + 조건부 영구 이탈·손실** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d45).
 
 - 자체 설명 도식: [SVG-45: 동료의 부상·실종·갈등·이별과 회복 및 조건부 영구 손실 비교](visuals/45-companion-loss-recovery-proposal.svg). 실제 아트 아님.
+
+## D46
+**함선 내부 경험과 운영 방식** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d46).
+
+- 자체 설명 도식: [SVG-46: 생활하는 함선 내부와 간편한 관리 접근의 결합](visuals/46-ship-interior-proposal.svg). 실제 아트 아님.
 
