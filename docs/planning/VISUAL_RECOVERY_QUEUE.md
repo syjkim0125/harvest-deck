@@ -1,5 +1,5 @@
 # 시각 자료 원본 복구 대기 목록
-2026-11-27 · D01–D38 승인, D39 미결. [결정별 색인](DECISION_VISUAL_INDEX.md) / [갤러리](REFERENCE_GALLERY.md) / [manifest](reference-images/manifest.json).
+2026-11-27 · D01–D39 승인, D40 미결. [결정별 색인](DECISION_VISUAL_INDEX.md) / [갤러리](REFERENCE_GALLERY.md) / [manifest](reference-images/manifest.json).
 
 **완료된 것은 결정 연결이지 원본 확보가 아니다.** 원본 자동 표시 이미지의 정확한 URL·픽셀을 얻지 못했다. 이전 대화 검색은 요약 및 기존 자료만 반환했으며 전체 원문·이미지 원본은 반환하지 않았다. 현재 대화 파일 목록 0개, /mnt/data 파일 0개. 사용자가 메시지에 첨부한 이미지도 실제 파일로 노출되지 않았다. 현재 브라우저 도구는 텍스트 읽기 전용이며 직접 채팅 UI를 캡처할 수 없다. 공개 저장소는 재배포 권한 확인 후에만 원본/캡처 등록. 새로 찾거나 제작한 대체 이미지는 별도 ID, 출처, 재구성 표시 필수.
 

@@ -247,9 +247,13 @@ D19 승인 구조 설명. 실제 행성 크기·지도 배치·갱신 규칙 미
 ![D38](visuals/38-companion-identity-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d38). 개별 동료 정체성과 역할의 예시, 실제 캐릭터/아트/영입 규칙 아님.
 
-## 39. Recruitment paths (D39 미승인)
+## 39. Recruitment paths (D39 구조 승인)
 ![D39](visuals/39-recruitment-paths-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d39). 여러 만남 경로와 상호 합의의 설명 도식, 실제 UI·영입 규칙 아님.
+
+## 40. Alien bonding (D40 미승인)
+![D40](visuals/40-alien-bonding-proposal.svg)
+[결정·예시](DECISION_VISUAL_INDEX.md#d40). 생태 관찰, 적절한 교감 행동, 자발적 동행의 예시. 실제 종·아트·영입 규칙 아님.
 
 ## 다음 시각 자료
 STEP 4 핵심 방향 확정 이후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.

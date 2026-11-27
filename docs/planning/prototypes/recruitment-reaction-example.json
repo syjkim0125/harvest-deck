@@ -1,0 +1,24 @@
+{
+  "decisionId": "D39",
+  "status": "illustrative, not actual recruitment algorithm",
+  "character": "정거장 출신 정비공",
+  "goal": "새로운 기술 연구와 안정적인 생활",
+  "default": "research",
+  "reactions": [
+    {
+      "id": "research",
+      "condition": "연구 시설을 갖춘 탐사 함선",
+      "response": "흥미로운 기술을 많이 연구할 수 있겠군요. 함께 가고 싶습니다."
+    },
+    {
+      "id": "pirate",
+      "condition": "위험한 전투를 반복하는 해적 함선",
+      "response": "저는 전투보다는 연구를 하고 싶습니다. 이번 제안은 거절하겠습니다."
+    },
+    {
+      "id": "poor",
+      "condition": "시설이 부족하지만 신뢰가 높은 선장",
+      "response": "시설은 부족하지만 당신이라면 믿을 수 있을 것 같습니다. 몇 가지 조건을 이야기해 볼까요?"
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 # VOID CARAVAN — 현재 참고 이미지 갤러리
 
-D39 검토 기준 · 이미지를 한 문서 안에 표시하도록 통합. 아래는 원격 임베드이며 인터넷 연결이 필요하다. **원본 파일 저장은 아직 완료되지 않았다.** 공개 저장소의 재호스팅 권한 미확인 및 실행 환경 외부 다운로드 제한. 출처 원본은 [증거 기록](REFERENCE_EVIDENCE.md). 이 목록은 채팅에 실제 반환된 정확한 이미지와 동일하다고 주장하지 않는다. 중복 URL 제거; 게임별 레퍼런스 우선순위는 GDD 및 REFERENCES가 결정한다.
+D40 검토 기준 · 이미지를 한 문서 안에 표시하도록 통합. 아래는 원격 임베드이며 인터넷 연결이 필요하다. **원본 파일 저장은 아직 완료되지 않았다.** 공개 저장소의 재호스팅 권한 미확인 및 실행 환경 외부 다운로드 제한. 출처 원본은 [증거 기록](REFERENCE_EVIDENCE.md). 이 목록은 채팅에 실제 반환된 정확한 이미지와 동일하다고 주장하지 않는다. 중복 URL 제거; 게임별 레퍼런스 우선순위는 GDD 및 REFERENCES가 결정한다.
 
 ## 결정별 찾아보기
-[결정별 시각 자료 색인 D01–D39](DECISION_VISUAL_INDEX.md) — 기획 결정·사용 의도·원본 확보 상태를 양방향으로 연결. 외부 URL 21개, 채팅 이미지 검색 기록 59개, 실제 로컬 SVG 39개. 이 중 검색 기록은 이미지 파일이 아님.
+[결정별 시각 자료 색인 D01–D40](DECISION_VISUAL_INDEX.md) — 기획 결정·사용 의도·원본 확보 상태를 양방향으로 연결. 외부 URL 21개, 채팅 이미지 검색 기록 59개, 실제 로컬 SVG 40개. 이 중 검색 기록은 이미지 파일이 아님.
 
 ## D36 — 사용자가 특히 좋아한 유적 탐험 예시
 **D36 기술 효과 구조 승인. 구체 아트 및 기술 효과는 미확정.** 원래 채팅의 5개 이미지의 실제 파일/URL을 현재 도구에서 확보하지 못했으므로 아래는 원본 대체 이미지가 아니라 개별 참조 카드다.
@@ -517,10 +517,11 @@ Dungeons & Dragons: Shadow over Mystara — 이미지 출처: Bitvint에 게시�
 - [D36 — 고대 유적 해결 경로](visuals/36-skill-solution-paths.svg) · [결정](DECISION_VISUAL_INDEX.md#d36)
 - [D37 — 장비와 기술 조합](visuals/37-equipment-skill-proposal.svg) · [결정](DECISION_VISUAL_INDEX.md#d37) (구조 승인)
 - [D38 — 동료 정체성과 역할](visuals/38-companion-identity-proposal.svg) · [결정](DECISION_VISUAL_INDEX.md#d38) (구조 승인)
-- [D39 — 일반 NPC 영입 경로 제안](visuals/39-recruitment-paths-proposal.svg) · [결정](DECISION_VISUAL_INDEX.md#d39) (미승인)
+- [D39 — 일반 NPC 영입 경로](visuals/39-recruitment-paths-proposal.svg) · [결정](DECISION_VISUAL_INDEX.md#d39) (구조 승인)
+- [D40 — 외계 생명체 교감·영입 제안](visuals/40-alien-bonding-proposal.svg) · [결정](DECISION_VISUAL_INDEX.md#d40) (미승인)
 
 ## 원본·캡처 확보 대기
-[복구 대기 목록](VISUAL_RECOVERY_QUEUE.md). 원격 이미지 21개, 채팅 검색 기록 59개, 자체 SVG 39개를 구분하고 원본이 없는 상태를 명시. 화면 캡처는 실제 접근 가능한 파일과 권리 확인 시 등록.
+[복구 대기 목록](VISUAL_RECOVERY_QUEUE.md). 원격 이미지 21개, 채팅 검색 기록 59개, 자체 SVG 40개를 구분하고 원본이 없는 상태를 명시. 화면 캡처는 실제 접근 가능한 파일과 권리 확인 시 등록.
 
 ## 보존 원칙
 공개 저장소에는 원 권리자의 재배포 허용 조건을 확인한 실제 이미지 또는 자체 제작 이미지 파일만 추가. 로컬 연구용 파일은 별도의 비공개 위치에 보존하고 공개 게임/마케팅 에셋으로 포함하지 않는다. 과거 전체 보드의 적용 설명은 [고정 이력](https://github.com/syjkim0125/harvest-deck/blob/0b7f09a8ef09cf5ce11c7259b26c24a3850bac90/docs/VISUAL_REFERENCE_BOARD.md)에서 확인 가능.
