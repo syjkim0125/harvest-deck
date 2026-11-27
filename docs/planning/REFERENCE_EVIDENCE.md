@@ -54,3 +54,10 @@
 
 ## 2026-11-27 최신 이미지 갤러리
 [통합 갤러리](REFERENCE_GALLERY.md) · [URL 및 공식 자료 목록](reference-images/manifest.json). 기존 URL 21개 중복 제거. 실제 원본 파일 0개 확보. 컨테이너 curl DNS 해석 실패 및 다운로드 도구 실패, 공식 Absolum ZIP은 웹 403, Hades II RAR는 웹 도구 형식 미지원. 저장소는 public, 공개 재호스팅 라이선스 미확인. 원격 이미지 표시와 출처 보존은 완료하되 파일 복제 완료로 표현하지 않는다. 갤러리 이미지 개별 렌더링 전수 검증 안 함.
+
+## D47 실제 검색 이미지 증거
+- REF-22: [FTL — top-down ship interior](https://www.gamestar.de/artikel/ftl-faster-than-light%2C3195_138/) · [이미지 URL](https://images.cgames.de/images/gamestar/4/faster-than-light_2346088.jpg) — 이미지 검색에서 실제 화면 확인; 파일 미다운로드, 공개 재호스팅 권리 미확인.
+- REF-23: [Fallout Shelter — side cutaway](https://gameranks.gg/games/fallout-shelter) · [이미지 URL](https://gameranks.gg/media/screenshots/webp/thk0u0kyhmncmqtmsn5o_1920x1080.webp) — 이미지 검색에서 실제 화면 확인; 파일 미다운로드, 공개 재호스팅 권리 미확인.
+- REF-24: [Space Haven — ship overview](https://ensigame.com/games/space-haven) · [이미지 URL](https://cdn.akamai.steamstatic.com/steam/apps/979110/ss_b1f27d81832ec796dbeeae639e6706b746813407.1920x1080.jpg) — 이미지 검색에서 실제 화면 확인; 파일 미다운로드, 공개 재호스팅 권리 미확인.
+- REF-25: [Space Haven — living deck](https://www.wasdland.com/game/space-haven-979110/) · [이미지 URL](https://shared.steamstatic.com/store_item_assets/steam/apps/979110/169275ca339f84a42bbaeab652575aa0d68bf5c4/ss_169275ca339f84a42bbaeab652575aa0d68bf5c4.1920x1080.jpg) — 이미지 검색에서 실제 화면 확인; 파일 미다운로드, 공개 재호스팅 권리 미확인.
+- REF-26: [Space Haven — boarding](https://store.steampowered.com/app/979110/Space_Haven/) · [이미지 URL](https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/979110/ss_f0565ff50257d42717da10052cc8cd643745da88.1920x1080.jpg?t=1694086997) — 이미지 검색에서 실제 화면 확인; 파일 미다운로드, 공개 재호스팅 권리 미확인.

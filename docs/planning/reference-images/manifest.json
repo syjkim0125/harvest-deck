@@ -363,6 +363,86 @@
       "referencePurpose": "공격 자세·궤적·피격 가독성; 벨트스크롤 제외",
       "mappingEvidence": "retrospective thematic association; exact chat occurrence unverified",
       "exclusions": "원작 IP·에셋 복제 금지; GDD 및 상태 기준"
+    },
+    {
+      "id": "REF-22",
+      "title": "FTL — top-down ship interior",
+      "url": "https://images.cgames.de/images/gamestar/4/faster-than-light_2346088.jpg",
+      "page": "https://www.gamestar.de/artikel/ftl-faster-than-light%2C3195_138/",
+      "source": "Subset Games game screenshot via GameStar",
+      "status": "deferred",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D47"
+      ],
+      "referencePurpose": "A 평면형 비교: 방·통로·승무원 위치 가독성; 평면 시점 확정 아님",
+      "mappingEvidence": "actual D47 follow-up displayed image; web image search returned visible screenshot and exact URL 2026-11-27",
+      "exclusions": "비교 시각 자료만; 원작 IP·UI·아트 복제 금지; 기획 승인 아님"
+    },
+    {
+      "id": "REF-23",
+      "title": "Fallout Shelter — side cutaway",
+      "url": "https://gameranks.gg/media/screenshots/webp/thk0u0kyhmncmqtmsn5o_1920x1080.webp",
+      "page": "https://gameranks.gg/games/fallout-shelter",
+      "source": "Bethesda game screenshot via Game Ranks",
+      "status": "deferred",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D47"
+      ],
+      "referencePurpose": "B 측면 단면 비교: 층별 생활·시설 표현; 지상 쿼터뷰 대체 확정 아님",
+      "mappingEvidence": "actual D47 follow-up displayed image; web image search returned visible screenshot and exact URL 2026-11-27",
+      "exclusions": "비교 시각 자료만; 원작 IP·UI·아트 복제 금지; 기획 승인 아님"
+    },
+    {
+      "id": "REF-24",
+      "title": "Space Haven — ship overview",
+      "url": "https://cdn.akamai.steamstatic.com/steam/apps/979110/ss_b1f27d81832ec796dbeeae639e6706b746813407.1920x1080.jpg",
+      "page": "https://ensigame.com/games/space-haven",
+      "source": "Bugbyte Steam CDN screenshot via Ensigame",
+      "status": "active",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D47"
+      ],
+      "referencePurpose": "C 쿼터뷰 후보: 지붕 제거·시설·통로·함선 전체 공간 읽기",
+      "mappingEvidence": "actual D47 follow-up displayed image; web image search returned visible screenshot and exact URL 2026-11-27",
+      "exclusions": "비교 시각 자료만; 원작 IP·UI·아트 복제 금지; 기획 승인 아님"
+    },
+    {
+      "id": "REF-25",
+      "title": "Space Haven — living deck",
+      "url": "https://shared.steamstatic.com/store_item_assets/steam/apps/979110/169275ca339f84a42bbaeab652575aa0d68bf5c4/ss_169275ca339f84a42bbaeab652575aa0d68bf5c4.1920x1080.jpg",
+      "page": "https://www.wasdland.com/game/space-haven-979110/",
+      "source": "Bugbyte Steam CDN screenshot via wasdland",
+      "status": "active",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D47"
+      ],
+      "referencePurpose": "C 생활 공간 후보: 식사·휴식·자율 행동·공간 입체감",
+      "mappingEvidence": "actual D47 follow-up displayed image; web image search returned visible screenshot and exact URL 2026-11-27",
+      "exclusions": "비교 시각 자료만; 원작 IP·UI·아트 복제 금지; 기획 승인 아님"
+    },
+    {
+      "id": "REF-26",
+      "title": "Space Haven — boarding",
+      "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/979110/ss_f0565ff50257d42717da10052cc8cd643745da88.1920x1080.jpg?t=1694086997",
+      "page": "https://store.steampowered.com/app/979110/Space_Haven/",
+      "source": "Bugbyte official Steam screenshot",
+      "status": "active",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D47"
+      ],
+      "referencePurpose": "C 승선·이동 공간 후보: 내부 인물 가독성; 전투 입력 및 UI 복제 아님",
+      "mappingEvidence": "actual D47 follow-up displayed image; web image search returned visible screenshot and exact URL 2026-11-27",
+      "exclusions": "비교 시각 자료만; 원작 IP·UI·아트 복제 금지; 기획 승인 아님"
     }
   ],
   "kits": [

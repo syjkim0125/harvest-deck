@@ -4,7 +4,7 @@
 
 [결정별 찾아보기](DECISION_VISUAL_INDEX.md) · [자체 도식 47개](VISUAL_ATLAS.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md).
 
-외부 URL 21개는 원격 임베드(렌더링·권리·바이트 미검증), 대화 참조 59건은 원본 상태를 표시. 과거 표시 이미지와 동일성 미확인. 사용자 선호는 최종 아트 승인 아님.
+외부 URL 26개는 원격 임베드(렌더링·권리·바이트 미검증), 대화 참조 59건은 원본 상태를 표시. 과거 표시 이미지와 동일성 미확인. 사용자 선호는 최종 아트 승인 아님.
 
 ## 사용자 선호 시각 예시 (D36)
 ### D36-IMG01
@@ -108,6 +108,27 @@
 
 공격 자세·궤적·피격 가독성; 벨트스크롤 제외. 기존 REFERENCE_EVIDENCE 원본 출처 기록. [원본 주소](https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1904480/ea0656207cbaf00003294eee4ce963b6df166916/ss_ea0656207cbaf00003294eee4ce963b6df166916.1920x1080.jpg?t=1759486757). not downloaded; not verified for public rehosting.
 
+### REF-24
+**Space Haven — ship overview** · [D47](DECISION_VISUAL_INDEX.md#d47)
+
+![Space Haven — ship overview](https://cdn.akamai.steamstatic.com/steam/apps/979110/ss_b1f27d81832ec796dbeeae639e6706b746813407.1920x1080.jpg)
+
+C 쿼터뷰 후보: 지붕 제거·시설·통로·함선 전체 공간 읽기. Bugbyte Steam CDN screenshot via Ensigame. [원본 주소](https://cdn.akamai.steamstatic.com/steam/apps/979110/ss_b1f27d81832ec796dbeeae639e6706b746813407.1920x1080.jpg). not downloaded; not verified for public rehosting.
+
+### REF-25
+**Space Haven — living deck** · [D47](DECISION_VISUAL_INDEX.md#d47)
+
+![Space Haven — living deck](https://shared.steamstatic.com/store_item_assets/steam/apps/979110/169275ca339f84a42bbaeab652575aa0d68bf5c4/ss_169275ca339f84a42bbaeab652575aa0d68bf5c4.1920x1080.jpg)
+
+C 생활 공간 후보: 식사·휴식·자율 행동·공간 입체감. Bugbyte Steam CDN screenshot via wasdland. [원본 주소](https://shared.steamstatic.com/store_item_assets/steam/apps/979110/169275ca339f84a42bbaeab652575aa0d68bf5c4/ss_169275ca339f84a42bbaeab652575aa0d68bf5c4.1920x1080.jpg). not downloaded; not verified for public rehosting.
+
+### REF-26
+**Space Haven — boarding** · [D47](DECISION_VISUAL_INDEX.md#d47)
+
+![Space Haven — boarding](https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/979110/ss_f0565ff50257d42717da10052cc8cd643745da88.1920x1080.jpg?t=1694086997)
+
+C 승선·이동 공간 후보: 내부 인물 가독성; 전투 입력 및 UI 복제 아님. Bugbyte official Steam screenshot. [원본 주소](https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/979110/ss_f0565ff50257d42717da10052cc8cd643745da88.1920x1080.jpg?t=1694086997). not downloaded; not verified for public rehosting.
+
 ## 후속 검토 후보
 
 ### REF-04
@@ -165,6 +186,20 @@
 ![Fallout 4](https://files.giga-video.de/81/ee/73/83afb144bc6ccd1cb553df1b5a_AzhlOGY0Y2NjNWY1.jpg)
 
 후속 거점 변화 후보; FPS 제외. Fallout 4 — 이미지 출처: GIGA에 게시된 Bethesda 게임 스크린샷. [원본 주소](https://files.giga-video.de/81/ee/73/83afb144bc6ccd1cb553df1b5a_AzhlOGY0Y2NjNWY1.jpg). not downloaded; not verified for public rehosting.
+
+### REF-22
+**FTL — top-down ship interior** · [D47](DECISION_VISUAL_INDEX.md#d47)
+
+![FTL — top-down ship interior](https://images.cgames.de/images/gamestar/4/faster-than-light_2346088.jpg)
+
+A 평면형 비교: 방·통로·승무원 위치 가독성; 평면 시점 확정 아님. Subset Games game screenshot via GameStar. [원본 주소](https://images.cgames.de/images/gamestar/4/faster-than-light_2346088.jpg). not downloaded; not verified for public rehosting.
+
+### REF-23
+**Fallout Shelter — side cutaway** · [D47](DECISION_VISUAL_INDEX.md#d47)
+
+![Fallout Shelter — side cutaway](https://gameranks.gg/media/screenshots/webp/thk0u0kyhmncmqtmsn5o_1920x1080.webp)
+
+B 측면 단면 비교: 층별 생활·시설 표현; 지상 쿼터뷰 대체 확정 아님. Bethesda game screenshot via Game Ranks. [원본 주소](https://gameranks.gg/media/screenshots/webp/thk0u0kyhmncmqtmsn5o_1920x1080.webp). not downloaded; not verified for public rehosting.
 
 ## 역사적 자료 — 활성 참조 금지
 

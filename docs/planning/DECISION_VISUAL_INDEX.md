@@ -284,4 +284,5 @@
 **함선 내부 시점과 공간 표현** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d47).
 
 - 자체 설명 도식: [SVG-47: 탑다운·측면 단면·쿼터뷰 내부 및 관리용 배치도 비교](visuals/47-ship-interior-camera-proposal.svg). 실제 아트 아님.
+- 외부 참고(사후 연결): [REF-22](REFERENCE_GALLERY.md#ref-22) FTL — top-down ship interior (deferred) · [REF-23](REFERENCE_GALLERY.md#ref-23) Fallout Shelter — side cutaway (deferred) · [REF-24](REFERENCE_GALLERY.md#ref-24) Space Haven — ship overview (active) · [REF-25](REFERENCE_GALLERY.md#ref-25) Space Haven — living deck (active) · [REF-26](REFERENCE_GALLERY.md#ref-26) Space Haven — boarding (active).
 
