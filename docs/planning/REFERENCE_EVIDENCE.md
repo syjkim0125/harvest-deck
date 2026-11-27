@@ -61,3 +61,6 @@
 - REF-24: [Space Haven — ship overview](https://ensigame.com/games/space-haven) · [이미지 URL](https://cdn.akamai.steamstatic.com/steam/apps/979110/ss_b1f27d81832ec796dbeeae639e6706b746813407.1920x1080.jpg) — 이미지 검색에서 실제 화면 확인; 파일 미다운로드, 공개 재호스팅 권리 미확인.
 - REF-25: [Space Haven — living deck](https://www.wasdland.com/game/space-haven-979110/) · [이미지 URL](https://shared.steamstatic.com/store_item_assets/steam/apps/979110/169275ca339f84a42bbaeab652575aa0d68bf5c4/ss_169275ca339f84a42bbaeab652575aa0d68bf5c4.1920x1080.jpg) — 이미지 검색에서 실제 화면 확인; 파일 미다운로드, 공개 재호스팅 권리 미확인.
 - REF-26: [Space Haven — boarding](https://store.steampowered.com/app/979110/Space_Haven/) · [이미지 URL](https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/979110/ss_f0565ff50257d42717da10052cc8cd643745da88.1920x1080.jpg?t=1694086997) — 이미지 검색에서 실제 화면 확인; 파일 미다운로드, 공개 재호스팅 권리 미확인.
+
+## 2026-11-27 원본 확보 재시도
+[복구 기록](IMAGE_RECOVERY_20261127.md). GitHub API public 확인. 26개 URL의 20개 호스트 전체 DNS 실패 및 REF-26 다운로드 실패. 실제 신규 외부 파일 0개. 기존 59 검색 기록은 정확 원본 미확보. 별도 로컬 복구 도구 추가(네트워크 정상 환경에서 수동 실행).

@@ -1,4 +1,4 @@
-# 대화 예시 상세 보존 — D19–D47 (D47 미결)
+# 대화 예시 상세 보존 — D19–D48 (D48 미결)
 2026-11-27 · 확인 가능한 대화 내용을 재구성한 상세 보존본. 대화의 모든 문장 축어록이나 원본 화면 캡처가 아니다. 승인된 결정은 GDD, 예시·대안·수치·UI는 미승인. D01–D18은 [결정 이력](DECISION_HISTORY.md)의 기존 상세 재구성 및 [시각 도식](VISUAL_ATLAS.md), [레퍼런스](REFERENCES.md) 보존. 이전 대화 검색에서 추가 축어록/이미지 원본을 확보하지 못함.
 
 ## D19 행성 공간
@@ -257,8 +257,14 @@ A 메뉴 중심의 함선 관리 / B 모든 함내 활동 직접 이동·조작 
 
 D46 상세 예시: 조종실·정비실(정비공 업무)·생활 공간(외계 생물 휴식)·연구실(유물)·화물실·엔진실 및 연결 통로. 직접 경험(대화·교감/유물 조사/함내 탐험/중요 사건)과 간편 관리(업무 배정/재고 확인/수리 우선순위/생산·연구 진행 확인) 구분. 엔진 수리 지시를 위해 매번 직접 이동할 필요 없음. 실제 시설·배치·UI 확정 아님.
 
-## D47 함선 내부 시점과 공간 표현 — 미승인 제안
+## D47 함선 내부 시점과 공간 표현 — C 승인
 <a id="example-d47"></a>
 A 탑다운 평면형 내부 / B 측면 단면형 내부 / C 지상과 연결되는 쿼터뷰 내부 + 필요 시 지붕·벽 가림 해제 및 전체 배치도(추천). 비교: A 탑다운 평면(방·통로와 위치가 잘 읽힘), B 측면 단면(여러 층과 생활 장면 강조), C 지상과 같은 쿼터뷰 계열(입체감·직접 이동의 일관성, 지붕·가리는 벽을 필요할 때 숨기거나 낮은 투명도로 표현, 간편 관리 시 전체 배치도 전환). 예시: 정비실에서 플레이어와 정비공을 동시에 보고, 통로를 지나 생활 공간의 외계 생명체에게 접근. 관리 모드에서는 방·동료·시설 상태를 요약하고 반복 이동 없이 우선순위를 변경. 배치도는 실제 이동 공간을 대체하는 것이 아니라 관리용 보조 보기. D18 지상 시점, D15 적 함선 승선, D46 직접 공간+간편 관리 유지. 회화적 2D 표현, 정확한 카메라 각도·줌·층 이동·가림 해제 규칙·기기별 가독성·관리 UI 및 조작 미결. [도식](visuals/47-ship-interior-camera-proposal.svg) · [결정](DECISION_VISUAL_INDEX.md#d47).
 
-D47 추가 실제 화면 비교 (2026-11-27): [REF-22 FTL — top-down ship interior](REFERENCE_GALLERY.md#ref-22) · [REF-23 Fallout Shelter — side cutaway](REFERENCE_GALLERY.md#ref-23) · [REF-24 Space Haven — ship overview](REFERENCE_GALLERY.md#ref-24) · [REF-25 Space Haven — living deck](REFERENCE_GALLERY.md#ref-25) · [REF-26 Space Haven — boarding](REFERENCE_GALLERY.md#ref-26). A FTL 평면형, B Fallout Shelter 측면 단면, C Space Haven 함선 전체/생활/승선. Space Haven 공식 개발사 설명 https://bugbyte.fi/spacehaven/ 및 Steam https://store.steampowered.com/app/979110/Space_Haven/ 확인. 쿼터뷰 공간 표현과 동료 생활 참고, 타일 건설·가스 시뮬레이션·UI·전투 조작의 채택은 미결. 이미지 검색에서 반환된 화면과 직접 URL 보존, 실제 바이너리/재호스팅 권리 미확보. 기존 D47 미승인 유지.
+D47 추가 실제 화면 비교 (2026-11-27): [REF-22 FTL — top-down ship interior](REFERENCE_GALLERY.md#ref-22) · [REF-23 Fallout Shelter — side cutaway](REFERENCE_GALLERY.md#ref-23) · [REF-24 Space Haven — ship overview](REFERENCE_GALLERY.md#ref-24) · [REF-25 Space Haven — living deck](REFERENCE_GALLERY.md#ref-25) · [REF-26 Space Haven — boarding](REFERENCE_GALLERY.md#ref-26). A FTL 평면형, B Fallout Shelter 측면 단면, C Space Haven 함선 전체/생활/승선. Space Haven 공식 개발사 설명 https://bugbyte.fi/spacehaven/ 및 Steam https://store.steampowered.com/app/979110/Space_Haven/ 확인. 쿼터뷰 공간 표현과 동료 생활 참고, 타일 건설·가스 시뮬레이션·UI·전투 조작의 채택은 미결. 이미지 검색에서 반환된 화면과 직접 URL 보존, 실제 바이너리/재호스팅 권리 미확보. 당시 비교 단계였으며 이후 C 승인.
+
+D47 직접 탐험/전체 관리 인터랙션 예시: 직접 모드에서는 정비공과 생물에 접근·대화/교감/관찰, 관리 모드에서는 엔진실(수리 중), 연구실(고대 유물 조사 중), 생활 공간(생명체 휴식 중), 화물실(자원·장비 확인)을 표시. 동일한 함선/동료 상태 공유. [Space Haven 적용 연구](SPACE_HAVEN_RESEARCH.md). 실제 UI/아트 미결.
+
+## D48 함선 시설과 확장 방식 — 미승인 제안
+<a id="example-d48"></a>
+A 함선별 고정 시설 / B 자유로운 타일 단위 건설 / C 함선별 기본 구조 + 확장·교체 가능한 기능 모듈(추천). 작은 고속선 예시: 기본 조종실·엔진·작은 화물/생활 공간에서 시작. 이후 한정된 확장 공간에 연구실을 설치하면 유물 분석, 추가 화물 모듈은 운반 용량, 생태 생활 모듈은 특정 외계 생명체의 거주 적합성을 향상하는 후보. 한 공간을 동시에 여러 모듈에 사용하지 않고 함선 크기·전력/공간/적재 등 제약 후보를 검토. 함선의 기본 실루엣과 기동/탐지/적재 정체성 유지(D32), 실제 시설 업무/수용 및 동료 배치(D43), 직접 함내 이동(D46–47) 연결. 모든 타일/배관/가스 관리 강제하지 않음. 모듈 개수·형상·건설 단위·비용·조건·확장/교체 장소·UI 미결. [도식](visuals/48-ship-modules-proposal.svg) · [결정](DECISION_VISUAL_INDEX.md#d48).

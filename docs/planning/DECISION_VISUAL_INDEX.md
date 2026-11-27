@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 46건 / 미결 D47. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 47건 / 미결 D48. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -281,8 +281,13 @@
 - 자체 설명 도식: [SVG-46: 생활하는 함선 내부와 간편한 관리 접근의 결합](visuals/46-ship-interior-proposal.svg). 실제 아트 아님.
 
 ## D47
-**함선 내부 시점과 공간 표현** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d47).
+**C. 지상과 연결되는 쿼터뷰 내부 + 필요 시 지붕·벽 가림 해제 및 전체 배치도** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d47).
 
 - 자체 설명 도식: [SVG-47: 탑다운·측면 단면·쿼터뷰 내부 및 관리용 배치도 비교](visuals/47-ship-interior-camera-proposal.svg). 실제 아트 아님.
 - 외부 참고(사후 연결): [REF-22](REFERENCE_GALLERY.md#ref-22) FTL — top-down ship interior (deferred) · [REF-23](REFERENCE_GALLERY.md#ref-23) Fallout Shelter — side cutaway (deferred) · [REF-24](REFERENCE_GALLERY.md#ref-24) Space Haven — ship overview (active) · [REF-25](REFERENCE_GALLERY.md#ref-25) Space Haven — living deck (active) · [REF-26](REFERENCE_GALLERY.md#ref-26) Space Haven — boarding (active).
+
+## D48
+**함선 시설과 확장 방식** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d48).
+
+- 자체 설명 도식: [SVG-48: 함선 기본 구조와 교체·확장 가능한 기능 모듈 비교](visuals/48-ship-modules-proposal.svg). 실제 아트 아님.
 

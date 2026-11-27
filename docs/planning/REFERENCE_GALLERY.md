@@ -1,8 +1,8 @@
 # 참고 이미지 갤러리
 
-> 승인 46건 / 미결 D47. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 47건 / 미결 D48. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
-[결정별 찾아보기](DECISION_VISUAL_INDEX.md) · [자체 도식 47개](VISUAL_ATLAS.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md).
+[결정별 찾아보기](DECISION_VISUAL_INDEX.md) · [자체 도식 48개](VISUAL_ATLAS.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md).
 
 외부 URL 26개는 원격 임베드(렌더링·권리·바이트 미검증), 대화 참조 59건은 원본 상태를 표시. 과거 표시 이미지와 동일성 미확인. 사용자 선호는 최종 아트 승인 아님.
 
@@ -377,5 +377,6 @@ B 측면 단면 비교: 층별 생활·시설 표현; 지상 쿼터뷰 대체 �
 - **TUNIC**: [공식/PR](https://finji.co/games/tunic/) — 퍼블리셔 Press Kit 안내 확인.
 - **Subnautica**: [공식/PR](https://unknownworlds.com/en/pages/press) — 공식 미디어 페이지 확인.
 - **Starsector**: [공식/PR](https://www.terminals.io/games/starsector) — 개발사 정보 및 Press Kit 링크 확인.
+- **Space Haven**: [공식/PR](https://bugbyte.fi/press/) — 공식 Press 페이지 검색 결과에 스크린샷 ZIP 안내 확인; 직접 바이너리 미확보.
 
 공개 재호스팅 권리 확인 후만 파일 추가. [출처 증거](REFERENCE_EVIDENCE.md) · [연구](REFERENCES.md).

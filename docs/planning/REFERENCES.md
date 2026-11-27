@@ -117,4 +117,7 @@ D04/D17/D29/D38의 개인 목표·관계·역할 연결. [D39 도식](visuals/39
 D24 생태 시뮬레이션, D29 관계 보상, D38 개체 정체성의 연계. [D40 도식](visuals/40-alien-bonding-proposal.svg) · [교감 예시](EXAMPLE_ARCHIVE.md#example-d40). 기존 생명체 레퍼런스는 관련 결정 색인에서 참조. 외부 이미지 신규 사용 없음. [D41 도식](visuals/41-companion-relationship-proposal.svg)은 미승인 관계 구조 제안.
 
 ## D47 추가 시각 비교
-[REF-22 FTL — top-down ship interior](REFERENCE_GALLERY.md#ref-22) · [REF-23 Fallout Shelter — side cutaway](REFERENCE_GALLERY.md#ref-23) · [REF-24 Space Haven — ship overview](REFERENCE_GALLERY.md#ref-24) · [REF-25 Space Haven — living deck](REFERENCE_GALLERY.md#ref-25) · [REF-26 Space Haven — boarding](REFERENCE_GALLERY.md#ref-26). [Space Haven 개발사 설명](https://bugbyte.fi/spacehaven/) · [Steam 공식 페이지](https://store.steampowered.com/app/979110/Space_Haven/). 공간 가독성·생활·승선 비교 후보, 원작 UI/에셋 복제 금지. 가스·건설 시뮬레이션·전투 입력 미채택. D47 미결.
+[REF-22 FTL — top-down ship interior](REFERENCE_GALLERY.md#ref-22) · [REF-23 Fallout Shelter — side cutaway](REFERENCE_GALLERY.md#ref-23) · [REF-24 Space Haven — ship overview](REFERENCE_GALLERY.md#ref-24) · [REF-25 Space Haven — living deck](REFERENCE_GALLERY.md#ref-25) · [REF-26 Space Haven — boarding](REFERENCE_GALLERY.md#ref-26). [Space Haven 개발사 설명](https://bugbyte.fi/spacehaven/) · [Steam 공식 페이지](https://store.steampowered.com/app/979110/Space_Haven/). 공간 가독성·생활·승선 비교 후보, 원작 UI/에셋 복제 금지. 가스·건설 시뮬레이션·전투 입력 미채택. D47 시점 구조 승인.
+
+## Space Haven 심화 적용 (2026-11-27)
+[공식 자료 기반 적용 연구](SPACE_HAVEN_RESEARCH.md) — 기존 승인과 일치하는 원리는 D47에 연결, 새 시설/생활 환경/물류/난파선의 세부 시스템은 후속 승인 후보. 원작 IP·아트·UI 복제 금지.
