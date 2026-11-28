@@ -1,8 +1,8 @@
 # 대화 이미지 검색 기록
 
-> 승인 83건 / 미결 D84. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 84건 / 미결 D85. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
-총 117건: 검색 문구 확인 89건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
+총 123건: 검색 문구 확인 95건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
 
 ## D19
 - [D19-IMG01](REFERENCE_GALLERY.md#d19-img01) · `Zelda breath of the wild vast open world landscape mountain forest village exploration gameplay` — 원문 미검증; 원본 미확보.
@@ -164,4 +164,12 @@
 - [D82-IMG02](REFERENCE_GALLERY.md#d82-img02) · `pixel art sci fi spaceship mechanic workshop interior repair shop` — 문구 확인; 원본 미확보.
 - [D82-IMG03](REFERENCE_GALLERY.md#d82-img03) · `pixel art abandoned science fiction industrial shop dark interior` — 문구 확인; 원본 미확보.
 - [D82-IMG04](REFERENCE_GALLERY.md#d82-img04) · `pixel art small spaceship exploring beautiful alien planet landscape adventure game` — 문구 확인; 원본 미확보.
+
+## D84
+- [D84-IMG01](REFERENCE_GALLERY.md#d84-img01) · `beautiful pixel art alien bioluminescent mushroom forest purple blue science fiction game environment` — 문구 확인; 원본 미확보.
+- [D84-IMG02](REFERENCE_GALLERY.md#d84-img02) · `pixel art futuristic spaceship biological research laboratory alien specimen tanks` — 문구 확인; 원본 미확보.
+- [D84-IMG03](REFERENCE_GALLERY.md#d84-img03) · `pixel art science fiction alien merchant futuristic potion shop space station interior` — 문구 확인; 원본 미확보.
+- [D84-IMG04](REFERENCE_GALLERY.md#d84-img04) · `pixel art science fiction spaceship approaching mysterious ancient alien ruins planet` — 문구 확인; 원본 미확보.
+- [D84-IMG05](REFERENCE_GALLERY.md#d84-img05) · `pixel art futuristic glowing handheld alien biology scanner equipment icon` — 문구 확인; 원본 미확보.
+- [D84-IMG06](REFERENCE_GALLERY.md#d84-img06) · `pixel art science fiction green glowing biological material processing machine game item` — 문구 확인; 원본 미확보.
 

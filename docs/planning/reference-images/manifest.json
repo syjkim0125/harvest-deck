@@ -2940,6 +2940,114 @@
       "galleryAnchor": "REFERENCE_GALLERY.md#d82-img04",
       "priority": "normal",
       "displayOrder": 4
+    },
+    {
+      "id": "D84-IMG01",
+      "decisionIds": [
+        "D84"
+      ],
+      "query": "beautiful pixel art alien bioluminescent mushroom forest purple blue science fiction game environment",
+      "purpose": "발견",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d84",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d84-img01",
+      "priority": "normal",
+      "displayOrder": 1
+    },
+    {
+      "id": "D84-IMG02",
+      "decisionIds": [
+        "D84"
+      ],
+      "query": "pixel art futuristic spaceship biological research laboratory alien specimen tanks",
+      "purpose": "연구",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d84",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d84-img02",
+      "priority": "normal",
+      "displayOrder": 2
+    },
+    {
+      "id": "D84-IMG03",
+      "decisionIds": [
+        "D84"
+      ],
+      "query": "pixel art science fiction alien merchant futuristic potion shop space station interior",
+      "purpose": "사업",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d84",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d84-img03",
+      "priority": "normal",
+      "displayOrder": 3
+    },
+    {
+      "id": "D84-IMG04",
+      "decisionIds": [
+        "D84"
+      ],
+      "query": "pixel art science fiction spaceship approaching mysterious ancient alien ruins planet",
+      "purpose": "탐험",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d84",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d84-img04",
+      "priority": "normal",
+      "displayOrder": 4
+    },
+    {
+      "id": "D84-IMG05",
+      "decisionIds": [
+        "D84"
+      ],
+      "query": "pixel art futuristic glowing handheld alien biology scanner equipment icon",
+      "purpose": "생체 탐지기",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d84",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d84-img05",
+      "priority": "normal",
+      "displayOrder": 5
+    },
+    {
+      "id": "D84-IMG06",
+      "decisionIds": [
+        "D84"
+      ],
+      "query": "pixel art science fiction green glowing biological material processing machine game item",
+      "purpose": "생체 정제 기술",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d84",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d84-img06",
+      "priority": "normal",
+      "displayOrder": 6
     }
   ],
   "diagrams": [
@@ -4010,13 +4118,13 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D84",
-    "approvedThrough": "D83",
-    "pending": "D84",
+    "decisionRange": "D01–D85",
+    "approvedThrough": "D84",
+    "pending": "D85",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
-    "exactVisibleQueries": 89,
-    "missingChatRenderedImages": 117,
+    "exactVisibleQueries": 95,
+    "missingChatRenderedImages": 123,
     "missingIndividualVisualDecisions": [
       "D02",
       "D06",

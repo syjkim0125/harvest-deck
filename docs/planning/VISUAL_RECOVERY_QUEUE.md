@@ -1,8 +1,8 @@
 # 원본 및 캡처 복구 대기
 
-> 승인 83건 / 미결 D84. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 84건 / 미결 D85. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
-**연결 완료 ≠ 이미지 확보.** 정확한 채팅 원본/URL 미확보 117건. D01–D18 전체 목록 미복구. D31 사용자 캡처 저장 및 채팅 직접 캡처 성공 미확인. 외부 원격 이미지 파일/권리/렌더링 미검증.
+**연결 완료 ≠ 이미지 확보.** 정확한 채팅 원본/URL 미확보 123건. D01–D18 전체 목록 미복구. D31 사용자 캡처 저장 및 채팅 직접 캡처 성공 미확인. 외부 원격 이미지 파일/권리/렌더링 미검증.
 
 ## 대화 이미지 원본
 - [ ] [D19](DECISION_VISUAL_INDEX.md#d19): [D19-IMG01](REFERENCE_GALLERY.md#d19-img01) · [D19-IMG02](REFERENCE_GALLERY.md#d19-img02) · [D19-IMG03](REFERENCE_GALLERY.md#d19-img03) · [D19-IMG04](REFERENCE_GALLERY.md#d19-img04).
@@ -27,6 +27,7 @@
 - [ ] [D78](DECISION_VISUAL_INDEX.md#d78): [D78-IMG01](REFERENCE_GALLERY.md#d78-img01) · [D78-IMG02](REFERENCE_GALLERY.md#d78-img02) · [D78-IMG03](REFERENCE_GALLERY.md#d78-img03) · [D78-IMG04](REFERENCE_GALLERY.md#d78-img04) · [D78-IMG05](REFERENCE_GALLERY.md#d78-img05) · [D78-IMG06](REFERENCE_GALLERY.md#d78-img06) · [D78-IMG07](REFERENCE_GALLERY.md#d78-img07).
 - [ ] [D81](DECISION_VISUAL_INDEX.md#d81): [D81-IMG01](REFERENCE_GALLERY.md#d81-img01) · [D81-IMG02](REFERENCE_GALLERY.md#d81-img02) · [D81-IMG03](REFERENCE_GALLERY.md#d81-img03).
 - [ ] [D82](DECISION_VISUAL_INDEX.md#d82): [D82-IMG01](REFERENCE_GALLERY.md#d82-img01) · [D82-IMG02](REFERENCE_GALLERY.md#d82-img02) · [D82-IMG03](REFERENCE_GALLERY.md#d82-img03) · [D82-IMG04](REFERENCE_GALLERY.md#d82-img04).
+- [ ] [D84](DECISION_VISUAL_INDEX.md#d84): [D84-IMG01](REFERENCE_GALLERY.md#d84-img01) · [D84-IMG02](REFERENCE_GALLERY.md#d84-img02) · [D84-IMG03](REFERENCE_GALLERY.md#d84-img03) · [D84-IMG04](REFERENCE_GALLERY.md#d84-img04) · [D84-IMG05](REFERENCE_GALLERY.md#d84-img05) · [D84-IMG06](REFERENCE_GALLERY.md#d84-img06).
 
 ## 이전 대화 및 캡처
 - [ ] D01–D18 원문/이미지 목록 — [색인](DECISION_VISUAL_INDEX.md). 개별 연결 없음: D02, D06, D09.
