@@ -1,9 +1,9 @@
 extends RefCounted
 # Fresh deterministic local star-system simulation; no retired runtime dependency.
 const LIMIT := Rect2(-1450, -1600, 2900, 3200)
-const PORT := Vector2(-260, -240)
-const MOON := Vector2(350, -610)
-const BEACON := Vector2(620, 220)
+const PORT := Vector2(-150, 130)
+const MOON := Vector2(153, -145)
+const BEACON := Vector2(193, 267)
 const RUIN := Vector2(-680, -830)
 var position := Vector2.ZERO
 var velocity := Vector2.ZERO
@@ -36,7 +36,7 @@ func site(id: String) -> Vector2:
 		"moon": return MOON
 		"echo": return BEACON
 		"ruin": return RUIN
-		"trader": return Vector2(120 + cos(time * 0.12) * 350, -340 + sin(time * 0.12) * 175)
+		"trader": return Vector2(105 + cos(time * 0.12 + 1.5) * 190, 5 + sin(time * 0.12 + 1.5) * 130)
 		"courier": return Vector2(-540 + sin(time * 0.17) * 230, 290 + cos(time * 0.17) * 140)
 	return Vector2.ZERO
 

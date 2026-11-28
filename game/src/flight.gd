@@ -20,8 +20,8 @@ var steer := Vector2.ZERO
 var cam := Vector2.ZERO
 var zoom := 1.0
 var stars: Array[Vector3] = []
-var message := "Free drift • Kestrel Reach"
-var message_time := 5.0
+var message := ""
+var message_time := 0.0
 var save_time := 0.0
 var audio: AudioStreamPlayer
 var chime: AudioStreamWAV
@@ -229,7 +229,8 @@ func marker(id: String,label: String,sub: String,texture: Texture2D,diameter: fl
 	var p := wp(world.site(id))
 	var d := diameter*zoom
 	draw_texture_rect(texture,Rect2(p-Vector2.ONE*d/2,Vector2.ONE*d),false)
-	if world.position.distance_to(world.site(id)) < 260.0 or id in ["port","moon"]:
+	var size := get_viewport_rect().size
+	if (world.position.distance_to(world.site(id)) < 260.0 or id in ["port","moon"]) and Rect2(78,125,size.x-156,size.y-285).has_point(p):
 		var r := Rect2(p+Vector2(-74,d*0.38+5),Vector2(148,38))
 		panel(r,Color("#102034",0.92),8)
 		center_txt(label,Rect2(r.position,r.size-Vector2(0,16)),13,color)
@@ -238,7 +239,7 @@ func marker(id: String,label: String,sub: String,texture: Texture2D,diameter: fl
 func edge_hint(id: String,label: String,col: Color) -> void:
 	var size := get_viewport_rect().size
 	var p := wp(world.site(id))
-	var safe := Rect2(45,155,size.x-90,size.y-340)
+	var safe := Rect2(45,152,size.x-90,size.y-304)
 	if safe.has_point(p): return
 	var offset := p-size/2
 	if offset.length()<1: return
@@ -256,8 +257,8 @@ func _draw() -> void:
 		draw_circle(p,s.z,Color("#dbebeb",0.48),true,-1.0,true)
 	# Visible bodies and subtle environmental cues; unknown sites have no map labels.
 	var moon_p := wp(world.site("moon"))
-	ring(moon_p,114*zoom,Color("#92c7c9",0.15))
-	marker("moon","VEYRA","quiet moon",MOON,210,MINT)
+	ring(moon_p,125*zoom,Color("#92c7c9",0.15))
+	marker("moon","VEYRA","quiet moon",MOON,236,MINT)
 	marker("port","HALCYON","free station",PORT,105,GOLD)
 	var ep := wp(world.site("echo"))
 	if not world.collected:
@@ -273,8 +274,8 @@ func _draw() -> void:
 		draw_circle(rp,2.8,Color("#c6a3bd"))
 	for id in ["trader","courier"]:
 		var p := wp(world.site(id))
-		var a := world.time*(0.12 if id=="trader" else 0.17)
-		var heading := Vector2(-sin(a)*350,cos(a)*175).angle() if id=="trader" else Vector2(cos(a)*230,-sin(a)*140).angle()
+		var a := world.time*(0.12 if id=="trader" else 0.17)+(1.5 if id=="trader" else 0.0)
+		var heading := Vector2(-sin(a)*190,cos(a)*130).angle() if id=="trader" else Vector2(cos(a)*230,-sin(a)*140).angle()
 		ship(NPC,p,heading,Vector2(76,46)*zoom,0.32)
 		if p.distance_to(wp(world.position)) < 160:
 			center_txt("VELA MERCHANT" if id=="trader" else "CIVILIAN",Rect2(p+Vector2(-72,31),Vector2(144,15)),10,GOLD)
@@ -284,7 +285,7 @@ func _draw() -> void:
 		var d := 155+float(i%7)*25
 		var p := wp(Vector2(-610,50)+Vector2(cos(a),sin(a)*0.65)*d)
 		draw_colored_polygon(PackedVector2Array([p+Vector2(-5,-2),p+Vector2(1,-6),p+Vector2(7,0),p+Vector2(0,5)]),Color("#607181",0.62))
-	ship(SHIP,wp(world.position),world.heading,Vector2(94,94)*zoom,world.velocity.length()/235.0)
+	ship(SHIP,wp(world.position),world.heading,Vector2(108,108)*zoom,world.velocity.length()/235.0)
 	for id in ["port","moon"]:
 		edge_hint(id,"STATION" if id=="port" else "MOON",GOLD if id=="port" else MINT)
 	if finger != -1:
@@ -299,30 +300,29 @@ func _draw() -> void:
 		center_txt("Tap II to resume",Rect2(36,sz.y/2,sz.x-72,35),15,WHITE)
 
 func paint_hud(sz: Vector2) -> void:
-	panel(Rect2(16,18,sz.x-140,99),Color("#0c1b2b",0.94))
-	txt("V O I D   C A R A V A N",Vector2(29,43),15,MINT)
-	txt("KESTREL REACH",Vector2(29,67),22,WHITE)
-	txt("01  •  FREE DRIFT",Vector2(29,94),12,GOLD)
+	panel(Rect2(16,18,sz.x-140,66),Color("#0c1b2b",0.94))
+	txt("V O I D   C A R A V A N",Vector2(29,40),12,MINT)
+	txt("KESTREL REACH",Vector2(29,66),22,WHITE)
 	panel(sound_rect())
 	center_txt("×" if muted else "♫",sound_rect(),19,WHITE)
 	panel(pause_rect())
 	center_txt("II" if not paused else "▶",pause_rect(),19,MINT)
-	panel(Rect2(16,128,sz.x-32,48),Color("#101d30",0.86))
-	txt("CARGO  %02d"%world.cargo,Vector2(29,157),14,GOLD)
-	txt("LOG  %02d"%world.discovered.size(),Vector2(sz.x*0.42,157),14,MINT)
+	panel(Rect2(16,95,sz.x-32,37),Color("#101d30",0.86))
+	txt("CARGO  %02d"%world.cargo,Vector2(29,119),14,GOLD)
+	txt("LOG  %02d"%world.discovered.size(),Vector2(sz.x*0.42,119),14,MINT)
 	var speed := world.velocity.length()
-	txt("%03d m/s"%int(speed),Vector2(sz.x-115,157),14,WHITE)
+	txt("%03d m/s"%int(speed),Vector2(sz.x-115,119),14,WHITE)
 	if message_time>0.0:
-		panel(Rect2(25,188,sz.x-50,44),Color("#193044",0.9))
-		center_txt(message,Rect2(25,188,sz.x-50,44),14,WHITE)
+		panel(Rect2(25,142,sz.x-50,37),Color("#193044",0.9))
+		center_txt(message,Rect2(25,142,sz.x-50,37),14,WHITE)
 	var near: String = world.nearby()
 	if not near.is_empty() and world.landed.is_empty():
 		var label: String = {"port":"DOCK  /  HALCYON","moon":"LAND  /  VEYRA","echo":"RECOVER RELAY","trader":"HAIL MERCHANT","courier":"HAIL COURIER"}[near]
 		panel(action_rect(),Color("#254f55"))
 		center_txt(label,action_rect(),17,MINT)
 	elif world.landed.is_empty() and world.time<25.0:
-		center_txt("Drag anywhere to steer",Rect2(0,sz.y-112,sz.x,36),16,WHITE)
-		center_txt("Release to coast • approach to interact",Rect2(0,sz.y-81,sz.x,26),12,MINT)
+		center_txt("Drag to fly",Rect2(0,sz.y-112,sz.x,36),17,WHITE)
+		center_txt("Explore at your own pace",Rect2(0,sz.y-81,sz.x,26),12,MINT)
 	# Thin lower safe-area footer.
 	draw_line(Vector2(25,sz.y-41),Vector2(sz.x-25,sz.y-41),Color("#94b5b6",0.27),1)
 	txt("FIRST LIGHT   /   M1 PLAYABLE STUDY",Vector2(25,sz.y-19),11,Color("#b1c8c8"))
