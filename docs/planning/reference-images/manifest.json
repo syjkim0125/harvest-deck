@@ -4244,9 +4244,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D86",
-    "approvedThrough": "D85",
-    "pending": "D86",
+    "decisionRange": "D01–D87",
+    "approvedThrough": "D86",
+    "pending": "D87",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 102,

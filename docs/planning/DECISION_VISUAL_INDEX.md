@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 85건 / 미결 D86. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 86건 / 미결 D87. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -485,7 +485,12 @@
 - 대화 이미지: [D85-IMG01](REFERENCE_GALLERY.md#d85-img01) 소재 발견 · [D85-IMG02](REFERENCE_GALLERY.md#d85-img02) 분석 · [D85-IMG03](REFERENCE_GALLERY.md#d85-img03) 전투 기술 · [D85-IMG04](REFERENCE_GALLERY.md#d85-img04) 함선 기술 · [D85-IMG05](REFERENCE_GALLERY.md#d85-img05) 상업 기술 · [D85-IMG06](REFERENCE_GALLERY.md#d85-img06) 초기 연구실 · [D85-IMG07](REFERENCE_GALLERY.md#d85-img07) 전문 연구실.
 
 ## D86
-**연구 진행·실험 실패와 발견의 불확실성** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d86).
+**C. 단계적 연구·예측 가능한 위험 + 선택적 실험과 실패의 학습** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d86).
+
+- 연결 개별 자료 없음; 이전 원문 미확보.
+
+## D87
+**기술 지식의 공유·거래와 확산** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d87).
 
 - 연결 개별 자료 없음; 이전 원문 미확보.
 
