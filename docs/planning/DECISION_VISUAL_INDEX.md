@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 63건 / 미결 D64. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 64건 / 미결 D65. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -374,7 +374,12 @@
 - 자체 설명 도식: [SVG-63: 카드 지식 보존과 발동 조건·개인 고유 능력 구분](visuals/63-card-ownership-proposal.svg) · [SVG-63B: 소유권 A/B/C 비교 및 동료·외계 생명체 고유 능력 시각 예시](visuals/63-ownership-examples.svg). 실제 아트 아님.
 
 ## D64
-**카드 성장과 강화 방식** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d64).
+**카드 성장과 강화 방식** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d64).
 
-- 자체 설명 도식: [SVG-64: 실제 활동 기반 성장 및 선택형 특화 분기](visuals/64-card-specialization-proposal.svg). 실제 아트 아님.
+- 자체 설명 도식: [SVG-64: 실제 활동 기반 성장 및 선택형 특화 분기](visuals/64-card-specialization-proposal.svg) · [SVG-64B: 강화 A/B/C 비교·신속/심층 분석·활동 기반 성장 흐름](visuals/64-specialization-examples.svg). 실제 아트 아님.
+
+## D65
+**덱 구성과 편집 시점** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d65).
+
+- 자체 설명 도식: [SVG-65: 안전 준비·위험 중 제한·위험 해제 후 재구성](visuals/65-deck-editing-proposal.svg). 실제 아트 아님.
 

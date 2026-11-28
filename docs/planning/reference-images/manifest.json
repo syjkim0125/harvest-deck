@@ -3427,6 +3427,26 @@
       "path": "docs/planning/visuals/64-card-specialization-proposal.svg",
       "purpose": "실제 활동 기반 성장 및 선택형 특화 분기",
       "mappingEvidence": "decision-specific original proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-64B",
+      "decisionIds": [
+        "D64"
+      ],
+      "path": "docs/planning/visuals/64-specialization-examples.svg",
+      "purpose": "강화 A/B/C 비교·신속/심층 분석·활동 기반 성장 흐름",
+      "mappingEvidence": "previous response visual examples reconstructed, not exact rendered pixels",
+      "status": "local SVG; explanatory only"
+    },
+    {
+      "id": "SVG-65",
+      "decisionIds": [
+        "D65"
+      ],
+      "path": "docs/planning/visuals/65-deck-editing-proposal.svg",
+      "purpose": "안전 준비·위험 중 제한·위험 해제 후 재구성",
+      "mappingEvidence": "decision-specific original proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -3437,9 +3457,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D64",
-    "approvedThrough": "D63",
-    "pending": "D64",
+    "decisionRange": "D01–D65",
+    "approvedThrough": "D64",
+    "pending": "D65",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 75,

@@ -382,9 +382,16 @@ D19 승인 구조 설명. 실제 행성 크기·지도 배치·갱신 규칙 미
 ![D63 비교·동료·생명체](visuals/63-ownership-examples.svg)
 [EMP 상실·복구 인터랙션 재구성](prototypes/d63-equipment-eligibility.html). 실제 소유권·아트·판정 아님.
 
-## 64. Card specialization (D64 미승인)
+## 64. Card specialization (D64 구조 승인)
 ![D64](visuals/64-card-specialization-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d64). 실제 활동 기반 숙련·연구 및 선택형 특화 후보. 실제 강화 규칙 미확정.
+
+![D64 비교·연구·성장](visuals/64-specialization-examples.svg)
+[EMP 특화 인터랙션 재구성](prototypes/d64-emp-specialization.html). 실제 범위·비용·강화 규칙 아님.
+
+## 65. Deck editing (D65 미승인)
+![D65](visuals/65-deck-editing-proposal.svg)
+[결정·예시](DECISION_VISUAL_INDEX.md#d65). 안전 준비 및 위험 중 편집 제한 후보. 실제 편집 규칙 미확정.
 
 ## 다음 시각 자료
 STEP 4 핵심 방향 확정 이후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.
