@@ -1,0 +1,16 @@
+config_version=5
+[application]
+config/name="VOID CARAVAN — First Light"
+run/main_scene="res://flight.tscn"
+config/features=PackedStringArray("4.6", "GL Compatibility")
+[display]
+window/size/viewport_width=480
+window/size/viewport_height=854
+window/size/window_width_override=480
+window/size/window_height_override=854
+window/stretch/mode="canvas_items"
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/default_filters/use_nearest_mipmap_filter=false
+environment/defaults/default_clear_color=Color(0.023,0.034,0.075,1)
