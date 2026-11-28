@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 79건 / 미결 D80. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 80건 / 미결 D81. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -455,7 +455,12 @@
 - 자체 설명 도식: [SVG-79: 품질·신뢰→단골→소문·평판→새 고객·계약·탐험 기회](visuals/79-customer-reputation-proposal.svg). 실제 아트 아님.
 
 ## D80
-**사업체 성장·전문화와 다점포 운영** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d80).
+**C. 실제 시설·인력·공급망에 따른 성장 + 선택적 사업 전문화·다점포 위임** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d80).
 
 - 자체 설명 도식: [SVG-80: 작은 함선 상점에서 전문점·종합점·다점포로 선택 성장](visuals/80-business-growth-proposal.svg). 실제 아트 아님.
+
+## D81
+**사업 경쟁·협력과 지역 시장 변화** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d81).
+
+- 연결 개별 자료 없음; 이전 원문 미확보.
 

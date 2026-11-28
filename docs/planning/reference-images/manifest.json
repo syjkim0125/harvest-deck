@@ -3874,7 +3874,7 @@
       "path": "docs/planning/visuals/80-business-growth-proposal.svg",
       "purpose": "작은 함선 상점에서 전문점·종합점·다점포로 선택 성장",
       "mappingEvidence": "decision-specific explanatory proposal",
-      "status": "local SVG; proposal pending, not final game art"
+      "status": "local SVG; explanatory only; structure approved, not final game art"
     }
   ],
   "userCapture": {
@@ -3884,9 +3884,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D80",
-    "approvedThrough": "D79",
-    "pending": "D80",
+    "decisionRange": "D01–D81",
+    "approvedThrough": "D80",
+    "pending": "D81",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 82,
