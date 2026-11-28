@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 56건 / 미결 D57. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 57건 / 미결 D58. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -339,7 +339,12 @@
 - 자체 설명 도식: [SVG-56: 전술 카드 손패·버림·순환](visuals/56-tactical-draw-proposal.svg) · [SVG-56B: A/B/C 카드 순환 비교 및 기본 조작 독립 관계](visuals/56-card-comparison.svg). 실제 아트 아님.
 
 ## D57
-**실시간 전술 카드 발동과 시간 흐름** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d57).
+**실시간 전술 카드 발동과 시간 흐름** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d57).
 
-- 자체 설명 도식: [SVG-57: 즉시형과 조준형 카드 발동 흐름](visuals/57-card-activation-proposal.svg). 실제 아트 아님.
+- 자체 설명 도식: [SVG-57: 즉시형과 조준형 카드 발동 흐름](visuals/57-card-activation-proposal.svg) · [SVG-57B: A/B/C 발동 비교 및 시간 완화 그래프 재구성](visuals/57-activation-examples.svg). 실제 아트 아님.
+
+## D58
+**전술 카드 사용 비용과 연속 사용 제한** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d58).
+
+- 자체 설명 도식: [SVG-58: 공통 전술 발동 자원과 기본 조작 독립](visuals/58-card-cost-proposal.svg). 실제 아트 아님.
 
