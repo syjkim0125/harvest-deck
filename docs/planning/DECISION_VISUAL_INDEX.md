@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 70건 / 미결 D71. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 71건 / 미결 D72. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -409,7 +409,12 @@
 - 자체 설명 도식: [SVG-70: 직접 채집·현장 판단·반복 작업 위임](visuals/70-gathering-proposal.svg) · [SVG-70B: 채집 A/B/C 비교·지상 채집·잔해 회수·자동 전초기지](visuals/70-gathering-examples.svg). 실제 아트 아님.
 
 ## D71
-**자원의 고갈·재생과 산지의 지속성** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d71).
+**자원의 고갈·재생과 산지의 지속성** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d71).
 
-- 자체 설명 도식: [SVG-71: 유한 매장량·생태 재생·개별 잔해 소진과 대안](visuals/71-resource-persistence-proposal.svg). 실제 아트 아님.
+- 자체 설명 도식: [SVG-71: 유한 매장량·생태 재생·개별 잔해 소진과 대안](visuals/71-resource-persistence-proposal.svg) · [SVG-71B: A/B 고갈 비교·광산 심층 광맥·잔해 소진 재구성](visuals/71-resource-persistence-examples.svg). 실제 아트 아님.
+
+## D72
+**화물 적재·보관·운송의 관리 범위** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d72).
+
+- 자체 설명 도식: [SVG-72: 일반 적재 용량·특수 화물·실제 물류 및 초과 적재 선택](visuals/72-cargo-proposal.svg). 실제 아트 아님.
 

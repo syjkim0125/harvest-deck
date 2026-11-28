@@ -3567,6 +3567,26 @@
       "path": "docs/planning/visuals/71-resource-persistence-proposal.svg",
       "purpose": "유한 매장량·생태 재생·개별 잔해 소진과 대안",
       "mappingEvidence": "decision-specific original proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-71B",
+      "decisionIds": [
+        "D71"
+      ],
+      "path": "docs/planning/visuals/71-resource-persistence-examples.svg",
+      "purpose": "A/B 고갈 비교·광산 심층 광맥·잔해 소진 재구성",
+      "mappingEvidence": "previous response visual examples reconstructed, not exact rendered pixels",
+      "status": "local SVG; explanatory only"
+    },
+    {
+      "id": "SVG-72",
+      "decisionIds": [
+        "D72"
+      ],
+      "path": "docs/planning/visuals/72-cargo-proposal.svg",
+      "purpose": "일반 적재 용량·특수 화물·실제 물류 및 초과 적재 선택",
+      "mappingEvidence": "decision-specific original proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -3577,9 +3597,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D71",
-    "approvedThrough": "D70",
-    "pending": "D71",
+    "decisionRange": "D01–D72",
+    "approvedThrough": "D71",
+    "pending": "D72",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 75,
