@@ -340,9 +340,16 @@ D19 승인 구조 설명. 실제 행성 크기·지도 배치·갱신 규칙 미
 ![D57 비교 및 시간 완화](visuals/57-activation-examples.svg)
 [보호막·중력 제어 인터랙션 재구성](prototypes/d57-activation-examples.html). 실제 입력·시간·전투 검증 아님.
 
-## 58. Card cost (D58 미승인)
+## 58. Card cost (D58 구조 승인)
 ![D58](visuals/58-card-cost-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d58). 공통 발동 자원과 기본 행동 독립의 개념. 실제 수치·UI 미확정.
+
+![D58 비교 및 조건부 카드](visuals/58-cost-examples.svg)
+[전술 에너지·손패 순환 인터랙션 재구성](prototypes/d58-card-energy.html). 실제 전투·회복 규칙 검증 아님.
+
+## 59. Energy recovery (D59 미승인)
+![D59](visuals/59-energy-recovery-proposal.svg)
+[결정·예시](DECISION_VISUAL_INDEX.md#d59). 기본 회복과 유효 행동 보너스의 개념. 실제 수치·UI 미확정.
 
 ## 다음 시각 자료
 STEP 4 핵심 방향 확정 이후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.

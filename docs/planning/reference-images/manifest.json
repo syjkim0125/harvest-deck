@@ -3307,6 +3307,26 @@
       "path": "docs/planning/visuals/58-card-cost-proposal.svg",
       "purpose": "공통 전술 발동 자원과 기본 조작 독립",
       "mappingEvidence": "decision-specific original proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-58B",
+      "decisionIds": [
+        "D58"
+      ],
+      "path": "docs/planning/visuals/58-cost-examples.svg",
+      "purpose": "비용 비교 및 조건부 카드 4종 시각 예시 재구성",
+      "mappingEvidence": "previous response visual examples reconstructed, not exact rendered pixels",
+      "status": "local SVG; explanatory only"
+    },
+    {
+      "id": "SVG-59",
+      "decisionIds": [
+        "D59"
+      ],
+      "path": "docs/planning/visuals/59-energy-recovery-proposal.svg",
+      "purpose": "시간 기본 회복과 유효 행동 보너스 회복",
+      "mappingEvidence": "decision-specific original proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -3317,9 +3337,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D58",
-    "approvedThrough": "D57",
-    "pending": "D58",
+    "decisionRange": "D01–D59",
+    "approvedThrough": "D58",
+    "pending": "D59",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 75,
