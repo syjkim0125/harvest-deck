@@ -410,9 +410,16 @@ D19 승인 구조 설명. 실제 행성 크기·지도 배치·갱신 규칙 미
 ![D67 비교·연결 카드·성장](visuals/67-synergy-examples.svg)
 [5단계 시너지 인터랙션 재구성](prototypes/d67-cross-deck-synergy.html). 실제 게임 활동 및 효과 아님.
 
-## 68. Economy simulation (D68 미승인)
+## 68. Economy simulation (D68 구조 승인)
 ![D68](visuals/68-economy-simulation-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d68). 실제 지역 경제 및 거리별 추상화 후보. 상세 규칙 미확정.
+
+![D68 경제 비교·공급망·거리](visuals/68-economy-examples.svg)
+[항로 차단·복구 인터랙션 재구성](prototypes/d68-route-economy.html). 실제 가격 공식 및 경제 시뮬레이션 아님.
+
+## 69. Resource chain (D69 미승인)
+![D69](visuals/69-resource-chain-proposal.svg)
+[결정·예시](DECISION_VISUAL_INDEX.md#d69). 자원군·특수 자원·가공 단계 후보. 실제 종류와 수치 미확정.
 
 ## 다음 시각 자료
 STEP 4 핵심 방향 확정 이후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.
