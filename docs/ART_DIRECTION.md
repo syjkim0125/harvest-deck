@@ -1,7 +1,7 @@
 # VOID CARAVAN — Art Direction Bible v1
 
 > 2026-11-25 · **사용자가 선택한 핵심 아트 DNA**: **바닐라웨어 계열의 풍부한 회화적 2D 표현 원리 × Lorenz의 Kindchenschema(유아 도식)를 활용한 사랑스러운 캐릭터/외계 생물**.  
-> **기획 참고 기준 — 제작 자동화 중지**. [디자인 작업 라우터](DESIGN_REFERENCE_ROUTER.md) · [디자인 PR 협업 계약](DESIGN_HANDOFF.md) · [게임 비전](LIVING_GALAXY_VISION.md) · [현재 비주얼 참고 기준](VISUAL_REFERENCE_BOARD.md) · [통합 갤러리](planning/REFERENCE_GALLERY.md).
+> **통합 개발 내 디자인 제작 병행 — [실행 계약](DEV_EXECUTION_CONTRACT.md)**. [디자인 작업 라우터](DESIGN_REFERENCE_ROUTER.md) · [디자인 PR 협업 계약](DESIGN_HANDOFF.md) · [게임 비전](LIVING_GALAXY_VISION.md) · [현재 비주얼 참고 기준](VISUAL_REFERENCE_BOARD.md) · [통합 갤러리](planning/REFERENCE_GALLERY.md).
 >
 > 이 문서는 명시된 두 방향을 **승인된 상위 원칙**으로 기록하지만, 아래의 예시 픽셀 크기/비율/팔레트는 **검증할 작업 가설**, 최종 확정 수치가 아니다. 기존 임시 Alpha UI/기존 128px 픽셀 스프라이트는 스타일의 기준으로 고정하지 않는다.
 

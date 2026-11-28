@@ -1,3 +1,2 @@
-# 기획 핸드오프
-
-**[현재 기획 위치 및 인계](planning/SESSION_RESUME.md)**부터 읽는다. [GDD](LIVING_GALAXY_VISION.md) 승인 규칙 우선. 개발·디자인·리뷰 자동화 중지; 과거 PR #4/#5/#6/#13 보류, 승인 없는 병합·확장 금지. 원본 코드/에셋/테스트/이력 보존. [기술 기록](RESEARCH_LOG.md) · [기획 이슈 #10](https://github.com/syjkim0125/harvest-deck/issues/10). 통합 기획 및 시각/조작 승인 후 구현 계획 재확정.
+# 기획·개발 핸드오프
+[현재 기획 위치](planning/SESSION_RESUME.md) → [GDD](LIVING_GALAXY_VISION.md) → [결정 이력](planning/DECISION_HISTORY.md) → [개발 실행 계약](DEV_EXECUTION_CONTRACT.md) → [로드맵](ROADMAP.md) → [진행](DEV_PROGRESS.md). 2026-11-28 사용자 지시로 승인된 방향의 통합 개발·디자인·QA 재개. 구 PR은 선별 검토, 기존 코드/에셋/이력 보존. 미결/최종 디자인은 별도 승인.
