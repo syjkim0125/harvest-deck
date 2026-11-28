@@ -1,2 +1,2 @@
-# VOID CARAVAN — 개발 진행 기록
-2026-11-28 재개 기준 1738261b85cfcdc40217a05c016e5d0fbc34995b. D01–D88 승인 / D89 미결. M0 진행 시작: main 파일·시작 씬·기존 SF 스크립트·CI 워크플로 및 열린 PR 5개 정적 감사 완료. [실행 계약](DEV_EXECUTION_CONTRACT.md)에서 충돌과 우선순위 정리. PR별 상세 diff/CI/실제 엔진 실행 및 현재 배포·시각 캡처 검증은 아직 NOT_RUN. M1–M6 TODO. 첫 실행 M0 상세 분류 및 M1 실제 직접 항해 수직 슬라이스 착수. 기존 실패 프로토타입 완료 처리 금지.
+# VOID CARAVAN — new development progress
+2026-11-28 clean reset requested; previous main 85cb8c61a6c6b2c9534edaad04d597c4573745a6. D01–D93 approved / D94 pending. M0 reset tree proposed; actual merge, branch pruning and old PR closure must be verified before claiming complete. Old published Pages is not a release of new game. M1–M6 TODO; new runtime, engine tests, mobile rendering and human play NOT_RUN. Next: first fresh Godot direct-flight slice after verified reset. Preserve ongoing planning updates.

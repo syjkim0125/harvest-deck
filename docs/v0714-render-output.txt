@@ -1,8 +1,0 @@
-Native OpenGL/Mesa llvmpipe; ALSA unavailable -> Dummy.
-LOCATOR_RENDER before hidden result=0 cue=false
-LOCATOR_RENDER before reduced result=0 cue=false
-LOCATOR_RENDER before front result=0 cue=false
-LOCATOR_RENDER after hidden result=0 cue=true
-LOCATOR_RENDER after reduced result=0 cue=true
-LOCATOR_RENDER after front result=0 cue=false
-Transcribed visible terminal. Static scripted fixture, not human play.

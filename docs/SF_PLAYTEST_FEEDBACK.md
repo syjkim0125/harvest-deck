@@ -1,7 +1,3 @@
-# 사용자 플레이 피드백 — 기획 참고
+# SF_PLAYTEST_FEEDBACK
 
-2026-11-25: “타격감이 없어 그리고 탐험하는 재미도 없고 아직 기본 단계구현이라 그렇지?”
-
-2026-11-26: “음 내가 원하는 게임방향이랑 전햐 다른데…”
-
-기존 프로토타입 방향/경험 불합격. 세부 개선 실험은 Git 이력에 보존하되 현재 개발 명령 아님. [통합 GDD](LIVING_GALAXY_VISION.md)를 기준으로 새 화면/조작을 기획하고 사용자 검증을 별도로 수행한다. 실제 모바일·정량·최신 배포 근거 미확인.
+Historical user evaluation: old prototypes rejected for visual divergence, lack of discovery and combat feel. Not a bug backlog. New project starts fresh.

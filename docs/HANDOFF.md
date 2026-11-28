@@ -1,2 +1,3 @@
-# 기획·개발 핸드오프
-[현재 기획 위치](planning/SESSION_RESUME.md) → [GDD](LIVING_GALAXY_VISION.md) → [결정 이력](planning/DECISION_HISTORY.md) → [개발 실행 계약](DEV_EXECUTION_CONTRACT.md) → [로드맵](ROADMAP.md) → [진행](DEV_PROGRESS.md). 2026-11-28 사용자 지시로 승인된 방향의 통합 개발·디자인·QA 재개. 구 PR은 선별 검토, 기존 코드/에셋/이력 보존. 미결/최종 디자인은 별도 승인.
+# HANDOFF
+
+Previous implementation retired. Follow DEV_EXECUTION_CONTRACT.md, DEV_PROGRESS.md and planning/DECISION_HISTORY.md.
