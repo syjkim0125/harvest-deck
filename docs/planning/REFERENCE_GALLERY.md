@@ -1,10 +1,10 @@
 # 참고 이미지 갤러리
 
-> 승인 48건 / 미결 D49. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 49건 / 미결 D50. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
-[결정별 찾아보기](DECISION_VISUAL_INDEX.md) · [자체 도식 49개](VISUAL_ATLAS.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md).
+[결정별 찾아보기](DECISION_VISUAL_INDEX.md) · [자체 도식 50개](VISUAL_ATLAS.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md).
 
-외부 URL 26개는 원격 임베드(렌더링·권리·바이트 미검증), 대화 참조 66건은 원본 상태를 표시. 과거 표시 이미지와 동일성 미확인. 사용자 선호는 최종 아트 승인 아님.
+외부 URL 26개는 원격 임베드(렌더링·권리·바이트 미검증), 대화 참조 75건은 원본 상태를 표시. 과거 표시 이미지와 동일성 미확인. 사용자 선호는 최종 아트 승인 아님.
 
 ## 사용자 선호 시각 예시 (D36)
 ### D36-IMG01
@@ -21,6 +21,7 @@
 
 ### D36-IMG05
 탐색 전문가 — 폭포·유적 뒤 숨은 우회로 발견; 가림과 환경 단서. [D36](DECISION_VISUAL_INDEX.md#d36) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d36) · [검색 기록](CHAT_IMAGE_INDEX.md#d36). 원본/캡처 미확보. 사용자 선호.
+
 
 ## 현재 기획 참고 이미지
 
@@ -391,6 +392,33 @@ B 측면 단면 비교: 층별 생활·시설 표현; 지상 쿼터뷰 대체 �
 
 ### D48-IMG07
 대안 B 자유 타일 건설 비교. [D48](DECISION_VISUAL_INDEX.md#d48) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d48) · [검색 기록](CHAT_IMAGE_INDEX.md#d48). 원본/캡처 미확보.
+
+### D49-IMG01
+A 생활 관리 없음 비교. [D49](DECISION_VISUAL_INDEX.md#d49) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d49) · [검색 기록](CHAT_IMAGE_INDEX.md#d49). 원본/캡처 미확보.
+
+### D49-IMG02
+B 정밀 생존 비교. [D49](DECISION_VISUAL_INDEX.md#d49) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d49) · [검색 기록](CHAT_IMAGE_INDEX.md#d49). 원본/캡처 미확보.
+
+### D49-IMG03
+C 생활 공간. [D49](DECISION_VISUAL_INDEX.md#d49) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d49) · [검색 기록](CHAT_IMAGE_INDEX.md#d49). 원본/캡처 미확보.
+
+### D49-IMG04
+위기 수리. [D49](DECISION_VISUAL_INDEX.md#d49) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d49) · [검색 기록](CHAT_IMAGE_INDEX.md#d49). 원본/캡처 미확보.
+
+### D49-IMG05
+함선 위기. [D49](DECISION_VISUAL_INDEX.md#d49) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d49) · [검색 기록](CHAT_IMAGE_INDEX.md#d49). 원본/캡처 미확보.
+
+### D49-IMG06
+습지형 생물. [D49](DECISION_VISUAL_INDEX.md#d49) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d49) · [검색 기록](CHAT_IMAGE_INDEX.md#d49). 원본/캡처 미확보.
+
+### D49-IMG07
+소음 민감형. [D49](DECISION_VISUAL_INDEX.md#d49) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d49) · [검색 기록](CHAT_IMAGE_INDEX.md#d49). 원본/캡처 미확보.
+
+### D49-IMG08
+광물형. [D49](DECISION_VISUAL_INDEX.md#d49) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d49) · [검색 기록](CHAT_IMAGE_INDEX.md#d49). 원본/캡처 미확보.
+
+### D49-IMG09
+부유형. [D49](DECISION_VISUAL_INDEX.md#d49) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d49) · [검색 기록](CHAT_IMAGE_INDEX.md#d49). 원본/캡처 미확보.
 
 ## 공식 미디어
 - **Absolum**: [공식/PR](https://www.dotemu.com/PressKit/project/Games/Absolum) · [압축파일](https://www.dotemu.com/PressKit/cache/Games/Absolum/images.zip) — 공식 이미지 ZIP 링크 확인; 웹 다운로드 403.

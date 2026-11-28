@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-27",
+  "date": "2026-11-28",
   "repositoryVisibility": "public",
   "note": "외부 URL은 사후 주제 연결; 원격 렌더링·바이트·재호스팅 권리 미검증. 대화 검색 기록은 원본 이미지 아님. SVG는 설명용 시안. 승인 여부는 DECISION_HISTORY 기준. 사용자 선호와 최종 아트 승인 구분.",
   "entries": [
@@ -1744,6 +1744,177 @@
       "galleryAnchor": "REFERENCE_GALLERY.md#d48-img07",
       "captureStatus": "missing; exact chat-rendered pixels unavailable",
       "priority": "normal"
+    },
+    {
+      "id": "D49-IMG01",
+      "decisionIds": [
+        "D49"
+      ],
+      "query": "Starbound spaceship interior crew decorated living quarters gameplay screenshot",
+      "purpose": "A 생활 관리 없음 비교",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D49 생활과 생존 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d49",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d49-img01",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D49-IMG02",
+      "decisionIds": [
+        "D49"
+      ],
+      "query": "Space Haven gameplay oxygen temperature gas overlay spaceship life support simulation",
+      "purpose": "B 정밀 생존 비교",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D49 생활과 생존 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d49",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d49-img02",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D49-IMG03",
+      "decisionIds": [
+        "D49"
+      ],
+      "query": "Space Haven isometric spaceship cozy crew bedrooms botanical hydroponics living quarters gameplay",
+      "purpose": "C 생활 공간",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D49 생활과 생존 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d49",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d49-img03",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D49-IMG04",
+      "decisionIds": [
+        "D49"
+      ],
+      "query": "Space Haven damaged spaceship hull breach crew emergency repair gameplay",
+      "purpose": "위기 수리",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D49 생활과 생존 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d49",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d49-img04",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D49-IMG05",
+      "decisionIds": [
+        "D49"
+      ],
+      "query": "FTL Faster Than Light spaceship fire damaged rooms gameplay",
+      "purpose": "함선 위기",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D49 생활과 생존 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d49",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d49-img05",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D49-IMG06",
+      "decisionIds": [
+        "D49"
+      ],
+      "query": "cute small bioluminescent alien creature moss terrarium spaceship concept art",
+      "purpose": "습지형 생물",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D49 생활과 생존 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d49",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d49-img06",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D49-IMG07",
+      "decisionIds": [
+        "D49"
+      ],
+      "query": "cute fluffy alien creature curled up sleeping cozy spaceship cabin fantasy game concept art",
+      "purpose": "소음 민감형",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D49 생활과 생존 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d49",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d49-img07",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D49-IMG08",
+      "decisionIds": [
+        "D49"
+      ],
+      "query": "cute crystalline alien creature glowing blue crystal rocky habitat game concept art",
+      "purpose": "광물형",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D49 생활과 생존 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d49",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d49-img08",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D49-IMG09",
+      "decisionIds": [
+        "D49"
+      ],
+      "query": "cute floating jellyfish alien pet low gravity spaceship science fiction concept art",
+      "purpose": "부유형",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D49 생활과 생존 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d49",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d49-img09",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
     }
   ],
   "diagrams": [
@@ -2244,6 +2415,16 @@
       "path": "docs/planning/visuals/49-ship-life-support-proposal.svg",
       "purpose": "평시 자율 생활 관리·탐험 전 준비·위기 상황 대응 비교",
       "mappingEvidence": "decision-specific proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-50",
+      "decisionIds": [
+        "D50"
+      ],
+      "path": "docs/planning/visuals/50-mobile-fixed-base-proposal.svg",
+      "purpose": "함선 중심·고정 거점 중심·선택적 거점 비교",
+      "mappingEvidence": "decision-specific original proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -2254,13 +2435,13 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D49",
-    "approvedThrough": "D48",
-    "pending": "D49",
+    "decisionRange": "D01–D50",
+    "approvedThrough": "D49",
+    "pending": "D50",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
-    "exactVisibleQueries": 38,
-    "missingChatRenderedImages": 66,
+    "exactVisibleQueries": 47,
+    "missingChatRenderedImages": 75,
     "missingIndividualVisualDecisions": [
       "D02",
       "D06",
@@ -2268,7 +2449,7 @@
     ],
     "screenshot": "Prior attempt did not obtain a saved capture. Direct chat UI screenshot capability not established. D31 capture remains unrecovered.",
     "recoverySearch": "Prior retrieval yielded summaries, not a complete transcript or rendered images.",
-    "provenanceNote": "D19–D26 28건 재구성 또는 원문 미검증. D28–D36 31건 응답 기록 검색 문구. 모두 실제 표시 원본 미확보. D48 직전 응답의 정확한 검색 문구 7건 추가; 표시 원본 미확보.",
+    "provenanceNote": "D19–D26 28건 재구성 또는 원문 미검증. D28–D36 31건 응답 기록 검색 문구. 모두 실제 표시 원본 미확보. D48 직전 응답의 정확한 검색 문구 7건 추가; 표시 원본 미확보. D49 검색 문구 9건 추가; 원본 미확보.",
     "latestDownloadAttempt": {
       "date": "2026-11-27",
       "knownUrls": 26,

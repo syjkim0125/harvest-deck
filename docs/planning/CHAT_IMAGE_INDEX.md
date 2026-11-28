@@ -1,8 +1,8 @@
 # 대화 이미지 검색 기록
 
-> 승인 48건 / 미결 D49. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 49건 / 미결 D50. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
-총 66건: 검색 문구 확인 38건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
+총 75건: 검색 문구 확인 47건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
 
 ## D19
 - [D19-IMG01](REFERENCE_GALLERY.md#d19-img01) · `Zelda breath of the wild vast open world landscape mountain forest village exploration gameplay` — 원문 미검증; 원본 미확보.
@@ -99,4 +99,15 @@
 - [D48-IMG05](REFERENCE_GALLERY.md#d48-img05) · `Space Haven game shuttle cargo logistics multiple spaceships screenshot` — 문구 확인; 원본 미확보.
 - [D48-IMG06](REFERENCE_GALLERY.md#d48-img06) · `FTL faster than light kestrel spaceship fixed interior rooms layout gameplay` — 문구 확인; 원본 미확보.
 - [D48-IMG07](REFERENCE_GALLERY.md#d48-img07) · `Space Haven spaceship hull construction tile by tile ship building game screenshot` — 문구 확인; 원본 미확보.
+
+## D49
+- [D49-IMG01](REFERENCE_GALLERY.md#d49-img01) · `Starbound spaceship interior crew decorated living quarters gameplay screenshot` — 문구 확인; 원본 미확보.
+- [D49-IMG02](REFERENCE_GALLERY.md#d49-img02) · `Space Haven gameplay oxygen temperature gas overlay spaceship life support simulation` — 문구 확인; 원본 미확보.
+- [D49-IMG03](REFERENCE_GALLERY.md#d49-img03) · `Space Haven isometric spaceship cozy crew bedrooms botanical hydroponics living quarters gameplay` — 문구 확인; 원본 미확보.
+- [D49-IMG04](REFERENCE_GALLERY.md#d49-img04) · `Space Haven damaged spaceship hull breach crew emergency repair gameplay` — 문구 확인; 원본 미확보.
+- [D49-IMG05](REFERENCE_GALLERY.md#d49-img05) · `FTL Faster Than Light spaceship fire damaged rooms gameplay` — 문구 확인; 원본 미확보.
+- [D49-IMG06](REFERENCE_GALLERY.md#d49-img06) · `cute small bioluminescent alien creature moss terrarium spaceship concept art` — 문구 확인; 원본 미확보.
+- [D49-IMG07](REFERENCE_GALLERY.md#d49-img07) · `cute fluffy alien creature curled up sleeping cozy spaceship cabin fantasy game concept art` — 문구 확인; 원본 미확보.
+- [D49-IMG08](REFERENCE_GALLERY.md#d49-img08) · `cute crystalline alien creature glowing blue crystal rocky habitat game concept art` — 문구 확인; 원본 미확보.
+- [D49-IMG09](REFERENCE_GALLERY.md#d49-img09) · `cute floating jellyfish alien pet low gravity spaceship science fiction concept art` — 문구 확인; 원본 미확보.
 
