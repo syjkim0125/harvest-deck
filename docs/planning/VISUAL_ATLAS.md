@@ -319,9 +319,16 @@ D19 승인 구조 설명. 실제 행성 크기·지도 배치·갱신 규칙 미
 ![D54 카드 예시](visuals/54-card-examples.svg)
 카드 6개 시각 예시 재구성. 실제 카드 명칭·효과·아트 아님.
 
-## 55. Deck connection (D55 미승인)
+## 55. Deck connection (D55 구조 승인)
 ![D55](visuals/55-deck-connection-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d55). 역할별 덱과 성장 연결의 개념 도식. 실제 UI·카드 규칙 아님.
+
+![D55 비교 및 순환](visuals/55-deck-examples.svg)
+[직업별 덱 인터랙션 재구성](prototypes/d55-deck-builds.html). 실제 UI·효과 아님.
+
+## 56. Tactical card draw (D56 미승인)
+![D56](visuals/56-tactical-draw-proposal.svg)
+[결정·예시](DECISION_VISUAL_INDEX.md#d56). 손패 순환과 직접 조작 유지의 개념 도식. 실제 규칙 미확정.
 
 ## 다음 시각 자료
 STEP 4 핵심 방향 확정 이후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.
