@@ -3750,6 +3750,96 @@
       "galleryAnchor": "REFERENCE_GALLERY.md#d94-img05",
       "priority": "normal",
       "displayOrder": 5
+    },
+    {
+      "id": "D95-IMG01",
+      "decisionIds": [
+        "D95"
+      ],
+      "query": "beautiful painterly sci fi small spaceship traveling through vast colorful nebula and stars",
+      "purpose": "우주 항해",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d95",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d95-img01",
+      "priority": "normal",
+      "displayOrder": 1
+    },
+    {
+      "id": "D95-IMG02",
+      "decisionIds": [
+        "D95"
+      ],
+      "query": "painterly alien forest bioluminescent wildlife beautiful peaceful otherworldly environment game art",
+      "purpose": "외계 행성",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d95",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d95-img02",
+      "priority": "normal",
+      "displayOrder": 2
+    },
+    {
+      "id": "D95-IMG03",
+      "decisionIds": [
+        "D95"
+      ],
+      "query": "cozy painterly science fiction spaceship interior living quarters crew cute alien companion",
+      "purpose": "함선 내부",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d95",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d95-img03",
+      "priority": "normal",
+      "displayOrder": 3
+    },
+    {
+      "id": "D95-IMG04",
+      "decisionIds": [
+        "D95"
+      ],
+      "query": "beautiful science fiction alien bustling space station marketplace painterly game concept art",
+      "purpose": "정거장과 도시",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d95",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d95-img04",
+      "priority": "normal",
+      "displayOrder": 4
+    },
+    {
+      "id": "D95-IMG05",
+      "decisionIds": [
+        "D95"
+      ],
+      "query": "epic painterly science fiction spaceship battle colorful energy shields space combat concept art",
+      "purpose": "전투",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d95",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d95-img05",
+      "priority": "normal",
+      "displayOrder": 5
     }
   ],
   "diagrams": [
@@ -4841,6 +4931,16 @@
       "purpose": "고정 버튼/제스처 전용/맥락 혼합 조작 비교 및 이동·상호작용·전투·카드 예시",
       "mappingEvidence": "reconstructed from prior inline comparison and action examples; not exact original",
       "status": "local SVG; explanatory only; structure approved, not final game art"
+    },
+    {
+      "id": "SVG-95",
+      "decisionIds": [
+        "D95"
+      ],
+      "path": "docs/planning/visuals/95-adaptive-audio-proposal.svg",
+      "purpose": "평온·신호·위험·전투·해소의 환경음/멜로디/긴장음/리듬 레이어 변화",
+      "mappingEvidence": "reconstructed from previous interactive audio layer diagram, not actual audio",
+      "status": "local SVG; explanatory only; structure approved, not final game art"
     }
   ],
   "userCapture": {
@@ -4850,13 +4950,13 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D95",
-    "approvedThrough": "D94",
-    "pending": "D95",
+    "decisionRange": "D01–D96",
+    "approvedThrough": "D95",
+    "pending": "D96",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
-    "exactVisibleQueries": 134,
-    "missingChatRenderedImages": 162,
+    "exactVisibleQueries": 139,
+    "missingChatRenderedImages": 167,
     "missingIndividualVisualDecisions": [
       "D02",
       "D06",

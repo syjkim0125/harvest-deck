@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 94건 / 미결 D95. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 95건 / 미결 D96. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -531,7 +531,13 @@
 - 대화 이미지: [D94-IMG01](REFERENCE_GALLERY.md#d94-img01) 공격 예고 · [D94-IMG02](REFERENCE_GALLERY.md#d94-img02) 타격감 · [D94-IMG03](REFERENCE_GALLERY.md#d94-img03) 발견 · [D94-IMG04](REFERENCE_GALLERY.md#d94-img04) 함선 손상 · [D94-IMG05](REFERENCE_GALLERY.md#d94-img05) 동료 감정.
 
 ## D95
-**음악·환경음과 상황별 사운드 연출** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d95).
+**C. 지역·상황별 환경음 + 적응형 음악·의도적인 정적** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d95).
+
+- 자체 설명 도식: [SVG-95: 평온·신호·위험·전투·해소의 환경음/멜로디/긴장음/리듬 레이어 변화](visuals/95-adaptive-audio-proposal.svg). 실제 아트 아님.
+- 대화 이미지: [D95-IMG01](REFERENCE_GALLERY.md#d95-img01) 우주 항해 · [D95-IMG02](REFERENCE_GALLERY.md#d95-img02) 외계 행성 · [D95-IMG03](REFERENCE_GALLERY.md#d95-img03) 함선 내부 · [D95-IMG04](REFERENCE_GALLERY.md#d95-img04) 정거장과 도시 · [D95-IMG05](REFERENCE_GALLERY.md#d95-img05) 전투.
+
+## D96
+**초반 학습과 자연스러운 온보딩** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d96).
 
 - 연결 개별 자료 없음; 이전 원문 미확보.
 

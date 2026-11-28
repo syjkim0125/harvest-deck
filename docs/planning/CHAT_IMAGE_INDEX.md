@@ -1,8 +1,8 @@
 # 대화 이미지 검색 기록
 
-> 승인 94건 / 미결 D95. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 95건 / 미결 D96. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
-총 162건: 검색 문구 확인 134건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
+총 167건: 검색 문구 확인 139건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
 
 ## D19
 - [D19-IMG01](REFERENCE_GALLERY.md#d19-img01) · `Zelda breath of the wild vast open world landscape mountain forest village exploration gameplay` — 원문 미검증; 원본 미확보.
@@ -223,4 +223,11 @@
 - [D94-IMG03](REFERENCE_GALLERY.md#d94-img03) · `Tunic game mysterious glowing hidden treasure exploration environment` — 문구 확인; 원본 미확보.
 - [D94-IMG04](REFERENCE_GALLERY.md#d94-img04) · `Starsector damaged spaceship combat engine fire smoke visual effects gameplay` — 문구 확인; 원본 미확보.
 - [D94-IMG05](REFERENCE_GALLERY.md#d94-img05) · `cute alien pet expressive happy sad sleeping creature 2d game animation concept sheet` — 문구 확인; 원본 미확보.
+
+## D95
+- [D95-IMG01](REFERENCE_GALLERY.md#d95-img01) · `beautiful painterly sci fi small spaceship traveling through vast colorful nebula and stars` — 문구 확인; 원본 미확보.
+- [D95-IMG02](REFERENCE_GALLERY.md#d95-img02) · `painterly alien forest bioluminescent wildlife beautiful peaceful otherworldly environment game art` — 문구 확인; 원본 미확보.
+- [D95-IMG03](REFERENCE_GALLERY.md#d95-img03) · `cozy painterly science fiction spaceship interior living quarters crew cute alien companion` — 문구 확인; 원본 미확보.
+- [D95-IMG04](REFERENCE_GALLERY.md#d95-img04) · `beautiful science fiction alien bustling space station marketplace painterly game concept art` — 문구 확인; 원본 미확보.
+- [D95-IMG05](REFERENCE_GALLERY.md#d95-img05) · `epic painterly science fiction spaceship battle colorful energy shields space combat concept art` — 문구 확인; 원본 미확보.
 
