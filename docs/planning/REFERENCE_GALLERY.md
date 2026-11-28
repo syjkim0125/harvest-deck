@@ -1,6 +1,6 @@
 # 참고 이미지 갤러리
 
-> 승인 82건 / 미결 D83. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 83건 / 미결 D84. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [결정별 찾아보기](DECISION_VISUAL_INDEX.md) · [자체 도식 105개](VISUAL_ATLAS.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md).
 

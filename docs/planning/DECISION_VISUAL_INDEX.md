@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 82건 / 미결 D83. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 83건 / 미결 D84. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -470,7 +470,12 @@
 - 대화 이미지: [D82-IMG01](REFERENCE_GALLERY.md#d82-img01) 공급망 붕괴 · [D82-IMG02](REFERENCE_GALLERY.md#d82-img02) 위기 대응 · [D82-IMG03](REFERENCE_GALLERY.md#d82-img03) 사업 축소 · [D82-IMG04](REFERENCE_GALLERY.md#d82-img04) 새로운 시작.
 
 ## D83
-**자본 조달·투자와 사업 소유권** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d83).
+**C. 실제 자본과 선택적 대출·공동 투자·사업 지분** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d83).
+
+- 연결 개별 자료 없음; 이전 원문 미확보.
+
+## D84
+**경제·사업 활동과 탐험의 연결** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d84).
 
 - 연결 개별 자료 없음; 이전 원문 미확보.
 
