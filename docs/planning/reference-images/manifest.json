@@ -3527,6 +3527,26 @@
       "path": "docs/planning/visuals/69-resource-chain-proposal.svg",
       "purpose": "핵심 자원군·지역 특수 자원·가공/소비 단계",
       "mappingEvidence": "decision-specific original proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-69B",
+      "decisionIds": [
+        "D69"
+      ],
+      "path": "docs/planning/visuals/69-resource-examples.svg",
+      "purpose": "자원 A/B/C 비교·6개 자원군·행성별 특수 자원 예시",
+      "mappingEvidence": "previous response visual examples reconstructed, not exact rendered pixels",
+      "status": "local SVG; explanatory only"
+    },
+    {
+      "id": "SVG-70",
+      "decisionIds": [
+        "D70"
+      ],
+      "path": "docs/planning/visuals/70-gathering-proposal.svg",
+      "purpose": "직접 채집·현장 판단·반복 작업 위임",
+      "mappingEvidence": "decision-specific original proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -3537,9 +3557,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D69",
-    "approvedThrough": "D68",
-    "pending": "D69",
+    "decisionRange": "D01–D70",
+    "approvedThrough": "D69",
+    "pending": "D70",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 75,

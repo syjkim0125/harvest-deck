@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 68건 / 미결 D69. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 69건 / 미결 D70. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -399,7 +399,12 @@
 - 자체 설명 도식: [SVG-68: 지역 경제 실제 생산·물류와 상세/집계 시뮬레이션](visuals/68-economy-simulation-proposal.svg) · [SVG-68B: 경제 A/B/C 비교·공급망·거리별 추상화 예시](visuals/68-economy-examples.svg). 실제 아트 아님.
 
 ## D69
-**자원 분류와 생산·소비 단계** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d69).
+**자원 분류와 생산·소비 단계** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d69).
 
-- 자체 설명 도식: [SVG-69: 핵심 자원군·지역 특수 자원·가공/소비 단계](visuals/69-resource-chain-proposal.svg). 실제 아트 아님.
+- 자체 설명 도식: [SVG-69: 핵심 자원군·지역 특수 자원·가공/소비 단계](visuals/69-resource-chain-proposal.svg) · [SVG-69B: 자원 A/B/C 비교·6개 자원군·행성별 특수 자원 예시](visuals/69-resource-examples.svg). 실제 아트 아님.
+
+## D70
+**자원 채집·회수의 직접 플레이와 자동화** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d70).
+
+- 자체 설명 도식: [SVG-70: 직접 채집·현장 판단·반복 작업 위임](visuals/70-gathering-proposal.svg). 실제 아트 아님.
 
