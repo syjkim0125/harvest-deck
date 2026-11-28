@@ -1,8 +1,8 @@
 # 대화 이미지 검색 기록
 
-> 승인 93건 / 미결 D94. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 94건 / 미결 D95. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
-총 157건: 검색 문구 확인 129건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
+총 162건: 검색 문구 확인 134건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
 
 ## D19
 - [D19-IMG01](REFERENCE_GALLERY.md#d19-img01) · `Zelda breath of the wild vast open world landscape mountain forest village exploration gameplay` — 원문 미검증; 원본 미확보.
@@ -216,4 +216,11 @@
 - [D90-IMG09](REFERENCE_GALLERY.md#d90-img09) · `cute original stylized alien creature companion hand painted 2d game character concept art round body large expressive eyes` — 문구 확인; 원본 미확보.
 - [D90-IMG10](REFERENCE_GALLERY.md#d90-img10) · `stylized hand painted science fiction small modular spaceship top down 2d game concept art` — 문구 확인; 원본 미확보.
 - [D90-IMG11](REFERENCE_GALLERY.md#d90-img11) · `Hades game beautifully illustrated minimal inventory item icons game UI` — 문구 확인; 원본 미확보.
+
+## D94
+- [D94-IMG01](REFERENCE_GALLERY.md#d94-img01) · `Hades II gameplay enemy attack telegraph glowing ground attack area` — 문구 확인; 원본 미확보.
+- [D94-IMG02](REFERENCE_GALLERY.md#d94-img02) · `Absolum game combat powerful melee attack impact visual effects screenshot` — 문구 확인; 원본 미확보.
+- [D94-IMG03](REFERENCE_GALLERY.md#d94-img03) · `Tunic game mysterious glowing hidden treasure exploration environment` — 문구 확인; 원본 미확보.
+- [D94-IMG04](REFERENCE_GALLERY.md#d94-img04) · `Starsector damaged spaceship combat engine fire smoke visual effects gameplay` — 문구 확인; 원본 미확보.
+- [D94-IMG05](REFERENCE_GALLERY.md#d94-img05) · `cute alien pet expressive happy sad sleeping creature 2d game animation concept sheet` — 문구 확인; 원본 미확보.
 

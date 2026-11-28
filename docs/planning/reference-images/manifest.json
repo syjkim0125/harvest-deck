@@ -3660,6 +3660,96 @@
       "galleryAnchor": "REFERENCE_GALLERY.md#d90-img11",
       "priority": "normal",
       "displayOrder": 11
+    },
+    {
+      "id": "D94-IMG01",
+      "decisionIds": [
+        "D94"
+      ],
+      "query": "Hades II gameplay enemy attack telegraph glowing ground attack area",
+      "purpose": "공격 예고",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d94",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d94-img01",
+      "priority": "normal",
+      "displayOrder": 1
+    },
+    {
+      "id": "D94-IMG02",
+      "decisionIds": [
+        "D94"
+      ],
+      "query": "Absolum game combat powerful melee attack impact visual effects screenshot",
+      "purpose": "타격감",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d94",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d94-img02",
+      "priority": "normal",
+      "displayOrder": 2
+    },
+    {
+      "id": "D94-IMG03",
+      "decisionIds": [
+        "D94"
+      ],
+      "query": "Tunic game mysterious glowing hidden treasure exploration environment",
+      "purpose": "발견",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d94",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d94-img03",
+      "priority": "normal",
+      "displayOrder": 3
+    },
+    {
+      "id": "D94-IMG04",
+      "decisionIds": [
+        "D94"
+      ],
+      "query": "Starsector damaged spaceship combat engine fire smoke visual effects gameplay",
+      "purpose": "함선 손상",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d94",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d94-img04",
+      "priority": "normal",
+      "displayOrder": 4
+    },
+    {
+      "id": "D94-IMG05",
+      "decisionIds": [
+        "D94"
+      ],
+      "query": "cute alien pet expressive happy sad sleeping creature 2d game animation concept sheet",
+      "purpose": "동료 감정",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d94",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d94-img05",
+      "priority": "normal",
+      "displayOrder": 5
     }
   ],
   "diagrams": [
@@ -4760,13 +4850,13 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D94",
-    "approvedThrough": "D93",
-    "pending": "D94",
+    "decisionRange": "D01–D95",
+    "approvedThrough": "D94",
+    "pending": "D95",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
-    "exactVisibleQueries": 129,
-    "missingChatRenderedImages": 157,
+    "exactVisibleQueries": 134,
+    "missingChatRenderedImages": 162,
     "missingIndividualVisualDecisions": [
       "D02",
       "D06",
