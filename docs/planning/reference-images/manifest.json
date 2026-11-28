@@ -3174,6 +3174,96 @@
       "galleryAnchor": "REFERENCE_GALLERY.md#d85-img07",
       "priority": "normal",
       "displayOrder": 7
+    },
+    {
+      "id": "D87-IMG01",
+      "decisionIds": [
+        "D87"
+      ],
+      "query": "pixel art science fiction spaceship advanced energy reactor engine room glowing teal",
+      "purpose": "독자 활용",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d87",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d87-img01",
+      "priority": "normal",
+      "displayOrder": 1
+    },
+    {
+      "id": "D87-IMG02",
+      "decisionIds": [
+        "D87"
+      ],
+      "query": "pixel art science fiction industrial mining colony futuristic machinery factory",
+      "purpose": "사용권",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d87",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d87-img02",
+      "priority": "normal",
+      "displayOrder": 2
+    },
+    {
+      "id": "D87-IMG03",
+      "decisionIds": [
+        "D87"
+      ],
+      "query": "pixel art science fiction alien scientists collaborative futuristic research laboratory",
+      "purpose": "공동 연구",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d87",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d87-img03",
+      "priority": "normal",
+      "displayOrder": 3
+    },
+    {
+      "id": "D87-IMG04",
+      "decisionIds": [
+        "D87"
+      ],
+      "query": "pixel art thriving futuristic alien colony city renewable energy solar panels science fiction game",
+      "purpose": "공개",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d87",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d87-img04",
+      "priority": "normal",
+      "displayOrder": 4
+    },
+    {
+      "id": "D87-IMG05",
+      "decisionIds": [
+        "D87"
+      ],
+      "query": "pixel art futuristic compact glowing blue fusion reactor generator isolated game equipment",
+      "purpose": "발전기",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d87",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d87-img05",
+      "priority": "normal",
+      "displayOrder": 5
     }
   ],
   "diagrams": [
@@ -4244,13 +4334,13 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D87",
-    "approvedThrough": "D86",
-    "pending": "D87",
+    "decisionRange": "D01–D88",
+    "approvedThrough": "D87",
+    "pending": "D88",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
-    "exactVisibleQueries": 102,
-    "missingChatRenderedImages": 130,
+    "exactVisibleQueries": 107,
+    "missingChatRenderedImages": 135,
     "missingIndividualVisualDecisions": [
       "D02",
       "D06",

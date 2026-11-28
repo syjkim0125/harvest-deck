@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 86건 / 미결 D87. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 87건 / 미결 D88. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -490,7 +490,12 @@
 - 연결 개별 자료 없음; 이전 원문 미확보.
 
 ## D87
-**기술 지식의 공유·거래와 확산** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d87).
+**C. 실제 교류·계약·연구 기반 기술 확산 + 선택적 공개·보호** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d87).
+
+- 대화 이미지: [D87-IMG01](REFERENCE_GALLERY.md#d87-img01) 독자 활용 · [D87-IMG02](REFERENCE_GALLERY.md#d87-img02) 사용권 · [D87-IMG03](REFERENCE_GALLERY.md#d87-img03) 공동 연구 · [D87-IMG04](REFERENCE_GALLERY.md#d87-img04) 공개 · [D87-IMG05](REFERENCE_GALLERY.md#d87-img05) 발전기.
+
+## D88
+**발견 기록·은하 지도와 지식 관리** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d88).
 
 - 연결 개별 자료 없음; 이전 원문 미확보.
 

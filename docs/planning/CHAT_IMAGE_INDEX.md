@@ -1,8 +1,8 @@
 # 대화 이미지 검색 기록
 
-> 승인 86건 / 미결 D87. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 87건 / 미결 D88. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
-총 130건: 검색 문구 확인 102건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
+총 135건: 검색 문구 확인 107건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
 
 ## D19
 - [D19-IMG01](REFERENCE_GALLERY.md#d19-img01) · `Zelda breath of the wild vast open world landscape mountain forest village exploration gameplay` — 원문 미검증; 원본 미확보.
@@ -181,4 +181,11 @@
 - [D85-IMG05](REFERENCE_GALLERY.md#d85-img05) · `pixel art beautiful glowing alien crystal lamp futuristic decorative furniture game sprite` — 문구 확인; 원본 미확보.
 - [D85-IMG06](REFERENCE_GALLERY.md#d85-img06) · `cozy pixel art small spaceship laboratory interior workbench microscope science fiction indie game` — 문구 확인; 원본 미확보.
 - [D85-IMG07](REFERENCE_GALLERY.md#d85-img07) · `detailed pixel art advanced science fiction biotechnology research laboratory alien plants robots interior` — 문구 확인; 원본 미확보.
+
+## D87
+- [D87-IMG01](REFERENCE_GALLERY.md#d87-img01) · `pixel art science fiction spaceship advanced energy reactor engine room glowing teal` — 문구 확인; 원본 미확보.
+- [D87-IMG02](REFERENCE_GALLERY.md#d87-img02) · `pixel art science fiction industrial mining colony futuristic machinery factory` — 문구 확인; 원본 미확보.
+- [D87-IMG03](REFERENCE_GALLERY.md#d87-img03) · `pixel art science fiction alien scientists collaborative futuristic research laboratory` — 문구 확인; 원본 미확보.
+- [D87-IMG04](REFERENCE_GALLERY.md#d87-img04) · `pixel art thriving futuristic alien colony city renewable energy solar panels science fiction game` — 문구 확인; 원본 미확보.
+- [D87-IMG05](REFERENCE_GALLERY.md#d87-img05) · `pixel art futuristic compact glowing blue fusion reactor generator isolated game equipment` — 문구 확인; 원본 미확보.
 
