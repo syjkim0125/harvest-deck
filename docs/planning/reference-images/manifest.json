@@ -1915,6 +1915,139 @@
       "galleryAnchor": "REFERENCE_GALLERY.md#d49-img09",
       "captureStatus": "missing; exact chat-rendered pixels unavailable",
       "priority": "normal"
+    },
+    {
+      "id": "D50-IMG01",
+      "decisionIds": [
+        "D50"
+      ],
+      "query": "Starbound upgraded spaceship interior player home base gameplay",
+      "purpose": "A 함선만",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D50 함선과 고정 거점",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d50",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d50-img01",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D50-IMG02",
+      "decisionIds": [
+        "D50"
+      ],
+      "query": "Rimworld large advanced colony base gameplay overview",
+      "purpose": "B 고정 거점",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D50 함선과 고정 거점",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d50",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d50-img02",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D50-IMG03",
+      "decisionIds": [
+        "D50"
+      ],
+      "query": "No Man's Sky planetary outpost base with spaceship landing pad alien planet",
+      "purpose": "C 선택적 거점",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D50 함선과 고정 거점",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d50",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d50-img03",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D50-IMG04",
+      "decisionIds": [
+        "D50"
+      ],
+      "query": "science fiction mining colony outpost alien rocky planet isometric game environment",
+      "purpose": "채굴 거점",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D50 함선과 고정 거점",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d50",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d50-img04",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D50-IMG05",
+      "decisionIds": [
+        "D50"
+      ],
+      "query": "science fiction alien botanical research greenhouse biodome outpost concept art",
+      "purpose": "생태 연구",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D50 함선과 고정 거점",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d50",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d50-img05",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D50-IMG06",
+      "decisionIds": [
+        "D50"
+      ],
+      "query": "science fiction cozy space station marketplace shops alien merchants game environment",
+      "purpose": "상업 거점",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D50 함선과 고정 거점",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d50",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d50-img06",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D50-IMG07",
+      "decisionIds": [
+        "D50"
+      ],
+      "query": "science fiction frontier spaceship repair refueling landing pad outpost concept art",
+      "purpose": "보급·정비",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D50 함선과 고정 거점",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d50",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d50-img07",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
     }
   ],
   "diagrams": [
@@ -2425,6 +2558,16 @@
       "path": "docs/planning/visuals/50-mobile-fixed-base-proposal.svg",
       "purpose": "함선 중심·고정 거점 중심·선택적 거점 비교",
       "mappingEvidence": "decision-specific original proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-51",
+      "decisionIds": [
+        "D51"
+      ],
+      "path": "docs/planning/visuals/51-outpost-acquisition-proposal.svg",
+      "purpose": "시설 임대·폐시설 복구·신규 모듈 건설 경로 비교",
+      "mappingEvidence": "decision-specific original proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -2435,13 +2578,13 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D50",
-    "approvedThrough": "D49",
-    "pending": "D50",
+    "decisionRange": "D01–D51",
+    "approvedThrough": "D50",
+    "pending": "D51",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
-    "exactVisibleQueries": 47,
-    "missingChatRenderedImages": 75,
+    "exactVisibleQueries": 54,
+    "missingChatRenderedImages": 82,
     "missingIndividualVisualDecisions": [
       "D02",
       "D06",
@@ -2449,7 +2592,7 @@
     ],
     "screenshot": "Prior attempt did not obtain a saved capture. Direct chat UI screenshot capability not established. D31 capture remains unrecovered.",
     "recoverySearch": "Prior retrieval yielded summaries, not a complete transcript or rendered images.",
-    "provenanceNote": "D19–D26 28건 재구성 또는 원문 미검증. D28–D36 31건 응답 기록 검색 문구. 모두 실제 표시 원본 미확보. D48 직전 응답의 정확한 검색 문구 7건 추가; 표시 원본 미확보. D49 검색 문구 9건 추가; 원본 미확보.",
+    "provenanceNote": "D19–D26 28건 재구성 또는 원문 미검증. D28–D36 31건 응답 기록 검색 문구. 모두 실제 표시 원본 미확보. D48 직전 응답의 정확한 검색 문구 7건 추가; 표시 원본 미확보. D49 검색 문구 9건 추가; 원본 미확보. D50 검색 문구 7건 추가; 원본 미확보.",
     "latestDownloadAttempt": {
       "date": "2026-11-27",
       "knownUrls": 26,

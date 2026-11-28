@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 49건 / 미결 D50. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 50건 / 미결 D51. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -299,7 +299,13 @@
 - 대화 이미지: [D49-IMG01](REFERENCE_GALLERY.md#d49-img01) A 생활 관리 없음 비교 · [D49-IMG02](REFERENCE_GALLERY.md#d49-img02) B 정밀 생존 비교 · [D49-IMG03](REFERENCE_GALLERY.md#d49-img03) C 생활 공간 · [D49-IMG04](REFERENCE_GALLERY.md#d49-img04) 위기 수리 · [D49-IMG05](REFERENCE_GALLERY.md#d49-img05) 함선 위기 · [D49-IMG06](REFERENCE_GALLERY.md#d49-img06) 습지형 생물 · [D49-IMG07](REFERENCE_GALLERY.md#d49-img07) 소음 민감형 · [D49-IMG08](REFERENCE_GALLERY.md#d49-img08) 광물형 · [D49-IMG09](REFERENCE_GALLERY.md#d49-img09) 부유형.
 
 ## D50
-**함선과 고정 거점의 관계** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d50).
+**함선과 고정 거점의 관계** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d50).
 
 - 자체 설명 도식: [SVG-50: 함선 중심·고정 거점 중심·선택적 거점 비교](visuals/50-mobile-fixed-base-proposal.svg). 실제 아트 아님.
+- 대화 이미지: [D50-IMG01](REFERENCE_GALLERY.md#d50-img01) A 함선만 · [D50-IMG02](REFERENCE_GALLERY.md#d50-img02) B 고정 거점 · [D50-IMG03](REFERENCE_GALLERY.md#d50-img03) C 선택적 거점 · [D50-IMG04](REFERENCE_GALLERY.md#d50-img04) 채굴 거점 · [D50-IMG05](REFERENCE_GALLERY.md#d50-img05) 생태 연구 · [D50-IMG06](REFERENCE_GALLERY.md#d50-img06) 상업 거점 · [D50-IMG07](REFERENCE_GALLERY.md#d50-img07) 보급·정비.
+
+## D51
+**고정 거점 확보와 건설·확장 방식** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d51).
+
+- 자체 설명 도식: [SVG-51: 시설 임대·폐시설 복구·신규 모듈 건설 경로 비교](visuals/51-outpost-acquisition-proposal.svg). 실제 아트 아님.
 

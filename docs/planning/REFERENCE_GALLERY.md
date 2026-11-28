@@ -1,10 +1,10 @@
 # 참고 이미지 갤러리
 
-> 승인 49건 / 미결 D50. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 50건 / 미결 D51. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
-[결정별 찾아보기](DECISION_VISUAL_INDEX.md) · [자체 도식 50개](VISUAL_ATLAS.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md).
+[결정별 찾아보기](DECISION_VISUAL_INDEX.md) · [자체 도식 51개](VISUAL_ATLAS.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md).
 
-외부 URL 26개는 원격 임베드(렌더링·권리·바이트 미검증), 대화 참조 75건은 원본 상태를 표시. 과거 표시 이미지와 동일성 미확인. 사용자 선호는 최종 아트 승인 아님.
+외부 URL 26개는 원격 임베드(렌더링·권리·바이트 미검증), 대화 참조 82건은 원본 상태를 표시. 과거 표시 이미지와 동일성 미확인. 사용자 선호는 최종 아트 승인 아님.
 
 ## 사용자 선호 시각 예시 (D36)
 ### D36-IMG01
@@ -419,6 +419,27 @@ C 생활 공간. [D49](DECISION_VISUAL_INDEX.md#d49) · [당시 예시](EXAMPLE_
 
 ### D49-IMG09
 부유형. [D49](DECISION_VISUAL_INDEX.md#d49) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d49) · [검색 기록](CHAT_IMAGE_INDEX.md#d49). 원본/캡처 미확보.
+
+### D50-IMG01
+A 함선만. [D50](DECISION_VISUAL_INDEX.md#d50) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d50) · [검색 기록](CHAT_IMAGE_INDEX.md#d50). 원본/캡처 미확보.
+
+### D50-IMG02
+B 고정 거점. [D50](DECISION_VISUAL_INDEX.md#d50) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d50) · [검색 기록](CHAT_IMAGE_INDEX.md#d50). 원본/캡처 미확보.
+
+### D50-IMG03
+C 선택적 거점. [D50](DECISION_VISUAL_INDEX.md#d50) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d50) · [검색 기록](CHAT_IMAGE_INDEX.md#d50). 원본/캡처 미확보.
+
+### D50-IMG04
+채굴 거점. [D50](DECISION_VISUAL_INDEX.md#d50) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d50) · [검색 기록](CHAT_IMAGE_INDEX.md#d50). 원본/캡처 미확보.
+
+### D50-IMG05
+생태 연구. [D50](DECISION_VISUAL_INDEX.md#d50) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d50) · [검색 기록](CHAT_IMAGE_INDEX.md#d50). 원본/캡처 미확보.
+
+### D50-IMG06
+상업 거점. [D50](DECISION_VISUAL_INDEX.md#d50) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d50) · [검색 기록](CHAT_IMAGE_INDEX.md#d50). 원본/캡처 미확보.
+
+### D50-IMG07
+보급·정비. [D50](DECISION_VISUAL_INDEX.md#d50) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d50) · [검색 기록](CHAT_IMAGE_INDEX.md#d50). 원본/캡처 미확보.
 
 ## 공식 미디어
 - **Absolum**: [공식/PR](https://www.dotemu.com/PressKit/project/Games/Absolum) · [압축파일](https://www.dotemu.com/PressKit/cache/Games/Absolum/images.zip) — 공식 이미지 ZIP 링크 확인; 웹 다운로드 403.
