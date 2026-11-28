@@ -3048,6 +3048,132 @@
       "galleryAnchor": "REFERENCE_GALLERY.md#d84-img06",
       "priority": "normal",
       "displayOrder": 6
+    },
+    {
+      "id": "D85-IMG01",
+      "decisionIds": [
+        "D85"
+      ],
+      "query": "pixel art glowing alien biological crystal specimen science fiction game item",
+      "purpose": "소재 발견",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d85",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d85-img01",
+      "priority": "normal",
+      "displayOrder": 1
+    },
+    {
+      "id": "D85-IMG02",
+      "decisionIds": [
+        "D85"
+      ],
+      "query": "pixel art spaceship science laboratory scientist analyzing glowing crystal",
+      "purpose": "분석",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d85",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d85-img02",
+      "priority": "normal",
+      "displayOrder": 2
+    },
+    {
+      "id": "D85-IMG03",
+      "decisionIds": [
+        "D85"
+      ],
+      "query": "pixel art sci fi glowing crystal powered energy rifle game equipment sprite",
+      "purpose": "전투 기술",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d85",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d85-img03",
+      "priority": "normal",
+      "displayOrder": 3
+    },
+    {
+      "id": "D85-IMG04",
+      "decisionIds": [
+        "D85"
+      ],
+      "query": "pixel art futuristic crystal powered spaceship reactor game equipment",
+      "purpose": "함선 기술",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d85",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d85-img04",
+      "priority": "normal",
+      "displayOrder": 4
+    },
+    {
+      "id": "D85-IMG05",
+      "decisionIds": [
+        "D85"
+      ],
+      "query": "pixel art beautiful glowing alien crystal lamp futuristic decorative furniture game sprite",
+      "purpose": "상업 기술",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d85",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d85-img05",
+      "priority": "normal",
+      "displayOrder": 5
+    },
+    {
+      "id": "D85-IMG06",
+      "decisionIds": [
+        "D85"
+      ],
+      "query": "cozy pixel art small spaceship laboratory interior workbench microscope science fiction indie game",
+      "purpose": "초기 연구실",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d85",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d85-img06",
+      "priority": "normal",
+      "displayOrder": 6
+    },
+    {
+      "id": "D85-IMG07",
+      "decisionIds": [
+        "D85"
+      ],
+      "query": "detailed pixel art advanced science fiction biotechnology research laboratory alien plants robots interior",
+      "purpose": "전문 연구실",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d85",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d85-img07",
+      "priority": "normal",
+      "displayOrder": 7
     }
   ],
   "diagrams": [
@@ -4118,13 +4244,13 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D85",
-    "approvedThrough": "D84",
-    "pending": "D85",
+    "decisionRange": "D01–D86",
+    "approvedThrough": "D85",
+    "pending": "D86",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
-    "exactVisibleQueries": 95,
-    "missingChatRenderedImages": 123,
+    "exactVisibleQueries": 102,
+    "missingChatRenderedImages": 130,
     "missingIndividualVisualDecisions": [
       "D02",
       "D06",

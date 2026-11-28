@@ -1,8 +1,8 @@
 # 대화 이미지 검색 기록
 
-> 승인 84건 / 미결 D85. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 85건 / 미결 D86. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
-총 123건: 검색 문구 확인 95건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
+총 130건: 검색 문구 확인 102건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
 
 ## D19
 - [D19-IMG01](REFERENCE_GALLERY.md#d19-img01) · `Zelda breath of the wild vast open world landscape mountain forest village exploration gameplay` — 원문 미검증; 원본 미확보.
@@ -172,4 +172,13 @@
 - [D84-IMG04](REFERENCE_GALLERY.md#d84-img04) · `pixel art science fiction spaceship approaching mysterious ancient alien ruins planet` — 문구 확인; 원본 미확보.
 - [D84-IMG05](REFERENCE_GALLERY.md#d84-img05) · `pixel art futuristic glowing handheld alien biology scanner equipment icon` — 문구 확인; 원본 미확보.
 - [D84-IMG06](REFERENCE_GALLERY.md#d84-img06) · `pixel art science fiction green glowing biological material processing machine game item` — 문구 확인; 원본 미확보.
+
+## D85
+- [D85-IMG01](REFERENCE_GALLERY.md#d85-img01) · `pixel art glowing alien biological crystal specimen science fiction game item` — 문구 확인; 원본 미확보.
+- [D85-IMG02](REFERENCE_GALLERY.md#d85-img02) · `pixel art spaceship science laboratory scientist analyzing glowing crystal` — 문구 확인; 원본 미확보.
+- [D85-IMG03](REFERENCE_GALLERY.md#d85-img03) · `pixel art sci fi glowing crystal powered energy rifle game equipment sprite` — 문구 확인; 원본 미확보.
+- [D85-IMG04](REFERENCE_GALLERY.md#d85-img04) · `pixel art futuristic crystal powered spaceship reactor game equipment` — 문구 확인; 원본 미확보.
+- [D85-IMG05](REFERENCE_GALLERY.md#d85-img05) · `pixel art beautiful glowing alien crystal lamp futuristic decorative furniture game sprite` — 문구 확인; 원본 미확보.
+- [D85-IMG06](REFERENCE_GALLERY.md#d85-img06) · `cozy pixel art small spaceship laboratory interior workbench microscope science fiction indie game` — 문구 확인; 원본 미확보.
+- [D85-IMG07](REFERENCE_GALLERY.md#d85-img07) · `detailed pixel art advanced science fiction biotechnology research laboratory alien plants robots interior` — 문구 확인; 원본 미확보.
 
