@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 87건 / 미결 D88. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 88건 / 미결 D89. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -495,7 +495,12 @@
 - 대화 이미지: [D87-IMG01](REFERENCE_GALLERY.md#d87-img01) 독자 활용 · [D87-IMG02](REFERENCE_GALLERY.md#d87-img02) 사용권 · [D87-IMG03](REFERENCE_GALLERY.md#d87-img03) 공동 연구 · [D87-IMG04](REFERENCE_GALLERY.md#d87-img04) 공개 · [D87-IMG05](REFERENCE_GALLERY.md#d87-img05) 발전기.
 
 ## D88
-**발견 기록·은하 지도와 지식 관리** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d88).
+**C. 자동 탐험 기록 + 선택적 지도 표시·연구 연결·정보 거래** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d88).
+
+- 대화 이미지: [D88-IMG01](REFERENCE_GALLERY.md#d88-img01) 행성 · [D88-IMG02](REFERENCE_GALLERY.md#d88-img02) 생명체 · [D88-IMG03](REFERENCE_GALLERY.md#d88-img03) 자원 · [D88-IMG04](REFERENCE_GALLERY.md#d88-img04) 유물 · [D88-IMG05](REFERENCE_GALLERY.md#d88-img05) 인물 · [D88-IMG06](REFERENCE_GALLERY.md#d88-img06) 미확인 장소 · [D88-IMG07](REFERENCE_GALLERY.md#d88-img07) 광맥.
+
+## D89
+**세계 변화의 전달·소문과 사건 발견** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d89).
 
 - 연결 개별 자료 없음; 이전 원문 미확보.
 

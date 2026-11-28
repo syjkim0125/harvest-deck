@@ -3264,6 +3264,132 @@
       "galleryAnchor": "REFERENCE_GALLERY.md#d87-img05",
       "priority": "normal",
       "displayOrder": 5
+    },
+    {
+      "id": "D88-IMG01",
+      "decisionIds": [
+        "D88"
+      ],
+      "query": "pixel art beautiful alien planet turquoise ocean floating islands from space",
+      "purpose": "행성",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d88",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d88-img01",
+      "priority": "normal",
+      "displayOrder": 1
+    },
+    {
+      "id": "D88-IMG02",
+      "decisionIds": [
+        "D88"
+      ],
+      "query": "cute pixel art alien creatures fantasy science fiction creature bestiary sprites",
+      "purpose": "생명체",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d88",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d88-img02",
+      "priority": "normal",
+      "displayOrder": 2
+    },
+    {
+      "id": "D88-IMG03",
+      "decisionIds": [
+        "D88"
+      ],
+      "query": "pixel art game inventory colorful alien minerals crystals plants resources sprite sheet",
+      "purpose": "자원",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d88",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d88-img03",
+      "priority": "normal",
+      "displayOrder": 3
+    },
+    {
+      "id": "D88-IMG04",
+      "decisionIds": [
+        "D88"
+      ],
+      "query": "pixel art mysterious ancient alien artifacts relics science fiction game items",
+      "purpose": "유물",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d88",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d88-img04",
+      "priority": "normal",
+      "displayOrder": 4
+    },
+    {
+      "id": "D88-IMG05",
+      "decisionIds": [
+        "D88"
+      ],
+      "query": "pixel art diverse alien character portraits space rpg NPC",
+      "purpose": "인물",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d88",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d88-img05",
+      "priority": "normal",
+      "displayOrder": 5
+    },
+    {
+      "id": "D88-IMG06",
+      "decisionIds": [
+        "D88"
+      ],
+      "query": "pixel art mysterious abandoned alien temple ruins jungle science fiction game",
+      "purpose": "미확인 장소",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d88",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d88-img06",
+      "priority": "normal",
+      "displayOrder": 6
+    },
+    {
+      "id": "D88-IMG07",
+      "decisionIds": [
+        "D88"
+      ],
+      "query": "pixel art glowing blue crystal deposits alien underground cave exploration game",
+      "purpose": "광맥",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d88",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d88-img07",
+      "priority": "normal",
+      "displayOrder": 7
     }
   ],
   "diagrams": [
@@ -4334,13 +4460,13 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D88",
-    "approvedThrough": "D87",
-    "pending": "D88",
+    "decisionRange": "D01–D89",
+    "approvedThrough": "D88",
+    "pending": "D89",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
-    "exactVisibleQueries": 107,
-    "missingChatRenderedImages": 135,
+    "exactVisibleQueries": 114,
+    "missingChatRenderedImages": 142,
     "missingIndividualVisualDecisions": [
       "D02",
       "D06",

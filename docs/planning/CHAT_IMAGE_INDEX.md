@@ -1,8 +1,8 @@
 # 대화 이미지 검색 기록
 
-> 승인 87건 / 미결 D88. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 88건 / 미결 D89. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
-총 135건: 검색 문구 확인 107건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
+총 142건: 검색 문구 확인 114건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
 
 ## D19
 - [D19-IMG01](REFERENCE_GALLERY.md#d19-img01) · `Zelda breath of the wild vast open world landscape mountain forest village exploration gameplay` — 원문 미검증; 원본 미확보.
@@ -188,4 +188,13 @@
 - [D87-IMG03](REFERENCE_GALLERY.md#d87-img03) · `pixel art science fiction alien scientists collaborative futuristic research laboratory` — 문구 확인; 원본 미확보.
 - [D87-IMG04](REFERENCE_GALLERY.md#d87-img04) · `pixel art thriving futuristic alien colony city renewable energy solar panels science fiction game` — 문구 확인; 원본 미확보.
 - [D87-IMG05](REFERENCE_GALLERY.md#d87-img05) · `pixel art futuristic compact glowing blue fusion reactor generator isolated game equipment` — 문구 확인; 원본 미확보.
+
+## D88
+- [D88-IMG01](REFERENCE_GALLERY.md#d88-img01) · `pixel art beautiful alien planet turquoise ocean floating islands from space` — 문구 확인; 원본 미확보.
+- [D88-IMG02](REFERENCE_GALLERY.md#d88-img02) · `cute pixel art alien creatures fantasy science fiction creature bestiary sprites` — 문구 확인; 원본 미확보.
+- [D88-IMG03](REFERENCE_GALLERY.md#d88-img03) · `pixel art game inventory colorful alien minerals crystals plants resources sprite sheet` — 문구 확인; 원본 미확보.
+- [D88-IMG04](REFERENCE_GALLERY.md#d88-img04) · `pixel art mysterious ancient alien artifacts relics science fiction game items` — 문구 확인; 원본 미확보.
+- [D88-IMG05](REFERENCE_GALLERY.md#d88-img05) · `pixel art diverse alien character portraits space rpg NPC` — 문구 확인; 원본 미확보.
+- [D88-IMG06](REFERENCE_GALLERY.md#d88-img06) · `pixel art mysterious abandoned alien temple ruins jungle science fiction game` — 문구 확인; 원본 미확보.
+- [D88-IMG07](REFERENCE_GALLERY.md#d88-img07) · `pixel art glowing blue crystal deposits alien underground cave exploration game` — 문구 확인; 원본 미확보.
 
