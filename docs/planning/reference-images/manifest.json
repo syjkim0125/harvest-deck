@@ -3607,6 +3607,26 @@
       "path": "docs/planning/visuals/73-market-trade-proposal.svg",
       "purpose": "지역별 수급 가격 및 수량별 거래 영향, 선택적 계약",
       "mappingEvidence": "decision-specific original proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-73B",
+      "decisionIds": [
+        "D73"
+      ],
+      "path": "docs/planning/visuals/73-market-examples.svg",
+      "purpose": "A/B/C 거래 비교·교역 지도·계약 유형·운용 카드",
+      "mappingEvidence": "previous response visual examples reconstructed, not exact rendered pixels",
+      "status": "local SVG; explanatory only"
+    },
+    {
+      "id": "SVG-74",
+      "decisionIds": [
+        "D74"
+      ],
+      "path": "docs/planning/visuals/74-crafting-proposal.svg",
+      "purpose": "간편 기본 제작·특화 선택·반복 생산 위임",
+      "mappingEvidence": "decision-specific original proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -3617,9 +3637,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D73",
-    "approvedThrough": "D72",
-    "pending": "D73",
+    "decisionRange": "D01–D74",
+    "approvedThrough": "D73",
+    "pending": "D74",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 75,
