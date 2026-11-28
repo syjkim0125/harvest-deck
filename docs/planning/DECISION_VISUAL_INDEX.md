@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 76건 / 미결 D77. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 77건 / 미결 D78. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -439,7 +439,12 @@
 - 자체 설명 도식: [SVG-76: 사건 기반 손상·응급 대응·자율 및 정식 수리](visuals/76-maintenance-proposal.svg) · [SVG-76B: 수리 비교·교전 손상·엔진실 기술자·상태·정비 사업체](visuals/76-maintenance-examples.svg). 실제 아트 아님.
 
 ## D77
-**상점·서비스 사업체의 직접 운영과 위임** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d77).
+**상점·서비스 사업체의 직접 운영과 위임** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d77).
 
-- 자체 설명 도식: [SVG-77: 실제 매장·고객·직접 운영·동료 위임 비교](visuals/77-shop-operations-proposal.svg). 실제 아트 아님.
+- 자체 설명 도식: [SVG-77: 실제 매장·고객·직접 운영·동료 위임 비교](visuals/77-shop-operations-proposal.svg) · [SVG-77B: A/B/C 비교·탐험 판매·고객 유형·직접 위임·사업 유형](visuals/77-shop-operations-examples.svg). 실제 아트 아님.
+
+## D78
+**상점 현장 조작과 주문 처리의 리듬** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d78).
+
+- 자체 설명 도식: [SVG-78: 직접 이동·맥락 상호작용·짧은 주문 루프](visuals/78-shop-controls-proposal.svg). 실제 아트 아님.
 
