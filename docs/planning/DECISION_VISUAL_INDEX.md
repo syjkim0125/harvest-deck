@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 53건 / 미결 D54. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 54건 / 미결 D55. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -324,7 +324,12 @@
 - 대화 이미지: [D53-IMG01](REFERENCE_GALLERY.md#d53-img01) A 안전 거점 · [D53-IMG02](REFERENCE_GALLERY.md#d53-img02) B 전면 공격 · [D53-IMG03](REFERENCE_GALLERY.md#d53-img03) C 분쟁 구조 · [D53-IMG04](REFERENCE_GALLERY.md#d53-img04) 중심 지역 · [D53-IMG05](REFERENCE_GALLERY.md#d53-img05) 개척 지역 · [D53-IMG06](REFERENCE_GALLERY.md#d53-img06) 무법 지대 · [D53-IMG07](REFERENCE_GALLERY.md#d53-img07) 국경 지역 · [D53-IMG08](REFERENCE_GALLERY.md#d53-img08) 직접 방어 전투 가독성 · [D53-IMG09](REFERENCE_GALLERY.md#d53-img09) 자율 방어와 시설 · [D53-IMG10](REFERENCE_GALLERY.md#d53-img10) 지상 거점 방어 · [D53-IMG11](REFERENCE_GALLERY.md#d53-img11) 피해 입은 거점 · [D53-IMG12](REFERENCE_GALLERY.md#d53-img12) 복구 및 재건.
 
 ## D54
-**실시간 플레이와 덱빌딩의 관계** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d54).
+**실시간 플레이와 덱빌딩의 관계** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d54).
 
-- 자체 설명 도식: [SVG-54: 직접 조작과 전술·운용 덱의 관계](visuals/54-deck-real-time-proposal.svg). 실제 아트 아님.
+- 자체 설명 도식: [SVG-54: 직접 조작과 전술·운용 덱의 관계](visuals/54-deck-real-time-proposal.svg) · [SVG-54B: 전술·운용 카드 6개 시각 예시 재구성](visuals/54-card-examples.svg). 실제 아트 아님.
+
+## D55
+**전술 덱과 운용 덱의 구성 및 연결** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d55).
+
+- 자체 설명 도식: [SVG-55: 역할별 덱과 공유 성장·교차 시너지](visuals/55-deck-connection-proposal.svg). 실제 아트 아님.
 

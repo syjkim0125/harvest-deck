@@ -3227,6 +3227,26 @@
       "path": "docs/planning/visuals/54-deck-real-time-proposal.svg",
       "purpose": "직접 조작과 전술·운용 덱의 관계",
       "mappingEvidence": "decision-specific original proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-54B",
+      "decisionIds": [
+        "D54"
+      ],
+      "path": "docs/planning/visuals/54-card-examples.svg",
+      "purpose": "전술·운용 카드 6개 시각 예시 재구성",
+      "mappingEvidence": "previous response card examples reconstructed; not exact rendered pixels",
+      "status": "local SVG; explanatory only"
+    },
+    {
+      "id": "SVG-55",
+      "decisionIds": [
+        "D55"
+      ],
+      "path": "docs/planning/visuals/55-deck-connection-proposal.svg",
+      "purpose": "역할별 덱과 공유 성장·교차 시너지",
+      "mappingEvidence": "decision-specific original proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -3237,9 +3257,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D54",
-    "approvedThrough": "D53",
-    "pending": "D54",
+    "decisionRange": "D01–D55",
+    "approvedThrough": "D54",
+    "pending": "D55",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 75,
