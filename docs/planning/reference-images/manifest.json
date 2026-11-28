@@ -2868,6 +2868,78 @@
       "galleryAnchor": "REFERENCE_GALLERY.md#d81-img03",
       "priority": "normal",
       "displayOrder": 3
+    },
+    {
+      "id": "D82-IMG01",
+      "decisionIds": [
+        "D82"
+      ],
+      "query": "pixel art sci fi damaged cargo freighter spaceship drifting asteroid field",
+      "purpose": "공급망 붕괴",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d82",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d82-img01",
+      "priority": "normal",
+      "displayOrder": 1
+    },
+    {
+      "id": "D82-IMG02",
+      "decisionIds": [
+        "D82"
+      ],
+      "query": "pixel art sci fi spaceship mechanic workshop interior repair shop",
+      "purpose": "위기 대응",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d82",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d82-img02",
+      "priority": "normal",
+      "displayOrder": 2
+    },
+    {
+      "id": "D82-IMG03",
+      "decisionIds": [
+        "D82"
+      ],
+      "query": "pixel art abandoned science fiction industrial shop dark interior",
+      "purpose": "사업 축소",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d82",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d82-img03",
+      "priority": "normal",
+      "displayOrder": 3
+    },
+    {
+      "id": "D82-IMG04",
+      "decisionIds": [
+        "D82"
+      ],
+      "query": "pixel art small spaceship exploring beautiful alien planet landscape adventure game",
+      "purpose": "새로운 시작",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d82",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d82-img04",
+      "priority": "normal",
+      "displayOrder": 4
     }
   ],
   "diagrams": [
@@ -3938,13 +4010,13 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D82",
-    "approvedThrough": "D81",
-    "pending": "D82",
+    "decisionRange": "D01–D83",
+    "approvedThrough": "D82",
+    "pending": "D83",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
-    "exactVisibleQueries": 85,
-    "missingChatRenderedImages": 113,
+    "exactVisibleQueries": 89,
+    "missingChatRenderedImages": 117,
     "missingIndividualVisualDecisions": [
       "D02",
       "D06",

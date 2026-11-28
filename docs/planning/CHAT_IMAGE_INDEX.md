@@ -1,8 +1,8 @@
 # 대화 이미지 검색 기록
 
-> 승인 81건 / 미결 D82. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 82건 / 미결 D83. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
-총 113건: 검색 문구 확인 85건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
+총 117건: 검색 문구 확인 89건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
 
 ## D19
 - [D19-IMG01](REFERENCE_GALLERY.md#d19-img01) · `Zelda breath of the wild vast open world landscape mountain forest village exploration gameplay` — 원문 미검증; 원본 미확보.
@@ -158,4 +158,10 @@
 - [D81-IMG01](REFERENCE_GALLERY.md#d81-img01) · `pixel art sci fi spaceship engine repair workshop game environment` — 문구 확인; 원본 미확보.
 - [D81-IMG02](REFERENCE_GALLERY.md#d81-img02) · `pixel art science fiction cargo spaceship loading warehouse game environment` — 문구 확인; 원본 미확보.
 - [D81-IMG03](REFERENCE_GALLERY.md#d81-img03) · `pixel art science fiction space station merchant trading market game environment` — 문구 확인; 원본 미확보.
+
+## D82
+- [D82-IMG01](REFERENCE_GALLERY.md#d82-img01) · `pixel art sci fi damaged cargo freighter spaceship drifting asteroid field` — 문구 확인; 원본 미확보.
+- [D82-IMG02](REFERENCE_GALLERY.md#d82-img02) · `pixel art sci fi spaceship mechanic workshop interior repair shop` — 문구 확인; 원본 미확보.
+- [D82-IMG03](REFERENCE_GALLERY.md#d82-img03) · `pixel art abandoned science fiction industrial shop dark interior` — 문구 확인; 원본 미확보.
+- [D82-IMG04](REFERENCE_GALLERY.md#d82-img04) · `pixel art small spaceship exploring beautiful alien planet landscape adventure game` — 문구 확인; 원본 미확보.
 
