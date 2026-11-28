@@ -4731,6 +4731,16 @@
       "purpose": "세계 사건→정보 전달→탐험/사업/무시→세계 변화",
       "mappingEvidence": "decision-specific reconstructed inline flow; not original",
       "status": "local SVG; explanatory only; structure approved, not final game art"
+    },
+    {
+      "id": "SVG-92",
+      "decisionIds": [
+        "D92"
+      ],
+      "path": "docs/planning/visuals/92-context-hud-proposal.svg",
+      "purpose": "항해·탐험·전투·함내의 상황별 최소 HUD 비교",
+      "mappingEvidence": "reconstructed from prior four inline UI schematics; not exact original",
+      "status": "local SVG; explanatory only; structure approved, not final game art"
     }
   ],
   "userCapture": {
@@ -4740,9 +4750,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D92",
-    "approvedThrough": "D91",
-    "pending": "D92",
+    "decisionRange": "D01–D93",
+    "approvedThrough": "D92",
+    "pending": "D93",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 129,

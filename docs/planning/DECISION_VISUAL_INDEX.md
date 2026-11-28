@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 91건 / 미결 D92. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 92건 / 미결 D93. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -516,7 +516,12 @@
 - 연결 개별 자료 없음; 이전 원문 미확보.
 
 ## D92
-**HUD와 상황별 정보 표시** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d92).
+**C. 최소 핵심 HUD + 상황에 따라 필요한 정보와 조작만 표시** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d92).
+
+- 자체 설명 도식: [SVG-92: 항해·탐험·전투·함내의 상황별 최소 HUD 비교](visuals/92-context-hud-proposal.svg). 실제 아트 아님.
+
+## D93
+**모바일 터치 조작 체계와 맥락별 입력** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d93).
 
 - 연결 개별 자료 없음; 이전 원문 미확보.
 
