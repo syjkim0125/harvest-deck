@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 89건 / 미결 D90. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 91건 / 미결 D92. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -506,7 +506,17 @@
 - 대화 이미지: [D89-IMG01](REFERENCE_GALLERY.md#d89-img01) 지역 소문 · [D89-IMG02](REFERENCE_GALLERY.md#d89-img02) 함선 통신 · [D89-IMG03](REFERENCE_GALLERY.md#d89-img03) 상인 · [D89-IMG04](REFERENCE_GALLERY.md#d89-img04) 동료 보고.
 
 ## D90
-**인게임 아트의 제작 방식과 시각적 밀도** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d90).
+**C. 회화적 환경 + 읽기 쉬운 스타일화 캐릭터·장비·UI, 통일된 시각 언어** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d90).
+
+- 대화 이미지: [D90-IMG01](REFERENCE_GALLERY.md#d90-img01) A 픽셀 참고 · [D90-IMG02](REFERENCE_GALLERY.md#d90-img02) A 픽셀 참고 · [D90-IMG03](REFERENCE_GALLERY.md#d90-img03) B 고밀도 참고 · [D90-IMG04](REFERENCE_GALLERY.md#d90-img04) B 고밀도 참고 · [D90-IMG05](REFERENCE_GALLERY.md#d90-img05) C 스타일 참고 · [D90-IMG06](REFERENCE_GALLERY.md#d90-img06) C 스타일 참고 · [D90-IMG07](REFERENCE_GALLERY.md#d90-img07) C 스타일 참고 · [D90-IMG08](REFERENCE_GALLERY.md#d90-img08) 환경 · [D90-IMG09](REFERENCE_GALLERY.md#d90-img09) 동료 · [D90-IMG10](REFERENCE_GALLERY.md#d90-img10) 함선 · [D90-IMG11](REFERENCE_GALLERY.md#d90-img11) UI.
+
+## D91
+**C. 기본은 중간 거리 + 상황별 부드러운 가변 줌** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d91).
+
+- 연결 개별 자료 없음; 이전 원문 미확보.
+
+## D92
+**HUD와 상황별 정보 표시** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d92).
 
 - 연결 개별 자료 없음; 이전 원문 미확보.
 

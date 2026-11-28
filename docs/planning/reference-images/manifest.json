@@ -3462,6 +3462,204 @@
       "galleryAnchor": "REFERENCE_GALLERY.md#d89-img04",
       "priority": "normal",
       "displayOrder": 4
+    },
+    {
+      "id": "D90-IMG01",
+      "decisionIds": [
+        "D90"
+      ],
+      "query": "Eastward game lush forest gameplay pixel art screenshot",
+      "purpose": "A 픽셀 참고",
+      "role": "alternative-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d90",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d90-img01",
+      "priority": "normal",
+      "displayOrder": 1
+    },
+    {
+      "id": "D90-IMG02",
+      "decisionIds": [
+        "D90"
+      ],
+      "query": "Hyper Light Drifter beautiful pixel art forest exploration gameplay",
+      "purpose": "A 픽셀 참고",
+      "role": "alternative-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d90",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d90-img02",
+      "priority": "normal",
+      "displayOrder": 2
+    },
+    {
+      "id": "D90-IMG03",
+      "decisionIds": [
+        "D90"
+      ],
+      "query": "Vanillaware Odin Sphere Leifthrasir lush forest gameplay hand painted background",
+      "purpose": "B 고밀도 참고",
+      "role": "alternative-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d90",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d90-img03",
+      "priority": "normal",
+      "displayOrder": 3
+    },
+    {
+      "id": "D90-IMG04",
+      "decisionIds": [
+        "D90"
+      ],
+      "query": "Vanillaware 13 Sentinels Aegis Rim beautiful detailed environment gameplay",
+      "purpose": "B 고밀도 참고",
+      "role": "alternative-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d90",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d90-img04",
+      "priority": "normal",
+      "displayOrder": 4
+    },
+    {
+      "id": "D90-IMG05",
+      "decisionIds": [
+        "D90"
+      ],
+      "query": "Hades 2 Crossroads lush hand painted environment gameplay",
+      "purpose": "C 스타일 참고",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d90",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d90-img05",
+      "priority": "normal",
+      "displayOrder": 5
+    },
+    {
+      "id": "D90-IMG06",
+      "decisionIds": [
+        "D90"
+      ],
+      "query": "Bastion Supergiant games colorful isometric hand painted forest gameplay",
+      "purpose": "C 스타일 참고",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d90",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d90-img06",
+      "priority": "normal",
+      "displayOrder": 6
+    },
+    {
+      "id": "D90-IMG07",
+      "decisionIds": [
+        "D90"
+      ],
+      "query": "Absolum game colorful forest character combat gameplay screenshot",
+      "purpose": "C 스타일 참고",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d90",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d90-img07",
+      "priority": "normal",
+      "displayOrder": 7
+    },
+    {
+      "id": "D90-IMG08",
+      "decisionIds": [
+        "D90"
+      ],
+      "query": "beautiful painterly 2d isometric alien forest environment fantasy science fiction bioluminescent plants game concept art",
+      "purpose": "환경",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d90",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d90-img08",
+      "priority": "normal",
+      "displayOrder": 8
+    },
+    {
+      "id": "D90-IMG09",
+      "decisionIds": [
+        "D90"
+      ],
+      "query": "cute original stylized alien creature companion hand painted 2d game character concept art round body large expressive eyes",
+      "purpose": "동료",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d90",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d90-img09",
+      "priority": "normal",
+      "displayOrder": 9
+    },
+    {
+      "id": "D90-IMG10",
+      "decisionIds": [
+        "D90"
+      ],
+      "query": "stylized hand painted science fiction small modular spaceship top down 2d game concept art",
+      "purpose": "함선",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d90",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d90-img10",
+      "priority": "normal",
+      "displayOrder": 10
+    },
+    {
+      "id": "D90-IMG11",
+      "decisionIds": [
+        "D90"
+      ],
+      "query": "Hades game beautifully illustrated minimal inventory item icons game UI",
+      "purpose": "UI",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d90",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d90-img11",
+      "priority": "normal",
+      "displayOrder": 11
     }
   ],
   "diagrams": [
@@ -4542,13 +4740,13 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D90",
-    "approvedThrough": "D89",
-    "pending": "D90",
+    "decisionRange": "D01–D92",
+    "approvedThrough": "D91",
+    "pending": "D92",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
-    "exactVisibleQueries": 118,
-    "missingChatRenderedImages": 146,
+    "exactVisibleQueries": 129,
+    "missingChatRenderedImages": 157,
     "missingIndividualVisualDecisions": [
       "D02",
       "D06",

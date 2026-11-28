@@ -1,8 +1,8 @@
 # 원본 및 캡처 복구 대기
 
-> 승인 89건 / 미결 D90. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 91건 / 미결 D92. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
-**연결 완료 ≠ 이미지 확보.** 정확한 채팅 원본/URL 미확보 146건. D01–D18 전체 목록 미복구. D31 사용자 캡처 저장 및 채팅 직접 캡처 성공 미확인. 외부 원격 이미지 파일/권리/렌더링 미검증.
+**연결 완료 ≠ 이미지 확보.** 정확한 채팅 원본/URL 미확보 157건. D01–D18 전체 목록 미복구. D31 사용자 캡처 저장 및 채팅 직접 캡처 성공 미확인. 외부 원격 이미지 파일/권리/렌더링 미검증.
 
 ## 대화 이미지 원본
 - [ ] [D19](DECISION_VISUAL_INDEX.md#d19): [D19-IMG01](REFERENCE_GALLERY.md#d19-img01) · [D19-IMG02](REFERENCE_GALLERY.md#d19-img02) · [D19-IMG03](REFERENCE_GALLERY.md#d19-img03) · [D19-IMG04](REFERENCE_GALLERY.md#d19-img04).
@@ -32,6 +32,7 @@
 - [ ] [D87](DECISION_VISUAL_INDEX.md#d87): [D87-IMG01](REFERENCE_GALLERY.md#d87-img01) · [D87-IMG02](REFERENCE_GALLERY.md#d87-img02) · [D87-IMG03](REFERENCE_GALLERY.md#d87-img03) · [D87-IMG04](REFERENCE_GALLERY.md#d87-img04) · [D87-IMG05](REFERENCE_GALLERY.md#d87-img05).
 - [ ] [D88](DECISION_VISUAL_INDEX.md#d88): [D88-IMG01](REFERENCE_GALLERY.md#d88-img01) · [D88-IMG02](REFERENCE_GALLERY.md#d88-img02) · [D88-IMG03](REFERENCE_GALLERY.md#d88-img03) · [D88-IMG04](REFERENCE_GALLERY.md#d88-img04) · [D88-IMG05](REFERENCE_GALLERY.md#d88-img05) · [D88-IMG06](REFERENCE_GALLERY.md#d88-img06) · [D88-IMG07](REFERENCE_GALLERY.md#d88-img07).
 - [ ] [D89](DECISION_VISUAL_INDEX.md#d89): [D89-IMG01](REFERENCE_GALLERY.md#d89-img01) · [D89-IMG02](REFERENCE_GALLERY.md#d89-img02) · [D89-IMG03](REFERENCE_GALLERY.md#d89-img03) · [D89-IMG04](REFERENCE_GALLERY.md#d89-img04).
+- [ ] [D90](DECISION_VISUAL_INDEX.md#d90): [D90-IMG01](REFERENCE_GALLERY.md#d90-img01) · [D90-IMG02](REFERENCE_GALLERY.md#d90-img02) · [D90-IMG03](REFERENCE_GALLERY.md#d90-img03) · [D90-IMG04](REFERENCE_GALLERY.md#d90-img04) · [D90-IMG05](REFERENCE_GALLERY.md#d90-img05) · [D90-IMG06](REFERENCE_GALLERY.md#d90-img06) · [D90-IMG07](REFERENCE_GALLERY.md#d90-img07) · [D90-IMG08](REFERENCE_GALLERY.md#d90-img08) · [D90-IMG09](REFERENCE_GALLERY.md#d90-img09) · [D90-IMG10](REFERENCE_GALLERY.md#d90-img10) · [D90-IMG11](REFERENCE_GALLERY.md#d90-img11).
 
 ## 이전 대화 및 캡처
 - [ ] D01–D18 원문/이미지 목록 — [색인](DECISION_VISUAL_INDEX.md). 개별 연결 없음: D02, D06, D09.

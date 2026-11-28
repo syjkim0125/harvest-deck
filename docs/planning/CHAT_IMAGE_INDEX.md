@@ -1,8 +1,8 @@
 # 대화 이미지 검색 기록
 
-> 승인 89건 / 미결 D90. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 91건 / 미결 D92. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
-총 146건: 검색 문구 확인 118건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
+총 157건: 검색 문구 확인 129건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
 
 ## D19
 - [D19-IMG01](REFERENCE_GALLERY.md#d19-img01) · `Zelda breath of the wild vast open world landscape mountain forest village exploration gameplay` — 원문 미검증; 원본 미확보.
@@ -203,4 +203,17 @@
 - [D89-IMG02](REFERENCE_GALLERY.md#d89-img02) · `pixel art science fiction spaceship cockpit communications radio holographic screen` — 문구 확인; 원본 미확보.
 - [D89-IMG03](REFERENCE_GALLERY.md#d89-img03) · `pixel art alien merchant space station marketplace trading goods futuristic game` — 문구 확인; 원본 미확보.
 - [D89-IMG04](REFERENCE_GALLERY.md#d89-img04) · `pixel art cozy spaceship bridge alien crew captain navigation computer interior game` — 문구 확인; 원본 미확보.
+
+## D90
+- [D90-IMG01](REFERENCE_GALLERY.md#d90-img01) · `Eastward game lush forest gameplay pixel art screenshot` — 문구 확인; 원본 미확보.
+- [D90-IMG02](REFERENCE_GALLERY.md#d90-img02) · `Hyper Light Drifter beautiful pixel art forest exploration gameplay` — 문구 확인; 원본 미확보.
+- [D90-IMG03](REFERENCE_GALLERY.md#d90-img03) · `Vanillaware Odin Sphere Leifthrasir lush forest gameplay hand painted background` — 문구 확인; 원본 미확보.
+- [D90-IMG04](REFERENCE_GALLERY.md#d90-img04) · `Vanillaware 13 Sentinels Aegis Rim beautiful detailed environment gameplay` — 문구 확인; 원본 미확보.
+- [D90-IMG05](REFERENCE_GALLERY.md#d90-img05) · `Hades 2 Crossroads lush hand painted environment gameplay` — 문구 확인; 원본 미확보.
+- [D90-IMG06](REFERENCE_GALLERY.md#d90-img06) · `Bastion Supergiant games colorful isometric hand painted forest gameplay` — 문구 확인; 원본 미확보.
+- [D90-IMG07](REFERENCE_GALLERY.md#d90-img07) · `Absolum game colorful forest character combat gameplay screenshot` — 문구 확인; 원본 미확보.
+- [D90-IMG08](REFERENCE_GALLERY.md#d90-img08) · `beautiful painterly 2d isometric alien forest environment fantasy science fiction bioluminescent plants game concept art` — 문구 확인; 원본 미확보.
+- [D90-IMG09](REFERENCE_GALLERY.md#d90-img09) · `cute original stylized alien creature companion hand painted 2d game character concept art round body large expressive eyes` — 문구 확인; 원본 미확보.
+- [D90-IMG10](REFERENCE_GALLERY.md#d90-img10) · `stylized hand painted science fiction small modular spaceship top down 2d game concept art` — 문구 확인; 원본 미확보.
+- [D90-IMG11](REFERENCE_GALLERY.md#d90-img11) · `Hades game beautifully illustrated minimal inventory item icons game UI` — 문구 확인; 원본 미확보.
 
