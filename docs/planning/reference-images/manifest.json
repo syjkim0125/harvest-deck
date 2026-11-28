@@ -3667,6 +3667,26 @@
       "path": "docs/planning/visuals/76-maintenance-proposal.svg",
       "purpose": "사건 기반 손상·응급 대응·자율 및 정식 수리",
       "mappingEvidence": "decision-specific original proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-76B",
+      "decisionIds": [
+        "D76"
+      ],
+      "path": "docs/planning/visuals/76-maintenance-examples.svg",
+      "purpose": "수리 비교·교전 손상·엔진실 기술자·상태·정비 사업체",
+      "mappingEvidence": "previous response visual examples reconstructed, not exact rendered pixels",
+      "status": "local SVG; explanatory only"
+    },
+    {
+      "id": "SVG-77",
+      "decisionIds": [
+        "D77"
+      ],
+      "path": "docs/planning/visuals/77-shop-operations-proposal.svg",
+      "purpose": "실제 매장·고객·직접 운영·동료 위임 비교",
+      "mappingEvidence": "decision-specific original proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -3677,9 +3697,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D76",
-    "approvedThrough": "D75",
-    "pending": "D76",
+    "decisionRange": "D01–D77",
+    "approvedThrough": "D76",
+    "pending": "D77",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 75,

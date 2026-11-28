@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 75건 / 미결 D76. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 76건 / 미결 D77. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -434,7 +434,12 @@
 - 자체 설명 도식: [SVG-75: 장비 기본 구조와 선택형 호환 부품·카드 적격성](visuals/75-equipment-modification-proposal.svg) · [SVG-75B: 개조 비교·동일 선체 3종·엔진 호환 슬롯·카드 적격성·전력 제약](visuals/75-equipment-examples.svg). 실제 아트 아님.
 
 ## D76
-**장비 손상·수리·유지보수** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d76).
+**장비 손상·수리·유지보수** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d76).
 
-- 자체 설명 도식: [SVG-76: 사건 기반 손상·응급 대응·자율 및 정식 수리](visuals/76-maintenance-proposal.svg). 실제 아트 아님.
+- 자체 설명 도식: [SVG-76: 사건 기반 손상·응급 대응·자율 및 정식 수리](visuals/76-maintenance-proposal.svg) · [SVG-76B: 수리 비교·교전 손상·엔진실 기술자·상태·정비 사업체](visuals/76-maintenance-examples.svg). 실제 아트 아님.
+
+## D77
+**상점·서비스 사업체의 직접 운영과 위임** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d77).
+
+- 자체 설명 도식: [SVG-77: 실제 매장·고객·직접 운영·동료 위임 비교](visuals/77-shop-operations-proposal.svg). 실제 아트 아님.
 

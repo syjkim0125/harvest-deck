@@ -466,9 +466,16 @@ D19 승인 구조 설명. 실제 행성 크기·지도 배치·갱신 규칙 미
 ![D75 개조·빌드·슬롯·카드·전력](visuals/75-equipment-examples.svg)
 설명용 재구성, 실제 수치/아트 아님.
 
-## 76. Maintenance (D76 미승인)
+## 76. Maintenance (D76 구조 승인)
 ![D76](visuals/76-maintenance-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d76). 사건 손상·자율 정비·위기 대응 후보.
+
+![D76 손상·엔진실·정비 사업체](visuals/76-maintenance-examples.svg)
+설명용 재구성, 실제 수치/아트 아님.
+
+## 77. Shop operations (D77 미승인)
+![D77](visuals/77-shop-operations-proposal.svg)
+[결정·예시](DECISION_VISUAL_INDEX.md#d77). 실제 재고·고객·선택 현장 운영·위임 후보.
 
 ## 다음 시각 자료
 STEP 4 핵심 방향 확정 이후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.
