@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 58건 / 미결 D59. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 59건 / 미결 D60. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -349,7 +349,12 @@
 - 자체 설명 도식: [SVG-58: 공통 전술 발동 자원과 기본 조작 독립](visuals/58-card-cost-proposal.svg) · [SVG-58B: 비용 비교 및 조건부 카드 4종 시각 예시 재구성](visuals/58-cost-examples.svg). 실제 아트 아님.
 
 ## D59
-**전술 에너지 회복과 전투 리듬** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d59).
+**전술 에너지 회복과 전투 리듬** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d59).
 
-- 자체 설명 도식: [SVG-59: 시간 기본 회복과 유효 행동 보너스 회복](visuals/59-energy-recovery-proposal.svg). 실제 아트 아님.
+- 자체 설명 도식: [SVG-59: 시간 기본 회복과 유효 행동 보너스 회복](visuals/59-energy-recovery-proposal.svg) · [SVG-59B: 회복 방식 A/B/C 그래프·교전 및 직업별 회복 예시 재구성](visuals/59-recovery-examples.svg). 실제 아트 아님.
+
+## D60
+**운용 덱의 발동·드로우·순환 방식** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d60).
+
+- 자체 설명 도식: [SVG-60: 활동 맥락별 운용 손패 및 작업 단계 순환](visuals/60-operations-draw-proposal.svg). 실제 아트 아님.
 

@@ -347,9 +347,16 @@ D19 승인 구조 설명. 실제 행성 크기·지도 배치·갱신 규칙 미
 ![D58 비교 및 조건부 카드](visuals/58-cost-examples.svg)
 [전술 에너지·손패 순환 인터랙션 재구성](prototypes/d58-card-energy.html). 실제 전투·회복 규칙 검증 아님.
 
-## 59. Energy recovery (D59 미승인)
+## 59. Energy recovery (D59 구조 승인)
 ![D59](visuals/59-energy-recovery-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d59). 기본 회복과 유효 행동 보너스의 개념. 실제 수치·UI 미확정.
+
+![D59 비교 및 전투 회복](visuals/59-recovery-examples.svg)
+[회복 인터랙션 재구성](prototypes/d59-energy-recovery.html). 실제 전투 판정·회복 수치 아님.
+
+## 60. Operations deck (D60 미승인)
+![D60](visuals/60-operations-draw-proposal.svg)
+[결정·예시](DECISION_VISUAL_INDEX.md#d60). 활동 맥락과 의미 있는 단계에 따른 손패 순환 후보. 실제 규칙·UI 미확정.
 
 ## 다음 시각 자료
 STEP 4 핵심 방향 확정 이후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.

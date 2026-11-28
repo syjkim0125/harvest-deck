@@ -3327,6 +3327,26 @@
       "path": "docs/planning/visuals/59-energy-recovery-proposal.svg",
       "purpose": "시간 기본 회복과 유효 행동 보너스 회복",
       "mappingEvidence": "decision-specific original proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-59B",
+      "decisionIds": [
+        "D59"
+      ],
+      "path": "docs/planning/visuals/59-recovery-examples.svg",
+      "purpose": "회복 방식 A/B/C 그래프·교전 및 직업별 회복 예시 재구성",
+      "mappingEvidence": "previous response visual examples reconstructed, not exact rendered pixels",
+      "status": "local SVG; explanatory only"
+    },
+    {
+      "id": "SVG-60",
+      "decisionIds": [
+        "D60"
+      ],
+      "path": "docs/planning/visuals/60-operations-draw-proposal.svg",
+      "purpose": "활동 맥락별 운용 손패 및 작업 단계 순환",
+      "mappingEvidence": "decision-specific original proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -3337,9 +3357,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D59",
-    "approvedThrough": "D58",
-    "pending": "D59",
+    "decisionRange": "D01–D60",
+    "approvedThrough": "D59",
+    "pending": "D60",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 75,
