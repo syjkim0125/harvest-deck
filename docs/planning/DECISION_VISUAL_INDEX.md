@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 80건 / 미결 D81. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 81건 / 미결 D82. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -460,7 +460,12 @@
 - 자체 설명 도식: [SVG-80: 작은 함선 상점에서 전문점·종합점·다점포로 선택 성장](visuals/80-business-growth-proposal.svg). 실제 아트 아님.
 
 ## D81
-**사업 경쟁·협력과 지역 시장 변화** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d81).
+**C. 실제 지역 경쟁·협력 + 중요 사업체의 개별 행동·나머지 집계** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d81).
+
+- 대화 이미지: [D81-IMG01](REFERENCE_GALLERY.md#d81-img01) 기술력 차별화 · [D81-IMG02](REFERENCE_GALLERY.md#d81-img02) 공급망 · [D81-IMG03](REFERENCE_GALLERY.md#d81-img03) 협력.
+
+## D82
+**경제적 위기·사업 실패와 재기** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d82).
 
 - 연결 개별 자료 없음; 이전 원문 미확보.
 

@@ -2814,6 +2814,60 @@
       "captureStatus": "missing; exact chat-rendered pixels unavailable",
       "priority": "normal",
       "displayOrder": 7
+    },
+    {
+      "id": "D81-IMG01",
+      "decisionIds": [
+        "D81"
+      ],
+      "query": "pixel art sci fi spaceship engine repair workshop game environment",
+      "purpose": "기술력 차별화",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d81",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d81-img01",
+      "priority": "normal",
+      "displayOrder": 1
+    },
+    {
+      "id": "D81-IMG02",
+      "decisionIds": [
+        "D81"
+      ],
+      "query": "pixel art science fiction cargo spaceship loading warehouse game environment",
+      "purpose": "공급망",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d81",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d81-img02",
+      "priority": "normal",
+      "displayOrder": 2
+    },
+    {
+      "id": "D81-IMG03",
+      "decisionIds": [
+        "D81"
+      ],
+      "query": "pixel art science fiction space station merchant trading market game environment",
+      "purpose": "협력",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d81",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d81-img03",
+      "priority": "normal",
+      "displayOrder": 3
     }
   ],
   "diagrams": [
@@ -3884,13 +3938,13 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D81",
-    "approvedThrough": "D80",
-    "pending": "D81",
+    "decisionRange": "D01–D82",
+    "approvedThrough": "D81",
+    "pending": "D82",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
-    "exactVisibleQueries": 82,
-    "missingChatRenderedImages": 110,
+    "exactVisibleQueries": 85,
+    "missingChatRenderedImages": 113,
     "missingIndividualVisualDecisions": [
       "D02",
       "D06",
