@@ -1,8 +1,0 @@
-Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
-
-variant,seconds,hits,cargo,ground,inventory,sold,pending_cash,collected_cash,max_shake_px
-baseline,18,38,0,0,26,4,0,20,0.000
-shake,18,38,0,0,26,4,0,20,5.333
-shake_sound,18,38,0,0,26,4,0,20,5.333
-shake_sound_reaction,18,38,0,0,26,4,0,20,5.333
-shake_sound_reaction_local,18,38,0,0,26,4,0,20,5.333

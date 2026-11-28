@@ -1,2 +1,3 @@
-# 통합 디자인 협업
-[실행 계약](DEV_EXECUTION_CONTRACT.md)과 [ART_DIRECTION](ART_DIRECTION.md) 우선. 매 개발 묶음에서 승인 D번호·참고 장면·독자 아트·씬/애니메이션/피드백·실제 모바일 캡처를 함께 완성한다. 별도 디자인 자동화는 중복 방지를 위해 중지 유지. 미확정 아트는 가역적 시안, 원작 IP 복제 금지. 기존 디자인 PR은 선별 검토.
+# DESIGN_HANDOFF
+
+Integrated development/design/QA. New original assets per slice. See ART_DIRECTION.md and planning/visuals/creature-concepts/README.md (reference only). No separate design backlog.

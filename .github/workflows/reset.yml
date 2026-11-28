@@ -1,0 +1,71 @@
+name: Clean reset validation
+on:
+  pull_request:
+    branches: [main]
+    paths: [".github/workflows/reset.yml"]
+  push:
+    branches: [main]
+    paths: [".github/workflows/reset.yml"]
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify planning-only baseline
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          for p in ["assets","scripts","tests","tools","checkpoints","project.godot","export_presets.cfg","main.tscn","mobile.tscn","sf_combat.tscn",".github/workflows/web.yml"]:
+              assert not Path(p).exists(), p
+          for p in ["docs/LIVING_GALAXY_VISION.md","docs/planning/SESSION_RESUME.md","docs/planning/DECISION_HISTORY.md","docs/planning/reference-images/manifest.json","docs/DEV_EXECUTION_CONTRACT.md","docs/DEV_PROGRESS.md","docs/planning/visuals/creature-concepts/creature-sheet-preview.webp"]:
+              assert Path(p).is_file(), p
+          print("Verified planning-only baseline")
+          PY
+  prune-retired-branches:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      RETIRED: '[{"name":"design/amber-mantis-combat-20261125-1916","sha":"d9066986b2569ac4b4958aacdad6aaf8ebcc7b65"},{"name":"design/creature-concept-archive-20261127","sha":"47764d71bdae9bc9906fd980a78f78956c4ee4d9"},{"name":"design/veilwood-discovery-20261125-manual","sha":"5e859ee5ab75203f8d61b1494a1e03639c2e414e"},{"name":"feat/sf-impact-stop-hit-confirm","sha":"fa60ff00c9cb0b7cd20a1eea93a20c46411fb94a"},{"name":"feature/living-galaxy-alpha","sha":"942175793303179c4fecd89f9f100de7a0255c43"},{"name":"feature/p0-charge-mobile-capture","sha":"66170105096c3f337f4eeef9b604450c7c24c26d"},{"name":"feature/p0-discovery-motion-release-proof","sha":"b21fecb2748fffea2b84fa6260f553b111f8253b"},{"name":"feature/sf-belt-scroll-prototype","sha":"15f1809fa987e4c4e9cecb491d0690cb83a8451a"},{"name":"feature/spatial-exploration-catchup","sha":"f3471d76218cd0e9613f4d47a2927ef61eeb8757"},{"name":"feature/veilwood-playable-quality-slice","sha":"924bfa026178dfee914346e6395e6b6b69d9c9fd"},{"name":"fix/p0-viewport-audio-regression","sha":"f4f32782accda777bf24be2fa7964dfd1e0043e6"},{"name":"fix/spatial-exploration-regression","sha":"5736a13a9ebd116dfd8bfd66dbb8964470af642c"},{"name":"legacy/harvest-deck-v0.8.11","sha":"049bc9f4f40682763a1f1c181e183105174a0181"},{"name":"planning/gdd-reset-20261126","sha":"d276097a4a82a6f2ce49ab1d7112671bf708660a"},{"name":"review/u007-impact-feedback","sha":"2350cfea697be3d0949d8fe76648bf3ba70c77b2"}]'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Delete only named retired refs at their recorded SHA
+        run: |
+          python3 - <<'PY'
+          import os, json, subprocess
+          assert os.environ["GITHUB_REPOSITORY"]=="syjkim0125/harvest-deck"
+          failed=[]
+          for item in json.loads(os.environ["RETIRED"]):
+              n=item["name"]; ref="refs/heads/"+n
+              assert n!="main" and not n.startswith("reset/")
+              r=subprocess.run(["git","ls-remote","--heads","origin",ref],capture_output=True,text=True)
+              if r.returncode:
+                  print("Read failed",n,r.stderr); failed.append(n); continue
+              if not r.stdout.strip():
+                  print("Already absent",n); continue
+              if r.stdout.split()[0]!=item["sha"]:
+                  print("Changed ref; skip",n); failed.append(n); continue
+              r=subprocess.run(["git","push","--force-with-lease="+ref+":"+item["sha"],"origin",":"+ref],capture_output=True,text=True)
+              print(n,r.returncode,r.stderr)
+              if r.returncode: failed.append(n)
+          # Temporary reset branch can be deleted only after its head is in main history.
+          ref="refs/heads/reset/void-caravan-clean-start"
+          r=subprocess.run(["git","ls-remote","--heads","origin",ref],capture_output=True,text=True)
+          if r.returncode: failed.append(ref)
+          elif r.stdout.strip():
+              sha=r.stdout.split()[0]
+              subprocess.run(["git","fetch","origin",ref],check=True)
+              if subprocess.run(["git","merge-base","--is-ancestor",sha,os.environ["GITHUB_SHA"]]).returncode==0:
+                  r=subprocess.run(["git","push","--force-with-lease="+ref+":"+sha,"origin",":"+ref],capture_output=True,text=True)
+                  print(ref,r.returncode,r.stderr)
+                  if r.returncode: failed.append(ref)
+              else:
+                  print("Temporary reset branch not an ancestor; retain",ref); failed.append(ref)
+          if failed: raise SystemExit("Unresolved: "+", ".join(failed))
+          PY

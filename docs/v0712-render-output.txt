@@ -1,3 +1,0 @@
-Visible native terminal: OpenGL/Mesa llvmpipe; ALSA unavailable -> Dummy audio.
-COMFORT_RENDER 10 samples / 0..75ms; last_offset=(0.0, 0.0)
-Scripted pulse fixture, not human play.
