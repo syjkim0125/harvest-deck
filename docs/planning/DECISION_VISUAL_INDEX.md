@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 92건 / 미결 D93. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 93건 / 미결 D94. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -521,7 +521,12 @@
 - 자체 설명 도식: [SVG-92: 항해·탐험·전투·함내의 상황별 최소 HUD 비교](visuals/92-context-hud-proposal.svg). 실제 아트 아님.
 
 ## D93
-**모바일 터치 조작 체계와 맥락별 입력** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d93).
+**C. 공통 직접 조작 + 맥락별 터치 행동·최소 명시적 버튼** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d93).
+
+- 자체 설명 도식: [SVG-93: 고정 버튼/제스처 전용/맥락 혼합 조작 비교 및 이동·상호작용·전투·카드 예시](visuals/93-mobile-input-proposal.svg). 실제 아트 아님.
+
+## D94
+**게임 정보의 시각적·청각적 피드백과 접근성** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d94).
 
 - 연결 개별 자료 없음; 이전 원문 미확보.
 

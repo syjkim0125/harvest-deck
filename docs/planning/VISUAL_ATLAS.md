@@ -494,3 +494,5 @@ STEP 4 핵심 방향 확정 이후 실제 쿼터뷰 탐험 장면과 자유 드�
 - D89 [정보망과 사건 선택 도식](visuals/89-information-network-proposal.svg) — 이전 인라인 흐름 재구성, 설명용.
 
 - D92 [4개 상황 HUD 비교](visuals/92-context-hud-proposal.svg) — 기존 인라인 설명 도식 재구성, 최종 디자인 아님.
+
+- D93 [모바일 터치 입력 비교](visuals/93-mobile-input-proposal.svg) — 기존 인라인 설명의 재구성, 최종 조작 UI 아님.

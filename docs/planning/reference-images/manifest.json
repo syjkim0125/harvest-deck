@@ -4741,6 +4741,16 @@
       "purpose": "항해·탐험·전투·함내의 상황별 최소 HUD 비교",
       "mappingEvidence": "reconstructed from prior four inline UI schematics; not exact original",
       "status": "local SVG; explanatory only; structure approved, not final game art"
+    },
+    {
+      "id": "SVG-93",
+      "decisionIds": [
+        "D93"
+      ],
+      "path": "docs/planning/visuals/93-mobile-input-proposal.svg",
+      "purpose": "고정 버튼/제스처 전용/맥락 혼합 조작 비교 및 이동·상호작용·전투·카드 예시",
+      "mappingEvidence": "reconstructed from prior inline comparison and action examples; not exact original",
+      "status": "local SVG; explanatory only; structure approved, not final game art"
     }
   ],
   "userCapture": {
@@ -4750,9 +4760,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D93",
-    "approvedThrough": "D92",
-    "pending": "D93",
+    "decisionRange": "D01–D94",
+    "approvedThrough": "D93",
+    "pending": "D94",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 129,
