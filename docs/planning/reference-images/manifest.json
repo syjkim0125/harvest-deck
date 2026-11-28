@@ -3467,6 +3467,26 @@
       "path": "docs/planning/visuals/66-deck-size-proposal.svg",
       "purpose": "역할별 제한 덱 크기와 일반/고유 카드 중복 차등",
       "mappingEvidence": "decision-specific original proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-66B",
+      "decisionIds": [
+        "D66"
+      ],
+      "path": "docs/planning/visuals/66-deck-size-examples.svg",
+      "purpose": "A/B/C 덱 크기·중복 비교와 3종 빌드",
+      "mappingEvidence": "previous response visual examples reconstructed, not exact rendered pixels",
+      "status": "local SVG; explanatory only"
+    },
+    {
+      "id": "SVG-67",
+      "decisionIds": [
+        "D67"
+      ],
+      "path": "docs/planning/visuals/67-cross-deck-synergy-proposal.svg",
+      "purpose": "실제 세계의 결과를 매개로 한 교차 시너지 및 독립 성장 경로",
+      "mappingEvidence": "decision-specific original proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -3477,9 +3497,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D66",
-    "approvedThrough": "D65",
-    "pending": "D66",
+    "decisionRange": "D01–D67",
+    "approvedThrough": "D66",
+    "pending": "D67",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 75,

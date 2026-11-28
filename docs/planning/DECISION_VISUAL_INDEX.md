@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 65건 / 미결 D66. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 66건 / 미결 D67. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -384,7 +384,12 @@
 - 자체 설명 도식: [SVG-65: 안전 준비·위험 중 제한·위험 해제 후 재구성](visuals/65-deck-editing-proposal.svg) · [SVG-65B: 편집 방식 A/B/C 비교 및 행성 착륙 전 준비 재구성](visuals/65-deck-editing-examples.svg). 실제 아트 아님.
 
 ## D66
-**덱 크기·중복 카드·구성 제한** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d66).
+**덱 크기·중복 카드·구성 제한** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d66).
 
-- 자체 설명 도식: [SVG-66: 역할별 제한 덱 크기와 일반/고유 카드 중복 차등](visuals/66-deck-size-proposal.svg). 실제 아트 아님.
+- 자체 설명 도식: [SVG-66: 역할별 제한 덱 크기와 일반/고유 카드 중복 차등](visuals/66-deck-size-proposal.svg) · [SVG-66B: A/B/C 덱 크기·중복 비교와 3종 빌드](visuals/66-deck-size-examples.svg). 실제 아트 아님.
+
+## D67
+**전술 덱과 운용 덱의 교차 시너지** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d67).
+
+- 자체 설명 도식: [SVG-67: 실제 세계의 결과를 매개로 한 교차 시너지 및 독립 성장 경로](visuals/67-cross-deck-synergy-proposal.svg). 실제 아트 아님.
 
