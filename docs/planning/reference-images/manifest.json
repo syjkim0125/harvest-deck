@@ -3387,6 +3387,26 @@
       "path": "docs/planning/visuals/62-card-acquisition-proposal.svg",
       "purpose": "활동 기반 발견·선택 보상과 목표형 획득 경로",
       "mappingEvidence": "decision-specific original proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-62B",
+      "decisionIds": [
+        "D62"
+      ],
+      "path": "docs/planning/visuals/62-acquisition-examples.svg",
+      "purpose": "획득 방식 비교·쿼터뷰 유물·해금 조건 관계 재구성",
+      "mappingEvidence": "previous response visual examples reconstructed, not exact rendered pixels",
+      "status": "local SVG; explanatory only"
+    },
+    {
+      "id": "SVG-63",
+      "decisionIds": [
+        "D63"
+      ],
+      "path": "docs/planning/visuals/63-card-ownership-proposal.svg",
+      "purpose": "카드 지식 보존과 발동 조건·개인 고유 능력 구분",
+      "mappingEvidence": "decision-specific original proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -3397,9 +3417,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D62",
-    "approvedThrough": "D61",
-    "pending": "D62",
+    "decisionRange": "D01–D63",
+    "approvedThrough": "D62",
+    "pending": "D63",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 75,

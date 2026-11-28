@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 61건 / 미결 D62. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 62건 / 미결 D63. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -364,7 +364,12 @@
 - 자체 설명 도식: [SVG-61: 실제 비용·선택 기회와 동료 위임 정책의 연결](visuals/61-operations-cost-delegation-proposal.svg) · [SVG-61B: A/B/C 운용 비용 비교와 쿼터뷰 상점·운용 카드 예시 재구성](visuals/61-operations-examples.svg). 실제 아트 아님.
 
 ## D62
-**카드 획득과 성장 기회의 연결** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d62).
+**카드 획득과 성장 기회의 연결** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d62).
 
-- 자체 설명 도식: [SVG-62: 활동 기반 발견·선택 보상과 목표형 획득 경로](visuals/62-card-acquisition-proposal.svg). 실제 아트 아님.
+- 자체 설명 도식: [SVG-62: 활동 기반 발견·선택 보상과 목표형 획득 경로](visuals/62-card-acquisition-proposal.svg) · [SVG-62B: 획득 방식 비교·쿼터뷰 유물·해금 조건 관계 재구성](visuals/62-acquisition-examples.svg). 실제 아트 아님.
+
+## D63
+**카드 소유권과 동료·장비 상실의 영향** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d63).
+
+- 자체 설명 도식: [SVG-63: 카드 지식 보존과 발동 조건·개인 고유 능력 구분](visuals/63-card-ownership-proposal.svg). 실제 아트 아님.
 
