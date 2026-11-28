@@ -1,10 +1,10 @@
 # 참고 이미지 갤러리
 
-> 승인 77건 / 미결 D78. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 78건 / 미결 D79. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
-[결정별 찾아보기](DECISION_VISUAL_INDEX.md) · [자체 도식 103개](VISUAL_ATLAS.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md).
+[결정별 찾아보기](DECISION_VISUAL_INDEX.md) · [자체 도식 104개](VISUAL_ATLAS.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md).
 
-외부 URL 38개는 원격 임베드(렌더링·권리·바이트 미검증), 대화 참조 103건은 원본 상태를 표시. 과거 표시 이미지와 동일성 미확인. 사용자 선호는 최종 아트 승인 아님.
+외부 URL 38개는 원격 임베드(렌더링·권리·바이트 미검증), 대화 참조 110건은 원본 상태를 표시. 과거 표시 이미지와 동일성 미확인. 사용자 선호는 최종 아트 승인 아님.
 
 ## 사용자 선호 시각 예시 (D36)
 ### D36-IMG01
@@ -21,7 +21,6 @@
 
 ### D36-IMG05
 탐색 전문가 — 폭포·유적 뒤 숨은 우회로 발견; 가림과 환경 단서. [D36](DECISION_VISUAL_INDEX.md#d36) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d36) · [검색 기록](CHAT_IMAGE_INDEX.md#d36). 원본/캡처 미확보. 사용자 선호.
-
 
 ## 현재 기획 참고 이미지
 
@@ -587,6 +586,27 @@ C 분쟁 구조. [D53](DECISION_VISUAL_INDEX.md#d53) · [당시 예시](EXAMPLE_
 
 ### D53-IMG12
 복구 및 재건. [D53](DECISION_VISUAL_INDEX.md#d53) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d53) · [검색 기록](CHAT_IMAGE_INDEX.md#d53). 원본/캡처 미확보.
+
+### D78-IMG01
+A 주문 목록·메뉴 선택. [D78](DECISION_VISUAL_INDEX.md#d78) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d78) · [검색 기록](CHAT_IMAGE_INDEX.md#d78). 원본/캡처 미확보.
+
+### D78-IMG02
+B 모든 작업 직접 조작. [D78](DECISION_VISUAL_INDEX.md#d78) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d78) · [검색 기록](CHAT_IMAGE_INDEX.md#d78). 원본/캡처 미확보.
+
+### D78-IMG03
+C 직접 이동·핵심 작업. [D78](DECISION_VISUAL_INDEX.md#d78) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d78) · [검색 기록](CHAT_IMAGE_INDEX.md#d78). 원본/캡처 미확보.
+
+### D78-IMG04
+외계 식당. [D78](DECISION_VISUAL_INDEX.md#d78) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d78) · [검색 기록](CHAT_IMAGE_INDEX.md#d78). 원본/캡처 미확보.
+
+### D78-IMG05
+장비점. [D78](DECISION_VISUAL_INDEX.md#d78) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d78) · [검색 기록](CHAT_IMAGE_INDEX.md#d78). 원본/캡처 미확보.
+
+### D78-IMG06
+정비소. [D78](DECISION_VISUAL_INDEX.md#d78) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d78) · [검색 기록](CHAT_IMAGE_INDEX.md#d78). 원본/캡처 미확보.
+
+### D78-IMG07
+유물 거래소. [D78](DECISION_VISUAL_INDEX.md#d78) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d78) · [검색 기록](CHAT_IMAGE_INDEX.md#d78). 원본/캡처 미확보.
 
 ## 공식 미디어
 - **Absolum**: [공식/PR](https://www.dotemu.com/PressKit/project/Games/Absolum) · [압축파일](https://www.dotemu.com/PressKit/cache/Games/Absolum/images.zip) — 공식 이미지 ZIP 링크 확인; 웹 다운로드 403.

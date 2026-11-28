@@ -1,8 +1,8 @@
 # 대화 이미지 검색 기록
 
-> 승인 77건 / 미결 D78. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 78건 / 미결 D79. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
-총 103건: 검색 문구 확인 75건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
+총 110건: 검색 문구 확인 82건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
 
 ## D19
 - [D19-IMG01](REFERENCE_GALLERY.md#d19-img01) · `Zelda breath of the wild vast open world landscape mountain forest village exploration gameplay` — 원문 미검증; 원본 미확보.
@@ -144,4 +144,13 @@
 - [D53-IMG10](REFERENCE_GALLERY.md#d53-img10) · `isometric science fiction planetary outpost battle combat game concept art` — 문구 확인; 원본 미확보.
 - [D53-IMG11](REFERENCE_GALLERY.md#d53-img11) · `damaged science fiction colony outpost after battle ruins concept art` — 문구 확인; 원본 미확보.
 - [D53-IMG12](REFERENCE_GALLERY.md#d53-img12) · `science fiction colony rebuilding construction repair robots outpost concept art` — 문구 확인; 원본 미확보.
+
+## D78
+- [D78-IMG01](REFERENCE_GALLERY.md#d78-img01) · `Potion Craft alchemist simulator customer shop interface gameplay` — 문구 확인; 원본 미확보.
+- [D78-IMG02](REFERENCE_GALLERY.md#d78-img02) · `Overcooked 2 kitchen cooking gameplay restaurant serving` — 문구 확인; 원본 미확보.
+- [D78-IMG03](REFERENCE_GALLERY.md#d78-img03) · `Dave the Diver Bancho Sushi restaurant serving customers gameplay` — 문구 확인; 원본 미확보.
+- [D78-IMG04](REFERENCE_GALLERY.md#d78-img04) · `pixel art sci fi alien restaurant interior game` — 문구 확인; 원본 미확보.
+- [D78-IMG05](REFERENCE_GALLERY.md#d78-img05) · `pixel art science fiction weapon merchant workshop interior game` — 문구 확인; 원본 미확보.
+- [D78-IMG06](REFERENCE_GALLERY.md#d78-img06) · `pixel art spaceship mechanical repair workshop interior game` — 문구 확인; 원본 미확보.
+- [D78-IMG07](REFERENCE_GALLERY.md#d78-img07) · `pixel art sci fi alien artifact relic merchant shop interior` — 문구 확인; 원본 미확보.
 

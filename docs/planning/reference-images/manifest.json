@@ -2667,6 +2667,153 @@
       "captureStatus": "missing; exact chat-rendered pixels unavailable; group returned image count unknown",
       "priority": "normal",
       "displayOrder": 12
+    },
+    {
+      "id": "D78-IMG01",
+      "decisionIds": [
+        "D78"
+      ],
+      "query": "Potion Craft alchemist simulator customer shop interface gameplay",
+      "purpose": "A 주문 목록·메뉴 선택",
+      "role": "unselected-alternative",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트/원작 시스템·UI 승인 아님; 미선택 대안은 구현 기준 금지",
+      "conversationSection": "D78 선택지 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d78",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d78-img01",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal",
+      "displayOrder": 1
+    },
+    {
+      "id": "D78-IMG02",
+      "decisionIds": [
+        "D78"
+      ],
+      "query": "Overcooked 2 kitchen cooking gameplay restaurant serving",
+      "purpose": "B 모든 작업 직접 조작",
+      "role": "unselected-alternative",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트/원작 시스템·UI 승인 아님; 미선택 대안은 구현 기준 금지",
+      "conversationSection": "D78 선택지 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d78",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d78-img02",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal",
+      "displayOrder": 2
+    },
+    {
+      "id": "D78-IMG03",
+      "decisionIds": [
+        "D78"
+      ],
+      "query": "Dave the Diver Bancho Sushi restaurant serving customers gameplay",
+      "purpose": "C 직접 이동·핵심 작업",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트/원작 시스템·UI 승인 아님; 미선택 대안은 구현 기준 금지",
+      "conversationSection": "D78 선택지 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d78",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d78-img03",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal",
+      "displayOrder": 3
+    },
+    {
+      "id": "D78-IMG04",
+      "decisionIds": [
+        "D78"
+      ],
+      "query": "pixel art sci fi alien restaurant interior game",
+      "purpose": "외계 식당",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트/원작 시스템·UI 승인 아님; 미선택 대안은 구현 기준 금지",
+      "conversationSection": "D78 구체 플레이 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d78",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d78-img04",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal",
+      "displayOrder": 4
+    },
+    {
+      "id": "D78-IMG05",
+      "decisionIds": [
+        "D78"
+      ],
+      "query": "pixel art science fiction weapon merchant workshop interior game",
+      "purpose": "장비점",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트/원작 시스템·UI 승인 아님; 미선택 대안은 구현 기준 금지",
+      "conversationSection": "D78 구체 플레이 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d78",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d78-img05",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal",
+      "displayOrder": 5
+    },
+    {
+      "id": "D78-IMG06",
+      "decisionIds": [
+        "D78"
+      ],
+      "query": "pixel art spaceship mechanical repair workshop interior game",
+      "purpose": "정비소",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트/원작 시스템·UI 승인 아님; 미선택 대안은 구현 기준 금지",
+      "conversationSection": "D78 구체 플레이 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d78",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d78-img06",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal",
+      "displayOrder": 6
+    },
+    {
+      "id": "D78-IMG07",
+      "decisionIds": [
+        "D78"
+      ],
+      "query": "pixel art sci fi alien artifact relic merchant shop interior",
+      "purpose": "유물 거래소",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트/원작 시스템·UI 승인 아님; 미선택 대안은 구현 기준 금지",
+      "conversationSection": "D78 구체 플레이 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d78",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d78-img07",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal",
+      "displayOrder": 7
     }
   ],
   "diagrams": [
@@ -3707,6 +3854,16 @@
       "path": "docs/planning/visuals/78-shop-controls-proposal.svg",
       "purpose": "직접 이동·맥락 상호작용·짧은 주문 루프",
       "mappingEvidence": "decision-specific original proposal",
+      "status": "local SVG; explanatory only; structure approved, not final game art"
+    },
+    {
+      "id": "SVG-79",
+      "decisionIds": [
+        "D79"
+      ],
+      "path": "docs/planning/visuals/79-customer-reputation-proposal.svg",
+      "purpose": "품질·신뢰→단골→소문·평판→새 고객·계약·탐험 기회",
+      "mappingEvidence": "decision-specific proposal; reconstructed inline flow",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -3717,13 +3874,13 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D78",
-    "approvedThrough": "D77",
-    "pending": "D78",
+    "decisionRange": "D01–D79",
+    "approvedThrough": "D78",
+    "pending": "D79",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
-    "exactVisibleQueries": 75,
-    "missingChatRenderedImages": 103,
+    "exactVisibleQueries": 82,
+    "missingChatRenderedImages": 110,
     "missingIndividualVisualDecisions": [
       "D02",
       "D06",
@@ -3731,7 +3888,7 @@
     ],
     "screenshot": "Prior attempt did not obtain a saved capture. Direct chat UI screenshot capability not established. D31 capture remains unrecovered.",
     "recoverySearch": "Prior retrieval yielded summaries, not a complete transcript or rendered images.",
-    "provenanceNote": "D19–D26 28건 재구성 또는 원문 미검증. D28–D36 31건 응답 기록 검색 문구. 모두 실제 표시 원본 미확보. D48 직전 응답의 정확한 검색 문구 7건 추가; 표시 원본 미확보. D49 검색 문구 9건 추가; 원본 미확보. D50 검색 문구 7건 추가; 원본 미확보. D51 검색 문구 9건 및 새 대체 참고 URL 8건 추가; 이전 표시 원본 미확보. D53 검색 문구 12건(실제 반환 이미지 수 미확인), 새 대체 참고 URL 4건; 과거 원본 미확보.",
+    "provenanceNote": "D19–D26 28건 재구성 또는 원문 미검증. D28–D36 31건 응답 기록 검색 문구. 모두 실제 표시 원본 미확보. D48 직전 응답의 정확한 검색 문구 7건 추가; 표시 원본 미확보. D49 검색 문구 9건 추가; 원본 미확보. D50 검색 문구 7건 추가; 원본 미확보. D51 검색 문구 9건 및 새 대체 참고 URL 8건 추가; 이전 표시 원본 미확보. D53 검색 문구 12건(실제 반환 이미지 수 미확인), 새 대체 참고 URL 4건; 과거 원본 미확보. D78 검색 문구 7건 추가; 표시 원본/URL 미확보.",
     "latestDownloadAttempt": {
       "date": "2026-11-27",
       "knownUrls": 26,
