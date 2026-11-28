@@ -2877,6 +2877,26 @@
       "path": "docs/planning/visuals/52-outpost-logistics-proposal.svg",
       "purpose": "자율 운영·실물 수송·위기 개입",
       "mappingEvidence": "decision-specific original proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-52B",
+      "decisionIds": [
+        "D52"
+      ],
+      "path": "docs/planning/visuals/52-outpost-crew-operations.svg",
+      "purpose": "채굴·연구·판매 담당 동료 작업 예시 재구성",
+      "mappingEvidence": "previous response inline SVG reconstructed",
+      "status": "local SVG; explanatory only"
+    },
+    {
+      "id": "SVG-53",
+      "decisionIds": [
+        "D53"
+      ],
+      "path": "docs/planning/visuals/53-outpost-defense-proposal.svg",
+      "purpose": "위험 감지·대응·결과 및 복구 흐름",
+      "mappingEvidence": "decision-specific original proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -2887,9 +2907,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D52",
-    "approvedThrough": "D51",
-    "pending": "D52",
+    "decisionRange": "D01–D53",
+    "approvedThrough": "D52",
+    "pending": "D53",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 63,

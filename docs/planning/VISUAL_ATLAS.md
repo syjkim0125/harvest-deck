@@ -299,9 +299,16 @@ D19 승인 구조 설명. 실제 행성 크기·지도 배치·갱신 규칙 미
 ![D51](visuals/51-outpost-acquisition-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d51). 임대·복구·신규 모듈 건설의 비교. 실제 아트·UI 아님.
 
-## 52. Outpost operations and logistics (D52 미승인)
+## 52. Outpost operations and logistics (D52 구조 승인)
 ![D52](visuals/52-outpost-logistics-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d52). 자율 운영·수송·위기 대응 설명. 실제 아트·UI 아님.
+
+![D52 동료 운영](visuals/52-outpost-crew-operations.svg)
+[물류 위기 인터랙션 재구성](prototypes/d52-logistics-crisis.html). 이전 예시의 설명용 재구성, 실제 게임 로직 아님.
+
+## 53. Outpost defense and disputes (D53 미승인)
+![D53](visuals/53-outpost-defense-proposal.svg)
+[결정·예시](DECISION_VISUAL_INDEX.md#d53). 위험 감지·위임/직접 대응·복구 기회 설명. 실제 아트·UI 아님.
 
 ## 다음 시각 자료
 STEP 4 핵심 방향 확정 이후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.

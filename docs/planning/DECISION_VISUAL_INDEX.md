@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 51건 / 미결 D52. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 52건 / 미결 D53. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -312,7 +312,12 @@
 - 대화 이미지: [D51-IMG01](REFERENCE_GALLERY.md#d51-img01) A 기존 시설 · [D51-IMG02](REFERENCE_GALLERY.md#d51-img02) B 타일 건설 · [D51-IMG03](REFERENCE_GALLERY.md#d51-img03) C 모듈 건설 · [D51-IMG04](REFERENCE_GALLERY.md#d51-img04) 상점 · [D51-IMG05](REFERENCE_GALLERY.md#d51-img05) 장비 상점 · [D51-IMG06](REFERENCE_GALLERY.md#d51-img06) 폐시설 발견 · [D51-IMG07](REFERENCE_GALLERY.md#d51-img07) 복구 후 연구 · [D51-IMG08](REFERENCE_GALLERY.md#d51-img08) 소형 전초기지 · [D51-IMG09](REFERENCE_GALLERY.md#d51-img09) 확장 거점.
 
 ## D52
-**거점 운영·물류와 플레이어 개입 범위** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d52).
+**거점 운영·물류와 플레이어 개입 범위** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d52).
 
-- 자체 설명 도식: [SVG-52: 자율 운영·실물 수송·위기 개입](visuals/52-outpost-logistics-proposal.svg). 실제 아트 아님.
+- 자체 설명 도식: [SVG-52: 자율 운영·실물 수송·위기 개입](visuals/52-outpost-logistics-proposal.svg) · [SVG-52B: 채굴·연구·판매 담당 동료 작업 예시 재구성](visuals/52-outpost-crew-operations.svg). 실제 아트 아님.
+
+## D53
+**거점 방어·분쟁과 손실 방식** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d53).
+
+- 자체 설명 도식: [SVG-53: 위험 감지·대응·결과 및 복구 흐름](visuals/53-outpost-defense-proposal.svg). 실제 아트 아님.
 
