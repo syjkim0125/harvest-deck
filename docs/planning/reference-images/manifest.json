@@ -3447,6 +3447,26 @@
       "path": "docs/planning/visuals/65-deck-editing-proposal.svg",
       "purpose": "안전 준비·위험 중 제한·위험 해제 후 재구성",
       "mappingEvidence": "decision-specific original proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-65B",
+      "decisionIds": [
+        "D65"
+      ],
+      "path": "docs/planning/visuals/65-deck-editing-examples.svg",
+      "purpose": "편집 방식 A/B/C 비교 및 행성 착륙 전 준비 재구성",
+      "mappingEvidence": "previous response visual examples reconstructed, not exact rendered pixels",
+      "status": "local SVG; explanatory only"
+    },
+    {
+      "id": "SVG-66",
+      "decisionIds": [
+        "D66"
+      ],
+      "path": "docs/planning/visuals/66-deck-size-proposal.svg",
+      "purpose": "역할별 제한 덱 크기와 일반/고유 카드 중복 차등",
+      "mappingEvidence": "decision-specific original proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -3457,9 +3477,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D65",
-    "approvedThrough": "D64",
-    "pending": "D65",
+    "decisionRange": "D01–D66",
+    "approvedThrough": "D65",
+    "pending": "D66",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 75,

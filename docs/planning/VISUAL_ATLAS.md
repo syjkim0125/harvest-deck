@@ -389,9 +389,16 @@ D19 승인 구조 설명. 실제 행성 크기·지도 배치·갱신 규칙 미
 ![D64 비교·연구·성장](visuals/64-specialization-examples.svg)
 [EMP 특화 인터랙션 재구성](prototypes/d64-emp-specialization.html). 실제 범위·비용·강화 규칙 아님.
 
-## 65. Deck editing (D65 미승인)
+## 65. Deck editing (D65 구조 승인)
 ![D65](visuals/65-deck-editing-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d65). 안전 준비 및 위험 중 편집 제한 후보. 실제 편집 규칙 미확정.
+
+![D65 비교·착륙 전 준비](visuals/65-deck-editing-examples.svg)
+[프리셋·위험 상태 인터랙션 재구성](prototypes/d65-deck-editing.html). 실제 안전 판정·덱 편집 규칙 아님.
+
+## 66. Deck size (D66 미승인)
+![D66](visuals/66-deck-size-proposal.svg)
+[결정·예시](DECISION_VISUAL_INDEX.md#d66). 제한 범위·일반/고유 중복 차등 후보. 수치 미확정.
 
 ## 다음 시각 자료
 STEP 4 핵심 방향 확정 이후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.
