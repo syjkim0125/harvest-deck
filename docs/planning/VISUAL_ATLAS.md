@@ -452,9 +452,16 @@ D19 승인 구조 설명. 실제 행성 크기·지도 배치·갱신 규칙 미
 ![D73 비교·지도·계약·카드](visuals/73-market-examples.svg)
 [거래 수량 인터랙션 재구성](prototypes/d73-trade-quantity.html). 실제 시장 가격 공식 아님.
 
-## 74. Crafting (D74 미승인)
+## 74. Crafting (D74 구조 승인)
 ![D74](visuals/74-crafting-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d74). 기본 제작·특화·위임 후보. 실제 레시피/수치 미확정.
+
+![D74 제작실·특화·생산 위임·카드](visuals/74-crafting-examples.svg)
+설명용 재구성, 실제 수치/아트 아님.
+
+## 75. Equipment modification (D75 미승인)
+![D75](visuals/75-equipment-modification-proposal.svg)
+[결정·예시](DECISION_VISUAL_INDEX.md#d75). 호환 모듈·선택형 개조 후보. 실제 규격 미확정.
 
 ## 다음 시각 자료
 STEP 4 핵심 방향 확정 이후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.

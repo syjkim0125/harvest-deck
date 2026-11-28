@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 73건 / 미결 D74. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 74건 / 미결 D75. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -424,7 +424,12 @@
 - 자체 설명 도식: [SVG-73: 지역별 수급 가격 및 수량별 거래 영향, 선택적 계약](visuals/73-market-trade-proposal.svg) · [SVG-73B: A/B/C 거래 비교·교역 지도·계약 유형·운용 카드](visuals/73-market-examples.svg). 실제 아트 아님.
 
 ## D74
-**장비·상품 제작의 직접 플레이와 생산 위임** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d74).
+**장비·상품 제작의 직접 플레이와 생산 위임** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d74).
 
-- 자체 설명 도식: [SVG-74: 간편 기본 제작·특화 선택·반복 생산 위임](visuals/74-crafting-proposal.svg). 실제 아트 아님.
+- 자체 설명 도식: [SVG-74: 간편 기본 제작·특화 선택·반복 생산 위임](visuals/74-crafting-proposal.svg) · [SVG-74B: 제작 비교·함선 제작실·수리 키트·엔진 특화·생산 위임·운용 카드](visuals/74-crafting-examples.svg). 실제 아트 아님.
+
+## D75
+**장비 개조와 모듈 호환성** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d75).
+
+- 자체 설명 도식: [SVG-75: 장비 기본 구조와 선택형 호환 부품·카드 적격성](visuals/75-equipment-modification-proposal.svg). 실제 아트 아님.
 

@@ -3627,6 +3627,26 @@
       "path": "docs/planning/visuals/74-crafting-proposal.svg",
       "purpose": "간편 기본 제작·특화 선택·반복 생산 위임",
       "mappingEvidence": "decision-specific original proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-74B",
+      "decisionIds": [
+        "D74"
+      ],
+      "path": "docs/planning/visuals/74-crafting-examples.svg",
+      "purpose": "제작 비교·함선 제작실·수리 키트·엔진 특화·생산 위임·운용 카드",
+      "mappingEvidence": "previous response visual examples reconstructed, not exact rendered pixels",
+      "status": "local SVG; explanatory only"
+    },
+    {
+      "id": "SVG-75",
+      "decisionIds": [
+        "D75"
+      ],
+      "path": "docs/planning/visuals/75-equipment-modification-proposal.svg",
+      "purpose": "장비 기본 구조와 선택형 호환 부품·카드 적격성",
+      "mappingEvidence": "decision-specific original proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -3637,9 +3657,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D74",
-    "approvedThrough": "D73",
-    "pending": "D74",
+    "decisionRange": "D01–D75",
+    "approvedThrough": "D74",
+    "pending": "D75",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 75,
