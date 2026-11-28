@@ -1,0 +1,85 @@
+name: Void Caravan M1
+on:
+  pull_request:
+    branches: [main]
+    paths: ["game/**", ".github/workflows/m1.yml"]
+  push:
+    branches: [main]
+    paths: ["game/**", ".github/workflows/m1.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: m1-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: game
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Godot and web templates
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 -o /tmp/godot.zip https://github.com/godotengine/godot-builds/releases/download/4.6.3-stable/Godot_v4.6.3-stable_linux.x86_64.zip
+          unzip -q /tmp/godot.zip -d /tmp/godot
+          sudo install /tmp/godot/Godot_v4.6.3-stable_linux.x86_64 /usr/local/bin/godot
+          curl -fL --retry 3 -o /tmp/templates.tpz https://github.com/godotengine/godot-builds/releases/download/4.6.3-stable/Godot_v4.6.3-stable_export_templates.tpz
+          mkdir -p "$HOME/.local/share/godot/export_templates/4.6.3.stable"
+          unzip -j -q /tmp/templates.tpz 'templates/web*' -d "$HOME/.local/share/godot/export_templates/4.6.3.stable"
+      - name: Import, test, run
+        run: |
+          godot --headless --editor --import --quit
+          godot --headless --script tests/test_world.gd
+          godot --headless --quit-after 90
+      - name: Render and verify first flight
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: xvfb-run -a -s '-screen 0 1280x1024x24' godot --audio-driver Dummy --script tests/capture.gd
+      - uses: actions/upload-artifact@v4
+        with:
+          name: first-light-captures
+          path: game/build/captures/*.png
+      - name: Export Web
+        run: |
+          mkdir -p build/web
+          godot --headless --export-release Web build/web/index.html
+          printf '{"commit":"%s","run":"%s","version":"first-light"}\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" > build/web/build-info.json
+          touch build/web/.nojekyll
+          test -s build/web/index.wasm
+          test -s build/web/index.pck
+      - name: Package source
+        run: zip -qr /tmp/void-caravan-godot.zip project.godot flight.tscn export_presets.cfg README.md art src tests
+      - uses: actions/upload-artifact@v4
+        with:
+          name: void-caravan-godot
+          path: /tmp/void-caravan-godot.zip
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: game/build/web
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Check published commit
+        run: |
+          for n in {1..12}; do
+            if curl -fsS --max-time 15 "https://syjkim0125.github.io/harvest-deck/build-info.json?v=$GITHUB_SHA" -o /tmp/build.json && python3 -c 'import json,os; assert json.load(open("/tmp/build.json"))["commit"]==os.environ["GITHUB_SHA"]'; then
+              cat /tmp/build.json; exit 0
+            fi
+            sleep 5
+          done
+          exit 1
