@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 50건 / 미결 D51. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 51건 / 미결 D52. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -305,7 +305,14 @@
 - 대화 이미지: [D50-IMG01](REFERENCE_GALLERY.md#d50-img01) A 함선만 · [D50-IMG02](REFERENCE_GALLERY.md#d50-img02) B 고정 거점 · [D50-IMG03](REFERENCE_GALLERY.md#d50-img03) C 선택적 거점 · [D50-IMG04](REFERENCE_GALLERY.md#d50-img04) 채굴 거점 · [D50-IMG05](REFERENCE_GALLERY.md#d50-img05) 생태 연구 · [D50-IMG06](REFERENCE_GALLERY.md#d50-img06) 상업 거점 · [D50-IMG07](REFERENCE_GALLERY.md#d50-img07) 보급·정비.
 
 ## D51
-**고정 거점 확보와 건설·확장 방식** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d51).
+**고정 거점 확보와 건설·확장 방식** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d51).
 
 - 자체 설명 도식: [SVG-51: 시설 임대·폐시설 복구·신규 모듈 건설 경로 비교](visuals/51-outpost-acquisition-proposal.svg). 실제 아트 아님.
+- 외부 참고(사후 연결): [REF-27](REFERENCE_GALLERY.md#ref-27) Interstellar Bazaar (active) · [REF-28](REFERENCE_GALLERY.md#ref-28) Universe: 113 — Alien Armory (active) · [REF-29](REFERENCE_GALLERY.md#ref-29) Avatar — Overgrown RDA Outpost (active) · [REF-30](REFERENCE_GALLERY.md#ref-30) Enclosed Jungle Facility (active) · [REF-31](REFERENCE_GALLERY.md#ref-31) Starfield Modular Outpost (active) · [REF-32](REFERENCE_GALLERY.md#ref-32) Space Colony Base Overview (active) · [REF-33](REFERENCE_GALLERY.md#ref-33) RimWorld Colony Base Layout (active) · [REF-34](REFERENCE_GALLERY.md#ref-34) The Outer Worlds 2 — Market (active).
+- 대화 이미지: [D51-IMG01](REFERENCE_GALLERY.md#d51-img01) A 기존 시설 · [D51-IMG02](REFERENCE_GALLERY.md#d51-img02) B 타일 건설 · [D51-IMG03](REFERENCE_GALLERY.md#d51-img03) C 모듈 건설 · [D51-IMG04](REFERENCE_GALLERY.md#d51-img04) 상점 · [D51-IMG05](REFERENCE_GALLERY.md#d51-img05) 장비 상점 · [D51-IMG06](REFERENCE_GALLERY.md#d51-img06) 폐시설 발견 · [D51-IMG07](REFERENCE_GALLERY.md#d51-img07) 복구 후 연구 · [D51-IMG08](REFERENCE_GALLERY.md#d51-img08) 소형 전초기지 · [D51-IMG09](REFERENCE_GALLERY.md#d51-img09) 확장 거점.
+
+## D52
+**거점 운영·물류와 플레이어 개입 범위** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d52).
+
+- 자체 설명 도식: [SVG-52: 자율 운영·실물 수송·위기 개입](visuals/52-outpost-logistics-proposal.svg). 실제 아트 아님.
 

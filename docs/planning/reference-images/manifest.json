@@ -443,6 +443,134 @@
       "referencePurpose": "C 승선·이동 공간 후보: 내부 인물 가독성; 전투 입력 및 UI 복제 아님",
       "mappingEvidence": "actual D47 follow-up displayed image; web image search returned visible screenshot and exact URL 2026-11-27",
       "exclusions": "비교 시각 자료만; 원작 IP·UI·아트 복제 금지; 기획 승인 아님"
+    },
+    {
+      "id": "REF-27",
+      "title": "Interstellar Bazaar",
+      "url": "https://www.entropypc.com/assets/alliance-casual-DVgJMtVi.jpg",
+      "page": "https://www.entropypc.com/",
+      "source": "Project Entropy official site",
+      "status": "active",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D51"
+      ],
+      "referencePurpose": "상점 및 외계 종족 생활",
+      "mappingEvidence": "2026-11-28 new web image search returned image and exact URL; substitute reference, not recovered original",
+      "exclusions": "시각 원리만; 원작 IP·UI 복제 금지; 아트 승인 아님"
+    },
+    {
+      "id": "REF-28",
+      "title": "Universe: 113 — Alien Armory",
+      "url": "https://mir-s3-cdn-cf.behance.net/project_modules/disp/04f83457327039.59d1fdc8b942c.jpg",
+      "page": "https://www.behance.net/gallery/57327039/Universe-113-Character-Poster",
+      "source": "Behance creator portfolio",
+      "status": "active",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D51"
+      ],
+      "referencePurpose": "장비 상점의 쿼터뷰 구성",
+      "mappingEvidence": "2026-11-28 new web image search returned image and exact URL; substitute reference, not recovered original",
+      "exclusions": "시각 원리만; 원작 IP·UI 복제 금지; 아트 승인 아님"
+    },
+    {
+      "id": "REF-29",
+      "title": "Avatar — Overgrown RDA Outpost",
+      "url": "https://www.massive.se/wp-content/uploads/2021/06/afop_conceptart_rdaovergrown_1200x675.jpg",
+      "page": "https://www.massive.se/project/avatar-frontiers-of-pandora/",
+      "source": "Massive Entertainment official concept art",
+      "status": "active",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D51"
+      ],
+      "referencePurpose": "폐시설 발견 및 자연 침식",
+      "mappingEvidence": "2026-11-28 new web image search returned image and exact URL; substitute reference, not recovered original",
+      "exclusions": "시각 원리만; 원작 IP·UI 복제 금지; 아트 승인 아님"
+    },
+    {
+      "id": "REF-30",
+      "title": "Enclosed Jungle Facility",
+      "url": "https://image.api.playstation.com/cdn/UP0002/CUSA02290_00/FREE_CONTENTd9qo6pGF0dnxN5s8VnP/PREVIEW_SCREENSHOT9_149262.jpg",
+      "page": "https://store.playstation.com/en-ca/product/UP0002-CUSA02290_00-CODBO3ZOMBIESHD1",
+      "source": "PlayStation store screenshot",
+      "status": "active",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D51"
+      ],
+      "referencePurpose": "복구 후 생태 연구 공간의 환경 참고; 실제 복구 장면 아님",
+      "mappingEvidence": "2026-11-28 new web image search returned image and exact URL; substitute reference, not recovered original",
+      "exclusions": "시각 원리만; 원작 IP·UI 복제 금지; 아트 승인 아님"
+    },
+    {
+      "id": "REF-31",
+      "title": "Starfield Modular Outpost",
+      "url": "https://cdn.mos.cms.futurecdn.net/DzZcR9aTmTVNHwd5kVQKz3.png",
+      "page": "https://www.pcgamer.com/starfield-outposts-guide/",
+      "source": "PC Gamer screenshot",
+      "status": "active",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D51"
+      ],
+      "referencePurpose": "초기 모듈형 거점",
+      "mappingEvidence": "2026-11-28 new web image search returned image and exact URL; substitute reference, not recovered original",
+      "exclusions": "시각 원리만; 원작 IP·UI 복제 금지; 아트 승인 아님"
+    },
+    {
+      "id": "REF-32",
+      "title": "Space Colony Base Overview",
+      "url": "https://fireflyworlds.com/press/Space%20Colony/images/5.png",
+      "page": "https://fireflyworlds.com/press/sheet.php?p=Space+Colony",
+      "source": "Firefly Studios press image",
+      "status": "active",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D51"
+      ],
+      "referencePurpose": "확장 복합 거점과 기능 배치",
+      "mappingEvidence": "2026-11-28 new web image search returned image and exact URL; substitute reference, not recovered original",
+      "exclusions": "시각 원리만; 원작 IP·UI 복제 금지; 아트 승인 아님"
+    },
+    {
+      "id": "REF-33",
+      "title": "RimWorld Colony Base Layout",
+      "url": "https://miro.medium.com/max/1400/1%2AcZzRybBqRUo2PTn20hhy-A.jpeg",
+      "page": "https://medium.com/%40heinyken/base-building-in-rimworld-minecraft-and-7-days-to-die-takeaways-and-lessons-85f67d8f0771",
+      "source": "Ross Heintzkill Medium screenshot",
+      "status": "active",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D51"
+      ],
+      "referencePurpose": "자유 타일 건설 비교",
+      "mappingEvidence": "2026-11-28 new web image search returned image and exact URL; substitute reference, not recovered original",
+      "exclusions": "시각 원리만; 원작 IP·UI 복제 금지; 아트 승인 아님"
+    },
+    {
+      "id": "REF-34",
+      "title": "The Outer Worlds 2 — Market",
+      "url": "https://images.rpgsite.net/image/da49c9a1/153351/original/The-Outer-Worlds-2_20250608_02.png",
+      "page": "https://www.rpgsite.net/interview/17785-outer-worlds-2-director-interview-respec-rpg-choice-consequences",
+      "source": "RPG Site screenshot",
+      "status": "active",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D51"
+      ],
+      "referencePurpose": "기존 정거장 상업 구역 참고",
+      "mappingEvidence": "2026-11-28 new web image search returned image and exact URL; substitute reference, not recovered original",
+      "exclusions": "시각 원리만; 원작 IP·UI 복제 금지; 아트 승인 아님"
     }
   ],
   "kits": [
@@ -2048,6 +2176,177 @@
       "galleryAnchor": "REFERENCE_GALLERY.md#d50-img07",
       "captureStatus": "missing; exact chat-rendered pixels unavailable",
       "priority": "normal"
+    },
+    {
+      "id": "D51-IMG01",
+      "decisionIds": [
+        "D51"
+      ],
+      "query": "Starfield Neon city player apartment interior gameplay",
+      "purpose": "A 기존 시설",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D51 선택지 및 구체 플레이 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d51",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d51-img01",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D51-IMG02",
+      "decisionIds": [
+        "D51"
+      ],
+      "query": "Rimworld colony base construction walls rooms building gameplay",
+      "purpose": "B 타일 건설",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D51 선택지 및 구체 플레이 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d51",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d51-img02",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D51-IMG03",
+      "decisionIds": [
+        "D51"
+      ],
+      "query": "Starfield modular planetary outpost habitat buildings landing pad aerial gameplay",
+      "purpose": "C 모듈 건설",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D51 선택지 및 구체 플레이 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d51",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d51-img03",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D51-IMG04",
+      "decisionIds": [
+        "D51"
+      ],
+      "query": "cozy science fiction alien space station marketplace small shop interior game concept art",
+      "purpose": "상점",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D51 선택지 및 구체 플레이 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d51",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d51-img04",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D51-IMG05",
+      "decisionIds": [
+        "D51"
+      ],
+      "query": "isometric sci fi weapon merchant workshop shop game environment",
+      "purpose": "장비 상점",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D51 선택지 및 구체 플레이 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d51",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d51-img05",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D51-IMG06",
+      "decisionIds": [
+        "D51"
+      ],
+      "query": "abandoned ruined science fiction research outpost overgrown alien jungle concept art",
+      "purpose": "폐시설 발견",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D51 선택지 및 구체 플레이 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d51",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d51-img06",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D51-IMG07",
+      "decisionIds": [
+        "D51"
+      ],
+      "query": "restored functioning science fiction research outpost green alien jungle greenhouse warm lights concept art",
+      "purpose": "복구 후 연구",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D51 선택지 및 구체 플레이 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d51",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d51-img07",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D51-IMG08",
+      "decisionIds": [
+        "D51"
+      ],
+      "query": "isometric small science fiction modular mining outpost rocky alien planet game concept art",
+      "purpose": "소형 전초기지",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D51 선택지 및 구체 플레이 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d51",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d51-img08",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
+    },
+    {
+      "id": "D51-IMG09",
+      "decisionIds": [
+        "D51"
+      ],
+      "query": "isometric large science fiction planetary settlement modular habitats factories landing pads concept art",
+      "purpose": "확장 거점",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트 아님",
+      "conversationSection": "D51 선택지 및 구체 플레이 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d51",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d51-img09",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable",
+      "priority": "normal"
     }
   ],
   "diagrams": [
@@ -2568,6 +2867,16 @@
       "path": "docs/planning/visuals/51-outpost-acquisition-proposal.svg",
       "purpose": "시설 임대·폐시설 복구·신규 모듈 건설 경로 비교",
       "mappingEvidence": "decision-specific original proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-52",
+      "decisionIds": [
+        "D52"
+      ],
+      "path": "docs/planning/visuals/52-outpost-logistics-proposal.svg",
+      "purpose": "자율 운영·실물 수송·위기 개입",
+      "mappingEvidence": "decision-specific original proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -2578,13 +2887,13 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D51",
-    "approvedThrough": "D50",
-    "pending": "D51",
+    "decisionRange": "D01–D52",
+    "approvedThrough": "D51",
+    "pending": "D52",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
-    "exactVisibleQueries": 54,
-    "missingChatRenderedImages": 82,
+    "exactVisibleQueries": 63,
+    "missingChatRenderedImages": 91,
     "missingIndividualVisualDecisions": [
       "D02",
       "D06",
@@ -2592,7 +2901,7 @@
     ],
     "screenshot": "Prior attempt did not obtain a saved capture. Direct chat UI screenshot capability not established. D31 capture remains unrecovered.",
     "recoverySearch": "Prior retrieval yielded summaries, not a complete transcript or rendered images.",
-    "provenanceNote": "D19–D26 28건 재구성 또는 원문 미검증. D28–D36 31건 응답 기록 검색 문구. 모두 실제 표시 원본 미확보. D48 직전 응답의 정확한 검색 문구 7건 추가; 표시 원본 미확보. D49 검색 문구 9건 추가; 원본 미확보. D50 검색 문구 7건 추가; 원본 미확보.",
+    "provenanceNote": "D19–D26 28건 재구성 또는 원문 미검증. D28–D36 31건 응답 기록 검색 문구. 모두 실제 표시 원본 미확보. D48 직전 응답의 정확한 검색 문구 7건 추가; 표시 원본 미확보. D49 검색 문구 9건 추가; 원본 미확보. D50 검색 문구 7건 추가; 원본 미확보. D51 검색 문구 9건 및 새 대체 참고 URL 8건 추가; 이전 표시 원본 미확보.",
     "latestDownloadAttempt": {
       "date": "2026-11-27",
       "knownUrls": 26,

@@ -1,8 +1,8 @@
 # 대화 이미지 검색 기록
 
-> 승인 50건 / 미결 D51. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 51건 / 미결 D52. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
-총 82건: 검색 문구 확인 54건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
+총 91건: 검색 문구 확인 63건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
 
 ## D19
 - [D19-IMG01](REFERENCE_GALLERY.md#d19-img01) · `Zelda breath of the wild vast open world landscape mountain forest village exploration gameplay` — 원문 미검증; 원본 미확보.
@@ -119,4 +119,15 @@
 - [D50-IMG05](REFERENCE_GALLERY.md#d50-img05) · `science fiction alien botanical research greenhouse biodome outpost concept art` — 문구 확인; 원본 미확보.
 - [D50-IMG06](REFERENCE_GALLERY.md#d50-img06) · `science fiction cozy space station marketplace shops alien merchants game environment` — 문구 확인; 원본 미확보.
 - [D50-IMG07](REFERENCE_GALLERY.md#d50-img07) · `science fiction frontier spaceship repair refueling landing pad outpost concept art` — 문구 확인; 원본 미확보.
+
+## D51
+- [D51-IMG01](REFERENCE_GALLERY.md#d51-img01) · `Starfield Neon city player apartment interior gameplay` — 문구 확인; 원본 미확보.
+- [D51-IMG02](REFERENCE_GALLERY.md#d51-img02) · `Rimworld colony base construction walls rooms building gameplay` — 문구 확인; 원본 미확보.
+- [D51-IMG03](REFERENCE_GALLERY.md#d51-img03) · `Starfield modular planetary outpost habitat buildings landing pad aerial gameplay` — 문구 확인; 원본 미확보.
+- [D51-IMG04](REFERENCE_GALLERY.md#d51-img04) · `cozy science fiction alien space station marketplace small shop interior game concept art` — 문구 확인; 원본 미확보.
+- [D51-IMG05](REFERENCE_GALLERY.md#d51-img05) · `isometric sci fi weapon merchant workshop shop game environment` — 문구 확인; 원본 미확보.
+- [D51-IMG06](REFERENCE_GALLERY.md#d51-img06) · `abandoned ruined science fiction research outpost overgrown alien jungle concept art` — 문구 확인; 원본 미확보.
+- [D51-IMG07](REFERENCE_GALLERY.md#d51-img07) · `restored functioning science fiction research outpost green alien jungle greenhouse warm lights concept art` — 문구 확인; 원본 미확보.
+- [D51-IMG08](REFERENCE_GALLERY.md#d51-img08) · `isometric small science fiction modular mining outpost rocky alien planet game concept art` — 문구 확인; 원본 미확보.
+- [D51-IMG09](REFERENCE_GALLERY.md#d51-img09) · `isometric large science fiction planetary settlement modular habitats factories landing pads concept art` — 문구 확인; 원본 미확보.
 

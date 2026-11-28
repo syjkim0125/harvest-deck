@@ -1,10 +1,10 @@
 # 참고 이미지 갤러리
 
-> 승인 50건 / 미결 D51. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 51건 / 미결 D52. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
-[결정별 찾아보기](DECISION_VISUAL_INDEX.md) · [자체 도식 51개](VISUAL_ATLAS.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md).
+[결정별 찾아보기](DECISION_VISUAL_INDEX.md) · [자체 도식 52개](VISUAL_ATLAS.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md).
 
-외부 URL 26개는 원격 임베드(렌더링·권리·바이트 미검증), 대화 참조 82건은 원본 상태를 표시. 과거 표시 이미지와 동일성 미확인. 사용자 선호는 최종 아트 승인 아님.
+외부 URL 34개는 원격 임베드(렌더링·권리·바이트 미검증), 대화 참조 91건은 원본 상태를 표시. 과거 표시 이미지와 동일성 미확인. 사용자 선호는 최종 아트 승인 아님.
 
 ## 사용자 선호 시각 예시 (D36)
 ### D36-IMG01
@@ -129,6 +129,62 @@ C 생활 공간 후보: 식사·휴식·자율 행동·공간 입체감. Bugbyte
 ![Space Haven — boarding](https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/979110/ss_f0565ff50257d42717da10052cc8cd643745da88.1920x1080.jpg?t=1694086997)
 
 C 승선·이동 공간 후보: 내부 인물 가독성; 전투 입력 및 UI 복제 아님. Bugbyte official Steam screenshot. [원본 주소](https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/979110/ss_f0565ff50257d42717da10052cc8cd643745da88.1920x1080.jpg?t=1694086997). not downloaded; not verified for public rehosting.
+
+### REF-27
+**Interstellar Bazaar** · [D51](DECISION_VISUAL_INDEX.md#d51)
+
+![Interstellar Bazaar](https://www.entropypc.com/assets/alliance-casual-DVgJMtVi.jpg)
+
+상점 및 외계 종족 생활. Project Entropy official site. [원본 주소](https://www.entropypc.com/assets/alliance-casual-DVgJMtVi.jpg). not downloaded; not verified for public rehosting.
+
+### REF-28
+**Universe: 113 — Alien Armory** · [D51](DECISION_VISUAL_INDEX.md#d51)
+
+![Universe: 113 — Alien Armory](https://mir-s3-cdn-cf.behance.net/project_modules/disp/04f83457327039.59d1fdc8b942c.jpg)
+
+장비 상점의 쿼터뷰 구성. Behance creator portfolio. [원본 주소](https://mir-s3-cdn-cf.behance.net/project_modules/disp/04f83457327039.59d1fdc8b942c.jpg). not downloaded; not verified for public rehosting.
+
+### REF-29
+**Avatar — Overgrown RDA Outpost** · [D51](DECISION_VISUAL_INDEX.md#d51)
+
+![Avatar — Overgrown RDA Outpost](https://www.massive.se/wp-content/uploads/2021/06/afop_conceptart_rdaovergrown_1200x675.jpg)
+
+폐시설 발견 및 자연 침식. Massive Entertainment official concept art. [원본 주소](https://www.massive.se/wp-content/uploads/2021/06/afop_conceptart_rdaovergrown_1200x675.jpg). not downloaded; not verified for public rehosting.
+
+### REF-30
+**Enclosed Jungle Facility** · [D51](DECISION_VISUAL_INDEX.md#d51)
+
+![Enclosed Jungle Facility](https://image.api.playstation.com/cdn/UP0002/CUSA02290_00/FREE_CONTENTd9qo6pGF0dnxN5s8VnP/PREVIEW_SCREENSHOT9_149262.jpg)
+
+복구 후 생태 연구 공간의 환경 참고; 실제 복구 장면 아님. PlayStation store screenshot. [원본 주소](https://image.api.playstation.com/cdn/UP0002/CUSA02290_00/FREE_CONTENTd9qo6pGF0dnxN5s8VnP/PREVIEW_SCREENSHOT9_149262.jpg). not downloaded; not verified for public rehosting.
+
+### REF-31
+**Starfield Modular Outpost** · [D51](DECISION_VISUAL_INDEX.md#d51)
+
+![Starfield Modular Outpost](https://cdn.mos.cms.futurecdn.net/DzZcR9aTmTVNHwd5kVQKz3.png)
+
+초기 모듈형 거점. PC Gamer screenshot. [원본 주소](https://cdn.mos.cms.futurecdn.net/DzZcR9aTmTVNHwd5kVQKz3.png). not downloaded; not verified for public rehosting.
+
+### REF-32
+**Space Colony Base Overview** · [D51](DECISION_VISUAL_INDEX.md#d51)
+
+![Space Colony Base Overview](https://fireflyworlds.com/press/Space%20Colony/images/5.png)
+
+확장 복합 거점과 기능 배치. Firefly Studios press image. [원본 주소](https://fireflyworlds.com/press/Space%20Colony/images/5.png). not downloaded; not verified for public rehosting.
+
+### REF-33
+**RimWorld Colony Base Layout** · [D51](DECISION_VISUAL_INDEX.md#d51)
+
+![RimWorld Colony Base Layout](https://miro.medium.com/max/1400/1%2AcZzRybBqRUo2PTn20hhy-A.jpeg)
+
+자유 타일 건설 비교. Ross Heintzkill Medium screenshot. [원본 주소](https://miro.medium.com/max/1400/1%2AcZzRybBqRUo2PTn20hhy-A.jpeg). not downloaded; not verified for public rehosting.
+
+### REF-34
+**The Outer Worlds 2 — Market** · [D51](DECISION_VISUAL_INDEX.md#d51)
+
+![The Outer Worlds 2 — Market](https://images.rpgsite.net/image/da49c9a1/153351/original/The-Outer-Worlds-2_20250608_02.png)
+
+기존 정거장 상업 구역 참고. RPG Site screenshot. [원본 주소](https://images.rpgsite.net/image/da49c9a1/153351/original/The-Outer-Worlds-2_20250608_02.png). not downloaded; not verified for public rehosting.
 
 ## 후속 검토 후보
 
@@ -440,6 +496,33 @@ C 선택적 거점. [D50](DECISION_VISUAL_INDEX.md#d50) · [당시 예시](EXAMP
 
 ### D50-IMG07
 보급·정비. [D50](DECISION_VISUAL_INDEX.md#d50) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d50) · [검색 기록](CHAT_IMAGE_INDEX.md#d50). 원본/캡처 미확보.
+
+### D51-IMG01
+A 기존 시설. [D51](DECISION_VISUAL_INDEX.md#d51) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d51) · [검색 기록](CHAT_IMAGE_INDEX.md#d51). 원본/캡처 미확보.
+
+### D51-IMG02
+B 타일 건설. [D51](DECISION_VISUAL_INDEX.md#d51) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d51) · [검색 기록](CHAT_IMAGE_INDEX.md#d51). 원본/캡처 미확보.
+
+### D51-IMG03
+C 모듈 건설. [D51](DECISION_VISUAL_INDEX.md#d51) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d51) · [검색 기록](CHAT_IMAGE_INDEX.md#d51). 원본/캡처 미확보.
+
+### D51-IMG04
+상점. [D51](DECISION_VISUAL_INDEX.md#d51) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d51) · [검색 기록](CHAT_IMAGE_INDEX.md#d51). 원본/캡처 미확보.
+
+### D51-IMG05
+장비 상점. [D51](DECISION_VISUAL_INDEX.md#d51) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d51) · [검색 기록](CHAT_IMAGE_INDEX.md#d51). 원본/캡처 미확보.
+
+### D51-IMG06
+폐시설 발견. [D51](DECISION_VISUAL_INDEX.md#d51) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d51) · [검색 기록](CHAT_IMAGE_INDEX.md#d51). 원본/캡처 미확보.
+
+### D51-IMG07
+복구 후 연구. [D51](DECISION_VISUAL_INDEX.md#d51) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d51) · [검색 기록](CHAT_IMAGE_INDEX.md#d51). 원본/캡처 미확보.
+
+### D51-IMG08
+소형 전초기지. [D51](DECISION_VISUAL_INDEX.md#d51) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d51) · [검색 기록](CHAT_IMAGE_INDEX.md#d51). 원본/캡처 미확보.
+
+### D51-IMG09
+확장 거점. [D51](DECISION_VISUAL_INDEX.md#d51) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d51) · [검색 기록](CHAT_IMAGE_INDEX.md#d51). 원본/캡처 미확보.
 
 ## 공식 미디어
 - **Absolum**: [공식/PR](https://www.dotemu.com/PressKit/project/Games/Absolum) · [압축파일](https://www.dotemu.com/PressKit/cache/Games/Absolum/images.zip) — 공식 이미지 ZIP 링크 확인; 웹 다운로드 403.
