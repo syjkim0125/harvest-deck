@@ -1,8 +1,8 @@
 # 대화 이미지 검색 기록
 
-> 승인 88건 / 미결 D89. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 89건 / 미결 D90. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
-총 142건: 검색 문구 확인 114건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
+총 146건: 검색 문구 확인 118건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
 
 ## D19
 - [D19-IMG01](REFERENCE_GALLERY.md#d19-img01) · `Zelda breath of the wild vast open world landscape mountain forest village exploration gameplay` — 원문 미검증; 원본 미확보.
@@ -197,4 +197,10 @@
 - [D88-IMG05](REFERENCE_GALLERY.md#d88-img05) · `pixel art diverse alien character portraits space rpg NPC` — 문구 확인; 원본 미확보.
 - [D88-IMG06](REFERENCE_GALLERY.md#d88-img06) · `pixel art mysterious abandoned alien temple ruins jungle science fiction game` — 문구 확인; 원본 미확보.
 - [D88-IMG07](REFERENCE_GALLERY.md#d88-img07) · `pixel art glowing blue crystal deposits alien underground cave exploration game` — 문구 확인; 원본 미확보.
+
+## D89
+- [D89-IMG01](REFERENCE_GALLERY.md#d89-img01) · `pixel art cozy science fiction alien space station cantina tavern bar interior NPC` — 문구 확인; 원본 미확보.
+- [D89-IMG02](REFERENCE_GALLERY.md#d89-img02) · `pixel art science fiction spaceship cockpit communications radio holographic screen` — 문구 확인; 원본 미확보.
+- [D89-IMG03](REFERENCE_GALLERY.md#d89-img03) · `pixel art alien merchant space station marketplace trading goods futuristic game` — 문구 확인; 원본 미확보.
+- [D89-IMG04](REFERENCE_GALLERY.md#d89-img04) · `pixel art cozy spaceship bridge alien crew captain navigation computer interior game` — 문구 확인; 원본 미확보.
 

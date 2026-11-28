@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 88건 / 미결 D89. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 89건 / 미결 D90. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -500,7 +500,13 @@
 - 대화 이미지: [D88-IMG01](REFERENCE_GALLERY.md#d88-img01) 행성 · [D88-IMG02](REFERENCE_GALLERY.md#d88-img02) 생명체 · [D88-IMG03](REFERENCE_GALLERY.md#d88-img03) 자원 · [D88-IMG04](REFERENCE_GALLERY.md#d88-img04) 유물 · [D88-IMG05](REFERENCE_GALLERY.md#d88-img05) 인물 · [D88-IMG06](REFERENCE_GALLERY.md#d88-img06) 미확인 장소 · [D88-IMG07](REFERENCE_GALLERY.md#d88-img07) 광맥.
 
 ## D89
-**세계 변화의 전달·소문과 사건 발견** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d89).
+**C. 실제 정보망·지역 소문 + 중요 사건 선별 전달** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d89).
+
+- 자체 설명 도식: [SVG-89: 세계 사건→정보 전달→탐험/사업/무시→세계 변화](visuals/89-information-network-proposal.svg). 실제 아트 아님.
+- 대화 이미지: [D89-IMG01](REFERENCE_GALLERY.md#d89-img01) 지역 소문 · [D89-IMG02](REFERENCE_GALLERY.md#d89-img02) 함선 통신 · [D89-IMG03](REFERENCE_GALLERY.md#d89-img03) 상인 · [D89-IMG04](REFERENCE_GALLERY.md#d89-img04) 동료 보고.
+
+## D90
+**인게임 아트의 제작 방식과 시각적 밀도** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d90).
 
 - 연결 개별 자료 없음; 이전 원문 미확보.
 

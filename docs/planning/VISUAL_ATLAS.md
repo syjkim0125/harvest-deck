@@ -490,3 +490,5 @@ STEP 4 핵심 방향 확정 이후 실제 쿼터뷰 탐험 장면과 자유 드�
 - [D79 고객 수요·단골·평판 흐름](visuals/79-customer-reputation-proposal.svg) — 미승인 설명 도식, 실제 게임 아트 아님.
 
 - [D80 사업체 성장·전문화와 다점포](visuals/80-business-growth-proposal.svg) — 미승인 설명 도식, 실제 게임 아트 아님.
+
+- D89 [정보망과 사건 선택 도식](visuals/89-information-network-proposal.svg) — 이전 인라인 흐름 재구성, 설명용.

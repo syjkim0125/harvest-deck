@@ -3390,6 +3390,78 @@
       "galleryAnchor": "REFERENCE_GALLERY.md#d88-img07",
       "priority": "normal",
       "displayOrder": 7
+    },
+    {
+      "id": "D89-IMG01",
+      "decisionIds": [
+        "D89"
+      ],
+      "query": "pixel art cozy science fiction alien space station cantina tavern bar interior NPC",
+      "purpose": "지역 소문",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d89",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d89-img01",
+      "priority": "normal",
+      "displayOrder": 1
+    },
+    {
+      "id": "D89-IMG02",
+      "decisionIds": [
+        "D89"
+      ],
+      "query": "pixel art science fiction spaceship cockpit communications radio holographic screen",
+      "purpose": "함선 통신",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d89",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d89-img02",
+      "priority": "normal",
+      "displayOrder": 2
+    },
+    {
+      "id": "D89-IMG03",
+      "decisionIds": [
+        "D89"
+      ],
+      "query": "pixel art alien merchant space station marketplace trading goods futuristic game",
+      "purpose": "상인",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d89",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d89-img03",
+      "priority": "normal",
+      "displayOrder": 3
+    },
+    {
+      "id": "D89-IMG04",
+      "decisionIds": [
+        "D89"
+      ],
+      "query": "pixel art cozy spaceship bridge alien crew captain navigation computer interior game",
+      "purpose": "동료 보고",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "status": "reference query only; original rendered image unknown",
+      "bytes": "unavailable",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d89",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d89-img04",
+      "priority": "normal",
+      "displayOrder": 4
     }
   ],
   "diagrams": [
@@ -4451,6 +4523,16 @@
       "purpose": "작은 함선 상점에서 전문점·종합점·다점포로 선택 성장",
       "mappingEvidence": "decision-specific explanatory proposal",
       "status": "local SVG; explanatory only; structure approved, not final game art"
+    },
+    {
+      "id": "SVG-89",
+      "decisionIds": [
+        "D89"
+      ],
+      "path": "docs/planning/visuals/89-information-network-proposal.svg",
+      "purpose": "세계 사건→정보 전달→탐험/사업/무시→세계 변화",
+      "mappingEvidence": "decision-specific reconstructed inline flow; not original",
+      "status": "local SVG; explanatory only; structure approved, not final game art"
     }
   ],
   "userCapture": {
@@ -4460,13 +4542,13 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D89",
-    "approvedThrough": "D88",
-    "pending": "D89",
+    "decisionRange": "D01–D90",
+    "approvedThrough": "D89",
+    "pending": "D90",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
-    "exactVisibleQueries": 114,
-    "missingChatRenderedImages": 142,
+    "exactVisibleQueries": 118,
+    "missingChatRenderedImages": 146,
     "missingIndividualVisualDecisions": [
       "D02",
       "D06",
