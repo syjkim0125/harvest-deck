@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 59건 / 미결 D60. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 60건 / 미결 D61. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -354,7 +354,12 @@
 - 자체 설명 도식: [SVG-59: 시간 기본 회복과 유효 행동 보너스 회복](visuals/59-energy-recovery-proposal.svg) · [SVG-59B: 회복 방식 A/B/C 그래프·교전 및 직업별 회복 예시 재구성](visuals/59-recovery-examples.svg). 실제 아트 아님.
 
 ## D60
-**운용 덱의 발동·드로우·순환 방식** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d60).
+**운용 덱의 발동·드로우·순환 방식** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d60).
 
-- 자체 설명 도식: [SVG-60: 활동 맥락별 운용 손패 및 작업 단계 순환](visuals/60-operations-draw-proposal.svg). 실제 아트 아님.
+- 자체 설명 도식: [SVG-60: 활동 맥락별 운용 손패 및 작업 단계 순환](visuals/60-operations-draw-proposal.svg) · [SVG-60B: A/B/C 운용 순환 비교 및 쿼터뷰 유적·상점 예시 재구성](visuals/60-operations-examples.svg). 실제 아트 아님.
+
+## D61
+**운용 카드의 사용 비용과 자율 운영 연계** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d61).
+
+- 자체 설명 도식: [SVG-61: 실제 비용·선택 기회와 동료 위임 정책의 연결](visuals/61-operations-cost-delegation-proposal.svg). 실제 아트 아님.
 

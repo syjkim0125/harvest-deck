@@ -3347,6 +3347,26 @@
       "path": "docs/planning/visuals/60-operations-draw-proposal.svg",
       "purpose": "활동 맥락별 운용 손패 및 작업 단계 순환",
       "mappingEvidence": "decision-specific original proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-60B",
+      "decisionIds": [
+        "D60"
+      ],
+      "path": "docs/planning/visuals/60-operations-examples.svg",
+      "purpose": "A/B/C 운용 순환 비교 및 쿼터뷰 유적·상점 예시 재구성",
+      "mappingEvidence": "previous response visual examples reconstructed, not exact rendered pixels",
+      "status": "local SVG; explanatory only"
+    },
+    {
+      "id": "SVG-61",
+      "decisionIds": [
+        "D61"
+      ],
+      "path": "docs/planning/visuals/61-operations-cost-delegation-proposal.svg",
+      "purpose": "실제 비용·선택 기회와 동료 위임 정책의 연결",
+      "mappingEvidence": "decision-specific original proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -3357,9 +3377,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D60",
-    "approvedThrough": "D59",
-    "pending": "D60",
+    "decisionRange": "D01–D61",
+    "approvedThrough": "D60",
+    "pending": "D61",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 75,
