@@ -11,10 +11,13 @@ func run() -> void:
 	await process_frame
 	await RenderingServer.frame_post_draw
 	var err=root.get_texture().get_image().save_png("res://build/captures/first-light.png")
+	scene.paused=false
+	scene.set_process(false)
 	scene.begin(0,Vector2(180,420))
 	scene.drag(0,Vector2(265,420))
 	for i in range(90): scene._process(1.0/60)
 	scene.end(0)
+	scene.queue_redraw()
 	if scene.world.position.x<100: err=FAILED
 	await process_frame
 	await RenderingServer.frame_post_draw

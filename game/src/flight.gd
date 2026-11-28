@@ -11,7 +11,7 @@ const WHITE := Color("#e9ecdf")
 const MINT := Color("#a7ebd7")
 const GOLD := Color("#e6bc89")
 const SAVE := "user://first_light_v1.json"
-var world = MODEL.new()
+var world := MODEL.new()
 var font := ThemeDB.fallback_font
 var finger := -1
 var start := Vector2.ZERO
@@ -85,12 +85,12 @@ func _exit_tree() -> void:
 func store() -> void:
 	if test_mode: return
 	var file := FileAccess.open(SAVE,FileAccess.WRITE)
-	if file != null: file.store_string(JSON.stringify(world.snapshot()))
+	if file != null: file.store_string(JSON.stringify(world.snapshot(),"",true,true))
 
 func say(s: String) -> void:
 	message = s
 	message_time = 4.2
-	if not muted and is_instance_valid(audio): audio.play()
+	if not test_mode and not muted and is_instance_valid(audio): audio.play()
 
 func action_rect() -> Rect2:
 	var size := get_viewport_rect().size
@@ -103,7 +103,7 @@ func sound_rect() -> Rect2:
 	return Rect2(get_viewport_rect().size.x-112,19,43,43)
 
 func resume_audio() -> void:
-	if not muted and not paused and not ambient.playing: ambient.play()
+	if not test_mode and not muted and not paused and not ambient.playing: ambient.play()
 
 func begin(id: int,p: Vector2) -> void:
 	if finger != -1: return
