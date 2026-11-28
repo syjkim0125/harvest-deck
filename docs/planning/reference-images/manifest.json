@@ -3367,6 +3367,26 @@
       "path": "docs/planning/visuals/61-operations-cost-delegation-proposal.svg",
       "purpose": "실제 비용·선택 기회와 동료 위임 정책의 연결",
       "mappingEvidence": "decision-specific original proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-61B",
+      "decisionIds": [
+        "D61"
+      ],
+      "path": "docs/planning/visuals/61-operations-examples.svg",
+      "purpose": "A/B/C 운용 비용 비교와 쿼터뷰 상점·운용 카드 예시 재구성",
+      "mappingEvidence": "previous response visual examples reconstructed, not exact rendered pixels",
+      "status": "local SVG; explanatory only"
+    },
+    {
+      "id": "SVG-62",
+      "decisionIds": [
+        "D62"
+      ],
+      "path": "docs/planning/visuals/62-card-acquisition-proposal.svg",
+      "purpose": "활동 기반 발견·선택 보상과 목표형 획득 경로",
+      "mappingEvidence": "decision-specific original proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -3377,9 +3397,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D61",
-    "approvedThrough": "D60",
-    "pending": "D61",
+    "decisionRange": "D01–D62",
+    "approvedThrough": "D61",
+    "pending": "D62",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 75,

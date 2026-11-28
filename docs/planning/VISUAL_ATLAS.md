@@ -361,9 +361,16 @@ D19 승인 구조 설명. 실제 행성 크기·지도 배치·갱신 규칙 미
 ![D60 비교·유적·상점](visuals/60-operations-examples.svg)
 [작업 단계 인터랙션 재구성](prototypes/d60-operations-stages.html). 실제 탐험·경제 규칙 아님.
 
-## 61. Operations costs and delegation (D61 미승인)
+## 61. Operations costs and delegation (D61 구조 승인)
 ![D61](visuals/61-operations-cost-delegation-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d61). 실제 비용과 위임 정책의 개념. 실제 규칙·UI 미확정.
+
+![D61 비용 비교·상점·카드](visuals/61-operations-examples.svg)
+[직접/위임·예외 거래 인터랙션 재구성](prototypes/d61-delegation.html). 실제 정책·거래 규칙 아님.
+
+## 62. Card acquisition (D62 미승인)
+![D62](visuals/62-card-acquisition-proposal.svg)
+[결정·예시](DECISION_VISUAL_INDEX.md#d62). 실제 활동 기반 발견·선택 및 목표형 획득 후보. 실제 획득·성장 규칙 미확정.
 
 ## 다음 시각 자료
 STEP 4 핵심 방향 확정 이후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.
