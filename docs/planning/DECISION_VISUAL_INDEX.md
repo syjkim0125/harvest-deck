@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 78건 / 미결 D79. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 79건 / 미결 D80. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -450,7 +450,12 @@
 - 대화 이미지: [D78-IMG01](REFERENCE_GALLERY.md#d78-img01) A 주문 목록·메뉴 선택 · [D78-IMG02](REFERENCE_GALLERY.md#d78-img02) B 모든 작업 직접 조작 · [D78-IMG03](REFERENCE_GALLERY.md#d78-img03) C 직접 이동·핵심 작업 · [D78-IMG04](REFERENCE_GALLERY.md#d78-img04) 외계 식당 · [D78-IMG05](REFERENCE_GALLERY.md#d78-img05) 장비점 · [D78-IMG06](REFERENCE_GALLERY.md#d78-img06) 정비소 · [D78-IMG07](REFERENCE_GALLERY.md#d78-img07) 유물 거래소.
 
 ## D79
-**고객 수요·단골·상점 평판 시스템** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d79).
+**C. 실제 지역 수요 + 주요 고객의 개별 관계·단골 + 자연스러운 평판 확산** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d79).
 
 - 자체 설명 도식: [SVG-79: 품질·신뢰→단골→소문·평판→새 고객·계약·탐험 기회](visuals/79-customer-reputation-proposal.svg). 실제 아트 아님.
+
+## D80
+**사업체 성장·전문화와 다점포 운영** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d80).
+
+- 자체 설명 도식: [SVG-80: 작은 함선 상점에서 전문점·종합점·다점포로 선택 성장](visuals/80-business-growth-proposal.svg). 실제 아트 아님.
 
