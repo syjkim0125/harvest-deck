@@ -3267,6 +3267,26 @@
       "path": "docs/planning/visuals/56-tactical-draw-proposal.svg",
       "purpose": "전술 카드 손패·버림·순환",
       "mappingEvidence": "decision-specific original proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-56B",
+      "decisionIds": [
+        "D56"
+      ],
+      "path": "docs/planning/visuals/56-card-comparison.svg",
+      "purpose": "A/B/C 카드 순환 비교 및 기본 조작 독립 관계",
+      "mappingEvidence": "previous response visual examples reconstructed, not exact rendered pixels",
+      "status": "local SVG; explanatory only"
+    },
+    {
+      "id": "SVG-57",
+      "decisionIds": [
+        "D57"
+      ],
+      "path": "docs/planning/visuals/57-card-activation-proposal.svg",
+      "purpose": "즉시형과 조준형 카드 발동 흐름",
+      "mappingEvidence": "decision-specific original proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -3277,9 +3297,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D56",
-    "approvedThrough": "D55",
-    "pending": "D56",
+    "decisionRange": "D01–D57",
+    "approvedThrough": "D56",
+    "pending": "D57",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 75,

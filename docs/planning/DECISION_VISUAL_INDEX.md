@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 55건 / 미결 D56. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 56건 / 미결 D57. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -334,7 +334,12 @@
 - 자체 설명 도식: [SVG-55: 역할별 덱과 공유 성장·교차 시너지](visuals/55-deck-connection-proposal.svg) · [SVG-55B: A/B/C 덱 비교·탐험에서 전술까지·성장 순환 재구성](visuals/55-deck-examples.svg). 실제 아트 아님.
 
 ## D56
-**전술 카드 드로우와 순환 방식** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d56).
+**전술 카드 드로우와 순환 방식** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d56).
 
-- 자체 설명 도식: [SVG-56: 전술 카드 손패·버림·순환](visuals/56-tactical-draw-proposal.svg). 실제 아트 아님.
+- 자체 설명 도식: [SVG-56: 전술 카드 손패·버림·순환](visuals/56-tactical-draw-proposal.svg) · [SVG-56B: A/B/C 카드 순환 비교 및 기본 조작 독립 관계](visuals/56-card-comparison.svg). 실제 아트 아님.
+
+## D57
+**실시간 전술 카드 발동과 시간 흐름** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d57).
+
+- 자체 설명 도식: [SVG-57: 즉시형과 조준형 카드 발동 흐름](visuals/57-card-activation-proposal.svg). 실제 아트 아님.
 
