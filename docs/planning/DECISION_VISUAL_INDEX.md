@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 71건 / 미결 D72. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 72건 / 미결 D73. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -414,7 +414,12 @@
 - 자체 설명 도식: [SVG-71: 유한 매장량·생태 재생·개별 잔해 소진과 대안](visuals/71-resource-persistence-proposal.svg) · [SVG-71B: A/B 고갈 비교·광산 심층 광맥·잔해 소진 재구성](visuals/71-resource-persistence-examples.svg). 실제 아트 아님.
 
 ## D72
-**화물 적재·보관·운송의 관리 범위** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d72).
+**화물 적재·보관·운송의 관리 범위** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d72).
 
-- 자체 설명 도식: [SVG-72: 일반 적재 용량·특수 화물·실제 물류 및 초과 적재 선택](visuals/72-cargo-proposal.svg). 실제 아트 아님.
+- 자체 설명 도식: [SVG-72: 일반 적재 용량·특수 화물·실제 물류 및 초과 적재 선택](visuals/72-cargo-proposal.svg) · [SVG-72B: A/B/C 비교·적재량·함선별 용량·특수 화물·거점 간 운송 재구성](visuals/72-cargo-examples.svg). 실제 아트 아님.
+
+## D73
+**지역 시장 가격과 교역 거래 방식** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d73).
+
+- 자체 설명 도식: [SVG-73: 지역별 수급 가격 및 수량별 거래 영향, 선택적 계약](visuals/73-market-trade-proposal.svg). 실제 아트 아님.
 

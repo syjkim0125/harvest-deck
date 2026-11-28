@@ -438,9 +438,16 @@ D19 승인 구조 설명. 실제 행성 크기·지도 배치·갱신 규칙 미
 ![D71 비교·심층 광맥·잔해](visuals/71-resource-persistence-examples.svg)
 [생체 채집 인터랙션 재구성](prototypes/d71-biological-regrowth.html). 실제 생태 모델 아님.
 
-## 72. Cargo (D72 미승인)
+## 72. Cargo (D72 구조 승인)
 ![D72](visuals/72-cargo-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d72). 화물 용량과 특수 조건·물류 후보. 수치 미확정.
+
+![D72 비교·적재·함선·특수 화물·물류](visuals/72-cargo-examples.svg)
+설명용 재구성, 실제 화물 수치·아트 아님.
+
+## 73. Market trade (D73 미승인)
+![D73](visuals/73-market-trade-proposal.svg)
+[결정·예시](DECISION_VISUAL_INDEX.md#d73). 실제 수급·수량별 영향·선택 계약 후보. 가격 공식 미확정.
 
 ## 다음 시각 자료
 STEP 4 핵심 방향 확정 이후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.
