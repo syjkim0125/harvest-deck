@@ -1,10 +1,10 @@
 # 참고 이미지 갤러리
 
-> 승인 52건 / 미결 D53. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 53건 / 미결 D54. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
-[결정별 찾아보기](DECISION_VISUAL_INDEX.md) · [자체 도식 54개](VISUAL_ATLAS.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md).
+[결정별 찾아보기](DECISION_VISUAL_INDEX.md) · [자체 도식 55개](VISUAL_ATLAS.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md).
 
-외부 URL 34개는 원격 임베드(렌더링·권리·바이트 미검증), 대화 참조 91건은 원본 상태를 표시. 과거 표시 이미지와 동일성 미확인. 사용자 선호는 최종 아트 승인 아님.
+외부 URL 38개는 원격 임베드(렌더링·권리·바이트 미검증), 대화 참조 103건은 원본 상태를 표시. 과거 표시 이미지와 동일성 미확인. 사용자 선호는 최종 아트 승인 아님.
 
 ## 사용자 선호 시각 예시 (D36)
 ### D36-IMG01
@@ -257,6 +257,34 @@ A 평면형 비교: 방·통로·승무원 위치 가독성; 평면 시점 확�
 ![Fallout Shelter — side cutaway](https://gameranks.gg/media/screenshots/webp/thk0u0kyhmncmqtmsn5o_1920x1080.webp)
 
 B 측면 단면 비교: 층별 생활·시설 표현; 지상 쿼터뷰 대체 확정 아님. Bethesda game screenshot via Game Ranks. [원본 주소](https://gameranks.gg/media/screenshots/webp/thk0u0kyhmncmqtmsn5o_1920x1080.webp). not downloaded; not verified for public rehosting.
+
+### REF-35
+**The Ascent — isometric combat** · [D53](DECISION_VISUAL_INDEX.md#d53)
+
+![The Ascent — isometric combat](https://cdn.mos.cms.futurecdn.net/xyw2VNqQJ8EqVsGf6FY2iP-1200-80.jpg)
+
+직접 방어전에서 쿼터뷰 공간 및 피격 가독성. PC Gamer review screenshot. [원본 주소](https://cdn.mos.cms.futurecdn.net/xyw2VNqQJ8EqVsGf6FY2iP-1200-80.jpg). not downloaded; not verified for public rehosting.
+
+### REF-36
+**Asteroids: Outpost — asteroid base** · [D53](DECISION_VISUAL_INDEX.md#d53)
+
+![Asteroids: Outpost — asteroid base](https://cdn.mos.cms.futurecdn.net/8ad2a416406e9524747aa2299e8df4f9.jpg)
+
+개척·소행성 거점의 공간 분위기. PC Gamer concept art. [원본 주소](https://cdn.mos.cms.futurecdn.net/8ad2a416406e9524747aa2299e8df4f9.jpg). not downloaded; not verified for public rehosting.
+
+### REF-37
+**Crash Site Repair Camp** · [D53](DECISION_VISUAL_INDEX.md#d53)
+
+![Crash Site Repair Camp](https://content.encounterkit.com/cdn-cgi/image/width%3D1080%2Cquality%3D75%2Cformat%3Dauto/https%3A/content.encounterkit.com/map/preview/8c7d4d3a478fee4beee793c3a92350eb.webp)
+
+손상 공간 및 현장 복구 분위기; 같은 거점 전후 장면 아님. Czepeku concept art. [원본 주소](https://content.encounterkit.com/cdn-cgi/image/width%3D1080%2Cquality%3D75%2Cformat%3Dauto/https%3A/content.encounterkit.com/map/preview/8c7d4d3a478fee4beee793c3a92350eb.webp). not downloaded; not verified for public rehosting.
+
+### REF-38
+**RimWorld — colony defense** · [D53](DECISION_VISUAL_INDEX.md#d53)
+
+![RimWorld — colony defense](https://blog-imgs-171-origin.fc2.com/c/h/i/chiha97/20240922154113_1.jpg)
+
+시설과 동료의 방어 배치 참고; 원작 함정 중심 설계 채택 아님. player blog screenshot. [원본 주소](https://blog-imgs-171-origin.fc2.com/c/h/i/chiha97/20240922154113_1.jpg). not downloaded; not verified for public rehosting.
 
 ## 역사적 자료 — 활성 참조 금지
 
@@ -523,6 +551,42 @@ C 모듈 건설. [D51](DECISION_VISUAL_INDEX.md#d51) · [당시 예시](EXAMPLE_
 
 ### D51-IMG09
 확장 거점. [D51](DECISION_VISUAL_INDEX.md#d51) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d51) · [검색 기록](CHAT_IMAGE_INDEX.md#d51). 원본/캡처 미확보.
+
+### D53-IMG01
+A 안전 거점. [D53](DECISION_VISUAL_INDEX.md#d53) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d53) · [검색 기록](CHAT_IMAGE_INDEX.md#d53). 원본/캡처 미확보.
+
+### D53-IMG02
+B 전면 공격. [D53](DECISION_VISUAL_INDEX.md#d53) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d53) · [검색 기록](CHAT_IMAGE_INDEX.md#d53). 원본/캡처 미확보.
+
+### D53-IMG03
+C 분쟁 구조. [D53](DECISION_VISUAL_INDEX.md#d53) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d53) · [검색 기록](CHAT_IMAGE_INDEX.md#d53). 원본/캡처 미확보.
+
+### D53-IMG04
+중심 지역. [D53](DECISION_VISUAL_INDEX.md#d53) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d53) · [검색 기록](CHAT_IMAGE_INDEX.md#d53). 원본/캡처 미확보.
+
+### D53-IMG05
+개척 지역. [D53](DECISION_VISUAL_INDEX.md#d53) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d53) · [검색 기록](CHAT_IMAGE_INDEX.md#d53). 원본/캡처 미확보.
+
+### D53-IMG06
+무법 지대. [D53](DECISION_VISUAL_INDEX.md#d53) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d53) · [검색 기록](CHAT_IMAGE_INDEX.md#d53). 원본/캡처 미확보.
+
+### D53-IMG07
+국경 지역. [D53](DECISION_VISUAL_INDEX.md#d53) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d53) · [검색 기록](CHAT_IMAGE_INDEX.md#d53). 원본/캡처 미확보.
+
+### D53-IMG08
+직접 방어 전투 가독성. [D53](DECISION_VISUAL_INDEX.md#d53) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d53) · [검색 기록](CHAT_IMAGE_INDEX.md#d53). 원본/캡처 미확보.
+
+### D53-IMG09
+자율 방어와 시설. [D53](DECISION_VISUAL_INDEX.md#d53) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d53) · [검색 기록](CHAT_IMAGE_INDEX.md#d53). 원본/캡처 미확보.
+
+### D53-IMG10
+지상 거점 방어. [D53](DECISION_VISUAL_INDEX.md#d53) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d53) · [검색 기록](CHAT_IMAGE_INDEX.md#d53). 원본/캡처 미확보.
+
+### D53-IMG11
+피해 입은 거점. [D53](DECISION_VISUAL_INDEX.md#d53) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d53) · [검색 기록](CHAT_IMAGE_INDEX.md#d53). 원본/캡처 미확보.
+
+### D53-IMG12
+복구 및 재건. [D53](DECISION_VISUAL_INDEX.md#d53) · [당시 예시](EXAMPLE_ARCHIVE.md#example-d53) · [검색 기록](CHAT_IMAGE_INDEX.md#d53). 원본/캡처 미확보.
 
 ## 공식 미디어
 - **Absolum**: [공식/PR](https://www.dotemu.com/PressKit/project/Games/Absolum) · [압축파일](https://www.dotemu.com/PressKit/cache/Games/Absolum/images.zip) — 공식 이미지 ZIP 링크 확인; 웹 다운로드 403.

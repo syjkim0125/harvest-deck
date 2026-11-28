@@ -1,8 +1,8 @@
 # 대화 이미지 검색 기록
 
-> 승인 52건 / 미결 D53. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 53건 / 미결 D54. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
-총 91건: 검색 문구 확인 63건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
+총 103건: 검색 문구 확인 75건, 재구성 또는 정확한 원문 미검증 28건. 실제 이미지/생성 프롬프트/확정 출처 아님.
 
 ## D19
 - [D19-IMG01](REFERENCE_GALLERY.md#d19-img01) · `Zelda breath of the wild vast open world landscape mountain forest village exploration gameplay` — 원문 미검증; 원본 미확보.
@@ -130,4 +130,18 @@
 - [D51-IMG07](REFERENCE_GALLERY.md#d51-img07) · `restored functioning science fiction research outpost green alien jungle greenhouse warm lights concept art` — 문구 확인; 원본 미확보.
 - [D51-IMG08](REFERENCE_GALLERY.md#d51-img08) · `isometric small science fiction modular mining outpost rocky alien planet game concept art` — 문구 확인; 원본 미확보.
 - [D51-IMG09](REFERENCE_GALLERY.md#d51-img09) · `isometric large science fiction planetary settlement modular habitats factories landing pads concept art` — 문구 확인; 원본 미확보.
+
+## D53
+- [D53-IMG01](REFERENCE_GALLERY.md#d53-img01) · `No Mans Sky peaceful planetary player home base landscape gameplay` — 문구 확인; 원본 미확보.
+- [D53-IMG02](REFERENCE_GALLERY.md#d53-img02) · `Rimworld colony siege raid base defense gameplay` — 문구 확인; 원본 미확보.
+- [D53-IMG03](REFERENCE_GALLERY.md#d53-img03) · `Mount and Blade II Bannerlord campaign map castle siege armies factions gameplay` — 문구 확인; 원본 미확보.
+- [D53-IMG04](REFERENCE_GALLERY.md#d53-img04) · `science fiction prosperous space station orbital city concept art peaceful trade hub` — 문구 확인; 원본 미확보.
+- [D53-IMG05](REFERENCE_GALLERY.md#d53-img05) · `science fiction remote mining outpost rocky desert alien planet concept art` — 문구 확인; 원본 미확보.
+- [D53-IMG06](REFERENCE_GALLERY.md#d53-img06) · `science fiction hidden asteroid pirate base spaceship hangar concept art` — 문구 확인; 원본 미확보.
+- [D53-IMG07](REFERENCE_GALLERY.md#d53-img07) · `science fiction frontier military colony fortress on alien planet war concept art` — 문구 확인; 원본 미확보.
+- [D53-IMG08](REFERENCE_GALLERY.md#d53-img08) · `The Ascent isometric science fiction combat industrial facility gameplay` — 문구 확인; 원본 미확보.
+- [D53-IMG09](REFERENCE_GALLERY.md#d53-img09) · `Rimworld sci fi colony defense turret battle gameplay` — 문구 확인; 원본 미확보.
+- [D53-IMG10](REFERENCE_GALLERY.md#d53-img10) · `isometric science fiction planetary outpost battle combat game concept art` — 문구 확인; 원본 미확보.
+- [D53-IMG11](REFERENCE_GALLERY.md#d53-img11) · `damaged science fiction colony outpost after battle ruins concept art` — 문구 확인; 원본 미확보.
+- [D53-IMG12](REFERENCE_GALLERY.md#d53-img12) · `science fiction colony rebuilding construction repair robots outpost concept art` — 문구 확인; 원본 미확보.
 

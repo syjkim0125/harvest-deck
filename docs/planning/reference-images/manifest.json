@@ -571,6 +571,74 @@
       "referencePurpose": "기존 정거장 상업 구역 참고",
       "mappingEvidence": "2026-11-28 new web image search returned image and exact URL; substitute reference, not recovered original",
       "exclusions": "시각 원리만; 원작 IP·UI 복제 금지; 아트 승인 아님"
+    },
+    {
+      "id": "REF-35",
+      "title": "The Ascent — isometric combat",
+      "url": "https://cdn.mos.cms.futurecdn.net/xyw2VNqQJ8EqVsGf6FY2iP-1200-80.jpg",
+      "page": "https://www.pcgamer.com/the-ascent-review/",
+      "source": "PC Gamer review screenshot",
+      "status": "deferred",
+      "role": "supplemental-reference",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D53"
+      ],
+      "referencePurpose": "직접 방어전에서 쿼터뷰 공간 및 피격 가독성",
+      "mappingEvidence": "2026-11-28 web image search returned visible image and URL; substitute for D53-IMG08, not recovered original",
+      "exclusions": "비교·분위기 참고만; 원작 IP·UI·아트 복제 금지; 최종 아트 승인 아님"
+    },
+    {
+      "id": "REF-36",
+      "title": "Asteroids: Outpost — asteroid base",
+      "url": "https://cdn.mos.cms.futurecdn.net/8ad2a416406e9524747aa2299e8df4f9.jpg",
+      "page": "https://www.pcgamer.com/asteroids-outpost-is-an-open-world-survival-sandbox/",
+      "source": "PC Gamer concept art",
+      "status": "deferred",
+      "role": "supplemental-reference",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D53"
+      ],
+      "referencePurpose": "개척·소행성 거점의 공간 분위기",
+      "mappingEvidence": "2026-11-28 web image search returned visible image and URL; substitute for D53-IMG05, not recovered original",
+      "exclusions": "비교·분위기 참고만; 원작 IP·UI·아트 복제 금지; 최종 아트 승인 아님"
+    },
+    {
+      "id": "REF-37",
+      "title": "Crash Site Repair Camp",
+      "url": "https://content.encounterkit.com/cdn-cgi/image/width%3D1080%2Cquality%3D75%2Cformat%3Dauto/https%3A/content.encounterkit.com/map/preview/8c7d4d3a478fee4beee793c3a92350eb.webp",
+      "page": "https://www.czepeku.com/scifi/scenes/crash-site-repair-camp",
+      "source": "Czepeku concept art",
+      "status": "deferred",
+      "role": "supplemental-reference",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D53"
+      ],
+      "referencePurpose": "손상 공간 및 현장 복구 분위기; 같은 거점 전후 장면 아님",
+      "mappingEvidence": "2026-11-28 web image search returned visible image and URL; substitute for D53-IMG12, not recovered original",
+      "exclusions": "비교·분위기 참고만; 원작 IP·UI·아트 복제 금지; 최종 아트 승인 아님"
+    },
+    {
+      "id": "REF-38",
+      "title": "RimWorld — colony defense",
+      "url": "https://blog-imgs-171-origin.fc2.com/c/h/i/chiha97/20240922154113_1.jpg",
+      "page": "https://chiha97.blog45.fc2.com/blog-entry-2844.html",
+      "source": "player blog screenshot",
+      "status": "deferred",
+      "role": "supplemental-reference",
+      "bytes": "not downloaded",
+      "license": "not verified for public rehosting",
+      "decisionIds": [
+        "D53"
+      ],
+      "referencePurpose": "시설과 동료의 방어 배치 참고; 원작 함정 중심 설계 채택 아님",
+      "mappingEvidence": "2026-11-28 web image search returned visible image and URL; substitute for D53-IMG09, not recovered original",
+      "exclusions": "비교·분위기 참고만; 원작 IP·UI·아트 복제 금지; 최종 아트 승인 아님"
     }
   ],
   "kits": [
@@ -2347,6 +2415,258 @@
       "galleryAnchor": "REFERENCE_GALLERY.md#d51-img09",
       "captureStatus": "missing; exact chat-rendered pixels unavailable",
       "priority": "normal"
+    },
+    {
+      "id": "D53-IMG01",
+      "decisionIds": [
+        "D53"
+      ],
+      "query": "No Mans Sky peaceful planetary player home base landscape gameplay",
+      "purpose": "A 안전 거점",
+      "role": "alternative-A",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트/원작 시스템·UI 승인 아님; 미선택 대안은 구현 기준 금지",
+      "conversationSection": "D53 선택지 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d53",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d53-img01",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable; group returned image count unknown",
+      "priority": "normal",
+      "displayOrder": 1
+    },
+    {
+      "id": "D53-IMG02",
+      "decisionIds": [
+        "D53"
+      ],
+      "query": "Rimworld colony siege raid base defense gameplay",
+      "purpose": "B 전면 공격",
+      "role": "alternative-B",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트/원작 시스템·UI 승인 아님; 미선택 대안은 구현 기준 금지",
+      "conversationSection": "D53 선택지 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d53",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d53-img02",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable; group returned image count unknown",
+      "priority": "normal",
+      "displayOrder": 2
+    },
+    {
+      "id": "D53-IMG03",
+      "decisionIds": [
+        "D53"
+      ],
+      "query": "Mount and Blade II Bannerlord campaign map castle siege armies factions gameplay",
+      "purpose": "C 분쟁 구조",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트/원작 시스템·UI 승인 아님; 미선택 대안은 구현 기준 금지",
+      "conversationSection": "D53 선택지 비교",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d53",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d53-img03",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable; group returned image count unknown",
+      "priority": "normal",
+      "displayOrder": 3
+    },
+    {
+      "id": "D53-IMG04",
+      "decisionIds": [
+        "D53"
+      ],
+      "query": "science fiction prosperous space station orbital city concept art peaceful trade hub",
+      "purpose": "중심 지역",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트/원작 시스템·UI 승인 아님; 미선택 대안은 구현 기준 금지",
+      "conversationSection": "D53 구체 플레이 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d53",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d53-img04",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable; group returned image count unknown",
+      "priority": "normal",
+      "displayOrder": 4
+    },
+    {
+      "id": "D53-IMG05",
+      "decisionIds": [
+        "D53"
+      ],
+      "query": "science fiction remote mining outpost rocky desert alien planet concept art",
+      "purpose": "개척 지역",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트/원작 시스템·UI 승인 아님; 미선택 대안은 구현 기준 금지",
+      "conversationSection": "D53 구체 플레이 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d53",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d53-img05",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable; group returned image count unknown",
+      "priority": "normal",
+      "displayOrder": 5
+    },
+    {
+      "id": "D53-IMG06",
+      "decisionIds": [
+        "D53"
+      ],
+      "query": "science fiction hidden asteroid pirate base spaceship hangar concept art",
+      "purpose": "무법 지대",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트/원작 시스템·UI 승인 아님; 미선택 대안은 구현 기준 금지",
+      "conversationSection": "D53 구체 플레이 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d53",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d53-img06",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable; group returned image count unknown",
+      "priority": "normal",
+      "displayOrder": 6
+    },
+    {
+      "id": "D53-IMG07",
+      "decisionIds": [
+        "D53"
+      ],
+      "query": "science fiction frontier military colony fortress on alien planet war concept art",
+      "purpose": "국경 지역",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트/원작 시스템·UI 승인 아님; 미선택 대안은 구현 기준 금지",
+      "conversationSection": "D53 구체 플레이 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d53",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d53-img07",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable; group returned image count unknown",
+      "priority": "normal",
+      "displayOrder": 7
+    },
+    {
+      "id": "D53-IMG08",
+      "decisionIds": [
+        "D53"
+      ],
+      "query": "The Ascent isometric science fiction combat industrial facility gameplay",
+      "purpose": "직접 방어 전투 가독성",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트/원작 시스템·UI 승인 아님; 미선택 대안은 구현 기준 금지",
+      "conversationSection": "D53 구체 플레이 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d53",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d53-img08",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable; group returned image count unknown",
+      "priority": "normal",
+      "displayOrder": 8
+    },
+    {
+      "id": "D53-IMG09",
+      "decisionIds": [
+        "D53"
+      ],
+      "query": "Rimworld sci fi colony defense turret battle gameplay",
+      "purpose": "자율 방어와 시설",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트/원작 시스템·UI 승인 아님; 미선택 대안은 구현 기준 금지",
+      "conversationSection": "D53 구체 플레이 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d53",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d53-img09",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable; group returned image count unknown",
+      "priority": "normal",
+      "displayOrder": 9
+    },
+    {
+      "id": "D53-IMG10",
+      "decisionIds": [
+        "D53"
+      ],
+      "query": "isometric science fiction planetary outpost battle combat game concept art",
+      "purpose": "지상 거점 방어",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트/원작 시스템·UI 승인 아님; 미선택 대안은 구현 기준 금지",
+      "conversationSection": "D53 구체 플레이 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d53",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d53-img10",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable; group returned image count unknown",
+      "priority": "normal",
+      "displayOrder": 10
+    },
+    {
+      "id": "D53-IMG11",
+      "decisionIds": [
+        "D53"
+      ],
+      "query": "damaged science fiction colony outpost after battle ruins concept art",
+      "purpose": "피해 입은 거점",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트/원작 시스템·UI 승인 아님; 미선택 대안은 구현 기준 금지",
+      "conversationSection": "D53 구체 플레이 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d53",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d53-img11",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable; group returned image count unknown",
+      "priority": "normal",
+      "displayOrder": 11
+    },
+    {
+      "id": "D53-IMG12",
+      "decisionIds": [
+        "D53"
+      ],
+      "query": "science fiction colony rebuilding construction repair robots outpost concept art",
+      "purpose": "복구 및 재건",
+      "role": "selected-example",
+      "sourceEvidence": "exact query preserved from available response record; original rendered image unknown",
+      "url": null,
+      "localFile": null,
+      "bytes": "unavailable",
+      "status": "reference query only; original rendered image unknown",
+      "exclusions": "기획 비교; 최종 아트/원작 시스템·UI 승인 아님; 미선택 대안은 구현 기준 금지",
+      "conversationSection": "D53 구체 플레이 예시",
+      "exampleAnchor": "EXAMPLE_ARCHIVE.md#example-d53",
+      "galleryAnchor": "REFERENCE_GALLERY.md#d53-img12",
+      "captureStatus": "missing; exact chat-rendered pixels unavailable; group returned image count unknown",
+      "priority": "normal",
+      "displayOrder": 12
     }
   ],
   "diagrams": [
@@ -2897,6 +3217,16 @@
       "path": "docs/planning/visuals/53-outpost-defense-proposal.svg",
       "purpose": "위험 감지·대응·결과 및 복구 흐름",
       "mappingEvidence": "decision-specific original proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-54",
+      "decisionIds": [
+        "D54"
+      ],
+      "path": "docs/planning/visuals/54-deck-real-time-proposal.svg",
+      "purpose": "직접 조작과 전술·운용 덱의 관계",
+      "mappingEvidence": "decision-specific original proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -2907,13 +3237,13 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D53",
-    "approvedThrough": "D52",
-    "pending": "D53",
+    "decisionRange": "D01–D54",
+    "approvedThrough": "D53",
+    "pending": "D54",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
-    "exactVisibleQueries": 63,
-    "missingChatRenderedImages": 91,
+    "exactVisibleQueries": 75,
+    "missingChatRenderedImages": 103,
     "missingIndividualVisualDecisions": [
       "D02",
       "D06",
@@ -2921,7 +3251,7 @@
     ],
     "screenshot": "Prior attempt did not obtain a saved capture. Direct chat UI screenshot capability not established. D31 capture remains unrecovered.",
     "recoverySearch": "Prior retrieval yielded summaries, not a complete transcript or rendered images.",
-    "provenanceNote": "D19–D26 28건 재구성 또는 원문 미검증. D28–D36 31건 응답 기록 검색 문구. 모두 실제 표시 원본 미확보. D48 직전 응답의 정확한 검색 문구 7건 추가; 표시 원본 미확보. D49 검색 문구 9건 추가; 원본 미확보. D50 검색 문구 7건 추가; 원본 미확보. D51 검색 문구 9건 및 새 대체 참고 URL 8건 추가; 이전 표시 원본 미확보.",
+    "provenanceNote": "D19–D26 28건 재구성 또는 원문 미검증. D28–D36 31건 응답 기록 검색 문구. 모두 실제 표시 원본 미확보. D48 직전 응답의 정확한 검색 문구 7건 추가; 표시 원본 미확보. D49 검색 문구 9건 추가; 원본 미확보. D50 검색 문구 7건 추가; 원본 미확보. D51 검색 문구 9건 및 새 대체 참고 URL 8건 추가; 이전 표시 원본 미확보. D53 검색 문구 12건(실제 반환 이미지 수 미확인), 새 대체 참고 URL 4건; 과거 원본 미확보.",
     "latestDownloadAttempt": {
       "date": "2026-11-27",
       "knownUrls": 26,
@@ -2932,5 +3262,6 @@
       "privateRecovery": "tools/recover-reference-images.py",
       "note": "59 historical chat search records lack exact original URL/bytes; do not substitute search results as recovered originals."
     }
-  }
+  },
+  "referencePolicy": "VISUAL_REFERENCE_POLICY.md"
 }

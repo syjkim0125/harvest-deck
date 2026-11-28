@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 52건 / 미결 D53. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 53건 / 미결 D54. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -317,7 +317,14 @@
 - 자체 설명 도식: [SVG-52: 자율 운영·실물 수송·위기 개입](visuals/52-outpost-logistics-proposal.svg) · [SVG-52B: 채굴·연구·판매 담당 동료 작업 예시 재구성](visuals/52-outpost-crew-operations.svg). 실제 아트 아님.
 
 ## D53
-**거점 방어·분쟁과 손실 방식** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d53).
+**거점 방어·분쟁과 손실 방식** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d53).
 
 - 자체 설명 도식: [SVG-53: 위험 감지·대응·결과 및 복구 흐름](visuals/53-outpost-defense-proposal.svg). 실제 아트 아님.
+- 외부 참고(사후 연결): [REF-35](REFERENCE_GALLERY.md#ref-35) The Ascent — isometric combat (deferred) · [REF-36](REFERENCE_GALLERY.md#ref-36) Asteroids: Outpost — asteroid base (deferred) · [REF-37](REFERENCE_GALLERY.md#ref-37) Crash Site Repair Camp (deferred) · [REF-38](REFERENCE_GALLERY.md#ref-38) RimWorld — colony defense (deferred).
+- 대화 이미지: [D53-IMG01](REFERENCE_GALLERY.md#d53-img01) A 안전 거점 · [D53-IMG02](REFERENCE_GALLERY.md#d53-img02) B 전면 공격 · [D53-IMG03](REFERENCE_GALLERY.md#d53-img03) C 분쟁 구조 · [D53-IMG04](REFERENCE_GALLERY.md#d53-img04) 중심 지역 · [D53-IMG05](REFERENCE_GALLERY.md#d53-img05) 개척 지역 · [D53-IMG06](REFERENCE_GALLERY.md#d53-img06) 무법 지대 · [D53-IMG07](REFERENCE_GALLERY.md#d53-img07) 국경 지역 · [D53-IMG08](REFERENCE_GALLERY.md#d53-img08) 직접 방어 전투 가독성 · [D53-IMG09](REFERENCE_GALLERY.md#d53-img09) 자율 방어와 시설 · [D53-IMG10](REFERENCE_GALLERY.md#d53-img10) 지상 거점 방어 · [D53-IMG11](REFERENCE_GALLERY.md#d53-img11) 피해 입은 거점 · [D53-IMG12](REFERENCE_GALLERY.md#d53-img12) 복구 및 재건.
+
+## D54
+**실시간 플레이와 덱빌딩의 관계** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d54).
+
+- 자체 설명 도식: [SVG-54: 직접 조작과 전술·운용 덱의 관계](visuals/54-deck-real-time-proposal.svg). 실제 아트 아님.
 
