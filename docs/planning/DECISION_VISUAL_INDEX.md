@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 69건 / 미결 D70. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 70건 / 미결 D71. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -404,7 +404,12 @@
 - 자체 설명 도식: [SVG-69: 핵심 자원군·지역 특수 자원·가공/소비 단계](visuals/69-resource-chain-proposal.svg) · [SVG-69B: 자원 A/B/C 비교·6개 자원군·행성별 특수 자원 예시](visuals/69-resource-examples.svg). 실제 아트 아님.
 
 ## D70
-**자원 채집·회수의 직접 플레이와 자동화** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d70).
+**자원 채집·회수의 직접 플레이와 자동화** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d70).
 
-- 자체 설명 도식: [SVG-70: 직접 채집·현장 판단·반복 작업 위임](visuals/70-gathering-proposal.svg). 실제 아트 아님.
+- 자체 설명 도식: [SVG-70: 직접 채집·현장 판단·반복 작업 위임](visuals/70-gathering-proposal.svg) · [SVG-70B: 채집 A/B/C 비교·지상 채집·잔해 회수·자동 전초기지](visuals/70-gathering-examples.svg). 실제 아트 아님.
+
+## D71
+**자원의 고갈·재생과 산지의 지속성** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d71).
+
+- 자체 설명 도식: [SVG-71: 유한 매장량·생태 재생·개별 잔해 소진과 대안](visuals/71-resource-persistence-proposal.svg). 실제 아트 아님.
 

@@ -424,9 +424,16 @@ D19 승인 구조 설명. 실제 행성 크기·지도 배치·갱신 규칙 미
 ![D69 비교·자원군·행성](visuals/69-resource-examples.svg)
 [생산 흐름 인터랙션 재구성](prototypes/d69-resource-chains.html). 실제 자원/레시피/아트 아님.
 
-## 70. Gathering (D70 미승인)
+## 70. Gathering (D70 구조 승인)
 ![D70](visuals/70-gathering-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d70). 직접 채집 및 반복 위임 후보. 실제 조작·수치 미확정.
+
+![D70 비교·지상·잔해·전초기지](visuals/70-gathering-examples.svg)
+[소행성 채굴 인터랙션 재구성](prototypes/d70-asteroid-mining.html). 실제 조작/타격감 검증 아님.
+
+## 71. Resource persistence (D71 미승인)
+![D71](visuals/71-resource-persistence-proposal.svg)
+[결정·예시](DECISION_VISUAL_INDEX.md#d71). 자원 성격별 지속성 후보. 실제 수치 미확정.
 
 ## 다음 시각 자료
 STEP 4 핵심 방향 확정 이후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.
