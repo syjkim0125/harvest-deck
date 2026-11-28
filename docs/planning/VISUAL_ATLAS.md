@@ -403,9 +403,16 @@ D19 승인 구조 설명. 실제 행성 크기·지도 배치·갱신 규칙 미
 ![D66 비교·중복·빌드](visuals/66-deck-size-examples.svg)
 [덱 크기 인터랙션 재구성](prototypes/d66-deck-size.html). 실제 덱 크기 및 드로우 확률 아님.
 
-## 67. Cross-deck synergy (D67 미승인)
+## 67. Cross-deck synergy (D67 구조 승인)
 ![D67](visuals/67-cross-deck-synergy-proposal.svg)
 [결정·예시](DECISION_VISUAL_INDEX.md#d67). 실제 결과와 제한적 연계 후보. 실제 카드 효과 미확정.
+
+![D67 비교·연결 카드·성장](visuals/67-synergy-examples.svg)
+[5단계 시너지 인터랙션 재구성](prototypes/d67-cross-deck-synergy.html). 실제 게임 활동 및 효과 아님.
+
+## 68. Economy simulation (D68 미승인)
+![D68](visuals/68-economy-simulation-proposal.svg)
+[결정·예시](DECISION_VISUAL_INDEX.md#d68). 실제 지역 경제 및 거리별 추상화 후보. 상세 규칙 미확정.
 
 ## 다음 시각 자료
 STEP 4 핵심 방향 확정 이후 실제 쿼터뷰 탐험 장면과 자유 드래그 항해 화면의 인게임 콘셉트, 모바일 조작 시안, 첫 10분 스토리보드를 사용자 검토용으로 제작하고 원본 파일을 저장. 사용자 승인과 구현 여부를 별도 표기.

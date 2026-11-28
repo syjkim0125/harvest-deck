@@ -3487,6 +3487,26 @@
       "path": "docs/planning/visuals/67-cross-deck-synergy-proposal.svg",
       "purpose": "실제 세계의 결과를 매개로 한 교차 시너지 및 독립 성장 경로",
       "mappingEvidence": "decision-specific original proposal",
+      "status": "local SVG; approved principle, not final game art"
+    },
+    {
+      "id": "SVG-67B",
+      "decisionIds": [
+        "D67"
+      ],
+      "path": "docs/planning/visuals/67-synergy-examples.svg",
+      "purpose": "교차 시너지 A/B/C 비교·연결 카드 4종·독립 성장 경로 3종",
+      "mappingEvidence": "previous response visual examples reconstructed, not exact rendered pixels",
+      "status": "local SVG; explanatory only"
+    },
+    {
+      "id": "SVG-68",
+      "decisionIds": [
+        "D68"
+      ],
+      "path": "docs/planning/visuals/68-economy-simulation-proposal.svg",
+      "purpose": "지역 경제 실제 생산·물류와 상세/집계 시뮬레이션",
+      "mappingEvidence": "decision-specific original proposal",
       "status": "local SVG; proposal pending, not final game art"
     }
   ],
@@ -3497,9 +3517,9 @@
     "note": "D31 초기 캐릭터 구성 예시 캡처; 실제 저장 미확인. D36 유적 이미지와 별개."
   },
   "coverage": {
-    "decisionRange": "D01–D67",
-    "approvedThrough": "D66",
-    "pending": "D67",
+    "decisionRange": "D01–D68",
+    "approvedThrough": "D67",
+    "pending": "D68",
     "earlierExactImages": "D01–D18 unavailable; only topic-level historical evidence, not a complete inventory",
     "reconstructedQueries": 28,
     "exactVisibleQueries": 75,

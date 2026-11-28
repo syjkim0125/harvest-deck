@@ -1,6 +1,6 @@
 # 원본 및 캡처 복구 대기
 
-> 승인 66건 / 미결 D67. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 67건 / 미결 D68. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 **연결 완료 ≠ 이미지 확보.** 정확한 채팅 원본/URL 미확보 103건. D01–D18 전체 목록 미복구. D31 사용자 캡처 저장 및 채팅 직접 캡처 성공 미확인. 외부 원격 이미지 파일/권리/렌더링 미검증.
 

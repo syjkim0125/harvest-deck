@@ -1,6 +1,6 @@
 # 결정별 시각 자료
 
-> 승인 66건 / 미결 D67. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
+> 승인 67건 / 미결 D68. 생성 기준: [manifest](reference-images/manifest.json) + [결정 이력](DECISION_HISTORY.md). 기준 수정 후 재생성. 원본·설명 도식·검색 기록 구분.
 
 [갤러리](REFERENCE_GALLERY.md) · [검색 문구](CHAT_IMAGE_INDEX.md) · [복구 대기](VISUAL_RECOVERY_QUEUE.md) · [자체 도식](VISUAL_ATLAS.md).
 
@@ -389,7 +389,12 @@
 - 자체 설명 도식: [SVG-66: 역할별 제한 덱 크기와 일반/고유 카드 중복 차등](visuals/66-deck-size-proposal.svg) · [SVG-66B: A/B/C 덱 크기·중복 비교와 3종 빌드](visuals/66-deck-size-examples.svg). 실제 아트 아님.
 
 ## D67
-**전술 덱과 운용 덱의 교차 시너지** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d67).
+**전술 덱과 운용 덱의 교차 시너지** — 구조 승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d67).
 
-- 자체 설명 도식: [SVG-67: 실제 세계의 결과를 매개로 한 교차 시너지 및 독립 성장 경로](visuals/67-cross-deck-synergy-proposal.svg). 실제 아트 아님.
+- 자체 설명 도식: [SVG-67: 실제 세계의 결과를 매개로 한 교차 시너지 및 독립 성장 경로](visuals/67-cross-deck-synergy-proposal.svg) · [SVG-67B: 교차 시너지 A/B/C 비교·연결 카드 4종·독립 성장 경로 3종](visuals/67-synergy-examples.svg). 실제 아트 아님.
+
+## D68
+**은하계 경제와 실제 자원 순환의 범위** — 미승인. [상세 예시](EXAMPLE_ARCHIVE.md#example-d68).
+
+- 자체 설명 도식: [SVG-68: 지역 경제 실제 생산·물류와 상세/집계 시뮬레이션](visuals/68-economy-simulation-proposal.svg). 실제 아트 아님.
 
